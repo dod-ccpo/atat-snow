@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description>2nd attempt</description>
+        <direct>false</direct>
+        <endpoint>x_g_dis_zach_widge_Widget UI 2.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+ <form name="myform" id="myform">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" name="name" class="form-control"/>
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <input type="text" name="description" class="form-control"/>
+    </div>
+    <div class="form-group">
+      <label for="size">Size:</label>
+      <input type="text" name="size" class="form-control"/>
+    </div>
+  </form>
+  <button type="submit" class="btn btn-success " id="submitform">Submit</button>
+
+
+  <script>
+  $(document).ready(function () {
+      $("#submitform").click(function (e) {
+          var MyForm = JSON.stringify($("#myform").serializeJSON());
+          console.log(MyForm);
+          $.ajax(
+              {
+                  url: "https://disastorefrontdev.servicenowservices.com/api/x_g_dis_zach_widge/widget_api",
+                  type: "POST",
+                  data: MyForm,
+              });
+          e.preventDefault(); //STOP default action
+      });
+  });
+  </script>
+</j:jelly>]]></html>
+        <name>Widget UI 2</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-01-26 14:18:49</sys_created_on>
+        <sys_id>26287b9187d50950bc86b889cebb3506</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Widget UI 2</sys_name>
+        <sys_package display_value="zach_widget_poc" source="x_g_dis_zach_widge">f978b6b687c98150bc86b889cebb353e</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="zach_widget_poc">f978b6b687c98150bc86b889cebb353e</sys_scope>
+        <sys_update_name>sys_ui_page_26287b9187d50950bc86b889cebb3506</sys_update_name>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-01-26 14:33:22</sys_updated_on>
+    </sys_ui_page>
+</record_update>

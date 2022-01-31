@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl/>
+        <http_method>GET</http_method>
+        <name>get_all_widgets</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+	var rec = new GlideRecord("x_g_dis_zach_widge_poc_widget");
+	// This query returns all records in the table
+	rec.query();
+	// Set up an array to return to user
+	var arrayOfRecs= [];
+	// Go through each record and add the name, description, and size to it
+	while(rec.next()){
+		// this is the record, wrapped in a simple JSON object for clarity
+		var record = {};
+		record.name = rec.getDisplayValue("name");
+		record.description = rec.getDisplayValue("description");
+		record.size = rec.getDisplayValue("size");
+		arrayOfRecs.push(record);
+	}
+	// Set response to application/json
+	// Use writer to make it strictly json
+	//
+	response.setContentType("application/json");
+	var writer = response.getStreamWriter();
+	writer.writeString(JSON.stringify(arrayOfRecs));
+	//
+	// OR
+	// Return it wrapped in a response object, this is how they do it in the docs
+	// response.setBody(arrayOfRecs);
+    
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_g_dis_zach_widge/widget_api</operation_uri>
+        <produces>application/json</produces>
+        <produces_customized>true</produces_customized>
+        <relative_path>/</relative_path>
+        <request_example/>
+        <requires_acl_authorization>false</requires_acl_authorization>
+        <requires_authentication>false</requires_authentication>
+        <requires_snc_internal_role>false</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-01-20 14:19:10</sys_created_on>
+        <sys_id>6d4efce387054510bc86b889cebb3517</sys_id>
+        <sys_mod_count>44</sys_mod_count>
+        <sys_name>get_all_widgets</sys_name>
+        <sys_package display_value="zach_widget_poc" source="x_g_dis_zach_widge">f978b6b687c98150bc86b889cebb353e</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="zach_widget_poc">f978b6b687c98150bc86b889cebb353e</sys_scope>
+        <sys_update_name>sys_ws_operation_6d4efce387054510bc86b889cebb3517</sys_update_name>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-01-20 17:43:53</sys_updated_on>
+        <web_service_definition display_value="widget_api">2d1b64e787414510bc86b889cebb3544</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl/>
+        <http_method>POST</http_method>
+        <name>create_widget</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+	var body = request.body.data;
+	// Validate request body
+	if (!body.name || !body.description || !body.size) {
+		response.setError(new sn_ws_err.BadRequestError("Missing Required Fields"));
+	}
+	else {
+	// Create a new Widget
+		var widget = new GlideRecord("x_g_dis_zach_widge_poc_widget");
+		widget.setValue("name", request.body.data.name);
+		// widget.setValue("description", request.body.data.description);
+		widget.setValue("size", request.body.data.size);
+		// Journal field in SNOW is strange, check out the docs, it doesn't work with setValue
+		widget.description = request.body.data.description;
+		widget.insert();
+		// Set up response object
+		var res = {
+			"name": request.body.data.name,
+			"description": request.body.data.description,
+			"size": request.body.data.size
+		};
+		response.setBody(res);
+	}	
+	
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_g_dis_zach_widge/widget_api</operation_uri>
+        <produces>application/json</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/</relative_path>
+        <request_example/>
+        <requires_acl_authorization>false</requires_acl_authorization>
+        <requires_authentication>false</requires_authentication>
+        <requires_snc_internal_role>false</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-01-20 13:03:00</sys_created_on>
+        <sys_id>e62b28e787414510bc86b889cebb3586</sys_id>
+        <sys_mod_count>25</sys_mod_count>
+        <sys_name>create_widget</sys_name>
+        <sys_package display_value="zach_widget_poc" source="x_g_dis_zach_widge">f978b6b687c98150bc86b889cebb353e</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="zach_widget_poc">f978b6b687c98150bc86b889cebb353e</sys_scope>
+        <sys_update_name>sys_ws_operation_e62b28e787414510bc86b889cebb3586</sys_update_name>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-01-26 14:27:32</sys_updated_on>
+        <web_service_definition display_value="widget_api">2d1b64e787414510bc86b889cebb3544</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>
