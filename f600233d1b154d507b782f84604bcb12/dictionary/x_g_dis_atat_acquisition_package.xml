@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element label="Acquisition Package" max_length="40" name="x_g_dis_atat_acquisition_package" type="collection">
         <element label="Contacts (MO/COR/ACOR)" max_length="32" name="contacts_mo_cor_acor" reference="x_g_dis_atat_contacts" type="reference"/>
-        <element attributes="edge_encryption_enabled=true" display="true" label="Description" max_length="300" name="description" type="string"/>
-        <element display="true" label="Documents URL" max_length="1024" name="documents_url" type="url"/>
         <element display="true" label="DocuSign Envelope ID" max_length="50" name="docusign_envelope_id" type="string"/>
-        <element display="true" label="Mission Owner" mandatory="true" max_length="32" name="mission_owner" reference="x_g_dis_atat_mission_owner" type="reference"/>
         <element attributes="edge_encryption_enabled=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
         <element label="Organization" max_length="32" name="organization" reference="x_g_dis_atat_organization" type="reference"/>
-        <element display="true" label="Package Notes" max_length="4000" name="package_notes" type="journal"/>
-        <element attributes="edge_encryption_enabled=true" display="true" label="Project Name" max_length="100" name="project_name" type="string"/>
         <element label="Project Overview" max_length="32" name="project_overview" reference="x_g_dis_atat_project_overview" type="reference"/>
-        <element choice="3" default="pending" display="true" label="Status" mandatory="true" max_length="40" name="status" type="choice">
+        <element choice="3" default="PENDING" display="true" label="Status" mandatory="true" max_length="40" name="status" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Approved" value="APPROVED"/>
                 <element inactive_on_update="false" label="Pending" value="PENDING"/>
@@ -22,12 +17,9 @@
             <element name="project_overview"/>
         </index>
         <index name="index2">
-            <element name="mission_owner"/>
-        </index>
-        <index name="index3">
             <element name="contacts_mo_cor_acor"/>
         </index>
-        <index name="index4">
+        <index name="index3">
             <element name="organization"/>
         </index>
     </element>
