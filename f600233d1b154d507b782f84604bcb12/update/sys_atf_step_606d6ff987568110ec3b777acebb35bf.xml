@@ -3,32 +3,33 @@
         <active>true</active>
         <copied_from/>
         <description>Validate that the form matches the following condition:
-Project Overview = small package
-and Organization = OC Transport Services (IE)
+Project Overview = {{Step 6: Record Insert.Record}}
+and Organization = {{Step 7: Record Insert.Record}}
 and Status = Pending
 and DocuSign Envelope ID = 7c169be2-ed33-4a49-882e-ebb96913b990
-and Project Overview Title = small package
-and Organization DISA Organization = OC Transport Services (IE)
+and Project Overview Title = Small Demo Package
+and Organization DISA Organization = (empty)
 With a failure timeout of 5 Seconds</description>
         <display_name>Field Values Validation</display_name>
         <inputs/>
+        <inputs/>
         <mugshots_cache_json/>
         <notes/>
-        <order>8</order>
+        <order>10</order>
         <snapshot/>
         <step_config display_value="Field Values Validation">1b97cd31872022008182c9ded0e3ece5</step_config>
         <sys_class_name>sys_atf_step</sys_class_name>
         <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-03-18 19:54:58</sys_created_on>
         <sys_id>606d6ff987568110ec3b777acebb35bf</sys_id>
-        <sys_mod_count>6</sys_mod_count>
+        <sys_mod_count>12</sys_mod_count>
         <sys_name>Field Values Validation</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_atf_step_606d6ff987568110ec3b777acebb35bf</sys_update_name>
-        <sys_updated_by>julius.fitzhugh-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-03-20 22:05:13</sys_updated_on>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-03-23 15:38:26</sys_updated_on>
         <table>x_g_dis_atat_acquisition_package</table>
         <test display_value="Verify ATAT tables &amp; menus (AT-7105)">7caf1fb187568110ec3b777acebb35a3</test>
         <timeout>1970-01-01 00:00:05</timeout>
@@ -71,11 +72,23 @@ With a failure timeout of 5 Seconds</description>
         <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-03-18 19:54:58</sys_created_on>
         <sys_id>bc5eafb987568110ec3b777acebb3596</sys_id>
-        <sys_mod_count>4</sys_mod_count>
-        <sys_updated_by>julius.fitzhugh-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-03-20 22:05:13</sys_updated_on>
-        <value>project_overview=8d447acf87420d10bc86b889cebb35fd^organization=6015360387820d10bc86b889cebb35eb^status=PENDING^docusign_envelope_id=7c169be2-ed33-4a49-882e-ebb96913b990^project_overview.title=small package^organization.disa_organization=OC_TRANSPORT_SERVICES^EQ</value>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-03-23 15:38:26</sys_updated_on>
+        <value>project_overview={{step['9a80e027875e41108ea6cbb9cebb3592'].record_id}}^organization={{step['1bf0e027875e41108ea6cbb9cebb350e'].record_id}}^status=PENDING^docusign_envelope_id=7c169be2-ed33-4a49-882e-ebb96913b990^project_overview.title=Small Demo Package^organization.disa_organization=^EQ</value>
         <variable display_value="Conditions">4aa838f25320220002c6435723dc34e1</variable>
     </sys_variable_value>
-    <sys_element_mapping action="delete_multiple" query="table=var__m_atf_input_variable_1b97cd31872022008182c9ded0e3ece5^id=606d6ff987568110ec3b777acebb35bf"/>
+    <sys_element_mapping action="delete_multiple" query="id=606d6ff987568110ec3b777acebb35bf"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>conditions</field>
+        <id>606d6ff987568110ec3b777acebb35bf</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-03-23 15:33:05</sys_created_on>
+        <sys_id>2d5260a7875e41108ea6cbb9cebb3582</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-03-23 15:38:26</sys_updated_on>
+        <table>var__m_atf_input_variable_1b97cd31872022008182c9ded0e3ece5</table>
+        <value>project_overview={{step['9a80e027875e41108ea6cbb9cebb3592'].record_id}}^organization={{step['1bf0e027875e41108ea6cbb9cebb350e'].record_id}}^status=PENDING^docusign_envelope_id=7c169be2-ed33-4a49-882e-ebb96913b990^project_overview.title=Small Demo Package^organization.disa_organization=^EQ</value>
+    </sys_element_mapping>
 </record_update>
