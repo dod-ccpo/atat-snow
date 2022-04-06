@@ -286,6 +286,7 @@
                 <element inactive_on_update="false" label="W-5 Chief Warrant Officer 5 (CWO5)" sequence="121" value="ARMY_W5_CHIEF_WARRANT_OFFICER"/>
             </choice>
         </element>
+        <element label="Rank Components" max_length="32" name="rank_components" reference="x_g_dis_atat_military_rank" type="reference"/>
         <element choice="1" label="Role" max_length="40" name="role" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Civilian" value="CIVILIAN"/>
@@ -310,5 +311,8 @@
                 <element inactive_on_update="false" label="Mission Owner" value="MISSION_OWNER"/>
             </choice>
         </element>
+        <index name="index">
+            <element name="rank_components"/>
+        </index>
     </element>
 </database>
