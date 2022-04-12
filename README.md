@@ -1,2 +1,2 @@
 # atat-snow
-ATAT - Service Now artifacts
+ATAT - ServiceNow artifacts
