@@ -57,7 +57,7 @@
 				provisioningRecord.status = 'FAILURE';
 				// 400 errors get put on the queue
 				// 500 errors do not get put on the queue at all
-				provisioningRecord.status_message = jobMessage.message;
+				provisioningRecord.status_message = JSON.stringify(jobMessage.cspResponse);
 				provisioningRecord.update();
 			}
 
@@ -71,13 +71,13 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-04-13 17:23:41</sys_created_on>
         <sys_id>a550095a87b241108ea6cbb9cebb35ec</sys_id>
-        <sys_mod_count>9</sys_mod_count>
+        <sys_mod_count>11</sys_mod_count>
         <sys_name>getProvisioningJobResults</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_a550095a87b241108ea6cbb9cebb35ec</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-04-13 22:56:49</sys_updated_on>
+        <sys_updated_on>2022-04-14 00:12:58</sys_updated_on>
     </sys_script_include>
 </record_update>
