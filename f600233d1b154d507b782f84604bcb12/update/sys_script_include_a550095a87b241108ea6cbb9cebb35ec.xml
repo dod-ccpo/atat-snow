@@ -10,14 +10,13 @@
         <script><![CDATA[function getProvisioningJobResults() {
 	
 	try {
-
+		// outbound REST message
 		var getProvisioningJobsRequest = new sn_ws.RESTMessageV2();
 
 		// AWS request setup
 		var baseUrl = new GlideRecord('x_g_dis_atat_configuration');
 		baseUrl.get('name', 'provisioning_api_endpoint');
 		var URL = baseUrl.value + 'provisioning-jobs';
-		gs.info('URL: ' + URL);
 		getProvisioningJobsRequest.setEndpoint(URL);
 		getProvisioningJobsRequest.setHttpMethod('get');
 		getProvisioningJobsRequest.setLogLevel('all');
@@ -26,16 +25,21 @@
 		var response = getProvisioningJobsRequest.execute();
 		var responseBody = JSON.parse(response.getBody());
 		var status = response.getStatusCode();
+		if (responseBody.length == 0) {
+			gs.info("No messages in Provisioning Job Queue.");
+			return;
+		}
 		
-		// loop through each job (can be empty)
+		// loop through each job
 		for (var i = 0; i <= responseBody.length - 1; i++) {
 			// get provisioning job (jobId -> sys_id)
 			var jobMessage = responseBody[i];
 			var provisioningRecord = new GlideRecord('x_g_dis_atat_provisioning_job');
 			provisioningRecord.get(jobMessage.jobId);
-
-			// update job status and add 'status message' if an error
-			if (jobMessage.cspResponse.code == '200') {
+			
+			if (jobMessage.cspResponse.code == '200' && 
+				provisioningRecord.job_type == 'ADD_PORTFOLIO') {
+				// update job status
 				provisioningRecord.status = 'SUCCESS';
 				provisioningRecord.update();
 
@@ -53,11 +57,16 @@
 				portfolio.mission_owners = m2mRecord.contacts.toString();
 				portfolio.insert();
 
-			} else {
+			} else if (jobMessage.cspResponse.code == '400') {
+				// update job status and status message
+				// only 400 errors get put on the queue (not 500 errors)
 				provisioningRecord.status = 'FAILURE';
-				// 400 errors get put on the queue
-				// 500 errors do not get put on the queue at all
 				provisioningRecord.status_message = JSON.stringify(jobMessage.cspResponse);
+				provisioningRecord.update();
+			} else {
+				// catch everything else
+				gs.info('Unknown status from provisioning request.');
+				provisioningRecord.status = 'FAILURE';
 				provisioningRecord.update();
 			}
 
@@ -71,13 +80,13 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-04-13 17:23:41</sys_created_on>
         <sys_id>a550095a87b241108ea6cbb9cebb35ec</sys_id>
-        <sys_mod_count>11</sys_mod_count>
+        <sys_mod_count>16</sys_mod_count>
         <sys_name>getProvisioningJobResults</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_a550095a87b241108ea6cbb9cebb35ec</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-04-14 00:12:58</sys_updated_on>
+        <sys_updated_on>2022-04-14 04:01:59</sys_updated_on>
     </sys_script_include>
 </record_update>
