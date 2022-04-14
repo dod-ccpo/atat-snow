@@ -12,7 +12,7 @@
         <change_fields>false</change_fields>
         <client_callable>false</client_callable>
         <collection>x_g_dis_atat_sensitive_information</collection>
-        <condition>!regexEvaluation(current.foia_state_province_state_code, /^A[AEP]$/) &amp;&amp; !current.foia_state_province_state_code.nil()</condition>
+        <condition>!regexEvaluation(current.foia_state_province_state_code, new BusinessRuleUtils().militaryStateRegex) &amp;&amp; !current.foia_state_province_state_code.nil()</condition>
         <description/>
         <execute_function>false</execute_function>
         <filter_condition table="x_g_dis_atat_sensitive_information">foia_address_type=MILITARY^EQ<item display_value="Military" endquery="false" field="foia_address_type" goto="false" newquery="false" operator="=" or="false" value="MILITARY"/>
@@ -44,7 +44,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>c9ec9aaa87f281108ea6cbb9cebb3594</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_name>SI - FOIA Military State Address</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -52,7 +52,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_c9ec9aaa87f281108ea6cbb9cebb3594</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-04-14 19:59:06</sys_updated_on>
+        <sys_updated_on>2022-04-14 20:05:56</sys_updated_on>
         <template/>
         <when>before</when>
     </sys_script>

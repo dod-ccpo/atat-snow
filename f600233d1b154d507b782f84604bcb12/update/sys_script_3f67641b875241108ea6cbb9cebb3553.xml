@@ -12,7 +12,7 @@
         <change_fields>false</change_fields>
         <client_callable>false</client_callable>
         <collection>x_g_dis_atat_organization</collection>
-        <condition>!regexEvaluation(current.state, /^A[AEP]$/) &amp;&amp; !current.state.nil()</condition>
+        <condition>!regexEvaluation(current.state, new BusinessRuleUtils().militaryStateRegex) &amp;&amp; !current.state.nil()</condition>
         <description/>
         <execute_function>false</execute_function>
         <filter_condition table="x_g_dis_atat_organization">address_type=MILITARY^EQ<item display_value="Military" endquery="false" field="address_type" goto="false" newquery="false" operator="=" or="false" value="MILITARY"/>
@@ -42,7 +42,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>3f67641b875241108ea6cbb9cebb3553</sys_id>
-        <sys_mod_count>11</sys_mod_count>
+        <sys_mod_count>12</sys_mod_count>
         <sys_name>Org - Military State Address</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -50,7 +50,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_3f67641b875241108ea6cbb9cebb3553</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-04-14 19:40:00</sys_updated_on>
+        <sys_updated_on>2022-04-14 20:04:03</sys_updated_on>
         <template/>
         <when>before</when>
     </sys_script>
