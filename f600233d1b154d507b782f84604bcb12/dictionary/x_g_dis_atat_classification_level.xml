@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Classification Level" max_length="40" name="x_g_dis_atat_classification_level" type="collection">
+        <element choice="1" label="Classification" mandatory="true" max_length="40" name="classification" read_only="true" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Unclassified" sequence="1" value="U"/>
+                <element inactive_on_update="false" label="Secret" sequence="2" value="S"/>
+                <element inactive_on_update="false" label="Top Secret" sequence="3" value="TS"/>
+            </choice>
+        </element>
+        <element choice="1" label="Impact Level" max_length="40" name="impact_level" read_only="true" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Impact Level 2" sequence="2" value="IL2"/>
+                <element inactive_on_update="false" label="Impact Level 4" sequence="4" value="IL4"/>
+                <element inactive_on_update="false" label="Impact Level 5" sequence="5" value="IL5"/>
+                <element inactive_on_update="false" label="Impact Level 6" sequence="6" value="IL6"/>
+            </choice>
+        </element>
+    </element>
+</database>
