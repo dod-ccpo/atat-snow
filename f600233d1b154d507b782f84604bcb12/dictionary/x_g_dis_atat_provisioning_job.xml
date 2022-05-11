@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element label="Provisioning Job" max_length="40" name="x_g_dis_atat_provisioning_job" sizeclass="0" type="collection">
-        <element attributes="edge_encryption_enabled=true,encode_utf8=false" display="true" label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
-        <element attributes="edge_encryption_enabled=true" choice="3" default="INITIAL_PROVISIONING" display="true" label="Job Type" mandatory="true" max_length="40" name="job_type" type="choice">
+        <element display="true" label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
+        <element choice="3" default="ADD_PORTFOLIO" label="Job Type" mandatory="true" max_length="40" name="job_type" type="choice">
             <choice>
-                <element inactive_on_update="false" label="Add Funding Source(s)" value="ADD_FUNDS"/>
+                <element inactive_on_update="false" label="Add Funding Source(s)" value="ADD_FUNDING_SOURCE"/>
+                <element inactive_on_update="false" label="Add New Portfolio" value="ADD_PORTFOLIO"/>
                 <element inactive_on_update="false" label="Add Operator(s)" value="ADD_OPERATORS"/>
-                <element inactive_on_update="false" label="Initial Provisioning" value="INITIAL_PROVISIONING"/>
             </choice>
         </element>
-        <element attributes="edge_encryption_enabled=true" choice="3" default="IN_PROGRESS" display="true" label="Status" max_length="40" name="status" type="choice">
+        <element choice="3" default="IN_PROGRESS" label="Status" max_length="40" name="status" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Failure" value="FAILURE"/>
                 <element inactive_on_update="false" label="In Progress" value="IN_PROGRESS"/>
                 <element inactive_on_update="false" label="Success" value="SUCCESS"/>
             </choice>
         </element>
+        <element label="Status Message" max_length="300" name="status_message" type="string"/>
         <index name="index">
             <element name="acquisition_package"/>
         </index>
