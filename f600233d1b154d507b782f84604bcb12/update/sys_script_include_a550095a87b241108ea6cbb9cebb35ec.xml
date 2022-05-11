@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.getProvisioningJobResults</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>A function to be used for a scheduled job that makes a GET request to AWS and gets the provisioning job results from the provisioning queue.</description>
+        <name>getProvisioningJobResults</name>
+        <script><![CDATA[function getProvisioningJobResults() {
+	
+	try {
+		// outbound REST message
+		var getProvisioningJobsRequest = new sn_ws.RESTMessageV2();
+
+		// AWS request setup
+		var baseUrl = new GlideRecord('x_g_dis_atat_configuration');
+		baseUrl.get('name', 'provisioning_api_endpoint');
+		var URL = baseUrl.value + 'provisioning-jobs';
+		getProvisioningJobsRequest.setEndpoint(URL);
+		getProvisioningJobsRequest.setHttpMethod('get');
+		getProvisioningJobsRequest.setLogLevel('all');
+
+		// make request
+		var response = getProvisioningJobsRequest.execute();
+		var responseBody = JSON.parse(response.getBody());
+		var status = response.getStatusCode();
+		if (responseBody.length == 0) {
+			gs.info("No messages in Provisioning Job Queue.");
+			return;
+		}
+		
+		// loop through each job
+		for (var i = 0; i <= responseBody.length - 1; i++) {
+			// get provisioning job (jobId -> sys_id)
+			var jobMessage = responseBody[i];
+			var provisioningRecord = new GlideRecord('x_g_dis_atat_provisioning_job');
+			provisioningRecord.get(jobMessage.jobId);
+			
+			if (jobMessage.cspResponse.code == '200' && 
+				provisioningRecord.job_type == 'ADD_PORTFOLIO') {
+				// update job status
+				provisioningRecord.status = 'SUCCESS';
+				provisioningRecord.update();
+
+				// get Mission Owner ID from m2m record			
+				var m2mRecord = new GlideRecord('x_g_dis_atat_m2m_contacts_acquisition');
+				m2mRecord.get('acquisition_package', provisioningRecord.acquisition_package);
+
+				// create a portfolio record and referece Acq Package
+				var portfolio = new GlideRecord('x_g_dis_atat_portfolio');
+				portfolio.initialize();
+				portfolio.acquisition_package = provisioningRecord.acquisition_package;
+				portfolio.name = jobMessage.payload.name;
+
+				// a 'List' field type is just a comma separated string
+				portfolio.mission_owners = m2mRecord.contacts.toString();
+				portfolio.insert();
+
+			} else if (jobMessage.cspResponse.code == '400') {
+				// update job status and status message
+				// only 400 errors get put on the queue (not 500 errors)
+				provisioningRecord.status = 'FAILURE';
+				provisioningRecord.status_message = JSON.stringify(jobMessage.cspResponse);
+				provisioningRecord.update();
+			} else {
+				// catch everything else
+				gs.info('Unknown status from provisioning request.');
+				provisioningRecord.status = 'FAILURE';
+				provisioningRecord.update();
+			}
+
+		}
+	} catch(error) {
+		gs.error('Internal SNOW error => ' + error);
+		gs.error('Error Stack => ' + error.stack);
+	}
+}]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-04-13 17:23:41</sys_created_on>
+        <sys_id>a550095a87b241108ea6cbb9cebb35ec</sys_id>
+        <sys_mod_count>16</sys_mod_count>
+        <sys_name>getProvisioningJobResults</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_a550095a87b241108ea6cbb9cebb35ec</sys_update_name>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-04-14 04:01:59</sys_updated_on>
+    </sys_script_include>
+</record_update>
