@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Acquisition Package" max_length="40" name="x_g_dis_atat_acquisition_package" sizeclass="0" type="collection">
+    <element label="Acquisition Package" max_length="40" name="x_g_dis_atat_acquisition_package" sizeclass="7130" type="collection">
         <element label="Contract Considerations" max_length="32" name="contract_considerations" reference="x_g_dis_atat_contract_considerations" type="reference"/>
         <element label="Contract Type" max_length="32" name="contract_type" reference="x_g_dis_atat_contract_type" type="reference"/>
         <element label="Current Contract Information" max_length="32" name="current_contract_and_recurring_information" reference="x_g_dis_atat_current_contract_and_recurring_information" type="reference"/>
+        <element label="Current Environment" max_length="32" name="current_environment" reference="x_g_dis_atat_current_environment" type="reference"/>
         <element label="DocuSign Envelope ID" max_length="50" name="docusign_envelope_id" type="string"/>
         <element label="Fair Opportunity" max_length="32" name="fair_opportunity" reference="x_g_dis_atat_fair_opportunity" type="reference"/>
         <element label="Funding Plans" max_length="4000" name="funding_plans" reference="x_g_dis_atat_funding_plan" type="glide_list"/>
@@ -21,13 +22,13 @@
             </choice>
         </element>
         <index name="index">
-            <element name="fair_opportunity"/>
+            <element name="contract_type"/>
         </index>
         <index name="index2">
-            <element name="period_of_performance"/>
+            <element name="organization"/>
         </index>
         <index name="index3">
-            <element name="project_overview"/>
+            <element name="period_of_performance"/>
         </index>
         <index name="index4">
             <element name="gfe_overview"/>
@@ -36,13 +37,16 @@
             <element name="sensitive_information"/>
         </index>
         <index name="index6">
-            <element name="contract_type"/>
+            <element name="project_overview"/>
         </index>
         <index name="index7">
-            <element name="organization"/>
+            <element name="contract_considerations"/>
         </index>
         <index name="index8">
-            <element name="contract_considerations"/>
+            <element name="fair_opportunity"/>
+        </index>
+        <index name="index9">
+            <element name="current_environment"/>
         </index>
     </element>
 </database>
