@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Environment Instance" max_length="40" name="x_g_dis_atat_environment_instance" type="collection">
+        <element label="Classification Level" max_length="32" name="classification_level" reference="x_g_dis_atat_classification_level" type="reference"/>
+        <element choice="1" label="CSP Region" max_length="40" name="csp_region" type="choice">
+            <choice/>
+        </element>
+        <element label="Data Egress Monthly Amount" max_length="40" name="data_egress_monthly_amount" type="integer"/>
+        <element choice="1" label="Data Egress Monthly Unit" max_length="40" name="data_egress_monthly_unit" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="GB" value="gb"/>
+                <element inactive_on_update="false" label="TB" value="tb"/>
+            </choice>
+        </element>
+        <element choice="1" label="Instance Location" max_length="40" name="instance_location" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="CSP" value="csp"/>
+                <element inactive_on_update="false" label="Hybrid" value="hybrid"/>
+                <element inactive_on_update="false" label="Not in the cloud/On-premise" value="on_premise"/>
+            </choice>
+        </element>
+        <element label="Instance Name" max_length="100" name="instance_name" type="string"/>
+        <element label="Memory Amount" max_length="40" name="memory_amount" type="integer"/>
+        <element choice="1" label="Memory Unit" max_length="40" name="memory_unit" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="GB" value="gb"/>
+                <element inactive_on_update="false" label="TB" value="tb"/>
+            </choice>
+        </element>
+        <element label="Number of vCPUs" max_length="40" name="number_of_vcpus" type="integer"/>
+        <element label="Operating System Licensing" max_length="1000" name="operating_system_licensing" type="string"/>
+        <element choice="1" label="Performance Tier" max_length="40" name="performance_tier" type="choice">
+            <choice/>
+        </element>
+        <element choice="1" label="Pricing Model" max_length="40" name="pricing_model" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="On-demand" value="on_demand"/>
+                <element inactive_on_update="false" label="Pay-as-you-go" value="pay_as_you_go"/>
+                <element inactive_on_update="false" label="Reserved" value="reserved"/>
+            </choice>
+        </element>
+        <element label="Pricing Model Expiration" max_length="40" name="pricing_model_expiration" type="glide_date"/>
+        <element label="Storage Amount" max_length="40" name="storage_amount" type="integer"/>
+        <element choice="1" label="Storage Type" max_length="40" name="storage_type" type="choice">
+            <choice/>
+        </element>
+        <element choice="1" label="Storage Unit" max_length="40" name="storage_unit" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="GB" value="gb"/>
+                <element inactive_on_update="false" label="TB" value="tb"/>
+            </choice>
+        </element>
+        <index name="index">
+            <element name="classification_level"/>
+        </index>
+    </element>
+</database>
