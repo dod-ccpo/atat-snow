@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Contacts" max_length="40" name="x_g_dis_atat_contacts" sizeclass="31" type="collection">
-        <element label="Can Access Package" max_length="40" name="can_access_package" type="boolean"/>
+    <element label="Contacts" max_length="40" name="x_g_dis_atat_contacts" type="collection">
+        <element choice="1" label="Can Access Package" max_length="40" name="can_access_package" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Unselected" value="UNSELECTED"/>
+                <element inactive_on_update="false" label="Yes" sequence="1" value="YES"/>
+                <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
+            </choice>
+        </element>
         <element label="DoDAAC" max_length="6" name="dodaac" type="string"/>
         <element label="Email" max_length="40" name="email" type="string"/>
         <element display="true" label="First Name" max_length="40" name="first_name" type="string"/>

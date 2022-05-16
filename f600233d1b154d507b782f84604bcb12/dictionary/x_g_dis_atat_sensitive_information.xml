@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element label="Sensitive Information" max_length="40" name="x_g_dis_atat_sensitive_information" type="collection">
         <element label="Accessibility Reqs 508" max_length="1000" name="accessibility_reqs_508" type="string"/>
-        <element label="BAA Required" max_length="40" name="baa_required" type="boolean"/>
+        <element choice="1" label="BAA Required" max_length="40" name="baa_required" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Yes" sequence="1" value="YES"/>
+                <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
+                <element inactive_on_update="false" label="Unselected" sequence="3" value="UNSELECTED"/>
+            </choice>
+        </element>
         <element choice="1" choice_field="address_type" choice_table="x_g_dis_atat_organization" label="FOIA Address Type" max_length="40" name="foia_address_type" type="choice">
             <choice/>
         </element>
@@ -13,9 +19,27 @@
         <element label="FOIA Street Address 1" max_length="50" name="foia_street_address_1" type="string"/>
         <element label="FOIA Street Address 2" max_length="50" name="foia_street_address_2" type="string"/>
         <element label="FOIA Zip/Postal Code" max_length="40" name="foia_zip_postal_code" type="string"/>
-        <element label="PII Present" max_length="40" name="pii_present" type="boolean"/>
-        <element label="Potential to be Harmful" max_length="40" name="potential_to_be_harmful" type="boolean"/>
-        <element label="Section 508 Sufficient" max_length="40" name="section_508_sufficient" type="boolean"/>
+        <element choice="1" label="PII Present" max_length="40" name="pii_present" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Yes" sequence="1" value="YES"/>
+                <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
+                <element inactive_on_update="false" label="Unselected" sequence="3" value="UNSELECTED"/>
+            </choice>
+        </element>
+        <element choice="1" label="Potential to be Harmful" max_length="40" name="potential_to_be_harmful" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Yes" sequence="1" value="YES"/>
+                <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
+                <element inactive_on_update="false" label="Unselected" sequence="3" value="UNSELECTED"/>
+            </choice>
+        </element>
+        <element choice="1" label="Section 508 Sufficient" max_length="40" name="section_508_sufficient" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Yes" sequence="1" value="YES"/>
+                <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
+                <element inactive_on_update="false" label="Unselected" sequence="3" value="UNSELECTED"/>
+            </choice>
+        </element>
         <element label="System of Record Name" max_length="40" name="system_of_record_name" type="string"/>
         <element label="Work to be Performed" max_length="400" name="work_to_be_performed" type="string"/>
     </element>
