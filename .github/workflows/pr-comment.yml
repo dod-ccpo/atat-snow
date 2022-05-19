@@ -40,13 +40,14 @@ jobs:
             const totalCommits = result.repository.pullRequest.commits.totalCount;
             // Get unique email addresses
             const commitEmails = [... new Set(result.repository.pullRequest.commits.nodes.map((node) => node.commit.author.email))];
+            // Check that all emails end in "@ccpo.mil"
             const allEmailCcpo = commitEmails.every((email) => email.endsWith("@ccpo.mil"));
 
             core.setOutput("commit-count", totalCommits);
             core.setOutput("all-email-ccpo", allEmailCcpo);
 
       - name: Message on too many commits
-        if: steps.get-commit-data.outputs.commit-count > 250
+        if: ${{ fromJSON(steps.get-commit-data.outputs.commit-count) > 250 }}
         uses: actions/github-script@v6
         with:
           script: |
@@ -66,7 +67,7 @@ jobs:
             });
 
       - name: Message on non-CCPO author
-        if: steps.get-commit-data.outputs.all-email-ccpo != true
+        if: ${{ steps.get-commit-data.outputs.all-email-ccpo != 'true' }}
         uses: actions/github-script@v6
         with:
           script: |
@@ -88,7 +89,7 @@ jobs:
             });
 
       - name: Message on all CCPO authors
-        if: steps.get-commit-data.outputs.all-email-ccpo == true
+        if: ${{ steps.get-commit-data.outputs.all-email-ccpo == 'true' }}
         uses: actions/github-script@v6
         with:
           script: |
