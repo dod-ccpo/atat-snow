@@ -13,7 +13,7 @@ jobs:
         id: get-commit-data
         uses: actions/github-script@v6
         with:
-          scipt: |
+          script: |
             const query = `query($owner:String!, $name:String!, $number:Int!) {
               repository(owner: $owner, name: $name) {
                 pullRequest(number: $number) {
@@ -49,7 +49,7 @@ jobs:
         if: steps.get-commit-data.outputs.commit-count > 250
         uses: actions/github-script@v6
         with:
-          scipt: |
+          script: |
             message = `
             :warning: :rotating_light: **This branch has too many commits to validate** :rotating_light: :warning:
 
@@ -69,7 +69,7 @@ jobs:
         if: steps.get-commit-data.outputs.all-email-ccpo != true
         uses: actions/github-script@v6
         with:
-          scipt: |
+          script: |
             message = `
             :wave: **One or more commits are from an external user** :wave:
             
@@ -91,7 +91,7 @@ jobs:
         if: steps.get-commit-data.outputs.all-email-ccpo == true
         uses: actions/github-script@v6
         with:
-          scipt: |
+          script: |
             message = `
             :white_check_mark: **All checked commits are from an @ccpo.mil email** :white_check_mark:
 
