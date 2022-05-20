@@ -1,0 +1,109 @@
+---
+name: Run checks on PRs
+
+on:
+  pull_request_target:
+
+jobs:
+  valiateCommitterEmails:
+    name: Check email matches expected
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get commit authors
+        id: get-commit-data
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const query = `query($owner:String!, $name:String!, $number:Int!) {
+              repository(owner: $owner, name: $name) {
+                pullRequest(number: $number) {
+                  commits(first: 250) {
+                    totalCount
+                    nodes {
+                      commit {
+                        author {
+                          email
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }`;
+            const variables = {
+              owner: context.repo.owner,
+              name: context.repo.repo,
+              number: context.payload.pull_request.number,
+            };
+            console.log('Request variables: %j', variables);
+            const result = await github.graphql(query, variables);
+            const totalCommits = result.repository.pullRequest.commits.totalCount;
+            // Get unique email addresses
+            const commitEmails = [... new Set(result.repository.pullRequest.commits.nodes.map((node) => node.commit.author.email))];
+            // Check that all emails end in "@ccpo.mil"
+            const allEmailCcpo = commitEmails.every((email) => email.endsWith("@ccpo.mil"));
+
+            core.setOutput("commit-count", totalCommits);
+            core.setOutput("all-email-ccpo", allEmailCcpo);
+
+      - name: Message on too many commits
+        if: ${{ fromJSON(steps.get-commit-data.outputs.commit-count) > 250 }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            message = `
+            :warning: :rotating_light: **This branch has too many commits to validate** :rotating_light: :warning:
+
+            Thanks for opening this pull request! We ensure that all commit author data matches certain patterns. Unfortunately,
+            there are more than 250 commits on this PR which makes it a little challenging to validate.
+
+            @dod-ccpo/platform-team Please pay extra attention to the commit author data on this pull request.
+            `;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: message,
+            });
+
+      - name: Message on non-CCPO author
+        if: ${{ steps.get-commit-data.outputs.all-email-ccpo != 'true' }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            message = `
+            :wave: **One or more commits are from an external user** :wave:
+            
+            Thanks for opening this pull request! It looks like one or more commits on this pull request are from an external
+            contributor. Thanks for taking the time to make a contribution; it will be reviewed shortly.
+            
+            @dod-ccpo/platform-team Please ensure that all commit author data associated with this commit looks reasonable and
+            that this is a contribution from an external user; make sure all commits from team members have proper email data
+            associated with it.
+            `;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: message,
+            });
+
+      - name: Message on all CCPO authors
+        if: ${{ steps.get-commit-data.outputs.all-email-ccpo == 'true' }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            message = `
+            :white_check_mark: **All checked commits are from an @ccpo.mil email** :white_check_mark:
+
+            Thanks for opening this pull request! It looks like all the commit authors have set the email address for the commits.
+            
+            @dod-ccpo/platform-team Remember that anyone can set commit author information to any value. Please review the content
+            of the pull request thoroughly, as always.
+            `;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: message,
+            });
