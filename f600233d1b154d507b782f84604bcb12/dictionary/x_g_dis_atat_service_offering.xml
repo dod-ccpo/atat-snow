@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Service Offering" max_length="40" name="x_g_dis_atat_service_offering" type="collection">
+    <element label="Service Offering" max_length="40" name="x_g_dis_atat_service_offering" sizeclass="37" type="collection">
         <element label="Name" mandatory="true" max_length="100" name="name" type="string"/>
         <element choice="1" label="Service Offering Group" mandatory="true" max_length="40" name="service_offering_group" type="choice">
             <choice>
-                <element inactive_on_update="false" label="Advanced Technology and Algorithmic Techniques (Machine Learning)" value="MACHINE_LEARNING"/>
-                <element inactive_on_update="false" label="Advisory and Assistance" value="ADVISORY"/>
-                <element inactive_on_update="false" label="Applications" value="APPLICATIONS"/>
-                <element inactive_on_update="false" label="Compute" value="COMPUTE"/>
-                <element inactive_on_update="false" label="Database with Storage" value="DATABASE"/>
-                <element inactive_on_update="false" label="Developer Tools and Services" value="DEVELOPER_TOOLS"/>
-                <element inactive_on_update="false" label="Edge Computing and Tactical Edge (TE)" value="EDGE_COMPUTING"/>
-                <element inactive_on_update="false" label="General Iaas, PaaS, and SaaS" value="GENERAL_XAAS"/>
-                <element inactive_on_update="false" label="Internet of Things (IoT)" value="IOT"/>
-                <element inactive_on_update="false" label="Networking" value="NETWORKING"/>
-                <element inactive_on_update="false" label="Security" value="SECURITY"/>
-                <element inactive_on_update="false" label="Training" value="TRAINING"/>
+                <element inactive_on_update="false" label="Compute" sequence="1" value="COMPUTE"/>
+                <element inactive_on_update="false" label="Developer Tools and Services" sequence="2" value="DEVELOPER_TOOLS"/>
+                <element inactive_on_update="false" label="Applications" sequence="3" value="APPLICATIONS"/>
+                <element inactive_on_update="false" label="Advanced Technology and Algorithmic Techniques (Machine Learning)" sequence="4" value="MACHINE_LEARNING"/>
+                <element inactive_on_update="false" label="Networking" sequence="5" value="NETWORKING"/>
+                <element inactive_on_update="false" label="Security" sequence="6" value="SECURITY"/>
+                <element inactive_on_update="false" label="Database with Storage" sequence="7" value="DATABASE"/>
+                <element inactive_on_update="false" label="Edge Computing and Tactical Edge (TE)" sequence="8" value="EDGE_COMPUTING"/>
+                <element inactive_on_update="false" label="Internet of Things (IoT)" sequence="9" value="IOT"/>
+                <element inactive_on_update="false" label="General Iaas, PaaS, and SaaS" sequence="10" value="GENERAL_XAAS"/>
+                <element inactive_on_update="false" label="Advisory and Assistance" sequence="11" value="ADVISORY"/>
+                <element inactive_on_update="false" label="Training" sequence="12" value="TRAINING"/>
             </choice>
         </element>
     </element>
