@@ -11,7 +11,7 @@
         <copied_from_name/>
         <description>Combines all the data from tables into a payload to be sent as a request to generate the Description of Work document.</description>
         <internal_name>atat_extract_descriptionofwork_data</internal_name>
-        <label_cache>[]</label_cache>
+        <label_cache>[{"name":"7fe9a84f-4be2-49bb-975b-dfd22cd37672.dow_document_data","label":"1➛DoW Document Data","reference_display":"DoW Document Data","type":"string","base_type":"string","attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiType":"string","uiUniqueId":"f2194a2c-4fb2-4f4e-a144-1a1e4272066d"}},{"name":"7fe9a84f-4be2-49bb-975b-dfd22cd37672.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FD5357b877f723411026d69fd59e0e47bb","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"46232d67-15b6-42ff-bb91-06f93679d6ca"}},{"name":"7fe9a84f-4be2-49bb-975b-dfd22cd37672.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"99c860d0-25e8-4104-bbb0-7b65310cf489"}},{"name":"subflow.acquisition_package","label":"Input➛Acquisition Package","reference":"x_g_dis_atat_acquisition_package","reference_display":"Acquisition Package","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"37bd85c9-e477-4892-b431-5c1a6a86ddd2","sourceUiUniqueId":"","sourceType":"","sourceId":""}}]</label_cache>
         <latest_snapshot/>
         <master_snapshot/>
         <name>ATAT Extract DescriptionOfWork Data</name>
@@ -30,7 +30,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>29672c3b1bef0110c385ea85604bcb5c</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name>ATAT Extract DescriptionOfWork Data</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -38,7 +38,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_flow_29672c3b1bef0110c385ea85604bcb5c</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-05-25 13:54:54</sys_updated_on>
+        <sys_updated_on>2022-05-25 15:02:42</sys_updated_on>
         <type>subflow</type>
     </sys_hub_flow>
     <sys_translated_text action="delete_multiple" query="documentkey=29672c3b1bef0110c385ea85604bcb5c"/>
@@ -220,6 +220,42 @@
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_flow_output>
+    <sys_hub_action_instance action="delete_multiple" query="flow=29672c3b1bef0110c385ea85604bcb5c^sys_idNOT IN2e87bc771b234110c385ea85604bcbb8"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Gather DescriptionOfWork Data">0f57b8771b234110c385ea85604bcb95</action_type>
+        <action_type_parent/>
+        <comment/>
+        <compiled_snapshot/>
+        <display_text/>
+        <flow display_value="ATAT Extract DescriptionOfWork Data">29672c3b1bef0110c385ea85604bcb5c</flow>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-05-25 15:02:41</sys_created_on>
+        <sys_id>2e87bc771b234110c385ea85604bcbb8</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-05-25 15:02:42</sys_updated_on>
+        <ui_id>7fe9a84f-4be2-49bb-975b-dfd22cd37672</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=2e87bc771b234110c385ea85604bcbb8"/>
+    <sys_element_mapping action="delete_multiple" query="id=2e87bc771b234110c385ea85604bcbb8"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>acquisition_package</field>
+        <id>2e87bc771b234110c385ea85604bcbb8</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-05-25 15:02:42</sys_created_on>
+        <sys_id>2e87bc771b234110c385ea85604bcbba</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-05-25 15:02:42</sys_updated_on>
+        <table>var__m_sys_hub_action_input_0f57b8771b234110c385ea85604bcb95</table>
+        <value>{{subflow.acquisition_package}}</value>
+    </sys_element_mapping>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_29672c3b1bef0110c385ea85604bcb5c^sys_idNOT INad0820bb1bef0110c385ea85604bcb15"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>acquisition_package</element>
