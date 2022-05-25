@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.mapPackagePeriods</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Map all periods of a package that can be used by easily selected later.</description>
+        <name>mapPackagePeriods</name>
+        <script><![CDATA[function mapPackagePeriods(base, options) {
+  var mappedPeriods = {};
+  mappedPeriods[base] = { period_type: base.period_type.toString(),
+    period_unit_count: base.period_unit_count.toString(),
+    period_unit: base.period_unit.toString(),
+    option_order: base.option_order.toString()
+  };
+
+  getListRecords(options,
+    ['period_type', 'period_unit_count', 'period_unit', 'option_order'],
+    'x_g_dis_atat_period')
+    .forEach(function(period) {
+		var id = period.sys_id;
+        delete period.sys_id;
+		mappedPeriods[id] = period;
+     });
+	
+  return mappedPeriods;
+}]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-05-25 17:24:58</sys_created_on>
+        <sys_id>2c07113f1b634110c385ea85604bcbf4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>mapPackagePeriods</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_2c07113f1b634110c385ea85604bcbf4</sys_update_name>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-05-25 17:24:58</sys_updated_on>
+    </sys_script_include>
+</record_update>
