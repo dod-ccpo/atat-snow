@@ -27,15 +27,15 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>4ed9607b1bef0110c385ea85604bcbcd</sys_id>
-        <sys_mod_count>16</sys_mod_count>
+        <sys_mod_count>21</sys_mod_count>
         <sys_name>Gather DescriptionOfWork Data</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_4ed9607b1bef0110c385ea85604bcbcd</sys_update_name>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-05-25 21:39:36</sys_updated_on>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-05-25 23:05:30</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -124,10 +124,10 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-05-25 14:59:59</sys_created_on>
         <sys_id>8be6f0771b234110c385ea85604bcb03</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-05-25 21:39:22</sys_updated_on>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-05-25 23:05:23</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=8be6f0771b234110c385ea85604bcb03"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -152,16 +152,16 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-05-25 15:00:00</sys_created_on>
         <sys_id>c3e6f0771b234110c385ea85604bcb2b</sys_id>
-        <sys_mod_count>3</sys_mod_count>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-05-25 21:39:22</sys_updated_on>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-05-25 23:05:23</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   var package = inputs.package;
   var ctb = convertToBoolean; // for compact execution
   
   // Tables 
   var projectOverview = package.project_overview;
-  var contractAward = package.contract_award;
+  var contractMods = package.contract_modifications
   // TODO (AT-0000): recreate Current Contract Info table 
   var currentContractInfo = package.current_contract_and_recurring_information;
   var currentEnvironment = package.current_environment;
@@ -187,6 +187,7 @@
     instanceFields, 
     'x_g_dis_atat_environment_instance')
     .map(function(instance) { 
+      // set classification level for instance
       var classification = new global.GlideQuery('x_g_dis_atat_classification_level')
         .get(instance.classification_level, ['classification', 'impact_level'])
         .orElse(null)
@@ -216,16 +217,34 @@
     .map(removeSysId)
   	.map(getNestedServiceInfo);
   
-  // hoth api 
+  // award history 
+  var awards = getListRecords(contractMods.toString(),
+    ['contract_award_type', 'modification_order', 'effective_date'],
+    'x_g_dis_atat_award_history')
+    .map(removeSysId);
+  awards.unshift({
+    	contract_award_type: package.contract_award.contract_award_type.toString(),
+        effective_date: package.contract_award.effective_date.toString(),
+        modification_order: package.contract_award.modification_order.toString()
+    });
+                
+  
+  // hoth api payload
     var dow_document_data = {
-      award_effective_date: contractAward.effective_date.toString(),
-      award_version_date: contractAward.contract_award_type.toString(),
-      mod_order: contractAward.modification_order.toString(),
-      
-      previous_contract: {
-        previous_contract_number: currentContractInfo.contract_number.toString(),
-        pervious_to_number: currentContractInfo.task_delivery_order_number.toString()
+      // tables at top of DoW
+      award_history: awards,
+      contract_information: {
+        contract_number: currentContractInfo.contract_number.toString(),
+        current_contract_exists: 		
+        	ctb(currentContractInfo.current_contract_exists.toString()),
+        contract_expiration_date: 
+        	currentContractInfo.contract_order_expiration_date.toString(),
+        incumbent_contractor_name: 
+        	currentContractInfo.incumbent_contractor_name.toString(),
+        task_order_number: null, // KO
+        previous_task_order_number: currentContractInfo.task_delivery_order_number.toString()
       },
+
       to_title: projectOverview.title.toString(),
       scope: projectOverview.scope.toString(),
       scope_surge: requirementsCostEstimate.surge_capabilities.toString(),
@@ -258,15 +277,19 @@
       },
       
       contract_considerations: {
-        packaging_shipping_none_apply: cc.packaging_shipping_none_apply.toString(),
-        packaging_shipping_other: cc.packaging_shipping_other.toString(),
+        packaging_shipping_none_apply: ctb(cc.packaging_shipping_none_apply.toString()),
+        packaging_shipping_other: ctb(cc.packaging_shipping_other.toString()),
         packaging_shipping_other_explanation: 
         	cc.packaging_shipping_other_explanation.toString(),
         potential_conflict_of_interest: ctb(cc.potential_conflict_of_interest.toString()),
         conflict_of_interest_explanation: cc.conflict_of_interest_explanation.toString(),
-        contractor_provided_transfer: cc.contractor_provided_transfer.toString(),
+        contractor_provided_transfer: ctb(cc.contractor_provided_transfer.toString()),
         contractor_required_training: ctb(cc.contractor_required_training.toString()),
-        required_training_services: cc.required_training_courses.toString()
+        // should this be modified?
+        required_training_services: {
+          name: "required training",
+          value: cc.required_training_courses.toString()
+        }
       },
       
       section_508_accessibility_standards: {
@@ -962,17 +985,17 @@
     <sys_hub_action_plan action="INSERT_OR_UPDATE">
         <action_id display_value="Gather DescriptionOfWork Data">4ed9607b1bef0110c385ea85604bcbcd</action_id>
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"6357f8771b234110c385ea85604bcb2d","name":"plan","plan_signature":null}}</plan>
-        <snapshot>a8629efb1b274110c385ea85604bcb1d</snapshot>
+        <snapshot>cb0626fb1b674110c385ea85604bcb86</snapshot>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-05-25 15:01:56</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>6357f8771b234110c385ea85604bcb2d</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_overrides/>
         <sys_scope/>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-05-25 21:39:37</sys_updated_on>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-05-25 23:05:31</sys_updated_on>
     </sys_hub_action_plan>
     <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
@@ -1096,10 +1119,10 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-05-25 15:01:55</sys_created_on>
         <sys_id>5357b8771b234110c385ea85604bcba4</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-05-25 21:39:36</sys_updated_on>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-05-25 23:05:30</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=5357b8771b234110c385ea85604bcba4"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -1110,16 +1133,16 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-05-25 15:01:55</sys_created_on>
         <sys_id>5f57b8771b234110c385ea85604bcbb7</sys_id>
-        <sys_mod_count>2</sys_mod_count>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-05-25 21:39:36</sys_updated_on>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-05-25 23:05:30</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   var package = inputs.package;
   var ctb = convertToBoolean; // for compact execution
   
   // Tables 
   var projectOverview = package.project_overview;
-  var contractAward = package.contract_award;
+  var contractMods = package.contract_modifications
   // TODO (AT-0000): recreate Current Contract Info table 
   var currentContractInfo = package.current_contract_and_recurring_information;
   var currentEnvironment = package.current_environment;
@@ -1145,6 +1168,7 @@
     instanceFields, 
     'x_g_dis_atat_environment_instance')
     .map(function(instance) { 
+      // set classification level for instance
       var classification = new global.GlideQuery('x_g_dis_atat_classification_level')
         .get(instance.classification_level, ['classification', 'impact_level'])
         .orElse(null)
@@ -1174,16 +1198,34 @@
     .map(removeSysId)
   	.map(getNestedServiceInfo);
   
-  // hoth api 
+  // award history 
+  var awards = getListRecords(contractMods.toString(),
+    ['contract_award_type', 'modification_order', 'effective_date'],
+    'x_g_dis_atat_award_history')
+    .map(removeSysId);
+  awards.unshift({
+    	contract_award_type: package.contract_award.contract_award_type.toString(),
+        effective_date: package.contract_award.effective_date.toString(),
+        modification_order: package.contract_award.modification_order.toString()
+    });
+                
+  
+  // hoth api payload
     var dow_document_data = {
-      award_effective_date: contractAward.effective_date.toString(),
-      award_version_date: contractAward.contract_award_type.toString(),
-      mod_order: contractAward.modification_order.toString(),
-      
-      previous_contract: {
-        previous_contract_number: currentContractInfo.contract_number.toString(),
-        pervious_to_number: currentContractInfo.task_delivery_order_number.toString()
+      // tables at top of DoW
+      award_history: awards,
+      contract_information: {
+        contract_number: currentContractInfo.contract_number.toString(),
+        current_contract_exists: 		
+        	ctb(currentContractInfo.current_contract_exists.toString()),
+        contract_expiration_date: 
+        	currentContractInfo.contract_order_expiration_date.toString(),
+        incumbent_contractor_name: 
+        	currentContractInfo.incumbent_contractor_name.toString(),
+        task_order_number: null, // KO
+        previous_task_order_number: currentContractInfo.task_delivery_order_number.toString()
       },
+
       to_title: projectOverview.title.toString(),
       scope: projectOverview.scope.toString(),
       scope_surge: requirementsCostEstimate.surge_capabilities.toString(),
@@ -1216,15 +1258,19 @@
       },
       
       contract_considerations: {
-        packaging_shipping_none_apply: cc.packaging_shipping_none_apply.toString(),
-        packaging_shipping_other: cc.packaging_shipping_other.toString(),
+        packaging_shipping_none_apply: ctb(cc.packaging_shipping_none_apply.toString()),
+        packaging_shipping_other: ctb(cc.packaging_shipping_other.toString()),
         packaging_shipping_other_explanation: 
         	cc.packaging_shipping_other_explanation.toString(),
         potential_conflict_of_interest: ctb(cc.potential_conflict_of_interest.toString()),
         conflict_of_interest_explanation: cc.conflict_of_interest_explanation.toString(),
-        contractor_provided_transfer: cc.contractor_provided_transfer.toString(),
+        contractor_provided_transfer: ctb(cc.contractor_provided_transfer.toString()),
         contractor_required_training: ctb(cc.contractor_required_training.toString()),
-        required_training_services: cc.required_training_courses.toString()
+        // should this be modified?
+        required_training_services: {
+          name: "required training",
+          value: cc.required_training_courses.toString()
+        }
       },
       
       section_508_accessibility_standards: {
