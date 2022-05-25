@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.getNestedServiceInfo</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Queries the nested list inside of the services for an instance (classifications, periods, service groups).</description>
+        <name>getNestedServiceInfo</name>
+        <script><![CDATA[function removeSysId(item) {
+	delete item.sys_id;
+	return item;
+}
+
+function getNestedServiceInfo(service) {
+	// get classification levels and add to service
+	service.applicable_classification_levels = getListRecords(
+		service.applicable_classification_levels.toString(), 
+		['classification', 'impact_level'], 
+		'x_g_dis_atat_classification_level')
+		.map(removeSysId);
+		
+  
+	// get periods and add to service
+	// TODO: need to think about if whole TO is selected
+	// TODO: think about using periods from dictionary
+	service.applicable_periods = getListRecords(
+		service.applicable_periods.toString(), 
+		['period_type', 'period_unit_count', 'period_unit', 'option_order'], 
+		'x_g_dis_atat_period')
+		.map(removeSysId);
+
+	// get service groups and add to service
+	service.select_service_offerings = getListRecords(
+		service.select_service_offerings.toString(), 
+		['name', 'service_offering_group$DISPLAY'], 
+		'x_g_dis_atat_service_offering')
+		.map(removeSysId);
+
+
+	return service;
+}]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-05-25 16:15:34</sys_created_on>
+        <sys_id>fd170d731b634110c385ea85604bcb2d</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>getNestedServiceInfo</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_fd170d731b634110c385ea85604bcb2d</sys_update_name>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-05-25 16:49:05</sys_updated_on>
+    </sys_script_include>
+</record_update>
