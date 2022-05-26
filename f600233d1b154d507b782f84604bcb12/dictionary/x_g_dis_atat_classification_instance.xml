@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Classification Instance" max_length="40" name="x_g_dis_atat_classification_instance" type="collection">
+        <element label="Classification Level" max_length="32" name="classification_level" reference="x_g_dis_atat_classification_level" type="reference"/>
+        <element label="Need for Entire Task Order Duration" max_length="40" name="need_for_entire_task_order_duration" type="boolean"/>
+        <element label="Selected Periods" max_length="4000" name="selected_periods" reference="x_g_dis_atat_period" type="glide_list"/>
+        <element label="Usage Description" max_length="500" name="usage_description" type="string"/>
+        <index name="index">
+            <element name="classification_level"/>
+        </index>
+    </element>
+</database>
