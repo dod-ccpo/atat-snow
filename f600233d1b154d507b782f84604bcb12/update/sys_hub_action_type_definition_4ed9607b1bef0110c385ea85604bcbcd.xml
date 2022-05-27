@@ -27,7 +27,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>4ed9607b1bef0110c385ea85604bcbcd</sys_id>
-        <sys_mod_count>35</sys_mod_count>
+        <sys_mod_count>15</sys_mod_count>
         <sys_name>Gather DescriptionOfWork Data</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -35,7 +35,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_4ed9607b1bef0110c385ea85604bcbcd</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-05-27 12:58:47</sys_updated_on>
+        <sys_updated_on>2022-05-27 18:19:21</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -124,10 +124,10 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-05-26 15:38:42</sys_created_on>
         <sys_id>3359ca0c1b338110c385ea85604bcb34</sys_id>
-        <sys_mod_count>8</sys_mod_count>
+        <sys_mod_count>11</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-05-27 12:51:10</sys_updated_on>
+        <sys_updated_on>2022-05-27 18:19:14</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=3359ca0c1b338110c385ea85604bcb34"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -138,9 +138,9 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-05-26 15:38:43</sys_created_on>
         <sys_id>4469ca0c1b338110c385ea85604bcb9b</sys_id>
-        <sys_mod_count>7</sys_mod_count>
+        <sys_mod_count>10</sys_mod_count>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-05-27 12:51:10</sys_updated_on>
+        <sys_updated_on>2022-05-27 18:19:14</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   var package = inputs.pre_process_package;
   
@@ -171,6 +171,15 @@
         var classification = new global.GlideQuery('x_g_dis_atat_classification_level')
           .get(instance.classification_level, ['classification', 'impact_level'])
           .orElse(null);
+      
+      	if (classification === null) {
+          var errorMessage = 'An environment instance has no classification level and'
+            errorMessage += ' one should be provided.'  
+            errorMessage += ' Environment Instance Name: ' + instance.instance_name + '.'
+            errorMessage += ' Sys ID: ' + instance.sys_id + ','
+          gs.error(errorMessage)
+        }
+      
         delete classification.sys_id;
         instance.classification_level = classification;
 
@@ -288,11 +297,11 @@
         <field>script</field>
         <id>3359ca0c1b338110c385ea85604bcb34</id>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
-        <sys_created_on>2022-05-27 00:28:57</sys_created_on>
-        <sys_id>c7b2c8541bf78110c385ea85604bcb13</sys_id>
+        <sys_created_on>2022-05-27 17:57:41</sys_created_on>
+        <sys_id>d9c2bf901bf3c110c385ea85604bcb42</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-05-27 00:28:57</sys_updated_on>
+        <sys_updated_on>2022-05-27 17:57:41</sys_updated_on>
         <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
         <value/>
     </sys_element_mapping>
@@ -1216,18 +1225,6 @@
         <sys_updated_on>2022-05-26 15:38:44</sys_updated_on>
         <table>var__m_sys_hub_step_ext_input_c869ca0c1b338110c385ea85604bcbd0</table>
         <value>{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].package_periods_by_id}}</value>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>script</field>
-        <id>c869ca0c1b338110c385ea85604bcbd0</id>
-        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
-        <sys_created_on>2022-05-27 00:28:58</sys_created_on>
-        <sys_id>d7b2c8541bf78110c385ea85604bcb5e</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-05-27 00:28:58</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>selectedServiceOfferings</field>
@@ -2381,17 +2378,17 @@
     <sys_hub_action_plan action="INSERT_OR_UPDATE">
         <action_id display_value="Gather DescriptionOfWork Data">4ed9607b1bef0110c385ea85604bcbcd</action_id>
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"6357f8771b234110c385ea85604bcb2d","name":"plan","plan_signature":null}}</plan>
-        <snapshot>fa5e6ad81bff8110c385ea85604bcb8a</snapshot>
+        <snapshot>beb7bfd41bf3c110c385ea85604bcb62</snapshot>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-05-25 15:01:56</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>6357f8771b234110c385ea85604bcb2d</sys_id>
-        <sys_mod_count>12</sys_mod_count>
+        <sys_mod_count>15</sys_mod_count>
         <sys_overrides/>
         <sys_scope/>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-05-27 12:58:48</sys_updated_on>
+        <sys_updated_on>2022-05-27 18:19:23</sys_updated_on>
     </sys_hub_action_plan>
     <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
@@ -2515,10 +2512,10 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-05-26 15:38:52</sys_created_on>
         <sys_id>5a694e0c1b338110c385ea85604bcb8a</sys_id>
-        <sys_mod_count>8</sys_mod_count>
+        <sys_mod_count>11</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-05-27 12:58:46</sys_updated_on>
+        <sys_updated_on>2022-05-27 18:19:21</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=5a694e0c1b338110c385ea85604bcb8a"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -2529,9 +2526,9 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-05-26 15:38:52</sys_created_on>
         <sys_id>56694e0c1b338110c385ea85604bcbcf</sys_id>
-        <sys_mod_count>7</sys_mod_count>
+        <sys_mod_count>10</sys_mod_count>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-05-27 12:58:46</sys_updated_on>
+        <sys_updated_on>2022-05-27 18:19:21</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   var package = inputs.pre_process_package;
   
@@ -2562,6 +2559,15 @@
         var classification = new global.GlideQuery('x_g_dis_atat_classification_level')
           .get(instance.classification_level, ['classification', 'impact_level'])
           .orElse(null);
+      
+      	if (classification === null) {
+          var errorMessage = 'An environment instance has no classification level and'
+            errorMessage += ' one should be provided.'  
+            errorMessage += ' Environment Instance Name: ' + instance.instance_name + '.'
+            errorMessage += ' Sys ID: ' + instance.sys_id + ','
+          gs.error(errorMessage)
+        }
+      
         delete classification.sys_id;
         instance.classification_level = classification;
 
@@ -2679,11 +2685,11 @@
         <field>script</field>
         <id>5a694e0c1b338110c385ea85604bcb8a</id>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
-        <sys_created_on>2022-05-27 00:29:45</sys_created_on>
-        <sys_id>b6e2cc541bf78110c385ea85604bcbba</sys_id>
+        <sys_created_on>2022-05-27 17:57:51</sys_created_on>
+        <sys_id>bfc2ff901bf3c110c385ea85604bcbd3</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-05-27 00:29:45</sys_updated_on>
+        <sys_updated_on>2022-05-27 17:57:51</sys_updated_on>
         <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
         <value/>
     </sys_element_mapping>
@@ -3607,18 +3613,6 @@
         <sys_updated_on>2022-05-26 15:38:54</sys_updated_on>
         <table>var__m_sys_hub_step_ext_input_a6698e0c1b338110c385ea85604bcb0c</table>
         <value>{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].package_periods_by_id}}</value>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>script</field>
-        <id>a6698e0c1b338110c385ea85604bcb0c</id>
-        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
-        <sys_created_on>2022-05-27 00:29:45</sys_created_on>
-        <sys_id>bae2cc541bf78110c385ea85604bcbe3</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-05-27 00:29:45</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>selectedServiceOfferings</field>
