@@ -14,7 +14,7 @@
         <description>Begins the provisioning request on behalf of the user after the approval by sending a request to POST /provisioning-jobs</description>
         <ih_action>false</ih_action>
         <internal_name>atat_provisioning_job_request</internal_name>
-        <label_cache>[{"name":"{{action.job_id}}","label":"action➛Job ID","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","sourceUiUniqueId":"","sourceType":"","uiType":"string","uiUniqueId":"7b21c56f-849e-4520-9ad6-d2a9bb4c3d0d"}},{"name":"{{action.job_id1}}","label":"action➛Job Id","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.user_id}}","label":"action➛User ID","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.user_id2}}","label":"action➛User Id","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.portfolio_id}}","label":"action➛Portfolio ID","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.job_type}}","label":"action➛Job Type","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.target_csp}}","label":"action➛Target CSP","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.payload}}","label":"action➛Payload","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.acquisition_package}}","label":"action➛Acquisition Package","type":"action","ref":"","reference_display":"Acquisition Package","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{"uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"reference","uiUniqueId":"ef7b8209-a3c0-44eb-970c-b93628e6d38b"}},{"name":"{{action.provisioning_job}}","label":"action➛Provisioning Job","type":"action","ref":"","reference_display":"Provisioning Job","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.provisioning_job.sys_id}}","label":"action➛Provisioning Job➛Sys ID","type":"action","ref":"","reference_display":"Sys ID","base_type":"GUID","parent_table_name":"x_g_dis_atat_provisioning_job","column_name":"sys_id","choices":null,"attributes":{}},{"name":"{{action.acquisition_package.current_contract_and_recurring_information.sys_id}}","label":"action➛Acquisition Package➛Current Contract and Recurring Information➛Sys ID","type":"action","ref":"","reference_display":"Sys ID","base_type":"GUID","parent_table_name":"x_g_dis_atat_current_contract_and_recurring_information","column_name":"sys_id","choices":null,"attributes":{}},{"name":"{{action.acquisition_package.sys_id}}","label":"action➛Acquisition Package➛Sys ID","type":"action","ref":"","reference_display":"Sys ID","base_type":"GUID","parent_table_name":"x_g_dis_atat_acquisition_package","column_name":"sys_id","choices":null,"attributes":{}},{"name":"{{action.provisioning_job.job_type}}","label":"action➛Provisioning Job➛Job Type","type":"action","ref":"","reference_display":"Job Type","base_type":"choice","parent_table_name":"x_g_dis_atat_provisioning_job","column_name":"job_type","choices":[{"reference":false,"image":"","rawLabel":"Add Funding Source(s)","missing":false,"label":"Add Funding Source(s)","used":false,"value":"ADD_FUNDING_SOURCE","parameters":{"name":"x_g_dis_atat_provisioning_job"},"selected":false},{"reference":false,"image":"","rawLabel":"Add New Portfolio","missing":false,"label":"Add New Portfolio","used":false,"value":"ADD_PORTFOLIO","parameters":{"name":"x_g_dis_atat_provisioning_job"},"selected":false},{"reference":false,"image":"","rawLabel":"Add Operator(s)","missing":false,"label":"Add Operator(s)","used":false,"value":"ADD_OPERATORS","parameters":{"name":"x_g_dis_atat_provisioning_job"},"selected":false}],"attributes":{}},{"name":"{{action.acquisition_package.project_overview.title}}","label":"action➛Acquisition Package➛Project Overview➛Title","type":"action","ref":"","reference_display":"Title","base_type":"string","parent_table_name":"x_g_dis_atat_project_overview","column_name":"title","choices":null,"attributes":{}},{"name":"{{action.package_contacts}}","label":"action➛Package Contacts","type":"action","ref":"","reference_display":"Acq Packages To Contacts","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.package_contacts.contacts.first_name}}","label":"action➛Package Contacts➛contacts➛First Name","type":"action","ref":"","reference_display":"First Name","base_type":"string","parent_table_name":"x_g_dis_atat_contacts","column_name":"first_name","choices":null,"attributes":{}},{"name":"{{action.package_contacts.contacts.sys_id}}","label":"action➛Package Contacts➛contacts➛Sys ID","type":"action","ref":"","reference_display":"Sys ID","base_type":"GUID","parent_table_name":"x_g_dis_atat_contacts","column_name":"sys_id","choices":null,"attributes":{}},{"name":"{{action.package_contacts.contacts.email}}","label":"action➛Package Contacts➛contacts➛Email","type":"action","ref":"","reference_display":"Email","base_type":"string","parent_table_name":"x_g_dis_atat_contacts","column_name":"email","choices":null,"attributes":{}},{"name":"{{action.provisioning_endpoint}}","label":"action➛Provisioning Endpoint","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.variable}}","label":"action➛variable","type":"action","ref":"","reference_display":"AWS Credentials","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.aws_credential}}","label":"action➛AWS Credential","type":"action","ref":"aws_credentials","reference_display":"AWS Credentials","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.aws_credential.sys_id}}","label":"action➛AWS Credential➛Sys ID","type":"action","ref":"","reference_display":"Sys ID","base_type":"GUID","parent_table_name":"aws_credentials","column_name":"sys_id","choices":null,"attributes":{}},{"name":"{{action.aws_region}}","label":"action➛AWS Region","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"string","uiUniqueId":"fe735f07-42f0-47c0-a382-89e838182292"}},{"name":"{{step[bcd63fe2-1df1-43ab-8cba-823d5b724054].variable}}","label":"step➛Script step➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[bcd63fe2-1df1-43ab-8cba-823d5b724054].request_body}}","label":"step➛Script step➛Request Body","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[cd5765ea-c47c-436e-929b-1a70dcfbfcac].response_body}}","label":"step➛REST step➛Response Body","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"hidden_for":"DATASTREAM"}},{"name":"{{step[cd5765ea-c47c-436e-929b-1a70dcfbfcac].response_headers}}","label":"step➛REST step➛Response Headers","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"hidden_for":"DATASTREAM"}},{"name":"{{step[cd5765ea-c47c-436e-929b-1a70dcfbfcac].status_code}}","label":"step➛REST step➛Status Code","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"hidden_for":"DATASTREAM"}},{"name":"{{step[cd5765ea-c47c-436e-929b-1a70dcfbfcac].error_code}}","label":"step➛REST step➛Error Code","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"hidden_for":"DATASTREAM"}},{"name":"{{step[3838a296-9414-40dd-88a4-3c939fa63a3f].variable}}","label":"step➛Pre-processing➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[3838a296-9414-40dd-88a4-3c939fa63a3f].request_body}}","label":"step➛Pre-processing➛Request body","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[154a0f06-647e-46b0-98fe-bce6547f961b].variable}}","label":"step➛Error Handling➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[154a0f06-647e-46b0-98fe-bce6547f961b].status}}","label":"step➛Error Handling➛Status","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[154a0f06-647e-46b0-98fe-bce6547f961b].error_message}}","label":"step➛Error Handling➛Error Message","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[154a0f06-647e-46b0-98fe-bce6547f961b].error_map}}","label":"step➛Error Handling➛Error Map","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[5fa2cbc7-280f-4606-be66-becb6a9b2235].response_body}}","label":"step➛AWS POST /provisioning-jobs➛Response Body","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"hidden_for":"DATASTREAM"}},{"name":"{{step[5fa2cbc7-280f-4606-be66-becb6a9b2235].status_code}}","label":"step➛AWS POST /provisioning-jobs➛Status Code","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"hidden_for":"DATASTREAM"}},{"name":"{{step[d00dac36-3008-4663-afbb-e0ad649259aa].variable}}","label":"step➛Script step➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[d00dac36-3008-4663-afbb-e0ad649259aa].variable1}}","label":"step➛Script step➛variable1","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","uiTypeLabel":"Object","co_type_name":"","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","sourceUiUniqueId":"","sourceType":"","uiType":"object","uiUniqueId":"bb4f22aa-71c3-48da-86bf-702186bd494d"}},{"name":"{{step[d00dac36-3008-4663-afbb-e0ad649259aa].host_header}}","label":"step➛Script step➛Host Header","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"string","uiUniqueId":"123d9635-ecc4-421e-a513-8566c3f9fde6"}},{"name":"{{step[d00dac36-3008-4663-afbb-e0ad649259aa].authorization_header}}","label":"step➛Script step➛Authorization Header","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"string","uiUniqueId":"dd16d6de-7ebf-48a7-aea0-0625a31f593e"}},{"name":"{{step[d00dac36-3008-4663-afbb-e0ad649259aa].date_header}}","label":"step➛Script step➛Date Header","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"string","uiUniqueId":"d56c6a2f-80a3-43ea-b616-a2912b786651"}},{"name":"{{step[4fd764ec-7f3d-416b-9f73-30a4e355552f].response_body}}","label":"step➛Perform POST request➛Response Body","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"hidden_for":"DATASTREAM"}},{"name":"{{step[4fd764ec-7f3d-416b-9f73-30a4e355552f].status_code}}","label":"step➛Perform POST request➛Status Code","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"hidden_for":"DATASTREAM"}}]</label_cache>
+        <label_cache>[{"name":"{{action.job_id}}","label":"action➛Job ID","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","sourceUiUniqueId":"","sourceType":"","uiType":"string","uiUniqueId":"7b21c56f-849e-4520-9ad6-d2a9bb4c3d0d"}},{"name":"{{action.job_id1}}","label":"action➛Job Id","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.user_id}}","label":"action➛User ID","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.user_id2}}","label":"action➛User Id","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.portfolio_id}}","label":"action➛Portfolio ID","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.job_type}}","label":"action➛Job Type","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.target_csp}}","label":"action➛Target CSP","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.payload}}","label":"action➛Payload","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.acquisition_package}}","label":"action➛Acquisition Package","type":"action","ref":"","reference_display":"Acquisition Package","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{"uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"reference","uiUniqueId":"ef7b8209-a3c0-44eb-970c-b93628e6d38b"}},{"name":"{{action.provisioning_job}}","label":"action➛Provisioning Job","type":"action","ref":"","reference_display":"Provisioning Job","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.provisioning_job.sys_id}}","label":"action➛Provisioning Job➛Sys ID","type":"action","ref":"","reference_display":"Sys ID","base_type":"GUID","parent_table_name":"x_g_dis_atat_provisioning_job","column_name":"sys_id","choices":null,"attributes":{}},{"name":"{{action.acquisition_package.current_contract_and_recurring_information.sys_id}}","label":"action➛Acquisition Package➛Current Contract and Recurring Information➛Sys ID","type":"action","ref":"","reference_display":"Sys ID","base_type":"GUID","parent_table_name":"x_g_dis_atat_current_contract_and_recurring_information","column_name":"sys_id","choices":null,"attributes":{}},{"name":"{{action.acquisition_package.sys_id}}","label":"action➛Acquisition Package➛Sys ID","type":"action","ref":"","reference_display":"Sys ID","base_type":"GUID","parent_table_name":"x_g_dis_atat_acquisition_package","column_name":"sys_id","choices":null,"attributes":{}},{"name":"{{action.provisioning_job.job_type}}","label":"action➛Provisioning Job➛Job Type","type":"action","ref":"","reference_display":"Job Type","base_type":"choice","parent_table_name":"x_g_dis_atat_provisioning_job","column_name":"job_type","choices":[{"reference":false,"image":"","rawLabel":"Add Funding Source(s)","missing":false,"label":"Add Funding Source(s)","used":false,"value":"ADD_FUNDING_SOURCE","parameters":{"name":"x_g_dis_atat_provisioning_job"},"selected":false},{"reference":false,"image":"","rawLabel":"Add New Portfolio","missing":false,"label":"Add New Portfolio","used":false,"value":"ADD_PORTFOLIO","parameters":{"name":"x_g_dis_atat_provisioning_job"},"selected":false},{"reference":false,"image":"","rawLabel":"Add Operator(s)","missing":false,"label":"Add Operator(s)","used":false,"value":"ADD_OPERATORS","parameters":{"name":"x_g_dis_atat_provisioning_job"},"selected":false}],"attributes":{}},{"name":"{{action.acquisition_package.project_overview.title}}","label":"action➛Acquisition Package➛Project Overview➛Title","type":"action","ref":"","reference_display":"Title","base_type":"string","parent_table_name":"x_g_dis_atat_project_overview","column_name":"title","choices":null,"attributes":{}},{"name":"{{action.package_contacts}}","label":"action➛Package Contacts","type":"action","ref":"","reference_display":"Acq Packages To Contacts","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.package_contacts.contacts.first_name}}","label":"action➛Package Contacts➛contacts➛First Name","type":"action","ref":"","reference_display":"First Name","base_type":"string","parent_table_name":"x_g_dis_atat_contacts","column_name":"first_name","choices":null,"attributes":{}},{"name":"{{action.package_contacts.contacts.sys_id}}","label":"action➛Package Contacts➛contacts➛Sys ID","type":"action","ref":"","reference_display":"Sys ID","base_type":"GUID","parent_table_name":"x_g_dis_atat_contacts","column_name":"sys_id","choices":null,"attributes":{}},{"name":"{{action.package_contacts.contacts.email}}","label":"action➛Package Contacts➛contacts➛Email","type":"action","ref":"","reference_display":"Email","base_type":"string","parent_table_name":"x_g_dis_atat_contacts","column_name":"email","choices":null,"attributes":{}},{"name":"{{action.provisioning_endpoint}}","label":"action➛Provisioning Endpoint","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.variable}}","label":"action➛variable","type":"action","ref":"","reference_display":"AWS Credentials","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.aws_credential}}","label":"action➛AWS Credential","type":"action","ref":"aws_credentials","reference_display":"AWS Credentials","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.aws_credential.sys_id}}","label":"action➛AWS Credential➛Sys ID","type":"action","ref":"","reference_display":"Sys ID","base_type":"GUID","parent_table_name":"aws_credentials","column_name":"sys_id","choices":null,"attributes":{}},{"name":"{{action.aws_region}}","label":"action➛AWS Region","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"string","uiUniqueId":"fe735f07-42f0-47c0-a382-89e838182292","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"{{action.request_path}}","label":"action➛Request path","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.request_path7}}","label":"action➛Request Path","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[bcd63fe2-1df1-43ab-8cba-823d5b724054].variable}}","label":"step➛Script step➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[bcd63fe2-1df1-43ab-8cba-823d5b724054].request_body}}","label":"step➛Script step➛Request Body","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[cd5765ea-c47c-436e-929b-1a70dcfbfcac].response_body}}","label":"step➛REST step➛Response Body","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"hidden_for":"DATASTREAM"}},{"name":"{{step[cd5765ea-c47c-436e-929b-1a70dcfbfcac].response_headers}}","label":"step➛REST step➛Response Headers","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"hidden_for":"DATASTREAM"}},{"name":"{{step[cd5765ea-c47c-436e-929b-1a70dcfbfcac].status_code}}","label":"step➛REST step➛Status Code","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"hidden_for":"DATASTREAM"}},{"name":"{{step[cd5765ea-c47c-436e-929b-1a70dcfbfcac].error_code}}","label":"step➛REST step➛Error Code","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"hidden_for":"DATASTREAM"}},{"name":"{{step[3838a296-9414-40dd-88a4-3c939fa63a3f].variable}}","label":"step➛Pre-processing➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[3838a296-9414-40dd-88a4-3c939fa63a3f].request_body}}","label":"step➛Pre-processing➛Request body","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[154a0f06-647e-46b0-98fe-bce6547f961b].variable}}","label":"step➛Error Handling➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[154a0f06-647e-46b0-98fe-bce6547f961b].status}}","label":"step➛Error Handling➛Status","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[154a0f06-647e-46b0-98fe-bce6547f961b].error_message}}","label":"step➛Error Handling➛Error Message","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[154a0f06-647e-46b0-98fe-bce6547f961b].error_map}}","label":"step➛Error Handling➛Error Map","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[5fa2cbc7-280f-4606-be66-becb6a9b2235].response_body}}","label":"step➛AWS POST /provisioning-jobs➛Response Body","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"hidden_for":"DATASTREAM"}},{"name":"{{step[5fa2cbc7-280f-4606-be66-becb6a9b2235].status_code}}","label":"step➛AWS POST /provisioning-jobs➛Status Code","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"hidden_for":"DATASTREAM"}},{"name":"{{step[d00dac36-3008-4663-afbb-e0ad649259aa].variable}}","label":"step➛Script step➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[d00dac36-3008-4663-afbb-e0ad649259aa].variable1}}","label":"step➛Script step➛variable1","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","uiTypeLabel":"Object","co_type_name":"","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","sourceUiUniqueId":"","sourceType":"","uiType":"object","uiUniqueId":"bb4f22aa-71c3-48da-86bf-702186bd494d"}},{"name":"{{step[d00dac36-3008-4663-afbb-e0ad649259aa].host_header}}","label":"step➛Script step➛Host Header","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"string","uiUniqueId":"123d9635-ecc4-421e-a513-8566c3f9fde6"}},{"name":"{{step[d00dac36-3008-4663-afbb-e0ad649259aa].authorization_header}}","label":"step➛Script step➛Authorization Header","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"string","uiUniqueId":"dd16d6de-7ebf-48a7-aea0-0625a31f593e"}},{"name":"{{step[d00dac36-3008-4663-afbb-e0ad649259aa].date_header}}","label":"step➛Script step➛Date Header","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"string","uiUniqueId":"d56c6a2f-80a3-43ea-b616-a2912b786651"}},{"name":"{{step[4fd764ec-7f3d-416b-9f73-30a4e355552f].response_body}}","label":"step➛Perform POST request➛Response Body","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"hidden_for":"DATASTREAM"}},{"name":"{{step[4fd764ec-7f3d-416b-9f73-30a4e355552f].status_code}}","label":"step➛Perform POST request➛Status Code","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"hidden_for":"DATASTREAM"}}]</label_cache>
         <master_snapshot>686d359c877241108ea6cbb9cebb35b7</master_snapshot>
         <name>AWS Provisioning Job Request (AT-7078)</name>
         <natlang/>
@@ -26,7 +26,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>8492b2de872201108ea6cbb9cebb359c</sys_id>
-        <sys_mod_count>69</sys_mod_count>
+        <sys_mod_count>74</sys_mod_count>
         <sys_name>AWS Provisioning Job Request (AT-7078)</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -34,7 +34,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_8492b2de872201108ea6cbb9cebb359c</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-05-27 12:52:20</sys_updated_on>
+        <sys_updated_on>2022-05-27 13:56:01</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -87,10 +87,10 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2022-05-26 19:00:28</sys_created_on>
         <sys_id>0b87ba8c97730110d8a9fef3a253af51</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-05-27 12:36:53</sys_updated_on>
+        <sys_updated_on>2022-05-27 13:56:01</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=0b87ba8c97730110d8a9fef3a253af51"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -199,10 +199,10 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2022-05-27 12:35:41</sys_created_on>
         <sys_id>e019aad497330110d8a9fef3a253af1f</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-05-27 12:35:41</sys_updated_on>
-        <value>/provisioning-jobs</value>
+        <sys_updated_on>2022-05-27 13:56:01</sys_updated_on>
+        <value/>
         <variable display_value="Resource Path">3d090af03b23320057a4a2e334efc455</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -231,6 +231,18 @@
         <sys_updated_on>2022-05-26 19:00:28</sys_updated_on>
         <table>var__m_sys_flow_step_definition_input_07a762fb47222200b4fad7527c9a7129</table>
         <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>base_url</field>
+        <id>0b87ba8c97730110d8a9fef3a253af51</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-05-27 13:56:01</sys_created_on>
+        <sys_id>957b761897730110d8a9fef3a253af09</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-05-27 13:56:01</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_07a762fb47222200b4fad7527c9a7129</table>
+        <value>{{action.provisioning_endpoint}}</value>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>body</field>
@@ -334,25 +346,25 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2022-05-27 12:35:41</sys_created_on>
         <sys_id>ac19aad497330110d8a9fef3a253af1e</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-05-27 12:35:41</sys_updated_on>
+        <sys_updated_on>2022-05-27 13:56:01</sys_updated_on>
         <table>var__m_sys_flow_step_definition_input_07a762fb47222200b4fad7527c9a7129</table>
-        <value/>
+        <value>{{action.request_path7}}</value>
     </sys_element_mapping>
     <sys_hub_input_scripts action="delete_multiple" query="instance=0b87ba8c97730110d8a9fef3a253af51^sys_idNOT INe419aad497330110d8a9fef3a253af1c"/>
     <sys_hub_input_scripts action="INSERT_OR_UPDATE">
-        <active>true</active>
+        <active>false</active>
         <input_name>base_url</input_name>
         <instance>0b87ba8c97730110d8a9fef3a253af51</instance>
         <referenced_table>sys_hub_step_instance</referenced_table>
-        <script>{"base_url":{"scriptActive":true,"script":"// We may need to remove \"/prod\" from the end of this string once we use\n// custom domains for our API.\nvar endpoint \u003d fd_data.action_inputs.provisioning_endpoint;\nreturn \"https://\" + endpoint + \"/prod\";"}}</script>
+        <script>{"base_url":{"scriptActive":false,"script":"// We may need to remove \"/prod\" from the end of this string once we use\n// custom domains for our API.\n"}}</script>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2022-05-27 12:35:40</sys_created_on>
         <sys_id>e419aad497330110d8a9fef3a253af1c</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-05-27 12:44:08</sys_updated_on>
+        <sys_updated_on>2022-05-27 13:56:01</sys_updated_on>
     </sys_hub_input_scripts>
     <sys_hub_step_instance action="INSERT_OR_UPDATE">
         <action display_value="AWS Provisioning Job Request (AT-7078)">8492b2de872201108ea6cbb9cebb359c</action>
@@ -988,10 +1000,10 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2022-05-25 19:13:42</sys_created_on>
         <sys_id>5bf0b1f797e30110d8a9fef3a253afe3</sys_id>
-        <sys_mod_count>34</sys_mod_count>
+        <sys_mod_count>37</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-05-27 12:32:40</sys_updated_on>
+        <sys_updated_on>2022-05-27 13:54:34</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=5bf0b1f797e30110d8a9fef3a253afe3"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -1016,21 +1028,17 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2022-05-25 19:13:42</sys_created_on>
         <sys_id>63f0b1f797e30110d8a9fef3a253aff9</sys_id>
-        <sys_mod_count>33</sys_mod_count>
+        <sys_mod_count>36</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-05-27 12:32:40</sys_updated_on>
+        <sys_updated_on>2022-05-27 13:54:34</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   var content = inputs.request_body;
   var endpoint = inputs.provisioning_endpoint;
 
-  // Build the request we will send. The API Gateway service uses the
-  // execute-api service name and the regions is provided as input. The
-  // Date is determined automatically as the request is signed. The
-  // endpoint must have https:// at the start; however, the `Host` header
-  // must not.
   var httpRequestData = new sn_auth.HttpRequestData();
-  httpRequestData.setEndpoint('https://' + endpoint);
-  httpRequestData.setHost(endpoint);
+  // The endpoint needs to be the full URL for the request path in order to properly
+  // create the Canonical Request string.
+  httpRequestData.setEndpoint(endpoint + inputs.request_path);
   httpRequestData.setService('execute-api');
   httpRequestData.setRegion(inputs.aws_region);
   httpRequestData.setHttpMethod('POST');
@@ -1156,6 +1164,18 @@
         <value>{{step[3838a296-9414-40dd-88a4-3c939fa63a3f].request_body}}</value>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>request_path</field>
+        <id>5bf0b1f797e30110d8a9fef3a253afe3</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-05-27 13:54:34</sys_created_on>
+        <sys_id>4c2b7ed497730110d8a9fef3a253af6c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-05-27 13:54:34</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_5bf0b1f797e30110d8a9fef3a253afe3</table>
+        <value>{{action.request_path7}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>script</field>
         <id>5bf0b1f797e30110d8a9fef3a253afe3</id>
         <sys_created_by>admin</sys_created_by>
@@ -1169,7 +1189,7 @@
     </sys_element_mapping>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_step_ext_output_5bf0b1f797e30110d8a9fef3a253afe3^id=5bf0b1f797e30110d8a9fef3a253afe3"/>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7^id=5bf0b1f797e30110d8a9fef3a253afe3"/>
-    <sys_hub_step_ext_input action="delete_multiple" query="model=5bf0b1f797e30110d8a9fef3a253afe3^sys_idNOT IN5068ee9497330110d8a9fef3a253af7e,5468ee9497330110d8a9fef3a253af85,5c68ee9497330110d8a9fef3a253af79,d868ee9497330110d8a9fef3a253af81"/>
+    <sys_hub_step_ext_input action="delete_multiple" query="model=5bf0b1f797e30110d8a9fef3a253afe3^sys_idNOT IN5068ee9497330110d8a9fef3a253af7e,5468ee9497330110d8a9fef3a253af85,5c68ee9497330110d8a9fef3a253af79,c82b7ed497730110d8a9fef3a253af52,d868ee9497330110d8a9fef3a253af81"/>
     <sys_hub_step_ext_input action="INSERT_OR_UPDATE">
         <active>true</active>
         <array>false</array>
@@ -1402,6 +1422,87 @@
         <sys_update_name/>
         <sys_updated_by>admin</sys_updated_by>
         <sys_updated_on>2022-05-27 12:33:51</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_input>
+    <sys_hub_step_ext_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>request_path</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label/>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Script step">5bf0b1f797e30110d8a9fef3a253afe3</model>
+        <model_id>5bf0b1f797e30110d8a9fef3a253afe3</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_input_5bf0b1f797e30110d8a9fef3a253afe3</name>
+        <next_element/>
+        <order>400</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-05-27 13:54:34</sys_created_on>
+        <sys_id>c82b7ed497730110d8a9fef3a253af52</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-05-27 13:54:34</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
@@ -2149,14 +2250,14 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-04-07 17:43:41</sys_created_on>
         <sys_id>7410921087f241108ea6cbb9cebb35d4</sys_id>
-        <sys_mod_count>71</sys_mod_count>
+        <sys_mod_count>75</sys_mod_count>
         <sys_name/>
         <sys_package/>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name/>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-05-27 12:52:19</sys_updated_on>
+        <sys_updated_on>2022-05-27 13:56:00</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
@@ -2679,7 +2780,7 @@
         <url/>
         <url_target/>
     </sys_documentation>
-    <sys_hub_action_input action="delete_multiple" query="model=8492b2de872201108ea6cbb9cebb359c^sys_idNOT IN11d1029087b241108ea6cbb9cebb3546,15d1029087b241108ea6cbb9cebb3550,4388ad3397e30110d8a9fef3a253af15,7726029487b241108ea6cbb9cebb352f,87ded66987b201108ea6cbb9cebb3586,a017ae5497330110d8a9fef3a253af25"/>
+    <sys_hub_action_input action="delete_multiple" query="model=8492b2de872201108ea6cbb9cebb359c^sys_idNOT IN11d1029087b241108ea6cbb9cebb3546,15d1029087b241108ea6cbb9cebb3550,4388ad3397e30110d8a9fef3a253af15,7726029487b241108ea6cbb9cebb352f,87ded66987b201108ea6cbb9cebb3586,882b7ed497730110d8a9fef3a253af29,a017ae5497330110d8a9fef3a253af25"/>
     <sys_hub_action_input action="INSERT_OR_UPDATE">
         <active>true</active>
         <array>false</array>
@@ -3089,6 +3190,87 @@
         <active>true</active>
         <array>false</array>
         <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=470d7e15-e06e-4ba3-80fd-56c7b040f0c7</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value>/provisioning-jobs</default_value>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>request_path7</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Request Path</label>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="AWS Provisioning Job Request (AT-7078)">8492b2de872201108ea6cbb9cebb359c</model>
+        <model_id>8492b2de872201108ea6cbb9cebb359c</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_input_8492b2de872201108ea6cbb9cebb359c</name>
+        <next_element/>
+        <order>7</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-05-27 13:54:33</sys_created_on>
+        <sys_id>882b7ed497730110d8a9fef3a253af29</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-05-27 13:54:33</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
         <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=fe735f07-42f0-47c0-a382-89e838182292</attributes>
         <audit>false</audit>
         <calculation><![CDATA[(function calculatedFieldValue(current) {
@@ -3122,7 +3304,7 @@
         <hint/>
         <internal_type display_value="String">string</internal_type>
         <label>AWS Region</label>
-        <mandatory>false</mandatory>
+        <mandatory>true</mandatory>
         <max_length>8000</max_length>
         <model display_value="AWS Provisioning Job Request (AT-7078)">8492b2de872201108ea6cbb9cebb359c</model>
         <model_id>8492b2de872201108ea6cbb9cebb359c</model_id>
@@ -3147,14 +3329,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2022-05-27 12:26:56</sys_created_on>
         <sys_id>a017ae5497330110d8a9fef3a253af25</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name/>
         <sys_package/>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name/>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-05-27 12:26:57</sys_updated_on>
+        <sys_updated_on>2022-05-27 13:54:33</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
@@ -3426,7 +3608,7 @@
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
         <sys_updated_on>2022-04-01 15:10:48</sys_updated_on>
     </sys_hub_action_status_metadata>
-    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_input_8492b2de872201108ea6cbb9cebb359c^sys_idNOT IN2c17ae5497330110d8a9fef3a253af3b,7726029487b241108ea6cbb9cebb3537,8fded66987b201108ea6cbb9cebb358b,9388ad3397e30110d8a9fef3a253af1d,d72e71dc877241108ea6cbb9cebb354d,db2e71dc877241108ea6cbb9cebb354f"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_input_8492b2de872201108ea6cbb9cebb359c^sys_idNOT IN2c17ae5497330110d8a9fef3a253af3b,7726029487b241108ea6cbb9cebb3537,8fded66987b201108ea6cbb9cebb358b,9388ad3397e30110d8a9fef3a253af1d,cc2b7ed497730110d8a9fef3a253af30,d72e71dc877241108ea6cbb9cebb354d,db2e71dc877241108ea6cbb9cebb354f"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>aws_region</element>
         <help/>
@@ -3516,6 +3698,29 @@
         <sys_update_name/>
         <sys_updated_by>admin</sys_updated_by>
         <sys_updated_on>2022-05-25 18:36:49</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>request_path7</element>
+        <help/>
+        <hint/>
+        <label>Request Path</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_8492b2de872201108ea6cbb9cebb359c</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-05-27 13:54:33</sys_created_on>
+        <sys_id>cc2b7ed497730110d8a9fef3a253af30</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-05-27 13:54:33</sys_updated_on>
         <url/>
         <url_target/>
     </sys_documentation>
