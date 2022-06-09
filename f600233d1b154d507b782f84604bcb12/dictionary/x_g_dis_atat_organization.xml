@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Organization" max_length="40" name="x_g_dis_atat_organization" sizeclass="2" type="collection">
+    <element label="Organization" max_length="40" name="x_g_dis_atat_organization" sizeclass="4" type="collection">
         <element choice="1" label="Address Type" max_length="40" name="address_type" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Foreign" value="FOREIGN"/>
@@ -8,8 +8,9 @@
             </choice>
         </element>
         <element label="City" max_length="50" name="city" type="string"/>
+        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;  if (!current.organization_name) {&#13;&#10;    return current.disa_organization.getDisplayValue();&#13;&#10;  }&#13;&#10;  else {&#13;&#10;    return current.organization_name;&#13;&#10;  }&#13;&#10;&#13;&#10;})(current);" display="true" label="Computed Name" max_length="200" name="computed_name" read_only="true" type="string" virtual="true"/>
         <element label="Country" max_length="50" name="country" type="string"/>
-        <element choice="1" display="true" label="DISA Organization" max_length="100" name="disa_organization" type="choice">
+        <element choice="1" label="DISA Organization" max_length="100" name="disa_organization" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Assistant to the Director (DD)" value="ASSISTANT_TO_THE_DIRECTOR"/>
                 <element inactive_on_update="false" label="Chaplain Program Management Office (DDCH)" value="CHAPLAIN_PROGRAM_MANAGEMENT_OFFICE"/>
@@ -67,7 +68,7 @@
         </element>
         <element label="DoDAAC" max_length="6" name="dodaac" type="string"/>
         <element label="Organization Name" max_length="100" name="organization_name" type="string"/>
-        <element choice="1" display="true" label="Service/Agency" max_length="40" name="service_agency" type="choice">
+        <element choice="1" label="Service/Agency" max_length="40" name="service_agency" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Communications &amp; Electronics Command" value="COMMUNICATIONS_AND_ELECTRONICS_COMMAND"/>
                 <element inactive_on_update="false" label="Defense Advanced Research Project Agency (DARPA)" value="DEFENSE_ADVANCED_RESEARCH_PROJECT_AGENCY"/>
