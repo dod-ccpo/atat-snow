@@ -1,0 +1,2605 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_action_type_definition">
+    <sys_hub_action_type_definition action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <action_status/>
+        <action_template/>
+        <active>true</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <compiler_build/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>POST Request with AWS Sigv4 Authentication</description>
+        <ih_action>false</ih_action>
+        <internal_name>atat_secure_post_request</internal_name>
+        <label_cache>[{"name":"{{action.aws_credential}}","label":"action➛AWS Credential","type":"action","ref":"","reference_display":"AWS Credentials","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.aws_region}}","label":"action➛AWS Region","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.request_path}}","label":"action➛Request Path","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.endpoint}}","label":"action➛Endpoint","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.request_body}}","label":"action➛Request Body","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.aws_credential.sys_id}}","label":"action➛AWS Credential➛Sys ID","type":"action","ref":"","reference_display":"Sys ID","base_type":"GUID","parent_table_name":"aws_credentials","column_name":"sys_id","choices":null,"attributes":{}},{"name":"{{step[74752496-dc7f-41a8-8aca-22bd5473e1fe].variable}}","label":"step➛Script step➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[74752496-dc7f-41a8-8aca-22bd5473e1fe].host_header}}","label":"step➛Script step➛Host Header","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"{{step[74752496-dc7f-41a8-8aca-22bd5473e1fe].authorization_header}}","label":"step➛Script step➛Authorization Header","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"{{step[74752496-dc7f-41a8-8aca-22bd5473e1fe].date_header}}","label":"step➛Script step➛Date Header","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"{{step[99e91455-2919-47e4-8f42-983fa48dc2d0].response_body}}","label":"step➛REST step➛Response Body","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"hidden_for":"DATASTREAM"}},{"name":"{{step[99e91455-2919-47e4-8f42-983fa48dc2d0].status_code}}","label":"step➛REST step➛Status Code","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"hidden_for":"DATASTREAM"}},{"name":"{{step[92e8f1ee-1998-4b23-82d6-45c8cae73a5f].variable}}","label":"step➛Error Handling➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[92e8f1ee-1998-4b23-82d6-45c8cae73a5f].status}}","label":"step➛Error Handling➛Status","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"{{step[92e8f1ee-1998-4b23-82d6-45c8cae73a5f].error_message}}","label":"step➛Error Handling➛Error Message","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"{{step[92e8f1ee-1998-4b23-82d6-45c8cae73a5f].error_map}}","label":"step➛Error Handling➛Error Map","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":""}}]</label_cache>
+        <latest_snapshot/>
+        <master_snapshot/>
+        <name>ATAT Secure POST Request</name>
+        <natlang/>
+        <outputs/>
+        <state>draft</state>
+        <sys_class_name>sys_hub_action_type_definition</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:11:38</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>921e87a8978011101e0835dfe153afb4</sys_id>
+        <sys_mod_count>13</sys_mod_count>
+        <sys_name>ATAT Secure POST Request</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_hub_action_type_definition_921e87a8978011101e0835dfe153afb4</sys_update_name>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:22:18</sys_updated_on>
+        <system_level>false</system_level>
+        <type/>
+    </sys_hub_action_type_definition>
+    <sys_translated_text action="delete_multiple" query="documentkey=921e87a8978011101e0835dfe153afb4"/>
+    <sys_variable_value action="delete_multiple" query="document_key=921e87a8978011101e0835dfe153afb4"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_type_definition</document>
+        <document_key>921e87a8978011101e0835dfe153afb4</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:15:40</sys_created_on>
+        <sys_id>590f4be8978011101e0835dfe153af55</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:16:18</sys_updated_on>
+        <value>{"version":"1.0","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}},"serializationFormat":"JSON","complexObjectSchema":{"FlowDesigner:FD110f4be8e3801110f76b8e1112854b27":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"integer\",\"default_value\":\"\",\"label\":\"Code\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"Message\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FD110f4be8e3801110f76b8e1112854b27.$type_facets":{"SimpleMapFacet":"{\"sourceId\":\"\",\"default_value\":\"\",\"label\":\"Action Status\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"uiUniqueId\":\"55b2092b-ee6f-4ede-a3b9-3e6d9abf0e31\",\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FD110f4be8e3801110f76b8e1112854b27\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"sourceUiUniqueId\":\"\",\"sourceType\":\"\",\"hint\":\"\",\"uiType\":\"object\",\"order\":\"1\",\"max_length\":\"65000\"}"}}}</value>
+        <variable display_value="Action Status">150f4be8978011101e0835dfe153af2a</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_type_definition</document>
+        <document_key>921e87a8978011101e0835dfe153afb4</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:15:40</sys_created_on>
+        <sys_id>950f4be8978011101e0835dfe153af55</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:15:40</sys_updated_on>
+        <value>0</value>
+        <variable display_value="Don't Treat as Error">990f4be8978011101e0835dfe153af3d</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_action_output_921e87a8978011101e0835dfe153afb4^id=921e87a8978011101e0835dfe153afb4"/>
+    <sys_hub_step_instance action="delete_multiple" query="action=921e87a8978011101e0835dfe153afb4^sys_idNOT IN1fff472c978011101e0835dfe153af95,93ff472c978011101e0835dfe153afbd,ae409b2c978011101e0835dfe153afbf,c10f0be8978011101e0835dfe153afff"/>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="ATAT Secure POST Request">921e87a8978011101e0835dfe153afb4</action>
+        <cid>99e91455-2919-47e4-8f42-983fa48dc2d0</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <inputs/>
+        <label>REST step</label>
+        <order>2</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="REST">07a762fb47222200b4fad7527c9a7129</step_type>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:54</sys_created_on>
+        <sys_id>1fff472c978011101e0835dfe153af95</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:20:35</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=1fff472c978011101e0835dfe153af95"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>1fff472c978011101e0835dfe153af95</document_key>
+        <order>12</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:54</sys_created_on>
+        <sys_id>1bff472c978011101e0835dfe153afb9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:54</sys_updated_on>
+        <value>35aa573fd7802200bdbaee5b5e610375</value>
+        <variable display_value="MID Application">f11ebf865f101300a09a2abd7f466652</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>1fff472c978011101e0835dfe153af95</document_key>
+        <order>25</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:54</sys_created_on>
+        <sys_id>1fff472c978011101e0835dfe153afb8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:54</sys_updated_on>
+        <value>post</value>
+        <variable display_value="HTTP Method">e85b7ebf47222200b4fad7527c9a71e3</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>1fff472c978011101e0835dfe153af95</document_key>
+        <order>13</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:54</sys_created_on>
+        <sys_id>57ff472c978011101e0835dfe153afb9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:54</sys_updated_on>
+        <value>18409d8007482000dada43c0d1021e8f</value>
+        <variable display_value="Capabilities">c30a451d2f201300a09a839fb18c95b4</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>1fff472c978011101e0835dfe153af95</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:54</sys_created_on>
+        <sys_id>5bff472c978011101e0835dfe153afb8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:54</sys_updated_on>
+        <value>1</value>
+        <variable display_value="Honor Duplicate Query Params">58715a1c53f22010d3a8ddeeff7b1248</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>1fff472c978011101e0835dfe153af95</document_key>
+        <order>30</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:54</sys_created_on>
+        <sys_id>93ff472c978011101e0835dfe153afb9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:54</sys_updated_on>
+        <value>{}</value>
+        <variable display_value="Headers">371837f1c71003007b237f48cb9763b0</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>1fff472c978011101e0835dfe153af95</document_key>
+        <order>25</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:20:35</sys_created_on>
+        <sys_id>d9201b2c978011101e0835dfe153af43</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:20:35</sys_updated_on>
+        <value>{"type":"ADV_NV","value":[]}</value>
+        <variable display_value="Query Parameters">4328e2fb47222200b4fad7527c9a7164</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>1fff472c978011101e0835dfe153af95</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:54</sys_created_on>
+        <sys_id>dbff472c978011101e0835dfe153afb9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:54</sys_updated_on>
+        <value/>
+        <variable display_value="Connection Timeout">7a59009bc7522010820469467ec260c0</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>1fff472c978011101e0835dfe153af95</document_key>
+        <order>5</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:54</sys_created_on>
+        <sys_id>dfff472c978011101e0835dfe153afb8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:54</sys_updated_on>
+        <value>define_connection_inline</value>
+        <variable display_value="Connection">91e207d03b50030057a4a2e334efc4a0</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=1fff472c978011101e0835dfe153af95"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>application</field>
+        <id>1fff472c978011101e0835dfe153af95</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:54</sys_created_on>
+        <sys_id>17ff472c978011101e0835dfe153afb8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:54</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_07a762fb47222200b4fad7527c9a7129</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>base_url</field>
+        <id>1fff472c978011101e0835dfe153af95</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:54</sys_created_on>
+        <sys_id>53ff472c978011101e0835dfe153afb8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:54</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_07a762fb47222200b4fad7527c9a7129</table>
+        <value>{{action.endpoint}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>body</field>
+        <id>1fff472c978011101e0835dfe153af95</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:54</sys_created_on>
+        <sys_id>1fff472c978011101e0835dfe153afb6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:54</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_07a762fb47222200b4fad7527c9a7129</table>
+        <value>{{action.request_body}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>capabilities</field>
+        <id>1fff472c978011101e0835dfe153af95</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:54</sys_created_on>
+        <sys_id>9fff472c978011101e0835dfe153afb7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:54</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_07a762fb47222200b4fad7527c9a7129</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>connection</field>
+        <id>1fff472c978011101e0835dfe153af95</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:54</sys_created_on>
+        <sys_id>1bff472c978011101e0835dfe153afb7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:54</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_07a762fb47222200b4fad7527c9a7129</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>connection_timeout</field>
+        <id>1fff472c978011101e0835dfe153af95</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:54</sys_created_on>
+        <sys_id>d7ff472c978011101e0835dfe153afb8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:54</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_07a762fb47222200b4fad7527c9a7129</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>headers</field>
+        <id>1fff472c978011101e0835dfe153af95</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:54</sys_created_on>
+        <sys_id>dbff472c978011101e0835dfe153afb7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:54</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_07a762fb47222200b4fad7527c9a7129</table>
+        <value>{"type":"ADV_NV","value":[{"name":"Authorization","value":"{{step[74752496-dc7f-41a8-8aca-22bd5473e1fe].authorization_header}}","attributes":{"omit_if_empty":false,"mandatory":false}},{"name":"X-Amz-Date","value":"{{step[74752496-dc7f-41a8-8aca-22bd5473e1fe].date_header}}","attributes":{"omit_if_empty":false,"mandatory":false}},{"name":"Content-Type","value":"application/json","attributes":{"omit_if_empty":false,"mandatory":false}}]}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>honor_duplicate_query_params</field>
+        <id>1fff472c978011101e0835dfe153af95</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:54</sys_created_on>
+        <sys_id>dfff472c978011101e0835dfe153afb6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:54</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_07a762fb47222200b4fad7527c9a7129</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>http_method</field>
+        <id>1fff472c978011101e0835dfe153af95</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:54</sys_created_on>
+        <sys_id>93ff472c978011101e0835dfe153afb7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:54</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_07a762fb47222200b4fad7527c9a7129</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>query_params</field>
+        <id>1fff472c978011101e0835dfe153af95</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:20:35</sys_created_on>
+        <sys_id>59201b2c978011101e0835dfe153af43</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:20:35</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_07a762fb47222200b4fad7527c9a7129</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>resource_path</field>
+        <id>1fff472c978011101e0835dfe153af95</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:54</sys_created_on>
+        <sys_id>57ff472c978011101e0835dfe153afb7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:54</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_07a762fb47222200b4fad7527c9a7129</table>
+        <value>{{action.request_path}}</value>
+    </sys_element_mapping>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="ATAT Secure POST Request">921e87a8978011101e0835dfe153afb4</action>
+        <cid>92e8f1ee-1998-4b23-82d6-45c8cae73a5f</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <label>Error Handling</label>
+        <order>3</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Script">106afb6647032200b4fad7527c9a71e7</step_type>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:54</sys_created_on>
+        <sys_id>93ff472c978011101e0835dfe153afbd</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:20:35</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=93ff472c978011101e0835dfe153afbd"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>93ff472c978011101e0835dfe153afbd</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:55</sys_created_on>
+        <sys_id>1fff472c978011101e0835dfe153afe5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:55</sys_updated_on>
+        <value>35aa573fd7802200bdbaee5b5e610375</value>
+        <variable display_value="MID Application">f5e56d79b3101300176b051a16a8dce4</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>93ff472c978011101e0835dfe153afbd</document_key>
+        <order>600</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:55</sys_created_on>
+        <sys_id>dfff472c978011101e0835dfe153afe5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:55</sys_updated_on>
+        <value>(function execute(inputs, outputs) {
+  var responseBody = JSON.parse(inputs.response)
+  if (inputs.status_code == "201") {
+    outputs.status = "Success"
+    outputs.responseBody = responseBody
+  } else {
+    outputs.status = "Error";
+    outputs.error_message = responseBody.message;
+    outputs.error_map = responseBody.errorMap;
+  }
+
+})(inputs, outputs);
+</value>
+        <variable display_value="Script">71aa7f6647032200b4fad7527c9a719b</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=93ff472c978011101e0835dfe153afbd"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>application</field>
+        <id>93ff472c978011101e0835dfe153afbd</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:55</sys_created_on>
+        <sys_id>d7ff472c978011101e0835dfe153afe5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:55</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>response</field>
+        <id>93ff472c978011101e0835dfe153afbd</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:55</sys_created_on>
+        <sys_id>5bff472c978011101e0835dfe153afe6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:55</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_93ff472c978011101e0835dfe153afbd</table>
+        <value>{{step[99e91455-2919-47e4-8f42-983fa48dc2d0].response_body}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>script</field>
+        <id>93ff472c978011101e0835dfe153afbd</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:55</sys_created_on>
+        <sys_id>9bff472c978011101e0835dfe153afe5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:55</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>status_code</field>
+        <id>93ff472c978011101e0835dfe153afbd</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:55</sys_created_on>
+        <sys_id>1fff472c978011101e0835dfe153afe6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:55</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_93ff472c978011101e0835dfe153afbd</table>
+        <value>{{step[99e91455-2919-47e4-8f42-983fa48dc2d0].status_code}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_step_ext_output_93ff472c978011101e0835dfe153afbd^id=93ff472c978011101e0835dfe153afbd"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7^id=93ff472c978011101e0835dfe153afbd"/>
+    <sys_hub_step_ext_input action="delete_multiple" query="model=93ff472c978011101e0835dfe153afbd^sys_idNOT IN13ff472c978011101e0835dfe153afde,d7ff472c978011101e0835dfe153afc0"/>
+    <sys_hub_step_ext_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>status_code</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label/>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Error Handling">93ff472c978011101e0835dfe153afbd</model>
+        <model_id>93ff472c978011101e0835dfe153afbd</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_input_93ff472c978011101e0835dfe153afbd</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_input</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:55</sys_created_on>
+        <sys_id>13ff472c978011101e0835dfe153afde</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:55</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_input>
+    <sys_hub_step_ext_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>response</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label/>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Error Handling">93ff472c978011101e0835dfe153afbd</model>
+        <model_id>93ff472c978011101e0835dfe153afbd</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_input_93ff472c978011101e0835dfe153afbd</name>
+        <next_element/>
+        <order>0</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_input</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:19:55</sys_created_on>
+        <sys_id>d7ff472c978011101e0835dfe153afc0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:19:55</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_input>
+    <sys_hub_step_ext_output action="delete_multiple" query="model=93ff472c978011101e0835dfe153afbd^sys_idNOT IN19601f2c978011101e0835dfe153afda,5d601f2c978011101e0835dfe153afec,91601f2c978011101e0835dfe153afd4"/>
+    <sys_hub_step_ext_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=8aca2b37-53d1-410b-8353-2ba5892d5ffd</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>error_message</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Error Message</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Error Handling">93ff472c978011101e0835dfe153afbd</model>
+        <model_id>93ff472c978011101e0835dfe153afbd</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_output_93ff472c978011101e0835dfe153afbd</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_output</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:21:41</sys_created_on>
+        <sys_id>19601f2c978011101e0835dfe153afda</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:21:41</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_output>
+    <sys_hub_step_ext_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=c3ecf8f2-efb4-4e7a-ac8f-f430fc30f536</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>error_map</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Error Map</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Error Handling">93ff472c978011101e0835dfe153afbd</model>
+        <model_id>93ff472c978011101e0835dfe153afbd</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_output_93ff472c978011101e0835dfe153afbd</name>
+        <next_element/>
+        <order>3</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_output</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:21:41</sys_created_on>
+        <sys_id>5d601f2c978011101e0835dfe153afec</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:21:41</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_output>
+    <sys_hub_step_ext_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=79ca3de2-2498-4f01-b199-8f29317afd89</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>status</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Status</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Error Handling">93ff472c978011101e0835dfe153afbd</model>
+        <model_id>93ff472c978011101e0835dfe153afbd</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_output_93ff472c978011101e0835dfe153afbd</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_output</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:21:40</sys_created_on>
+        <sys_id>91601f2c978011101e0835dfe153afd4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:21:40</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_output>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_step_ext_output_93ff472c978011101e0835dfe153afbd^sys_idNOT IN55601f2c978011101e0835dfe153aff1,91601f2c978011101e0835dfe153afd9,d5601f2c978011101e0835dfe153afeb"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>error_map</element>
+        <help/>
+        <hint/>
+        <label>Error Map</label>
+        <language>en</language>
+        <name>var__m_sys_hub_step_ext_output_93ff472c978011101e0835dfe153afbd</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:21:41</sys_created_on>
+        <sys_id>55601f2c978011101e0835dfe153aff1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:21:41</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>status</element>
+        <help/>
+        <hint/>
+        <label>Status</label>
+        <language>en</language>
+        <name>var__m_sys_hub_step_ext_output_93ff472c978011101e0835dfe153afbd</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:21:41</sys_created_on>
+        <sys_id>91601f2c978011101e0835dfe153afd9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:21:41</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>error_message</element>
+        <help/>
+        <hint/>
+        <label>Error Message</label>
+        <language>en</language>
+        <name>var__m_sys_hub_step_ext_output_93ff472c978011101e0835dfe153afbd</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:21:41</sys_created_on>
+        <sys_id>d5601f2c978011101e0835dfe153afeb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:21:41</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="ATAT Secure POST Request">921e87a8978011101e0835dfe153afb4</action>
+        <cid>d1e577c4-0458-48a9-87f9-0906f0b4cee1</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <inputs/>
+        <label>Log step</label>
+        <order>4</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Log">a03fea9bc712220061f553c6f09763b1</step_type>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:21:13</sys_created_on>
+        <sys_id>ae409b2c978011101e0835dfe153afbf</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:22:18</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=ae409b2c978011101e0835dfe153afbf"/>
+    <sys_element_mapping action="delete_multiple" query="id=ae409b2c978011101e0835dfe153afbf"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>log_message</field>
+        <id>ae409b2c978011101e0835dfe153afbf</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:22:18</sys_created_on>
+        <sys_id>da80df2c978011101e0835dfe153af46</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:22:18</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_a03fea9bc712220061f553c6f09763b1</table>
+        <value>{{step[92e8f1ee-1998-4b23-82d6-45c8cae73a5f].status}}{{step[92e8f1ee-1998-4b23-82d6-45c8cae73a5f].error_message}}{{step[92e8f1ee-1998-4b23-82d6-45c8cae73a5f].error_map}}</value>
+    </sys_element_mapping>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="ATAT Secure POST Request">921e87a8978011101e0835dfe153afb4</action>
+        <cid>74752496-dc7f-41a8-8aca-22bd5473e1fe</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <label>Script step</label>
+        <order>1</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Script">106afb6647032200b4fad7527c9a71e7</step_type>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:15:39</sys_created_on>
+        <sys_id>c10f0be8978011101e0835dfe153afff</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:15:40</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=c10f0be8978011101e0835dfe153afff"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>c10f0be8978011101e0835dfe153afff</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:15:40</sys_created_on>
+        <sys_id>550f4be8978011101e0835dfe153af22</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:15:40</sys_updated_on>
+        <value>35aa573fd7802200bdbaee5b5e610375</value>
+        <variable display_value="MID Application">f5e56d79b3101300176b051a16a8dce4</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>c10f0be8978011101e0835dfe153afff</document_key>
+        <order>600</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:15:40</sys_created_on>
+        <sys_id>9d0f4be8978011101e0835dfe153af22</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:15:40</sys_updated_on>
+        <value>(function execute(inputs, outputs) {
+  var content = inputs.request_body;
+  var endpoint = inputs.endpoint;
+
+  var httpRequestData = new sn_auth.HttpRequestData();
+  // The endpoint needs to be the full URL for the request path in order to properly
+  // create the Canonical Request string.
+  httpRequestData.setEndpoint(endpoint + inputs.request_path);
+  httpRequestData.setService('execute-api');
+  httpRequestData.setRegion(inputs.aws_region);
+  httpRequestData.setHttpMethod('POST');
+  httpRequestData.setDirective('header');
+  httpRequestData.addHeader('Content-Type', 'application/json');
+  httpRequestData.setContent(content);
+
+  // The `getAuthCredentialByID` method is referenced in the documentation for
+  // the other classes used in this script; however, that function does not seem
+  // to be documented itself; however, it does return an AuthCredential object
+  // which is required in order to perform the signing.
+  var credential = new sn_cc.StandardCredentialsProvider().getAuthCredentialByID(inputs.aws_credential);
+  var signingApi = new sn_auth.RequestAuthAPI(httpRequestData, credential);
+  var signedRequest = signingApi.generateAuth();
+  
+  // Because the content is not transformed as part of this action, we don't
+  // output it and we can just re-use the input in future requests. We do output
+  // the headers that contain the necessary information for the AWS service to
+  // accept the request.
+  var headers = signedRequest.getHeaderMap();
+  outputs.host_header = endpoint;
+  outputs.authorization_header = headers['Authorization'];
+  outputs.date_header = headers['X-Amz-Date'];
+})(inputs, outputs);
+</value>
+        <variable display_value="Script">71aa7f6647032200b4fad7527c9a719b</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=c10f0be8978011101e0835dfe153afff"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>application</field>
+        <id>c10f0be8978011101e0835dfe153afff</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:15:40</sys_created_on>
+        <sys_id>990f4be8978011101e0835dfe153af21</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:15:40</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>aws_credential</field>
+        <id>c10f0be8978011101e0835dfe153afff</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:15:40</sys_created_on>
+        <sys_id>990f4be8978011101e0835dfe153af23</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:15:40</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_c10f0be8978011101e0835dfe153afff</table>
+        <value>{{action.aws_credential.sys_id}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>aws_region</field>
+        <id>c10f0be8978011101e0835dfe153afff</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:15:40</sys_created_on>
+        <sys_id>d10f4be8978011101e0835dfe153af24</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:15:40</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_c10f0be8978011101e0835dfe153afff</table>
+        <value>{{action.aws_region}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>endpoint</field>
+        <id>c10f0be8978011101e0835dfe153afff</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:15:40</sys_created_on>
+        <sys_id>110f4be8978011101e0835dfe153af24</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:15:40</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_c10f0be8978011101e0835dfe153afff</table>
+        <value>{{action.endpoint}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>request_body</field>
+        <id>c10f0be8978011101e0835dfe153afff</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:15:40</sys_created_on>
+        <sys_id>950f4be8978011101e0835dfe153af24</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:15:40</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_c10f0be8978011101e0835dfe153afff</table>
+        <value>{{action.request_body}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>request_path</field>
+        <id>c10f0be8978011101e0835dfe153afff</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:15:40</sys_created_on>
+        <sys_id>5d0f4be8978011101e0835dfe153af23</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:15:40</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_c10f0be8978011101e0835dfe153afff</table>
+        <value>{{action.request_path}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>script</field>
+        <id>c10f0be8978011101e0835dfe153afff</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:15:40</sys_created_on>
+        <sys_id>d10f4be8978011101e0835dfe153af22</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:15:40</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_step_ext_output_c10f0be8978011101e0835dfe153afff^id=c10f0be8978011101e0835dfe153afff"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7^id=c10f0be8978011101e0835dfe153afff"/>
+    <sys_hub_step_ext_input action="delete_multiple" query="model=c10f0be8978011101e0835dfe153afff^sys_idNOT IN010f4be8978011101e0835dfe153af0c,450f4be8978011101e0835dfe153af10,4d0f4be8978011101e0835dfe153af06,890f4be8978011101e0835dfe153af14,cd0f4be8978011101e0835dfe153af18"/>
+    <sys_hub_step_ext_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>request_body</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label/>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Script step">c10f0be8978011101e0835dfe153afff</model>
+        <model_id>c10f0be8978011101e0835dfe153afff</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_input_c10f0be8978011101e0835dfe153afff</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_input</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:15:40</sys_created_on>
+        <sys_id>010f4be8978011101e0835dfe153af0c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:15:40</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_input>
+    <sys_hub_step_ext_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>aws_region</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label/>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Script step">c10f0be8978011101e0835dfe153afff</model>
+        <model_id>c10f0be8978011101e0835dfe153afff</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_input_c10f0be8978011101e0835dfe153afff</name>
+        <next_element/>
+        <order>200</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_input</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:15:40</sys_created_on>
+        <sys_id>450f4be8978011101e0835dfe153af10</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:15:40</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_input>
+    <sys_hub_step_ext_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=GUID,uiTypeLabel=Sys ID (GUID)</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>aws_credential</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">GUID</internal_type>
+        <label/>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="Script step">c10f0be8978011101e0835dfe153afff</model>
+        <model_id>c10f0be8978011101e0835dfe153afff</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_input_c10f0be8978011101e0835dfe153afff</name>
+        <next_element/>
+        <order>0</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_input</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:15:40</sys_created_on>
+        <sys_id>4d0f4be8978011101e0835dfe153af06</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:16:18</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_input>
+    <sys_hub_step_ext_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>endpoint</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label/>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Script step">c10f0be8978011101e0835dfe153afff</model>
+        <model_id>c10f0be8978011101e0835dfe153afff</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_input_c10f0be8978011101e0835dfe153afff</name>
+        <next_element/>
+        <order>300</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_input</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:15:40</sys_created_on>
+        <sys_id>890f4be8978011101e0835dfe153af14</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:15:40</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_input>
+    <sys_hub_step_ext_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>request_path</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label/>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Script step">c10f0be8978011101e0835dfe153afff</model>
+        <model_id>c10f0be8978011101e0835dfe153afff</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_input_c10f0be8978011101e0835dfe153afff</name>
+        <next_element/>
+        <order>400</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_input</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:15:40</sys_created_on>
+        <sys_id>cd0f4be8978011101e0835dfe153af18</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:15:40</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_input>
+    <sys_hub_step_ext_output action="delete_multiple" query="model=c10f0be8978011101e0835dfe153afff^sys_idNOT IN2a2fcbe8978011101e0835dfe153af44,6e2fcbe8978011101e0835dfe153af57,ea2fcbe8978011101e0835dfe153af5d"/>
+    <sys_hub_step_ext_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=88f2c303-61f6-43a2-ae85-2a9e7aebcbcb</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>host_header</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Host Header</label>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Script step">c10f0be8978011101e0835dfe153afff</model>
+        <model_id>c10f0be8978011101e0835dfe153afff</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_output_c10f0be8978011101e0835dfe153afff</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_output</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:16:18</sys_created_on>
+        <sys_id>2a2fcbe8978011101e0835dfe153af44</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:16:18</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_output>
+    <sys_hub_step_ext_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=c666045f-32ba-4b34-8df9-b21208cff834</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>authorization_header</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Authorization Header</label>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Script step">c10f0be8978011101e0835dfe153afff</model>
+        <model_id>c10f0be8978011101e0835dfe153afff</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_output_c10f0be8978011101e0835dfe153afff</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_output</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:16:18</sys_created_on>
+        <sys_id>6e2fcbe8978011101e0835dfe153af57</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:16:18</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_output>
+    <sys_hub_step_ext_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=e924c5fe-fbc6-47bc-a176-40be4e0f327e</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>date_header</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Date Header</label>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Script step">c10f0be8978011101e0835dfe153afff</model>
+        <model_id>c10f0be8978011101e0835dfe153afff</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_output_c10f0be8978011101e0835dfe153afff</name>
+        <next_element/>
+        <order>3</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_output</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:16:18</sys_created_on>
+        <sys_id>ea2fcbe8978011101e0835dfe153af5d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:16:18</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_output>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_step_ext_output_c10f0be8978011101e0835dfe153afff^sys_idNOT IN662fcbe8978011101e0835dfe153af5c,e22fcbe8978011101e0835dfe153af62,e62fcbe8978011101e0835dfe153af56"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>authorization_header</element>
+        <help/>
+        <hint/>
+        <label>Authorization Header</label>
+        <language>en</language>
+        <name>var__m_sys_hub_step_ext_output_c10f0be8978011101e0835dfe153afff</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:16:18</sys_created_on>
+        <sys_id>662fcbe8978011101e0835dfe153af5c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:16:18</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>date_header</element>
+        <help/>
+        <hint/>
+        <label>Date Header</label>
+        <language>en</language>
+        <name>var__m_sys_hub_step_ext_output_c10f0be8978011101e0835dfe153afff</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:16:18</sys_created_on>
+        <sys_id>e22fcbe8978011101e0835dfe153af62</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:16:18</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>host_header</element>
+        <help/>
+        <hint/>
+        <label>Host Header</label>
+        <language>en</language>
+        <name>var__m_sys_hub_step_ext_output_c10f0be8978011101e0835dfe153afff</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:16:18</sys_created_on>
+        <sys_id>e62fcbe8978011101e0835dfe153af56</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:16:18</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_hub_action_input action="delete_multiple" query="model=921e87a8978011101e0835dfe153afb4^sys_idNOT IN088e43e8978011101e0835dfe153afd2,488e43e8978011101e0835dfe153afcc,4c8e43e8978011101e0835dfe153afea,8c8e43e8978011101e0835dfe153afe4,bf7e43e8978011101e0835dfe153af99"/>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=3a5433a2-bb8b-43e1-af41-dbd90add3e47</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>request_path</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Request Path</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="ATAT Secure POST Request">921e87a8978011101e0835dfe153afb4</model>
+        <model_id>921e87a8978011101e0835dfe153afb4</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_input_921e87a8978011101e0835dfe153afb4</name>
+        <next_element/>
+        <order>3</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:13:24</sys_created_on>
+        <sys_id>088e43e8978011101e0835dfe153afd2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:13:24</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=1779ff9b-3405-4ec1-a000-e35649e1ddea</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>aws_region</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>AWS Region</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="ATAT Secure POST Request">921e87a8978011101e0835dfe153afb4</model>
+        <model_id>921e87a8978011101e0835dfe153afb4</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_input_921e87a8978011101e0835dfe153afb4</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:13:24</sys_created_on>
+        <sys_id>488e43e8978011101e0835dfe153afcc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:13:24</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=6746adcc-064e-48b0-ab4f-e83e5e61f545</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>request_body</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Request Body</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="ATAT Secure POST Request">921e87a8978011101e0835dfe153afb4</model>
+        <model_id>921e87a8978011101e0835dfe153afb4</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_input_921e87a8978011101e0835dfe153afb4</name>
+        <next_element/>
+        <order>5</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:13:24</sys_created_on>
+        <sys_id>4c8e43e8978011101e0835dfe153afea</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:13:24</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=08573383-8266-40f3-ae8f-a0be88acd2ae</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>endpoint</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Endpoint</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="ATAT Secure POST Request">921e87a8978011101e0835dfe153afb4</model>
+        <model_id>921e87a8978011101e0835dfe153afb4</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_input_921e87a8978011101e0835dfe153afb4</name>
+        <next_element/>
+        <order>4</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:13:24</sys_created_on>
+        <sys_id>8c8e43e8978011101e0835dfe153afe4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:13:24</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference,uiUniqueId=645ffd8e-138b-458a-93f7-2cef557a9dc4</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table>aws_credentials</choice_table>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>aws_credential</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>AWS Credential</label>
+        <mandatory>false</mandatory>
+        <max_length>32</max_length>
+        <model display_value="ATAT Secure POST Request">921e87a8978011101e0835dfe153afb4</model>
+        <model_id>921e87a8978011101e0835dfe153afb4</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_input_921e87a8978011101e0835dfe153afb4</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference display_value="" name="aws_credentials">aws_credentials</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:13:23</sys_created_on>
+        <sys_id>bf7e43e8978011101e0835dfe153af99</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:13:24</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_output action="delete_multiple" query="model=921e87a8978011101e0835dfe153afb4^sys_idNOT IN150f4be8978011101e0835dfe153af2a,990f4be8978011101e0835dfe153af3d"/>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>action_error_output=true,co_type_name=FD110f4be8e3801110f76b8e1112854b27,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=object,uiTypeLabel=Object,uiUniqueId=55b2092b-ee6f-4ede-a3b9-3e6d9abf0e31</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>__action_status__</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Action Status</label>
+        <mandatory>false</mandatory>
+        <max_length>65000</max_length>
+        <model display_value="ATAT Secure POST Request">921e87a8978011101e0835dfe153afb4</model>
+        <model_id>921e87a8978011101e0835dfe153afb4</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_output_921e87a8978011101e0835dfe153afb4</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:15:40</sys_created_on>
+        <sys_id>150f4be8978011101e0835dfe153af2a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:15:40</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>action_error_output=true,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=boolean,uiTypeLabel=True/False,uiUniqueId=6391b310-5d9e-4d67-9d1e-90f421c55efc,visible_in_ui=false</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value>true</default_value>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>__dont_treat_as_error__</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="">boolean</internal_type>
+        <label>Don't Treat as Error</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="ATAT Secure POST Request">921e87a8978011101e0835dfe153afb4</model>
+        <model_id>921e87a8978011101e0835dfe153afb4</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_output_921e87a8978011101e0835dfe153afb4</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:15:40</sys_created_on>
+        <sys_id>990f4be8978011101e0835dfe153af3d</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:15:40</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_action_status_metadata action="delete_multiple" query="action_type_id=921e87a8978011101e0835dfe153afb4^sys_idNOT INc88e43e8978011101e0835dfe153aff4"/>
+    <sys_hub_action_status_metadata action="INSERT_OR_UPDATE">
+        <action_type_id display_value="ATAT Secure POST Request">921e87a8978011101e0835dfe153afb4</action_type_id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:13:24</sys_created_on>
+        <sys_id>c88e43e8978011101e0835dfe153aff4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:13:24</sys_updated_on>
+    </sys_hub_action_status_metadata>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_input_921e87a8978011101e0835dfe153afb4^sys_idNOT IN088e43e8978011101e0835dfe153afa5,408e43e8978011101e0835dfe153afd7,808e43e8978011101e0835dfe153afd1,848e43e8978011101e0835dfe153afef,c48e43e8978011101e0835dfe153afe9"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>aws_credential</element>
+        <help/>
+        <hint/>
+        <label>AWS Credential</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_921e87a8978011101e0835dfe153afb4</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:13:24</sys_created_on>
+        <sys_id>088e43e8978011101e0835dfe153afa5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:13:24</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>request_path</element>
+        <help/>
+        <hint/>
+        <label>Request Path</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_921e87a8978011101e0835dfe153afb4</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:13:24</sys_created_on>
+        <sys_id>408e43e8978011101e0835dfe153afd7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:13:24</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>aws_region</element>
+        <help/>
+        <hint/>
+        <label>AWS Region</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_921e87a8978011101e0835dfe153afb4</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:13:24</sys_created_on>
+        <sys_id>808e43e8978011101e0835dfe153afd1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:13:24</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>request_body</element>
+        <help/>
+        <hint/>
+        <label>Request Body</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_921e87a8978011101e0835dfe153afb4</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:13:24</sys_created_on>
+        <sys_id>848e43e8978011101e0835dfe153afef</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:13:24</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>endpoint</element>
+        <help/>
+        <hint/>
+        <label>Endpoint</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_921e87a8978011101e0835dfe153afb4</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:13:24</sys_created_on>
+        <sys_id>c48e43e8978011101e0835dfe153afe9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:13:24</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_output_921e87a8978011101e0835dfe153afb4^sys_idNOT IN150f4be8978011101e0835dfe153af3c,d90f4be8978011101e0835dfe153af45"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>__action_status__</element>
+        <help/>
+        <hint/>
+        <label>Action Status</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_921e87a8978011101e0835dfe153afb4</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:15:40</sys_created_on>
+        <sys_id>150f4be8978011101e0835dfe153af3c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:15:40</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>__dont_treat_as_error__</element>
+        <help/>
+        <hint/>
+        <label>Don't Treat as Error</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_921e87a8978011101e0835dfe153afb4</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:15:40</sys_created_on>
+        <sys_id>d90f4be8978011101e0835dfe153af45</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:15:40</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+</record_update>
