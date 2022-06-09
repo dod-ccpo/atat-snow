@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Classification Instance" max_length="40" name="x_g_dis_atat_classification_instance" type="collection">
+    <element label="Classification Instance" max_length="40" name="x_g_dis_atat_classification_instance" sizeclass="1" type="collection">
         <element label="Classification Level" max_length="32" name="classification_level" reference="x_g_dis_atat_classification_level" type="reference"/>
         <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Need for Entire Task Order Duration" max_length="40" name="need_for_entire_task_order_duration" type="choice">
-            <choice/>
+            <choice>
+                <element inactive_on_update="false" label="No" value="NO"/>
+                <element inactive_on_update="false" label="Unselected" value="UNSELECTED"/>
+                <element inactive_on_update="false" label="Yes" value="YES"/>
+            </choice>
         </element>
         <element label="Selected Periods" max_length="4000" name="selected_periods" reference="x_g_dis_atat_period" type="glide_list"/>
         <element label="Usage Description" max_length="500" name="usage_description" type="string"/>
