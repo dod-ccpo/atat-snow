@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element label=" Funding Plan" max_length="40" name="x_g_dis_atat_funding_plan" sizeclass="0" type="collection">
         <element label="Attachment" max_length="40" name="attachment" type="file_attachment"/>
+        <element label="Estimated Task Order Value" max_length="20" name="estimated_task_order_value" type="currency"/>
         <element label="Extension" max_length="40" name="extension" type="string"/>
         <element label="File Name" max_length="100" name="file_name" type="string"/>
         <element label="Initial Amount" max_length="20" name="initial_amount" type="currency"/>
+        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;&#9;return current.estimated_task_order_value - current.initial_amount;&#13;&#10;})(current);" label="Remaining Amount" max_length="20" name="remaining_amount" type="currency" virtual="true"/>
         <element label="Remaining Amount Increments" max_length="4000" name="remaining_amount_increments" reference="x_g_dis_atat_funding_increment" type="glide_list"/>
     </element>
 </database>
