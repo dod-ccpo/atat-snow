@@ -2,7 +2,12 @@
     <element label="CLIN" max_length="40" name="x_g_dis_atat_clin" type="collection">
         <element label="CLIN Number" max_length="4" name="clin_number" type="string"/>
         <element choice="1" label="CLIN Status" max_length="40" name="clin_status" type="choice">
-            <choice/>
+            <choice>
+                <element inactive_on_update="false" label="UPCOMING" sequence="1" value="UPCOMING"/>
+                <element inactive_on_update="false" label="ACTIVE" sequence="2" value="ACTIVE"/>
+                <element inactive_on_update="false" label="AT-RISK" sequence="3" value="AT_RISK"/>
+                <element inactive_on_update="false" label="EXPIRED" sequence="4" value="EXPIRED"/>
+            </choice>
         </element>
         <element label="Funds Obligated" max_length="20" name="funds_obligated" type="currency"/>
         <element label="Funds Total" max_length="20" name="funds_total" type="currency"/>
