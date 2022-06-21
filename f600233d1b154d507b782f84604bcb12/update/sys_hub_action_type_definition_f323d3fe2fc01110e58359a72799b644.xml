@@ -1,0 +1,2505 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_action_type_definition">
+    <sys_hub_action_type_definition action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <action_status/>
+        <action_template/>
+        <active>true</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <compiler_build>glide-rome-06-23-2021__patch5-12-15-2021_01-04-2022_2221.zip</compiler_build>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Creates a /cost-request POST body from the given inputs</description>
+        <ih_action>false</ih_action>
+        <internal_name>generate_cost_request</internal_name>
+        <label_cache>[{"name":"{{action.portfolio}}","label":"action➛Portfolio","type":"action","ref":"","reference_display":"Portfolio","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","sourceUiUniqueId":"","sourceType":"","uiType":"string","uiUniqueId":"060392ba-f94d-4e70-9bf2-f3dbe6302ef2"}},{"name":"{{action.start_date}}","label":"action➛Start Date","type":"action","ref":"","reference_display":"","base_type":"glide_date","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","sourceUiUniqueId":"","sourceType":"","uiType":"string","uiUniqueId":"6aeb9ed4-a275-4b59-95bc-e844aac7773a"}},{"name":"{{action.end_date}}","label":"action➛End Date","type":"action","ref":"","reference_display":"","base_type":"glide_date","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","sourceUiUniqueId":"","sourceType":"","uiType":"string","uiUniqueId":"ea9e0cbd-2425-4af0-b4ad-52a095aed985"}},{"name":"{{step[74752496-dc7f-41a8-8aca-22bd5473e1fe].variable}}","label":"step➛Script step➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[74752496-dc7f-41a8-8aca-22bd5473e1fe].host_header}}","label":"step➛Script step➛Host Header","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[74752496-dc7f-41a8-8aca-22bd5473e1fe].authorization_header}}","label":"step➛Script step➛Authorization Header","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[74752496-dc7f-41a8-8aca-22bd5473e1fe].date_header}}","label":"step➛Script step➛Date Header","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[99e91455-2919-47e4-8f42-983fa48dc2d0].response_body}}","label":"step➛REST step➛Response Body","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"hidden_for":"DATASTREAM"}},{"name":"{{step[99e91455-2919-47e4-8f42-983fa48dc2d0].status_code}}","label":"step➛REST step➛Status Code","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"hidden_for":"DATASTREAM"}},{"name":"{{step[92e8f1ee-1998-4b23-82d6-45c8cae73a5f].variable}}","label":"step➛Error Handling➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[92e8f1ee-1998-4b23-82d6-45c8cae73a5f].status}}","label":"step➛Error Handling➛Status","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[92e8f1ee-1998-4b23-82d6-45c8cae73a5f].error_message}}","label":"step➛Error Handling➛Error Message","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[92e8f1ee-1998-4b23-82d6-45c8cae73a5f].error_map}}","label":"step➛Error Handling➛Error Map","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[61a5d301-bdf7-4f3f-b8fa-7362a1cc6ed7].variable}}","label":"step➛Gather DoW information➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[61a5d301-bdf7-4f3f-b8fa-7362a1cc6ed7].dow_document_data}}","label":"step➛Gather DoW information➛dow_document_data","type":"step","ref":"","reference_display":"","base_type":"json","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[61a5d301-bdf7-4f3f-b8fa-7362a1cc6ed7].__step_status__.message}}","label":"step➛Gather DoW information➛Step Status➛Message","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[61a5d301-bdf7-4f3f-b8fa-7362a1cc6ed7].__step_status__.code}}","label":"step➛Gather DoW information➛Step Status➛Code","type":"step","ref":"","reference_display":"","base_type":"integer","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[61a5d301-bdf7-4f3f-b8fa-7362a1cc6ed7].error_message}}","label":"step➛Gather DoW information➛error_message","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"string","uiUniqueId":"cde8630e-360e-445c-968b-750274f906e3"}},{"name":"{{step[61a5d301-bdf7-4f3f-b8fa-7362a1cc6ed7].pure_object}}","label":"step➛Gather DoW information➛pure_object","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[61a5d301-bdf7-4f3f-b8fa-7362a1cc6ed7].hoth_schema}}","label":"step➛Gather DoW information➛hoth_schema","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[f89b19e7-cc73-4f5b-b169-6d31ea989b8d].variable}}","label":"step➛Script step➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[f89b19e7-cc73-4f5b-b169-6d31ea989b8d].dow_data}}","label":"step➛Script step➛DoW Data","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[2f744425-6b8d-4565-9e2a-c8d9b870c95f].variable}}","label":"step➛Project Overview➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[2f744425-6b8d-4565-9e2a-c8d9b870c95f].variable1}}","label":"step➛Project Overview➛variable1","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[2f744425-6b8d-4565-9e2a-c8d9b870c95f].title}}","label":"step➛Project Overview➛Title","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[2f744425-6b8d-4565-9e2a-c8d9b870c95f].scope}}","label":"step➛Project Overview➛Scope","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[02c7dd54-796d-4fc9-bd34-6307c0669b40].variable}}","label":"step➛Award History➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[02c7dd54-796d-4fc9-bd34-6307c0669b40].award_history}}","label":"step➛Award History➛award_history","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].instances}}","label":"step➛Pre-Processing➛Instances","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].packageperiodsbyid}}","label":"step➛Pre-Processing➛packagePeriodsById","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].instances1}}","label":"step➛Pre-Processing➛Instances","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].package_periods_by_id}}","label":"step➛Pre-Processing➛Package Periods By Id","type":"step","ref":"","reference_display":"","base_type":"json","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].variable}}","label":"step➛Pre-Processing➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].package_option_periods}}","label":"step➛Pre-Processing➛Package Option Periods","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].services}}","label":"step➛Pre-Processing➛Services","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"string","uiUniqueId":"18db4ec4-43a5-4553-b629-a4601ee6d7ab"}},{"name":"{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].awards}}","label":"step➛Pre-Processing➛Awards","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].package_option_periods.Package Option Periods_child0.package_option_periods_child0_child1}}","label":"step➛Pre-Processing➛Package Option Periods➛Package Option Periods_child0➛Package Option Periods_child0_child1","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[e1cac120-b2cf-462e-8f7d-7b62d4bdebae].variable}}","label":"step➛Compose DoW Payload➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[e1cac120-b2cf-462e-8f7d-7b62d4bdebae].dow_data}}","label":"step➛Compose DoW Payload➛DoW Data","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].selected_service_offerings}}","label":"step➛Pre-Processing➛Selected Service Offerings","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].training}}","label":"step➛Pre-Processing➛Training","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[2e3c8276-66fd-414a-9ea6-377b27bcfb22].variable}}","label":"step➛Script step➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[2e3c8276-66fd-414a-9ea6-377b27bcfb22].cost_request}}","label":"step➛Script step➛cost_request","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}}]</label_cache>
+        <master_snapshot>e083e70f2f005110e58359a72799b6a4</master_snapshot>
+        <name>Generate Cost Request</name>
+        <natlang/>
+        <outputs/>
+        <outputs/>
+        <state>draft</state>
+        <sys_class_name>sys_hub_action_type_definition</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-16 20:20:11</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>f323d3fe2fc01110e58359a72799b644</sys_id>
+        <sys_mod_count>18</sys_mod_count>
+        <sys_name>Generate Cost Request</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_hub_action_type_definition_f323d3fe2fc01110e58359a72799b644</sys_update_name>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-21 14:35:25</sys_updated_on>
+        <system_level>false</system_level>
+        <type/>
+    </sys_hub_action_type_definition>
+    <sys_translated_text action="delete_multiple" query="documentkey=f323d3fe2fc01110e58359a72799b644"/>
+    <sys_variable_value action="delete_multiple" query="document_key=f323d3fe2fc01110e58359a72799b644"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_type_definition</document>
+        <document_key>f323d3fe2fc01110e58359a72799b644</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:08:38</sys_created_on>
+        <sys_id>43b707c72fcc1110e58359a72799b6f6</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-21 14:35:24</sys_updated_on>
+        <value>{"version":"1.0","serializationFormat":"JSON","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}},"complexObjectSchema":{"FlowDesigner:FD7ab707c722cc1110c0b85747ab02b1d3":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"integer\",\"default_value\":\"\",\"label\":\"Code\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"Message\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FD7ab707c722cc1110c0b85747ab02b1d3.$type_facets":{"SimpleMapFacet":"{\"sourceId\":\"\",\"default_value\":\"\",\"label\":\"Action Status\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"uiUniqueId\":\"e44ce1ee-9a61-4f33-98fa-913d37ca1ca2\",\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FD7ab707c722cc1110c0b85747ab02b1d3\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"sourceUiUniqueId\":\"\",\"sourceType\":\"\",\"hint\":\"\",\"uiType\":\"object\",\"order\":\"1\",\"max_length\":\"65000\"}"}}}</value>
+        <variable display_value="Action Status">72b707c72fcc1110e58359a72799b6d7</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_type_definition</document>
+        <document_key>f323d3fe2fc01110e58359a72799b644</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:08:38</sys_created_on>
+        <sys_id>4bb707c72fcc1110e58359a72799b6f5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:08:38</sys_updated_on>
+        <value>0</value>
+        <variable display_value="Don't Treat as Error">fab707c72fcc1110e58359a72799b6dd</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=f323d3fe2fc01110e58359a72799b644"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>cost_request</field>
+        <id>f323d3fe2fc01110e58359a72799b644</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:09:40</sys_created_on>
+        <sys_id>8073670f2f005110e58359a72799b676</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:09:40</sys_updated_on>
+        <table>var__m_sys_hub_action_output_f323d3fe2fc01110e58359a72799b644</table>
+        <value>{{step[2e3c8276-66fd-414a-9ea6-377b27bcfb22].cost_request}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>__action_status__</field>
+        <id>f323d3fe2fc01110e58359a72799b644</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:08:38</sys_created_on>
+        <sys_id>c7b707c72fcc1110e58359a72799b6f5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:08:38</sys_updated_on>
+        <table>var__m_sys_hub_action_output_f323d3fe2fc01110e58359a72799b644</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>__dont_treat_as_error__</field>
+        <id>f323d3fe2fc01110e58359a72799b644</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:08:38</sys_created_on>
+        <sys_id>03b707c72fcc1110e58359a72799b6f5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:08:38</sys_updated_on>
+        <table>var__m_sys_hub_action_output_f323d3fe2fc01110e58359a72799b644</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_step_instance action="delete_multiple" query="action=f323d3fe2fc01110e58359a72799b644^sys_idNOT IN82e98f0b2fcc1110e58359a72799b66a"/>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="Generate Cost Request">f323d3fe2fc01110e58359a72799b644</action>
+        <cid>2e3c8276-66fd-414a-9ea6-377b27bcfb22</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <label>Script step</label>
+        <order>1</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Script">106afb6647032200b4fad7527c9a71e7</step_type>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:18:08</sys_created_on>
+        <sys_id>82e98f0b2fcc1110e58359a72799b66a</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 15:10:29</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=82e98f0b2fcc1110e58359a72799b66a"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>82e98f0b2fcc1110e58359a72799b66a</document_key>
+        <order>600</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:18:09</sys_created_on>
+        <sys_id>5ee98f0b2fcc1110e58359a72799b67b</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 15:10:29</sys_updated_on>
+        <value>(function execute(inputs, outputs) {
+
+  var csp = new GlideRecord('x_g_dis_atat_cloud_service_provider');
+  csp.get(inputs.portfolio.csp);
+  
+  var cost_request = {
+    requestId: gs.generateGUID(),
+    portfolioId: inputs.portfolio.csp_portfolio_id.toString(),
+    targetCsp: {
+      name: csp.name.toString(),
+      uri: csp.uri.toString(),
+      network: csp.network.toString()
+    },
+    startDate: inputs.start_date,
+    endDate: inputs.end_date
+  };
+  
+  outputs.cost_request = JSON.stringify(cost_request);
+
+})(inputs, outputs);
+</value>
+        <variable display_value="Script">71aa7f6647032200b4fad7527c9a719b</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>82e98f0b2fcc1110e58359a72799b66a</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:18:09</sys_created_on>
+        <sys_id>9ae98f0b2fcc1110e58359a72799b67b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:18:09</sys_updated_on>
+        <value>35aa573fd7802200bdbaee5b5e610375</value>
+        <variable display_value="MID Application">f5e56d79b3101300176b051a16a8dce4</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=82e98f0b2fcc1110e58359a72799b66a"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>application</field>
+        <id>82e98f0b2fcc1110e58359a72799b66a</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:18:09</sys_created_on>
+        <sys_id>56e98f0b2fcc1110e58359a72799b67b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:18:09</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>end_date</field>
+        <id>82e98f0b2fcc1110e58359a72799b66a</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:20:37</sys_created_on>
+        <sys_id>5a7a474b2fcc1110e58359a72799b6a7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:20:37</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_82e98f0b2fcc1110e58359a72799b66a</table>
+        <value>{{action.end_date}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>portfolio</field>
+        <id>82e98f0b2fcc1110e58359a72799b66a</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:20:37</sys_created_on>
+        <sys_id>1e7a474b2fcc1110e58359a72799b6a7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:20:37</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_82e98f0b2fcc1110e58359a72799b66a</table>
+        <value>{{action.portfolio}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>script</field>
+        <id>82e98f0b2fcc1110e58359a72799b66a</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:18:09</sys_created_on>
+        <sys_id>1ae98f0b2fcc1110e58359a72799b67b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:18:09</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>start_date</field>
+        <id>82e98f0b2fcc1110e58359a72799b66a</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:20:37</sys_created_on>
+        <sys_id>de7a474b2fcc1110e58359a72799b6a7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:20:37</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_82e98f0b2fcc1110e58359a72799b66a</table>
+        <value>{{action.start_date}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_step_ext_output_82e98f0b2fcc1110e58359a72799b66a^id=82e98f0b2fcc1110e58359a72799b66a"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7^id=82e98f0b2fcc1110e58359a72799b66a"/>
+    <sys_hub_step_ext_input action="delete_multiple" query="model=82e98f0b2fcc1110e58359a72799b66a^sys_idNOT IN167a474b2fcc1110e58359a72799b694,167a474b2fcc1110e58359a72799b699,1a7a474b2fcc1110e58359a72799b69d"/>
+    <sys_hub_step_ext_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>portfolio</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label/>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Script step">82e98f0b2fcc1110e58359a72799b66a</model>
+        <model_id>82e98f0b2fcc1110e58359a72799b66a</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_input_82e98f0b2fcc1110e58359a72799b66a</name>
+        <next_element/>
+        <order>0</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_input</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:20:36</sys_created_on>
+        <sys_id>167a474b2fcc1110e58359a72799b694</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:20:36</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_input>
+    <sys_hub_step_ext_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>start_date</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label/>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Script step">82e98f0b2fcc1110e58359a72799b66a</model>
+        <model_id>82e98f0b2fcc1110e58359a72799b66a</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_input_82e98f0b2fcc1110e58359a72799b66a</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_input</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:20:36</sys_created_on>
+        <sys_id>167a474b2fcc1110e58359a72799b699</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:20:36</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_input>
+    <sys_hub_step_ext_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>end_date</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label/>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Script step">82e98f0b2fcc1110e58359a72799b66a</model>
+        <model_id>82e98f0b2fcc1110e58359a72799b66a</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_input_82e98f0b2fcc1110e58359a72799b66a</name>
+        <next_element/>
+        <order>200</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_input</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:20:36</sys_created_on>
+        <sys_id>1a7a474b2fcc1110e58359a72799b69d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:20:36</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_input>
+    <sys_hub_step_ext_output action="delete_multiple" query="model=82e98f0b2fcc1110e58359a72799b66a^sys_idNOT IN82e98f0b2fcc1110e58359a72799b672"/>
+    <sys_hub_step_ext_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=ccf5072b-a4d7-4fb1-abc3-2c91d80f563f</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>cost_request</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>cost_request</label>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Script step">82e98f0b2fcc1110e58359a72799b66a</model>
+        <model_id>82e98f0b2fcc1110e58359a72799b66a</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_output_82e98f0b2fcc1110e58359a72799b66a</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_output</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:18:08</sys_created_on>
+        <sys_id>82e98f0b2fcc1110e58359a72799b672</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:18:08</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_output>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_step_ext_output_82e98f0b2fcc1110e58359a72799b66a^sys_idNOT INc6e98f0b2fcc1110e58359a72799b677"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>cost_request</element>
+        <help/>
+        <hint/>
+        <label>cost_request</label>
+        <language>en</language>
+        <name>var__m_sys_hub_step_ext_output_82e98f0b2fcc1110e58359a72799b66a</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:18:08</sys_created_on>
+        <sys_id>c6e98f0b2fcc1110e58359a72799b677</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:18:08</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_hub_action_input action="delete_multiple" query="model=f323d3fe2fc01110e58359a72799b644^sys_idNOT IN678a874b2fcc1110e58359a72799b680,7f9ac74b2fcc1110e58359a72799b6a2,ccaac74b2fcc1110e58359a72799b6af"/>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference,uiUniqueId=060392ba-f94d-4e70-9bf2-f3dbe6302ef2</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table>x_g_dis_atat_portfolio</choice_table>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>portfolio</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>Portfolio</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="Generate Cost Request">f323d3fe2fc01110e58359a72799b644</model>
+        <model_id>f323d3fe2fc01110e58359a72799b644</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_input_f323d3fe2fc01110e58359a72799b644</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference display_value="" name="x_g_dis_atat_portfolio">x_g_dis_atat_portfolio</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:20:57</sys_created_on>
+        <sys_id>678a874b2fcc1110e58359a72799b680</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:20:58</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=glide_date,uiTypeLabel=Date,uiUniqueId=6aeb9ed4-a275-4b59-95bc-e844aac7773a</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>start_date</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">glide_date</internal_type>
+        <label>Start Date</label>
+        <mandatory>true</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Generate Cost Request">f323d3fe2fc01110e58359a72799b644</model>
+        <model_id>f323d3fe2fc01110e58359a72799b644</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_input_f323d3fe2fc01110e58359a72799b644</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:21:16</sys_created_on>
+        <sys_id>7f9ac74b2fcc1110e58359a72799b6a2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:21:16</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=glide_date,uiTypeLabel=Date,uiUniqueId=ea9e0cbd-2425-4af0-b4ad-52a095aed985</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>end_date</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">glide_date</internal_type>
+        <label>End Date</label>
+        <mandatory>true</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Generate Cost Request">f323d3fe2fc01110e58359a72799b644</model>
+        <model_id>f323d3fe2fc01110e58359a72799b644</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_input_f323d3fe2fc01110e58359a72799b644</name>
+        <next_element/>
+        <order>3</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:21:16</sys_created_on>
+        <sys_id>ccaac74b2fcc1110e58359a72799b6af</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:21:16</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_output action="delete_multiple" query="model=f323d3fe2fc01110e58359a72799b644^sys_idNOT IN4e3477d02f501110e58359a72799b626,72b707c72fcc1110e58359a72799b6d7,fab707c72fcc1110e58359a72799b6dd"/>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=a030f51c-7041-4a4b-a467-0ef63888ab96</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>cost_request</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Cost Request</label>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Generate Cost Request">f323d3fe2fc01110e58359a72799b644</model>
+        <model_id>f323d3fe2fc01110e58359a72799b644</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_output_f323d3fe2fc01110e58359a72799b644</name>
+        <next_element/>
+        <order>3</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-21 14:35:24</sys_created_on>
+        <sys_id>4e3477d02f501110e58359a72799b626</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-21 14:35:24</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=4e3477d02f501110e58359a72799b626^sys_idNOT IN863477d02f501110e58359a72799b62e"/>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>false</active>
+        <input_name>cost_request</input_name>
+        <instance>4e3477d02f501110e58359a72799b626</instance>
+        <referenced_table>sys_hub_action_output</referenced_table>
+        <script>{"cost_request":{"scriptActive":false}}</script>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-21 14:35:24</sys_created_on>
+        <sys_id>863477d02f501110e58359a72799b62e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-21 14:35:24</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>action_error_output=true,co_type_name=FD7ab707c722cc1110c0b85747ab02b1d3,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=object,uiTypeLabel=Object,uiUniqueId=e44ce1ee-9a61-4f33-98fa-913d37ca1ca2</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>__action_status__</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Action Status</label>
+        <mandatory>false</mandatory>
+        <max_length>65000</max_length>
+        <model display_value="Generate Cost Request">f323d3fe2fc01110e58359a72799b644</model>
+        <model_id>f323d3fe2fc01110e58359a72799b644</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_output_f323d3fe2fc01110e58359a72799b644</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:08:38</sys_created_on>
+        <sys_id>72b707c72fcc1110e58359a72799b6d7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:08:38</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>action_error_output=true,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=boolean,uiTypeLabel=True/False,uiUniqueId=c2be9629-ac6c-47fc-8feb-c9b595ec6aa2,visible_in_ui=false</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value>true</default_value>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>__dont_treat_as_error__</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="">boolean</internal_type>
+        <label>Don't Treat as Error</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Generate Cost Request">f323d3fe2fc01110e58359a72799b644</model>
+        <model_id>f323d3fe2fc01110e58359a72799b644</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_output_f323d3fe2fc01110e58359a72799b644</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:08:38</sys_created_on>
+        <sys_id>fab707c72fcc1110e58359a72799b6dd</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:08:38</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_action_status_metadata action="delete_multiple" query="action_type_id=f323d3fe2fc01110e58359a72799b644^sys_idNOT IN0fb707c72fcc1110e58359a72799b6f7"/>
+    <sys_hub_action_status_metadata action="INSERT_OR_UPDATE">
+        <action_type_id display_value="Generate Cost Request">f323d3fe2fc01110e58359a72799b644</action_type_id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:08:38</sys_created_on>
+        <sys_id>0fb707c72fcc1110e58359a72799b6f7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:08:38</sys_updated_on>
+    </sys_hub_action_status_metadata>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_input_f323d3fe2fc01110e58359a72799b644^sys_idNOT IN08aac74b2fcc1110e58359a72799b6b4,6b8a874b2fcc1110e58359a72799b688,84aac74b2fcc1110e58359a72799b6a7"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>end_date</element>
+        <help/>
+        <hint/>
+        <label>End Date</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_f323d3fe2fc01110e58359a72799b644</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:21:16</sys_created_on>
+        <sys_id>08aac74b2fcc1110e58359a72799b6b4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:21:16</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>portfolio</element>
+        <help/>
+        <hint/>
+        <label>Portfolio</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_f323d3fe2fc01110e58359a72799b644</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:20:58</sys_created_on>
+        <sys_id>6b8a874b2fcc1110e58359a72799b688</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:20:58</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>start_date</element>
+        <help/>
+        <hint/>
+        <label>Start Date</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_f323d3fe2fc01110e58359a72799b644</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:21:16</sys_created_on>
+        <sys_id>84aac74b2fcc1110e58359a72799b6a7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:21:16</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_output_f323d3fe2fc01110e58359a72799b644^sys_idNOT IN0a3477d02f501110e58359a72799b62b,3ab707c72fcc1110e58359a72799b6dc,c3b707c72fcc1110e58359a72799b6f2"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>cost_request</element>
+        <help/>
+        <hint/>
+        <label>Cost Request</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_f323d3fe2fc01110e58359a72799b644</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-21 14:35:24</sys_created_on>
+        <sys_id>0a3477d02f501110e58359a72799b62b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-21 14:35:24</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>__action_status__</element>
+        <help/>
+        <hint/>
+        <label>Action Status</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_f323d3fe2fc01110e58359a72799b644</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:08:38</sys_created_on>
+        <sys_id>3ab707c72fcc1110e58359a72799b6dc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:08:38</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>__dont_treat_as_error__</element>
+        <help/>
+        <hint/>
+        <label>Don't Treat as Error</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_f323d3fe2fc01110e58359a72799b644</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 14:08:38</sys_created_on>
+        <sys_id>c3b707c72fcc1110e58359a72799b6f2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 14:08:38</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_hub_action_plan action="delete_multiple" query="action_id=f323d3fe2fc01110e58359a72799b644^sys_idNOT IN4a832b0f2f005110e58359a72799b69e"/>
+    <sys_hub_action_plan action="INSERT_OR_UPDATE">
+        <action_id display_value="Generate Cost Request">f323d3fe2fc01110e58359a72799b644</action_id>
+        <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"4a832b0f2f005110e58359a72799b69e","name":"plan","plan_signature":null}}</plan>
+        <snapshot>99832b0f2f005110e58359a72799b642</snapshot>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:05</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>4a832b0f2f005110e58359a72799b69e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:05</sys_updated_on>
+    </sys_hub_action_plan>
+    <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <action_status/>
+        <action_template/>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Creates a /cost-request POST body from the given inputs</description>
+        <internal_name>generate_cost_request</internal_name>
+        <label_cache>[{"name":"{{action.portfolio}}","label":"action➛Portfolio","type":"action","ref":"","reference_display":"Portfolio","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","sourceUiUniqueId":"","sourceType":"","uiType":"string","uiUniqueId":"060392ba-f94d-4e70-9bf2-f3dbe6302ef2"}},{"name":"{{action.start_date}}","label":"action➛Start Date","type":"action","ref":"","reference_display":"","base_type":"glide_date","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","sourceUiUniqueId":"","sourceType":"","uiType":"string","uiUniqueId":"6aeb9ed4-a275-4b59-95bc-e844aac7773a"}},{"name":"{{action.end_date}}","label":"action➛End Date","type":"action","ref":"","reference_display":"","base_type":"glide_date","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","sourceUiUniqueId":"","sourceType":"","uiType":"string","uiUniqueId":"ea9e0cbd-2425-4af0-b4ad-52a095aed985"}},{"name":"{{step[74752496-dc7f-41a8-8aca-22bd5473e1fe].variable}}","label":"step➛Script step➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[74752496-dc7f-41a8-8aca-22bd5473e1fe].host_header}}","label":"step➛Script step➛Host Header","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[74752496-dc7f-41a8-8aca-22bd5473e1fe].authorization_header}}","label":"step➛Script step➛Authorization Header","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[74752496-dc7f-41a8-8aca-22bd5473e1fe].date_header}}","label":"step➛Script step➛Date Header","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[99e91455-2919-47e4-8f42-983fa48dc2d0].response_body}}","label":"step➛REST step➛Response Body","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"hidden_for":"DATASTREAM"}},{"name":"{{step[99e91455-2919-47e4-8f42-983fa48dc2d0].status_code}}","label":"step➛REST step➛Status Code","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"hidden_for":"DATASTREAM"}},{"name":"{{step[92e8f1ee-1998-4b23-82d6-45c8cae73a5f].variable}}","label":"step➛Error Handling➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[92e8f1ee-1998-4b23-82d6-45c8cae73a5f].status}}","label":"step➛Error Handling➛Status","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[92e8f1ee-1998-4b23-82d6-45c8cae73a5f].error_message}}","label":"step➛Error Handling➛Error Message","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[92e8f1ee-1998-4b23-82d6-45c8cae73a5f].error_map}}","label":"step➛Error Handling➛Error Map","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[61a5d301-bdf7-4f3f-b8fa-7362a1cc6ed7].variable}}","label":"step➛Gather DoW information➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[61a5d301-bdf7-4f3f-b8fa-7362a1cc6ed7].dow_document_data}}","label":"step➛Gather DoW information➛dow_document_data","type":"step","ref":"","reference_display":"","base_type":"json","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[61a5d301-bdf7-4f3f-b8fa-7362a1cc6ed7].__step_status__.message}}","label":"step➛Gather DoW information➛Step Status➛Message","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[61a5d301-bdf7-4f3f-b8fa-7362a1cc6ed7].__step_status__.code}}","label":"step➛Gather DoW information➛Step Status➛Code","type":"step","ref":"","reference_display":"","base_type":"integer","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[61a5d301-bdf7-4f3f-b8fa-7362a1cc6ed7].error_message}}","label":"step➛Gather DoW information➛error_message","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"string","uiUniqueId":"cde8630e-360e-445c-968b-750274f906e3"}},{"name":"{{step[61a5d301-bdf7-4f3f-b8fa-7362a1cc6ed7].pure_object}}","label":"step➛Gather DoW information➛pure_object","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[61a5d301-bdf7-4f3f-b8fa-7362a1cc6ed7].hoth_schema}}","label":"step➛Gather DoW information➛hoth_schema","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[f89b19e7-cc73-4f5b-b169-6d31ea989b8d].variable}}","label":"step➛Script step➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[f89b19e7-cc73-4f5b-b169-6d31ea989b8d].dow_data}}","label":"step➛Script step➛DoW Data","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[2f744425-6b8d-4565-9e2a-c8d9b870c95f].variable}}","label":"step➛Project Overview➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[2f744425-6b8d-4565-9e2a-c8d9b870c95f].variable1}}","label":"step➛Project Overview➛variable1","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[2f744425-6b8d-4565-9e2a-c8d9b870c95f].title}}","label":"step➛Project Overview➛Title","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[2f744425-6b8d-4565-9e2a-c8d9b870c95f].scope}}","label":"step➛Project Overview➛Scope","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[02c7dd54-796d-4fc9-bd34-6307c0669b40].variable}}","label":"step➛Award History➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[02c7dd54-796d-4fc9-bd34-6307c0669b40].award_history}}","label":"step➛Award History➛award_history","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].instances}}","label":"step➛Pre-Processing➛Instances","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].packageperiodsbyid}}","label":"step➛Pre-Processing➛packagePeriodsById","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].instances1}}","label":"step➛Pre-Processing➛Instances","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].package_periods_by_id}}","label":"step➛Pre-Processing➛Package Periods By Id","type":"step","ref":"","reference_display":"","base_type":"json","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].variable}}","label":"step➛Pre-Processing➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].package_option_periods}}","label":"step➛Pre-Processing➛Package Option Periods","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].services}}","label":"step➛Pre-Processing➛Services","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"string","uiUniqueId":"18db4ec4-43a5-4553-b629-a4601ee6d7ab"}},{"name":"{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].awards}}","label":"step➛Pre-Processing➛Awards","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].package_option_periods.Package Option Periods_child0.package_option_periods_child0_child1}}","label":"step➛Pre-Processing➛Package Option Periods➛Package Option Periods_child0➛Package Option Periods_child0_child1","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[e1cac120-b2cf-462e-8f7d-7b62d4bdebae].variable}}","label":"step➛Compose DoW Payload➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[e1cac120-b2cf-462e-8f7d-7b62d4bdebae].dow_data}}","label":"step➛Compose DoW Payload➛DoW Data","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].selected_service_offerings}}","label":"step➛Pre-Processing➛Selected Service Offerings","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[cc36b84f-cc2d-485b-b198-83feaf3577ac].training}}","label":"step➛Pre-Processing➛Training","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[2e3c8276-66fd-414a-9ea6-377b27bcfb22].variable}}","label":"step➛Script step➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[2e3c8276-66fd-414a-9ea6-377b27bcfb22].cost_request}}","label":"step➛Script step➛cost_request","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}}]</label_cache>
+        <master>true</master>
+        <name>Generate Cost Request</name>
+        <natlang/>
+        <outputs/>
+        <outputs/>
+        <parent_action display_value="Generate Cost Request">f323d3fe2fc01110e58359a72799b644</parent_action>
+        <sys_class_name>sys_hub_action_type_snapshot</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:09:59</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>e083e70f2f005110e58359a72799b6a4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:09:59</sys_updated_on>
+        <system_level>false</system_level>
+        <type/>
+    </sys_hub_action_type_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=e083e70f2f005110e58359a72799b6a4"/>
+    <sys_variable_value action="delete_multiple" query="document_key=e083e70f2f005110e58359a72799b6a4"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_type_snapshot</document>
+        <document_key>e083e70f2f005110e58359a72799b6a4</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:03</sys_created_on>
+        <sys_id>91832b0f2f005110e58359a72799b640</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:03</sys_updated_on>
+        <value>{"version":"1.0","complexObjectSchema":{"FlowDesigner:FD8983e70f97005110587214493de2aefe":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"integer\",\"default_value\":\"\",\"label\":\"Code\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"Message\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FD8983e70f97005110587214493de2aefe.$type_facets":{"SimpleMapFacet":"{\"default_value\":\"\",\"label\":\"Action Status\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"uiUniqueId\":\"e44ce1ee-9a61-4f33-98fa-913d37ca1ca2\",\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FD8983e70f97005110587214493de2aefe\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"object\",\"order\":\"1\",\"max_length\":\"65000\"}"}},"serializationFormat":"JSON","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}}}</value>
+        <variable display_value="Action Status">8d832b0f2f005110e58359a72799b601</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_type_snapshot</document>
+        <document_key>e083e70f2f005110e58359a72799b6a4</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:03</sys_created_on>
+        <sys_id>dd832b0f2f005110e58359a72799b63f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:03</sys_updated_on>
+        <value>0</value>
+        <variable display_value="Don't Treat as Error">09832b0f2f005110e58359a72799b608</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=e083e70f2f005110e58359a72799b6a4"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>cost_request</field>
+        <id>e083e70f2f005110e58359a72799b6a4</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:03</sys_created_on>
+        <sys_id>d5832b0f2f005110e58359a72799b63f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:03</sys_updated_on>
+        <table>var__m_sys_hub_action_output_e083e70f2f005110e58359a72799b6a4</table>
+        <value>{{step[2e3c8276-66fd-414a-9ea6-377b27bcfb22].cost_request}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>__action_status__</field>
+        <id>e083e70f2f005110e58359a72799b6a4</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:03</sys_created_on>
+        <sys_id>5d832b0f2f005110e58359a72799b63f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:03</sys_updated_on>
+        <table>var__m_sys_hub_action_output_e083e70f2f005110e58359a72799b6a4</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>__dont_treat_as_error__</field>
+        <id>e083e70f2f005110e58359a72799b6a4</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:03</sys_created_on>
+        <sys_id>99832b0f2f005110e58359a72799b63f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:03</sys_updated_on>
+        <table>var__m_sys_hub_action_output_e083e70f2f005110e58359a72799b6a4</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_step_instance action="delete_multiple" query="action=e083e70f2f005110e58359a72799b6a4^sys_idNOT IN2483e70f2f005110e58359a72799b6cc"/>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="Generate Cost Request">e083e70f2f005110e58359a72799b6a4</action>
+        <cid>2e3c8276-66fd-414a-9ea6-377b27bcfb22</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <label>Script step</label>
+        <order>1</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Script">106afb6647032200b4fad7527c9a71e7</step_type>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:00</sys_created_on>
+        <sys_id>2483e70f2f005110e58359a72799b6cc</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:01</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=2483e70f2f005110e58359a72799b6cc"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>2483e70f2f005110e58359a72799b6cc</document_key>
+        <order>600</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:01</sys_created_on>
+        <sys_id>4983e70f2f005110e58359a72799b6fa</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:01</sys_updated_on>
+        <value>(function execute(inputs, outputs) {
+
+  var csp = new GlideRecord('x_g_dis_atat_cloud_service_provider');
+  csp.get(inputs.portfolio.csp);
+  
+  var cost_request = {
+    requestId: gs.generateGUID(),
+    portfolioId: inputs.portfolio.csp_portfolio_id.toString(),
+    targetCsp: {
+      name: csp.name.toString(),
+      uri: csp.uri.toString(),
+      network: csp.network.toString()
+    },
+    startDate: inputs.start_date,
+    endDate: inputs.end_date
+  };
+  
+  outputs.cost_request = JSON.stringify(cost_request);
+
+})(inputs, outputs);
+</value>
+        <variable display_value="Script">71aa7f6647032200b4fad7527c9a719b</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>2483e70f2f005110e58359a72799b6cc</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:01</sys_created_on>
+        <sys_id>8183e70f2f005110e58359a72799b6fa</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:01</sys_updated_on>
+        <value>35aa573fd7802200bdbaee5b5e610375</value>
+        <variable display_value="MID Application">f5e56d79b3101300176b051a16a8dce4</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=2483e70f2f005110e58359a72799b6cc"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>application</field>
+        <id>2483e70f2f005110e58359a72799b6cc</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:01</sys_created_on>
+        <sys_id>7c83e70f2f005110e58359a72799b6f9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:01</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>end_date</field>
+        <id>2483e70f2f005110e58359a72799b6cc</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:01</sys_created_on>
+        <sys_id>c583e70f2f005110e58359a72799b6fb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:01</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_2483e70f2f005110e58359a72799b6cc</table>
+        <value>{{action.end_date}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>portfolio</field>
+        <id>2483e70f2f005110e58359a72799b6cc</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:01</sys_created_on>
+        <sys_id>8983e70f2f005110e58359a72799b6fb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:01</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_2483e70f2f005110e58359a72799b6cc</table>
+        <value>{{action.portfolio}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>script</field>
+        <id>2483e70f2f005110e58359a72799b6cc</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:01</sys_created_on>
+        <sys_id>0183e70f2f005110e58359a72799b6fa</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:01</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>start_date</field>
+        <id>2483e70f2f005110e58359a72799b6cc</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:01</sys_created_on>
+        <sys_id>4d83e70f2f005110e58359a72799b6fb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:01</sys_updated_on>
+        <table>var__m_sys_hub_step_ext_input_2483e70f2f005110e58359a72799b6cc</table>
+        <value>{{action.start_date}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_step_ext_output_2483e70f2f005110e58359a72799b6cc^id=2483e70f2f005110e58359a72799b6cc"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7^id=2483e70f2f005110e58359a72799b6cc"/>
+    <sys_hub_step_ext_input action="delete_multiple" query="model=2483e70f2f005110e58359a72799b6cc^sys_idNOT IN3c83e70f2f005110e58359a72799b6cf,f083e70f2f005110e58359a72799b6e9,f883e70f2f005110e58359a72799b6d6"/>
+    <sys_hub_step_ext_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>portfolio</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>portfolio</label>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Script step">2483e70f2f005110e58359a72799b6cc</model>
+        <model_id>2483e70f2f005110e58359a72799b6cc</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_input_2483e70f2f005110e58359a72799b6cc</name>
+        <next_element/>
+        <order>0</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_input</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:00</sys_created_on>
+        <sys_id>3c83e70f2f005110e58359a72799b6cf</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:00</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_input>
+    <sys_hub_step_ext_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>end_date</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>end_date</label>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Script step">2483e70f2f005110e58359a72799b6cc</model>
+        <model_id>2483e70f2f005110e58359a72799b6cc</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_input_2483e70f2f005110e58359a72799b6cc</name>
+        <next_element/>
+        <order>200</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_input</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:00</sys_created_on>
+        <sys_id>f083e70f2f005110e58359a72799b6e9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:00</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_input>
+    <sys_hub_step_ext_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>start_date</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>start_date</label>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Script step">2483e70f2f005110e58359a72799b6cc</model>
+        <model_id>2483e70f2f005110e58359a72799b6cc</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_input_2483e70f2f005110e58359a72799b6cc</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_input</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:00</sys_created_on>
+        <sys_id>f883e70f2f005110e58359a72799b6d6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:00</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_input>
+    <sys_hub_step_ext_output action="delete_multiple" query="model=2483e70f2f005110e58359a72799b6cc^sys_idNOT IN3c83e70f2f005110e58359a72799b6ef"/>
+    <sys_hub_step_ext_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=ccf5072b-a4d7-4fb1-abc3-2c91d80f563f</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>cost_request</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>cost_request</label>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Script step">2483e70f2f005110e58359a72799b6cc</model>
+        <model_id>2483e70f2f005110e58359a72799b6cc</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_output_2483e70f2f005110e58359a72799b6cc</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_output</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:00</sys_created_on>
+        <sys_id>3c83e70f2f005110e58359a72799b6ef</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:00</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_output>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_step_ext_output_2483e70f2f005110e58359a72799b6cc^sys_idNOT IN3483e70f2f005110e58359a72799b6f5"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>cost_request</element>
+        <help/>
+        <hint/>
+        <label>cost_request</label>
+        <language>en</language>
+        <name>var__m_sys_hub_step_ext_output_2483e70f2f005110e58359a72799b6cc</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:01</sys_created_on>
+        <sys_id>3483e70f2f005110e58359a72799b6f5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:01</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_hub_action_input action="delete_multiple" query="model=e083e70f2f005110e58359a72799b6a4^sys_idNOT IN2c83e70f2f005110e58359a72799b6a7,6483e70f2f005110e58359a72799b6b2,ac83e70f2f005110e58359a72799b6c4"/>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference,uiUniqueId=060392ba-f94d-4e70-9bf2-f3dbe6302ef2</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table>x_g_dis_atat_portfolio</choice_table>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>portfolio</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>Portfolio</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="Generate Cost Request">e083e70f2f005110e58359a72799b6a4</model>
+        <model_id>e083e70f2f005110e58359a72799b6a4</model_id>
+        <model_table>sys_hub_action_type_snapshot</model_table>
+        <name>var__m_sys_hub_action_input_e083e70f2f005110e58359a72799b6a4</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference display_value="" name="x_g_dis_atat_portfolio">x_g_dis_atat_portfolio</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:09:59</sys_created_on>
+        <sys_id>2c83e70f2f005110e58359a72799b6a7</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:09:59</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=glide_date,uiTypeLabel=Date,uiUniqueId=6aeb9ed4-a275-4b59-95bc-e844aac7773a</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>start_date</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">glide_date</internal_type>
+        <label>Start Date</label>
+        <mandatory>true</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Generate Cost Request">e083e70f2f005110e58359a72799b6a4</model>
+        <model_id>e083e70f2f005110e58359a72799b6a4</model_id>
+        <model_table>sys_hub_action_type_snapshot</model_table>
+        <name>var__m_sys_hub_action_input_e083e70f2f005110e58359a72799b6a4</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:09:59</sys_created_on>
+        <sys_id>6483e70f2f005110e58359a72799b6b2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:09:59</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=glide_date,uiTypeLabel=Date,uiUniqueId=ea9e0cbd-2425-4af0-b4ad-52a095aed985</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>end_date</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">glide_date</internal_type>
+        <label>End Date</label>
+        <mandatory>true</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Generate Cost Request">e083e70f2f005110e58359a72799b6a4</model>
+        <model_id>e083e70f2f005110e58359a72799b6a4</model_id>
+        <model_table>sys_hub_action_type_snapshot</model_table>
+        <name>var__m_sys_hub_action_input_e083e70f2f005110e58359a72799b6a4</name>
+        <next_element/>
+        <order>3</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:00</sys_created_on>
+        <sys_id>ac83e70f2f005110e58359a72799b6c4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:00</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_output action="delete_multiple" query="model=e083e70f2f005110e58359a72799b6a4^sys_idNOT IN09832b0f2f005110e58359a72799b608,8d832b0f2f005110e58359a72799b601,91832b0f2f005110e58359a72799b62b"/>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>action_error_output=true,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=boolean,uiTypeLabel=True/False,uiUniqueId=c2be9629-ac6c-47fc-8feb-c9b595ec6aa2,visible_in_ui=false</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value>true</default_value>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>__dont_treat_as_error__</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="">boolean</internal_type>
+        <label>Don't Treat as Error</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Generate Cost Request">e083e70f2f005110e58359a72799b6a4</model>
+        <model_id>e083e70f2f005110e58359a72799b6a4</model_id>
+        <model_table>sys_hub_action_type_snapshot</model_table>
+        <name>var__m_sys_hub_action_output_e083e70f2f005110e58359a72799b6a4</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:02</sys_created_on>
+        <sys_id>09832b0f2f005110e58359a72799b608</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:02</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>action_error_output=true,co_type_name=FD8983e70f97005110587214493de2aefe,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=object,uiTypeLabel=Object,uiUniqueId=e44ce1ee-9a61-4f33-98fa-913d37ca1ca2</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>__action_status__</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Action Status</label>
+        <mandatory>false</mandatory>
+        <max_length>65000</max_length>
+        <model display_value="Generate Cost Request">e083e70f2f005110e58359a72799b6a4</model>
+        <model_id>e083e70f2f005110e58359a72799b6a4</model_id>
+        <model_table>sys_hub_action_type_snapshot</model_table>
+        <name>var__m_sys_hub_action_output_e083e70f2f005110e58359a72799b6a4</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:01</sys_created_on>
+        <sys_id>8d832b0f2f005110e58359a72799b601</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:01</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=json,uiTypeLabel=JSON,uiUniqueId=a030f51c-7041-4a4b-a467-0ef63888ab96</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>cost_request</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="JSON">json</internal_type>
+        <label>Cost Request</label>
+        <mandatory>true</mandatory>
+        <max_length>4000</max_length>
+        <model display_value="Generate Cost Request">e083e70f2f005110e58359a72799b6a4</model>
+        <model_id>e083e70f2f005110e58359a72799b6a4</model_id>
+        <model_table>sys_hub_action_type_snapshot</model_table>
+        <name>var__m_sys_hub_action_output_e083e70f2f005110e58359a72799b6a4</name>
+        <next_element/>
+        <order>3</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:02</sys_created_on>
+        <sys_id>91832b0f2f005110e58359a72799b62b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:02</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_action_status_metadata action="delete_multiple" query="action_type_id=e083e70f2f005110e58359a72799b6a4^sys_idNOT IN91832b0f2f005110e58359a72799b642"/>
+    <sys_hub_action_status_metadata action="INSERT_OR_UPDATE">
+        <action_type_id display_value="Generate Cost Request">e083e70f2f005110e58359a72799b6a4</action_type_id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:03</sys_created_on>
+        <sys_id>91832b0f2f005110e58359a72799b642</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:03</sys_updated_on>
+    </sys_hub_action_status_metadata>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_input_e083e70f2f005110e58359a72799b6a4^sys_idNOT IN6883e70f2f005110e58359a72799b6c9,ac83e70f2f005110e58359a72799b6b0,e483e70f2f005110e58359a72799b6c3"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>end_date</element>
+        <help/>
+        <hint/>
+        <label>End Date</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_e083e70f2f005110e58359a72799b6a4</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:00</sys_created_on>
+        <sys_id>6883e70f2f005110e58359a72799b6c9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:00</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>portfolio</element>
+        <help/>
+        <hint/>
+        <label>Portfolio</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_e083e70f2f005110e58359a72799b6a4</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:09:59</sys_created_on>
+        <sys_id>ac83e70f2f005110e58359a72799b6b0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:09:59</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>start_date</element>
+        <help/>
+        <hint/>
+        <label>Start Date</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_e083e70f2f005110e58359a72799b6a4</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:00</sys_created_on>
+        <sys_id>e483e70f2f005110e58359a72799b6c3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:00</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_output_e083e70f2f005110e58359a72799b6a4^sys_idNOT IN41832b0f2f005110e58359a72799b607,d1832b0f2f005110e58359a72799b63c,d9832b0f2f005110e58359a72799b629"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>__action_status__</element>
+        <help/>
+        <hint/>
+        <label>Action Status</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_e083e70f2f005110e58359a72799b6a4</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:02</sys_created_on>
+        <sys_id>41832b0f2f005110e58359a72799b607</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:02</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>cost_request</element>
+        <help/>
+        <hint/>
+        <label>Cost Request</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_e083e70f2f005110e58359a72799b6a4</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:02</sys_created_on>
+        <sys_id>d1832b0f2f005110e58359a72799b63c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:02</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>__dont_treat_as_error__</element>
+        <help/>
+        <hint/>
+        <label>Don't Treat as Error</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_e083e70f2f005110e58359a72799b6a4</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 16:10:02</sys_created_on>
+        <sys_id>d9832b0f2f005110e58359a72799b629</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 16:10:02</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_hub_action_type_definition action="update">
+        <sys_id>f323d3fe2fc01110e58359a72799b644</sys_id>
+        <latest_snapshot>e083e70f2f005110e58359a72799b6a4</latest_snapshot>
+    </sys_hub_action_type_definition>
+</record_update>
