@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Organization" max_length="40" name="x_g_dis_atat_organization" sizeclass="5" type="collection">
+    <element label="Organization" max_length="40" name="x_g_dis_atat_organization" sizeclass="0" type="collection">
         <element choice="1" label="Address Type" max_length="40" name="address_type" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Foreign" value="FOREIGN"/>
@@ -8,7 +8,7 @@
             </choice>
         </element>
         <element label="City" max_length="50" name="city" type="string"/>
-        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;  if (!current.organization_name) {&#13;&#10;    return current.disa_organization.getDisplayValue();&#13;&#10;  }&#13;&#10;  else {&#13;&#10;    return current.organization_name;&#13;&#10;  }&#13;&#10;})(current);" display="true" label="Computed Name" max_length="200" name="computed_name" type="string" virtual="true"/>
+        <element calculation="(function calculatedFieldValue(current) {&#10;  if (!current.organization_name) {&#10;    return current.disa_organization.getDisplayValue();&#10;  }&#10;  else {&#10;    return current.organization_name;&#10;  }&#10;})(current);" display="true" label="Computed Name" max_length="200" name="computed_name" type="string" virtual="true"/>
         <element label="Country" max_length="50" name="country" type="string"/>
         <element choice="1" label="DISA Organization" max_length="100" name="disa_organization" type="choice">
             <choice>
