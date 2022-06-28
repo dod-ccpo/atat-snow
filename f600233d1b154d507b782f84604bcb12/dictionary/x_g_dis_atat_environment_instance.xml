@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Environment Instance" max_length="40" name="x_g_dis_atat_environment_instance" sizeclass="1" type="collection">
+    <element label="Environment Instance" max_length="40" name="x_g_dis_atat_environment_instance" sizeclass="0" type="collection">
         <element label="Classification Level" max_length="32" name="classification_level" reference="x_g_dis_atat_classification_level" type="reference"/>
         <element choice="1" label="CSP Region" max_length="40" name="csp_region" type="choice">
             <choice/>
@@ -33,7 +33,6 @@
         </element>
         <element choice="1" label="Pricing Model" max_length="40" name="pricing_model" type="choice">
             <choice>
-                <element inactive_on_update="false" label="On-demand" value="ON_DEMAND"/>
                 <element inactive_on_update="false" label="Pay-as-you-go" value="PAY_AS_YOU_GO"/>
                 <element inactive_on_update="false" label="Reserved" value="RESERVED"/>
             </choice>
