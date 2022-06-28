@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Costs" max_length="40" name="x_g_dis_atat_costs" type="collection">
+    <element label="Costs" max_length="40" name="x_g_dis_atat_costs" sizeclass="168" type="collection">
         <element label="CLIN" max_length="40" name="clin" type="string"/>
+        <element label="CSP" max_length="32" name="csp" reference="x_g_dis_atat_cloud_service_provider" type="reference"/>
         <element label="Is Actual" max_length="40" name="is_actual" type="boolean"/>
         <element label="Organization" max_length="32" name="organization" reference="x_g_dis_atat_organization" type="reference"/>
         <element label="Portfolio" max_length="32" name="portfolio" reference="x_g_dis_atat_portfolio" type="reference"/>
+        <element choice="3" choice_field="service_agency" choice_table="x_g_dis_atat_organization" label="Service/Agency" max_length="200" name="service_agency" type="choice">
+            <choice/>
+        </element>
         <element label="Task Order Number" max_length="40" name="task_order_number" type="string"/>
         <element label="Value" max_length="20" name="value" type="currency"/>
         <element label="Year-Month" max_length="40" name="year_month" type="glide_date"/>
         <index name="index">
-            <element name="portfolio"/>
+            <element name="csp"/>
         </index>
         <index name="index2">
+            <element name="portfolio"/>
+        </index>
+        <index name="index3">
             <element name="organization"/>
+        </index>
+        <index name="index4">
+            <element name="service_agency"/>
         </index>
     </element>
 </database>
