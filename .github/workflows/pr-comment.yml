@@ -41,7 +41,7 @@ jobs:
             // Get unique email addresses
             const commitEmails = [... new Set(result.repository.pullRequest.commits.nodes.map((node) => node.commit.author.email))];
             // Check that all emails end in "@ccpo.mil"
-            const allEmailCcpo = commitEmails.every((email) => email.endsWith("@ccpo.mil"));
+            const allEmailCcpo = commitEmails.every((email) => email.endsWith("@ccpo.mil") || email.endsWith("@users.noreply.github.com"));
 
             core.setOutput("commit-count", totalCommits);
             core.setOutput("all-email-ccpo", allEmailCcpo);
