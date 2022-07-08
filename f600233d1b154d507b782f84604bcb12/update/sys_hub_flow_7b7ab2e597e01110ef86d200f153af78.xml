@@ -43,6 +43,8 @@
     </sys_hub_flow>
     <sys_translated_text action="delete_multiple" query="documentkey=7b7ab2e597e01110ef86d200f153af78"/>
     <sys_variable_value action="delete_multiple" query="document_key=7b7ab2e597e01110ef86d200f153af78"/>
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=7b7ab2e597e01110ef86d200f153af78"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=7b7ab2e597e01110ef86d200f153af78"/>
     <sys_flow_cat_variable_model action="delete_multiple" query="id=7b7ab2e597e01110ef86d200f153af78^sys_idNOT IN3b7aba6997e01110ef86d200f153af83"/>
     <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
         <id>7b7ab2e597e01110ef86d200f153af78</id>
@@ -55,6 +57,7 @@
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-07-07 17:51:19</sys_updated_on>
     </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=3b7aba6997e01110ef86d200f153af83"/>
     <sys_hub_flow_input action="delete_multiple" query="model=7b7ab2e597e01110ef86d200f153af78^sys_idNOT IN054b3aa997e01110ef86d200f153af79,0d4b3aa997e01110ef86d200f153af81,454b3aa997e01110ef86d200f153af64,494b3aa997e01110ef86d200f153af5a"/>
     <sys_hub_flow_input action="INSERT_OR_UPDATE">
         <active>true</active>
@@ -380,6 +383,8 @@
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_flow_input>
+    <sys_hub_flow_output action="delete_multiple" query="model=7b7ab2e597e01110ef86d200f153af78"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=7b7ab2e597e01110ef86d200f153af78"/>
     <sys_hub_action_instance action="delete_multiple" query="flow=7b7ab2e597e01110ef86d200f153af78^sys_idNOT IN5d4b3aa997e01110ef86d200f153afc6,9d4b3aa997e01110ef86d200f153af9c,9d4b3aa997e01110ef86d200f153afa4"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
@@ -444,6 +449,8 @@
 Code: {{d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.code}}
 Message: {{d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.message}}</value>
     </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=5d4b3aa997e01110ef86d200f153afc6"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=5d4b3aa997e01110ef86d200f153afc6"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
@@ -515,6 +522,8 @@ Message: {{d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.message}}</val
         <table>var__m_sys_hub_action_input_bacabe6997e01110ef86d200f153afe5</table>
         <value>{{subflow.resource_path}}</value>
     </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=9d4b3aa997e01110ef86d200f153af9c"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=9d4b3aa997e01110ef86d200f153af9c"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
@@ -550,6 +559,9 @@ Message: {{d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.message}}</val
         <table>var__m_sys_hub_action_input_edda32a997e01110ef86d200f153afe3</table>
         <value>{{759d6c2c-1e8f-46d2-a955-f78b804e711f.response_body}}</value>
     </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=9d4b3aa997e01110ef86d200f153afa4"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=9d4b3aa997e01110ef86d200f153afa4"/>
+    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=7b7ab2e597e01110ef86d200f153af78"/>
     <sys_hub_flow_logic action="delete_multiple" query="flow=7b7ab2e597e01110ef86d200f153af78^sys_idNOT IN4d4b3aa997e01110ef86d200f153af8e,d94b3aa997e01110ef86d200f153afbf"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">414b3aa997e01110ef86d200f153af8e</block>
@@ -581,6 +593,8 @@ Message: {{d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.message}}</val
         <workflow_reference/>
     </sys_hub_flow_logic>
     <sys_variable_value action="delete_multiple" query="document_key=4d4b3aa997e01110ef86d200f153af8e"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=4d4b3aa997e01110ef86d200f153af8e"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=4d4b3aa997e01110ef86d200f153af8e"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">d54b3aa997e01110ef86d200f153afa6</block>
         <comment/>
@@ -640,6 +654,10 @@ Message: {{d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.message}}</val
         <variable display_value="enabled">dd70187cc36e20105553b740ad40dddc</variable>
     </sys_variable_value>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_logic_input_35d60003e6022010a5e40cdd1254dd23^id=d94b3aa997e01110ef86d200f153afbf"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=d94b3aa997e01110ef86d200f153afbf"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=d94b3aa997e01110ef86d200f153afbf"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=7b7ab2e597e01110ef86d200f153af78"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=7b7ab2e597e01110ef86d200f153af78"/>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_7b7ab2e597e01110ef86d200f153af78^sys_idNOT IN854b3aa997e01110ef86d200f153af80,8d4b3aa997e01110ef86d200f153af77,8d4b3aa997e01110ef86d200f153af88,cd4b3aa997e01110ef86d200f153af62"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>base_url</element>
@@ -654,11 +672,11 @@ Message: {{d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.message}}</val
         <sys_created_on>2022-07-07 17:54:41</sys_created_on>
         <sys_id>854b3aa997e01110ef86d200f153af80</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Base URL</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_flow_input_7b7ab2e597e01110ef86d200f153af78_base_url_en</sys_update_name>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-07-07 17:54:41</sys_updated_on>
         <url/>
@@ -677,11 +695,11 @@ Message: {{d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.message}}</val
         <sys_created_on>2022-07-07 17:54:41</sys_created_on>
         <sys_id>8d4b3aa997e01110ef86d200f153af77</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>AWS Region</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_flow_input_7b7ab2e597e01110ef86d200f153af78_aws_region_en</sys_update_name>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-07-07 17:54:41</sys_updated_on>
         <url/>
@@ -700,11 +718,11 @@ Message: {{d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.message}}</val
         <sys_created_on>2022-07-07 17:54:41</sys_created_on>
         <sys_id>8d4b3aa997e01110ef86d200f153af88</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Resource Path</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_flow_input_7b7ab2e597e01110ef86d200f153af78_resource_path_en</sys_update_name>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-07-07 17:54:41</sys_updated_on>
         <url/>
@@ -723,14 +741,19 @@ Message: {{d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.message}}</val
         <sys_created_on>2022-07-07 17:54:41</sys_created_on>
         <sys_id>cd4b3aa997e01110ef86d200f153af62</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>AWS Credential</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_flow_input_7b7ab2e597e01110ef86d200f153af78_aws_credential_en</sys_update_name>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-07-07 17:54:41</sys_updated_on>
         <url/>
         <url_target/>
     </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_7b7ab2e597e01110ef86d200f153af78"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_7b7ab2e597e01110ef86d200f153af78"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_7b7ab2e597e01110ef86d200f153af78"/>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=7b7ab2e597e01110ef86d200f153af78"/>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=7b7ab2e597e01110ef86d200f153af78"/>
 </record_update>
