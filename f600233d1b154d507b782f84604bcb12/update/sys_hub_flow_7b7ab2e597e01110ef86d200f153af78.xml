@@ -2,18 +2,17 @@
     <sys_hub_flow action="INSERT_OR_UPDATE">
         <access>public</access>
         <acls/>
-        <active>false</active>
+        <active>true</active>
         <annotation/>
         <callable_by_client_api>false</callable_by_client_api>
         <category/>
-        <compiler_build/>
+        <compiler_build>glide-rome-06-23-2021__patch5-12-15-2021_01-04-2022_2221.zip</compiler_build>
         <copied_from/>
         <copied_from_name/>
         <description>Invokes GET /cost-jobs to obtain the latest set of cost data responses &amp; invokes Persist Costs Payload Action to save them to Costs Table.</description>
         <internal_name>atat_consume_cost_responses</internal_name>
-        <label_cache>[{"name":"759d6c2c-1e8f-46d2-a955-f78b804e711f.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FD1fcafe6939e01110fdc2ee5eb9f2999e","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"29df7452-080f-43f2-b815-0f1077b70c46"}},{"name":"759d6c2c-1e8f-46d2-a955-f78b804e711f.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"89313553-3555-4213-8979-6790927f14ab"}},{"name":"759d6c2c-1e8f-46d2-a955-f78b804e711f.response_body","label":"1➛Response Body","reference_display":"Response Body","type":"string","base_type":"string","attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiType":"string","uiUniqueId":"7c5f2903-194a-4968-be28-89fdf94281a0"}},{"name":"subflow.aws_credential","label":"Input➛AWS Credential","reference":"aws_credentials","reference_display":"AWS Credentials","type":"reference","base_type":"reference","attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":"","uiUniqueId":"ad0510f7-001e-49cb-b0fd-2f570fb99c35"}},{"name":"subflow.aws_region","label":"Input➛AWS Region","reference":"x_g_dis_atat_configuration","reference_display":"ATAT Configuration","type":"reference","base_type":"reference","attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":"","uiUniqueId":"c3c76ac2-f11a-4c6b-9d17-0c625001b5ed"}},{"name":"subflow.resource_path","label":"Input➛Resource Path","reference":"x_g_dis_atat_configuration","reference_display":"ATAT Configuration","type":"reference","base_type":"reference","attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":"","uiUniqueId":"a0693617-9d0a-4556-948b-1670857b0b16"}},{"name":"subflow.base_url","label":"Input➛Base URL","reference":"x_g_dis_atat_configuration","reference_display":"ATAT Configuration","type":"reference","base_type":"reference","attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":"","uiUniqueId":"a02d33ef-e5fc-478a-ab1d-8b72f3fb9890"}},{"name":"d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__","label":"2➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FDe5da32a982e01110a696d8950e17a3f6","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"4bb990a8-9b2d-4ce3-a40b-e1266e86ef79"}},{"name":"d47435b3-5a39-442c-891f-bf3f0f2d39fc.__dont_treat_as_error__","label":"2➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"ea387cf9-c95b-4dbf-8d18-877b796d6824"}},{"name":"f24d6a09-bf37-4376-9f86-1238a32bdc3b.__status__","label":"2➛Error Status","reference_display":"Error Status","type":"object","base_type":"object","attributes":{"uiType":"object","uiTypeLabel":"Object","co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"3e44f744-9360-44df-81ff-5f38ad0c4f6b.__action_status__","label":"3➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"3e44f744-9360-44df-81ff-5f38ad0c4f6b.__dont_treat_as_error__","label":"3➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.code","label":"2➛Action Status➛Code","reference":"","reference_display":"","type":"integer","base_type":"integer","column_name":"","attributes":{}},{"name":"d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.message","label":"2➛Action Status➛Message","reference":"","reference_display":"","type":"string","base_type":"string","column_name":"","attributes":{}}]</label_cache>
-        <latest_snapshot/>
-        <master_snapshot/>
+        <label_cache>[{"name":"flow_variable.running_updates","label":"Flow Variables➛running_updates","reference":"","reference_display":"","type":"integer","base_type":"integer","attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":"","uiUniqueId":"25aaf7fb-1a94-41b1-baf0-09989e1799ad"}},{"name":"flow_variable.running_creates","label":"Flow Variables➛running_creates","reference":"","reference_display":"","type":"integer","base_type":"integer","attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":"","uiUniqueId":"c5c38ad0-a094-4d99-a5f2-642914bfad5c"}},{"name":"7f9cc424-96c6-49d1-a378-e4d3a0b38d34.__dont_treat_as_error__","label":"8➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"7f9cc424-96c6-49d1-a378-e4d3a0b38d34.__action_status__","label":"8➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"69ad36d6-b10c-4fe8-b31b-6df2b51b0478.variable","label":"4➛Updated Cost Records","reference_display":"Updated Cost Records","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"dd3aac21-ce1c-4797-91ae-002042d2bc67"}},{"name":"69ad36d6-b10c-4fe8-b31b-6df2b51b0478.new_cost_records","label":"4➛New Cost Records","reference_display":"New Cost Records","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"031c9479-5453-48a0-85d8-8d185a646225"}},{"name":"507902ef-e5c1-4e4c-8e3b-7bfce65290d7.scheduled_end_date_time","label":"5➛Scheduled End date/time","reference_display":"Scheduled End date/time","type":"glide_date_time","base_type":"glide_date_time","attributes":{"pills_draggable_inside_block":"false","pills_draggable_outside_block":"true"}},{"name":"507902ef-e5c1-4e4c-8e3b-7bfce65290d7.total_duration","label":"5➛Total Duration","reference_display":"Total Duration","type":"glide_duration","base_type":"glide_duration","attributes":{"pills_draggable_inside_block":"false","pills_draggable_outside_block":"true"}},{"name":"flow_variable.latest_response","label":"Flow Variables➛latest_response","type":"string","base_type":"string","attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":"","uiUniqueId":"73a79968-d5be-4f27-9d97-bdc78df557bd"}},{"name":"f24d6a09-bf37-4376-9f86-1238a32bdc3b.__status__.message","label":"8➛Error Status➛Message","reference":"","reference_display":"","type":"string","base_type":"string","column_name":"","attributes":{}},{"name":"f24d6a09-bf37-4376-9f86-1238a32bdc3b.__status__.code","label":"8➛Error Status➛Code","reference":"","reference_display":"","type":"integer","base_type":"integer","column_name":"","attributes":{}},{"name":"ae32e720-3840-4af5-9028-947a189202bc.__dont_treat_as_error__","label":"4➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"ae32e720-3840-4af5-9028-947a189202bc.__action_status__","label":"4➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"69ad36d6-b10c-4fe8-b31b-6df2b51b0478.__dont_treat_as_error__","label":"4➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"ea387cf9-c95b-4dbf-8d18-877b796d6824"}},{"name":"69ad36d6-b10c-4fe8-b31b-6df2b51b0478.__action_status__","label":"4➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FDe5da32a982e01110a696d8950e17a3f6","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"4bb990a8-9b2d-4ce3-a40b-e1266e86ef79"}},{"name":"5c6ff1c3-3a4b-4f33-b8de-eeb881da0c2c.response_body","label":"2➛Response Body","reference_display":"Response Body","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"7c5f2903-194a-4968-be28-89fdf94281a0"}},{"name":"5c6ff1c3-3a4b-4f33-b8de-eeb881da0c2c.__dont_treat_as_error__","label":"2➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"89313553-3555-4213-8979-6790927f14ab"}},{"name":"5c6ff1c3-3a4b-4f33-b8de-eeb881da0c2c.__action_status__","label":"2➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FD1fcafe6939e01110fdc2ee5eb9f2999e","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"29df7452-080f-43f2-b815-0f1077b70c46"}},{"name":"fc58d1ae-27c4-46d9-a1db-39667de00324.scheduled_end_date_time","label":"4➛Scheduled End date/time","reference_display":"Scheduled End date/time","type":"glide_date_time","base_type":"glide_date_time","attributes":{"pills_draggable_inside_block":"false","pills_draggable_outside_block":"true"}},{"name":"fc58d1ae-27c4-46d9-a1db-39667de00324.total_duration","label":"4➛Total Duration","reference_display":"Total Duration","type":"glide_duration","base_type":"glide_duration","attributes":{"pills_draggable_inside_block":"false","pills_draggable_outside_block":"true"}},{"name":"759d6c2c-1e8f-46d2-a955-f78b804e711f.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FD1fcafe6939e01110fdc2ee5eb9f2999e","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"29df7452-080f-43f2-b815-0f1077b70c46"}},{"name":"759d6c2c-1e8f-46d2-a955-f78b804e711f.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"89313553-3555-4213-8979-6790927f14ab"}},{"name":"759d6c2c-1e8f-46d2-a955-f78b804e711f.response_body","label":"1➛Response Body","reference_display":"Response Body","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"7c5f2903-194a-4968-be28-89fdf94281a0"}},{"name":"subflow.aws_credential","label":"Input➛AWS Credential","reference":"aws_credentials","reference_display":"AWS Credentials","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"ad0510f7-001e-49cb-b0fd-2f570fb99c35","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.aws_region","label":"Input➛AWS Region","reference":"x_g_dis_atat_configuration","reference_display":"ATAT Configuration","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"c3c76ac2-f11a-4c6b-9d17-0c625001b5ed","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.resource_path","label":"Input➛Resource Path","reference":"x_g_dis_atat_configuration","reference_display":"ATAT Configuration","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"a0693617-9d0a-4556-948b-1670857b0b16","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.base_url","label":"Input➛Base URL","reference":"x_g_dis_atat_configuration","reference_display":"ATAT Configuration","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"a02d33ef-e5fc-478a-ab1d-8b72f3fb9890","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FDe5da32a982e01110a696d8950e17a3f6","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"4bb990a8-9b2d-4ce3-a40b-e1266e86ef79"}},{"name":"d47435b3-5a39-442c-891f-bf3f0f2d39fc.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"ea387cf9-c95b-4dbf-8d18-877b796d6824"}},{"name":"f24d6a09-bf37-4376-9f86-1238a32bdc3b.__status__","label":"8➛Error Status","reference_display":"Error Status","type":"object","base_type":"object","attributes":{"uiType":"object","uiTypeLabel":"Object","co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"3e44f744-9360-44df-81ff-5f38ad0c4f6b.__action_status__","label":"9➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"3e44f744-9360-44df-81ff-5f38ad0c4f6b.__dont_treat_as_error__","label":"9➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.code","label":"1➛Action Status➛Code","reference":"","reference_display":"","type":"integer","base_type":"integer","column_name":"","attributes":{}},{"name":"d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.message","label":"1➛Action Status➛Message","reference":"","reference_display":"","type":"string","base_type":"string","column_name":"","attributes":{}}]</label_cache>
+        <master_snapshot>a6cde77e2fe01110e58359a72799b66b</master_snapshot>
         <name>ATAT Consume Cost Responses</name>
         <natlang/>
         <outputs/>
@@ -23,14 +22,14 @@
         <sc_callable>false</sc_callable>
         <show_draft_actions>false</show_draft_actions>
         <show_triggered_flows>false</show_triggered_flows>
-        <status>draft</status>
+        <status>published</status>
         <sys_class_name>sys_hub_flow</sys_class_name>
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-07-07 17:51:19</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>7b7ab2e597e01110ef86d200f153af78</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>7</sys_mod_count>
         <sys_name>ATAT Consume Cost Responses</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -38,11 +37,12 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_flow_7b7ab2e597e01110ef86d200f153af78</sys_update_name>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-07-07 17:54:42</sys_updated_on>
+        <sys_updated_on>2022-07-11 20:21:48</sys_updated_on>
         <type>subflow</type>
     </sys_hub_flow>
     <sys_translated_text action="delete_multiple" query="documentkey=7b7ab2e597e01110ef86d200f153af78"/>
     <sys_variable_value action="delete_multiple" query="document_key=7b7ab2e597e01110ef86d200f153af78"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_7b7ab2e597e01110ef86d200f153af78^id=7b7ab2e597e01110ef86d200f153af78"/>
     <sys_flow_cat_variable_model action="delete_multiple" query="id=7b7ab2e597e01110ef86d200f153af78^sys_idNOT IN3b7aba6997e01110ef86d200f153af83"/>
     <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
         <id>7b7ab2e597e01110ef86d200f153af78</id>
@@ -380,26 +380,189 @@
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_flow_input>
-    <sys_hub_action_instance action="delete_multiple" query="flow=7b7ab2e597e01110ef86d200f153af78^sys_idNOT IN5d4b3aa997e01110ef86d200f153afc6,9d4b3aa997e01110ef86d200f153af9c,9d4b3aa997e01110ef86d200f153afa4"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=7b7ab2e597e01110ef86d200f153af78^sys_idNOT IN69238c8f2f241110e58359a72799b661,ed238c8f2f241110e58359a72799b66a"/>
+    <sys_hub_flow_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=integer,uiTypeLabel=Integer,uiUniqueId=e085df0e-65c4-4614-817c-9f433b866c0b</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice>3</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>total_new_cost_records</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Integer">integer</internal_type>
+        <label>Total New Cost Records</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="ATAT Consume Cost Responses">7b7ab2e597e01110ef86d200f153af78</model>
+        <model_id>7b7ab2e597e01110ef86d200f153af78</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_output_7b7ab2e597e01110ef86d200f153af78</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_output</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:08</sys_created_on>
+        <sys_id>69238c8f2f241110e58359a72799b661</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:08</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_output>
+    <sys_hub_flow_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=integer,uiTypeLabel=Integer,uiUniqueId=3e69ebe9-16cc-4e48-80c2-a81f48016312</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice>3</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>total_updated_cost_records</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Integer">integer</internal_type>
+        <label>Total Updated Cost Records</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="ATAT Consume Cost Responses">7b7ab2e597e01110ef86d200f153af78</model>
+        <model_id>7b7ab2e597e01110ef86d200f153af78</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_output_7b7ab2e597e01110ef86d200f153af78</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_output</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:08</sys_created_on>
+        <sys_id>ed238c8f2f241110e58359a72799b66a</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:08</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_output>
+    <sys_hub_action_instance action="delete_multiple" query="flow=7b7ab2e597e01110ef86d200f153af78^sys_idNOT IN5d4b3aa997e01110ef86d200f153afc6,ed7befba2fe01110e58359a72799b62e,f97befba2fe01110e58359a72799b63a"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
         <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
         <action_type_parent/>
         <comment/>
-        <compiled_snapshot/>
+        <compiled_snapshot>5bc1bcc6531003003bf1d9109ec587d4</compiled_snapshot>
         <display_text/>
         <flow display_value="ATAT Consume Cost Responses">7b7ab2e597e01110ef86d200f153af78</flow>
-        <order>4</order>
+        <order>10</order>
         <parent_ui_id>f24d6a09-bf37-4376-9f86-1238a32bdc3b</parent_ui_id>
         <sys_class_name>sys_hub_action_instance</sys_class_name>
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-07-07 17:54:41</sys_created_on>
         <sys_id>5d4b3aa997e01110ef86d200f153afc6</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>18</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-07-07 17:54:41</sys_updated_on>
+        <sys_updated_on>2022-07-11 20:28:09</sys_updated_on>
         <ui_id>3e44f744-9360-44df-81ff-5f38ad0c4f6b</ui_id>
     </sys_hub_action_instance>
     <sys_variable_value action="delete_multiple" query="document_key=5d4b3aa997e01110ef86d200f153afc6"/>
@@ -436,13 +599,13 @@
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-07-07 17:54:42</sys_created_on>
         <sys_id>954b3aa997e01110ef86d200f153afc8</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-07-07 17:54:42</sys_updated_on>
+        <sys_updated_on>2022-07-11 18:37:40</sys_updated_on>
         <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
         <value>Error persisting Cost Responses:
-Code: {{d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.code}}
-Message: {{d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.message}}</value>
+Code: {{f24d6a09-bf37-4376-9f86-1238a32bdc3b.__status__.code}}
+Message: {{f24d6a09-bf37-4376-9f86-1238a32bdc3b.__status__.message}}</value>
     </sys_element_mapping>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
@@ -450,68 +613,68 @@ Message: {{d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.message}}</val
         <action_type display_value="ATAT Secure GET Request">bacabe6997e01110ef86d200f153afe5</action_type>
         <action_type_parent/>
         <comment/>
-        <compiled_snapshot/>
+        <compiled_snapshot>bacabe6997e01110ef86d200f153afe5</compiled_snapshot>
         <display_text/>
         <flow display_value="ATAT Consume Cost Responses">7b7ab2e597e01110ef86d200f153af78</flow>
-        <order>1</order>
-        <parent_ui_id>fe0c5667-d86f-4cd2-979e-23a001d0318b</parent_ui_id>
+        <order>2</order>
+        <parent_ui_id>f0f8622f-0713-44d7-a486-e9630eeca437</parent_ui_id>
         <sys_class_name>sys_hub_action_instance</sys_class_name>
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
-        <sys_created_on>2022-07-07 17:54:41</sys_created_on>
-        <sys_id>9d4b3aa997e01110ef86d200f153af9c</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_created_on>2022-07-11 18:37:39</sys_created_on>
+        <sys_id>ed7befba2fe01110e58359a72799b62e</sys_id>
+        <sys_mod_count>16</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-07-07 17:54:41</sys_updated_on>
-        <ui_id>759d6c2c-1e8f-46d2-a955-f78b804e711f</ui_id>
+        <sys_updated_on>2022-07-11 20:28:08</sys_updated_on>
+        <ui_id>5c6ff1c3-3a4b-4f33-b8de-eeb881da0c2c</ui_id>
     </sys_hub_action_instance>
-    <sys_variable_value action="delete_multiple" query="document_key=9d4b3aa997e01110ef86d200f153af9c"/>
-    <sys_element_mapping action="delete_multiple" query="id=9d4b3aa997e01110ef86d200f153af9c"/>
+    <sys_variable_value action="delete_multiple" query="document_key=ed7befba2fe01110e58359a72799b62e"/>
+    <sys_element_mapping action="delete_multiple" query="id=ed7befba2fe01110e58359a72799b62e"/>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>aws_credential</field>
-        <id>9d4b3aa997e01110ef86d200f153af9c</id>
+        <id>ed7befba2fe01110e58359a72799b62e</id>
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
-        <sys_created_on>2022-07-07 17:54:41</sys_created_on>
-        <sys_id>d54b3aa997e01110ef86d200f153af9f</sys_id>
+        <sys_created_on>2022-07-11 18:37:39</sys_created_on>
+        <sys_id>e57befba2fe01110e58359a72799b631</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-07-07 17:54:41</sys_updated_on>
+        <sys_updated_on>2022-07-11 18:37:39</sys_updated_on>
         <table>var__m_sys_hub_action_input_bacabe6997e01110ef86d200f153afe5</table>
         <value>{{subflow.aws_credential}}</value>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>aws_region</field>
-        <id>9d4b3aa997e01110ef86d200f153af9c</id>
+        <id>ed7befba2fe01110e58359a72799b62e</id>
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
-        <sys_created_on>2022-07-07 17:54:41</sys_created_on>
-        <sys_id>994b3aa997e01110ef86d200f153af9f</sys_id>
+        <sys_created_on>2022-07-11 18:37:39</sys_created_on>
+        <sys_id>a97befba2fe01110e58359a72799b631</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-07-07 17:54:41</sys_updated_on>
+        <sys_updated_on>2022-07-11 18:37:39</sys_updated_on>
         <table>var__m_sys_hub_action_input_bacabe6997e01110ef86d200f153afe5</table>
         <value>{{subflow.aws_region}}</value>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>base_url</field>
-        <id>9d4b3aa997e01110ef86d200f153af9c</id>
+        <id>ed7befba2fe01110e58359a72799b62e</id>
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
-        <sys_created_on>2022-07-07 17:54:41</sys_created_on>
-        <sys_id>154b3aa997e01110ef86d200f153af9f</sys_id>
+        <sys_created_on>2022-07-11 18:37:39</sys_created_on>
+        <sys_id>257befba2fe01110e58359a72799b631</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-07-07 17:54:41</sys_updated_on>
+        <sys_updated_on>2022-07-11 18:37:39</sys_updated_on>
         <table>var__m_sys_hub_action_input_bacabe6997e01110ef86d200f153afe5</table>
         <value>{{subflow.base_url}}</value>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>resource_path</field>
-        <id>9d4b3aa997e01110ef86d200f153af9c</id>
+        <id>ed7befba2fe01110e58359a72799b62e</id>
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
-        <sys_created_on>2022-07-07 17:54:41</sys_created_on>
-        <sys_id>5d4b3aa997e01110ef86d200f153af9f</sys_id>
+        <sys_created_on>2022-07-11 18:37:39</sys_created_on>
+        <sys_id>6d7befba2fe01110e58359a72799b631</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-07-07 17:54:41</sys_updated_on>
+        <sys_updated_on>2022-07-11 18:37:39</sys_updated_on>
         <table>var__m_sys_hub_action_input_bacabe6997e01110ef86d200f153afe5</table>
         <value>{{subflow.resource_path}}</value>
     </sys_element_mapping>
@@ -521,38 +684,83 @@ Message: {{d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.message}}</val
         <action_type display_value="Persist Costs Payload">edda32a997e01110ef86d200f153afe3</action_type>
         <action_type_parent/>
         <comment/>
-        <compiled_snapshot/>
+        <compiled_snapshot>edda32a997e01110ef86d200f153afe3</compiled_snapshot>
         <display_text/>
         <flow display_value="ATAT Consume Cost Responses">7b7ab2e597e01110ef86d200f153af78</flow>
-        <order>2</order>
-        <parent_ui_id>fe0c5667-d86f-4cd2-979e-23a001d0318b</parent_ui_id>
+        <order>4</order>
+        <parent_ui_id>f0f8622f-0713-44d7-a486-e9630eeca437</parent_ui_id>
         <sys_class_name>sys_hub_action_instance</sys_class_name>
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
-        <sys_created_on>2022-07-07 17:54:41</sys_created_on>
-        <sys_id>9d4b3aa997e01110ef86d200f153afa4</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_created_on>2022-07-11 18:37:40</sys_created_on>
+        <sys_id>f97befba2fe01110e58359a72799b63a</sys_id>
+        <sys_mod_count>16</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-07-07 17:54:41</sys_updated_on>
-        <ui_id>d47435b3-5a39-442c-891f-bf3f0f2d39fc</ui_id>
+        <sys_updated_on>2022-07-11 20:28:09</sys_updated_on>
+        <ui_id>69ad36d6-b10c-4fe8-b31b-6df2b51b0478</ui_id>
     </sys_hub_action_instance>
-    <sys_variable_value action="delete_multiple" query="document_key=9d4b3aa997e01110ef86d200f153afa4"/>
-    <sys_element_mapping action="delete_multiple" query="id=9d4b3aa997e01110ef86d200f153afa4"/>
+    <sys_variable_value action="delete_multiple" query="document_key=f97befba2fe01110e58359a72799b63a"/>
+    <sys_element_mapping action="delete_multiple" query="id=f97befba2fe01110e58359a72799b63a"/>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>cost_response</field>
-        <id>9d4b3aa997e01110ef86d200f153afa4</id>
+        <id>f97befba2fe01110e58359a72799b63a</id>
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
-        <sys_created_on>2022-07-07 17:54:41</sys_created_on>
-        <sys_id>914b3aa997e01110ef86d200f153afa6</sys_id>
+        <sys_created_on>2022-07-11 18:37:40</sys_created_on>
+        <sys_id>bd7befba2fe01110e58359a72799b63b</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-07-07 17:54:41</sys_updated_on>
+        <sys_updated_on>2022-07-11 18:37:40</sys_updated_on>
         <table>var__m_sys_hub_action_input_edda32a997e01110ef86d200f153afe3</table>
-        <value>{{759d6c2c-1e8f-46d2-a955-f78b804e711f.response_body}}</value>
+        <value>{{5c6ff1c3-3a4b-4f33-b8de-eeb881da0c2c.response_body}}</value>
     </sys_element_mapping>
-    <sys_hub_flow_logic action="delete_multiple" query="flow=7b7ab2e597e01110ef86d200f153af78^sys_idNOT IN4d4b3aa997e01110ef86d200f153af8e,d94b3aa997e01110ef86d200f153afbf"/>
+    <sys_hub_flow_logic action="delete_multiple" query="flow=7b7ab2e597e01110ef86d200f153af78^sys_idNOT IN297befba2fe01110e58359a72799b632,4d4b3aa997e01110ef86d200f153af8e,797befba2fe01110e58359a72799b63c,ad7befba2fe01110e58359a72799b601,bd238c8f2f241110e58359a72799b6f3,d94b3aa997e01110ef86d200f153afbf,f5238c8f2f241110e58359a72799b6b0"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
-        <block display_value="">414b3aa997e01110ef86d200f153af8e</block>
+        <block display_value="">a17befba2fe01110e58359a72799b632</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="ATAT Consume Cost Responses">7b7ab2e597e01110ef86d200f153af78</flow>
+        <flow_variable/>
+        <flow_variable/>
+        <flow_variables_assigned>latest_response</flow_variables_assigned>
+        <inputs/>
+        <logic_definition display_value="Set Flow Variables">4f787d1e0f9b0010ecf0cc52ff767ea0</logic_definition>
+        <order>3</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>f0f8622f-0713-44d7-a486-e9630eeca437</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:37:39</sys_created_on>
+        <sys_id>297befba2fe01110e58359a72799b632</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:47</sys_updated_on>
+        <ui_id>13e383b0-2dcd-420c-9994-bba2a0423650</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=297befba2fe01110e58359a72799b632"/>
+    <sys_element_mapping action="delete_multiple" query="id=297befba2fe01110e58359a72799b632"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>latest_response</field>
+        <id>297befba2fe01110e58359a72799b632</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:37:39</sys_created_on>
+        <sys_id>357befba2fe01110e58359a72799b635</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:37:39</sys_updated_on>
+        <table>var__m_sys_hub_flow_variable_7b7ab2e597e01110ef86d200f153af78</table>
+        <value>{{5c6ff1c3-3a4b-4f33-b8de-eeb881da0c2c.response_body}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_7b7ab2e597e01110ef86d200f153af78^id=297befba2fe01110e58359a72799b632"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">a97bafba2fe01110e58359a72799b6fd</block>
         <comment/>
         <connected_to/>
         <decision_table/>
@@ -572,17 +780,211 @@ Message: {{d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.message}}</val
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-07-07 17:54:41</sys_created_on>
         <sys_id>4d4b3aa997e01110ef86d200f153af8e</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>8</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-07-07 17:54:41</sys_updated_on>
+        <sys_updated_on>2022-07-11 20:21:47</sys_updated_on>
         <ui_id>fe0c5667-d86f-4cd2-979e-23a001d0318b</ui_id>
         <workflow_inputs/>
         <workflow_reference/>
     </sys_hub_flow_logic>
     <sys_variable_value action="delete_multiple" query="document_key=4d4b3aa997e01110ef86d200f153af8e"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_7b7ab2e597e01110ef86d200f153af78^id=4d4b3aa997e01110ef86d200f153af8e"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_7b7ab2e597e01110ef86d200f153af78^id=4d4b3aa997e01110ef86d200f153af8e"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
-        <block display_value="">d54b3aa997e01110ef86d200f153afa6</block>
+        <block display_value="">f17befba2fe01110e58359a72799b63c</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="ATAT Consume Cost Responses">7b7ab2e597e01110ef86d200f153af78</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="Wait for a duration of time">fdb2541473031300b61e66476bf6a70e</logic_definition>
+        <order>5</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>f0f8622f-0713-44d7-a486-e9630eeca437</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:37:40</sys_created_on>
+        <sys_id>797befba2fe01110e58359a72799b63c</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:47</sys_updated_on>
+        <ui_id>507902ef-e5c1-4e4c-8e3b-7bfce65290d7</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=797befba2fe01110e58359a72799b63c"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>797befba2fe01110e58359a72799b63c</document_key>
+        <order>300</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:37:40</sys_created_on>
+        <sys_id>3d7befba2fe01110e58359a72799b641</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:37:40</sys_updated_on>
+        <value/>
+        <variable display_value="Timer relative duration operator">dca4105473031300b61e66476bf6a726</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>797befba2fe01110e58359a72799b63c</document_key>
+        <order>200</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:37:40</sys_created_on>
+        <sys_id>7d7befba2fe01110e58359a72799b64e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:37:40</sys_updated_on>
+        <value>1970-01-01 00:00:10</value>
+        <variable display_value="Duration">ef145c1473031300b61e66476bf6a7be</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_7b7ab2e597e01110ef86d200f153af78^id=797befba2fe01110e58359a72799b63c"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_logic_input_fdb2541473031300b61e66476bf6a70e^id=797befba2fe01110e58359a72799b63c"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_7b7ab2e597e01110ef86d200f153af78^id=797befba2fe01110e58359a72799b63c"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">297befba2fe01110e58359a72799b601</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="ATAT Consume Cost Responses">7b7ab2e597e01110ef86d200f153af78</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <inputs/>
+        <logic_definition display_value="Do the following until">eaeb040687210300e6c2c88fc0e3ec89</logic_definition>
+        <order>1</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>fe0c5667-d86f-4cd2-979e-23a001d0318b</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:37:39</sys_created_on>
+        <sys_id>ad7befba2fe01110e58359a72799b601</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:47</sys_updated_on>
+        <ui_id>f0f8622f-0713-44d7-a486-e9630eeca437</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=ad7befba2fe01110e58359a72799b601"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_7b7ab2e597e01110ef86d200f153af78^id=ad7befba2fe01110e58359a72799b601"/>
+    <sys_element_mapping action="delete_multiple" query="id=ad7befba2fe01110e58359a72799b601"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>condition</field>
+        <id>ad7befba2fe01110e58359a72799b601</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:37:39</sys_created_on>
+        <sys_id>ed7befba2fe01110e58359a72799b604</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:37:39</sys_updated_on>
+        <table>var__m_sys_hub_flow_logic_input_eaeb040687210300e6c2c88fc0e3ec89</table>
+        <value>{{flow_variable.latest_response}}=[]</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_7b7ab2e597e01110ef86d200f153af78^id=ad7befba2fe01110e58359a72799b601"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">39238c8f2f241110e58359a72799b6f3</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="ATAT Consume Cost Responses">7b7ab2e597e01110ef86d200f153af78</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="Assign Subflow Outputs">df4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>8</order>
+        <outputs_assigned>total_new_cost_records,total_updated_cost_records</outputs_assigned>
+        <outputs_to_assign/>
+        <outputs_to_assign/>
+        <parent_ui_id>fe0c5667-d86f-4cd2-979e-23a001d0318b</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:10</sys_created_on>
+        <sys_id>bd238c8f2f241110e58359a72799b6f3</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:48</sys_updated_on>
+        <ui_id>589c4c8e-f67b-4cb8-ba36-4f28212b6071</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=bd238c8f2f241110e58359a72799b6f3"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>bd238c8f2f241110e58359a72799b6f3</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:10</sys_created_on>
+        <sys_id>4a238c8f2f241110e58359a72799b6f7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:10</sys_updated_on>
+        <value/>
+        <variable display_value="Total Updated Cost Records">ed238c8f2f241110e58359a72799b66a</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>bd238c8f2f241110e58359a72799b6f3</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:10</sys_created_on>
+        <sys_id>86238c8f2f241110e58359a72799b6f7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:10</sys_updated_on>
+        <value/>
+        <variable display_value="Total New Cost Records">69238c8f2f241110e58359a72799b661</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_7b7ab2e597e01110ef86d200f153af78^id=bd238c8f2f241110e58359a72799b6f3"/>
+    <sys_element_mapping action="delete_multiple" query="id=bd238c8f2f241110e58359a72799b6f3"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>total_new_cost_records</field>
+        <id>bd238c8f2f241110e58359a72799b6f3</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:10</sys_created_on>
+        <sys_id>06238c8f2f241110e58359a72799b6f7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:10</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_7b7ab2e597e01110ef86d200f153af78</table>
+        <value>{{flow_variable.running_creates}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>total_updated_cost_records</field>
+        <id>bd238c8f2f241110e58359a72799b6f3</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:10</sys_created_on>
+        <sys_id>42238c8f2f241110e58359a72799b6f7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:10</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_7b7ab2e597e01110ef86d200f153af78</table>
+        <value>{{flow_variable.running_updates}}</value>
+    </sys_element_mapping>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">3d7befba2fe01110e58359a72799b651</block>
         <comment/>
         <connected_to/>
         <decision_table/>
@@ -594,7 +996,7 @@ Message: {{d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.message}}</val
         <flow_variables_assigned/>
         <inputs/>
         <logic_definition display_value="Top Level Catch">35d60003e6022010a5e40cdd1254dd23</logic_definition>
-        <order>3</order>
+        <order>9</order>
         <outputs_assigned/>
         <outputs_to_assign/>
         <parent_ui_id/>
@@ -602,10 +1004,10 @@ Message: {{d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.message}}</val
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-07-07 17:54:41</sys_created_on>
         <sys_id>d94b3aa997e01110ef86d200f153afbf</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>9</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-07-07 17:54:41</sys_updated_on>
+        <sys_updated_on>2022-07-11 20:21:48</sys_updated_on>
         <ui_id>f24d6a09-bf37-4376-9f86-1238a32bdc3b</ui_id>
         <workflow_inputs/>
         <workflow_reference/>
@@ -639,7 +1041,340 @@ Message: {{d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.message}}</val
         <value>1</value>
         <variable display_value="enabled">dd70187cc36e20105553b740ad40dddc</variable>
     </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_7b7ab2e597e01110ef86d200f153af78^id=d94b3aa997e01110ef86d200f153afbf"/>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_logic_input_35d60003e6022010a5e40cdd1254dd23^id=d94b3aa997e01110ef86d200f153afbf"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_7b7ab2e597e01110ef86d200f153af78^id=d94b3aa997e01110ef86d200f153afbf"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">7d238c8f2f241110e58359a72799b6af</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="ATAT Consume Cost Responses">7b7ab2e597e01110ef86d200f153af78</flow>
+        <flow_variable/>
+        <flow_variables_assigned>running_creates,running_updates</flow_variables_assigned>
+        <inputs/>
+        <logic_definition display_value="Set Flow Variables">4f787d1e0f9b0010ecf0cc52ff767ea0</logic_definition>
+        <order>6</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>f0f8622f-0713-44d7-a486-e9630eeca437</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:10</sys_created_on>
+        <sys_id>f5238c8f2f241110e58359a72799b6b0</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:47</sys_updated_on>
+        <ui_id>0a67ea1b-7a6c-4a43-8bf6-fafcf9b7397b</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=f5238c8f2f241110e58359a72799b6b0"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>f5238c8f2f241110e58359a72799b6b0</document_key>
+        <order>0</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:10</sys_created_on>
+        <sys_id>b1238c8f2f241110e58359a72799b6f3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:10</sys_updated_on>
+        <value/>
+        <variable display_value="running_updates">ad238c8f2f241110e58359a72799b67c</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>f5238c8f2f241110e58359a72799b6b0</document_key>
+        <order>0</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:10</sys_created_on>
+        <sys_id>fd238c8f2f241110e58359a72799b6f2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:10</sys_updated_on>
+        <value/>
+        <variable display_value="running_creates">a5238c8f2f241110e58359a72799b677</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_7b7ab2e597e01110ef86d200f153af78^id=f5238c8f2f241110e58359a72799b6b0"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_7b7ab2e597e01110ef86d200f153af78^id=f5238c8f2f241110e58359a72799b6b0"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=f5238c8f2f241110e58359a72799b6b0^sys_idNOT IN35238c8f2f241110e58359a72799b6b2,b9238c8f2f241110e58359a72799b6b1"/>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <input_name>running_updates</input_name>
+        <instance>f5238c8f2f241110e58359a72799b6b0</instance>
+        <referenced_table>sys_hub_flow_logic</referenced_table>
+        <script>{"running_updates":{"scriptActive":true,"script":"/*\n**Access Flow/Action data using the fd_data object. Script must return a value.\n**example: var shortDesc \u003d fd_data.trigger.current.short_description;\n**return shortDesc;\n*/\nreturn fd_data.flow_var.running_updates + fd_data._4__persist_costs_payload.updated_cost_records;"}}</script>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:10</sys_created_on>
+        <sys_id>35238c8f2f241110e58359a72799b6b2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:10</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <input_name>running_creates</input_name>
+        <instance>f5238c8f2f241110e58359a72799b6b0</instance>
+        <referenced_table>sys_hub_flow_logic</referenced_table>
+        <script>{"running_creates":{"scriptActive":true,"script":"/*\n**Access Flow/Action data using the fd_data object. Script must return a value.\n**example: var shortDesc \u003d fd_data.trigger.current.short_description;\n**return shortDesc;\n*/\nreturn fd_data.flow_var.running_creates + fd_data._4__persist_costs_payload.new_cost_records;"}}</script>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:10</sys_created_on>
+        <sys_id>b9238c8f2f241110e58359a72799b6b1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:10</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_flow_variable action="delete_multiple" query="model=7b7ab2e597e01110ef86d200f153af78^sys_idNOT IN917bafba2fe01110e58359a72799b6f2,a5238c8f2f241110e58359a72799b677,ad238c8f2f241110e58359a72799b67c"/>
+    <sys_hub_flow_variable action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=73a79968-d5be-4f27-9d97-bdc78df557bd</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>latest_response</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>latest_response</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="ATAT Consume Cost Responses">7b7ab2e597e01110ef86d200f153af78</model>
+        <model_id>7b7ab2e597e01110ef86d200f153af78</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_variable_7b7ab2e597e01110ef86d200f153af78</name>
+        <next_element/>
+        <order>0</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_variable</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:37:38</sys_created_on>
+        <sys_id>917bafba2fe01110e58359a72799b6f2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>latest_response</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_hub_flow_variable_917bafba2fe01110e58359a72799b6f2</sys_update_name>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:37:38</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_variable>
+    <sys_hub_flow_variable action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=integer,uiTypeLabel=Integer,uiUniqueId=c5c38ad0-a094-4d99-a5f2-642914bfad5c</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>running_creates</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Integer">integer</internal_type>
+        <label>running_creates</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="ATAT Consume Cost Responses">7b7ab2e597e01110ef86d200f153af78</model>
+        <model_id>7b7ab2e597e01110ef86d200f153af78</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_variable_7b7ab2e597e01110ef86d200f153af78</name>
+        <next_element/>
+        <order>0</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_variable</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:08</sys_created_on>
+        <sys_id>a5238c8f2f241110e58359a72799b677</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>running_creates</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_hub_flow_variable_a5238c8f2f241110e58359a72799b677</sys_update_name>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:08</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_variable>
+    <sys_hub_flow_variable action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=integer,uiTypeLabel=Integer,uiUniqueId=25aaf7fb-1a94-41b1-baf0-09989e1799ad</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>running_updates</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Integer">integer</internal_type>
+        <label>running_updates</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="ATAT Consume Cost Responses">7b7ab2e597e01110ef86d200f153af78</model>
+        <model_id>7b7ab2e597e01110ef86d200f153af78</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_variable_7b7ab2e597e01110ef86d200f153af78</name>
+        <next_element/>
+        <order>0</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_variable</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:09</sys_created_on>
+        <sys_id>ad238c8f2f241110e58359a72799b67c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>running_updates</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_hub_flow_variable_ad238c8f2f241110e58359a72799b67c</sys_update_name>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:09</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_variable>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_7b7ab2e597e01110ef86d200f153af78^sys_idNOT IN854b3aa997e01110ef86d200f153af80,8d4b3aa997e01110ef86d200f153af77,8d4b3aa997e01110ef86d200f153af88,cd4b3aa997e01110ef86d200f153af62"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>base_url</element>
@@ -733,4 +1468,1585 @@ Message: {{d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.message}}</val
         <url/>
         <url_target/>
     </sys_documentation>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_7b7ab2e597e01110ef86d200f153af78^sys_idNOT IN69238c8f2f241110e58359a72799b669,69238c8f2f241110e58359a72799b671"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>total_new_cost_records</element>
+        <help/>
+        <hint/>
+        <label>Total New Cost Records</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_output_7b7ab2e597e01110ef86d200f153af78</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:08</sys_created_on>
+        <sys_id>69238c8f2f241110e58359a72799b669</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:08</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>total_updated_cost_records</element>
+        <help/>
+        <hint/>
+        <label>Total Updated Cost Records</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_output_7b7ab2e597e01110ef86d200f153af78</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:08</sys_created_on>
+        <sys_id>69238c8f2f241110e58359a72799b671</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:08</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=7b7ab2e597e01110ef86d200f153af78^sys_idNOT INa4dd6b7e2fe01110e58359a72799b645"/>
+    <sys_flow_subflow_plan action="INSERT_OR_UPDATE">
+        <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_flow_subflow_plan","id":"a4dd6b7e2fe01110e58359a72799b645","name":"plan","plan_signature":null}}</plan>
+        <plan_id display_value="ATAT Consume Cost Responses">7b7ab2e597e01110ef86d200f153af78</plan_id>
+        <snapshot>e3b448432f641110e58359a72799b679</snapshot>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:57</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>a4dd6b7e2fe01110e58359a72799b645</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:46</sys_updated_on>
+    </sys_flow_subflow_plan>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Invokes GET /cost-jobs to obtain the latest set of cost data responses &amp; invokes Persist Costs Payload Action to save them to Costs Table.</description>
+        <internal_name>atat_consume_cost_responses</internal_name>
+        <label_cache>[{"name":"flow_variable.running_updates","label":"Flow Variables➛running_updates","reference":"","reference_display":"","type":"integer","base_type":"integer","attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":"","uiUniqueId":"25aaf7fb-1a94-41b1-baf0-09989e1799ad"}},{"name":"flow_variable.running_creates","label":"Flow Variables➛running_creates","reference":"","reference_display":"","type":"integer","base_type":"integer","attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":"","uiUniqueId":"c5c38ad0-a094-4d99-a5f2-642914bfad5c"}},{"name":"7f9cc424-96c6-49d1-a378-e4d3a0b38d34.__dont_treat_as_error__","label":"8➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"7f9cc424-96c6-49d1-a378-e4d3a0b38d34.__action_status__","label":"8➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"69ad36d6-b10c-4fe8-b31b-6df2b51b0478.variable","label":"4➛Updated Cost Records","reference_display":"Updated Cost Records","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"dd3aac21-ce1c-4797-91ae-002042d2bc67"}},{"name":"69ad36d6-b10c-4fe8-b31b-6df2b51b0478.new_cost_records","label":"4➛New Cost Records","reference_display":"New Cost Records","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"031c9479-5453-48a0-85d8-8d185a646225"}},{"name":"507902ef-e5c1-4e4c-8e3b-7bfce65290d7.scheduled_end_date_time","label":"5➛Scheduled End date/time","reference_display":"Scheduled End date/time","type":"glide_date_time","base_type":"glide_date_time","attributes":{"pills_draggable_inside_block":"false","pills_draggable_outside_block":"true"}},{"name":"507902ef-e5c1-4e4c-8e3b-7bfce65290d7.total_duration","label":"5➛Total Duration","reference_display":"Total Duration","type":"glide_duration","base_type":"glide_duration","attributes":{"pills_draggable_inside_block":"false","pills_draggable_outside_block":"true"}},{"name":"flow_variable.latest_response","label":"Flow Variables➛latest_response","type":"string","base_type":"string","attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":"","uiUniqueId":"73a79968-d5be-4f27-9d97-bdc78df557bd"}},{"name":"f24d6a09-bf37-4376-9f86-1238a32bdc3b.__status__.message","label":"8➛Error Status➛Message","reference":"","reference_display":"","type":"string","base_type":"string","column_name":"","attributes":{}},{"name":"f24d6a09-bf37-4376-9f86-1238a32bdc3b.__status__.code","label":"8➛Error Status➛Code","reference":"","reference_display":"","type":"integer","base_type":"integer","column_name":"","attributes":{}},{"name":"ae32e720-3840-4af5-9028-947a189202bc.__dont_treat_as_error__","label":"4➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"ae32e720-3840-4af5-9028-947a189202bc.__action_status__","label":"4➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"69ad36d6-b10c-4fe8-b31b-6df2b51b0478.__dont_treat_as_error__","label":"4➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"ea387cf9-c95b-4dbf-8d18-877b796d6824"}},{"name":"69ad36d6-b10c-4fe8-b31b-6df2b51b0478.__action_status__","label":"4➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FDe5da32a982e01110a696d8950e17a3f6","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"4bb990a8-9b2d-4ce3-a40b-e1266e86ef79"}},{"name":"5c6ff1c3-3a4b-4f33-b8de-eeb881da0c2c.response_body","label":"2➛Response Body","reference_display":"Response Body","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"7c5f2903-194a-4968-be28-89fdf94281a0"}},{"name":"5c6ff1c3-3a4b-4f33-b8de-eeb881da0c2c.__dont_treat_as_error__","label":"2➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"89313553-3555-4213-8979-6790927f14ab"}},{"name":"5c6ff1c3-3a4b-4f33-b8de-eeb881da0c2c.__action_status__","label":"2➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FD1fcafe6939e01110fdc2ee5eb9f2999e","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"29df7452-080f-43f2-b815-0f1077b70c46"}},{"name":"fc58d1ae-27c4-46d9-a1db-39667de00324.scheduled_end_date_time","label":"4➛Scheduled End date/time","reference_display":"Scheduled End date/time","type":"glide_date_time","base_type":"glide_date_time","attributes":{"pills_draggable_inside_block":"false","pills_draggable_outside_block":"true"}},{"name":"fc58d1ae-27c4-46d9-a1db-39667de00324.total_duration","label":"4➛Total Duration","reference_display":"Total Duration","type":"glide_duration","base_type":"glide_duration","attributes":{"pills_draggable_inside_block":"false","pills_draggable_outside_block":"true"}},{"name":"759d6c2c-1e8f-46d2-a955-f78b804e711f.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FD1fcafe6939e01110fdc2ee5eb9f2999e","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"29df7452-080f-43f2-b815-0f1077b70c46"}},{"name":"759d6c2c-1e8f-46d2-a955-f78b804e711f.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"89313553-3555-4213-8979-6790927f14ab"}},{"name":"759d6c2c-1e8f-46d2-a955-f78b804e711f.response_body","label":"1➛Response Body","reference_display":"Response Body","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"7c5f2903-194a-4968-be28-89fdf94281a0"}},{"name":"subflow.aws_credential","label":"Input➛AWS Credential","reference":"aws_credentials","reference_display":"AWS Credentials","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"ad0510f7-001e-49cb-b0fd-2f570fb99c35","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.aws_region","label":"Input➛AWS Region","reference":"x_g_dis_atat_configuration","reference_display":"ATAT Configuration","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"c3c76ac2-f11a-4c6b-9d17-0c625001b5ed","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.resource_path","label":"Input➛Resource Path","reference":"x_g_dis_atat_configuration","reference_display":"ATAT Configuration","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"a0693617-9d0a-4556-948b-1670857b0b16","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.base_url","label":"Input➛Base URL","reference":"x_g_dis_atat_configuration","reference_display":"ATAT Configuration","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"a02d33ef-e5fc-478a-ab1d-8b72f3fb9890","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FDe5da32a982e01110a696d8950e17a3f6","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"4bb990a8-9b2d-4ce3-a40b-e1266e86ef79"}},{"name":"d47435b3-5a39-442c-891f-bf3f0f2d39fc.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"ea387cf9-c95b-4dbf-8d18-877b796d6824"}},{"name":"f24d6a09-bf37-4376-9f86-1238a32bdc3b.__status__","label":"8➛Error Status","reference_display":"Error Status","type":"object","base_type":"object","attributes":{"uiType":"object","uiTypeLabel":"Object","co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"3e44f744-9360-44df-81ff-5f38ad0c4f6b.__action_status__","label":"9➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"3e44f744-9360-44df-81ff-5f38ad0c4f6b.__dont_treat_as_error__","label":"9➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.code","label":"1➛Action Status➛Code","reference":"","reference_display":"","type":"integer","base_type":"integer","column_name":"","attributes":{}},{"name":"d47435b3-5a39-442c-891f-bf3f0f2d39fc.__action_status__.message","label":"1➛Action Status➛Message","reference":"","reference_display":"","type":"string","base_type":"string","column_name":"","attributes":{}}]</label_cache>
+        <master>true</master>
+        <name>ATAT Consume Cost Responses</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="ATAT Consume Cost Responses">7b7ab2e597e01110ef86d200f153af78</parent_flow>
+        <remote_trigger_id/>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:49</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>a6cde77e2fe01110e58359a72799b66b</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:39</sys_updated_on>
+        <type>subflow</type>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=a6cde77e2fe01110e58359a72799b66b"/>
+    <sys_variable_value action="delete_multiple" query="document_key=a6cde77e2fe01110e58359a72799b66b"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_a6cde77e2fe01110e58359a72799b66b^id=a6cde77e2fe01110e58359a72799b66b"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=a6cde77e2fe01110e58359a72799b66b^sys_idNOT INa2cde77e2fe01110e58359a72799b66c"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>a6cde77e2fe01110e58359a72799b66b</id>
+        <name>ATAT Consume Cost Responses</name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:49</sys_created_on>
+        <sys_id>a2cde77e2fe01110e58359a72799b66c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:49</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_hub_flow_input action="delete_multiple" query="model=a6cde77e2fe01110e58359a72799b66b^sys_idNOT INbacde77e2fe01110e58359a72799b6f5,e2cde77e2fe01110e58359a72799b66d,f6cd2b7e2fe01110e58359a72799b610,fecde77e2fe01110e58359a72799b6da"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference,uiUniqueId=a02d33ef-e5fc-478a-ab1d-8b72f3fb9890</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table>x_g_dis_atat_configuration</choice_table>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>base_url</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>Base URL</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="ATAT Consume Cost Responses">a6cde77e2fe01110e58359a72799b66b</model>
+        <model_id>a6cde77e2fe01110e58359a72799b66b</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_a6cde77e2fe01110e58359a72799b66b</name>
+        <next_element/>
+        <order>3</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference display_value="" name="x_g_dis_atat_configuration">x_g_dis_atat_configuration</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:50</sys_created_on>
+        <sys_id>bacde77e2fe01110e58359a72799b6f5</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:50</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference,uiUniqueId=ad0510f7-001e-49cb-b0fd-2f570fb99c35</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table>aws_credentials</choice_table>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>aws_credential</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>AWS Credential</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="ATAT Consume Cost Responses">a6cde77e2fe01110e58359a72799b66b</model>
+        <model_id>a6cde77e2fe01110e58359a72799b66b</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_a6cde77e2fe01110e58359a72799b66b</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference display_value="" name="aws_credentials">aws_credentials</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:49</sys_created_on>
+        <sys_id>e2cde77e2fe01110e58359a72799b66d</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:50</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference,uiUniqueId=a0693617-9d0a-4556-948b-1670857b0b16</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table>x_g_dis_atat_configuration</choice_table>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>resource_path</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>Resource Path</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="ATAT Consume Cost Responses">a6cde77e2fe01110e58359a72799b66b</model>
+        <model_id>a6cde77e2fe01110e58359a72799b66b</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_a6cde77e2fe01110e58359a72799b66b</name>
+        <next_element/>
+        <order>4</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference display_value="" name="x_g_dis_atat_configuration">x_g_dis_atat_configuration</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:50</sys_created_on>
+        <sys_id>f6cd2b7e2fe01110e58359a72799b610</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:50</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference,uiUniqueId=c3c76ac2-f11a-4c6b-9d17-0c625001b5ed</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table>x_g_dis_atat_configuration</choice_table>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>aws_region</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>AWS Region</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="ATAT Consume Cost Responses">a6cde77e2fe01110e58359a72799b66b</model>
+        <model_id>a6cde77e2fe01110e58359a72799b66b</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_a6cde77e2fe01110e58359a72799b66b</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference display_value="" name="x_g_dis_atat_configuration">x_g_dis_atat_configuration</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:50</sys_created_on>
+        <sys_id>fecde77e2fe01110e58359a72799b6da</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:50</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_output action="delete_multiple" query="model=a6cde77e2fe01110e58359a72799b66b^sys_idNOT IN0443c0cf2f241110e58359a72799b60c,9c43c0cf2f241110e58359a72799b61a"/>
+    <sys_hub_flow_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=integer,uiTypeLabel=Integer,uiUniqueId=e085df0e-65c4-4614-817c-9f433b866c0b</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice>3</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>total_new_cost_records</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Integer">integer</internal_type>
+        <label>Total New Cost Records</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="ATAT Consume Cost Responses">a6cde77e2fe01110e58359a72799b66b</model>
+        <model_id>a6cde77e2fe01110e58359a72799b66b</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_output_a6cde77e2fe01110e58359a72799b66b</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_output</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:35</sys_created_on>
+        <sys_id>0443c0cf2f241110e58359a72799b60c</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:35</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_output>
+    <sys_hub_flow_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=integer,uiTypeLabel=Integer,uiUniqueId=3e69ebe9-16cc-4e48-80c2-a81f48016312</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice>3</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>total_updated_cost_records</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Integer">integer</internal_type>
+        <label>Total Updated Cost Records</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="ATAT Consume Cost Responses">a6cde77e2fe01110e58359a72799b66b</model>
+        <model_id>a6cde77e2fe01110e58359a72799b66b</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_output_a6cde77e2fe01110e58359a72799b66b</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_output</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:36</sys_created_on>
+        <sys_id>9c43c0cf2f241110e58359a72799b61a</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:36</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_output>
+    <sys_hub_action_instance action="delete_multiple" query="flow=a6cde77e2fe01110e58359a72799b66b^sys_idNOT IN5bcd2b7e2fe01110e58359a72799b66e,9bcd2b7e2fe01110e58359a72799b665,ebcd2b7e2fe01110e58359a72799b674"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Persist Costs Payload">edda32a997e01110ef86d200f153afe3</action_type>
+        <action_type_parent display_value="Persist Costs Payload">c5c9be2997e01110ef86d200f153afd3</action_type_parent>
+        <comment/>
+        <compiled_snapshot>edda32a997e01110ef86d200f153afe3</compiled_snapshot>
+        <display_text/>
+        <flow display_value="ATAT Consume Cost Responses">a6cde77e2fe01110e58359a72799b66b</flow>
+        <order>4</order>
+        <parent_ui_id>f0f8622f-0713-44d7-a486-e9630eeca437</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:53</sys_created_on>
+        <sys_id>5bcd2b7e2fe01110e58359a72799b66e</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:38</sys_updated_on>
+        <ui_id>69ad36d6-b10c-4fe8-b31b-6df2b51b0478</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=5bcd2b7e2fe01110e58359a72799b66e"/>
+    <sys_element_mapping action="delete_multiple" query="id=5bcd2b7e2fe01110e58359a72799b66e"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>cost_response</field>
+        <id>5bcd2b7e2fe01110e58359a72799b66e</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:53</sys_created_on>
+        <sys_id>9bcd2b7e2fe01110e58359a72799b66f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:53</sys_updated_on>
+        <table>var__m_sys_hub_action_input_edda32a997e01110ef86d200f153afe3</table>
+        <value>{{5c6ff1c3-3a4b-4f33-b8de-eeb881da0c2c.response_body}}</value>
+    </sys_element_mapping>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="ATAT Secure GET Request">bacabe6997e01110ef86d200f153afe5</action_type>
+        <action_type_parent display_value="ATAT Secure GET Request">25577ea597e01110ef86d200f153afa4</action_type_parent>
+        <comment/>
+        <compiled_snapshot>bacabe6997e01110ef86d200f153afe5</compiled_snapshot>
+        <display_text/>
+        <flow display_value="ATAT Consume Cost Responses">a6cde77e2fe01110e58359a72799b66b</flow>
+        <order>2</order>
+        <parent_ui_id>f0f8622f-0713-44d7-a486-e9630eeca437</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:52</sys_created_on>
+        <sys_id>9bcd2b7e2fe01110e58359a72799b665</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:38</sys_updated_on>
+        <ui_id>5c6ff1c3-3a4b-4f33-b8de-eeb881da0c2c</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=9bcd2b7e2fe01110e58359a72799b665"/>
+    <sys_element_mapping action="delete_multiple" query="id=9bcd2b7e2fe01110e58359a72799b665"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>aws_credential</field>
+        <id>9bcd2b7e2fe01110e58359a72799b665</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:52</sys_created_on>
+        <sys_id>1bcd2b7e2fe01110e58359a72799b667</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:52</sys_updated_on>
+        <table>var__m_sys_hub_action_input_bacabe6997e01110ef86d200f153afe5</table>
+        <value>{{subflow.aws_credential}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>aws_region</field>
+        <id>9bcd2b7e2fe01110e58359a72799b665</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:52</sys_created_on>
+        <sys_id>dbcd2b7e2fe01110e58359a72799b667</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:52</sys_updated_on>
+        <table>var__m_sys_hub_action_input_bacabe6997e01110ef86d200f153afe5</table>
+        <value>{{subflow.aws_region}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>base_url</field>
+        <id>9bcd2b7e2fe01110e58359a72799b665</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:52</sys_created_on>
+        <sys_id>57cd2b7e2fe01110e58359a72799b667</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:52</sys_updated_on>
+        <table>var__m_sys_hub_action_input_bacabe6997e01110ef86d200f153afe5</table>
+        <value>{{subflow.base_url}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>resource_path</field>
+        <id>9bcd2b7e2fe01110e58359a72799b665</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:52</sys_created_on>
+        <sys_id>9fcd2b7e2fe01110e58359a72799b667</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:52</sys_updated_on>
+        <table>var__m_sys_hub_action_input_bacabe6997e01110ef86d200f153afe5</table>
+        <value>{{subflow.resource_path}}</value>
+    </sys_element_mapping>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
+        <action_type_parent display_value="Log">0e0ae8c2531003003bf1d9109ec587c8</action_type_parent>
+        <comment/>
+        <compiled_snapshot>5bc1bcc6531003003bf1d9109ec587d4</compiled_snapshot>
+        <display_text/>
+        <flow display_value="ATAT Consume Cost Responses">a6cde77e2fe01110e58359a72799b66b</flow>
+        <order>10</order>
+        <parent_ui_id>f24d6a09-bf37-4376-9f86-1238a32bdc3b</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:53</sys_created_on>
+        <sys_id>ebcd2b7e2fe01110e58359a72799b674</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:39</sys_updated_on>
+        <ui_id>3e44f744-9360-44df-81ff-5f38ad0c4f6b</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=ebcd2b7e2fe01110e58359a72799b674"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>ebcd2b7e2fe01110e58359a72799b674</document_key>
+        <order>0</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:53</sys_created_on>
+        <sys_id>e3cd2b7e2fe01110e58359a72799b676</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:53</sys_updated_on>
+        <value>error</value>
+        <variable display_value="Level">5bc1bcc6531003003bf1d9109ec587d7</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=ebcd2b7e2fe01110e58359a72799b674"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>log_level</field>
+        <id>ebcd2b7e2fe01110e58359a72799b674</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:53</sys_created_on>
+        <sys_id>afcd2b7e2fe01110e58359a72799b675</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:53</sys_updated_on>
+        <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>log_message</field>
+        <id>ebcd2b7e2fe01110e58359a72799b674</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:53</sys_created_on>
+        <sys_id>63cd2b7e2fe01110e58359a72799b676</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:53</sys_updated_on>
+        <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
+        <value>Error persisting Cost Responses:
+Code: {{f24d6a09-bf37-4376-9f86-1238a32bdc3b.__status__.code}}
+Message: {{f24d6a09-bf37-4376-9f86-1238a32bdc3b.__status__.message}}</value>
+    </sys_element_mapping>
+    <sys_hub_flow_logic action="delete_multiple" query="flow=a6cde77e2fe01110e58359a72799b66b^sys_idNOT IN2043c0cf2f241110e58359a72799b69b,43cd2b7e2fe01110e58359a72799b63c,4fcd2b7e2fe01110e58359a72799b643,8bcd2b7e2fe01110e58359a72799b64a,8fcd2b7e2fe01110e58359a72799b638,c3cd2b7e2fe01110e58359a72799b640,ec43c0cf2f241110e58359a72799b69f"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">7d238c8f2f241110e58359a72799b6af</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="ATAT Consume Cost Responses">a6cde77e2fe01110e58359a72799b66b</flow>
+        <flow_variable/>
+        <flow_variables_assigned>running_creates,running_updates</flow_variables_assigned>
+        <inputs/>
+        <logic_definition display_value="Set Flow Variables">4f787d1e0f9b0010ecf0cc52ff767ea0</logic_definition>
+        <order>6</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>f0f8622f-0713-44d7-a486-e9630eeca437</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:37</sys_created_on>
+        <sys_id>2043c0cf2f241110e58359a72799b69b</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:38</sys_updated_on>
+        <ui_id>0a67ea1b-7a6c-4a43-8bf6-fafcf9b7397b</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=2043c0cf2f241110e58359a72799b69b"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>2043c0cf2f241110e58359a72799b69b</document_key>
+        <order>0</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:37</sys_created_on>
+        <sys_id>a043c0cf2f241110e58359a72799b69f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:37</sys_updated_on>
+        <value/>
+        <variable display_value="running_updates">5843c0cf2f241110e58359a72799b63e</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>2043c0cf2f241110e58359a72799b69b</document_key>
+        <order>0</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:37</sys_created_on>
+        <sys_id>ec43c0cf2f241110e58359a72799b69e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:37</sys_updated_on>
+        <value/>
+        <variable display_value="running_creates">d443c0cf2f241110e58359a72799b639</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_a6cde77e2fe01110e58359a72799b66b^id=2043c0cf2f241110e58359a72799b69b"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_a6cde77e2fe01110e58359a72799b66b^id=2043c0cf2f241110e58359a72799b69b"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=2043c0cf2f241110e58359a72799b69b^sys_idNOT INe043c0cf2f241110e58359a72799b69c,e443c0cf2f241110e58359a72799b69c"/>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <input_name>running_creates</input_name>
+        <instance>2043c0cf2f241110e58359a72799b69b</instance>
+        <referenced_table>sys_hub_flow_logic</referenced_table>
+        <script>{"running_creates":{"scriptActive":true,"script":"/*\n**Access Flow/Action data using the fd_data object. Script must return a value.\n**example: var shortDesc \u003d fd_data.trigger.current.short_description;\n**return shortDesc;\n*/\nreturn fd_data.flow_var.running_creates + fd_data._4__persist_costs_payload.new_cost_records;"}}</script>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:37</sys_created_on>
+        <sys_id>e043c0cf2f241110e58359a72799b69c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:37</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <input_name>running_updates</input_name>
+        <instance>2043c0cf2f241110e58359a72799b69b</instance>
+        <referenced_table>sys_hub_flow_logic</referenced_table>
+        <script>{"running_updates":{"scriptActive":true,"script":"/*\n**Access Flow/Action data using the fd_data object. Script must return a value.\n**example: var shortDesc \u003d fd_data.trigger.current.short_description;\n**return shortDesc;\n*/\nreturn fd_data.flow_var.running_updates + fd_data._4__persist_costs_payload.updated_cost_records;"}}</script>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:37</sys_created_on>
+        <sys_id>e443c0cf2f241110e58359a72799b69c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:37</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">297befba2fe01110e58359a72799b601</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="ATAT Consume Cost Responses">a6cde77e2fe01110e58359a72799b66b</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <inputs/>
+        <logic_definition display_value="Do the following until">eaeb040687210300e6c2c88fc0e3ec89</logic_definition>
+        <order>1</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>fe0c5667-d86f-4cd2-979e-23a001d0318b</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:51</sys_created_on>
+        <sys_id>43cd2b7e2fe01110e58359a72799b63c</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:38</sys_updated_on>
+        <ui_id>f0f8622f-0713-44d7-a486-e9630eeca437</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=43cd2b7e2fe01110e58359a72799b63c"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_a6cde77e2fe01110e58359a72799b66b^id=43cd2b7e2fe01110e58359a72799b63c"/>
+    <sys_element_mapping action="delete_multiple" query="id=43cd2b7e2fe01110e58359a72799b63c"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>condition</field>
+        <id>43cd2b7e2fe01110e58359a72799b63c</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:51</sys_created_on>
+        <sys_id>c3cd2b7e2fe01110e58359a72799b63f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:51</sys_updated_on>
+        <table>var__m_sys_hub_flow_logic_input_eaeb040687210300e6c2c88fc0e3ec89</table>
+        <value>{{flow_variable.latest_response}}=[]</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_a6cde77e2fe01110e58359a72799b66b^id=43cd2b7e2fe01110e58359a72799b63c"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">f17befba2fe01110e58359a72799b63c</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="ATAT Consume Cost Responses">a6cde77e2fe01110e58359a72799b66b</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="Wait for a duration of time">fdb2541473031300b61e66476bf6a70e</logic_definition>
+        <order>5</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>f0f8622f-0713-44d7-a486-e9630eeca437</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:51</sys_created_on>
+        <sys_id>4fcd2b7e2fe01110e58359a72799b643</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:38</sys_updated_on>
+        <ui_id>507902ef-e5c1-4e4c-8e3b-7bfce65290d7</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=4fcd2b7e2fe01110e58359a72799b643"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>4fcd2b7e2fe01110e58359a72799b643</document_key>
+        <order>200</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:52</sys_created_on>
+        <sys_id>4fcd2b7e2fe01110e58359a72799b649</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:52</sys_updated_on>
+        <value>1970-01-01 00:00:10</value>
+        <variable display_value="Duration">ef145c1473031300b61e66476bf6a7be</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>4fcd2b7e2fe01110e58359a72799b643</document_key>
+        <order>300</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:52</sys_created_on>
+        <sys_id>87cd2b7e2fe01110e58359a72799b649</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:52</sys_updated_on>
+        <value/>
+        <variable display_value="Timer relative duration operator">dca4105473031300b61e66476bf6a726</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_a6cde77e2fe01110e58359a72799b66b^id=4fcd2b7e2fe01110e58359a72799b643"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_logic_input_fdb2541473031300b61e66476bf6a70e^id=4fcd2b7e2fe01110e58359a72799b643"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_a6cde77e2fe01110e58359a72799b66b^id=4fcd2b7e2fe01110e58359a72799b643"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">3d7befba2fe01110e58359a72799b651</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="ATAT Consume Cost Responses">a6cde77e2fe01110e58359a72799b66b</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="Top Level Catch">35d60003e6022010a5e40cdd1254dd23</logic_definition>
+        <order>9</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:52</sys_created_on>
+        <sys_id>8bcd2b7e2fe01110e58359a72799b64a</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:39</sys_updated_on>
+        <ui_id>f24d6a09-bf37-4376-9f86-1238a32bdc3b</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=8bcd2b7e2fe01110e58359a72799b64a"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>8bcd2b7e2fe01110e58359a72799b64a</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:52</sys_created_on>
+        <sys_id>53cd2b7e2fe01110e58359a72799b64e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:52</sys_updated_on>
+        <value>1</value>
+        <variable display_value="enabled">dd70187cc36e20105553b740ad40dddc</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>8bcd2b7e2fe01110e58359a72799b64a</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:52</sys_created_on>
+        <sys_id>9fcd2b7e2fe01110e58359a72799b64d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:52</sys_updated_on>
+        <value>{"version":"1.0","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}},"complexObjectSchema":{"FlowDesigner:FDACTIONSTATUS":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"true\",\"hint\":null,\"uiType\":\"integer\",\"default_value\":\"\",\"action_error_output\":\"true\",\"label\":\"Code\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"true\",\"hint\":null,\"uiType\":\"string\",\"default_value\":null,\"action_error_output\":\"true\",\"label\":\"Message\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FDACTIONSTATUS.$type_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FDACTIONSTATUS\",\"read_only\":\"true\",\"hint\":null,\"uiType\":\"object\",\"default_value\":\"\",\"label\":\"Action Status\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"0\",\"uiUniqueId\":\"8e3eb395-c990-4a7d-b8da-081a1acab7eb\"}"}},"serializationFormat":"JSON"}</value>
+        <variable display_value="Error Status">0f72a5a25b132010b61ea2013781c749</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_a6cde77e2fe01110e58359a72799b66b^id=8bcd2b7e2fe01110e58359a72799b64a"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_logic_input_35d60003e6022010a5e40cdd1254dd23^id=8bcd2b7e2fe01110e58359a72799b64a"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_a6cde77e2fe01110e58359a72799b66b^id=8bcd2b7e2fe01110e58359a72799b64a"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">a97bafba2fe01110e58359a72799b6fd</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="ATAT Consume Cost Responses">a6cde77e2fe01110e58359a72799b66b</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="Try">07223332de022010ec58424b73829721</logic_definition>
+        <order>0</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:51</sys_created_on>
+        <sys_id>8fcd2b7e2fe01110e58359a72799b638</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:38</sys_updated_on>
+        <ui_id>fe0c5667-d86f-4cd2-979e-23a001d0318b</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=8fcd2b7e2fe01110e58359a72799b638"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_a6cde77e2fe01110e58359a72799b66b^id=8fcd2b7e2fe01110e58359a72799b638"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_a6cde77e2fe01110e58359a72799b66b^id=8fcd2b7e2fe01110e58359a72799b638"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">a17befba2fe01110e58359a72799b632</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="ATAT Consume Cost Responses">a6cde77e2fe01110e58359a72799b66b</flow>
+        <flow_variable/>
+        <flow_variable/>
+        <flow_variables_assigned>latest_response</flow_variables_assigned>
+        <inputs/>
+        <logic_definition display_value="Set Flow Variables">4f787d1e0f9b0010ecf0cc52ff767ea0</logic_definition>
+        <order>3</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>f0f8622f-0713-44d7-a486-e9630eeca437</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:51</sys_created_on>
+        <sys_id>c3cd2b7e2fe01110e58359a72799b640</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:38</sys_updated_on>
+        <ui_id>13e383b0-2dcd-420c-9994-bba2a0423650</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=c3cd2b7e2fe01110e58359a72799b640"/>
+    <sys_element_mapping action="delete_multiple" query="id=c3cd2b7e2fe01110e58359a72799b640"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>latest_response</field>
+        <id>c3cd2b7e2fe01110e58359a72799b640</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:51</sys_created_on>
+        <sys_id>43cd2b7e2fe01110e58359a72799b643</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:51</sys_updated_on>
+        <table>var__m_sys_hub_flow_variable_a6cde77e2fe01110e58359a72799b66b</table>
+        <value>{{5c6ff1c3-3a4b-4f33-b8de-eeb881da0c2c.response_body}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_a6cde77e2fe01110e58359a72799b66b^id=c3cd2b7e2fe01110e58359a72799b640"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">39238c8f2f241110e58359a72799b6f3</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="ATAT Consume Cost Responses">a6cde77e2fe01110e58359a72799b66b</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="Assign Subflow Outputs">df4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>8</order>
+        <outputs_assigned>total_new_cost_records,total_updated_cost_records</outputs_assigned>
+        <outputs_to_assign/>
+        <outputs_to_assign/>
+        <parent_ui_id>fe0c5667-d86f-4cd2-979e-23a001d0318b</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:37</sys_created_on>
+        <sys_id>ec43c0cf2f241110e58359a72799b69f</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:39</sys_updated_on>
+        <ui_id>589c4c8e-f67b-4cb8-ba36-4f28212b6071</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=ec43c0cf2f241110e58359a72799b69f"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>ec43c0cf2f241110e58359a72799b69f</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:37</sys_created_on>
+        <sys_id>2c43c0cf2f241110e58359a72799b6a3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:37</sys_updated_on>
+        <value/>
+        <variable display_value="Total Updated Cost Records">9c43c0cf2f241110e58359a72799b61a</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>ec43c0cf2f241110e58359a72799b69f</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:37</sys_created_on>
+        <sys_id>6843c0cf2f241110e58359a72799b6a3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:37</sys_updated_on>
+        <value/>
+        <variable display_value="Total New Cost Records">0443c0cf2f241110e58359a72799b60c</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_a6cde77e2fe01110e58359a72799b66b^id=ec43c0cf2f241110e58359a72799b69f"/>
+    <sys_element_mapping action="delete_multiple" query="id=ec43c0cf2f241110e58359a72799b69f"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>total_new_cost_records</field>
+        <id>ec43c0cf2f241110e58359a72799b69f</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:37</sys_created_on>
+        <sys_id>e443c0cf2f241110e58359a72799b6a3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:37</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_a6cde77e2fe01110e58359a72799b66b</table>
+        <value>{{flow_variable.running_creates}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>total_updated_cost_records</field>
+        <id>ec43c0cf2f241110e58359a72799b69f</id>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:37</sys_created_on>
+        <sys_id>2443c0cf2f241110e58359a72799b6a3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:37</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_a6cde77e2fe01110e58359a72799b66b</table>
+        <value>{{flow_variable.running_updates}}</value>
+    </sys_element_mapping>
+    <sys_hub_flow_variable action="delete_multiple" query="model=a6cde77e2fe01110e58359a72799b66b^sys_idNOT IN5843c0cf2f241110e58359a72799b63e,87cd2b7e2fe01110e58359a72799b625,d443c0cf2f241110e58359a72799b639"/>
+    <sys_hub_flow_variable action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=integer,uiTypeLabel=Integer,uiUniqueId=25aaf7fb-1a94-41b1-baf0-09989e1799ad</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>running_updates</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Integer">integer</internal_type>
+        <label>running_updates</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="ATAT Consume Cost Responses">a6cde77e2fe01110e58359a72799b66b</model>
+        <model_id>a6cde77e2fe01110e58359a72799b66b</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_variable_a6cde77e2fe01110e58359a72799b66b</name>
+        <next_element/>
+        <order>0</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_variable</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:36</sys_created_on>
+        <sys_id>5843c0cf2f241110e58359a72799b63e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>running_updates</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_hub_flow_variable_5843c0cf2f241110e58359a72799b63e</sys_update_name>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:36</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_variable>
+    <sys_hub_flow_variable action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=73a79968-d5be-4f27-9d97-bdc78df557bd</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>latest_response</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>latest_response</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="ATAT Consume Cost Responses">a6cde77e2fe01110e58359a72799b66b</model>
+        <model_id>a6cde77e2fe01110e58359a72799b66b</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_variable_a6cde77e2fe01110e58359a72799b66b</name>
+        <next_element/>
+        <order>0</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_variable</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:51</sys_created_on>
+        <sys_id>87cd2b7e2fe01110e58359a72799b625</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>latest_response</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_hub_flow_variable_87cd2b7e2fe01110e58359a72799b625</sys_update_name>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:51</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_variable>
+    <sys_hub_flow_variable action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=integer,uiTypeLabel=Integer,uiUniqueId=c5c38ad0-a094-4d99-a5f2-642914bfad5c</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>running_creates</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Integer">integer</internal_type>
+        <label>running_creates</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="ATAT Consume Cost Responses">a6cde77e2fe01110e58359a72799b66b</model>
+        <model_id>a6cde77e2fe01110e58359a72799b66b</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_variable_a6cde77e2fe01110e58359a72799b66b</name>
+        <next_element/>
+        <order>0</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_variable</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:36</sys_created_on>
+        <sys_id>d443c0cf2f241110e58359a72799b639</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>running_creates</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_hub_flow_variable_d443c0cf2f241110e58359a72799b639</sys_update_name>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:36</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_variable>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_a6cde77e2fe01110e58359a72799b66b^sys_idNOT INbacde77e2fe01110e58359a72799b6f1,f6cd2b7e2fe01110e58359a72799b60c,fecd2b7e2fe01110e58359a72799b61a,fecde77e2fe01110e58359a72799b6d6"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>aws_region</element>
+        <help/>
+        <hint/>
+        <label>AWS Region</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_a6cde77e2fe01110e58359a72799b66b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:50</sys_created_on>
+        <sys_id>bacde77e2fe01110e58359a72799b6f1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:50</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>base_url</element>
+        <help/>
+        <hint/>
+        <label>Base URL</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_a6cde77e2fe01110e58359a72799b66b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:50</sys_created_on>
+        <sys_id>f6cd2b7e2fe01110e58359a72799b60c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:50</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>resource_path</element>
+        <help/>
+        <hint/>
+        <label>Resource Path</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_a6cde77e2fe01110e58359a72799b66b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:51</sys_created_on>
+        <sys_id>fecd2b7e2fe01110e58359a72799b61a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:51</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>aws_credential</element>
+        <help/>
+        <hint/>
+        <label>AWS Credential</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_a6cde77e2fe01110e58359a72799b66b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 18:47:50</sys_created_on>
+        <sys_id>fecde77e2fe01110e58359a72799b6d6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 18:47:50</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_a6cde77e2fe01110e58359a72799b66b^sys_idNOT IN5843c0cf2f241110e58359a72799b631,8c43c0cf2f241110e58359a72799b616"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>total_updated_cost_records</element>
+        <help/>
+        <hint/>
+        <label>Total Updated Cost Records</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_output_a6cde77e2fe01110e58359a72799b66b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:36</sys_created_on>
+        <sys_id>5843c0cf2f241110e58359a72799b631</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:36</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>total_new_cost_records</element>
+        <help/>
+        <hint/>
+        <label>Total New Cost Records</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_output_a6cde77e2fe01110e58359a72799b66b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 20:21:36</sys_created_on>
+        <sys_id>8c43c0cf2f241110e58359a72799b616</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 20:21:36</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_hub_flow action="update">
+        <sys_id>7b7ab2e597e01110ef86d200f153af78</sys_id>
+        <latest_snapshot>a6cde77e2fe01110e58359a72799b66b</latest_snapshot>
+    </sys_hub_flow>
 </record_update>
