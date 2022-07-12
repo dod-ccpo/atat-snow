@@ -2,7 +2,7 @@
     <sys_hub_flow action="INSERT_OR_UPDATE">
         <access>public</access>
         <acls/>
-        <active>false</active>
+        <active>true</active>
         <annotation/>
         <callable_by_client_api>false</callable_by_client_api>
         <category/>
@@ -11,9 +11,8 @@
         <copied_from_name/>
         <description>Submits a CostRequest object to the /cost-jobs route in the HOTH API</description>
         <internal_name>atat_send_cost_request</internal_name>
-        <label_cache>[{"name":"3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id","label":"1➛Cost Request Id","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"7382bcc5-78f4-4d45-bbcf-4da4eaaae0e5"}},{"name":"subflow.aws_credential","label":"Input➛AWS Credential","reference":"aws_credentials","reference_display":"AWS Credentials","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"5a8010ef-f170-4729-aaa2-c269e0fd0f87","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"c49ac17f-3e3b-43b6-b87e-44237d1c5527.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"c49ac17f-3e3b-43b6-b87e-44237d1c5527.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"c49ac17f-3e3b-43b6-b87e-44237d1c5527.error_message","label":"1➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"87687532-9e3d-4497-a88e-90f45bfb9adb"}},{"name":"c49ac17f-3e3b-43b6-b87e-44237d1c5527.status","label":"1➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"5e478657-3a84-4a60-a92b-d3e80005ad34"}},{"name":"c49ac17f-3e3b-43b6-b87e-44237d1c5527.Table","label":"1➛ATAT Configuration Table","reference":"x_g_dis_atat_configuration","reference_display":"ATAT Configuration","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"c49ac17f-3e3b-43b6-b87e-44237d1c5527.Record","label":"1➛ATAT Configuration Record","reference":"x_g_dis_atat_configuration","reference_display":"ATAT Configuration","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"3a2e2a96-cd91-4072-bca5-4e40a88764c3.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FD8983e70f97005110587214493de2aefe","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"e44ce1ee-9a61-4f33-98fa-913d37ca1ca2"}},{"name":"3a2e2a96-cd91-4072-bca5-4e40a88764c3.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"c2be9629-ac6c-47fc-8feb-c9b595ec6aa2"}},{"name":"3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request","label":"1➛Cost Request","reference_display":"Cost Request","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"a030f51c-7041-4a4b-a467-0ef63888ab96"}},{"name":"subflow.portfolio","label":"Input➛Portfolio","reference":"x_g_dis_atat_portfolio","reference_display":"Portfolio","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"3dae6079-9438-42b9-a33c-7ad9961c0fbc","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.start_date","label":"Input➛Start Date","reference":"","reference_display":"","type":"glide_date","base_type":"glide_date","column_name":"","attributes":{"uiType":"glide_date","uiTypeLabel":"Date","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"3f60e391-81c7-472a-b8cb-889c36cc00db","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.end_date","label":"Input➛End Date","reference":"","reference_display":"","type":"glide_date","base_type":"glide_date","column_name":"","attributes":{"uiType":"glide_date","uiTypeLabel":"Date","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"ea1e3566-8d4f-49e6-b1fc-33a38990874b","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"c2b784e4-700a-4680-884c-3ee25fa9ba7a.__action_status__","label":"2➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FD2ca65b24fbc01110936aaa164fae267c","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"55b2092b-ee6f-4ede-a3b9-3e6d9abf0e31"}},{"name":"c2b784e4-700a-4680-884c-3ee25fa9ba7a.__dont_treat_as_error__","label":"2➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"6391b310-5d9e-4d67-9d1e-90f421c55efc"}},{"name":"c2b784e4-700a-4680-884c-3ee25fa9ba7a.variable","label":"2➛Response Body","reference_display":"Response Body","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"70e33bde-cff3-42a0-8d5d-6a7a598be287"}},{"name":"c49ac17f-3e3b-43b6-b87e-44237d1c5527.Record.value","label":"1➛ATAT Configuration Record➛Value","reference":"","reference_display":"Value","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_configuration","column_name":"value"},{"name":"d801f01a-a9b0-4f63-938b-3da1e718a2b9.__action_status__","label":"4➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"d801f01a-a9b0-4f63-938b-3da1e718a2b9.__dont_treat_as_error__","label":"4➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"subflow.aws_region","label":"Input➛AWS Region","reference":"x_g_dis_atat_configuration","reference_display":"ATAT Configuration","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"2b3cac28-521b-4874-bfaa-10711152f8d4","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.aws_region.value","label":"Input➛AWS Region➛Value","reference":"","reference_display":"Value","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_configuration","column_name":"value"},{"name":"subflow.base_url.value","label":"Input➛Base URL➛Value","reference":"","reference_display":"Value","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_configuration","column_name":"value"},{"name":"subflow.resource_path.value","label":"Input➛Resource Path➛Value","reference":"","reference_display":"Value","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_configuration","column_name":"value"}]</label_cache>
-        <latest_snapshot/>
-        <master_snapshot/>
+        <label_cache>[{"name":"c2b784e4-700a-4680-884c-3ee25fa9ba7a.response_status","label":"2➛Response Status","reference_display":"Response Status","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"6679b850-af9e-4018-8c37-b9cea8061597"}},{"name":"c2b784e4-700a-4680-884c-3ee25fa9ba7a.error_message","label":"2➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"28752eb6-ce9e-49f8-a7b9-e3c03173a2c4"}},{"name":"subflow.resource_path.value","label":"Input➛Resource Path➛Value","reference":"","reference_display":"Value","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_configuration","column_name":"value"},{"name":"subflow.base_url.value","label":"Input➛Base URL➛Value","reference":"","reference_display":"Value","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_configuration","column_name":"value"},{"name":"subflow.aws_region.value","label":"Input➛AWS Region➛Value","reference":"","reference_display":"Value","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_configuration","column_name":"value"},{"name":"subflow.aws_region","label":"Input➛AWS Region","reference":"x_g_dis_atat_configuration","reference_display":"ATAT Configuration","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"2b3cac28-521b-4874-bfaa-10711152f8d4","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"d801f01a-a9b0-4f63-938b-3da1e718a2b9.__dont_treat_as_error__","label":"4➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"d801f01a-a9b0-4f63-938b-3da1e718a2b9.__action_status__","label":"4➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"c49ac17f-3e3b-43b6-b87e-44237d1c5527.Record.value","label":"1➛ATAT Configuration Record➛Value","reference":"","reference_display":"Value","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_configuration","column_name":"value"},{"name":"c2b784e4-700a-4680-884c-3ee25fa9ba7a.variable","label":"2➛Response Body","reference_display":"Response Body","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"70e33bde-cff3-42a0-8d5d-6a7a598be287"}},{"name":"c2b784e4-700a-4680-884c-3ee25fa9ba7a.__dont_treat_as_error__","label":"2➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"6391b310-5d9e-4d67-9d1e-90f421c55efc"}},{"name":"c2b784e4-700a-4680-884c-3ee25fa9ba7a.__action_status__","label":"2➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FD110f4be8e3801110f76b8e1112854b27","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"55b2092b-ee6f-4ede-a3b9-3e6d9abf0e31"}},{"name":"subflow.end_date","label":"Input➛End Date","reference":"","reference_display":"","type":"glide_date","base_type":"glide_date","column_name":"","attributes":{"uiType":"glide_date","uiTypeLabel":"Date","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"ea1e3566-8d4f-49e6-b1fc-33a38990874b","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.start_date","label":"Input➛Start Date","reference":"","reference_display":"","type":"glide_date","base_type":"glide_date","column_name":"","attributes":{"uiType":"glide_date","uiTypeLabel":"Date","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"3f60e391-81c7-472a-b8cb-889c36cc00db","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.portfolio","label":"Input➛Portfolio","reference":"x_g_dis_atat_portfolio","reference_display":"Portfolio","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"3dae6079-9438-42b9-a33c-7ad9961c0fbc","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request","label":"1➛Cost Request","reference_display":"Cost Request","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"a030f51c-7041-4a4b-a467-0ef63888ab96"}},{"name":"3a2e2a96-cd91-4072-bca5-4e40a88764c3.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"c2be9629-ac6c-47fc-8feb-c9b595ec6aa2"}},{"name":"3a2e2a96-cd91-4072-bca5-4e40a88764c3.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FD7ab707c722cc1110c0b85747ab02b1d3","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"e44ce1ee-9a61-4f33-98fa-913d37ca1ca2"}},{"name":"c49ac17f-3e3b-43b6-b87e-44237d1c5527.Record","label":"1➛ATAT Configuration Record","reference":"x_g_dis_atat_configuration","reference_display":"ATAT Configuration","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"c49ac17f-3e3b-43b6-b87e-44237d1c5527.Table","label":"1➛ATAT Configuration Table","reference":"x_g_dis_atat_configuration","reference_display":"ATAT Configuration","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"c49ac17f-3e3b-43b6-b87e-44237d1c5527.status","label":"1➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"5e478657-3a84-4a60-a92b-d3e80005ad34"}},{"name":"c49ac17f-3e3b-43b6-b87e-44237d1c5527.error_message","label":"1➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"87687532-9e3d-4497-a88e-90f45bfb9adb"}},{"name":"c49ac17f-3e3b-43b6-b87e-44237d1c5527.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"c49ac17f-3e3b-43b6-b87e-44237d1c5527.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"subflow.aws_credential","label":"Input➛AWS Credential","reference":"aws_credentials","reference_display":"AWS Credentials","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"5a8010ef-f170-4729-aaa2-c269e0fd0f87","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id","label":"1➛Cost Request Id","reference_display":"Cost Request Id","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"7382bcc5-78f4-4d45-bbcf-4da4eaaae0e5"}}]</label_cache>
+        <master_snapshot>79c648ca1bacd510c385ea85604bcbc0</master_snapshot>
         <name>ATAT Send Cost Request</name>
         <natlang/>
         <outputs/>
@@ -23,14 +22,14 @@
         <sc_callable>false</sc_callable>
         <show_draft_actions>false</show_draft_actions>
         <show_triggered_flows>false</show_triggered_flows>
-        <status>draft</status>
+        <status>published</status>
         <sys_class_name>sys_hub_flow</sys_class_name>
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-06-16 19:59:33</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>e57ec3fa2fc01110e58359a72799b622</sys_id>
-        <sys_mod_count>6</sys_mod_count>
+        <sys_mod_count>11</sys_mod_count>
         <sys_name>ATAT Send Cost Request</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -38,7 +37,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_flow_e57ec3fa2fc01110e58359a72799b622</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-06-23 20:58:00</sys_updated_on>
+        <sys_updated_on>2022-07-08 18:50:31</sys_updated_on>
         <type>subflow</type>
     </sys_hub_flow>
     <sys_translated_text action="delete_multiple" query="documentkey=e57ec3fa2fc01110e58359a72799b622"/>
@@ -624,7 +623,88 @@
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_flow_input>
-    <sys_hub_flow_output action="delete_multiple" query="model=e57ec3fa2fc01110e58359a72799b622^sys_idNOT INfabe9f051b941110c385ea85604bcb92"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=e57ec3fa2fc01110e58359a72799b622^sys_idNOT INbc91dc061becd510c385ea85604bcb5f,fabe9f051b941110c385ea85604bcb92,fc91dc061becd510c385ea85604bcb68"/>
+    <sys_hub_flow_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=e326c7f4-0aed-4c2e-ad1f-2d1126052d0b</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice>3</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>response</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Response</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="ATAT Send Cost Request">e57ec3fa2fc01110e58359a72799b622</model>
+        <model_id>e57ec3fa2fc01110e58359a72799b622</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_output_e57ec3fa2fc01110e58359a72799b622</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_output</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:50:15</sys_created_on>
+        <sys_id>bc91dc061becd510c385ea85604bcb5f</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:16</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_output>
     <sys_hub_flow_output action="INSERT_OR_UPDATE">
         <active>true</active>
         <array>false</array>
@@ -706,11 +786,92 @@
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_flow_output>
+    <sys_hub_flow_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=7bc51e6c-425c-4e91-bcfa-c6cbd96543ac</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice>3</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>response_status</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Response Status</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="ATAT Send Cost Request">e57ec3fa2fc01110e58359a72799b622</model>
+        <model_id>e57ec3fa2fc01110e58359a72799b622</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_output_e57ec3fa2fc01110e58359a72799b622</name>
+        <next_element/>
+        <order>3</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_output</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:50:15</sys_created_on>
+        <sys_id>fc91dc061becd510c385ea85604bcb68</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:16</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_output>
     <sys_hub_action_instance action="delete_multiple" query="flow=e57ec3fa2fc01110e58359a72799b622^sys_idNOT IN4e442f4f2f005110e58359a72799b60c,b944eb4f2f005110e58359a72799b6d8,f1442f4f2f005110e58359a72799b606"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
-        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
+        <action_type display_value="Log">0e0ae8c2531003003bf1d9109ec587c8</action_type>
         <action_type_parent/>
         <comment/>
         <compiled_snapshot/>
@@ -722,14 +883,27 @@
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-06-17 16:13:21</sys_created_on>
         <sys_id>4e442f4f2f005110e58359a72799b60c</sys_id>
-        <sys_mod_count>10</sys_mod_count>
+        <sys_mod_count>20</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-06-23 20:57:59</sys_updated_on>
+        <sys_updated_on>2022-07-08 18:50:31</sys_updated_on>
         <ui_id>d801f01a-a9b0-4f63-938b-3da1e718a2b9</ui_id>
     </sys_hub_action_instance>
     <sys_variable_value action="delete_multiple" query="document_key=4e442f4f2f005110e58359a72799b60c"/>
     <sys_element_mapping action="delete_multiple" query="id=4e442f4f2f005110e58359a72799b60c"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>log_message</field>
+        <id>4e442f4f2f005110e58359a72799b60c</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:02</sys_created_on>
+        <sys_id>9dc648ca1bacd510c385ea85604bcb27</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:02</sys_updated_on>
+        <table>var__m_sys_hub_action_input_0e0ae8c2531003003bf1d9109ec587c8</table>
+        <value>Response:{{c2b784e4-700a-4680-884c-3ee25fa9ba7a.variable}}.
+Cost Request ID: {{3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id}}.</value>
+    </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>log_message</field>
         <id>4e442f4f2f005110e58359a72799b60c</id>
@@ -746,7 +920,7 @@ Cost Request ID: {{3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id}}.</valu
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
-        <action_type display_value="Generate Cost Request">e083e70f2f005110e58359a72799b6a4</action_type>
+        <action_type display_value="Generate Cost Request">f323d3fe2fc01110e58359a72799b644</action_type>
         <action_type_parent/>
         <comment/>
         <compiled_snapshot/>
@@ -758,13 +932,27 @@ Cost Request ID: {{3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id}}.</valu
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-06-17 16:13:21</sys_created_on>
         <sys_id>b944eb4f2f005110e58359a72799b6d8</sys_id>
-        <sys_mod_count>10</sys_mod_count>
+        <sys_mod_count>20</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-06-23 20:57:59</sys_updated_on>
+        <sys_updated_on>2022-07-08 18:50:31</sys_updated_on>
         <ui_id>3a2e2a96-cd91-4072-bca5-4e40a88764c3</ui_id>
     </sys_hub_action_instance>
     <sys_variable_value action="delete_multiple" query="document_key=b944eb4f2f005110e58359a72799b6d8"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>b944eb4f2f005110e58359a72799b6d8</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:02</sys_created_on>
+        <sys_id>55c648ca1bacd510c385ea85604bcb1c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:02</sys_updated_on>
+        <value/>
+        <variable display_value="Start Date">7f9ac74b2fcc1110e58359a72799b6a2</variable>
+    </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>sys_hub_action_instance</document>
         <document_key>b944eb4f2f005110e58359a72799b6d8</document_key>
@@ -793,6 +981,20 @@ Cost Request ID: {{3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id}}.</valu
         <value/>
         <variable display_value="End Date">ac83e70f2f005110e58359a72799b6c4</variable>
     </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>b944eb4f2f005110e58359a72799b6d8</document_key>
+        <order>3</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:02</sys_created_on>
+        <sys_id>d9c648ca1bacd510c385ea85604bcb1b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:02</sys_updated_on>
+        <value/>
+        <variable display_value="End Date">ccaac74b2fcc1110e58359a72799b6af</variable>
+    </sys_variable_value>
     <sys_element_mapping action="delete_multiple" query="id=b944eb4f2f005110e58359a72799b6d8"/>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>end_date</field>
@@ -804,6 +1006,18 @@ Cost Request ID: {{3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id}}.</valu
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-06-17 16:13:21</sys_updated_on>
         <table>var__m_sys_hub_action_input_e083e70f2f005110e58359a72799b6a4</table>
+        <value>{{subflow.end_date}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>end_date</field>
+        <id>b944eb4f2f005110e58359a72799b6d8</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:02</sys_created_on>
+        <sys_id>5dc648ca1bacd510c385ea85604bcb1a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:02</sys_updated_on>
+        <table>var__m_sys_hub_action_input_f323d3fe2fc01110e58359a72799b644</table>
         <value>{{subflow.end_date}}</value>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
@@ -819,6 +1033,18 @@ Cost Request ID: {{3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id}}.</valu
         <value>{{subflow.portfolio}}</value>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>portfolio</field>
+        <id>b944eb4f2f005110e58359a72799b6d8</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:02</sys_created_on>
+        <sys_id>95c648ca1bacd510c385ea85604bcb1b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:02</sys_updated_on>
+        <table>var__m_sys_hub_action_input_f323d3fe2fc01110e58359a72799b644</table>
+        <value>{{subflow.portfolio}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>start_date</field>
         <id>b944eb4f2f005110e58359a72799b6d8</id>
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
@@ -830,10 +1056,22 @@ Cost Request ID: {{3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id}}.</valu
         <table>var__m_sys_hub_action_input_e083e70f2f005110e58359a72799b6a4</table>
         <value>{{subflow.start_date}}</value>
     </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>start_date</field>
+        <id>b944eb4f2f005110e58359a72799b6d8</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:02</sys_created_on>
+        <sys_id>59c648ca1bacd510c385ea85604bcb1b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:02</sys_updated_on>
+        <table>var__m_sys_hub_action_input_f323d3fe2fc01110e58359a72799b644</table>
+        <value>{{subflow.start_date}}</value>
+    </sys_element_mapping>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
-        <action_type display_value="ATAT Secure POST Request">54a61b2497c011101e0835dfe153afb0</action_type>
+        <action_type display_value="ATAT Secure POST Request">921e87a8978011101e0835dfe153afb4</action_type>
         <action_type_parent/>
         <comment/>
         <compiled_snapshot/>
@@ -845,10 +1083,10 @@ Cost Request ID: {{3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id}}.</valu
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-06-17 16:13:21</sys_created_on>
         <sys_id>f1442f4f2f005110e58359a72799b606</sys_id>
-        <sys_mod_count>10</sys_mod_count>
+        <sys_mod_count>20</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-06-23 20:57:59</sys_updated_on>
+        <sys_updated_on>2022-07-08 18:50:31</sys_updated_on>
         <ui_id>c2b784e4-700a-4680-884c-3ee25fa9ba7a</ui_id>
     </sys_hub_action_instance>
     <sys_variable_value action="delete_multiple" query="document_key=f1442f4f2f005110e58359a72799b606"/>
@@ -880,6 +1118,18 @@ Cost Request ID: {{3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id}}.</valu
         <value>{{subflow.aws_credential}}</value>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>aws_credential</field>
+        <id>f1442f4f2f005110e58359a72799b606</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:02</sys_created_on>
+        <sys_id>11c648ca1bacd510c385ea85604bcb20</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:02</sys_updated_on>
+        <table>var__m_sys_hub_action_input_921e87a8978011101e0835dfe153afb4</table>
+        <value>{{subflow.aws_credential}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>aws_region</field>
         <id>f1442f4f2f005110e58359a72799b606</id>
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
@@ -889,6 +1139,18 @@ Cost Request ID: {{3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id}}.</valu
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
         <sys_updated_on>2022-06-23 17:01:44</sys_updated_on>
         <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value>{{subflow.aws_region.value}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>aws_region</field>
+        <id>f1442f4f2f005110e58359a72799b606</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:02</sys_created_on>
+        <sys_id>15c648ca1bacd510c385ea85604bcb1f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:02</sys_updated_on>
+        <table>var__m_sys_hub_action_input_921e87a8978011101e0835dfe153afb4</table>
         <value>{{subflow.aws_region.value}}</value>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
@@ -904,6 +1166,18 @@ Cost Request ID: {{3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id}}.</valu
         <value>{{subflow.base_url.value}}</value>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>base_url</field>
+        <id>f1442f4f2f005110e58359a72799b606</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:02</sys_created_on>
+        <sys_id>5dc648ca1bacd510c385ea85604bcb1f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:02</sys_updated_on>
+        <table>var__m_sys_hub_action_input_921e87a8978011101e0835dfe153afb4</table>
+        <value>{{subflow.base_url.value}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>endpoint</field>
         <id>f1442f4f2f005110e58359a72799b606</id>
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
@@ -914,6 +1188,30 @@ Cost Request ID: {{3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id}}.</valu
         <sys_updated_on>2022-06-17 16:13:21</sys_updated_on>
         <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
         <value>{{c49ac17f-3e3b-43b6-b87e-44237d1c5527.Record.value}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>portfolio</field>
+        <id>f1442f4f2f005110e58359a72799b606</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:50:15</sys_created_on>
+        <sys_id>0d91dc061becd510c385ea85604bcb77</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:15</sys_updated_on>
+        <table>var__m_sys_hub_action_input_921e87a8978011101e0835dfe153afb4</table>
+        <value>{{subflow.portfolio}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>request_body</field>
+        <id>f1442f4f2f005110e58359a72799b606</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:02</sys_created_on>
+        <sys_id>d5c648ca1bacd510c385ea85604bcb1f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:02</sys_updated_on>
+        <table>var__m_sys_hub_action_input_921e87a8978011101e0835dfe153afb4</table>
+        <value>{{3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request}}</value>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>request_body</field>
@@ -951,6 +1249,18 @@ Cost Request ID: {{3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id}}.</valu
         <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
         <value>{{subflow.resource_path.value}}</value>
     </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>resource_path</field>
+        <id>f1442f4f2f005110e58359a72799b606</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:02</sys_created_on>
+        <sys_id>99c648ca1bacd510c385ea85604bcb1f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:02</sys_updated_on>
+        <table>var__m_sys_hub_action_input_921e87a8978011101e0835dfe153afb4</table>
+        <value>{{subflow.resource_path.value}}</value>
+    </sys_element_mapping>
     <sys_hub_flow_logic action="delete_multiple" query="flow=e57ec3fa2fc01110e58359a72799b622^sys_idNOT INfabe9f051b941110c385ea85604bcba0"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">76be9f051b941110c385ea85604bcba0</block>
@@ -966,7 +1276,7 @@ Cost Request ID: {{3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id}}.</valu
         <inputs/>
         <logic_definition display_value="Assign Subflow Outputs">df4e1945c3e232002841b63b12d3ae3e</logic_definition>
         <order>3</order>
-        <outputs_assigned>cost_request_id</outputs_assigned>
+        <outputs_assigned>cost_request_id,response,response_status</outputs_assigned>
         <outputs_to_assign/>
         <outputs_to_assign/>
         <parent_ui_id/>
@@ -974,10 +1284,10 @@ Cost Request ID: {{3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id}}.</valu
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-06-23 20:56:58</sys_created_on>
         <sys_id>fabe9f051b941110c385ea85604bcba0</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>8</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-06-23 20:57:59</sys_updated_on>
+        <sys_updated_on>2022-07-08 18:50:31</sys_updated_on>
         <ui_id>77f7dfd5-c532-42e3-a1df-045d5a658fc7</ui_id>
         <workflow_inputs/>
         <workflow_reference/>
@@ -995,6 +1305,30 @@ Cost Request ID: {{3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id}}.</valu
         <sys_updated_on>2022-06-23 20:56:58</sys_updated_on>
         <table>var__m_sys_hub_flow_output_e57ec3fa2fc01110e58359a72799b622</table>
         <value>{{3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>response</field>
+        <id>fabe9f051b941110c385ea85604bcba0</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:50:15</sys_created_on>
+        <sys_id>4191dc061becd510c385ea85604bcb7f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:15</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_e57ec3fa2fc01110e58359a72799b622</table>
+        <value>{{c2b784e4-700a-4680-884c-3ee25fa9ba7a.variable}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>response_status</field>
+        <id>fabe9f051b941110c385ea85604bcba0</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:50:15</sys_created_on>
+        <sys_id>8d91dc061becd510c385ea85604bcb7e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:15</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_e57ec3fa2fc01110e58359a72799b622</table>
+        <value>{{c2b784e4-700a-4680-884c-3ee25fa9ba7a.response_status}}</value>
     </sys_element_mapping>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_e57ec3fa2fc01110e58359a72799b622^sys_idNOT IN309927b22f441110e58359a72799b60e,30e86e091bd01110c385ea85604bcbb4,389927b22f441110e58359a72799b613,b0e86e091bd01110c385ea85604bcbd5,b4e86e091bd01110c385ea85604bcbdd,bc9927b22f441110e58359a72799b631,be15f3142f501110e58359a72799b663"/>
     <sys_documentation action="INSERT_OR_UPDATE">
@@ -1158,7 +1492,7 @@ Cost Request ID: {{3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id}}.</valu
         <url/>
         <url_target/>
     </sys_documentation>
-    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_e57ec3fa2fc01110e58359a72799b622^sys_idNOT IN32be9f051b941110c385ea85604bcb9a"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_e57ec3fa2fc01110e58359a72799b622^sys_idNOT IN32be9f051b941110c385ea85604bcb9a,7091dc061becd510c385ea85604bcb70,7891dc061becd510c385ea85604bcb67"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>cost_request_id</element>
         <help/>
@@ -1182,4 +1516,1456 @@ Cost Request ID: {{3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id}}.</valu
         <url/>
         <url_target/>
     </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>response_status</element>
+        <help/>
+        <hint/>
+        <label>Response Status</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_output_e57ec3fa2fc01110e58359a72799b622</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:50:15</sys_created_on>
+        <sys_id>7091dc061becd510c385ea85604bcb70</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:15</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>response</element>
+        <help/>
+        <hint/>
+        <label>Response</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_output_e57ec3fa2fc01110e58359a72799b622</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:50:15</sys_created_on>
+        <sys_id>7891dc061becd510c385ea85604bcb67</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:15</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=e57ec3fa2fc01110e58359a72799b622^sys_idNOT IN7def622d1b6c9510c385ea85604bcb15"/>
+    <sys_flow_subflow_plan action="INSERT_OR_UPDATE">
+        <plan>com.snc.process_flow.engine.ProcessPlan@c1ea57</plan>
+        <plan_id display_value="ATAT Send Cost Request">e57ec3fa2fc01110e58359a72799b622</plan_id>
+        <snapshot>79c648ca1bacd510c385ea85604bcbc0</snapshot>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-07 17:05:01</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>7def622d1b6c9510c385ea85604bcb15</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:31</sys_updated_on>
+    </sys_flow_subflow_plan>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Submits a CostRequest object to the /cost-jobs route in the HOTH API</description>
+        <internal_name>atat_send_cost_request</internal_name>
+        <label_cache>[{"name":"c2b784e4-700a-4680-884c-3ee25fa9ba7a.response_status","label":"2➛Response Status","reference_display":"Response Status","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"6679b850-af9e-4018-8c37-b9cea8061597"}},{"name":"c2b784e4-700a-4680-884c-3ee25fa9ba7a.error_message","label":"2➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"28752eb6-ce9e-49f8-a7b9-e3c03173a2c4"}},{"name":"subflow.resource_path.value","label":"Input➛Resource Path➛Value","reference":"","reference_display":"Value","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_configuration","column_name":"value"},{"name":"subflow.base_url.value","label":"Input➛Base URL➛Value","reference":"","reference_display":"Value","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_configuration","column_name":"value"},{"name":"subflow.aws_region.value","label":"Input➛AWS Region➛Value","reference":"","reference_display":"Value","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_configuration","column_name":"value"},{"name":"subflow.aws_region","label":"Input➛AWS Region","reference":"x_g_dis_atat_configuration","reference_display":"ATAT Configuration","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"2b3cac28-521b-4874-bfaa-10711152f8d4","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"d801f01a-a9b0-4f63-938b-3da1e718a2b9.__dont_treat_as_error__","label":"4➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"d801f01a-a9b0-4f63-938b-3da1e718a2b9.__action_status__","label":"4➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"c49ac17f-3e3b-43b6-b87e-44237d1c5527.Record.value","label":"1➛ATAT Configuration Record➛Value","reference":"","reference_display":"Value","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_configuration","column_name":"value"},{"name":"c2b784e4-700a-4680-884c-3ee25fa9ba7a.variable","label":"2➛Response Body","reference_display":"Response Body","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"70e33bde-cff3-42a0-8d5d-6a7a598be287"}},{"name":"c2b784e4-700a-4680-884c-3ee25fa9ba7a.__dont_treat_as_error__","label":"2➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"6391b310-5d9e-4d67-9d1e-90f421c55efc"}},{"name":"c2b784e4-700a-4680-884c-3ee25fa9ba7a.__action_status__","label":"2➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FD110f4be8e3801110f76b8e1112854b27","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"55b2092b-ee6f-4ede-a3b9-3e6d9abf0e31"}},{"name":"subflow.end_date","label":"Input➛End Date","reference":"","reference_display":"","type":"glide_date","base_type":"glide_date","column_name":"","attributes":{"uiType":"glide_date","uiTypeLabel":"Date","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"ea1e3566-8d4f-49e6-b1fc-33a38990874b","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.start_date","label":"Input➛Start Date","reference":"","reference_display":"","type":"glide_date","base_type":"glide_date","column_name":"","attributes":{"uiType":"glide_date","uiTypeLabel":"Date","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"3f60e391-81c7-472a-b8cb-889c36cc00db","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.portfolio","label":"Input➛Portfolio","reference":"x_g_dis_atat_portfolio","reference_display":"Portfolio","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"3dae6079-9438-42b9-a33c-7ad9961c0fbc","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request","label":"1➛Cost Request","reference_display":"Cost Request","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"a030f51c-7041-4a4b-a467-0ef63888ab96"}},{"name":"3a2e2a96-cd91-4072-bca5-4e40a88764c3.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"c2be9629-ac6c-47fc-8feb-c9b595ec6aa2"}},{"name":"3a2e2a96-cd91-4072-bca5-4e40a88764c3.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FD7ab707c722cc1110c0b85747ab02b1d3","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"e44ce1ee-9a61-4f33-98fa-913d37ca1ca2"}},{"name":"c49ac17f-3e3b-43b6-b87e-44237d1c5527.Record","label":"1➛ATAT Configuration Record","reference":"x_g_dis_atat_configuration","reference_display":"ATAT Configuration","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"c49ac17f-3e3b-43b6-b87e-44237d1c5527.Table","label":"1➛ATAT Configuration Table","reference":"x_g_dis_atat_configuration","reference_display":"ATAT Configuration","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"c49ac17f-3e3b-43b6-b87e-44237d1c5527.status","label":"1➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"5e478657-3a84-4a60-a92b-d3e80005ad34"}},{"name":"c49ac17f-3e3b-43b6-b87e-44237d1c5527.error_message","label":"1➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"87687532-9e3d-4497-a88e-90f45bfb9adb"}},{"name":"c49ac17f-3e3b-43b6-b87e-44237d1c5527.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"c49ac17f-3e3b-43b6-b87e-44237d1c5527.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"subflow.aws_credential","label":"Input➛AWS Credential","reference":"aws_credentials","reference_display":"AWS Credentials","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"5a8010ef-f170-4729-aaa2-c269e0fd0f87","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id","label":"1➛Cost Request Id","reference_display":"Cost Request Id","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"7382bcc5-78f4-4d45-bbcf-4da4eaaae0e5"}}]</label_cache>
+        <master>true</master>
+        <name>ATAT Send Cost Request</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="ATAT Send Cost Request">e57ec3fa2fc01110e58359a72799b622</parent_flow>
+        <remote_trigger_id/>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:04</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>79c648ca1bacd510c385ea85604bcbc0</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:28</sys_updated_on>
+        <type>subflow</type>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=79c648ca1bacd510c385ea85604bcbc0"/>
+    <sys_variable_value action="delete_multiple" query="document_key=79c648ca1bacd510c385ea85604bcbc0"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_79c648ca1bacd510c385ea85604bcbc0^id=79c648ca1bacd510c385ea85604bcbc0"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=79c648ca1bacd510c385ea85604bcbc0^sys_idNOT IN3dc648ca1bacd510c385ea85604bcbc1"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>79c648ca1bacd510c385ea85604bcbc0</id>
+        <name>ATAT Send Cost Request</name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:04</sys_created_on>
+        <sys_id>3dc648ca1bacd510c385ea85604bcbc1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:04</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_hub_flow_input action="delete_multiple" query="model=79c648ca1bacd510c385ea85604bcbc0^sys_idNOT IN02c688ca1bacd510c385ea85604bcb31,0ec688ca1bacd510c385ea85604bcb21,7dc648ca1bacd510c385ea85604bcbc2,7dc688ca1bacd510c385ea85604bcb12,82c688ca1bacd510c385ea85604bcb3b,f1c648ca1bacd510c385ea85604bcbf5,fdc688ca1bacd510c385ea85604bcb03"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=glide_date,uiTypeLabel=Date,uiUniqueId=3f60e391-81c7-472a-b8cb-889c36cc00db</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>start_date</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">glide_date</internal_type>
+        <label>Start Date</label>
+        <mandatory>true</mandatory>
+        <max_length>40</max_length>
+        <model display_value="ATAT Send Cost Request">79c648ca1bacd510c385ea85604bcbc0</model>
+        <model_id>79c648ca1bacd510c385ea85604bcbc0</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_79c648ca1bacd510c385ea85604bcbc0</name>
+        <next_element/>
+        <order>6</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:05</sys_created_on>
+        <sys_id>02c688ca1bacd510c385ea85604bcb31</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:28</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference,uiUniqueId=3dae6079-9438-42b9-a33c-7ad9961c0fbc</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table>x_g_dis_atat_portfolio</choice_table>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>portfolio</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>Portfolio</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="ATAT Send Cost Request">79c648ca1bacd510c385ea85604bcbc0</model>
+        <model_id>79c648ca1bacd510c385ea85604bcbc0</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_79c648ca1bacd510c385ea85604bcbc0</name>
+        <next_element/>
+        <order>5</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference display_value="" name="x_g_dis_atat_portfolio">x_g_dis_atat_portfolio</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:05</sys_created_on>
+        <sys_id>0ec688ca1bacd510c385ea85604bcb21</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:28</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference,uiUniqueId=5a8010ef-f170-4729-aaa2-c269e0fd0f87</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table>aws_credentials</choice_table>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>aws_credential</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>AWS Credential</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="ATAT Send Cost Request">79c648ca1bacd510c385ea85604bcbc0</model>
+        <model_id>79c648ca1bacd510c385ea85604bcbc0</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_79c648ca1bacd510c385ea85604bcbc0</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference display_value="" name="aws_credentials">aws_credentials</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:04</sys_created_on>
+        <sys_id>7dc648ca1bacd510c385ea85604bcbc2</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:28</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference,uiUniqueId=0eb337a3-685b-4c31-99d3-bfbf81c3c866</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table>x_g_dis_atat_configuration</choice_table>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>resource_path</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>Resource Path</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="ATAT Send Cost Request">79c648ca1bacd510c385ea85604bcbc0</model>
+        <model_id>79c648ca1bacd510c385ea85604bcbc0</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_79c648ca1bacd510c385ea85604bcbc0</name>
+        <next_element/>
+        <order>4</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference display_value="" name="x_g_dis_atat_configuration">x_g_dis_atat_configuration</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:05</sys_created_on>
+        <sys_id>7dc688ca1bacd510c385ea85604bcb12</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:28</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=glide_date,uiTypeLabel=Date,uiUniqueId=ea1e3566-8d4f-49e6-b1fc-33a38990874b</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>end_date</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">glide_date</internal_type>
+        <label>End Date</label>
+        <mandatory>true</mandatory>
+        <max_length>40</max_length>
+        <model display_value="ATAT Send Cost Request">79c648ca1bacd510c385ea85604bcbc0</model>
+        <model_id>79c648ca1bacd510c385ea85604bcbc0</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_79c648ca1bacd510c385ea85604bcbc0</name>
+        <next_element/>
+        <order>7</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:05</sys_created_on>
+        <sys_id>82c688ca1bacd510c385ea85604bcb3b</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:28</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference,uiUniqueId=2b3cac28-521b-4874-bfaa-10711152f8d4</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table>x_g_dis_atat_configuration</choice_table>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>aws_region</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>AWS Region</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="ATAT Send Cost Request">79c648ca1bacd510c385ea85604bcbc0</model>
+        <model_id>79c648ca1bacd510c385ea85604bcbc0</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_79c648ca1bacd510c385ea85604bcbc0</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference display_value="" name="x_g_dis_atat_configuration">x_g_dis_atat_configuration</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:04</sys_created_on>
+        <sys_id>f1c648ca1bacd510c385ea85604bcbf5</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:28</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference,uiUniqueId=8c098f8e-8f3c-40ba-a7ec-f7605de9856a</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table>x_g_dis_atat_configuration</choice_table>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>base_url</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>Base URL</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="ATAT Send Cost Request">79c648ca1bacd510c385ea85604bcbc0</model>
+        <model_id>79c648ca1bacd510c385ea85604bcbc0</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_79c648ca1bacd510c385ea85604bcbc0</name>
+        <next_element/>
+        <order>3</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference display_value="" name="x_g_dis_atat_configuration">x_g_dis_atat_configuration</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:04</sys_created_on>
+        <sys_id>fdc688ca1bacd510c385ea85604bcb03</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:28</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_output action="delete_multiple" query="model=79c648ca1bacd510c385ea85604bcbc0^sys_idNOT IN4ec688ca1bacd510c385ea85604bcb48,7f9190461becd510c385ea85604bcb56,bb9190461becd510c385ea85604bcb3b"/>
+    <sys_hub_flow_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=632bbc60-97d5-4275-80db-c7239f39b840</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice>3</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>cost_request_id</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Cost Request ID</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="ATAT Send Cost Request">79c648ca1bacd510c385ea85604bcbc0</model>
+        <model_id>79c648ca1bacd510c385ea85604bcbc0</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_output_79c648ca1bacd510c385ea85604bcbc0</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_output</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:05</sys_created_on>
+        <sys_id>4ec688ca1bacd510c385ea85604bcb48</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:28</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_output>
+    <sys_hub_flow_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=7bc51e6c-425c-4e91-bcfa-c6cbd96543ac</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice>3</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>response_status</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Response Status</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="ATAT Send Cost Request">79c648ca1bacd510c385ea85604bcbc0</model>
+        <model_id>79c648ca1bacd510c385ea85604bcbc0</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_output_79c648ca1bacd510c385ea85604bcbc0</name>
+        <next_element/>
+        <order>3</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_output</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:50:27</sys_created_on>
+        <sys_id>7f9190461becd510c385ea85604bcb56</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:28</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_output>
+    <sys_hub_flow_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=e326c7f4-0aed-4c2e-ad1f-2d1126052d0b</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice>3</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>response</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Response</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="ATAT Send Cost Request">79c648ca1bacd510c385ea85604bcbc0</model>
+        <model_id>79c648ca1bacd510c385ea85604bcbc0</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_output_79c648ca1bacd510c385ea85604bcbc0</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_output</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:50:27</sys_created_on>
+        <sys_id>bb9190461becd510c385ea85604bcb3b</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:28</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_output>
+    <sys_hub_action_instance action="delete_multiple" query="flow=79c648ca1bacd510c385ea85604bcbc0^sys_idNOT IN1ec688ca1bacd510c385ea85604bcba8,5ac688ca1bacd510c385ea85604bcbb0,82c688ca1bacd510c385ea85604bcb6e"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="ATAT Secure POST Request">54a61b2497c011101e0835dfe153afb0</action_type>
+        <action_type_parent/>
+        <comment/>
+        <compiled_snapshot>921e87a8978011101e0835dfe153afb4</compiled_snapshot>
+        <display_text/>
+        <flow display_value="ATAT Send Cost Request">79c648ca1bacd510c385ea85604bcbc0</flow>
+        <order>2</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:06</sys_created_on>
+        <sys_id>1ec688ca1bacd510c385ea85604bcba8</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:28</sys_updated_on>
+        <ui_id>c2b784e4-700a-4680-884c-3ee25fa9ba7a</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=1ec688ca1bacd510c385ea85604bcba8"/>
+    <sys_element_mapping action="delete_multiple" query="id=1ec688ca1bacd510c385ea85604bcba8"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>aws_credential</field>
+        <id>1ec688ca1bacd510c385ea85604bcba8</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:06</sys_created_on>
+        <sys_id>1ac688ca1bacd510c385ea85604bcbab</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:06</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value>{{subflow.aws_credential}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>aws_region</field>
+        <id>1ec688ca1bacd510c385ea85604bcba8</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:06</sys_created_on>
+        <sys_id>1ec688ca1bacd510c385ea85604bcbaa</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:06</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value>{{subflow.aws_region.value}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>base_url</field>
+        <id>1ec688ca1bacd510c385ea85604bcba8</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:06</sys_created_on>
+        <sys_id>56c688ca1bacd510c385ea85604bcbab</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:06</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value>{{subflow.base_url.value}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>portfolio</field>
+        <id>1ec688ca1bacd510c385ea85604bcba8</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:50:27</sys_created_on>
+        <sys_id>3b9190461becd510c385ea85604bcb9c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:27</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value>{{subflow.portfolio}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>request_body</field>
+        <id>1ec688ca1bacd510c385ea85604bcba8</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:06</sys_created_on>
+        <sys_id>dec688ca1bacd510c385ea85604bcbaa</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:06</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value>{{3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>resource_path</field>
+        <id>1ec688ca1bacd510c385ea85604bcba8</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:06</sys_created_on>
+        <sys_id>92c688ca1bacd510c385ea85604bcbab</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:06</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value>{{subflow.resource_path.value}}</value>
+    </sys_element_mapping>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Log">0e0ae8c2531003003bf1d9109ec587c8</action_type>
+        <action_type_parent/>
+        <comment/>
+        <compiled_snapshot>0e0ae8c2531003003bf1d9109ec587c8</compiled_snapshot>
+        <display_text/>
+        <flow display_value="ATAT Send Cost Request">79c648ca1bacd510c385ea85604bcbc0</flow>
+        <order>4</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:06</sys_created_on>
+        <sys_id>5ac688ca1bacd510c385ea85604bcbb0</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:28</sys_updated_on>
+        <ui_id>d801f01a-a9b0-4f63-938b-3da1e718a2b9</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=5ac688ca1bacd510c385ea85604bcbb0"/>
+    <sys_element_mapping action="delete_multiple" query="id=5ac688ca1bacd510c385ea85604bcbb0"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>log_message</field>
+        <id>5ac688ca1bacd510c385ea85604bcbb0</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:06</sys_created_on>
+        <sys_id>1ac688ca1bacd510c385ea85604bcbb1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:06</sys_updated_on>
+        <table>var__m_sys_hub_action_input_0e0ae8c2531003003bf1d9109ec587c8</table>
+        <value>Response:{{c2b784e4-700a-4680-884c-3ee25fa9ba7a.variable}}.
+Cost Request ID: {{3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id}}.</value>
+    </sys_element_mapping>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Generate Cost Request">e083e70f2f005110e58359a72799b6a4</action_type>
+        <action_type_parent/>
+        <comment/>
+        <compiled_snapshot>f323d3fe2fc01110e58359a72799b644</compiled_snapshot>
+        <display_text/>
+        <flow display_value="ATAT Send Cost Request">79c648ca1bacd510c385ea85604bcbc0</flow>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:06</sys_created_on>
+        <sys_id>82c688ca1bacd510c385ea85604bcb6e</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:28</sys_updated_on>
+        <ui_id>3a2e2a96-cd91-4072-bca5-4e40a88764c3</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=82c688ca1bacd510c385ea85604bcb6e"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>82c688ca1bacd510c385ea85604bcb6e</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:06</sys_created_on>
+        <sys_id>0ac688ca1bacd510c385ea85604bcb70</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:06</sys_updated_on>
+        <value/>
+        <variable display_value="Start Date">6483e70f2f005110e58359a72799b6b2</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>82c688ca1bacd510c385ea85604bcb6e</document_key>
+        <order>3</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:06</sys_created_on>
+        <sys_id>46c688ca1bacd510c385ea85604bcb70</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:06</sys_updated_on>
+        <value/>
+        <variable display_value="End Date">ac83e70f2f005110e58359a72799b6c4</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=82c688ca1bacd510c385ea85604bcb6e"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>end_date</field>
+        <id>82c688ca1bacd510c385ea85604bcb6e</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:06</sys_created_on>
+        <sys_id>4ec688ca1bacd510c385ea85604bcb6f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:06</sys_updated_on>
+        <table>var__m_sys_hub_action_input_e083e70f2f005110e58359a72799b6a4</table>
+        <value>{{subflow.end_date}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>portfolio</field>
+        <id>82c688ca1bacd510c385ea85604bcb6e</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:06</sys_created_on>
+        <sys_id>02c688ca1bacd510c385ea85604bcb70</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:06</sys_updated_on>
+        <table>var__m_sys_hub_action_input_e083e70f2f005110e58359a72799b6a4</table>
+        <value>{{subflow.portfolio}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>start_date</field>
+        <id>82c688ca1bacd510c385ea85604bcb6e</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:06</sys_created_on>
+        <sys_id>c2c688ca1bacd510c385ea85604bcb70</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:06</sys_updated_on>
+        <table>var__m_sys_hub_action_input_e083e70f2f005110e58359a72799b6a4</table>
+        <value>{{subflow.start_date}}</value>
+    </sys_element_mapping>
+    <sys_hub_flow_logic action="delete_multiple" query="flow=79c648ca1bacd510c385ea85604bcbc0^sys_idNOT IN86c688ca1bacd510c385ea85604bcb5a"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">76be9f051b941110c385ea85604bcba0</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="ATAT Send Cost Request">79c648ca1bacd510c385ea85604bcbc0</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="Assign Subflow Outputs">df4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>3</order>
+        <outputs_assigned>cost_request_id,response,response_status</outputs_assigned>
+        <outputs_to_assign/>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:05</sys_created_on>
+        <sys_id>86c688ca1bacd510c385ea85604bcb5a</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:28</sys_updated_on>
+        <ui_id>77f7dfd5-c532-42e3-a1df-045d5a658fc7</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=86c688ca1bacd510c385ea85604bcb5a"/>
+    <sys_element_mapping action="delete_multiple" query="id=86c688ca1bacd510c385ea85604bcb5a"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>cost_request_id</field>
+        <id>86c688ca1bacd510c385ea85604bcb5a</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:05</sys_created_on>
+        <sys_id>0ec688ca1bacd510c385ea85604bcb5d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:05</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_79c648ca1bacd510c385ea85604bcbc0</table>
+        <value>{{3a2e2a96-cd91-4072-bca5-4e40a88764c3.cost_request_id}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>response</field>
+        <id>86c688ca1bacd510c385ea85604bcb5a</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:50:27</sys_created_on>
+        <sys_id>04a190461becd510c385ea85604bcba5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:27</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_79c648ca1bacd510c385ea85604bcbc0</table>
+        <value>{{c2b784e4-700a-4680-884c-3ee25fa9ba7a.variable}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>response_status</field>
+        <id>86c688ca1bacd510c385ea85604bcb5a</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:50:27</sys_created_on>
+        <sys_id>40a190461becd510c385ea85604bcba5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:27</sys_updated_on>
+        <table>var__m_sys_hub_flow_output_79c648ca1bacd510c385ea85604bcbc0</table>
+        <value>{{c2b784e4-700a-4680-884c-3ee25fa9ba7a.response_status}}</value>
+    </sys_element_mapping>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_79c648ca1bacd510c385ea85604bcbc0^sys_idNOT IN02c688ca1bacd510c385ea85604bcb2d,3dc688ca1bacd510c385ea85604bcb1d,46c688ca1bacd510c385ea85604bcb41,71c648ca1bacd510c385ea85604bcbf1,7dc688ca1bacd510c385ea85604bcb0e,82c688ca1bacd510c385ea85604bcb37,fdc648ca1bacd510c385ea85604bcbff"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>portfolio</element>
+        <help/>
+        <hint/>
+        <label>Portfolio</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_79c648ca1bacd510c385ea85604bcbc0</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:05</sys_created_on>
+        <sys_id>02c688ca1bacd510c385ea85604bcb2d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:05</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>resource_path</element>
+        <help/>
+        <hint/>
+        <label>Resource Path</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_79c648ca1bacd510c385ea85604bcbc0</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:05</sys_created_on>
+        <sys_id>3dc688ca1bacd510c385ea85604bcb1d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:05</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>end_date</element>
+        <help/>
+        <hint/>
+        <label>End Date</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_79c648ca1bacd510c385ea85604bcbc0</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:05</sys_created_on>
+        <sys_id>46c688ca1bacd510c385ea85604bcb41</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:05</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>aws_credential</element>
+        <help/>
+        <hint/>
+        <label>AWS Credential</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_79c648ca1bacd510c385ea85604bcbc0</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:04</sys_created_on>
+        <sys_id>71c648ca1bacd510c385ea85604bcbf1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:04</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>base_url</element>
+        <help/>
+        <hint/>
+        <label>Base URL</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_79c648ca1bacd510c385ea85604bcbc0</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:05</sys_created_on>
+        <sys_id>7dc688ca1bacd510c385ea85604bcb0e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:05</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>start_date</element>
+        <help/>
+        <hint/>
+        <label>Start Date</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_79c648ca1bacd510c385ea85604bcbc0</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:05</sys_created_on>
+        <sys_id>82c688ca1bacd510c385ea85604bcb37</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:05</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>aws_region</element>
+        <help/>
+        <hint/>
+        <label>AWS Region</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_79c648ca1bacd510c385ea85604bcbc0</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:04</sys_created_on>
+        <sys_id>fdc648ca1bacd510c385ea85604bcbff</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:04</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_79c648ca1bacd510c385ea85604bcbc0^sys_idNOT IN7f9190461becd510c385ea85604bcb52,b39190461becd510c385ea85604bcb6e,cac688ca1bacd510c385ea85604bcb54"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>response</element>
+        <help/>
+        <hint/>
+        <label>Response</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_output_79c648ca1bacd510c385ea85604bcbc0</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:50:27</sys_created_on>
+        <sys_id>7f9190461becd510c385ea85604bcb52</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:27</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>response_status</element>
+        <help/>
+        <hint/>
+        <label>Response Status</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_output_79c648ca1bacd510c385ea85604bcbc0</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:50:27</sys_created_on>
+        <sys_id>b39190461becd510c385ea85604bcb6e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:50:27</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>cost_request_id</element>
+        <help/>
+        <hint/>
+        <label>Cost Request ID</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_output_79c648ca1bacd510c385ea85604bcbc0</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-07-08 18:03:05</sys_created_on>
+        <sys_id>cac688ca1bacd510c385ea85604bcb54</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-08 18:03:05</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_hub_flow action="update">
+        <sys_id>e57ec3fa2fc01110e58359a72799b622</sys_id>
+        <latest_snapshot>79c648ca1bacd510c385ea85604bcbc0</latest_snapshot>
+    </sys_hub_flow>
 </record_update>
