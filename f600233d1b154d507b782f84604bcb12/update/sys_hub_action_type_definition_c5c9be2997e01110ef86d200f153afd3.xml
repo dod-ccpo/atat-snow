@@ -27,7 +27,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>c5c9be2997e01110ef86d200f153afd3</sys_id>
-        <sys_mod_count>23</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_name>Persist Costs Payload</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -35,7 +35,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_c5c9be2997e01110ef86d200f153afd3</sys_update_name>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-07-11 20:11:41</sys_updated_on>
+        <sys_updated_on>2022-07-11 21:05:19</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -286,18 +286,6 @@ function handleCostObject(costObject, outputs) {
         <sys_updated_on>2022-07-07 18:07:10</sys_updated_on>
         <table>var__m_sys_hub_step_ext_input_e05af6e597e01110ef86d200f153afcc</table>
         <value>{{action.cost_response}}</value>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>script</field>
-        <id>e05af6e597e01110ef86d200f153afcc</id>
-        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
-        <sys_created_on>2022-07-07 18:21:20</sys_created_on>
-        <sys_id>6b51c7212fa09110e58359a72799b690</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-07-07 18:21:20</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
     </sys_element_mapping>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_step_ext_output_e05af6e597e01110ef86d200f153afcc^id=e05af6e597e01110ef86d200f153afcc"/>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7^id=e05af6e597e01110ef86d200f153afcc"/>
@@ -1021,7 +1009,7 @@ function handleCostObject(costObject, outputs) {
     <sys_hub_status_condition action="delete_multiple" query="action_status_metadata_id=aed9726997e01110ef86d200f153afda^sys_idNOT IN4ad203a12fa09110e58359a72799b66e"/>
     <sys_hub_status_condition action="INSERT_OR_UPDATE">
         <action_status_metadata_id display_value="Created 2022-07-07 10:48:29">aed9726997e01110ef86d200f153afda</action_status_metadata_id>
-        <condition>{{step[858c980e-50bd-448c-a1f7-7af6adc2f0c1].__step_status__.message}}=Error: Cannot convert null to an object.,Detail: Cannot convert null to an object.</condition>
+        <condition>{{step[858c980e-50bd-448c-a1f7-7af6adc2f0c1].__step_status__.message}}=Error: Cannot convert null to an object.,Detail: Cannot convert null to an object.^NQ{{step[858c980e-50bd-448c-a1f7-7af6adc2f0c1].__step_status__.message}}=Error: Empty JSON string,Detail: Empty JSON string</condition>
         <dont_treat_as_error>true</dont_treat_as_error>
         <label>empty array</label>
         <order>1</order>
@@ -1029,9 +1017,9 @@ function handleCostObject(costObject, outputs) {
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-07-07 18:27:47</sys_created_on>
         <sys_id>4ad203a12fa09110e58359a72799b66e</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-07-11 20:06:36</sys_updated_on>
+        <sys_updated_on>2022-07-11 21:04:07</sys_updated_on>
     </sys_hub_status_condition>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_input_c5c9be2997e01110ef86d200f153afd3^sys_idNOT INaed9726997e01110ef86d200f153afd6"/>
     <sys_documentation action="INSERT_OR_UPDATE">
@@ -1154,17 +1142,17 @@ function handleCostObject(costObject, outputs) {
     <sys_hub_action_plan action="INSERT_OR_UPDATE">
         <action_id display_value="Persist Costs Payload">c5c9be2997e01110ef86d200f153afd3</action_id>
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"7dda72a997e01110ef86d200f153af47","name":"plan","plan_signature":null}}</plan>
-        <snapshot>4bf0cc0f2f241110e58359a72799b6f6</snapshot>
+        <snapshot>a44dcccb2f641110e58359a72799b630</snapshot>
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-07-07 17:52:49</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>7dda72a997e01110ef86d200f153af47</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_overrides/>
         <sys_scope/>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-07-11 20:11:43</sys_updated_on>
+        <sys_updated_on>2022-07-11 21:05:21</sys_updated_on>
     </sys_hub_action_plan>
     <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
@@ -1450,18 +1438,6 @@ function handleCostObject(costObject, outputs) {
         <sys_updated_on>2022-07-07 18:25:10</sys_updated_on>
         <table>var__m_sys_hub_step_ext_input_25da32a997e01110ef86d200f153afee</table>
         <value>{{action.cost_response}}</value>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>script</field>
-        <id>25da32a997e01110ef86d200f153afee</id>
-        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
-        <sys_created_on>2022-07-07 18:25:10</sys_created_on>
-        <sys_id>eb3247612fa09110e58359a72799b66c</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-07-07 18:25:10</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
     </sys_element_mapping>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_step_ext_output_25da32a997e01110ef86d200f153afee^id=25da32a997e01110ef86d200f153afee"/>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7^id=25da32a997e01110ef86d200f153afee"/>
@@ -2182,20 +2158,20 @@ function handleCostObject(costObject, outputs) {
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-07-07 17:52:48</sys_updated_on>
     </sys_hub_action_status_metadata>
-    <sys_hub_status_condition action="delete_multiple" query="action_status_metadata_id=f9da72a997e01110ef86d200f153af18^sys_idNOT IN83f0cc0f2f241110e58359a72799b6f6"/>
+    <sys_hub_status_condition action="delete_multiple" query="action_status_metadata_id=f9da72a997e01110ef86d200f153af18^sys_idNOT IN684dcccb2f641110e58359a72799b62f"/>
     <sys_hub_status_condition action="INSERT_OR_UPDATE">
         <action_status_metadata_id display_value="Created 2022-07-07 10:52:48">f9da72a997e01110ef86d200f153af18</action_status_metadata_id>
-        <condition>{{step[858c980e-50bd-448c-a1f7-7af6adc2f0c1].__step_status__.message}}=Error: Cannot convert null to an object.,Detail: Cannot convert null to an object.</condition>
+        <condition>{{step[858c980e-50bd-448c-a1f7-7af6adc2f0c1].__step_status__.message}}=Error: Cannot convert null to an object.,Detail: Cannot convert null to an object.^NQ{{step[858c980e-50bd-448c-a1f7-7af6adc2f0c1].__step_status__.message}}=Error: Empty JSON string,Detail: Empty JSON string</condition>
         <dont_treat_as_error>true</dont_treat_as_error>
         <label>empty array</label>
         <order>1</order>
         <status>{"version":"1.0","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":"200"}},"message":{"$cv":{"$c":"java.lang.String","$v":"No Cost Responses were consumed."}}},"complexObjectSchema":{"FlowDesigner:FDACTIONSTATUS":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"true\",\"hint\":null,\"uiType\":\"integer\",\"default_value\":\"\",\"action_error_output\":\"true\",\"label\":\"Code\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"true\",\"hint\":null,\"uiType\":\"string\",\"default_value\":null,\"action_error_output\":\"true\",\"label\":\"Message\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FDACTIONSTATUS.$type_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FDACTIONSTATUS\",\"read_only\":\"true\",\"hint\":null,\"uiType\":\"object\",\"default_value\":\"\",\"label\":\"Action Status\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"0\",\"uiUniqueId\":\"8e3eb395-c990-4a7d-b8da-081a1acab7eb\"}"}},"serializationFormat":"JSON"}</status>
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
-        <sys_created_on>2022-07-11 20:11:41</sys_created_on>
-        <sys_id>83f0cc0f2f241110e58359a72799b6f6</sys_id>
+        <sys_created_on>2022-07-11 21:05:18</sys_created_on>
+        <sys_id>684dcccb2f641110e58359a72799b62f</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-07-11 20:11:41</sys_updated_on>
+        <sys_updated_on>2022-07-11 21:05:18</sys_updated_on>
     </sys_hub_status_condition>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_input_edda32a997e01110ef86d200f153afe3^sys_idNOT IN21da32a997e01110ef86d200f153afec"/>
     <sys_documentation action="INSERT_OR_UPDATE">
