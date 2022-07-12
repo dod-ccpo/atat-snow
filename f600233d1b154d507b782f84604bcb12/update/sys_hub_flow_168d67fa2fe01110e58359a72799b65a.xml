@@ -29,15 +29,15 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>168d67fa2fe01110e58359a72799b65a</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name>ATAT Cost Response Orchestrator</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_flow_168d67fa2fe01110e58359a72799b65a</sys_update_name>
-        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-07-12 21:09:18</sys_updated_on>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-07-12 21:12:57</sys_updated_on>
         <type>flow</type>
     </sys_hub_flow>
     <sys_translated_text action="delete_multiple" query="documentkey=168d67fa2fe01110e58359a72799b65a"/>
@@ -63,6 +63,41 @@
         <time/>
         <timer_type>1</timer_type>
     </sys_flow_timer_trigger>
+    <sys_flow_trigger_auto_script action="delete_multiple" query="name=Trigger:3180f3322f241110e58359a72799b629^sys_idNOT IN5ee2d4032fa41110e58359a72799b6f4"/>
+    <sys_flow_trigger_auto_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <business_calendar/>
+        <condition/>
+        <conditional>false</conditional>
+        <entered_time/>
+        <name>Trigger:3180f3322f241110e58359a72799b629</name>
+        <offset/>
+        <offset_type>0</offset_type>
+        <run_as display_value="">aa0c12a82f401110e58359a72799b646</run_as>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek/>
+        <run_period>1970-01-01 00:30:00</run_period>
+        <run_start>2022-07-11 21:30:00</run_start>
+        <run_time/>
+        <run_type>periodically</run_type>
+        <script><![CDATA[sn_flow_trigger.FlowTriggerAPI.fireTimerTrigger('3180f3322f241110e58359a72799b629');]]></script>
+        <sys_class_name>sys_flow_trigger_auto_script</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-11 21:30:00</sys_created_on>
+        <sys_id>5ee2d4032fa41110e58359a72799b6f4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-11 21:30:00</sys_updated_on>
+        <time_zone/>
+        <trigger display_value="">3180f3322f241110e58359a72799b629</trigger>
+        <upgrade_safe>true</upgrade_safe>
+    </sys_flow_trigger_auto_script>
     <sys_hub_trigger_instance action="delete_multiple" query="flow=168d67fa2fe01110e58359a72799b65a^sys_idNOT INb0fd677e2fe01110e58359a72799b6b7"/>
     <sys_hub_trigger_instance action="INSERT_OR_UPDATE">
         <comment/>
@@ -510,7 +545,7 @@ Updated {{a4635a17-2164-43fc-b92a-5ac90254bc86.total_updated_cost_records}} exis
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-07-11 18:59:44</sys_updated_on>
         <value>badb437a2fc01110e58359a72799b6a5</value>
-        <variable display_value="Base URL">bacde77e2fe01110e58359a72799b6f5</variable>
+        <variable display_value="">bacde77e2fe01110e58359a72799b6f5</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>sys_hub_sub_flow_instance</document>
@@ -524,7 +559,7 @@ Updated {{a4635a17-2164-43fc-b92a-5ac90254bc86.total_updated_cost_records}} exis
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-07-11 18:59:44</sys_updated_on>
         <value>2c74d7d32fd01110e58359a72799b616</value>
-        <variable display_value="Resource Path">f6cd2b7e2fe01110e58359a72799b610</variable>
+        <variable display_value="">f6cd2b7e2fe01110e58359a72799b610</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>sys_hub_sub_flow_instance</document>
@@ -538,7 +573,7 @@ Updated {{a4635a17-2164-43fc-b92a-5ac90254bc86.total_updated_cost_records}} exis
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-07-11 18:59:44</sys_updated_on>
         <value>7a841bd32fd01110e58359a72799b63a</value>
-        <variable display_value="AWS Region">fecde77e2fe01110e58359a72799b6da</variable>
+        <variable display_value="">fecde77e2fe01110e58359a72799b6da</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>sys_hub_sub_flow_instance</document>
@@ -566,7 +601,7 @@ Updated {{a4635a17-2164-43fc-b92a-5ac90254bc86.total_updated_cost_records}} exis
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-07-11 18:59:44</sys_updated_on>
         <value>6659fbd42f501110e58359a72799b6bc</value>
-        <variable display_value="AWS Credential">e2cde77e2fe01110e58359a72799b66d</variable>
+        <variable display_value="">e2cde77e2fe01110e58359a72799b66d</variable>
     </sys_variable_value>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_input_7b7ab2e597e01110ef86d200f153af78^id=c980b3322f241110e58359a72799b6a4"/>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_sub_flow_instance_inputs_c980b3322f241110e58359a72799b6a4^id=c980b3322f241110e58359a72799b6a4"/>
