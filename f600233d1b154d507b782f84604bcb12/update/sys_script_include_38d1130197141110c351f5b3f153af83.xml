@@ -17,17 +17,18 @@ delivery_order_number: string (optional)&#13;
 </description>
         <name>edaPdsRequest</name>
         <script><![CDATA[function edaPdsRequest(payload){
+	var http_payload;
 	try{
-		// outbound REST message
+		// Outbound REST message
 		var request = new sn_ws.RESTMessageV2();
 		
-		// request set-up
+		// Request set-up
 		request.setEndpoint(payload.endpoint);
 		request.setHttpMethod("get");
 		request.setLogLevel("all");
 		request.setMutualAuth("mauth");
 		
-		// add query parameters
+		// Add query parameters
 		if(payload.contract_number){
 			request.setQueryParameter("contractNumber", payload.contract_number);
 		}
@@ -35,15 +36,23 @@ delivery_order_number: string (optional)&#13;
 			request.setQueryParameter("deliveryOrderNumber", payload.delivery_order_number);
 		}
 		
-		// make request
+		// Make request
 		var response = request.execute();
-		// check for errors
-		if(response.getStatusCode() != "200" && response.getStatusCode() != "204"){
+		// Check for errors
+		if(response.getStatusCode() != "200"){
 			gs.error(response.getStatusCode());
 			gs.error(response.getBody());
-			gs.addErrorMessage("Error: " + response.getStatusCode() + " " + response.getBody());
+			var errorMessage = "Error: " + response.getStatusCode() + " " + response.getBody() + " response, no XML retrieved";
+			http_payload = {
+				body: response.getBody(),
+				status_code: response.getStatusCode(),
+				headers: response.getAllHeaders(),
+				error: errorMessage
+			};
+			return http_payload;
+			
 		}
-		var http_payload = {
+		http_payload = {
 			body: response.getBody(),
 			status_code: response.getStatusCode(),
 			headers: response.getAllHeaders(),
@@ -51,22 +60,21 @@ delivery_order_number: string (optional)&#13;
 		return http_payload;
 	}
 	catch(error){
-		gs.error('Internal SNOW error => ' + error);
-		gs.error('Error Stack => ' + error.stack);
-		gs.addErrorMessage(error);
+		gs.error("Internal SNOW error => " + error);
+		gs.error("Error Stack => " + error.stack);
 	}
 }]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-06-23 20:05:58</sys_created_on>
         <sys_id>38d1130197141110c351f5b3f153af83</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_name>edaPdsRequest</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_38d1130197141110c351f5b3f153af83</sys_update_name>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2022-07-12 21:00:40</sys_updated_on>
+        <sys_updated_on>2022-07-13 18:10:14</sys_updated_on>
     </sys_script_include>
 </record_update>

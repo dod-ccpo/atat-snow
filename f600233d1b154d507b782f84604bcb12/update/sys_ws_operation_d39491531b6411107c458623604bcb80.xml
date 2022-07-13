@@ -11,6 +11,7 @@
 	var edaPds = new GlideRecord("x_g_dis_atat_environment_config");
 	edaPds.get("name", "eda-pds");
 	var requestBody = request.body.data;
+	// Create request payload
 	var payload = {
 		endpoint: edaPds.endpoint,
 		delivery_order_number: requestBody.delivery_order_number,
@@ -18,24 +19,24 @@
 	};
 	// Make GET request to endpoint
 	var my_procurement_doc = edaPdsRequest(payload);
-	
-	// Check array of error messages created with .addErrorMessage
-	// If there are any messages, return a 500 Internal Server Error
-	if (gs.getErrorMessages(my_procurement_doc).length > 0){
+	if (my_procurement_doc.error){
 		var pdsReqError = new sn_ws_err.ServiceError();
-		pdsReqError.setMessage(gs.getErrorMessages(my_procurement_doc).toString());
+		pdsReqError.setMessage(my_procurement_doc.error);
 		pdsReqError.setDetail("Check System>System Logs>Errors for thrown error from edaPdsRequest");
 		return pdsReqError;
 	}
-	var responseMessage = edaPdsResult(my_procurement_doc);
-	if (gs.getErrorMessages(responseMessage).length > 0){
-		var pdsResError = new sn_ws_err.ServiceError();
-		pdsResError.setMessage(gs.getErrorMessages(responseMessage).toString());
-		pdsResError.setDetail("Check System>System Logs>Errors for thrown error from edaPdsResult");
-		return pdsResError;
+	else{
+		var responseMessage = edaPdsResult(my_procurement_doc);
+		if (responseMessage.error){
+			var pdsResError = new sn_ws_err.ServiceError();
+			pdsResError.setMessage(responseMessage.error);
+			pdsResError.setDetail("Check System>System Logs>Errors for thrown error from edaPdsResult");
+			return pdsResError;
+		}
+		else {
+			return responseMessage();
+		}
 	}
-	
-	return responseMessage;
 })(request, response);]]></operation_script>
         <operation_uri>/api/x_g_dis_atat/eda/pds</operation_uri>
         <produces>application/json,application/xml,text/xml</produces>
@@ -50,14 +51,14 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-07-12 20:56:08</sys_created_on>
         <sys_id>d39491531b6411107c458623604bcb80</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>13</sys_mod_count>
         <sys_name>PDS</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_ws_operation_d39491531b6411107c458623604bcb80</sys_update_name>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2022-07-13 16:14:03</sys_updated_on>
+        <sys_updated_on>2022-07-13 18:07:23</sys_updated_on>
         <web_service_definition display_value="EDA">841459131b6411107c458623604bcbcd</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
