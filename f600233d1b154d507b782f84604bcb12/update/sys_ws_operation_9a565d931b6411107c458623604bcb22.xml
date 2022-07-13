@@ -24,15 +24,15 @@
 	// Check array of error messages created with .addErrorMessage
 	// If there are any messages, return a 500 Internal Server Error
 	var responseMessage = edaPdsResult(my_procurement_doc);
-	if (gs.getErrorMessages(responseMessage).length > 0){
+	if (responseMessage.error){
 		var pdsResError = new sn_ws_err.ServiceError();
-		pdsResError.setMessage(gs.getErrorMessages(responseMessage).toString());
+		pdsResError.setMessage(responseMessage.error);
 		pdsResError.setDetail("Check System>System Logs>Errors for thrown error from edaPdsResult");
 		return pdsResError;
 	}
-	
-	return message = responseMessage;
-	
+	else {
+		return responseMessage;
+	}
 })(request, response);]]></operation_script>
         <operation_uri>/api/x_g_dis_atat/eda/pds-test</operation_uri>
         <produces>application/json,application/xml,text/xml</produces>
@@ -47,14 +47,14 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-07-12 21:03:59</sys_created_on>
         <sys_id>9a565d931b6411107c458623604bcb22</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>7</sys_mod_count>
         <sys_name>PDSTest</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_ws_operation_9a565d931b6411107c458623604bcb22</sys_update_name>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2022-07-12 21:49:30</sys_updated_on>
+        <sys_updated_on>2022-07-13 18:23:29</sys_updated_on>
         <web_service_definition display_value="EDA">841459131b6411107c458623604bcbcd</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
