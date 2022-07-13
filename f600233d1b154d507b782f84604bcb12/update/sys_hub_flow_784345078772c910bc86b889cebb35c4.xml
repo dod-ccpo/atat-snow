@@ -29,20 +29,22 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>784345078772c910bc86b889cebb35c4</sys_id>
-        <sys_mod_count>6</sys_mod_count>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name>Get Contacts of Type X for Acquisition Package</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_flow_784345078772c910bc86b889cebb35c4</sys_update_name>
-        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-04-16 02:17:01</sys_updated_on>
+        <sys_updated_by>julius.fitzhugh-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-13 11:24:16</sys_updated_on>
         <type>subflow</type>
     </sys_hub_flow>
     <sys_translated_text action="delete_multiple" query="documentkey=784345078772c910bc86b889cebb35c4"/>
     <sys_variable_value action="delete_multiple" query="document_key=784345078772c910bc86b889cebb35c4"/>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_784345078772c910bc86b889cebb35c4^id=784345078772c910bc86b889cebb35c4"/>
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=784345078772c910bc86b889cebb35c4"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=784345078772c910bc86b889cebb35c4"/>
     <sys_flow_cat_variable_model action="delete_multiple" query="id=784345078772c910bc86b889cebb35c4^sys_idNOT IN744345078772c910bc86b889cebb35c6"/>
     <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
         <id>784345078772c910bc86b889cebb35c4</id>
@@ -55,6 +57,7 @@
         <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-04-16 01:11:22</sys_updated_on>
     </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=744345078772c910bc86b889cebb35c6"/>
     <sys_hub_flow_input action="delete_multiple" query="model=784345078772c910bc86b889cebb35c4^sys_idNOT IN304345078772c910bc86b889cebb35d3,784345078772c910bc86b889cebb35cc"/>
     <sys_hub_flow_input action="INSERT_OR_UPDATE">
         <active>true</active>
@@ -300,6 +303,7 @@
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_flow_output>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=784345078772c910bc86b889cebb35c4"/>
     <sys_hub_action_instance action="delete_multiple" query="flow=784345078772c910bc86b889cebb35c4^sys_idNOT IN304345078772c910bc86b889cebb35fd,414385078772c910bc86b889cebb3508,454385078772c910bc86b889cebb350f,c54385078772c910bc86b889cebb3514"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
@@ -388,6 +392,8 @@
         <table>var__m_sys_hub_action_input_9d09f99587003300663ca1bb36cb0ba3</table>
         <value/>
     </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=304345078772c910bc86b889cebb35fd"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=304345078772c910bc86b889cebb35fd"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
@@ -475,6 +481,8 @@
         <table>var__m_sys_hub_action_input_43400a1587003300663ca1bb36cb0b4b</table>
         <value/>
     </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=414385078772c910bc86b889cebb3508"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=414385078772c910bc86b889cebb3508"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
@@ -510,6 +518,8 @@
         <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
         <value>Found {{b02e65a3-9b48-4117-aa19-d3d4f9acaa6e.Count}} contacts of type {{subflow.contact_type}} for acquisition package {{74fd72bc-80df-46a0-9d97-2864cfd9e6bd.Record.number}}</value>
     </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=454385078772c910bc86b889cebb350f"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=454385078772c910bc86b889cebb350f"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
@@ -545,6 +555,9 @@
         <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
         <value>{{6cf917f1-7f04-42a4-a4ef-4704932af631.item.contacts.first_name}} {{6cf917f1-7f04-42a4-a4ef-4704932af631.item.contacts.middle_name}} {{6cf917f1-7f04-42a4-a4ef-4704932af631.item.contacts.last_name}}:{{6cf917f1-7f04-42a4-a4ef-4704932af631.item.contacts.email}}</value>
     </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=c54385078772c910bc86b889cebb3514"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=c54385078772c910bc86b889cebb3514"/>
+    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=784345078772c910bc86b889cebb35c4"/>
     <sys_hub_flow_logic action="delete_multiple" query="flow=784345078772c910bc86b889cebb35c4^sys_idNOT INb04345078772c910bc86b889cebb35f1,f84345078772c910bc86b889cebb35ec"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">8889777a87fa8910bc86b889cebb3525</block>
@@ -590,6 +603,8 @@
         <table>var__m_sys_hub_flow_output_784345078772c910bc86b889cebb35c4</table>
         <value>{{b02e65a3-9b48-4117-aa19-d3d4f9acaa6e.Records}}</value>
     </sys_element_mapping>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=b04345078772c910bc86b889cebb35f1"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=b04345078772c910bc86b889cebb35f1"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">8889777a87fa8910bc86b889cebb351c</block>
         <comment/>
@@ -635,6 +650,10 @@
         <value>{{b02e65a3-9b48-4117-aa19-d3d4f9acaa6e.Records}}</value>
     </sys_element_mapping>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_784345078772c910bc86b889cebb35c4^id=f84345078772c910bc86b889cebb35ec"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=f84345078772c910bc86b889cebb35ec"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=f84345078772c910bc86b889cebb35ec"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=784345078772c910bc86b889cebb35c4"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=784345078772c910bc86b889cebb35c4"/>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_784345078772c910bc86b889cebb35c4^sys_idNOT IN304345078772c910bc86b889cebb35dd,784345078772c910bc86b889cebb35d1"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>contact_type</element>
@@ -649,11 +668,11 @@
         <sys_created_on>2022-04-16 01:11:23</sys_created_on>
         <sys_id>304345078772c910bc86b889cebb35dd</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>contact_type</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_flow_input_784345078772c910bc86b889cebb35c4_contact_type_en</sys_update_name>
         <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-04-16 01:11:23</sys_updated_on>
         <url/>
@@ -672,11 +691,11 @@
         <sys_created_on>2022-04-16 01:11:22</sys_created_on>
         <sys_id>784345078772c910bc86b889cebb35d1</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>acquisition_package_number</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_flow_input_784345078772c910bc86b889cebb35c4_acquisition_package_number_en</sys_update_name>
         <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-04-16 01:11:22</sys_updated_on>
         <url/>
@@ -759,16 +778,18 @@
         <sys_created_on>2022-04-16 02:15:42</sys_created_on>
         <sys_id>b2f1994787b2c910bc86b889cebb350a</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>contacts</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_flow_output_784345078772c910bc86b889cebb35c4_contacts_en</sys_update_name>
         <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-04-16 02:15:42</sys_updated_on>
         <url/>
         <url_target/>
     </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_784345078772c910bc86b889cebb35c4"/>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=784345078772c910bc86b889cebb35c4"/>
     <sys_flow_subflow_plan action="delete_multiple" query="plan_id=784345078772c910bc86b889cebb35c4^sys_idNOT INa784c9478772c910bc86b889cebb35d0"/>
     <sys_flow_subflow_plan action="INSERT_OR_UPDATE">
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_flow_subflow_plan","id":"a784c9478772c910bc86b889cebb35d0","name":"plan","plan_signature":null}}</plan>
@@ -827,6 +848,8 @@
     <sys_translated_text action="delete_multiple" query="documentkey=9784c9478772c910bc86b889cebb352d"/>
     <sys_variable_value action="delete_multiple" query="document_key=9784c9478772c910bc86b889cebb352d"/>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_9784c9478772c910bc86b889cebb352d^id=9784c9478772c910bc86b889cebb352d"/>
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=9784c9478772c910bc86b889cebb352d"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=9784c9478772c910bc86b889cebb352d"/>
     <sys_flow_cat_variable_model action="delete_multiple" query="id=9784c9478772c910bc86b889cebb352d^sys_idNOT IN1384c9478772c910bc86b889cebb352e"/>
     <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
         <id>9784c9478772c910bc86b889cebb352d</id>
@@ -839,6 +862,7 @@
         <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-04-16 01:17:00</sys_updated_on>
     </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=1384c9478772c910bc86b889cebb352e"/>
     <sys_hub_flow_input action="delete_multiple" query="model=9784c9478772c910bc86b889cebb352d^sys_idNOT IN1784c9478772c910bc86b889cebb352f,d784c9478772c910bc86b889cebb3542"/>
     <sys_hub_flow_input action="INSERT_OR_UPDATE">
         <active>true</active>
@@ -1084,6 +1108,7 @@
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_flow_output>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=9784c9478772c910bc86b889cebb352d"/>
     <sys_hub_action_instance action="delete_multiple" query="flow=9784c9478772c910bc86b889cebb352d^sys_idNOT IN1384c9478772c910bc86b889cebb3579,5384c9478772c910bc86b889cebb358f,5784c9478772c910bc86b889cebb358a,9384c9478772c910bc86b889cebb3583"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
@@ -1172,6 +1197,8 @@
         <table>var__m_sys_hub_action_input_9d09f99587003300663ca1bb36cb0ba3</table>
         <value/>
     </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=1384c9478772c910bc86b889cebb3579"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=1384c9478772c910bc86b889cebb3579"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
@@ -1207,6 +1234,8 @@
         <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
         <value>{{6cf917f1-7f04-42a4-a4ef-4704932af631.item.contacts.first_name}} {{6cf917f1-7f04-42a4-a4ef-4704932af631.item.contacts.middle_name}} {{6cf917f1-7f04-42a4-a4ef-4704932af631.item.contacts.last_name}}:{{6cf917f1-7f04-42a4-a4ef-4704932af631.item.contacts.email}}</value>
     </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=5384c9478772c910bc86b889cebb358f"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=5384c9478772c910bc86b889cebb358f"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
@@ -1242,6 +1271,8 @@
         <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
         <value>Found {{b02e65a3-9b48-4117-aa19-d3d4f9acaa6e.Count}} contacts of type {{subflow.contact_type}} for acquisition package {{74fd72bc-80df-46a0-9d97-2864cfd9e6bd.Record.number}}</value>
     </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=5784c9478772c910bc86b889cebb358a"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=5784c9478772c910bc86b889cebb358a"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
@@ -1329,6 +1360,9 @@
         <table>var__m_sys_hub_action_input_43400a1587003300663ca1bb36cb0b4b</table>
         <value/>
     </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=9384c9478772c910bc86b889cebb3583"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=9384c9478772c910bc86b889cebb3583"/>
+    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=9784c9478772c910bc86b889cebb352d"/>
     <sys_hub_flow_logic action="delete_multiple" query="flow=9784c9478772c910bc86b889cebb352d^sys_idNOT IN1b84c9478772c910bc86b889cebb356c,db84c9478772c910bc86b889cebb3568"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">8889777a87fa8910bc86b889cebb3525</block>
@@ -1374,6 +1408,8 @@
         <table>var__m_sys_hub_flow_output_9784c9478772c910bc86b889cebb352d</table>
         <value>{{b02e65a3-9b48-4117-aa19-d3d4f9acaa6e.Records}}</value>
     </sys_element_mapping>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=1b84c9478772c910bc86b889cebb356c"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=1b84c9478772c910bc86b889cebb356c"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">8889777a87fa8910bc86b889cebb351c</block>
         <comment/>
@@ -1419,6 +1455,10 @@
         <value>{{b02e65a3-9b48-4117-aa19-d3d4f9acaa6e.Records}}</value>
     </sys_element_mapping>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_9784c9478772c910bc86b889cebb352d^id=db84c9478772c910bc86b889cebb3568"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=db84c9478772c910bc86b889cebb3568"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=db84c9478772c910bc86b889cebb3568"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=9784c9478772c910bc86b889cebb352d"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=9784c9478772c910bc86b889cebb352d"/>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_9784c9478772c910bc86b889cebb352d^sys_idNOT IN1b84c9478772c910bc86b889cebb3551,9784c9478772c910bc86b889cebb353e"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>contact_type</element>
@@ -1433,7 +1473,7 @@
         <sys_created_on>2022-04-16 01:17:00</sys_created_on>
         <sys_id>1b84c9478772c910bc86b889cebb3551</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>contact_type</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -1456,7 +1496,7 @@
         <sys_created_on>2022-04-16 01:17:00</sys_created_on>
         <sys_id>9784c9478772c910bc86b889cebb353e</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>acquisition_package_number</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -1543,7 +1583,7 @@
         <sys_created_on>2022-04-16 02:16:59</sys_created_on>
         <sys_id>f542118787b2c910bc86b889cebb359d</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>contacts</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -1553,6 +1593,7 @@
         <url/>
         <url_target/>
     </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_9784c9478772c910bc86b889cebb352d"/>
     <sys_hub_flow action="update">
         <sys_id>784345078772c910bc86b889cebb35c4</sys_id>
         <latest_snapshot>9784c9478772c910bc86b889cebb352d</latest_snapshot>
