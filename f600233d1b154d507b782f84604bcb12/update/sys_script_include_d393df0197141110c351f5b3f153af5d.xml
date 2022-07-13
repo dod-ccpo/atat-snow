@@ -8,22 +8,118 @@
         <description>Logs payload from EDA PDS </description>
         <name>edaPdsResult</name>
         <script><![CDATA[function edaPdsResult(http_payload){
-	gs.info(http_payload.getBody());
-	gs.info(http_payload.getStatusCode());
-	gs.info(http_payload.getAllHeaders());
-	
+	var result;
+	try{
+		// Log http_payload
+		gs.info(http_payload.body);
+		gs.info(http_payload.status_code);
+		gs.info(http_payload.headers);
+
+		// Validate the XML before converting it to a string
+		// validateXML will return null if it passes validation
+		var xmlBody = http_payload.body;
+		var xmlValid = GlideXMLUtil.validateXML(xmlBody,false, false);
+		if (xmlValid == null){
+			// Parse the XML string as an XMLDocument2()
+			// This is required to use gs.xmlToJSON() without errors
+			// For more information please see: https://support.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0784264
+			var xmlStringBody = xmlBody.toString();
+			var xmlDoc = new XMLDocument2();
+			xmlDoc.setNamespaceAware(true);
+			xmlDoc.parseXML(xmlStringBody);
+			var jsonObject = gs.xmlToJSON(xmlDoc);
+
+			// As a result of parseXML, we are left with LineItems as an Array or an Object
+			// If it is an Array, that means there are CLIN records to create
+			// If it is an Object, that means there is a single CLIN record instead of a CLIN and INFOSLIN, requiring no CLIN creation
+			var lineItems = jsonObject.ProcurementDocument.AwardInstrument.ContractLineItems.LineItems;
+			var clins = [];
+			gs.info(Array.isArray(lineItems));
+			if (Array.isArray(lineItems)){
+				for (var i = 0; i< lineItems.length; i++){
+					// If LineItemType is INFOSLIN, we will create a CLIN record
+					if (lineItems[i].LineItemIdentifier.DFARS.LineItem.LineItemType == "INFOSLIN"){
+						var lineItemBase = lineItems[i].LineItemIdentifier.DFARS.LineItem.LineItemBase;
+						var popStartDate, popEndDate;
+						// We need to loop through lineItems again to find the matching CLIN that contains the popStartDate and popEndDate
+						for (var j = 0; j< lineItems.length; j++){
+							var lineItemToMatch = lineItems[j].LineItemIdentifier.DFARS.LineItem.LineItemBase;
+							if (lineItems[j].LineItemIdentifier.DFARS.LineItem.LineItemType == "CLIN" & lineItemToMatch == lineItemBase & lineItems[j].hasOwnProperty("LineItemDates")){
+								popStartDate = lineItems[j].LineItemDates.LineItemPeriod.PeriodStart.DateElement;
+								popEndDate = lineItems[j].LineItemDates.LineItemPeriod.PeriodEnd.DateElement;
+							}
+						}
+						var obligatedAmount = lineItems[i].LineItemAmounts.ItemObligatedAmount.ObligatedAmount;
+						// Create new CLIN record
+						var grClin = new GlideRecord("x_g_dis_atat_clin");
+						grClin.initialize();
+						grClin.setValue("clin_number", lineItemBase);
+						grClin.setValue("funds_obligated", obligatedAmount);
+						grClin.setValue("pop_start_date", popStartDate);
+						grClin.setValue("pop_end_date", popEndDate);
+						var newCLINSysID = grClin.insert();
+						clins.push(newCLINSysID);
+					}
+				}
+			}
+			// Check for created CLIN(s)
+			if (clins.length > 0){
+				// Extract startDate and endDate for the new Task Order record
+				var startDate = jsonObject.ProcurementDocument.AwardInstrument.ProcurementInstrumentHeader.ProcurementInstrumentDates.ProcurementInstrumentPeriods.StartDate;
+				var endDate = jsonObject.ProcurementDocument.AwardInstrument.ProcurementInstrumentHeader.ProcurementInstrumentDates.ProcurementInstrumentPeriods.EndDate;
+				// Create new Task Order parent record
+				var grTaskOrder = new GlideRecord("x_g_dis_atat_task_order");
+				grTaskOrder.initialize();
+				// W911S122F0003 is the hardcoded value, this will need to be altered later
+				grTaskOrder.setValue("task_order_number", "W911S122F0003");
+				grTaskOrder.setValue("pop_start_date", startDate);
+				grTaskOrder.setValue("pop_end_date", endDate);
+				grTaskOrder.setValue("clins", clins.toString());
+				var newTaskOrderSysID = grTaskOrder.insert();
+				// Return response
+				var responseMessage = "Success: created " + clins.length + " CLIN(s)";
+				result = {
+					success: responseMessage
+				};
+				return result;
+			}
+			else {
+				gs.error("Error: No CLINs created");
+				result = {
+					error: "No CLINs created"
+				};
+				return result;
+			}	
+		}
+		else{
+			// Log error string of xmlValid and include error message
+			gs.error(xmlValid);
+			result = {
+				error: "Invalid XML"
+			};
+			return result;
+		}
+	}
+	catch (error){
+		gs.error('Internal SNOW error => ' + error);
+		gs.error('Error Stack => ' + error.stack);
+		result = {
+			error: "Internal SNOW error"
+		};
+		return result;
+	}
 }]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-06-23 20:09:28</sys_created_on>
         <sys_id>d393df0197141110c351f5b3f153af5d</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_name>edaPdsResult</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_d393df0197141110c351f5b3f153af5d</sys_update_name>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2022-06-23 20:09:28</sys_updated_on>
+        <sys_updated_on>2022-07-13 17:55:21</sys_updated_on>
     </sys_script_include>
 </record_update>
