@@ -15,12 +15,12 @@
 		var request = new sn_ws.RESTMessageV2();
 		
 		// Request set-up
-		request.setEndpoint(payload.endpoint);
+		var gInvoicingEndpoint = payload.endpoint + "/" + payload.order_number;
+		request.setEndpoint(gInvoicingEndpoint);
 		request.setHttpMethod("get");
 		request.setLogLevel("all");
 		request.setMutualAuth("g-invoicing-mauth");
-		request.setRequestHeader("SystemID", "SYSDISAHACC01");
-		
+		request.setRequestHeader("SystemID", payload.system_id);
 		
 		// Make request
 		var response = request.execute();
@@ -28,12 +28,11 @@
 		if(response.getStatusCode() != "200"){
 			gs.error(response.getStatusCode());
 			gs.error(response.getBody());
-			var errorMessage = "Error: " + response.getStatusCode() + " " + response.getBody() + " response, no XML retrieved";
 			http_payload = {
 				body: response.getBody(),
 				status_code: response.getStatusCode(),
 				headers: response.getAllHeaders(),
-				error: errorMessage
+				valid: false,
 			};
 			return http_payload;
 			
@@ -42,6 +41,7 @@
 			body: response.getBody(),
 			status_code: response.getStatusCode(),
 			headers: response.getAllHeaders(),
+			valid: true,
 		};
 		return http_payload;
 	}
@@ -54,13 +54,13 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-07-14 15:26:59</sys_created_on>
         <sys_id>2a6c123f1b2091107c458623604bcbe3</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>12</sys_mod_count>
         <sys_name>gInvoicingRequest</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_2a6c123f1b2091107c458623604bcbe3</sys_update_name>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2022-07-14 17:07:10</sys_updated_on>
+        <sys_updated_on>2022-07-14 17:42:43</sys_updated_on>
     </sys_script_include>
 </record_update>
