@@ -1,0 +1,1732 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="DELETE">
+        <access>public</access>
+        <acls/>
+        <active>false</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <compiler_build/>
+        <copied_from>e11dd9d3870a0d10bc86b889cebb3572</copied_from>
+        <copied_from_name>AT-7081 New Acquisition Package</copied_from_name>
+        <description>AT-7081 Send DocuSign envelope, save envelope ID to acquisition pkg record</description>
+        <internal_name>at7081_new_acquisition_package</internal_name>
+        <label_cache>[{"name":"Updated_1.current.sys_id","label":"Trigger➛Acquisition Package Record➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"x_g_dis_atat_acquisition_package","column_name":"sys_id"},{"name":"c36914b9-2bf2-4646-91ee-cef03a9f59cb.__dont_treat_as_error__","label":"4➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"c36914b9-2bf2-4646-91ee-cef03a9f59cb.__action_status__","label":"4➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"c36914b9-2bf2-4646-91ee-cef03a9f59cb.error_message","label":"4➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"c36914b9-2bf2-4646-91ee-cef03a9f59cb.status","label":"4➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"7ce3bf9a-ff8d-4b33-9d8d-a1baee039636.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"7ce3bf9a-ff8d-4b33-9d8d-a1baee039636.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"7ce3bf9a-ff8d-4b33-9d8d-a1baee039636.envelope_id","label":"1➛Envelope","reference":"sn_docusign_spoke_envelopes","reference_display":"Envelopes","type":"reference","base_type":"reference","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"c7e30746-99bf-4ec0-b3b9-28afaa53b1c7"}},{"name":"7ce3bf9a-ff8d-4b33-9d8d-a1baee039636.error_message","label":"1➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"be3a9d5e-5ff6-49cb-8e19-01f71f1d5a6d"}},{"name":"7ce3bf9a-ff8d-4b33-9d8d-a1baee039636.status","label":"1➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"2d636182-211e-433b-a313-6f984a9b44b1"}},{"name":"d8aad1cd-3fc6-4ed6-a78e-0f268d7a27ed.status","label":"2➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"482e3bb3-ee94-42ed-ad93-7d669c1cd401"}},{"name":"d8aad1cd-3fc6-4ed6-a78e-0f268d7a27ed.error_message","label":"2➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"c64b14cb-2c93-46b8-8676-0023eaf12894"}},{"name":"d8aad1cd-3fc6-4ed6-a78e-0f268d7a27ed.__action_status__","label":"2➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"d8aad1cd-3fc6-4ed6-a78e-0f268d7a27ed.__dont_treat_as_error__","label":"2➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"335edd67-09fa-4d27-b749-886bf04a6a85.status","label":"3➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"482e3bb3-ee94-42ed-ad93-7d669c1cd401"}},{"name":"335edd67-09fa-4d27-b749-886bf04a6a85.error_message","label":"3➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"c64b14cb-2c93-46b8-8676-0023eaf12894"}},{"name":"335edd67-09fa-4d27-b749-886bf04a6a85.__action_status__","label":"3➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"335edd67-09fa-4d27-b749-886bf04a6a85.__dont_treat_as_error__","label":"3➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"678626b1-7dd8-43fc-b92d-7c24e5f02d33.__action_status__","label":"4➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"678626b1-7dd8-43fc-b92d-7c24e5f02d33.__dont_treat_as_error__","label":"4➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"7ce3bf9a-ff8d-4b33-9d8d-a1baee039636.envelope_id.id","label":"1➛Envelope➛ID","reference":"","reference_display":"ID","type":"string","base_type":"string","parent_table_name":"sn_docusign_spoke_envelopes","column_name":"id"},{"name":"93ad96b3-f090-43b5-b04b-e716762a81c4.record","label":"5➛Acquisition Package Record","reference":"x_g_dis_atat_acquisition_package","reference_display":"Acquisition Package Record","type":"reference","base_type":"reference","attributes":{"uiType":"document_id","uiTypeLabel":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"93ad96b3-f090-43b5-b04b-e716762a81c4.table_name","label":"5➛Acquisition Package Table","reference":"x_g_dis_atat_acquisition_package","reference_display":"Acquisition Package Table","type":"table_name","base_type":"table_name","attributes":{"uiType":"table_name","uiTypeLabel":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"93ad96b3-f090-43b5-b04b-e716762a81c4.status","label":"5➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"93ad96b3-f090-43b5-b04b-e716762a81c4.error_message","label":"5➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"93ad96b3-f090-43b5-b04b-e716762a81c4.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"93ad96b3-f090-43b5-b04b-e716762a81c4.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"Updated_1.current","label":"Trigger➛Acquisition Package Record","reference":"x_g_dis_atat_acquisition_package","reference_display":"Acquisition Package","type":"reference","base_type":"reference","attributes":{}},{"name":"a2a23f26-75b3-4565-b0d5-5200dfb287fd.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"a2a23f26-75b3-4565-b0d5-5200dfb287fd.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"Updated_1.current.number","label":"Trigger➛Acquisition Package Record➛Number","reference":"","reference_display":"Number","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_acquisition_package","column_name":"number"},{"name":"80f36b0d-399b-42cb-b664-c7e5181b2ebf.record","label":"5➛Acquisition Package Record","reference":"x_g_dis_atat_acquisition_package","reference_display":"Acquisition Package Record","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"80f36b0d-399b-42cb-b664-c7e5181b2ebf.table_name","label":"5➛Acquisition Package Table","reference":"x_g_dis_atat_acquisition_package","reference_display":"Acquisition Package Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"80f36b0d-399b-42cb-b664-c7e5181b2ebf.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"80f36b0d-399b-42cb-b664-c7e5181b2ebf.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}}]</label_cache>
+        <latest_snapshot/>
+        <master_snapshot/>
+        <name>AT-7081 New Acquisition Package</name>
+        <natlang/>
+        <outputs/>
+        <remote_trigger_id/>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>draft</status>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:54</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>e80dccab875e4510bc86b889cebb359b</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>AT-7081 New Acquisition Package</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_hub_flow_e80dccab875e4510bc86b889cebb359b</sys_update_name>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 17:03:01</sys_updated_on>
+        <type>flow</type>
+    </sys_hub_flow>
+    <sys_translated_text action="DELETE" query="documentkey=e80dccab875e4510bc86b889cebb359b"/>
+    <sys_variable_value action="DELETE" query="document_key=e80dccab875e4510bc86b889cebb359b"/>
+    <sys_hub_trigger_instance action="DELETE" query="flow=e80dccab875e4510bc86b889cebb359b^sys_idNOT IN890d00eb875e4510bc86b889cebb353e"/>
+    <sys_hub_trigger_instance action="DELETE">
+        <comment/>
+        <display_text/>
+        <flow display_value="AT-7081 New Acquisition Package">e80dccab875e4510bc86b889cebb359b</flow>
+        <name>Updated</name>
+        <remote_sys_id/>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>890d00eb875e4510bc86b889cebb353e</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 17:03:01</sys_updated_on>
+        <trigger_definition display_value="Updated">bb695e60c31322002841b63b12d3aea5</trigger_definition>
+        <trigger_inputs/>
+        <trigger_outputs/>
+        <trigger_type>record_update</trigger_type>
+    </sys_hub_trigger_instance>
+    <sys_variable_value action="DELETE" query="document_key=890d00eb875e4510bc86b889cebb353e"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_hub_trigger_instance</document>
+        <document_key>890d00eb875e4510bc86b889cebb353e</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>0d0d00eb875e4510bc86b889cebb353f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:56</sys_updated_on>
+        <value>statusCHANGESTOAPPROVED</value>
+        <variable display_value="Condition">bb9adea0c31322002841b63b12d3ae67</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_hub_trigger_instance</document>
+        <document_key>890d00eb875e4510bc86b889cebb353e</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>cd0d00eb875e4510bc86b889cebb353f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:56</sys_updated_on>
+        <value>x_g_dis_atat_acquisition_package</value>
+        <variable display_value="Table">1dda12e0c31322002841b63b12d3aea8</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="DELETE" query="table=var__m_sys_hub_trigger_output_bb695e60c31322002841b63b12d3aea5^id=890d00eb875e4510bc86b889cebb353e"/>
+    <sys_flow_cat_variable_model action="DELETE" query="id=e80dccab875e4510bc86b889cebb359b^sys_idNOT IN680dccab875e4510bc86b889cebb359f"/>
+    <sys_flow_cat_variable_model action="DELETE">
+        <id>e80dccab875e4510bc86b889cebb359b</id>
+        <name>AT-7081 New Acquisition Package</name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:54</sys_created_on>
+        <sys_id>680dccab875e4510bc86b889cebb359f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:54</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_hub_flow_input action="DELETE" query="model=e80dccab875e4510bc86b889cebb359b^sys_idNOT INa40dccab875e4510bc86b889cebb35b9,a80dccab875e4510bc86b889cebb35b3,ac0dccab875e4510bc86b889cebb35a9"/>
+    <sys_hub_flow_input action="DELETE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>child_label=FDChangeDetails,child_name=FDChangeDetails,child_type=object,child_type_label=Object,co_type_name=FDf6e6f86b03de4510228e0881da64f063,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,pwd2droppable=true,uiType=array.object,uiTypeLabel=Array.Object</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>changed_fields</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Changed Fields</label>
+        <mandatory>false</mandatory>
+        <max_length>4000</max_length>
+        <model display_value="AT-7081 New Acquisition Package">e80dccab875e4510bc86b889cebb359b</model>
+        <model_id>e80dccab875e4510bc86b889cebb359b</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_e80dccab875e4510bc86b889cebb359b</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:55</sys_created_on>
+        <sys_id>a40dccab875e4510bc86b889cebb35b9</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 17:03:01</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_input action="DELETE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=document_id,uiTypeLabel=Document ID</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent>table_name</dependent>
+        <dependent_on_field>table_name</dependent_on_field>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">document_id</internal_type>
+        <label>Record</label>
+        <mandatory>true</mandatory>
+        <max_length>200</max_length>
+        <model display_value="AT-7081 New Acquisition Package">e80dccab875e4510bc86b889cebb359b</model>
+        <model_id>e80dccab875e4510bc86b889cebb359b</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_e80dccab875e4510bc86b889cebb359b</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:55</sys_created_on>
+        <sys_id>a80dccab875e4510bc86b889cebb35b3</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 14:41:41</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>true</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_input action="DELETE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name,uiTypeLabel=Table Name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>200</max_length>
+        <model display_value="AT-7081 New Acquisition Package">e80dccab875e4510bc86b889cebb359b</model>
+        <model_id>e80dccab875e4510bc86b889cebb359b</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_e80dccab875e4510bc86b889cebb359b</name>
+        <next_element/>
+        <order>101</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:55</sys_created_on>
+        <sys_id>ac0dccab875e4510bc86b889cebb35a9</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 14:41:41</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_instance action="DELETE" query="flow=e80dccab875e4510bc86b889cebb359b^sys_idNOT IN3c0dccab875e4510bc86b889cebb35ec,780d00eb875e4510bc86b889cebb3503,7c0d00eb875e4510bc86b889cebb3535,f2e6f86b87de4510bc86b889cebb3580,f80d00eb875e4510bc86b889cebb351a"/>
+    <sys_hub_action_instance action="DELETE">
+        <action_inputs/>
+        <action_type display_value="Create Draft Envelope from Template">845e3abfdb8f1b00a9c7594e5e9619e4</action_type>
+        <action_type_parent display_value="Create Draft Envelope from Template">f7eed795db321300868f5404ce9619ca</action_type_parent>
+        <comment/>
+        <compiled_snapshot>845e3abfdb8f1b00a9c7594e5e9619e4</compiled_snapshot>
+        <display_text/>
+        <flow display_value="AT-7081 New Acquisition Package">e80dccab875e4510bc86b889cebb359b</flow>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:55</sys_created_on>
+        <sys_id>3c0dccab875e4510bc86b889cebb35ec</sys_id>
+        <sys_mod_count>10</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 17:03:01</sys_updated_on>
+        <ui_id>7ce3bf9a-ff8d-4b33-9d8d-a1baee039636</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="DELETE" query="document_key=3c0dccab875e4510bc86b889cebb35ec"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_hub_action_instance</document>
+        <document_key>3c0dccab875e4510bc86b889cebb35ec</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:55</sys_created_on>
+        <sys_id>f40dccab875e4510bc86b889cebb35ef</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:55</sys_updated_on>
+        <value>2beb5b1c1b0245107b782f84604bcb78</value>
+        <variable display_value="Template">c05e3abfdb8f1b00a9c7594e5e9619e7</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="DELETE" query="table=var__m_sys_hub_action_input_845e3abfdb8f1b00a9c7594e5e9619e4^id=3c0dccab875e4510bc86b889cebb35ec"/>
+    <sys_hub_action_instance action="DELETE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Add Recipient to Envelope">7a6bb6fbdb8f1b00a9c7594e5e9619e8</action_type>
+        <action_type_parent display_value="Add Recipient to Envelope">9b38442ddb721300bea7ff561d9619f8</action_type_parent>
+        <comment/>
+        <compiled_snapshot>7a6bb6fbdb8f1b00a9c7594e5e9619e8</compiled_snapshot>
+        <display_text/>
+        <flow display_value="AT-7081 New Acquisition Package">e80dccab875e4510bc86b889cebb359b</flow>
+        <order>2</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:55</sys_created_on>
+        <sys_id>780d00eb875e4510bc86b889cebb3503</sys_id>
+        <sys_mod_count>10</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 17:03:01</sys_updated_on>
+        <ui_id>d8aad1cd-3fc6-4ed6-a78e-0f268d7a27ed</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="DELETE" query="document_key=780d00eb875e4510bc86b889cebb3503"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_hub_action_instance</document>
+        <document_key>780d00eb875e4510bc86b889cebb3503</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>3c0d00eb875e4510bc86b889cebb3506</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:56</sys_updated_on>
+        <value>jason.burkert@hunterstrategy.net</value>
+        <variable display_value="Email">366bb6fbdb8f1b00a9c7594e5e9619f2</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_hub_action_instance</document>
+        <document_key>780d00eb875e4510bc86b889cebb3503</document_key>
+        <order>3</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>780d00eb875e4510bc86b889cebb3506</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:56</sys_updated_on>
+        <value>Jason Burkert</value>
+        <variable display_value="Name">7a6bb6fbdb8f1b00a9c7594e5e9619f8</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_hub_action_instance</document>
+        <document_key>780d00eb875e4510bc86b889cebb3503</document_key>
+        <order>4</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>b40d00eb875e4510bc86b889cebb3506</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:56</sys_updated_on>
+        <value>Signer 1</value>
+        <variable display_value="Role Name">7e6bb6fbdb8f1b00a9c7594e5e9619fe</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_hub_action_instance</document>
+        <document_key>780d00eb875e4510bc86b889cebb3503</document_key>
+        <order>5</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>fc0d00eb875e4510bc86b889cebb3506</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:56</sys_updated_on>
+        <value>1</value>
+        <variable display_value="Recipient ID">3a6bf6fbdb8f1b00a9c7594e5e961911</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="DELETE" query="id=780d00eb875e4510bc86b889cebb3503"/>
+    <sys_element_mapping action="DELETE">
+        <field>email</field>
+        <id>780d00eb875e4510bc86b889cebb3503</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>700d00eb875e4510bc86b889cebb3506</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:56</sys_updated_on>
+        <table>var__m_sys_hub_action_input_7a6bb6fbdb8f1b00a9c7594e5e9619e8</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="DELETE">
+        <field>envelope</field>
+        <id>780d00eb875e4510bc86b889cebb3503</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>f80d00eb875e4510bc86b889cebb3505</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:56</sys_updated_on>
+        <table>var__m_sys_hub_action_input_7a6bb6fbdb8f1b00a9c7594e5e9619e8</table>
+        <value>{{7ce3bf9a-ff8d-4b33-9d8d-a1baee039636.envelope_id}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="DELETE">
+        <field>full_name</field>
+        <id>780d00eb875e4510bc86b889cebb3503</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>bc0d00eb875e4510bc86b889cebb3505</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:56</sys_updated_on>
+        <table>var__m_sys_hub_action_input_7a6bb6fbdb8f1b00a9c7594e5e9619e8</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="DELETE">
+        <field>recipient_id</field>
+        <id>780d00eb875e4510bc86b889cebb3503</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>340d00eb875e4510bc86b889cebb3506</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:56</sys_updated_on>
+        <table>var__m_sys_hub_action_input_7a6bb6fbdb8f1b00a9c7594e5e9619e8</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="DELETE">
+        <field>role_name</field>
+        <id>780d00eb875e4510bc86b889cebb3503</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>380d00eb875e4510bc86b889cebb3505</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:56</sys_updated_on>
+        <table>var__m_sys_hub_action_input_7a6bb6fbdb8f1b00a9c7594e5e9619e8</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_action_instance action="DELETE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Send Envelope">067d36fbdb475b00dd14596e5e9619f3</action_type>
+        <action_type_parent display_value="Send Envelope">83ce2ca5dbf21300868f5404ce9619f2</action_type_parent>
+        <comment/>
+        <compiled_snapshot>067d36fbdb475b00dd14596e5e9619f3</compiled_snapshot>
+        <display_text/>
+        <flow display_value="AT-7081 New Acquisition Package">e80dccab875e4510bc86b889cebb359b</flow>
+        <order>4</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>7c0d00eb875e4510bc86b889cebb3535</sys_id>
+        <sys_mod_count>10</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 17:03:01</sys_updated_on>
+        <ui_id>c36914b9-2bf2-4646-91ee-cef03a9f59cb</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="DELETE" query="document_key=7c0d00eb875e4510bc86b889cebb3535"/>
+    <sys_element_mapping action="DELETE" query="id=7c0d00eb875e4510bc86b889cebb3535"/>
+    <sys_element_mapping action="DELETE">
+        <field>envelope</field>
+        <id>7c0d00eb875e4510bc86b889cebb3535</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>010d00eb875e4510bc86b889cebb3537</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:56</sys_updated_on>
+        <table>var__m_sys_hub_action_input_067d36fbdb475b00dd14596e5e9619f3</table>
+        <value>{{7ce3bf9a-ff8d-4b33-9d8d-a1baee039636.envelope_id}}</value>
+    </sys_element_mapping>
+    <sys_hub_action_instance action="DELETE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent/>
+        <comment/>
+        <compiled_snapshot/>
+        <display_text/>
+        <flow display_value="AT-7081 New Acquisition Package">e80dccab875e4510bc86b889cebb359b</flow>
+        <order>5</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 17:03:01</sys_created_on>
+        <sys_id>f2e6f86b87de4510bc86b889cebb3580</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 17:03:01</sys_updated_on>
+        <ui_id>80f36b0d-399b-42cb-b664-c7e5181b2ebf</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="DELETE" query="document_key=f2e6f86b87de4510bc86b889cebb3580"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_hub_action_instance</document>
+        <document_key>f2e6f86b87de4510bc86b889cebb3580</document_key>
+        <order>50</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 17:03:01</sys_created_on>
+        <sys_id>7ee6f86b87de4510bc86b889cebb3582</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 17:03:01</sys_updated_on>
+        <value>x_g_dis_atat_acquisition_package</value>
+        <variable display_value="Table">b5d01916c31332002841b63b12d3aec9</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="DELETE" query="id=f2e6f86b87de4510bc86b889cebb3580"/>
+    <sys_element_mapping action="DELETE">
+        <field>record</field>
+        <id>f2e6f86b87de4510bc86b889cebb3580</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 17:03:01</sys_created_on>
+        <sys_id>3ae6f86b87de4510bc86b889cebb3582</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 17:03:01</sys_updated_on>
+        <table>var__m_sys_hub_action_input_f9d01dd2c31332002841b63b12d3aea1</table>
+        <value>{{Updated_1.current}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="DELETE">
+        <field>table_name</field>
+        <id>f2e6f86b87de4510bc86b889cebb3580</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 17:03:01</sys_created_on>
+        <sys_id>72e6f86b87de4510bc86b889cebb3582</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 17:03:01</sys_updated_on>
+        <table>var__m_sys_hub_action_input_f9d01dd2c31332002841b63b12d3aea1</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="DELETE">
+        <field>values</field>
+        <id>f2e6f86b87de4510bc86b889cebb3580</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 17:03:01</sys_created_on>
+        <sys_id>fae6f86b87de4510bc86b889cebb3582</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 17:03:01</sys_updated_on>
+        <table>var__m_sys_hub_action_input_f9d01dd2c31332002841b63b12d3aea1</table>
+        <value>docusign_envelope_id={{7ce3bf9a-ff8d-4b33-9d8d-a1baee039636.envelope_id.id}}</value>
+    </sys_element_mapping>
+    <sys_hub_action_instance action="DELETE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Add Recipient to Envelope">7a6bb6fbdb8f1b00a9c7594e5e9619e8</action_type>
+        <action_type_parent display_value="Add Recipient to Envelope">9b38442ddb721300bea7ff561d9619f8</action_type_parent>
+        <comment/>
+        <compiled_snapshot>7a6bb6fbdb8f1b00a9c7594e5e9619e8</compiled_snapshot>
+        <display_text/>
+        <flow display_value="AT-7081 New Acquisition Package">e80dccab875e4510bc86b889cebb359b</flow>
+        <order>3</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>f80d00eb875e4510bc86b889cebb351a</sys_id>
+        <sys_mod_count>10</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 17:03:01</sys_updated_on>
+        <ui_id>335edd67-09fa-4d27-b749-886bf04a6a85</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="DELETE" query="document_key=f80d00eb875e4510bc86b889cebb351a"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_hub_action_instance</document>
+        <document_key>f80d00eb875e4510bc86b889cebb351a</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>380d00eb875e4510bc86b889cebb351d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:56</sys_updated_on>
+        <value>jeff.segal@hunterstrategy.net</value>
+        <variable display_value="Email">366bb6fbdb8f1b00a9c7594e5e9619f2</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_hub_action_instance</document>
+        <document_key>f80d00eb875e4510bc86b889cebb351a</document_key>
+        <order>3</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>740d00eb875e4510bc86b889cebb351d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:56</sys_updated_on>
+        <value>Jeff Segal</value>
+        <variable display_value="Name">7a6bb6fbdb8f1b00a9c7594e5e9619f8</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_hub_action_instance</document>
+        <document_key>f80d00eb875e4510bc86b889cebb351a</document_key>
+        <order>4</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>b00d00eb875e4510bc86b889cebb351d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:56</sys_updated_on>
+        <value>Signer 2</value>
+        <variable display_value="Role Name">7e6bb6fbdb8f1b00a9c7594e5e9619fe</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_hub_action_instance</document>
+        <document_key>f80d00eb875e4510bc86b889cebb351a</document_key>
+        <order>5</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>f80d00eb875e4510bc86b889cebb351d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:56</sys_updated_on>
+        <value>2</value>
+        <variable display_value="Recipient ID">3a6bf6fbdb8f1b00a9c7594e5e961911</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="DELETE" query="id=f80d00eb875e4510bc86b889cebb351a"/>
+    <sys_element_mapping action="DELETE">
+        <field>email</field>
+        <id>f80d00eb875e4510bc86b889cebb351a</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>7c0d00eb875e4510bc86b889cebb351c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:56</sys_updated_on>
+        <table>var__m_sys_hub_action_input_7a6bb6fbdb8f1b00a9c7594e5e9619e8</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="DELETE">
+        <field>envelope</field>
+        <id>f80d00eb875e4510bc86b889cebb351a</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>f40d00eb875e4510bc86b889cebb351c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:56</sys_updated_on>
+        <table>var__m_sys_hub_action_input_7a6bb6fbdb8f1b00a9c7594e5e9619e8</table>
+        <value>{{7ce3bf9a-ff8d-4b33-9d8d-a1baee039636.envelope_id}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="DELETE">
+        <field>full_name</field>
+        <id>f80d00eb875e4510bc86b889cebb351a</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>b80d00eb875e4510bc86b889cebb351c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:56</sys_updated_on>
+        <table>var__m_sys_hub_action_input_7a6bb6fbdb8f1b00a9c7594e5e9619e8</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="DELETE">
+        <field>recipient_id</field>
+        <id>f80d00eb875e4510bc86b889cebb351a</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>300d00eb875e4510bc86b889cebb351d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:56</sys_updated_on>
+        <table>var__m_sys_hub_action_input_7a6bb6fbdb8f1b00a9c7594e5e9619e8</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="DELETE">
+        <field>role_name</field>
+        <id>f80d00eb875e4510bc86b889cebb351a</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:56</sys_created_on>
+        <sys_id>340d00eb875e4510bc86b889cebb351c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:56</sys_updated_on>
+        <table>var__m_sys_hub_action_input_7a6bb6fbdb8f1b00a9c7594e5e9619e8</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_documentation action="DELETE" query="name=var__m_sys_hub_flow_input_e80dccab875e4510bc86b889cebb359b^sys_idNOT IN2c0dccab875e4510bc86b889cebb35bd,680dccab875e4510bc86b889cebb35b1,e80dccab875e4510bc86b889cebb35b7"/>
+    <sys_documentation action="DELETE">
+        <element>changed_fields</element>
+        <help/>
+        <hint/>
+        <label>Changed Fields</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_e80dccab875e4510bc86b889cebb359b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:55</sys_created_on>
+        <sys_id>2c0dccab875e4510bc86b889cebb35bd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:55</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="DELETE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_e80dccab875e4510bc86b889cebb359b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:55</sys_created_on>
+        <sys_id>680dccab875e4510bc86b889cebb35b1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:55</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="DELETE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>Record</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_e80dccab875e4510bc86b889cebb359b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-03-23 13:59:55</sys_created_on>
+        <sys_id>e80dccab875e4510bc86b889cebb35b7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-03-23 13:59:55</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+<sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="ATAT">f600233d1b154d507b782f84604bcb12</application>
+        <file_path/>
+        <instance_id>0ef3c06adb7c4990c908fc16f396190b</instance_id>
+        <instance_name>disastorefrontdev</instance_name>
+        <name>sys_hub_flow_e80dccab875e4510bc86b889cebb359b</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_hub_flow"&gt;
+    &lt;sys_hub_flow action="INSERT_OR_UPDATE"&gt;
+        &lt;access&gt;public&lt;/access&gt;
+        &lt;acls/&gt;
+        &lt;active&gt;false&lt;/active&gt;
+        &lt;annotation/&gt;
+        &lt;callable_by_client_api&gt;false&lt;/callable_by_client_api&gt;
+        &lt;category/&gt;
+        &lt;compiler_build/&gt;
+        &lt;copied_from&gt;e11dd9d3870a0d10bc86b889cebb3572&lt;/copied_from&gt;
+        &lt;copied_from_name&gt;AT-7081 New Acquisition Package&lt;/copied_from_name&gt;
+        &lt;description&gt;AT-7081 Send DocuSign envelope, save envelope ID to acquisition pkg record&lt;/description&gt;
+        &lt;internal_name&gt;at7081_new_acquisition_package&lt;/internal_name&gt;
+        &lt;label_cache&gt;[{"name":"Updated_1.current.sys_id","label":"Trigger➛Acquisition Package Record➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"x_g_dis_atat_acquisition_package","column_name":"sys_id"},{"name":"c36914b9-2bf2-4646-91ee-cef03a9f59cb.__dont_treat_as_error__","label":"4➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"c36914b9-2bf2-4646-91ee-cef03a9f59cb.__action_status__","label":"4➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"c36914b9-2bf2-4646-91ee-cef03a9f59cb.error_message","label":"4➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"c36914b9-2bf2-4646-91ee-cef03a9f59cb.status","label":"4➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"7ce3bf9a-ff8d-4b33-9d8d-a1baee039636.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"7ce3bf9a-ff8d-4b33-9d8d-a1baee039636.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"7ce3bf9a-ff8d-4b33-9d8d-a1baee039636.envelope_id","label":"1➛Envelope","reference":"sn_docusign_spoke_envelopes","reference_display":"Envelopes","type":"reference","base_type":"reference","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"c7e30746-99bf-4ec0-b3b9-28afaa53b1c7"}},{"name":"7ce3bf9a-ff8d-4b33-9d8d-a1baee039636.error_message","label":"1➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"be3a9d5e-5ff6-49cb-8e19-01f71f1d5a6d"}},{"name":"7ce3bf9a-ff8d-4b33-9d8d-a1baee039636.status","label":"1➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"2d636182-211e-433b-a313-6f984a9b44b1"}},{"name":"d8aad1cd-3fc6-4ed6-a78e-0f268d7a27ed.status","label":"2➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"482e3bb3-ee94-42ed-ad93-7d669c1cd401"}},{"name":"d8aad1cd-3fc6-4ed6-a78e-0f268d7a27ed.error_message","label":"2➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"c64b14cb-2c93-46b8-8676-0023eaf12894"}},{"name":"d8aad1cd-3fc6-4ed6-a78e-0f268d7a27ed.__action_status__","label":"2➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"d8aad1cd-3fc6-4ed6-a78e-0f268d7a27ed.__dont_treat_as_error__","label":"2➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"335edd67-09fa-4d27-b749-886bf04a6a85.status","label":"3➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"482e3bb3-ee94-42ed-ad93-7d669c1cd401"}},{"name":"335edd67-09fa-4d27-b749-886bf04a6a85.error_message","label":"3➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"c64b14cb-2c93-46b8-8676-0023eaf12894"}},{"name":"335edd67-09fa-4d27-b749-886bf04a6a85.__action_status__","label":"3➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"335edd67-09fa-4d27-b749-886bf04a6a85.__dont_treat_as_error__","label":"3➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"678626b1-7dd8-43fc-b92d-7c24e5f02d33.__action_status__","label":"4➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"678626b1-7dd8-43fc-b92d-7c24e5f02d33.__dont_treat_as_error__","label":"4➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"7ce3bf9a-ff8d-4b33-9d8d-a1baee039636.envelope_id.id","label":"1➛Envelope➛ID","reference":"","reference_display":"ID","type":"string","base_type":"string","parent_table_name":"sn_docusign_spoke_envelopes","column_name":"id"},{"name":"93ad96b3-f090-43b5-b04b-e716762a81c4.record","label":"5➛Acquisition Package Record","reference":"x_g_dis_atat_acquisition_package","reference_display":"Acquisition Package Record","type":"reference","base_type":"reference","attributes":{"uiType":"document_id","uiTypeLabel":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"93ad96b3-f090-43b5-b04b-e716762a81c4.table_name","label":"5➛Acquisition Package Table","reference":"x_g_dis_atat_acquisition_package","reference_display":"Acquisition Package Table","type":"table_name","base_type":"table_name","attributes":{"uiType":"table_name","uiTypeLabel":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"93ad96b3-f090-43b5-b04b-e716762a81c4.status","label":"5➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"93ad96b3-f090-43b5-b04b-e716762a81c4.error_message","label":"5➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"93ad96b3-f090-43b5-b04b-e716762a81c4.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"93ad96b3-f090-43b5-b04b-e716762a81c4.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"Updated_1.current","label":"Trigger➛Acquisition Package Record","reference":"x_g_dis_atat_acquisition_package","reference_display":"Acquisition Package","type":"reference","base_type":"reference","attributes":{}},{"name":"a2a23f26-75b3-4565-b0d5-5200dfb287fd.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"a2a23f26-75b3-4565-b0d5-5200dfb287fd.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"Updated_1.current.number","label":"Trigger➛Acquisition Package Record➛Number","reference":"","reference_display":"Number","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_acquisition_package","column_name":"number"},{"name":"80f36b0d-399b-42cb-b664-c7e5181b2ebf.record","label":"5➛Acquisition Package Record","reference":"x_g_dis_atat_acquisition_package","reference_display":"Acquisition Package Record","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"80f36b0d-399b-42cb-b664-c7e5181b2ebf.table_name","label":"5➛Acquisition Package Table","reference":"x_g_dis_atat_acquisition_package","reference_display":"Acquisition Package Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"80f36b0d-399b-42cb-b664-c7e5181b2ebf.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"80f36b0d-399b-42cb-b664-c7e5181b2ebf.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}}]&lt;/label_cache&gt;
+        &lt;latest_snapshot/&gt;
+        &lt;master_snapshot/&gt;
+        &lt;name&gt;AT-7081 New Acquisition Package&lt;/name&gt;
+        &lt;natlang/&gt;
+        &lt;outputs/&gt;
+        &lt;remote_trigger_id/&gt;
+        &lt;run_as&gt;user&lt;/run_as&gt;
+        &lt;run_with_roles/&gt;
+        &lt;sc_callable&gt;false&lt;/sc_callable&gt;
+        &lt;show_draft_actions&gt;false&lt;/show_draft_actions&gt;
+        &lt;show_triggered_flows&gt;false&lt;/show_triggered_flows&gt;
+        &lt;status&gt;draft&lt;/status&gt;
+        &lt;sys_class_name&gt;sys_hub_flow&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:54&lt;/sys_created_on&gt;
+        &lt;sys_domain&gt;global&lt;/sys_domain&gt;
+        &lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;
+        &lt;sys_id&gt;e80dccab875e4510bc86b889cebb359b&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;5&lt;/sys_mod_count&gt;
+        &lt;sys_name&gt;AT-7081 New Acquisition Package&lt;/sys_name&gt;
+        &lt;sys_overrides/&gt;
+        &lt;sys_package display_value="ATAT" source="x_g_dis_atat"&gt;f600233d1b154d507b782f84604bcb12&lt;/sys_package&gt;
+        &lt;sys_policy/&gt;
+        &lt;sys_scope display_value="ATAT"&gt;f600233d1b154d507b782f84604bcb12&lt;/sys_scope&gt;
+        &lt;sys_update_name&gt;sys_hub_flow_e80dccab875e4510bc86b889cebb359b&lt;/sys_update_name&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 17:03:01&lt;/sys_updated_on&gt;
+        &lt;type&gt;flow&lt;/type&gt;
+    &lt;/sys_hub_flow&gt;
+    &lt;sys_translated_text action="delete_multiple" query="documentkey=e80dccab875e4510bc86b889cebb359b"/&gt;
+    &lt;sys_variable_value action="delete_multiple" query="document_key=e80dccab875e4510bc86b889cebb359b"/&gt;
+    &lt;sys_hub_trigger_instance action="delete_multiple" query="flow=e80dccab875e4510bc86b889cebb359b^sys_idNOT IN890d00eb875e4510bc86b889cebb353e"/&gt;
+    &lt;sys_hub_trigger_instance action="INSERT_OR_UPDATE"&gt;
+        &lt;comment/&gt;
+        &lt;display_text/&gt;
+        &lt;flow display_value="AT-7081 New Acquisition Package"&gt;e80dccab875e4510bc86b889cebb359b&lt;/flow&gt;
+        &lt;name&gt;Updated&lt;/name&gt;
+        &lt;remote_sys_id/&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;890d00eb875e4510bc86b889cebb353e&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;5&lt;/sys_mod_count&gt;
+        &lt;sys_scope/&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 17:03:01&lt;/sys_updated_on&gt;
+        &lt;trigger_definition display_value="Updated"&gt;bb695e60c31322002841b63b12d3aea5&lt;/trigger_definition&gt;
+        &lt;trigger_inputs/&gt;
+        &lt;trigger_outputs/&gt;
+        &lt;trigger_type&gt;record_update&lt;/trigger_type&gt;
+    &lt;/sys_hub_trigger_instance&gt;
+    &lt;sys_variable_value action="delete_multiple" query="document_key=890d00eb875e4510bc86b889cebb353e"/&gt;
+    &lt;sys_variable_value action="INSERT_OR_UPDATE"&gt;
+        &lt;document&gt;sys_hub_trigger_instance&lt;/document&gt;
+        &lt;document_key&gt;890d00eb875e4510bc86b889cebb353e&lt;/document_key&gt;
+        &lt;order&gt;100&lt;/order&gt;
+        &lt;sys_class_name&gt;sys_variable_value&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;0d0d00eb875e4510bc86b889cebb353f&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:56&lt;/sys_updated_on&gt;
+        &lt;value&gt;statusCHANGESTOAPPROVED&lt;/value&gt;
+        &lt;variable display_value="Condition"&gt;bb9adea0c31322002841b63b12d3ae67&lt;/variable&gt;
+    &lt;/sys_variable_value&gt;
+    &lt;sys_variable_value action="INSERT_OR_UPDATE"&gt;
+        &lt;document&gt;sys_hub_trigger_instance&lt;/document&gt;
+        &lt;document_key&gt;890d00eb875e4510bc86b889cebb353e&lt;/document_key&gt;
+        &lt;order&gt;1&lt;/order&gt;
+        &lt;sys_class_name&gt;sys_variable_value&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;cd0d00eb875e4510bc86b889cebb353f&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:56&lt;/sys_updated_on&gt;
+        &lt;value&gt;x_g_dis_atat_acquisition_package&lt;/value&gt;
+        &lt;variable display_value="Table"&gt;1dda12e0c31322002841b63b12d3aea8&lt;/variable&gt;
+    &lt;/sys_variable_value&gt;
+    &lt;sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_trigger_output_bb695e60c31322002841b63b12d3aea5^id=890d00eb875e4510bc86b889cebb353e"/&gt;
+    &lt;sys_flow_cat_variable_model action="delete_multiple" query="id=e80dccab875e4510bc86b889cebb359b^sys_idNOT IN680dccab875e4510bc86b889cebb359f"/&gt;
+    &lt;sys_flow_cat_variable_model action="INSERT_OR_UPDATE"&gt;
+        &lt;id&gt;e80dccab875e4510bc86b889cebb359b&lt;/id&gt;
+        &lt;name&gt;AT-7081 New Acquisition Package&lt;/name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:54&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;680dccab875e4510bc86b889cebb359f&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_scope/&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:54&lt;/sys_updated_on&gt;
+    &lt;/sys_flow_cat_variable_model&gt;
+    &lt;sys_hub_flow_input action="delete_multiple" query="model=e80dccab875e4510bc86b889cebb359b^sys_idNOT INa40dccab875e4510bc86b889cebb35b9,a80dccab875e4510bc86b889cebb35b3,ac0dccab875e4510bc86b889cebb35a9"/&gt;
+    &lt;sys_hub_flow_input action="INSERT_OR_UPDATE"&gt;
+        &lt;active&gt;true&lt;/active&gt;
+        &lt;array&gt;false&lt;/array&gt;
+        &lt;array_denormalized&gt;false&lt;/array_denormalized&gt;
+        &lt;attributes&gt;child_label=FDChangeDetails,child_name=FDChangeDetails,child_type=object,child_type_label=Object,co_type_name=FDf6e6f86b03de4510228e0881da64f063,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,pwd2droppable=true,uiType=array.object,uiTypeLabel=Array.Object&lt;/attributes&gt;
+        &lt;audit&gt;false&lt;/audit&gt;
+        &lt;calculation&gt;&lt;![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]&gt;&lt;/calculation&gt;
+        &lt;choice/&gt;
+        &lt;choice_field/&gt;
+        &lt;choice_table/&gt;
+        &lt;column_label/&gt;
+        &lt;comments/&gt;
+        &lt;create_roles/&gt;
+        &lt;default_value/&gt;
+        &lt;defaultsort/&gt;
+        &lt;delete_roles/&gt;
+        &lt;dependent/&gt;
+        &lt;dependent_on_field/&gt;
+        &lt;display&gt;false&lt;/display&gt;
+        &lt;dynamic_creation&gt;false&lt;/dynamic_creation&gt;
+        &lt;dynamic_creation_script/&gt;
+        &lt;dynamic_default_value/&gt;
+        &lt;dynamic_ref_qual/&gt;
+        &lt;element&gt;changed_fields&lt;/element&gt;
+        &lt;element_reference&gt;false&lt;/element_reference&gt;
+        &lt;foreign_database/&gt;
+        &lt;function_definition/&gt;
+        &lt;function_field&gt;false&lt;/function_field&gt;
+        &lt;help/&gt;
+        &lt;hint/&gt;
+        &lt;internal_type display_value="String"&gt;string&lt;/internal_type&gt;
+        &lt;label&gt;Changed Fields&lt;/label&gt;
+        &lt;mandatory&gt;false&lt;/mandatory&gt;
+        &lt;max_length&gt;4000&lt;/max_length&gt;
+        &lt;model display_value="AT-7081 New Acquisition Package"&gt;e80dccab875e4510bc86b889cebb359b&lt;/model&gt;
+        &lt;model_id&gt;e80dccab875e4510bc86b889cebb359b&lt;/model_id&gt;
+        &lt;model_table&gt;sys_hub_flow&lt;/model_table&gt;
+        &lt;name&gt;var__m_sys_hub_flow_input_e80dccab875e4510bc86b889cebb359b&lt;/name&gt;
+        &lt;next_element/&gt;
+        &lt;order&gt;100&lt;/order&gt;
+        &lt;primary&gt;false&lt;/primary&gt;
+        &lt;read_only&gt;false&lt;/read_only&gt;
+        &lt;read_roles/&gt;
+        &lt;reference/&gt;
+        &lt;reference_cascade_rule/&gt;
+        &lt;reference_floats&gt;false&lt;/reference_floats&gt;
+        &lt;reference_key/&gt;
+        &lt;reference_qual/&gt;
+        &lt;reference_qual_condition/&gt;
+        &lt;reference_type/&gt;
+        &lt;sizeclass/&gt;
+        &lt;spell_check&gt;false&lt;/spell_check&gt;
+        &lt;staged&gt;false&lt;/staged&gt;
+        &lt;sys_class_name&gt;sys_hub_flow_input&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:55&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;a40dccab875e4510bc86b889cebb35b9&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;4&lt;/sys_mod_count&gt;
+        &lt;sys_name/&gt;
+        &lt;sys_package/&gt;
+        &lt;sys_policy/&gt;
+        &lt;sys_scope display_value="ATAT"&gt;f600233d1b154d507b782f84604bcb12&lt;/sys_scope&gt;
+        &lt;sys_update_name/&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 17:03:01&lt;/sys_updated_on&gt;
+        &lt;table_reference&gt;false&lt;/table_reference&gt;
+        &lt;text_index&gt;false&lt;/text_index&gt;
+        &lt;unique&gt;false&lt;/unique&gt;
+        &lt;use_dependent_field&gt;false&lt;/use_dependent_field&gt;
+        &lt;use_dynamic_default&gt;false&lt;/use_dynamic_default&gt;
+        &lt;use_reference_qualifier&gt;simple&lt;/use_reference_qualifier&gt;
+        &lt;virtual&gt;false&lt;/virtual&gt;
+        &lt;widget/&gt;
+        &lt;write_roles/&gt;
+        &lt;xml_view&gt;false&lt;/xml_view&gt;
+    &lt;/sys_hub_flow_input&gt;
+    &lt;sys_hub_flow_input action="INSERT_OR_UPDATE"&gt;
+        &lt;active&gt;true&lt;/active&gt;
+        &lt;array&gt;false&lt;/array&gt;
+        &lt;array_denormalized&gt;false&lt;/array_denormalized&gt;
+        &lt;attributes&gt;element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=document_id,uiTypeLabel=Document ID&lt;/attributes&gt;
+        &lt;audit&gt;false&lt;/audit&gt;
+        &lt;calculation&gt;&lt;![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]&gt;&lt;/calculation&gt;
+        &lt;choice/&gt;
+        &lt;choice_field/&gt;
+        &lt;choice_table/&gt;
+        &lt;column_label/&gt;
+        &lt;comments/&gt;
+        &lt;create_roles/&gt;
+        &lt;default_value/&gt;
+        &lt;defaultsort/&gt;
+        &lt;delete_roles/&gt;
+        &lt;dependent&gt;table_name&lt;/dependent&gt;
+        &lt;dependent_on_field&gt;table_name&lt;/dependent_on_field&gt;
+        &lt;display&gt;false&lt;/display&gt;
+        &lt;dynamic_creation&gt;false&lt;/dynamic_creation&gt;
+        &lt;dynamic_creation_script/&gt;
+        &lt;dynamic_default_value/&gt;
+        &lt;dynamic_ref_qual/&gt;
+        &lt;element&gt;current&lt;/element&gt;
+        &lt;element_reference&gt;false&lt;/element_reference&gt;
+        &lt;foreign_database/&gt;
+        &lt;function_definition/&gt;
+        &lt;function_field&gt;false&lt;/function_field&gt;
+        &lt;help/&gt;
+        &lt;hint/&gt;
+        &lt;internal_type display_value=""&gt;document_id&lt;/internal_type&gt;
+        &lt;label&gt;Record&lt;/label&gt;
+        &lt;mandatory&gt;true&lt;/mandatory&gt;
+        &lt;max_length&gt;200&lt;/max_length&gt;
+        &lt;model display_value="AT-7081 New Acquisition Package"&gt;e80dccab875e4510bc86b889cebb359b&lt;/model&gt;
+        &lt;model_id&gt;e80dccab875e4510bc86b889cebb359b&lt;/model_id&gt;
+        &lt;model_table&gt;sys_hub_flow&lt;/model_table&gt;
+        &lt;name&gt;var__m_sys_hub_flow_input_e80dccab875e4510bc86b889cebb359b&lt;/name&gt;
+        &lt;next_element/&gt;
+        &lt;order&gt;100&lt;/order&gt;
+        &lt;primary&gt;false&lt;/primary&gt;
+        &lt;read_only&gt;false&lt;/read_only&gt;
+        &lt;read_roles/&gt;
+        &lt;reference/&gt;
+        &lt;reference_cascade_rule/&gt;
+        &lt;reference_floats&gt;false&lt;/reference_floats&gt;
+        &lt;reference_key/&gt;
+        &lt;reference_qual/&gt;
+        &lt;reference_qual_condition/&gt;
+        &lt;reference_type/&gt;
+        &lt;sizeclass/&gt;
+        &lt;spell_check&gt;false&lt;/spell_check&gt;
+        &lt;staged&gt;false&lt;/staged&gt;
+        &lt;sys_class_name&gt;sys_hub_flow_input&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:55&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;a80dccab875e4510bc86b889cebb35b3&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;1&lt;/sys_mod_count&gt;
+        &lt;sys_name/&gt;
+        &lt;sys_package/&gt;
+        &lt;sys_policy/&gt;
+        &lt;sys_scope display_value="ATAT"&gt;f600233d1b154d507b782f84604bcb12&lt;/sys_scope&gt;
+        &lt;sys_update_name/&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 14:41:41&lt;/sys_updated_on&gt;
+        &lt;table_reference&gt;false&lt;/table_reference&gt;
+        &lt;text_index&gt;false&lt;/text_index&gt;
+        &lt;unique&gt;false&lt;/unique&gt;
+        &lt;use_dependent_field&gt;true&lt;/use_dependent_field&gt;
+        &lt;use_dynamic_default&gt;false&lt;/use_dynamic_default&gt;
+        &lt;use_reference_qualifier&gt;simple&lt;/use_reference_qualifier&gt;
+        &lt;virtual&gt;false&lt;/virtual&gt;
+        &lt;widget/&gt;
+        &lt;write_roles/&gt;
+        &lt;xml_view&gt;false&lt;/xml_view&gt;
+    &lt;/sys_hub_flow_input&gt;
+    &lt;sys_hub_flow_input action="INSERT_OR_UPDATE"&gt;
+        &lt;active&gt;true&lt;/active&gt;
+        &lt;array&gt;false&lt;/array&gt;
+        &lt;array_denormalized&gt;false&lt;/array_denormalized&gt;
+        &lt;attributes&gt;element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name,uiTypeLabel=Table Name&lt;/attributes&gt;
+        &lt;audit&gt;false&lt;/audit&gt;
+        &lt;calculation&gt;&lt;![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]&gt;&lt;/calculation&gt;
+        &lt;choice/&gt;
+        &lt;choice_field/&gt;
+        &lt;choice_table/&gt;
+        &lt;column_label/&gt;
+        &lt;comments/&gt;
+        &lt;create_roles/&gt;
+        &lt;default_value/&gt;
+        &lt;defaultsort/&gt;
+        &lt;delete_roles/&gt;
+        &lt;dependent/&gt;
+        &lt;dependent_on_field/&gt;
+        &lt;display&gt;false&lt;/display&gt;
+        &lt;dynamic_creation&gt;false&lt;/dynamic_creation&gt;
+        &lt;dynamic_creation_script/&gt;
+        &lt;dynamic_default_value/&gt;
+        &lt;dynamic_ref_qual/&gt;
+        &lt;element&gt;table_name&lt;/element&gt;
+        &lt;element_reference&gt;false&lt;/element_reference&gt;
+        &lt;foreign_database/&gt;
+        &lt;function_definition/&gt;
+        &lt;function_field&gt;false&lt;/function_field&gt;
+        &lt;help/&gt;
+        &lt;hint/&gt;
+        &lt;internal_type display_value=""&gt;table_name&lt;/internal_type&gt;
+        &lt;label&gt;Table Name&lt;/label&gt;
+        &lt;mandatory&gt;false&lt;/mandatory&gt;
+        &lt;max_length&gt;200&lt;/max_length&gt;
+        &lt;model display_value="AT-7081 New Acquisition Package"&gt;e80dccab875e4510bc86b889cebb359b&lt;/model&gt;
+        &lt;model_id&gt;e80dccab875e4510bc86b889cebb359b&lt;/model_id&gt;
+        &lt;model_table&gt;sys_hub_flow&lt;/model_table&gt;
+        &lt;name&gt;var__m_sys_hub_flow_input_e80dccab875e4510bc86b889cebb359b&lt;/name&gt;
+        &lt;next_element/&gt;
+        &lt;order&gt;101&lt;/order&gt;
+        &lt;primary&gt;false&lt;/primary&gt;
+        &lt;read_only&gt;false&lt;/read_only&gt;
+        &lt;read_roles/&gt;
+        &lt;reference/&gt;
+        &lt;reference_cascade_rule/&gt;
+        &lt;reference_floats&gt;false&lt;/reference_floats&gt;
+        &lt;reference_key/&gt;
+        &lt;reference_qual/&gt;
+        &lt;reference_qual_condition/&gt;
+        &lt;reference_type/&gt;
+        &lt;sizeclass/&gt;
+        &lt;spell_check&gt;false&lt;/spell_check&gt;
+        &lt;staged&gt;false&lt;/staged&gt;
+        &lt;sys_class_name&gt;sys_hub_flow_input&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:55&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;ac0dccab875e4510bc86b889cebb35a9&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;1&lt;/sys_mod_count&gt;
+        &lt;sys_name/&gt;
+        &lt;sys_package/&gt;
+        &lt;sys_policy/&gt;
+        &lt;sys_scope display_value="ATAT"&gt;f600233d1b154d507b782f84604bcb12&lt;/sys_scope&gt;
+        &lt;sys_update_name/&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 14:41:41&lt;/sys_updated_on&gt;
+        &lt;table_reference&gt;false&lt;/table_reference&gt;
+        &lt;text_index&gt;false&lt;/text_index&gt;
+        &lt;unique&gt;false&lt;/unique&gt;
+        &lt;use_dependent_field&gt;false&lt;/use_dependent_field&gt;
+        &lt;use_dynamic_default&gt;false&lt;/use_dynamic_default&gt;
+        &lt;use_reference_qualifier&gt;simple&lt;/use_reference_qualifier&gt;
+        &lt;virtual&gt;false&lt;/virtual&gt;
+        &lt;widget/&gt;
+        &lt;write_roles/&gt;
+        &lt;xml_view&gt;false&lt;/xml_view&gt;
+    &lt;/sys_hub_flow_input&gt;
+    &lt;sys_hub_action_instance action="delete_multiple" query="flow=e80dccab875e4510bc86b889cebb359b^sys_idNOT IN3c0dccab875e4510bc86b889cebb35ec,780d00eb875e4510bc86b889cebb3503,7c0d00eb875e4510bc86b889cebb3535,f2e6f86b87de4510bc86b889cebb3580,f80d00eb875e4510bc86b889cebb351a"/&gt;
+    &lt;sys_hub_action_instance action="INSERT_OR_UPDATE"&gt;
+        &lt;action_inputs/&gt;
+        &lt;action_type display_value="Create Draft Envelope from Template"&gt;845e3abfdb8f1b00a9c7594e5e9619e4&lt;/action_type&gt;
+        &lt;action_type_parent display_value="Create Draft Envelope from Template"&gt;f7eed795db321300868f5404ce9619ca&lt;/action_type_parent&gt;
+        &lt;comment/&gt;
+        &lt;compiled_snapshot&gt;845e3abfdb8f1b00a9c7594e5e9619e4&lt;/compiled_snapshot&gt;
+        &lt;display_text/&gt;
+        &lt;flow display_value="AT-7081 New Acquisition Package"&gt;e80dccab875e4510bc86b889cebb359b&lt;/flow&gt;
+        &lt;order&gt;1&lt;/order&gt;
+        &lt;parent_ui_id/&gt;
+        &lt;sys_class_name&gt;sys_hub_action_instance&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:55&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;3c0dccab875e4510bc86b889cebb35ec&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;10&lt;/sys_mod_count&gt;
+        &lt;sys_scope display_value="ATAT"&gt;f600233d1b154d507b782f84604bcb12&lt;/sys_scope&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 17:03:01&lt;/sys_updated_on&gt;
+        &lt;ui_id&gt;7ce3bf9a-ff8d-4b33-9d8d-a1baee039636&lt;/ui_id&gt;
+    &lt;/sys_hub_action_instance&gt;
+    &lt;sys_variable_value action="delete_multiple" query="document_key=3c0dccab875e4510bc86b889cebb35ec"/&gt;
+    &lt;sys_variable_value action="INSERT_OR_UPDATE"&gt;
+        &lt;document&gt;sys_hub_action_instance&lt;/document&gt;
+        &lt;document_key&gt;3c0dccab875e4510bc86b889cebb35ec&lt;/document_key&gt;
+        &lt;order&gt;1&lt;/order&gt;
+        &lt;sys_class_name&gt;sys_variable_value&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:55&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;f40dccab875e4510bc86b889cebb35ef&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:55&lt;/sys_updated_on&gt;
+        &lt;value&gt;2beb5b1c1b0245107b782f84604bcb78&lt;/value&gt;
+        &lt;variable display_value="Template"&gt;c05e3abfdb8f1b00a9c7594e5e9619e7&lt;/variable&gt;
+    &lt;/sys_variable_value&gt;
+    &lt;sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_action_input_845e3abfdb8f1b00a9c7594e5e9619e4^id=3c0dccab875e4510bc86b889cebb35ec"/&gt;
+    &lt;sys_hub_action_instance action="INSERT_OR_UPDATE"&gt;
+        &lt;action_inputs/&gt;
+        &lt;action_inputs/&gt;
+        &lt;action_type display_value="Add Recipient to Envelope"&gt;7a6bb6fbdb8f1b00a9c7594e5e9619e8&lt;/action_type&gt;
+        &lt;action_type_parent display_value="Add Recipient to Envelope"&gt;9b38442ddb721300bea7ff561d9619f8&lt;/action_type_parent&gt;
+        &lt;comment/&gt;
+        &lt;compiled_snapshot&gt;7a6bb6fbdb8f1b00a9c7594e5e9619e8&lt;/compiled_snapshot&gt;
+        &lt;display_text/&gt;
+        &lt;flow display_value="AT-7081 New Acquisition Package"&gt;e80dccab875e4510bc86b889cebb359b&lt;/flow&gt;
+        &lt;order&gt;2&lt;/order&gt;
+        &lt;parent_ui_id/&gt;
+        &lt;sys_class_name&gt;sys_hub_action_instance&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:55&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;780d00eb875e4510bc86b889cebb3503&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;10&lt;/sys_mod_count&gt;
+        &lt;sys_scope display_value="ATAT"&gt;f600233d1b154d507b782f84604bcb12&lt;/sys_scope&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 17:03:01&lt;/sys_updated_on&gt;
+        &lt;ui_id&gt;d8aad1cd-3fc6-4ed6-a78e-0f268d7a27ed&lt;/ui_id&gt;
+    &lt;/sys_hub_action_instance&gt;
+    &lt;sys_variable_value action="delete_multiple" query="document_key=780d00eb875e4510bc86b889cebb3503"/&gt;
+    &lt;sys_variable_value action="INSERT_OR_UPDATE"&gt;
+        &lt;document&gt;sys_hub_action_instance&lt;/document&gt;
+        &lt;document_key&gt;780d00eb875e4510bc86b889cebb3503&lt;/document_key&gt;
+        &lt;order&gt;2&lt;/order&gt;
+        &lt;sys_class_name&gt;sys_variable_value&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;3c0d00eb875e4510bc86b889cebb3506&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:56&lt;/sys_updated_on&gt;
+        &lt;value&gt;jason.burkert@hunterstrategy.net&lt;/value&gt;
+        &lt;variable display_value="Email"&gt;366bb6fbdb8f1b00a9c7594e5e9619f2&lt;/variable&gt;
+    &lt;/sys_variable_value&gt;
+    &lt;sys_variable_value action="INSERT_OR_UPDATE"&gt;
+        &lt;document&gt;sys_hub_action_instance&lt;/document&gt;
+        &lt;document_key&gt;780d00eb875e4510bc86b889cebb3503&lt;/document_key&gt;
+        &lt;order&gt;3&lt;/order&gt;
+        &lt;sys_class_name&gt;sys_variable_value&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;780d00eb875e4510bc86b889cebb3506&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:56&lt;/sys_updated_on&gt;
+        &lt;value&gt;Jason Burkert&lt;/value&gt;
+        &lt;variable display_value="Name"&gt;7a6bb6fbdb8f1b00a9c7594e5e9619f8&lt;/variable&gt;
+    &lt;/sys_variable_value&gt;
+    &lt;sys_variable_value action="INSERT_OR_UPDATE"&gt;
+        &lt;document&gt;sys_hub_action_instance&lt;/document&gt;
+        &lt;document_key&gt;780d00eb875e4510bc86b889cebb3503&lt;/document_key&gt;
+        &lt;order&gt;4&lt;/order&gt;
+        &lt;sys_class_name&gt;sys_variable_value&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;b40d00eb875e4510bc86b889cebb3506&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:56&lt;/sys_updated_on&gt;
+        &lt;value&gt;Signer 1&lt;/value&gt;
+        &lt;variable display_value="Role Name"&gt;7e6bb6fbdb8f1b00a9c7594e5e9619fe&lt;/variable&gt;
+    &lt;/sys_variable_value&gt;
+    &lt;sys_variable_value action="INSERT_OR_UPDATE"&gt;
+        &lt;document&gt;sys_hub_action_instance&lt;/document&gt;
+        &lt;document_key&gt;780d00eb875e4510bc86b889cebb3503&lt;/document_key&gt;
+        &lt;order&gt;5&lt;/order&gt;
+        &lt;sys_class_name&gt;sys_variable_value&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;fc0d00eb875e4510bc86b889cebb3506&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:56&lt;/sys_updated_on&gt;
+        &lt;value&gt;1&lt;/value&gt;
+        &lt;variable display_value="Recipient ID"&gt;3a6bf6fbdb8f1b00a9c7594e5e961911&lt;/variable&gt;
+    &lt;/sys_variable_value&gt;
+    &lt;sys_element_mapping action="delete_multiple" query="id=780d00eb875e4510bc86b889cebb3503"/&gt;
+    &lt;sys_element_mapping action="INSERT_OR_UPDATE"&gt;
+        &lt;field&gt;email&lt;/field&gt;
+        &lt;id&gt;780d00eb875e4510bc86b889cebb3503&lt;/id&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;700d00eb875e4510bc86b889cebb3506&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:56&lt;/sys_updated_on&gt;
+        &lt;table&gt;var__m_sys_hub_action_input_7a6bb6fbdb8f1b00a9c7594e5e9619e8&lt;/table&gt;
+        &lt;value/&gt;
+    &lt;/sys_element_mapping&gt;
+    &lt;sys_element_mapping action="INSERT_OR_UPDATE"&gt;
+        &lt;field&gt;envelope&lt;/field&gt;
+        &lt;id&gt;780d00eb875e4510bc86b889cebb3503&lt;/id&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;f80d00eb875e4510bc86b889cebb3505&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:56&lt;/sys_updated_on&gt;
+        &lt;table&gt;var__m_sys_hub_action_input_7a6bb6fbdb8f1b00a9c7594e5e9619e8&lt;/table&gt;
+        &lt;value&gt;{{7ce3bf9a-ff8d-4b33-9d8d-a1baee039636.envelope_id}}&lt;/value&gt;
+    &lt;/sys_element_mapping&gt;
+    &lt;sys_element_mapping action="INSERT_OR_UPDATE"&gt;
+        &lt;field&gt;full_name&lt;/field&gt;
+        &lt;id&gt;780d00eb875e4510bc86b889cebb3503&lt;/id&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;bc0d00eb875e4510bc86b889cebb3505&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:56&lt;/sys_updated_on&gt;
+        &lt;table&gt;var__m_sys_hub_action_input_7a6bb6fbdb8f1b00a9c7594e5e9619e8&lt;/table&gt;
+        &lt;value/&gt;
+    &lt;/sys_element_mapping&gt;
+    &lt;sys_element_mapping action="INSERT_OR_UPDATE"&gt;
+        &lt;field&gt;recipient_id&lt;/field&gt;
+        &lt;id&gt;780d00eb875e4510bc86b889cebb3503&lt;/id&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;340d00eb875e4510bc86b889cebb3506&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:56&lt;/sys_updated_on&gt;
+        &lt;table&gt;var__m_sys_hub_action_input_7a6bb6fbdb8f1b00a9c7594e5e9619e8&lt;/table&gt;
+        &lt;value/&gt;
+    &lt;/sys_element_mapping&gt;
+    &lt;sys_element_mapping action="INSERT_OR_UPDATE"&gt;
+        &lt;field&gt;role_name&lt;/field&gt;
+        &lt;id&gt;780d00eb875e4510bc86b889cebb3503&lt;/id&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;380d00eb875e4510bc86b889cebb3505&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:56&lt;/sys_updated_on&gt;
+        &lt;table&gt;var__m_sys_hub_action_input_7a6bb6fbdb8f1b00a9c7594e5e9619e8&lt;/table&gt;
+        &lt;value/&gt;
+    &lt;/sys_element_mapping&gt;
+    &lt;sys_hub_action_instance action="INSERT_OR_UPDATE"&gt;
+        &lt;action_inputs/&gt;
+        &lt;action_inputs/&gt;
+        &lt;action_type display_value="Send Envelope"&gt;067d36fbdb475b00dd14596e5e9619f3&lt;/action_type&gt;
+        &lt;action_type_parent display_value="Send Envelope"&gt;83ce2ca5dbf21300868f5404ce9619f2&lt;/action_type_parent&gt;
+        &lt;comment/&gt;
+        &lt;compiled_snapshot&gt;067d36fbdb475b00dd14596e5e9619f3&lt;/compiled_snapshot&gt;
+        &lt;display_text/&gt;
+        &lt;flow display_value="AT-7081 New Acquisition Package"&gt;e80dccab875e4510bc86b889cebb359b&lt;/flow&gt;
+        &lt;order&gt;4&lt;/order&gt;
+        &lt;parent_ui_id/&gt;
+        &lt;sys_class_name&gt;sys_hub_action_instance&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;7c0d00eb875e4510bc86b889cebb3535&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;10&lt;/sys_mod_count&gt;
+        &lt;sys_scope display_value="ATAT"&gt;f600233d1b154d507b782f84604bcb12&lt;/sys_scope&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 17:03:01&lt;/sys_updated_on&gt;
+        &lt;ui_id&gt;c36914b9-2bf2-4646-91ee-cef03a9f59cb&lt;/ui_id&gt;
+    &lt;/sys_hub_action_instance&gt;
+    &lt;sys_variable_value action="delete_multiple" query="document_key=7c0d00eb875e4510bc86b889cebb3535"/&gt;
+    &lt;sys_element_mapping action="delete_multiple" query="id=7c0d00eb875e4510bc86b889cebb3535"/&gt;
+    &lt;sys_element_mapping action="INSERT_OR_UPDATE"&gt;
+        &lt;field&gt;envelope&lt;/field&gt;
+        &lt;id&gt;7c0d00eb875e4510bc86b889cebb3535&lt;/id&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;010d00eb875e4510bc86b889cebb3537&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:56&lt;/sys_updated_on&gt;
+        &lt;table&gt;var__m_sys_hub_action_input_067d36fbdb475b00dd14596e5e9619f3&lt;/table&gt;
+        &lt;value&gt;{{7ce3bf9a-ff8d-4b33-9d8d-a1baee039636.envelope_id}}&lt;/value&gt;
+    &lt;/sys_element_mapping&gt;
+    &lt;sys_hub_action_instance action="INSERT_OR_UPDATE"&gt;
+        &lt;action_inputs/&gt;
+        &lt;action_inputs/&gt;
+        &lt;action_type display_value="Update Record"&gt;f9d01dd2c31332002841b63b12d3aea1&lt;/action_type&gt;
+        &lt;action_type_parent/&gt;
+        &lt;comment/&gt;
+        &lt;compiled_snapshot/&gt;
+        &lt;display_text/&gt;
+        &lt;flow display_value="AT-7081 New Acquisition Package"&gt;e80dccab875e4510bc86b889cebb359b&lt;/flow&gt;
+        &lt;order&gt;5&lt;/order&gt;
+        &lt;parent_ui_id/&gt;
+        &lt;sys_class_name&gt;sys_hub_action_instance&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 17:03:01&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;f2e6f86b87de4510bc86b889cebb3580&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;2&lt;/sys_mod_count&gt;
+        &lt;sys_scope display_value="ATAT"&gt;f600233d1b154d507b782f84604bcb12&lt;/sys_scope&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 17:03:01&lt;/sys_updated_on&gt;
+        &lt;ui_id&gt;80f36b0d-399b-42cb-b664-c7e5181b2ebf&lt;/ui_id&gt;
+    &lt;/sys_hub_action_instance&gt;
+    &lt;sys_variable_value action="delete_multiple" query="document_key=f2e6f86b87de4510bc86b889cebb3580"/&gt;
+    &lt;sys_variable_value action="INSERT_OR_UPDATE"&gt;
+        &lt;document&gt;sys_hub_action_instance&lt;/document&gt;
+        &lt;document_key&gt;f2e6f86b87de4510bc86b889cebb3580&lt;/document_key&gt;
+        &lt;order&gt;50&lt;/order&gt;
+        &lt;sys_class_name&gt;sys_variable_value&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 17:03:01&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;7ee6f86b87de4510bc86b889cebb3582&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 17:03:01&lt;/sys_updated_on&gt;
+        &lt;value&gt;x_g_dis_atat_acquisition_package&lt;/value&gt;
+        &lt;variable display_value="Table"&gt;b5d01916c31332002841b63b12d3aec9&lt;/variable&gt;
+    &lt;/sys_variable_value&gt;
+    &lt;sys_element_mapping action="delete_multiple" query="id=f2e6f86b87de4510bc86b889cebb3580"/&gt;
+    &lt;sys_element_mapping action="INSERT_OR_UPDATE"&gt;
+        &lt;field&gt;record&lt;/field&gt;
+        &lt;id&gt;f2e6f86b87de4510bc86b889cebb3580&lt;/id&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 17:03:01&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;3ae6f86b87de4510bc86b889cebb3582&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 17:03:01&lt;/sys_updated_on&gt;
+        &lt;table&gt;var__m_sys_hub_action_input_f9d01dd2c31332002841b63b12d3aea1&lt;/table&gt;
+        &lt;value&gt;{{Updated_1.current}}&lt;/value&gt;
+    &lt;/sys_element_mapping&gt;
+    &lt;sys_element_mapping action="INSERT_OR_UPDATE"&gt;
+        &lt;field&gt;table_name&lt;/field&gt;
+        &lt;id&gt;f2e6f86b87de4510bc86b889cebb3580&lt;/id&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 17:03:01&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;72e6f86b87de4510bc86b889cebb3582&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 17:03:01&lt;/sys_updated_on&gt;
+        &lt;table&gt;var__m_sys_hub_action_input_f9d01dd2c31332002841b63b12d3aea1&lt;/table&gt;
+        &lt;value/&gt;
+    &lt;/sys_element_mapping&gt;
+    &lt;sys_element_mapping action="INSERT_OR_UPDATE"&gt;
+        &lt;field&gt;values&lt;/field&gt;
+        &lt;id&gt;f2e6f86b87de4510bc86b889cebb3580&lt;/id&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 17:03:01&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;fae6f86b87de4510bc86b889cebb3582&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 17:03:01&lt;/sys_updated_on&gt;
+        &lt;table&gt;var__m_sys_hub_action_input_f9d01dd2c31332002841b63b12d3aea1&lt;/table&gt;
+        &lt;value&gt;docusign_envelope_id={{7ce3bf9a-ff8d-4b33-9d8d-a1baee039636.envelope_id.id}}&lt;/value&gt;
+    &lt;/sys_element_mapping&gt;
+    &lt;sys_hub_action_instance action="INSERT_OR_UPDATE"&gt;
+        &lt;action_inputs/&gt;
+        &lt;action_inputs/&gt;
+        &lt;action_type display_value="Add Recipient to Envelope"&gt;7a6bb6fbdb8f1b00a9c7594e5e9619e8&lt;/action_type&gt;
+        &lt;action_type_parent display_value="Add Recipient to Envelope"&gt;9b38442ddb721300bea7ff561d9619f8&lt;/action_type_parent&gt;
+        &lt;comment/&gt;
+        &lt;compiled_snapshot&gt;7a6bb6fbdb8f1b00a9c7594e5e9619e8&lt;/compiled_snapshot&gt;
+        &lt;display_text/&gt;
+        &lt;flow display_value="AT-7081 New Acquisition Package"&gt;e80dccab875e4510bc86b889cebb359b&lt;/flow&gt;
+        &lt;order&gt;3&lt;/order&gt;
+        &lt;parent_ui_id/&gt;
+        &lt;sys_class_name&gt;sys_hub_action_instance&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;f80d00eb875e4510bc86b889cebb351a&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;10&lt;/sys_mod_count&gt;
+        &lt;sys_scope display_value="ATAT"&gt;f600233d1b154d507b782f84604bcb12&lt;/sys_scope&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 17:03:01&lt;/sys_updated_on&gt;
+        &lt;ui_id&gt;335edd67-09fa-4d27-b749-886bf04a6a85&lt;/ui_id&gt;
+    &lt;/sys_hub_action_instance&gt;
+    &lt;sys_variable_value action="delete_multiple" query="document_key=f80d00eb875e4510bc86b889cebb351a"/&gt;
+    &lt;sys_variable_value action="INSERT_OR_UPDATE"&gt;
+        &lt;document&gt;sys_hub_action_instance&lt;/document&gt;
+        &lt;document_key&gt;f80d00eb875e4510bc86b889cebb351a&lt;/document_key&gt;
+        &lt;order&gt;2&lt;/order&gt;
+        &lt;sys_class_name&gt;sys_variable_value&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;380d00eb875e4510bc86b889cebb351d&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:56&lt;/sys_updated_on&gt;
+        &lt;value&gt;jeff.segal@hunterstrategy.net&lt;/value&gt;
+        &lt;variable display_value="Email"&gt;366bb6fbdb8f1b00a9c7594e5e9619f2&lt;/variable&gt;
+    &lt;/sys_variable_value&gt;
+    &lt;sys_variable_value action="INSERT_OR_UPDATE"&gt;
+        &lt;document&gt;sys_hub_action_instance&lt;/document&gt;
+        &lt;document_key&gt;f80d00eb875e4510bc86b889cebb351a&lt;/document_key&gt;
+        &lt;order&gt;3&lt;/order&gt;
+        &lt;sys_class_name&gt;sys_variable_value&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;740d00eb875e4510bc86b889cebb351d&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:56&lt;/sys_updated_on&gt;
+        &lt;value&gt;Jeff Segal&lt;/value&gt;
+        &lt;variable display_value="Name"&gt;7a6bb6fbdb8f1b00a9c7594e5e9619f8&lt;/variable&gt;
+    &lt;/sys_variable_value&gt;
+    &lt;sys_variable_value action="INSERT_OR_UPDATE"&gt;
+        &lt;document&gt;sys_hub_action_instance&lt;/document&gt;
+        &lt;document_key&gt;f80d00eb875e4510bc86b889cebb351a&lt;/document_key&gt;
+        &lt;order&gt;4&lt;/order&gt;
+        &lt;sys_class_name&gt;sys_variable_value&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;b00d00eb875e4510bc86b889cebb351d&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:56&lt;/sys_updated_on&gt;
+        &lt;value&gt;Signer 2&lt;/value&gt;
+        &lt;variable display_value="Role Name"&gt;7e6bb6fbdb8f1b00a9c7594e5e9619fe&lt;/variable&gt;
+    &lt;/sys_variable_value&gt;
+    &lt;sys_variable_value action="INSERT_OR_UPDATE"&gt;
+        &lt;document&gt;sys_hub_action_instance&lt;/document&gt;
+        &lt;document_key&gt;f80d00eb875e4510bc86b889cebb351a&lt;/document_key&gt;
+        &lt;order&gt;5&lt;/order&gt;
+        &lt;sys_class_name&gt;sys_variable_value&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;f80d00eb875e4510bc86b889cebb351d&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:56&lt;/sys_updated_on&gt;
+        &lt;value&gt;2&lt;/value&gt;
+        &lt;variable display_value="Recipient ID"&gt;3a6bf6fbdb8f1b00a9c7594e5e961911&lt;/variable&gt;
+    &lt;/sys_variable_value&gt;
+    &lt;sys_element_mapping action="delete_multiple" query="id=f80d00eb875e4510bc86b889cebb351a"/&gt;
+    &lt;sys_element_mapping action="INSERT_OR_UPDATE"&gt;
+        &lt;field&gt;email&lt;/field&gt;
+        &lt;id&gt;f80d00eb875e4510bc86b889cebb351a&lt;/id&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;7c0d00eb875e4510bc86b889cebb351c&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:56&lt;/sys_updated_on&gt;
+        &lt;table&gt;var__m_sys_hub_action_input_7a6bb6fbdb8f1b00a9c7594e5e9619e8&lt;/table&gt;
+        &lt;value/&gt;
+    &lt;/sys_element_mapping&gt;
+    &lt;sys_element_mapping action="INSERT_OR_UPDATE"&gt;
+        &lt;field&gt;envelope&lt;/field&gt;
+        &lt;id&gt;f80d00eb875e4510bc86b889cebb351a&lt;/id&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;f40d00eb875e4510bc86b889cebb351c&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:56&lt;/sys_updated_on&gt;
+        &lt;table&gt;var__m_sys_hub_action_input_7a6bb6fbdb8f1b00a9c7594e5e9619e8&lt;/table&gt;
+        &lt;value&gt;{{7ce3bf9a-ff8d-4b33-9d8d-a1baee039636.envelope_id}}&lt;/value&gt;
+    &lt;/sys_element_mapping&gt;
+    &lt;sys_element_mapping action="INSERT_OR_UPDATE"&gt;
+        &lt;field&gt;full_name&lt;/field&gt;
+        &lt;id&gt;f80d00eb875e4510bc86b889cebb351a&lt;/id&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;b80d00eb875e4510bc86b889cebb351c&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:56&lt;/sys_updated_on&gt;
+        &lt;table&gt;var__m_sys_hub_action_input_7a6bb6fbdb8f1b00a9c7594e5e9619e8&lt;/table&gt;
+        &lt;value/&gt;
+    &lt;/sys_element_mapping&gt;
+    &lt;sys_element_mapping action="INSERT_OR_UPDATE"&gt;
+        &lt;field&gt;recipient_id&lt;/field&gt;
+        &lt;id&gt;f80d00eb875e4510bc86b889cebb351a&lt;/id&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;300d00eb875e4510bc86b889cebb351d&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:56&lt;/sys_updated_on&gt;
+        &lt;table&gt;var__m_sys_hub_action_input_7a6bb6fbdb8f1b00a9c7594e5e9619e8&lt;/table&gt;
+        &lt;value/&gt;
+    &lt;/sys_element_mapping&gt;
+    &lt;sys_element_mapping action="INSERT_OR_UPDATE"&gt;
+        &lt;field&gt;role_name&lt;/field&gt;
+        &lt;id&gt;f80d00eb875e4510bc86b889cebb351a&lt;/id&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:56&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;340d00eb875e4510bc86b889cebb351c&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:56&lt;/sys_updated_on&gt;
+        &lt;table&gt;var__m_sys_hub_action_input_7a6bb6fbdb8f1b00a9c7594e5e9619e8&lt;/table&gt;
+        &lt;value/&gt;
+    &lt;/sys_element_mapping&gt;
+    &lt;sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_e80dccab875e4510bc86b889cebb359b^sys_idNOT IN2c0dccab875e4510bc86b889cebb35bd,680dccab875e4510bc86b889cebb35b1,e80dccab875e4510bc86b889cebb35b7"/&gt;
+    &lt;sys_documentation action="INSERT_OR_UPDATE"&gt;
+        &lt;element&gt;changed_fields&lt;/element&gt;
+        &lt;help/&gt;
+        &lt;hint/&gt;
+        &lt;label&gt;Changed Fields&lt;/label&gt;
+        &lt;language&gt;en&lt;/language&gt;
+        &lt;name&gt;var__m_sys_hub_flow_input_e80dccab875e4510bc86b889cebb359b&lt;/name&gt;
+        &lt;plural/&gt;
+        &lt;sys_class_name&gt;sys_documentation&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:55&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;2c0dccab875e4510bc86b889cebb35bd&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_name/&gt;
+        &lt;sys_package display_value="ATAT" source="x_g_dis_atat"&gt;f600233d1b154d507b782f84604bcb12&lt;/sys_package&gt;
+        &lt;sys_policy/&gt;
+        &lt;sys_scope display_value="ATAT"&gt;f600233d1b154d507b782f84604bcb12&lt;/sys_scope&gt;
+        &lt;sys_update_name/&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:55&lt;/sys_updated_on&gt;
+        &lt;url/&gt;
+        &lt;url_target/&gt;
+    &lt;/sys_documentation&gt;
+    &lt;sys_documentation action="INSERT_OR_UPDATE"&gt;
+        &lt;element&gt;table_name&lt;/element&gt;
+        &lt;help/&gt;
+        &lt;hint/&gt;
+        &lt;label&gt;Table Name&lt;/label&gt;
+        &lt;language&gt;en&lt;/language&gt;
+        &lt;name&gt;var__m_sys_hub_flow_input_e80dccab875e4510bc86b889cebb359b&lt;/name&gt;
+        &lt;plural/&gt;
+        &lt;sys_class_name&gt;sys_documentation&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:55&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;680dccab875e4510bc86b889cebb35b1&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_name/&gt;
+        &lt;sys_package display_value="ATAT" source="x_g_dis_atat"&gt;f600233d1b154d507b782f84604bcb12&lt;/sys_package&gt;
+        &lt;sys_policy/&gt;
+        &lt;sys_scope display_value="ATAT"&gt;f600233d1b154d507b782f84604bcb12&lt;/sys_scope&gt;
+        &lt;sys_update_name/&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:55&lt;/sys_updated_on&gt;
+        &lt;url/&gt;
+        &lt;url_target/&gt;
+    &lt;/sys_documentation&gt;
+    &lt;sys_documentation action="INSERT_OR_UPDATE"&gt;
+        &lt;element&gt;current&lt;/element&gt;
+        &lt;help/&gt;
+        &lt;hint/&gt;
+        &lt;label&gt;Record&lt;/label&gt;
+        &lt;language&gt;en&lt;/language&gt;
+        &lt;name&gt;var__m_sys_hub_flow_input_e80dccab875e4510bc86b889cebb359b&lt;/name&gt;
+        &lt;plural/&gt;
+        &lt;sys_class_name&gt;sys_documentation&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-03-23 13:59:55&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;e80dccab875e4510bc86b889cebb35b7&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_name/&gt;
+        &lt;sys_package display_value="ATAT" source="x_g_dis_atat"&gt;f600233d1b154d507b782f84604bcb12&lt;/sys_package&gt;
+        &lt;sys_policy/&gt;
+        &lt;sys_scope display_value="ATAT"&gt;f600233d1b154d507b782f84604bcb12&lt;/sys_scope&gt;
+        &lt;sys_update_name/&gt;
+        &lt;sys_updated_by&gt;jason.burkert-ctr@ccpo.mil&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-03-23 13:59:55&lt;/sys_updated_on&gt;
+        &lt;url/&gt;
+        &lt;url_target/&gt;
+    &lt;/sys_documentation&gt;
+&lt;/record_update&gt;</payload>
+        <payload_hash>-765600170</payload_hash>
+        <record_name>AT-7081 New Acquisition Package</record_name>
+        <reverted_from/>
+        <source>5c5acddf87d7c190ec3b777acebb3590</source>
+        <source_table>sys_upgrade_history</source_table>
+        <state>previous</state>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-05-11 16:53:23</sys_created_on>
+        <sys_id>df9a8993871bc190ec3b777acebb35bc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>180b40a1e400000001</sys_recorded_at>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-05-11 16:53:23</sys_updated_on>
+        <type>Flow</type>
+        <update_guid>1f9a8993ef1bc190be288b84f92946bc</update_guid>
+        <update_guid_history>1f9a8993ef1bc190be288b84f92946bc:0,734285d743d7c1907ad1ed788794fb8a:-934333659,0f332bfd6aaec91055a3160e51f5d50e:0,71c122fd54eac910a64f6baa2f2528e3:-934333659,f69175714daac9106ed8e28a2b499001:0,a101b1319de24d10882c503be5a8f69a:-934333659,3e5fa5bd88a24d10456ab30f2e310b8a:0,07ec01f1e1224d10f2fde2cb54869206:-934333659,eb27c57dc8ee0d108a17703c81f9ee15:0,63f8e8bdaf6e0d10785cd75d29e2e687:-934333659,f593a0650e6e891042cfe96d86a07baf:0,86373395b8ea8910840efcfa6119b381:-934333659,826aef1df8aa89108e1928efb04eb891:0,bd50a75df7aec910f6e50935f5ffb64d:-934333659,4c5f131d21aec910da943985c7025330:0,fde2d75daa6a8910c4c1743206cd7f15:-934333659,f0aab389ab62891030820699a32b9c0e:0,d70437c94626c910f04c407000081762:-934333659,014fdf897fe2c910d8e9a14257aced4f:0,701352cd5eae891021e4efa9c994e6f3:-934333659,66dbdb0412aac510473df202d2f50878:0,0dcd8b88e36ac51037f18b4b1f01d7d8:-934333659,9aad0788916ac510a3dc1de7319cb88d:0,35b28bc0fca60910c226537ec48fad2b:-934333659,44c0a2fb175e85102110fb198bcb7490:0,383331bf9496c510be41b523a6fbfb20:-934333659,2e58b1a7eb928510ee9c6b4809bcfcb7:0,e88ea5aff3528510a6b2130897d9d577:-934333659,03e6f86b70de4510b0f7e3bb311cc3aa:1446170760,d925302be5de4510750de8517702df42:1278757364,02d3f8a751de45108491c6f54b5d5c9b:-1953759239,ec9694a3f49e45104a7c6e0113de2847:2018152690,cd0d00eb755e451014a7d13046995e6e:-1768475707,a00dccab735e4510267273e1d502b7a4:-1294589013</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-07-18 20:26:22</sys_created_on>
+        <sys_db_object display_value="" name="sys_hub_flow">sys_hub_flow</sys_db_object>
+        <sys_id>3e7c93794afc4b12a29376c21f20ece9</sys_id>
+        <sys_metadata>e80dccab875e4510bc86b889cebb359b</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>AT-7081 New Acquisition Package</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_scope_delete display_value="">0e7a10eb525044648240c5b393f748c4</sys_scope_delete>
+        <sys_update_name>sys_hub_flow_e80dccab875e4510bc86b889cebb359b</sys_update_name>
+        <sys_update_version display_value="sys_hub_flow_e80dccab875e4510bc86b889cebb359b">df9a8993871bc190ec3b777acebb35bc</sys_update_version>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-07-18 20:26:22</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
