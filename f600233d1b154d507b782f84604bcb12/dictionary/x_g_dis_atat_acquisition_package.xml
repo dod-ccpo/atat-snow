@@ -13,6 +13,15 @@
         <element label="GFE Overview" max_length="32" name="gfe_overview" reference="x_g_dis_atat_gfe_overview" type="reference"/>
         <element attributes="edge_encryption_enabled=true" default="javascript:global.getNextObjNumberPadded();" display="true" label="Number" max_length="40" name="number" type="string"/>
         <element label="Organization" max_length="32" name="organization" reference="x_g_dis_atat_organization" type="reference"/>
+        <element choice="1" label="Status" max_length="40" name="package_status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Draft" sequence="1" value="DRAFT"/>
+                <element inactive_on_update="false" label="Under Review" sequence="2" value="UNDER_REVIEW"/>
+                <element inactive_on_update="false" label="Accepted" sequence="3" value="ACCEPTED"/>
+                <element inactive_on_update="false" label="Task Order Issued" sequence="4" value="TASK_ORDER_ISSUED"/>
+                <element inactive_on_update="false" label="Cancelled" sequence="5" value="CANCELLED"/>
+            </choice>
+        </element>
         <element label="Period Of Performance" max_length="32" name="period_of_performance" reference="x_g_dis_atat_period_of_performance" type="reference"/>
         <element label="Project Overview" max_length="32" name="project_overview" reference="x_g_dis_atat_project_overview" type="reference"/>
         <element label="Requirements Cost Estimate" max_length="32" name="requirements_cost_estimate" reference="x_g_dis_atat_requirements_cost_estimate" type="reference"/>
