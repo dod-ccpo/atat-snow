@@ -23,6 +23,7 @@
             </choice>
         </element>
         <element label="Period Of Performance" max_length="32" name="period_of_performance" reference="x_g_dis_atat_period_of_performance" type="reference"/>
+        <element label="Primary Reviewer" max_length="32" name="primary_reviewer" reference="sys_user" type="reference"/>
         <element label="Project Overview" max_length="32" name="project_overview" reference="x_g_dis_atat_project_overview" type="reference"/>
         <element label="Requirements Cost Estimate" max_length="32" name="requirements_cost_estimate" reference="x_g_dis_atat_requirements_cost_estimate" type="reference"/>
         <element label="Selected Service Offerings" max_length="4000" name="selected_service_offerings" reference="x_g_dis_atat_selected_service_offering" type="glide_list"/>
@@ -61,6 +62,9 @@
             <element name="organization"/>
         </index>
         <index name="index12">
+            <element name="primary_reviewer"/>
+        </index>
+        <index name="index13">
             <element name="current_environment"/>
         </index>
     </element>
