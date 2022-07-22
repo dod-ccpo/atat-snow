@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>homepages</category>
+        <client_script><![CDATA[sessionStorage.setItem("userEmail", "${gs.getUser().name}");
+sessionStorage.setItem("userId", "${gs.getUserID()}");
+sessionStorage.setItem("userName", "${gs.getUserDisplayName()}");]]></client_script>
+        <description>Home Page for ATAT Single Page Application</description>
+        <direct>true</direct>
+        <endpoint>x_g_dis_atat_ATAT Home Page.do</endpoint>
+        <html><![CDATA[<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+  <g:evaluate> var docType = '&lt;!DOCTYPE HTML&gt;';
+  </g:evaluate>
+  <g2:no_escape>
+    $[docType]
+  </g2:no_escape>
+  <g:evaluate object="true">
+    var session = gs.getSession();
+    var token = session.getSessionToken();
+  </g:evaluate>
+  <script>
+    window.sessionToken = "$[token]";
+  </script>
+
+  <head>
+    <title>sn-vue</title>
+  </head>
+
+  <body><noscript><strong>We're sorry but sn-vue doesn't work properly without JavaScript enabled. Please enable it to
+        continue.</strong></noscript>
+    <div id="app"></div>
+    <script src="/api/x_g_dis_atat/vue_app_container/js/vendor-d88cb6223f5fb7affed9-js"></script>
+    <script src="/api/x_g_dis_atat/vue_app_container/js/app-3f1189217eb8a235faca-js"></script>
+  </body>
+</j:jelly>]]></html>
+        <name>ATAT Home Page</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-07-22 16:58:29</sys_created_on>
+        <sys_id>0bfd335edb7055d08c045e8cd39619b3</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>ATAT Home Page</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_ui_page_0bfd335edb7055d08c045e8cd39619b3</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-07-22 18:16:04</sys_updated_on>
+    </sys_ui_page>
+</record_update>
