@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl/>
+        <http_method>GET</http_method>
+        <name>Assets</name>
+        <operation_script><![CDATA[(function process( /*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+    var fileName = request.pathParams.file;
+    var currentRecord = "042fbf9edb7055d08c045e8cd39619d0";
+    var ar = new GlideRecord('sys_attachment');
+    ar.addQuery('table_sys_id', currentRecord);
+    ar.addQuery('file_name', fileName + ".html");
+    ar.query();
+
+	response.setContentType('application/octet-stream');
+    response.setStatus(200);
+
+    if (ar.next()) {
+		var gsa = new GlideSysAttachment();
+		var attachmentStream = new gsa.getContentStream(ar.sys_id.toString());
+		var writer = response.getStreamWriter();
+		writer.writeStream(attachmentStream);
+    } else {
+        return "file not found";
+    }
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_g_dis_atat/vue_app_container/other_assets/{file}</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/other_assets/{file}</relative_path>
+        <request_example/>
+        <requires_acl_authorization>false</requires_acl_authorization>
+        <requires_authentication>false</requires_authentication>
+        <requires_snc_internal_role>false</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-07-22 17:02:53</sys_created_on>
+        <sys_id>042fbf9edb7055d08c045e8cd39619d0</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Assets</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_ws_operation_042fbf9edb7055d08c045e8cd39619d0</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-07-22 18:12:11</sys_updated_on>
+        <web_service_definition display_value="Vue App Container">ac5ebb5edb7055d08c045e8cd3961971</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>
