@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Provisioning Job" max_length="40" name="x_g_dis_atat_provisioning_job" sizeclass="0" type="collection">
+    <element label="Provisioning Job" max_length="40" name="x_g_dis_atat_provisioning_job" sizeclass="5" type="collection">
         <element display="true" label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
         <element choice="3" default="ADD_PORTFOLIO" label="Job Type" mandatory="true" max_length="40" name="job_type" type="choice">
             <choice>
@@ -8,10 +8,12 @@
                 <element inactive_on_update="false" label="Add Operator(s)" value="ADD_OPERATORS"/>
             </choice>
         </element>
-        <element choice="3" default="IN_PROGRESS" label="Status" max_length="40" name="status" type="choice">
+        <element label="Payload" max_length="2000" name="payload" type="string"/>
+        <element choice="3" default="NOT_STARTED" label="Status" max_length="40" name="status" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Failure" value="FAILURE"/>
                 <element inactive_on_update="false" label="In Progress" value="IN_PROGRESS"/>
+                <element inactive_on_update="false" label="Not Started" value="NOT_STARTED"/>
                 <element inactive_on_update="false" label="Success" value="SUCCESS"/>
             </choice>
         </element>
