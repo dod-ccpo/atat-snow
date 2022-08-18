@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.VueAppContainerUtils</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Supports Scripted REST API 'Vue App Container'</description>
+        <name>VueAppContainerUtils</name>
+        <script><![CDATA[var VueAppContainerUtils = Class.create();
+VueAppContainerUtils.prototype = {
+    // Returns details for Scripted REST API matching specified parameters
+    // @param {string} namespace aka application scope
+    // @param {string} serviceId The formal identifer for Scripted REST API (aka web service, api_id) in the namespace
+    getApi: function(namespace, serviceId) {
+        return new global.GlideQuery('sys_ws_definition')
+            .where('namespace', namespace)
+            .where('service_id', serviceId)
+            .selectOne('sys_id', 'namespace', 'service_id', 'name')
+            .get(); // throws if no record is found
+    },
+    // Returns details for REST API resource matching the specified parameters
+    // @param {object} api contains details for a Scripted REST API
+    // @param {string} resourceName The name for a resource (aka operation) within the Scripted REST API
+    getResource: function(api, resourceName) {
+        return new global.GlideQuery('sys_ws_operation')
+            .where('web_service_definition', api.sys_id)
+            .where('name', resourceName)
+            .selectOne('sys_id', 'web_service_definition', 'name', 'operation_uri', 'relative_path', 'http_method')
+            .get(); // throws if no record is found
+    },
+    // Returns details for attachment matching the specified record and filename
+    getAttachment: function(tableSysId, filename) {
+        return new global.GlideQuery('sys_attachment')
+            .where('table_sys_id', tableSysId)
+            .where('file_name', filename)
+            .selectOne('sys_id', 'file_name')
+            .get(); // throws if no record is found
+    },
+    // Extract file type from our internal naming convention
+    // convention: <baseFilename>-<fileType>.<ourFakeExtension>
+    getContentType: function(filename) {
+        // we produce files of these types
+        var fileTypes = {
+            eot: 'application/vnd.ms-fontobject',
+            woff: 'font/woff',
+            woff2: 'font/woff2',
+            jpg: 'image/jpeg',
+            js: 'text/javascript'
+        };
+        var regexp = /-(\w+).\w+$/;
+        //gives two matches such as ["-jpg", "jpg"]
+        var matches = filename.match(regexp);
+        var contentType = fileTypes[matches[1]];
+        // if the type is not recognized, use something generic
+        if (typeof contentType == 'undefined') {
+            contentType = "application/octet-stream";
+        }
+        gs.debug("File " + filename + " is content type " + contentType);
+        return contentType;
+    },
+    // Write to the response a stream of the content of a file expected to be attached to the record for the API resource
+    // @param {string} namespace aka application scope
+    // @param {string} serviceId The formal identifer for Scripted REST API (aka web service, api_id) in the namespace
+    // @param {string} resourceName The name for a resource (aka operation) within the Scripted REST API
+    // @param {string} fileParam Parameter as recieved in request.  NOT expected to contain our fake extension.
+    // @param {object} response ServiceNow API Response to which stream will be written
+    streamFileContentAttachedToResource: function(namespace, serviceId, resourceName, fileParam, response) {
+        // Get the api and resource by name
+        var api = this.getApi(namespace, serviceId);
+        var resource = this.getResource(api, resourceName);
+
+        // Locate the file attachment on this API resource
+        // We produce files with this extension by convention to workaround environmental limitation
+        var ourFakeExtension = ".html";
+        var filename = fileParam + ourFakeExtension;
+        var attachment;
+        try {
+            attachment = this.getAttachment(resource.sys_id, filename);
+        } catch (error) {
+            gs.error("File " + filename + " was NOT FOUND attached to resource " + resource.name);
+            gs.error(error.message);
+            response.setStatus(404);
+            return;
+        }
+
+        // Stream the attachment's content to the response
+        try {
+            response.setContentType(this.getContentType(filename));
+            response.setStatus(200);
+            var stream = new GlideSysAttachment().getContentStream(attachment.sys_id);
+            response.getStreamWriter().writeStream(stream);
+            gs.info("Successfully streamed content of file " + attachment.file_name + " to the response");
+            return;
+        } catch (error) {
+            gs.error("An error occurred while attempting to stream content of file " + filename + " to the response");
+            gs.error(error.message);
+            response.setStatus(500);
+            return;
+        }
+    },
+    type: 'VueAppContainerUtils'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-08-17 20:51:50</sys_created_on>
+        <sys_id>657ce2b697d11110cf3cfd9fe153af30</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>VueAppContainerUtils</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_657ce2b697d11110cf3cfd9fe153af30</sys_update_name>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-08-17 20:53:29</sys_updated_on>
+    </sys_script_include>
+</record_update>
