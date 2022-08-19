@@ -1,3 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element extends="x_g_dis_atat_environment_instance" label="Classification Instance Environment Estimate" max_length="40" name="x_g_dis_atat_classification_instance_environment_estimate" type="collection"/>
+    <element extends="x_g_dis_atat_environment_instance" label="Classification Instance Environment Estimate" max_length="40" name="x_g_dis_atat_classification_instance_environment_estimate" type="collection">
+        <element choice="1" label="Need for Entire Task Order Duration" max_length="40" name="need_for_entire_task_order_duration" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="-- New choice --" value="-- New choice --"/>
+            </choice>
+        </element>
+        <element label="Selected Periods" max_length="4000" name="selected_periods" reference="x_g_dis_atat_period" type="glide_list"/>
+    </element>
 </database>
