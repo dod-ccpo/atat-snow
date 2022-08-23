@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Classification Level" max_length="40" name="x_g_dis_atat_classification_level" type="collection">
+    <element label="Classification Level" max_length="40" name="x_g_dis_atat_classification_level" sizeclass="5" type="collection">
         <element choice="1" label="Classification" mandatory="true" max_length="40" name="classification" read_only="true" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Unclassified" sequence="1" value="U"/>
@@ -7,6 +7,7 @@
                 <element inactive_on_update="false" label="Top Secret" sequence="3" value="TS"/>
             </choice>
         </element>
+        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;    var output = '';&#13;&#10;    output += current.classification.getDisplayValue();&#13;&#10;&#9;if (current.impact_level) {&#13;&#10;      output += ' - ';&#13;&#10;      output += current.impact_level;&#9;&#13;&#10;&#9;}&#13;&#10;    return output;&#13;&#10;})(current);" display="true" label="Display" max_length="40" name="display" type="string" virtual="true"/>
         <element choice="1" label="Impact Level" max_length="40" name="impact_level" read_only="true" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Impact Level 2" sequence="2" value="IL2"/>
