@@ -8,25 +8,8 @@
         <http_method>GET</http_method>
         <name>JS</name>
         <operation_script><![CDATA[(function process( /*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
-	var fileName = request.pathParams.file;
-    var currentRecord = "608ff756db7055d08c045e8cd396197f";
-    var ar = new GlideRecord('sys_attachment');
-    ar.addQuery('table_sys_id', currentRecord);
-    ar.addQuery('file_name', fileName + ".html");
-    ar.query();
-    if (ar.next()) {
-        var message = new GlideSysAttachment().getContent(ar);
-        if (fileName.indexOf('-js')>0) {
-			response.setContentType('text/javascript');
-		} 
-		else {
-			response.setContentType('text/css');
-		} 
-        response.setStatus(200);
-        response.getStreamWriter().writeString(message);
-    } else {
-        return "file not found";
-    }
+    var vUtils = new VueAppContainerUtils();
+    vUtils.streamFileContentAttachedToResource('x_g_dis_atat', 'vue_app_container', 'JS', request.pathParams.file, response);
 })(request, response);]]></operation_script>
         <operation_uri>/api/x_g_dis_atat/vue_app_container/js/{file}</operation_uri>
         <produces>application/json,application/xml,text/xml</produces>
@@ -41,14 +24,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2022-07-22 17:05:05</sys_created_on>
         <sys_id>608ff756db7055d08c045e8cd396197f</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_name>JS</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_ws_operation_608ff756db7055d08c045e8cd396197f</sys_update_name>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-07-22 18:11:39</sys_updated_on>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-08-17 21:00:57</sys_updated_on>
         <web_service_definition display_value="Vue App Container">ac5ebb5edb7055d08c045e8cd3961971</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>

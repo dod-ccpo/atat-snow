@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="IDIQ CLIN" max_length="40" name="x_g_dis_atat_idiq_clin" type="collection">
+        <element label="Classification Level" max_length="32" name="classification_level" reference="x_g_dis_atat_classification_level" type="reference"/>
+        <element choice="1" label="Contract" max_length="100" name="contract" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="JWCC" value="JWCC"/>
+            </choice>
+        </element>
+        <element choice="1" label="Contract Type" max_length="40" name="contract_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Firm Fixed Price" value="FFP"/>
+                <element inactive_on_update="false" label="Time And Materials" value="T&amp;M"/>
+            </choice>
+        </element>
+        <element label="Description" max_length="300" name="description" type="string"/>
+        <element label="IDIQ CLIN" max_length="100" name="idiq_clin" type="string"/>
+        <index name="index">
+            <element name="classification_level"/>
+        </index>
+    </element>
+</database>
