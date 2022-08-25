@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.getClassificationInstanceInfo</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Queries data nested inside of a classification instance</description>
+        <name>getClassificationInstanceInfo</name>
+        <script><![CDATA[function getClassificationInstanceInfo(instance) {
+	var entireDuration = convertToBoolean(instance.need_for_entire_task_order_duration.toString());
+	instance.need_for_entire_task_order_duration = entireDuration;
+
+	if (entireDuration) {
+		instance.selected_periods = [];
+	} else {
+		var selectedPeriods = [];
+		instance.selected_periods.split(",")
+			.map(function(id) { return  outputs.package_periods_by_id[id]; })
+			.forEach(function(period) { selectedPeriods.push(period); });
+		instance.selected_periods = selectedPeriods;
+	}
+
+	var classLevel = new global.GlideQuery('x_g_dis_atat_classification_level')
+	.get(instance.classification_level.toString(),
+	['impact_level', 'classification'])
+	.orElse(null);
+
+	classLevel = removeSysId(classLevel);
+	instance.classification_level = classLevel;
+
+	return instance;
+}]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>zach.clark</sys_created_by>
+        <sys_created_on>2022-08-25 21:26:48</sys_created_on>
+        <sys_id>da618c6d1b2511107c458623604bcbed</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>getClassificationInstanceInfo</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_da618c6d1b2511107c458623604bcbed</sys_update_name>
+        <sys_updated_by>zach.clark</sys_updated_by>
+        <sys_updated_on>2022-08-25 21:26:48</sys_updated_on>
+    </sys_script_include>
+</record_update>

@@ -7,32 +7,7 @@
         <client_callable>false</client_callable>
         <description>Queries data nested inside of the selected service offerings for each service (classifications, periods, offering group, etc.).</description>
         <name>getNestedServiceInfo</name>
-        <script><![CDATA[function getClassificationInstanceInfo(instance) {
-	var entireDuration = convertToBoolean(instance.need_for_entire_task_order_duration.toString());
-	instance.need_for_entire_task_order_duration = entireDuration;
-
-	if (entireDuration) {
-		instance.selected_periods = [];
-	} else {
-		var selectedPeriods = [];
-		instance.selected_periods.split(",")
-			.map(function(id) { return  outputs.package_periods_by_id[id]; })
-			.forEach(function(period) { selectedPeriods.push(period); });
-		instance.selected_periods = selectedPeriods;
-	}
-
-	var classLevel = new global.GlideQuery('x_g_dis_atat_classification_level')
-	.get(instance.classification_level.toString(),
-	['impact_level', 'classification'])
-	.orElse(null);
-
-	classLevel = removeSysId(classLevel);
-	instance.classification_level = classLevel;
-
-	return instance;
-}
-
-function getNestedServiceInfo(selectedService) {
+        <script><![CDATA[function getNestedServiceInfo(selectedService) {
 	// get service offering or user created offering for each selection
 	var offering;
 	if (selectedService.service_offering) {
@@ -68,13 +43,13 @@ function getNestedServiceInfo(selectedService) {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-05-25 16:15:34</sys_created_on>
         <sys_id>fd170d731b634110c385ea85604bcb2d</sys_id>
-        <sys_mod_count>6</sys_mod_count>
+        <sys_mod_count>7</sys_mod_count>
         <sys_name>getNestedServiceInfo</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_fd170d731b634110c385ea85604bcb2d</sys_update_name>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-05-27 12:47:40</sys_updated_on>
+        <sys_updated_by>zach.clark</sys_updated_by>
+        <sys_updated_on>2022-08-25 21:26:37</sys_updated_on>
     </sys_script_include>
 </record_update>
