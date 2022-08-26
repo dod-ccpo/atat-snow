@@ -20,14 +20,14 @@
         <natlang/>
         <outputs/>
         <outputs/>
-        <state>draft</state>
+        <state>published</state>
         <sys_class_name>sys_hub_action_type_definition</sys_class_name>
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-08-25 15:53:24</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>82657a551b2111107c458623604bcb46</sys_id>
-        <sys_mod_count>13</sys_mod_count>
+        <sys_mod_count>16</sys_mod_count>
         <sys_name>ATAT Gather IGCE Data</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -35,7 +35,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_82657a551b2111107c458623604bcb46</sys_update_name>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-08-26 20:39:08</sys_updated_on>
+        <sys_updated_on>2022-08-26 20:43:16</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -2861,17 +2861,17 @@
     <sys_hub_action_plan action="INSERT_OR_UPDATE">
         <action_id display_value="ATAT Gather IGCE Data">82657a551b2111107c458623604bcb46</action_id>
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"a4753e551b2111107c458623604bcbd8","name":"plan","plan_signature":null}}</plan>
-        <snapshot>505089792f251110e58359a72799b60d</snapshot>
+        <snapshot>3951c9b92f251110e58359a72799b618</snapshot>
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-08-25 15:53:34</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>a4753e551b2111107c458623604bcbd8</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_overrides/>
         <sys_scope/>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-08-26 20:38:51</sys_updated_on>
+        <sys_updated_on>2022-08-26 20:43:19</sys_updated_on>
     </sys_hub_action_plan>
     <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
@@ -2983,10 +2983,10 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-08-25 21:56:52</sys_created_on>
         <sys_id>169848691b6511107c458623604bcb1c</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-08-26 20:38:47</sys_updated_on>
+        <sys_updated_on>2022-08-26 20:43:15</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=169848691b6511107c458623604bcb1c"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -2997,9 +2997,9 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-08-25 21:56:53</sys_created_on>
         <sys_id>269848691b6511107c458623604bcb67</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-08-26 20:38:47</sys_updated_on>
+        <sys_updated_on>2022-08-26 20:43:15</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   
   var periodsEstimate = JSON.parse(inputs.periodsEstimate);
@@ -3025,7 +3025,7 @@
     documentType: "INDEPENDENT_GOVERNMENT_COST_ESTIMATE",
     templatePayload: {
       fundingDocument: fundingDocument,
-      surgeDapabilities: surgeCapabilities,
+      surgeCapabilities: surgeCapabilities,
       periodsEstimate: periodsEstimate,
     }
   };
