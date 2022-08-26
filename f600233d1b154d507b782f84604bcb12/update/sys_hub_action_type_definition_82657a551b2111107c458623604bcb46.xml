@@ -27,7 +27,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>82657a551b2111107c458623604bcb46</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_name>ATAT Gather IGCE Data</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -35,7 +35,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_82657a551b2111107c458623604bcb46</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-08-26 17:48:07</sys_updated_on>
+        <sys_updated_on>2022-08-26 17:55:32</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -1680,10 +1680,10 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-08-25 16:13:43</sys_created_on>
         <sys_id>370aba1d1b2111107c458623604bcb00</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2022-08-25 16:13:43</sys_updated_on>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-08-26 17:55:32</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=370aba1d1b2111107c458623604bcb00"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -1694,9 +1694,9 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-08-25 16:13:43</sys_created_on>
         <sys_id>f30aba1d1b2111107c458623604bcb33</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2022-08-25 16:13:43</sys_updated_on>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-08-26 17:55:32</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   
   var periodsEstimate = JSON.parse(inputs.periodsEstimate);
@@ -1705,14 +1705,14 @@
   
   if (inputs.fundingType == "MIPR"){
   	fundingDocument = {
-      funding_type: inputs.fundingType,
-      mipr_number: inputs.miprNumber
+      fundingType: inputs.fundingType,
+      miprNumber: inputs.miprNumber
     }
   }
   else if (inputs.fundingType == "FS_FORM"){
     fundingDocument = {
-      funding_type: inputs.fundingType,
-      gtc_number: inputs.gtcNumber,
+      fundingType: inputs.fundingType,
+      gtcNumber: inputs.gtcNumber,
       orderNumber: inputs.orderNumber
     }
   }
@@ -1721,16 +1721,15 @@
   var igce_payload = {
     documentType: "INDEPENDENT_GOVERNMENT_COST_ESTIMATE",
     templatePayload: {
-      funding_document: fundingDocument,
-      surge_capabilities: surgeCapabilities,
-      periods_estimate: periodsEstimate,
+      fundingDocument: fundingDocument,
+      surgeDapabilities: surgeCapabilities,
+      periodsEstimate: periodsEstimate,
     }
   };
   
   outputs.igce_data = igce_payload;
 
-})(inputs, outputs);
-</value>
+})(inputs, outputs);</value>
         <variable display_value="Script">71aa7f6647032200b4fad7527c9a719b</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -1807,6 +1806,18 @@
         <sys_updated_on>2022-08-25 16:13:43</sys_updated_on>
         <table>var__m_sys_hub_step_ext_input_370aba1d1b2111107c458623604bcb00</table>
         <value>{{step[13ff57a5-9114-4c75-9bac-6fc6db723003].periods_estimate}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>script</field>
+        <id>370aba1d1b2111107c458623604bcb00</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-08-26 17:55:32</sys_created_on>
+        <sys_id>d5fa58f197e191102b1ef0b0f053afe7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-08-26 17:55:32</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
+        <value/>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>surgeCapabilities</field>
