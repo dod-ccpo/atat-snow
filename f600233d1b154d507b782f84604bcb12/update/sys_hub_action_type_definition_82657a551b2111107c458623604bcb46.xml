@@ -27,7 +27,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>82657a551b2111107c458623604bcb46</sys_id>
-        <sys_mod_count>27</sys_mod_count>
+        <sys_mod_count>29</sys_mod_count>
         <sys_name>ATAT Gather IGCE Data</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -35,7 +35,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_82657a551b2111107c458623604bcb46</sys_update_name>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2022-08-26 06:14:11</sys_updated_on>
+        <sys_updated_on>2022-08-26 06:33:51</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -124,10 +124,10 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-08-25 16:06:45</sys_created_on>
         <sys_id>2178b2d91b2111107c458623604bcbf2</sys_id>
-        <sys_mod_count>25</sys_mod_count>
+        <sys_mod_count>27</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2022-08-26 06:14:11</sys_updated_on>
+        <sys_updated_on>2022-08-26 06:33:51</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=2178b2d91b2111107c458623604bcbf2"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -138,9 +138,9 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-08-25 16:06:45</sys_created_on>
         <sys_id>6178f2d91b2111107c458623604bcb03</sys_id>
-        <sys_mod_count>24</sys_mod_count>
+        <sys_mod_count>26</sys_mod_count>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2022-08-26 06:14:11</sys_updated_on>
+        <sys_updated_on>2022-08-26 06:33:51</sys_updated_on>
         <value>(function execute(inputs, outputs) {
     var package = inputs.pre_process_package;
 
@@ -202,8 +202,8 @@
     var idiqFields = ['contract', 'idiq_clin', 'description', 'contract_type', 'classification_level'];
 
     //put everything into an array
-    var smart = getListRecords(idiqClins.toString(), idiqFields, 'x_g_dis_atat_idiq_clin').map(removeSysId);
-    smart.forEach(function (item) {
+    var clin_info = getListRecords(idiqClins.toString(), idiqFields, 'x_g_dis_atat_idiq_clin').map(removeSysId);
+    clin_info.forEach(function (item) {
         if (item.classification_level != null) {
             var gr = new GlideRecord('x_g_dis_atat_classification_level');
             gr.get(item.classification_level.toString());
@@ -218,10 +218,10 @@
     });
 
     // take these values and make the combined idiq clin
-    // Check if any values in smart 
+    // Check if any values in clin_info 
     var new_clins = [];
-    smart.forEach(function (item1) {
-        smart.forEach(function (item2) {
+    clin_info.forEach(function (item1) {
+        clin_info.forEach(function (item2) {
             var idiqClinString;
             // If the items descriptions and classification_levels match, create a new idiqClinString
             if (item1.description == item2.description &amp;&amp; item1.classification_level == item2.classification_level &amp;&amp; item1.idiq_clin != item2.idiq_clin) {
@@ -247,7 +247,7 @@
         });
     });
 
-    outputs.idiqclin = JSON.stringify(smart);
+    outputs.idiqclin = JSON.stringify(clin_info);
     outputs.new_clins = new_clins;
 
     // Retrieve selected service offerings, classification instances, and estimated environment instances 
@@ -289,16 +289,14 @@
 
                         // Insert into periods_estimate, under the specified period and period_line_items
                         periods_estimate[indexOfCurrentPeriod].period_line_items.push({
-                            "period_type": period.period_type,
-                            "period_unit_count": period.period_unit_count,
-                            "period_unit": period.period_unit,
-                            "option_order": period.option_order,
-                            "service_offering": item.service_offering.name,
+                            "clin": "x001",
                             "idiq_clin": getClinFromDowTask(instance.dow_task_number, outputs.new_clins),
+                            "dow_task_number": instance.dow_task_number,
+                            "service_offering": item.service_offering.name,
                             "item_description_or_config_summary": instance.usage_description,
                             "monthly_price": instance.monthly_price,
                             "months_in_period": monthsInPeriod(period.period_unit, period.period_unit_count),
-                            "dow_task_number": instance.dow_task_number,
+
                         });
                     });
                 }
@@ -306,11 +304,13 @@
                 else if (instance.need_for_entire_task_order_duration) {
                     periods_estimate.forEach(function (period) {
                         period.period_line_items.push({
-                            "service_offering": item.service_offering.name,
+                            "clin": "x001",
                             "idiq_clin": getClinFromDowTask(instance.dow_task_number, outputs.new_clins),
-                            "item_description_or_config_summary": instance.usage_description,
-                            "need_for_entire_duration": "yes",
                             "dow_task_number": instance.dow_task_number,
+                            "service_offering": item.service_offering.name,
+                            "item_description_or_config_summary": instance.usage_description,
+                            "monthly_price": instance.monthly_price,
+                            "months_in_period": monthsInPeriod(period.period_unit, period.period_unit_count),
                         });
                     });
                 }
@@ -321,6 +321,13 @@
 
             // For each instance in estimated environment instances array
             item.estimated_environment_instances.forEach(function (instance) {
+
+                // Create environment configuration summary
+                var configSummary = instance.instance_location + " " + instance.number_of_vcpus + " vCPU(s) "
+                    + instance.storage_amount + " " + instance.storage_type + " Storage "
+                    + instance.memory_amount + " " + instance.memory_unit + " Memory"
+                    + instance.data_egress_monthly_unit + " " + instance.data_egress_monthly_amount + " Data Egress."
+
                 // Check if need for entire task order duration is false
                 // If false, use the selected_periods array of the estimated environment instance
                 if (!instance.need_for_entire_task_order_duration) {
@@ -335,32 +342,30 @@
 
                         var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(period.period_type + period.option_order);
 
+
+
                         // Insert into periods_estimate, under the specified period and period_line_items
                         periods_estimate[indexOfCurrentPeriod].period_line_items.push({
-                            "period_type": period.period_type,
-                            "period_unit_count": period.period_unit_count,
-                            "period_unit": period.period_unit,
-                            "option_order": period.option_order,
-                            "service_offering": item.service_offering.name,
+                            "clin": "x001",
                             "idiq_clin": getClinFromDowTask(instance.dow_task_number, outputs.new_clins),
-                            "item_description_or_config_summary": instance.usage_description,
+                            "dow_task_number": instance.dow_task_number,
+                            "service_offering": item.service_offering.name,
+                            "item_description_or_config_summary": configSummary,
                             "monthly_price": instance.monthly_price,
                             "months_in_period": monthsInPeriod(period.period_unit, period.period_unit_count),
-                            "dow_task_number": instance.dow_task_number,
                         });
                     });
                 }
                 else if (instance.need_for_entire_task_order_duration) {
                     periods_estimate.forEach(function (period) {
                         period.period_line_items.push({
-                            "service_offering": item.service_offering.name,
-                            "idiq_clin": getClinFromDowTask(instance.dow_task_number, new_clins),
-                            "item_description_or_config_summary": instance.usage_description,
-                            "need_for_entire_duration": "yes",
+                            "clin": "x001",
+                            "idiq_clin": getClinFromDowTask(instance.dow_task_number, outputs.new_clins),
                             "dow_task_number": instance.dow_task_number,
+                            "service_offering": item.service_offering.name,
+                            "item_description_or_config_summary": configSummary,
                             "monthly_price": instance.monthly_price,
                             "months_in_period": monthsInPeriod(period.period_unit, period.period_unit_count),
-                            "needforentiredurationestimate": outputs.new_clins,
                         });
                     });
                 }
