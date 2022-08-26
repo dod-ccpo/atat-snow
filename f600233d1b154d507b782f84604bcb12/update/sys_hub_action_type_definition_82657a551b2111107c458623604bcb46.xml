@@ -27,7 +27,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>82657a551b2111107c458623604bcb46</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name>ATAT Gather IGCE Data</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -35,7 +35,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_82657a551b2111107c458623604bcb46</sys_update_name>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2022-08-25 23:08:19</sys_updated_on>
+        <sys_updated_on>2022-08-26 00:11:18</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -124,10 +124,10 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-08-25 16:06:45</sys_created_on>
         <sys_id>2178b2d91b2111107c458623604bcbf2</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2022-08-25 23:08:18</sys_updated_on>
+        <sys_updated_on>2022-08-26 00:11:17</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=2178b2d91b2111107c458623604bcbf2"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -138,153 +138,192 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-08-25 16:06:45</sys_created_on>
         <sys_id>6178f2d91b2111107c458623604bcb03</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2022-08-25 23:08:18</sys_updated_on>
+        <sys_updated_on>2022-08-26 00:11:17</sys_updated_on>
         <value>(function execute(inputs, outputs) {
-  var package = inputs.pre_process_package;
-  
-  // Tables 
-  var currentEnvironment = package.current_environment;
-  var periodOfPerformance = package.period_of_performance;
-  var selectedServiceOfferings = package.selected_service_offerings;
-  var fundingRequest = package.funding_request;
-  var requirementsCostEstimate = package.requirements_cost_estimate;
-  
-  
-  // Funding request mapping
-  if (fundingRequest){
-    if (fundingRequest.funding_request_type == "MIPR"){
-      outputs.funding_type = fundingRequest.funding_request_type;
-      outputs.mipr_number = fundingRequest.mipr.mipr_number;
-    }
-    else if (fundingRequest.funding_request_type == "FS_FORM"){
-		outputs.funding_type = fundingRequest.funding_request_type;
-      	outputs.gtc_number = fundingRequest.fs_form.gt_c_number;
-      	outputs.order_number = fundingRequest.fs_form.order_number;
-    }
-  }
-  
-  // Re-use mapping of package periods function (mapPackagePeriods) from DOW action
-  outputs.package_periods_by_id = mapPackagePeriods(
-    periodOfPerformance.base_period, periodOfPerformance.option_periods
-  );
-  
-  if (periodOfPerformance.option_periods) {
-    outputs.package_option_periods = periodOfPerformance
-      .option_periods.split(",")
-      .map(function(periodId) { return outputs.package_periods_by_id[periodId] });
-  } else {
-    outputs.package_option_periods = [];
-  }
-  
-  // Format periods into IGCE schema format (periods_estimate)
-  var periods_estimate = [];  
-  var optionPeriods = outputs.package_option_periods;
-  var basePeriod = {
-    period: outputs.package_periods_by_id[periodOfPerformance.base_period.toString()],
-    period_line_items: []
-      }
-  periods_estimate.push(basePeriod);
-  optionPeriods.forEach(function(item){
-    periods_estimate.push({"period": { "period_type": item.period_type,
-                  	"period_unit_count": item.period_unit_count,
-                  	"period_unit": item.period_unit,
-                  	"option_order": item.option_order}, "period_line_items":[]});
-});
-  
-  
-  // Retrieve selected service offerings, classification instances, and estimated environment instances 
-  var selectedServiceFields = [
-    'other_service_offering', 'service_offering', 'classification_instances', 'estimated_environment_instances'
-  ];
-  
-  if (selectedServiceOfferings) {
-	  outputs.selected_service_offerings = getListRecords(
-        selectedServiceOfferings.toString(),
-        selectedServiceFields,
-        'x_g_dis_atat_selected_service_offering')
-    	.map(removeSysId)
-        .map(getNestedIgceServiceInfo);
-  }
-  
-  
-  // For each item in selected_service_offerings
-  outputs.selected_service_offerings.forEach(function(item){
-    
-    // For each instance in classification instances array
-    if (item.classification_instances){
-    item.classification_instances.forEach(function(instance){
-      	
-      	// Check if need for entire task order duration is false
-      	// If false, use the selected_periods array of the classification instance
-      	if (!instance.need_for_entire_task_order_duration){
+    var package = inputs.pre_process_package;
 
-          	// For each period in the selected_periods array of the classification instance
-          	instance.selected_periods.forEach(function(period){
-          
-              // Map period_type and base_period of the periods_estimate array
-              var formattedPeriodOutput = periods_estimate.map(function(input) { 
-                return input.period.period_type + input.period.option_order; 
-              });
-              
-              var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(period.period_type + period.option_order);
-              
-              // If the period doesn't exist in the period_estimates, add it to the periods_estimate
-              // This statement will account for any periods not included in the acquisition package's period_of_performance
-              // Not sure if this is an actual requirement, see line 111 for further explanation.
-              // If its not a requirement, its still a good safeguard to ensure the periods are being pushed correctly
-              if (indexOfCurrentPeriod == -1){
-              	periods_estimate.push({"period": { "period_type": period.period_type,
-                  	"period_unit_count": period.period_unit_count,
-                  	"period_unit": period.period_unit,
-                  	"option_order": period.option_order}, "period_line_items":[]});
-                indexOfCurrentPeriod = periods_estimate.map(function(input) { 
-                return input.period.period_type + input.period.option_order; 
-              }).indexOf(period.period_type + period.option_order);
-              }
-              // Insert into periods_estimate, under the specified period and period_line_items
-              periods_estimate[indexOfCurrentPeriod].period_line_items.push({
-                  	"period_type":  period.period_type,
-                  	"period_unit_count": period.period_unit_count,
-                  	"period_unit": period.period_unit,
-                  	"option_order": period.option_order,
-                	"service_offering": item.service_offering.name,
-                  	"idiq_clin": instance.classification_level.impact_level,
-                  	"item_description_or_config_summary": instance.usage_description,
-              });
+    // Tables 
+    var currentEnvironment = package.current_environment;
+    var periodOfPerformance = package.period_of_performance;
+    var selectedServiceOfferings = package.selected_service_offerings;
+    var fundingRequest = package.funding_request;
+    var requirementsCostEstimate = package.requirements_cost_estimate;
+
+
+    // Funding request mapping
+    if (fundingRequest) {
+        if (fundingRequest.funding_request_type == "MIPR") {
+            outputs.funding_type = fundingRequest.funding_request_type;
+            outputs.mipr_number = fundingRequest.mipr.mipr_number;
+        }
+        else if (fundingRequest.funding_request_type == "FS_FORM") {
+            outputs.funding_type = fundingRequest.funding_request_type;
+            outputs.gtc_number = fundingRequest.fs_form.gt_c_number;
+            outputs.order_number = fundingRequest.fs_form.order_number;
+        }
+    }
+
+    // Re-use mapping of package periods function (mapPackagePeriods) from DOW action
+    outputs.package_periods_by_id = mapPackagePeriods(
+        periodOfPerformance.base_period, periodOfPerformance.option_periods
+    );
+
+    if (periodOfPerformance.option_periods) {
+        outputs.package_option_periods = periodOfPerformance
+            .option_periods.split(",")
+            .map(function (periodId) { return outputs.package_periods_by_id[periodId] });
+    } else {
+        outputs.package_option_periods = [];
+    }
+
+    // Format periods into IGCE schema format (periods_estimate)
+    var periods_estimate = [];
+    var optionPeriods = outputs.package_option_periods;
+    var basePeriod = {
+        period: outputs.package_periods_by_id[periodOfPerformance.base_period.toString()],
+        period_line_items: []
+    }
+    periods_estimate.push(basePeriod);
+    optionPeriods.forEach(function (item) {
+        periods_estimate.push({
+            "period": {
+                "period_type": item.period_type,
+                "period_unit_count": item.period_unit_count,
+                "period_unit": item.period_unit,
+                "option_order": item.option_order
+            }, "period_line_items": []
+        });
+    });
+
+
+    // Retrieve selected service offerings, classification instances, and estimated environment instances 
+    var selectedServiceFields = [
+        'other_service_offering', 'service_offering', 'classification_instances', 'estimated_environment_instances'
+    ];
+
+    if (selectedServiceOfferings) {
+        outputs.selected_service_offerings = getListRecords(
+            selectedServiceOfferings.toString(),
+            selectedServiceFields,
+            'x_g_dis_atat_selected_service_offering')
+            .map(removeSysId)
+            .map(getNestedIgceServiceInfo);
+    }
+
+
+    // For each item in selected_service_offerings
+    outputs.selected_service_offerings.forEach(function (item) {
+
+        // If the item includes classification_instances
+        if (item.classification_instances) {
+            // For each instance in classification instances array
+            item.classification_instances.forEach(function (instance) {
+
+                // Check if need for entire task order duration is false
+                // If false, use the selected_periods array of the classification instance
+                if (!instance.need_for_entire_task_order_duration) {
+
+                    // For each period in the selected_periods array of the classification instance
+                    instance.selected_periods.forEach(function (period) {
+
+                        // Map period_type and base_period of the periods_estimate array
+                        var formattedPeriodOutput = periods_estimate.map(function (input) {
+                            return input.period.period_type + input.period.option_order;
+                        });
+
+                        var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(period.period_type + period.option_order);
+
+                        // Insert into periods_estimate, under the specified period and period_line_items
+                        periods_estimate[indexOfCurrentPeriod].period_line_items.push({
+                            "period_type": period.period_type,
+                            "period_unit_count": period.period_unit_count,
+                            "period_unit": period.period_unit,
+                            "option_order": period.option_order,
+                            "service_offering": item.service_offering.name,
+                            "idiq_clin": instance.classification_level.impact_level,
+                            "item_description_or_config_summary": instance.usage_description,
+                            "monthly_price": instance.monthly_price,
+                            "months_in_period": monthsInPeriod(period.period_unit, period.period_unit_count),
+                            "dow_task_number": instance.dow_task_number,
+                        });
+                    });
+                }
+                // If instance is needed for the entire task_order_duration, add it to all period_line_items
+                else if (instance.need_for_entire_task_order_duration) {
+                    periods_estimate.forEach(function (period) {
+                        period.period_line_items.push({
+                            "service_offering": item.service_offering.name,
+                            "idiq_clin": instance.classification_level.impact_level,
+                            "item_description_or_config_summary": instance.usage_description,
+                            "need_for_entire_duration": "yes"
+                        });
+                    });
+                }
             });
         }
-      	// If instance is needed for the entire task_order_duration, add it to all period_line_items
-      	// This will not account for periods outside the acquisition package's period_of_performance,
-      	// but will be added to periods that were added with the indexOfCurrentPeriod if statement above
-      	// If adding periods outside the acq package's period_of_performance is a requirement, this will need
-      	// to be moved to a separate loop. 
-      	else if (instance.need_for_entire_task_order_duration){
-          periods_estimate.forEach(function(period){
-          	period.period_line_items.push({"service_offering": item.service_offering.name,
-                  	"idiq_clin": instance.classification_level.impact_level,
-                  	"item_description_or_config_summary": instance.usage_description,
-                    "need_for_entire_duration": "yes"});
-          });
+        // Else if the item includes estimated_environment_instances
+        else if (item.estimated_environment_instances) {
+
+            // For each instance in estimated environment instances array
+            item.estimated_environment_instances.forEach(function (instance) {
+                // Check if need for entire task order duration is false
+                // If false, use the selected_periods array of the estimated environment instance
+                if (!instance.need_for_entire_task_order_duration) {
+
+                    // For each period in the selected_periods array of the estimated environment instance
+                    instance.selected_periods.forEach(function (period) {
+
+                        // Map period_type and base_period of the periods_estimate array
+                        var formattedPeriodOutput = periods_estimate.map(function (input) {
+                            return input.period.period_type + input.period.option_order;
+                        });
+
+                        var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(period.period_type + period.option_order);
+
+                        // Insert into periods_estimate, under the specified period and period_line_items
+                        periods_estimate[indexOfCurrentPeriod].period_line_items.push({
+                            "period_type": period.period_type,
+                            "period_unit_count": period.period_unit_count,
+                            "period_unit": period.period_unit,
+                            "option_order": period.option_order,
+                            "service_offering": item.service_offering.name,
+                            "idiq_clin": instance.classification_level.impact_level,
+                            "item_description_or_config_summary": instance.usage_description,
+                            "monthly_price": instance.monthly_price,
+                            "months_in_period": monthsInPeriod(period.period_unit, period.period_unit_count),
+                            "dow_task_number": instance.dow_task_number,
+                        });
+                    });
+                }
+                else if (instance.need_for_entire_task_order_duration) {
+                    periods_estimate.forEach(function (period) {
+                        period.period_line_items.push({
+                            "service_offering": item.service_offering.name,
+                            "idiq_clin": instance.classification_level.impact_level,
+                            "item_description_or_config_summary": instance.usage_description,
+                            "need_for_entire_duration": "yes"
+                        });
+                    });
+                }
+            });
         }
     });
-    }
-  });
 
-  // Retrieve surge_capabilities from requirements cost estimate table
-  if (requirementsCostEstimate) {
-		var gr = new GlideRecord('x_g_dis_atat_requirements_cost_estimate');
-  		gr.get(requirementsCostEstimate);
-  		outputs.surge_capabilities = gr.surge_capabilities;
-  }
-  
-  // Set action outputs
-  outputs.periods_estimate = JSON.stringify(periods_estimate);
-  // package_option_periods and selected_service_offerings are vital sanity checks
-  // they are used to cross reference if the periods_estimate was filled correctly
-  outputs.package_option_periods = JSON.stringify(outputs.package_option_periods);
-  outputs.selected_service_offerings = JSON.stringify(outputs.selected_service_offerings);
+    // Retrieve surge_capabilities from requirements cost estimate table
+    if (requirementsCostEstimate) {
+        var gr = new GlideRecord('x_g_dis_atat_requirements_cost_estimate');
+        gr.get(requirementsCostEstimate);
+        outputs.surge_capabilities = gr.surge_capabilities;
+    }
+
+    // Set action outputs
+    outputs.periods_estimate = JSON.stringify(periods_estimate);
+    // package_option_periods and selected_service_offerings are vital sanity checks
+    // they are used to cross reference if the periods_estimate was filled correctly
+    outputs.package_option_periods = JSON.stringify(outputs.package_option_periods);
+    outputs.selected_service_offerings = JSON.stringify(outputs.selected_service_offerings);
 
 })(inputs, outputs);
 </value>
