@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.FundingService</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Grouped funding functionality used within ATAT (e.g., Alerts).</description>
+        <name>FundingService</name>
+        <script><![CDATA[var FundingService = Class.create();
+FundingService.prototype = {
+    initialize: function() {
+		this.TO_TABLE = "x_g_dis_atat_task_order";
+		this.CLIN_TABLE = "x_g_dis_atat_clin";
+    },
+	getFollowOnCLIN: function(clinRec) {
+		// find the related TO for the CLIN
+		var toRecord = new GlideRecord(this.TO_TABLE);
+		toRecord.addQuery("clins", "CONTAINS", clinRec.sys_id);
+		toRecord.query();
+		toRecord.next();
+
+		// get all CLIN records for the task order
+		var clinRecord = new GlideRecord(this.CLIN_TABLE);
+		clinRecord.addQuery("sys_id", "IN", toRecord.clins);
+		clinRecord.addQuery("clin_status", "!=", "EXPIRED");
+		clinRecord.query();
+		
+		var toClins = [];
+		while (clinRecord.next()) {
+           // attempted to pass along only the clin records which would reduce having to do another query 
+           // later, but there was some weird behavior and only the first clin Record would populate in the
+           // array (e.g., toClins) when looping over the records in the "while" loop above. Not sure if
+           // there is a special way to do it or if that is a limitation with in SN.
+			toClins.push(clinRecord.clin_number.toString());
+		}
+		
+		gs.info("Task Order CLINS found: " + toClins);
+		var followOnClins = toClins
+			.filter(function(clinNumber) { 
+				// exclude current clin
+				return clinNumber !== clinRec.clin_number.toString(); } )
+            .filter(function(clinNumber) { 
+				// get clins that are in future periods
+                // assumes the clin first char identifies the period
+                var currentPeriod = clinRec.clin_number.toString()[0]++;
+                var selectedClinPeriod = clinNumber[0]++;
+				
+               // period ceiling is 9 currently
+               return selectedClinPeriod > currentPeriod && selectedClinPeriod <= 9;  })
+            .filter(function(clinNumber) {
+				// filter out matching clins
+				var currentClin = clinRec.clin_number.toString().slice(1);
+				var selectedClin = clinNumber.slice(1);
+                return selectedClin === currentClin; })
+            .sort(function(a, b) { return a++ - b++; } ); // sort clins
+            
+            var message = "Current Task Order (" + toRecord.task_order_number.toString() + ") has ";
+            message += "follow on clins:  " + followOnClins;
+            gs.info(message);
+		
+
+        if (followOnClins.length > 0) {
+           // query the follow on CLIN record to be returned
+           var followOnClin = new GlideRecord(this.CLIN_TABLE);
+           followOnClin.addQuery("sys_id", "IN", toRecord.clins);
+           followOnClin.addQuery("clin_number", followOnClins[0].toString());
+           followOnClin.query();
+           followOnClin.next();
+
+           return followOnClin;
+        }
+		
+		return null;
+	},
+    type: 'FundingService'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-08-25 13:32:55</sys_created_on>
+        <sys_id>3a155edd97ed11102b1ef0b0f053aff0</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>FundingService</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_3a155edd97ed11102b1ef0b0f053aff0</sys_update_name>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-08-25 22:03:54</sys_updated_on>
+    </sys_script_include>
+</record_update>
