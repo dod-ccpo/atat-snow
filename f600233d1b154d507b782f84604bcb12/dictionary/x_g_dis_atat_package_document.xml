@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Package Document" max_length="40" name="x_g_dis_atat_package_document" type="collection">
+        <element label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
+        <element choice="1" label="Document Status" max_length="40" name="document_status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Action Requested" value="ACTION_REQUESTED"/>
+                <element inactive_on_update="false" label="Completed" value="COMPLETED"/>
+                <element inactive_on_update="false" label="Draft" value="DRAFT"/>
+                <element inactive_on_update="false" label="Ready for Review" value="READY_FOR_REVIEW"/>
+            </choice>
+        </element>
+        <element label="File" max_length="40" name="file" type="file_attachment"/>
+        <index name="index">
+            <element name="acquisition_package"/>
+        </index>
+    </element>
+</database>
