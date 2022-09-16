@@ -31,7 +31,7 @@ This Subflow will fill the DocuSign fields, required to use the Action "Set Fiel
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>aefc04e8878e1510bc86b889cebb359f</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_name>ATAT Fill DocuSign Fields</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -39,7 +39,7 @@ This Subflow will fill the DocuSign fields, required to use the Action "Set Fiel
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_flow_aefc04e8878e1510bc86b889cebb359f</sys_update_name>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-16 16:13:26</sys_updated_on>
+        <sys_updated_on>2022-09-16 16:19:52</sys_updated_on>
         <type>subflow</type>
     </sys_hub_flow>
     <sys_translated_text action="delete_multiple" query="documentkey=aefc04e8878e1510bc86b889cebb359f"/>
@@ -59,7 +59,88 @@ This Subflow will fill the DocuSign fields, required to use the Action "Set Fiel
         <sys_updated_on>2022-09-16 16:13:27</sys_updated_on>
     </sys_flow_cat_variable_model>
     <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=2afc04e8878e1510bc86b889cebb35a3"/>
-    <sys_hub_flow_input action="delete_multiple" query="model=aefc04e8878e1510bc86b889cebb359f"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=aefc04e8878e1510bc86b889cebb359f^sys_idNOT IN247ec86c878e1510bc86b889cebb35c0"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>child_label=field,child_name=field,child_type=object,child_type_label=Object,child_uiUniqueId=3f08b8c6-c631-4485-bd5c-fadf1a8a3328,co_type_name=FDe47ec86ce58e1510e127e288db5b65bc,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=array.object,uiTypeLabel=Array.Object,uiUniqueId=e3af8c25-ce09-49ce-90f6-23b45597cbbf</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>Fields</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Fields</label>
+        <mandatory>true</mandatory>
+        <max_length>65000</max_length>
+        <model display_value="ATAT Fill DocuSign Fields">aefc04e8878e1510bc86b889cebb359f</model>
+        <model_id>aefc04e8878e1510bc86b889cebb359f</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_aefc04e8878e1510bc86b889cebb359f</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-09-16 16:19:52</sys_created_on>
+        <sys_id>247ec86c878e1510bc86b889cebb35c0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-09-16 16:19:52</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
     <sys_hub_flow_output action="delete_multiple" query="model=aefc04e8878e1510bc86b889cebb359f"/>
     <sys_hub_alias_mapping action="delete_multiple" query="source_id=aefc04e8878e1510bc86b889cebb359f"/>
     <sys_hub_action_instance action="delete_multiple" query="flow=aefc04e8878e1510bc86b889cebb359f"/>
@@ -67,7 +148,30 @@ This Subflow will fill the DocuSign fields, required to use the Action "Set Fiel
     <sys_hub_flow_logic action="delete_multiple" query="flow=aefc04e8878e1510bc86b889cebb359f"/>
     <sys_hub_pill_compound action="delete_multiple" query="attached_to=aefc04e8878e1510bc86b889cebb359f"/>
     <sys_hub_flow_variable action="delete_multiple" query="model=aefc04e8878e1510bc86b889cebb359f"/>
-    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_aefc04e8878e1510bc86b889cebb359f"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_aefc04e8878e1510bc86b889cebb359f^sys_idNOT IN607e00ac878e1510bc86b889cebb35a4"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>Fields</element>
+        <help/>
+        <hint/>
+        <label>Fields</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_aefc04e8878e1510bc86b889cebb359f</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-09-16 16:19:52</sys_created_on>
+        <sys_id>607e00ac878e1510bc86b889cebb35a4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-09-16 16:19:52</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
     <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_aefc04e8878e1510bc86b889cebb359f"/>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_aefc04e8878e1510bc86b889cebb359f"/>
     <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_aefc04e8878e1510bc86b889cebb359f"/>
