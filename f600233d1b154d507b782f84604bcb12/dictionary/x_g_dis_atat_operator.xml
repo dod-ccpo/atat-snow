@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element label="Operator" max_length="40" name="x_g_dis_atat_operator" sizeclass="2" type="collection">
-        <element label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
         <element calculation="(function calculatedFieldValue(current) {&#13;&#10;    // use display value if possible&#13;&#10;    var gr = new GlideRecord('sys_user');&#13;&#10;    if (gr.get('user_name', current.sys_created_by)) {&#13;&#10;        return gr.getDisplayValue();&#13;&#10;    }&#13;&#10;    return current.sys_created_by; // default&#13;&#10;})(current);" label="Added by" max_length="100" name="added_by" type="string" virtual="true"/>
         <element label="DoD ID" mandatory="true" max_length="10" name="dod_id" type="string"/>
         <element display="true" label="Email" mandatory="true" max_length="254" name="email" type="string"/>
@@ -11,9 +10,6 @@
         <element label="Provisioning Failure Cause" max_length="100" name="provisioning_failure_cause" type="string"/>
         <index name="index">
             <element name="portfolio"/>
-        </index>
-        <index name="index2">
-            <element name="acquisition_package"/>
         </index>
     </element>
 </database>
