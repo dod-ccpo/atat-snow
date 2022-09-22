@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.Jwt</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>ATAT class to help with handling JWT operations (e.g. CSS).</description>
+        <name>Jwt</name>
+        <script><![CDATA[var Jwt = Class.create();
+Jwt.prototype = {
+    initialize: function() {
+    },
+	decodeAndParseJwt: function (jwt) {
+		if (!jwt || jwt.split(".").length !== 3) {
+			throw new Error("JWT is undefined or invalid. Please provide a valid JWT.");
+		}
+
+		// JWT sections
+		var jwtSections = jwt.split(".").map(function(section) { return gs.base64Decode(section); });
+		var jwtHeaders = JSON.parse(jwtSections[0]);
+		var jwtPayload = JSON.parse(jwtSections[1]);
+		var jwtSignature = jwtSections[2]; // signature is a hashed string
+
+		return {
+			headers: jwtHeaders,
+			payload: jwtPayload,
+			signature: jwtSignature,
+		};
+	},
+
+	isJwtExpired: function (expirationDate) {
+		if (!expirationDate || typeof expirationDate !== "number") {
+			throw new Error("JWT expiration is undfined or not a number. Please provide a valid JWT.");
+		}
+
+		// date/time
+		var now = new GlideDateTime();
+		var expiration = new GlideDateTime();
+		expiration.setNumericValue(expirationDate * 1000);
+		gs.info("Token Expiration: " + expiration);
+
+		if (now > expiration) {
+			return true;
+		}
+
+		return false;
+	},
+
+    type: 'Jwt'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-09-22 01:11:30</sys_created_on>
+        <sys_id>3eb7734e970611106fa8b4b3f153af51</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Jwt</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_3eb7734e970611106fa8b4b3f153af51</sys_update_name>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-09-22 01:11:30</sys_updated_on>
+    </sys_script_include>
+</record_update>
