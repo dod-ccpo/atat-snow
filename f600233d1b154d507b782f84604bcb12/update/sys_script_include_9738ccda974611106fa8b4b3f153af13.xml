@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.getCssJwt</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>ATAT function to get a JWT from CSS to retreived information related to contracts.</description>
+        <name>getCssJwt</name>
+        <script><![CDATA[function getCssJwt(endpoint) {
+  var errClient = new Error();
+  var jwtClient = new Jwt();
+  var reqClient = new Request();
+  var reqProps = {
+	endpoint: endpoint,
+	method: reqClient.POST,
+	mutualAuth: reqClient.JKS,
+  };
+  var ATAT_CONFIG_TABLE = "x_g_dis_atat_configuration";
+  var currentCssJwt = new GlideRecord(ATAT_CONFIG_TABLE);
+  var previousCssJwt = new GlideRecord(ATAT_CONFIG_TABLE);
+  var response;
+
+  try {
+    previousCssJwt.addQuery("name", "cssJwt");
+    previousCssJwt.query();
+
+    if (!previousCssJwt.next()) {
+      response = reqClient.makeRequest(reqProps);
+      response = reqClient.checkResponseCode([200], response);
+      if (response.error) {
+        throw errClient.createError("Error requesting JWT. " + response.error, "RequestError");
+      }
+
+      gs.info("Request and create CSS JWT config.");
+
+      // create record
+      currentCssJwt.initialize();
+      currentCssJwt.name = "cssJwt";
+      currentCssJwt.description = "CSS JWT for getting information related to contract records.";
+      currentCssJwt.value = response.body.replace('"', "");
+      currentCssJwt.insert();
+
+      return currentCssJwt.value;
+    }
+
+    var jwtId = previousCssJwt.sys_id;
+    var jwt = previousCssJwt.value;
+	var decodedJwt = jwtClient.decodeAndParseJwt(jwt);
+    var isExpired = isJwtExpired(decodedJwt.payload.exp);
+
+    if (jwt && !isExpired) {
+      return jwt;
+    }
+
+    if (jwt && isExpired) {
+      response = reqClient.makeRequest(reqProps);
+      response = reqClient.checkResponseCode([200], response);
+      if (response.error) {
+        throw errClient.createError("Error requesting JWT. " + response.error, "RequestError");
+      }
+        
+      gs.info("Request and update CSS JWT config.");
+
+      // update record
+      currentCssJwt.get(jwtId);
+      currentCssJwt.value = response.body.replace('"', "");
+      currentCssJwt.update();
+
+      return currentCssJwt.value;
+    }
+   
+    return jwt;
+
+  } catch (error) {
+    errClient.errorLogger(error);
+  }
+}]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-09-22 02:38:55</sys_created_on>
+        <sys_id>9738ccda974611106fa8b4b3f153af13</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>getCssJwt</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_9738ccda974611106fa8b4b3f153af13</sys_update_name>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-09-22 02:38:55</sys_updated_on>
+    </sys_script_include>
+</record_update>
