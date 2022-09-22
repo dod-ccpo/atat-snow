@@ -20,6 +20,9 @@ Request.prototype = {
 		this.JKS = "jks443"; // CSS
 		this.MAUTH = "mauth"; // EDA/PDS
     },
+    // Sends a request based on the request properties provided
+	// @para {object} - object that contains request properties endpoint, method, mutual auth
+	//  mutual auth property is optional
 	makeRequest: function (req) {
 		// Outbound REST message
 		var request = new sn_ws.RESTMessageV2();
@@ -35,6 +38,9 @@ Request.prototype = {
 		// Make request and return response
 		return request.execute();
 	},
+	// Checks the status code and adds an error property if request not successful
+	// @param {array} - array of accesstable success codes
+	// @param {response object} - response object returned from RESTMessageV2 execute() method
 	checkResponseCode: function (successCodes, response) {
 		if (!listContains(response.getStatusCode(), successCodes)) {
 			var errorMessage = "Status Code: " + response.getStatusCode() + ". ";
@@ -62,13 +68,13 @@ Request.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-09-22 01:05:38</sys_created_on>
         <sys_id>5d76f38e970611106fa8b4b3f153afc4</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_name>Request</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_5d76f38e970611106fa8b4b3f153afc4</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-09-22 01:05:38</sys_updated_on>
+        <sys_updated_on>2022-09-22 12:52:53</sys_updated_on>
     </sys_script_include>
 </record_update>
