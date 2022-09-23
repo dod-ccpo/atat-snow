@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="CLIN" max_length="40" name="x_g_dis_atat_clin" sizeclass="16" type="collection">
+    <element label="CLIN" max_length="40" name="x_g_dis_atat_clin" sizeclass="2" type="collection">
         <element display="true" label="CLIN Number" mandatory="true" max_length="4" name="clin_number" type="string"/>
-        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;&#13;&#10;&#9;var now = new GlideDate();&#13;&#10;&#9;var twoMonthsFromNow = new GlideDateTime();&#13;&#10;&#9;twoMonthsFromNow.addDaysLocalTime(60);&#13;&#10;&#9;if (current.pop_end_date &lt; now) {&#13;&#10;&#9;&#9;return 'EXPIRED';&#13;&#10;&#9;}&#13;&#10;&#9;else if (current.pop_start_date &gt; now) {&#13;&#10;&#9;&#9;return 'UPCOMING';&#13;&#10;&#9;}&#13;&#10;&#9;else if (current.pop_end_date &lt; twoMonthsFromNow) {&#13;&#10;&#9;&#9;return 'AT_RISK';&#13;&#10;&#9;}&#13;&#10;&#9;return 'ACTIVE';&#13;&#10;})(current);" choice="1" label="CLIN Status" max_length="40" name="clin_status" type="choice" virtual="true">
+        <element choice="1" label="CLIN Status" max_length="40" name="clin_status" type="choice">
             <choice>
-                <element inactive_on_update="false" label="UPCOMING" sequence="1" value="UPCOMING"/>
-                <element inactive_on_update="false" label="ACTIVE" sequence="2" value="ACTIVE"/>
-                <element inactive_on_update="false" label="AT-RISK" sequence="3" value="AT_RISK"/>
-                <element inactive_on_update="false" label="EXPIRED" sequence="4" value="EXPIRED"/>
+                <element inactive_on_update="false" label="At-Risk" value="AT_RISK"/>
+                <element inactive_on_update="false" label="Delinquent" value="DELINQUENT"/>
+                <element inactive_on_update="false" label="Expired" value="EXPIRED"/>
+                <element inactive_on_update="false" label="Expiring PoP" value="EXPIRING_POP"/>
+                <element inactive_on_update="false" label="Funding At-Risk" value="FUNDING_AT_RISK"/>
+                <element inactive_on_update="false" label="On-Track" value="ON_TRACK"/>
+                <element inactive_on_update="false" label="Option Exercised" value="OPTION_EXERCISED"/>
+                <element inactive_on_update="false" label="Option Pending" value="OPTION_PENDING"/>
             </choice>
         </element>
         <element label="Funds Obligated" max_length="20" name="funds_obligated" type="currency"/>

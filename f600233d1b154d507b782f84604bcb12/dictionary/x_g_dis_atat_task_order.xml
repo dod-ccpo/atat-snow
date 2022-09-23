@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Task Order" max_length="40" name="x_g_dis_atat_task_order" sizeclass="0" type="collection">
+    <element label="Task Order" max_length="40" name="x_g_dis_atat_task_order" sizeclass="1" type="collection">
         <element label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
         <element label="CLINs" max_length="4000" name="clins" reference="x_g_dis_atat_clin" type="glide_list"/>
         <element label="Funding Plan" max_length="32" name="funding_plan" reference="x_g_dis_atat_funding_plan" type="reference"/>
@@ -19,10 +19,10 @@
         <element display="true" label="Task Order Number" mandatory="true" max_length="40" name="task_order_number" type="string"/>
         <element choice="1" label="Task Order Status" max_length="40" name="task_order_status" type="choice">
             <choice>
-                <element inactive_on_update="false" label="UPCOMING" sequence="1" value="UPCOMING"/>
-                <element inactive_on_update="false" label="ACTIVE" sequence="2" value="ACTIVE"/>
-                <element inactive_on_update="false" label="AT-RISK" sequence="3" value="AT_RISK"/>
-                <element inactive_on_update="false" label="EXPIRED" sequence="4" value="EXPIRED"/>
+                <element inactive_on_update="false" label="At-Risk" value="AT_RISK"/>
+                <element inactive_on_update="false" label="Expired" value="EXPIRED"/>
+                <element inactive_on_update="false" label="On-Track" value="ON_TRACK"/>
+                <element inactive_on_update="false" label="Upcoming" value="UPCOMING"/>
             </choice>
         </element>
         <index name="index">
