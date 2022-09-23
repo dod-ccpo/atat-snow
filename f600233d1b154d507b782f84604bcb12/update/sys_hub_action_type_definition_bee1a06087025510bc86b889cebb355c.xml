@@ -27,7 +27,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>bee1a06087025510bc86b889cebb355c</sys_id>
-        <sys_mod_count>7</sys_mod_count>
+        <sys_mod_count>12</sys_mod_count>
         <sys_name>ATAT Fill DocuSign Fields Helper</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -35,7 +35,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_bee1a06087025510bc86b889cebb355c</sys_update_name>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2022-09-23 16:36:53</sys_updated_on>
+        <sys_updated_on>2022-09-23 16:39:56</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -138,10 +138,10 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 19:16:33</sys_created_on>
         <sys_id>cb60bf521b8211107c458623604bcb7b</sys_id>
-        <sys_mod_count>86</sys_mod_count>
+        <sys_mod_count>87</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2022-09-23 16:32:53</sys_updated_on>
+        <sys_updated_on>2022-09-23 16:39:38</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=cb60bf521b8211107c458623604bcb7b"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -152,9 +152,9 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 19:16:33</sys_created_on>
         <sys_id>0b60bb161b8211107c458623604bcb71</sys_id>
-        <sys_mod_count>82</sys_mod_count>
+        <sys_mod_count>83</sys_mod_count>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2022-09-23 16:32:53</sys_updated_on>
+        <sys_updated_on>2022-09-23 16:39:38</sys_updated_on>
         <value>(function execute(inputs, outputs) {
     // ... code ...
     var fields = inputs.given_fields;
@@ -176,15 +176,7 @@
         }
         // tabLabel is composite.organization
         if (field.tabLabel.toString() === "composite.organization") {
-            // check if service_agency is DISA
-            if (inputs.given_acq_package.organization.service_agency == "DEFENSE_INFORMATION_SYSTEMS_AGENCY") {
-                // get display value
-                var dis_val = getDisplayValue("disa_organization", inputs.given_acq_package.organization.disa_organization);
-                field.value = dis_val;
-            }
-            else {
-                field.value = inputs.given_acq_package.organization.organization_name;
-            }
+          	field.value = inputs.given_acq_package.organization.computed_name;
         }
         // tabLabel is contacts#mo.formal_name
         if (field.tabLabel.toString() === "contacts#mo.formal_name") {
@@ -1986,17 +1978,17 @@
     <sys_hub_action_plan action="INSERT_OR_UPDATE">
         <action_id display_value="ATAT Fill DocuSign Fields Helper">bee1a06087025510bc86b889cebb355c</action_id>
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"4e6984aa1bc211107c458623604bcb73","name":"plan","plan_signature":null}}</plan>
-        <snapshot>0a75d8b61b0251107c458623604bcb37</snapshot>
+        <snapshot>6226d4f61b0251107c458623604bcbc6</snapshot>
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 21:05:43</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>4e6984aa1bc211107c458623604bcb73</sys_id>
-        <sys_mod_count>17</sys_mod_count>
+        <sys_mod_count>18</sys_mod_count>
         <sys_overrides/>
         <sys_scope/>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2022-09-23 16:36:56</sys_updated_on>
+        <sys_updated_on>2022-09-23 16:39:58</sys_updated_on>
     </sys_hub_action_plan>
     <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
@@ -2132,10 +2124,10 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 21:05:41</sys_created_on>
         <sys_id>696944aa1bc211107c458623604bcbc1</sys_id>
-        <sys_mod_count>17</sys_mod_count>
+        <sys_mod_count>18</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2022-09-23 16:36:53</sys_updated_on>
+        <sys_updated_on>2022-09-23 16:39:55</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=696944aa1bc211107c458623604bcbc1"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -2146,9 +2138,9 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 21:05:41</sys_created_on>
         <sys_id>716944aa1bc211107c458623604bcbed</sys_id>
-        <sys_mod_count>16</sys_mod_count>
+        <sys_mod_count>17</sys_mod_count>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2022-09-23 16:36:53</sys_updated_on>
+        <sys_updated_on>2022-09-23 16:39:55</sys_updated_on>
         <value>(function execute(inputs, outputs) {
     // ... code ...
     var fields = inputs.given_fields;
@@ -2170,15 +2162,7 @@
         }
         // tabLabel is composite.organization
         if (field.tabLabel.toString() === "composite.organization") {
-            // check if service_agency is DISA
-            if (inputs.given_acq_package.organization.service_agency == "DEFENSE_INFORMATION_SYSTEMS_AGENCY") {
-                // get display value
-                var dis_val = getDisplayValue("disa_organization", inputs.given_acq_package.organization.disa_organization);
-                field.value = dis_val;
-            }
-            else {
-                field.value = inputs.given_acq_package.organization.organization_name;
-            }
+          	field.value = inputs.given_acq_package.organization.computed_name;
         }
         // tabLabel is contacts#mo.formal_name
         if (field.tabLabel.toString() === "contacts#mo.formal_name") {
