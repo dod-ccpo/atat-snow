@@ -8,7 +8,7 @@
         <annotation/>
         <callable_by_client_api>false</callable_by_client_api>
         <category/>
-        <compiler_build>glide-rome-06-23-2021__patch9b-07-19-2022_08-04-2022_2150.zip</compiler_build>
+        <compiler_build>glide-rome-06-23-2021__patch5-12-15-2021_01-04-2022_2221.zip</compiler_build>
         <copied_from/>
         <copied_from_name/>
         <description/>
@@ -20,14 +20,14 @@
         <natlang/>
         <outputs/>
         <outputs/>
-        <state>draft</state>
+        <state>published</state>
         <sys_class_name>sys_hub_action_type_definition</sys_class_name>
         <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-09-16 17:44:57</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>bee1a06087025510bc86b889cebb355c</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>7</sys_mod_count>
         <sys_name>ATAT Fill DocuSign Fields Helper</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -35,7 +35,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_bee1a06087025510bc86b889cebb355c</sys_update_name>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2022-09-23 16:25:01</sys_updated_on>
+        <sys_updated_on>2022-09-23 16:36:53</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -138,10 +138,10 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 19:16:33</sys_created_on>
         <sys_id>cb60bf521b8211107c458623604bcb7b</sys_id>
-        <sys_mod_count>84</sys_mod_count>
+        <sys_mod_count>86</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2022-09-23 16:25:00</sys_updated_on>
+        <sys_updated_on>2022-09-23 16:32:53</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=cb60bf521b8211107c458623604bcb7b"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -152,9 +152,9 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 19:16:33</sys_created_on>
         <sys_id>0b60bb161b8211107c458623604bcb71</sys_id>
-        <sys_mod_count>80</sys_mod_count>
+        <sys_mod_count>82</sys_mod_count>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2022-09-23 16:25:01</sys_updated_on>
+        <sys_updated_on>2022-09-23 16:32:53</sys_updated_on>
         <value>(function execute(inputs, outputs) {
     // ... code ...
     var fields = inputs.given_fields;
@@ -220,7 +220,7 @@
             if (field.tabLabel.toString() === "contacts#cor.email") {
                 field.value = inputs.acor_contact.email;
             }
-            // tabLabel is contacts#acor.phone_and_extension FIX
+            // tabLabel is contacts#acor.phone_and_extension
             if (field.tabLabel.toString() === "contacts#cor.phone_and_extension") {
                 field.value = inputs.acor_contact.phone_and_extension;
             }
@@ -307,7 +307,8 @@
         }
         // tabLabel is fair_opportunity.exception_to_fair_opportunity_yes AND there is an exception to the fair opportunity process
         if (field.tabLabel.toString() === "fair_opportunity.exception_to_fair_opportunity_yes" &amp;&amp;
-            inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "YES_FAR_16_505_B_2_I_B" || inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "YES_FAR_16_505_B_2_I_C") {
+            inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "YES_FAR_16_505_B_2_I_B" || inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "YES_FAR_16_505_B_2_I_C"
+            || inputs.given_acq_package.fair_opportunity.fair_opportunity.exception_to_fair_opportunity === "YES_FAR_16_505_B_2_I_A") {
             field.value = "X";
         }
         // tabLabel is fair_opportunity.exception_to_fair_opportunity_no AND there IS NOT an exception to the fair opportunity process
@@ -398,7 +399,7 @@
         if (field.tabLabel.toString() === "contract_type.type_tm_justification" &amp;&amp; inputs.given_acq_package.contract_type.time_and_materials) {
             field.value = inputs.given_acq_package.contract_type.contract_type_justification;
         }
-      
+
         var newField = {
             "field_id": field.field_id,
             "field_val": field.value,
@@ -1985,17 +1986,17 @@
     <sys_hub_action_plan action="INSERT_OR_UPDATE">
         <action_id display_value="ATAT Fill DocuSign Fields Helper">bee1a06087025510bc86b889cebb355c</action_id>
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"4e6984aa1bc211107c458623604bcb73","name":"plan","plan_signature":null}}</plan>
-        <snapshot>071d61a287c29110ec3b777acebb3521</snapshot>
+        <snapshot>0a75d8b61b0251107c458623604bcb37</snapshot>
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 21:05:43</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>4e6984aa1bc211107c458623604bcb73</sys_id>
-        <sys_mod_count>16</sys_mod_count>
+        <sys_mod_count>17</sys_mod_count>
         <sys_overrides/>
         <sys_scope/>
-        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-23 04:21:21</sys_updated_on>
+        <sys_updated_by>zach.clark</sys_updated_by>
+        <sys_updated_on>2022-09-23 16:36:56</sys_updated_on>
     </sys_hub_action_plan>
     <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
@@ -2044,10 +2045,10 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 21:05:41</sys_created_on>
         <sys_id>b56984aa1bc211107c458623604bcb17</sys_id>
-        <sys_mod_count>1</sys_mod_count>
-        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-22 21:50:13</sys_updated_on>
-        <value>{"version":"1.0","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}},"complexObjectSchema":{"FlowDesigner:FD716944aa4fc21110264816908295a3fd":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"integer\",\"default_value\":\"\",\"label\":\"Code\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"Message\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FD716944aa4fc21110264816908295a3fd.$type_facets":{"SimpleMapFacet":"{\"default_value\":\"\",\"label\":\"Action Status\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"uiUniqueId\":\"06e0c1fb-a5e9-40a1-85f9-30b7295b2311\",\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FD716944aa4fc21110264816908295a3fd\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"object\",\"order\":\"1\",\"max_length\":\"65000\"}"}},"serializationFormat":"JSON"}</value>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_updated_by>zach.clark</sys_updated_by>
+        <sys_updated_on>2022-09-23 16:36:53</sys_updated_on>
+        <value>{"version":"1.0","complexObjectSchema":{"FlowDesigner:FD716944aa4fc21110264816908295a3fd":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"integer\",\"default_value\":\"\",\"label\":\"Code\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"Message\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FD716944aa4fc21110264816908295a3fd.$type_facets":{"SimpleMapFacet":"{\"default_value\":\"\",\"label\":\"Action Status\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"uiUniqueId\":\"06e0c1fb-a5e9-40a1-85f9-30b7295b2311\",\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FD716944aa4fc21110264816908295a3fd\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"object\",\"order\":\"1\",\"max_length\":\"65000\"}"}},"serializationFormat":"JSON","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}}}</value>
         <variable display_value="Action Status">b56944aa1bc211107c458623604bcbff</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -2131,10 +2132,10 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 21:05:41</sys_created_on>
         <sys_id>696944aa1bc211107c458623604bcbc1</sys_id>
-        <sys_mod_count>16</sys_mod_count>
+        <sys_mod_count>17</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-23 04:21:19</sys_updated_on>
+        <sys_updated_by>zach.clark</sys_updated_by>
+        <sys_updated_on>2022-09-23 16:36:53</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=696944aa1bc211107c458623604bcbc1"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -2145,22 +2146,14 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 21:05:41</sys_created_on>
         <sys_id>716944aa1bc211107c458623604bcbed</sys_id>
-        <sys_mod_count>15</sys_mod_count>
-        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-23 04:21:19</sys_updated_on>
+        <sys_mod_count>16</sys_mod_count>
+        <sys_updated_by>zach.clark</sys_updated_by>
+        <sys_updated_on>2022-09-23 16:36:53</sys_updated_on>
         <value>(function execute(inputs, outputs) {
     // ... code ...
     var fields = inputs.given_fields;
     var newFields = [];
     fields.forEach(function (field) {
-        var label = field.tabLabel.toString();
-        outputs.frog = label;
-
-        /* working test
-        if (field.tabLabel.toString() === "project_overview.title"){
-            field.value = "crabber";
-        }*/
-
         // tabLabel is project_overview.title
         if (field.tabLabel.toString() === "project_overview.title") {
             field.value = inputs.given_acq_package.project_overview.title;
@@ -2221,7 +2214,7 @@
             if (field.tabLabel.toString() === "contacts#cor.email") {
                 field.value = inputs.acor_contact.email;
             }
-            // tabLabel is contacts#acor.phone_and_extension FIX
+            // tabLabel is contacts#acor.phone_and_extension
             if (field.tabLabel.toString() === "contacts#cor.phone_and_extension") {
                 field.value = inputs.acor_contact.phone_and_extension;
             }
@@ -2308,7 +2301,8 @@
         }
         // tabLabel is fair_opportunity.exception_to_fair_opportunity_yes AND there is an exception to the fair opportunity process
         if (field.tabLabel.toString() === "fair_opportunity.exception_to_fair_opportunity_yes" &amp;&amp;
-            inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "YES_FAR_16_505_B_2_I_B" || inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "YES_FAR_16_505_B_2_I_C") {
+            inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "YES_FAR_16_505_B_2_I_B" || inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "YES_FAR_16_505_B_2_I_C"
+            || inputs.given_acq_package.fair_opportunity.fair_opportunity.exception_to_fair_opportunity === "YES_FAR_16_505_B_2_I_A") {
             field.value = "X";
         }
         // tabLabel is fair_opportunity.exception_to_fair_opportunity_no AND there IS NOT an exception to the fair opportunity process
@@ -2399,7 +2393,7 @@
         if (field.tabLabel.toString() === "contract_type.type_tm_justification" &amp;&amp; inputs.given_acq_package.contract_type.time_and_materials) {
             field.value = inputs.given_acq_package.contract_type.contract_type_justification;
         }
-      
+
         var newField = {
             "field_id": field.field_id,
             "field_val": field.value,
@@ -2499,6 +2493,18 @@
         <sys_updated_on>2022-09-23 00:48:06</sys_updated_on>
         <table>var__m_sys_hub_step_ext_input_696944aa1bc211107c458623604bcbc1</table>
         <value>{{action.mission_owner}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>script</field>
+        <id>696944aa1bc211107c458623604bcbc1</id>
+        <sys_created_by>zach.clark</sys_created_by>
+        <sys_created_on>2022-09-23 16:36:53</sys_created_on>
+        <sys_id>ce75d8b61b0251107c458623604bcb2a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark</sys_updated_by>
+        <sys_updated_on>2022-09-23 16:36:53</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
+        <value/>
     </sys_element_mapping>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_step_ext_output_696944aa1bc211107c458623604bcbc1^id=696944aa1bc211107c458623604bcbc1"/>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7^id=696944aa1bc211107c458623604bcbc1"/>
@@ -3085,11 +3091,11 @@
         <sys_created_on>2022-09-22 22:46:41</sys_created_on>
         <sys_id>0d80602e87ca5110ec3b777acebb3500</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name>Fields</sys_name>
+        <sys_name/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name>sys_documentation_var__m_sys_hub_step_ext_output_696944aa1bc211107c458623604bcbc1_fields_en</sys_update_name>
+        <sys_update_name/>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-09-22 22:46:41</sys_updated_on>
         <url/>
@@ -3108,7 +3114,7 @@
         <sys_created_on>2022-09-22 21:05:41</sys_created_on>
         <sys_id>f96944aa1bc211107c458623604bcbe8</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name>frog</sys_name>
+        <sys_name/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -3798,11 +3804,11 @@
         <sys_created_on>2022-09-23 00:25:32</sys_created_on>
         <sys_id>0d273466878e5110ec3b777acebb35d6</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name>Mission Owner</sys_name>
+        <sys_name/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_a96944aa1bc211107c458623604bcbab_mission_owner_en</sys_update_name>
+        <sys_update_name/>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-09-23 00:25:32</sys_updated_on>
         <url/>
@@ -3821,7 +3827,7 @@
         <sys_created_on>2022-09-22 21:05:41</sys_created_on>
         <sys_id>216944aa1bc211107c458623604bcbb6</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name>Fields</sys_name>
+        <sys_name/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -3844,11 +3850,11 @@
         <sys_created_on>2022-09-23 00:25:32</sys_created_on>
         <sys_id>49273466878e5110ec3b777acebb35e0</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name>COR</sys_name>
+        <sys_name/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_a96944aa1bc211107c458623604bcbab_cor_en</sys_update_name>
+        <sys_update_name/>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-09-23 00:25:32</sys_updated_on>
         <url/>
@@ -3867,11 +3873,11 @@
         <sys_created_on>2022-09-23 00:25:32</sys_created_on>
         <sys_id>85273466878e5110ec3b777acebb35ea</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name>ACOR</sys_name>
+        <sys_name/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name>sys_documentation_var__m_sys_hub_action_input_a96944aa1bc211107c458623604bcbab_acor_en</sys_update_name>
+        <sys_update_name/>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-09-23 00:25:32</sys_updated_on>
         <url/>
@@ -3890,7 +3896,7 @@
         <sys_created_on>2022-09-22 21:05:41</sys_created_on>
         <sys_id>ad6944aa1bc211107c458623604bcbbe</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name>Acquisition Package</sys_name>
+        <sys_name/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -3914,7 +3920,7 @@
         <sys_created_on>2022-09-22 21:05:41</sys_created_on>
         <sys_id>396984aa1bc211107c458623604bcb0d</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name>Don't Treat as Error</sys_name>
+        <sys_name/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -3937,11 +3943,11 @@
         <sys_created_on>2022-09-22 22:08:35</sys_created_on>
         <sys_id>83c7d4ee878a5110ec3b777acebb35d0</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name>Fields</sys_name>
+        <sys_name/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name>sys_documentation_var__m_sys_hub_action_output_a96944aa1bc211107c458623604bcbab_fields_en</sys_update_name>
+        <sys_update_name/>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-09-22 22:08:35</sys_updated_on>
         <url/>
@@ -3960,7 +3966,7 @@
         <sys_created_on>2022-09-22 21:05:41</sys_created_on>
         <sys_id>f56984aa1bc211107c458623604bcb04</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name>Action Status</sys_name>
+        <sys_name/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
