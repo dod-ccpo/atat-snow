@@ -27,7 +27,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>bee1a06087025510bc86b889cebb355c</sys_id>
-        <sys_mod_count>117</sys_mod_count>
+        <sys_mod_count>122</sys_mod_count>
         <sys_name>ATAT Fill DocuSign Fields Helper</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -35,7 +35,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_bee1a06087025510bc86b889cebb355c</sys_update_name>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-23 03:12:30</sys_updated_on>
+        <sys_updated_on>2022-09-23 04:21:19</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -138,10 +138,10 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 19:16:33</sys_created_on>
         <sys_id>cb60bf521b8211107c458623604bcb7b</sys_id>
-        <sys_mod_count>82</sys_mod_count>
+        <sys_mod_count>83</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-23 03:12:15</sys_updated_on>
+        <sys_updated_on>2022-09-23 04:21:13</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=cb60bf521b8211107c458623604bcb7b"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -152,9 +152,9 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 19:16:33</sys_created_on>
         <sys_id>0b60bb161b8211107c458623604bcb71</sys_id>
-        <sys_mod_count>78</sys_mod_count>
+        <sys_mod_count>79</sys_mod_count>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-23 03:12:15</sys_updated_on>
+        <sys_updated_on>2022-09-23 04:21:13</sys_updated_on>
         <value>(function execute(inputs, outputs) {
     // ... code ...
     var fields = inputs.given_fields;
@@ -289,11 +289,13 @@
             field.value = formattedText;
 
         }
-        // tabLabel is composite.pop_start_date_text AND there is a requested PoP start date
-        if (field.tabLabel.toString() === "composite.requested_pop_text" &amp;&amp; inputs.given_acq_package.period_of_performance.pop_start_request === "YES") {
-            // display value
-            var dis_val = getDisplayValue("time_frame", inputs.given_acq_package.period_of_performance.time_frame);
-            field.value = dis_val;
+        // tabLabel is composite.pop_start_date_no_sooner_than_text AND the period of performance time_frame is NO_SOONER_THAN
+        if (field.tabLabel.toString() === "composite.pop_start_date_no_sooner_than_text" &amp;&amp; inputs.given_acq_package.period_of_performance.time_frame === "NO_SOONER_THAN") {
+            field.value = inputs.given_acq_package.period_of_performance.requested_pop_start_date;
+        }
+        // tabLabel is composite.pop_start_date_not_later_than_text AND the period of performance time_frame is NO_LATER_THAN
+        if (field.tabLabel.toString() === "composite.pop_start_date_not_later_than_text" &amp;&amp; inputs.given_acq_package.period_of_performance.time_frame === "NO_LATER_THAN") {
+            field.value = inputs.given_acq_package.period_of_performance.requested_pop_start_date;
         }
         // tabLabel is project_overview.emergency_declaration_yes AND in support of an emergency declaration
         if (field.tabLabel.toString() === "project_overview.emergency_declaration_yes" &amp;&amp; inputs.given_acq_package.project_overview.emergency_declaration == "YES") {
@@ -337,14 +339,6 @@
         if (field.tabLabel.toString() === "period_of_performance.pop_start_request_no" &amp;&amp; inputs.given_acq_package.period_of_performance.pop_start_request === "NO") {
             field.value = "X";
         }
-        // tabLabel is sensitive_information.pii_present_yes AND contract involves PII
-        if (field.tabLabel.toString() === "sensitive_information.pii_present_yes" &amp;&amp; inputs.given_acq_package.sensitive_information.pii_present === "YES") {
-            field.value = "X";
-        }
-        // tabLabel is sensitive_information.pii_present_no AND contract does not involve PII
-        if (field.tabLabel.toString() === "sensitive_information.pii_present_no" &amp;&amp; inputs.given_acq_package.sensitive_information.pii_present === "NO") {
-            field.value = "X";
-        }
         // tabLabel is sensitive_information.baa_required_yes AND a BAA is required
         if (field.tabLabel.toString() === "sensitive_information.baa_required_yes" &amp;&amp; inputs.given_acq_package.sensitive_information.baa_required === "YES") {
             field.value = "X";
@@ -359,14 +353,6 @@
         }
         // tabLabel is sensitive_information.potential_to_be_harmful_no AND public disclosure would NOT be harmful to govt
         if (field.tabLabel.toString() === "sensitive_information.potential_to_be_harmful_no" &amp;&amp; inputs.given_acq_package.sensitive_information.potential_to_be_harmful === "NO") {
-            field.value = "X";
-        }
-        // tabLabel is gfe_overview.gfe_gfp_furnished_yes AND govt will furnish equipment or property
-        if (field.tabLabel.toString() === "gfe_overview.gfe_gfp_furnished_yes" &amp;&amp; inputs.given_acq_package.gfe_gfp_furnished === "YES") {
-            field.value = "X";
-        }
-        // tabLabel is gfe_overview.gfe_gfp_furnished_no AND govt will NOT furnish equipment or property
-        if (field.tabLabel.toString() === "gfe_overview.gfe_gfp_furnished_no" &amp;&amp; inputs.given_acq_package.gfe_gfp_furnished === "NO") {
             field.value = "X";
         }
         // tabLabel is sensitive_information.section_508_sufficient_yes AND Section 508 requirements are sufficient
@@ -420,20 +406,13 @@
         if (field.tabLabel.toString() === "contract_type.type_tm_justification" &amp;&amp; inputs.given_acq_package.contract_type.time_and_materials) {
             field.value = inputs.given_acq_package.contract_type.contract_type_justification;
         }
-
-
-
-
-
-
-        //////
+      
         var newField = {
             "field_id": field.field_id,
             "field_val": field.value,
             "field_cat": field.category,
             "field_selected": "false"
         }
-
 
         newFields.push(newField);
     });
@@ -2030,17 +2009,17 @@
     <sys_hub_action_plan action="INSERT_OR_UPDATE">
         <action_id display_value="ATAT Fill DocuSign Fields Helper">bee1a06087025510bc86b889cebb355c</action_id>
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"4e6984aa1bc211107c458623604bcb73","name":"plan","plan_signature":null}}</plan>
-        <snapshot>b65d556687429110ec3b777acebb3583</snapshot>
+        <snapshot>071d61a287c29110ec3b777acebb3521</snapshot>
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 21:05:43</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>4e6984aa1bc211107c458623604bcb73</sys_id>
-        <sys_mod_count>15</sys_mod_count>
+        <sys_mod_count>16</sys_mod_count>
         <sys_overrides/>
         <sys_scope/>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-23 03:12:31</sys_updated_on>
+        <sys_updated_on>2022-09-23 04:21:21</sys_updated_on>
     </sys_hub_action_plan>
     <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
@@ -2176,10 +2155,10 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 21:05:41</sys_created_on>
         <sys_id>696944aa1bc211107c458623604bcbc1</sys_id>
-        <sys_mod_count>15</sys_mod_count>
+        <sys_mod_count>16</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-23 03:12:29</sys_updated_on>
+        <sys_updated_on>2022-09-23 04:21:19</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=696944aa1bc211107c458623604bcbc1"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -2190,9 +2169,9 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 21:05:41</sys_created_on>
         <sys_id>716944aa1bc211107c458623604bcbed</sys_id>
-        <sys_mod_count>14</sys_mod_count>
+        <sys_mod_count>15</sys_mod_count>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-23 03:12:29</sys_updated_on>
+        <sys_updated_on>2022-09-23 04:21:19</sys_updated_on>
         <value>(function execute(inputs, outputs) {
     // ... code ...
     var fields = inputs.given_fields;
@@ -2327,11 +2306,13 @@
             field.value = formattedText;
 
         }
-        // tabLabel is composite.pop_start_date_text AND there is a requested PoP start date
-        if (field.tabLabel.toString() === "composite.requested_pop_text" &amp;&amp; inputs.given_acq_package.period_of_performance.pop_start_request === "YES") {
-            // display value
-            var dis_val = getDisplayValue("time_frame", inputs.given_acq_package.period_of_performance.time_frame);
-            field.value = dis_val;
+        // tabLabel is composite.pop_start_date_no_sooner_than_text AND the period of performance time_frame is NO_SOONER_THAN
+        if (field.tabLabel.toString() === "composite.pop_start_date_no_sooner_than_text" &amp;&amp; inputs.given_acq_package.period_of_performance.time_frame === "NO_SOONER_THAN") {
+            field.value = inputs.given_acq_package.period_of_performance.requested_pop_start_date;
+        }
+        // tabLabel is composite.pop_start_date_not_later_than_text AND the period of performance time_frame is NO_LATER_THAN
+        if (field.tabLabel.toString() === "composite.pop_start_date_not_later_than_text" &amp;&amp; inputs.given_acq_package.period_of_performance.time_frame === "NO_LATER_THAN") {
+            field.value = inputs.given_acq_package.period_of_performance.requested_pop_start_date;
         }
         // tabLabel is project_overview.emergency_declaration_yes AND in support of an emergency declaration
         if (field.tabLabel.toString() === "project_overview.emergency_declaration_yes" &amp;&amp; inputs.given_acq_package.project_overview.emergency_declaration == "YES") {
@@ -2375,14 +2356,6 @@
         if (field.tabLabel.toString() === "period_of_performance.pop_start_request_no" &amp;&amp; inputs.given_acq_package.period_of_performance.pop_start_request === "NO") {
             field.value = "X";
         }
-        // tabLabel is sensitive_information.pii_present_yes AND contract involves PII
-        if (field.tabLabel.toString() === "sensitive_information.pii_present_yes" &amp;&amp; inputs.given_acq_package.sensitive_information.pii_present === "YES") {
-            field.value = "X";
-        }
-        // tabLabel is sensitive_information.pii_present_no AND contract does not involve PII
-        if (field.tabLabel.toString() === "sensitive_information.pii_present_no" &amp;&amp; inputs.given_acq_package.sensitive_information.pii_present === "NO") {
-            field.value = "X";
-        }
         // tabLabel is sensitive_information.baa_required_yes AND a BAA is required
         if (field.tabLabel.toString() === "sensitive_information.baa_required_yes" &amp;&amp; inputs.given_acq_package.sensitive_information.baa_required === "YES") {
             field.value = "X";
@@ -2397,14 +2370,6 @@
         }
         // tabLabel is sensitive_information.potential_to_be_harmful_no AND public disclosure would NOT be harmful to govt
         if (field.tabLabel.toString() === "sensitive_information.potential_to_be_harmful_no" &amp;&amp; inputs.given_acq_package.sensitive_information.potential_to_be_harmful === "NO") {
-            field.value = "X";
-        }
-        // tabLabel is gfe_overview.gfe_gfp_furnished_yes AND govt will furnish equipment or property
-        if (field.tabLabel.toString() === "gfe_overview.gfe_gfp_furnished_yes" &amp;&amp; inputs.given_acq_package.gfe_gfp_furnished === "YES") {
-            field.value = "X";
-        }
-        // tabLabel is gfe_overview.gfe_gfp_furnished_no AND govt will NOT furnish equipment or property
-        if (field.tabLabel.toString() === "gfe_overview.gfe_gfp_furnished_no" &amp;&amp; inputs.given_acq_package.gfe_gfp_furnished === "NO") {
             field.value = "X";
         }
         // tabLabel is sensitive_information.section_508_sufficient_yes AND Section 508 requirements are sufficient
@@ -2458,20 +2423,13 @@
         if (field.tabLabel.toString() === "contract_type.type_tm_justification" &amp;&amp; inputs.given_acq_package.contract_type.time_and_materials) {
             field.value = inputs.given_acq_package.contract_type.contract_type_justification;
         }
-
-
-
-
-
-
-        //////
+      
         var newField = {
             "field_id": field.field_id,
             "field_val": field.value,
             "field_cat": field.category,
             "field_selected": "false"
         }
-
 
         newFields.push(newField);
     });
