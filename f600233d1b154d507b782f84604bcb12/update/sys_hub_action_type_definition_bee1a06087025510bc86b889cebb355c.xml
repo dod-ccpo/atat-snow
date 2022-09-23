@@ -20,14 +20,14 @@
         <natlang/>
         <outputs/>
         <outputs/>
-        <state>published</state>
+        <state>draft</state>
         <sys_class_name>sys_hub_action_type_definition</sys_class_name>
         <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-09-16 17:44:57</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>bee1a06087025510bc86b889cebb355c</sys_id>
-        <sys_mod_count>77</sys_mod_count>
+        <sys_mod_count>102</sys_mod_count>
         <sys_name>ATAT Fill DocuSign Fields Helper</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -35,7 +35,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_bee1a06087025510bc86b889cebb355c</sys_update_name>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-23 01:12:04</sys_updated_on>
+        <sys_updated_on>2022-09-23 02:19:15</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -138,10 +138,10 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 19:16:33</sys_created_on>
         <sys_id>cb60bf521b8211107c458623604bcb7b</sys_id>
-        <sys_mod_count>57</sys_mod_count>
+        <sys_mod_count>77</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-23 01:11:09</sys_updated_on>
+        <sys_updated_on>2022-09-23 02:19:15</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=cb60bf521b8211107c458623604bcb7b"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -152,9 +152,9 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 19:16:33</sys_created_on>
         <sys_id>0b60bb161b8211107c458623604bcb71</sys_id>
-        <sys_mod_count>53</sys_mod_count>
+        <sys_mod_count>73</sys_mod_count>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-23 01:11:09</sys_updated_on>
+        <sys_updated_on>2022-09-23 02:19:15</sys_updated_on>
         <value>(function execute(inputs, outputs) {
 // ... code ...
  var fields = inputs.given_fields;
@@ -208,7 +208,7 @@
       if (field.tabLabel.toString() === "contacts#cor.email"){
         field.value = inputs.cor_contact.email;
       }
-      // tabLabel is contacts#cor.phone_and_extension FIX
+      // tabLabel is contacts#cor.phone_and_extension
       if (field.tabLabel.toString() === "contacts#cor.phone_and_extension"){
         field.value = inputs.cor_contact.phone_and_extension;
       }
@@ -237,6 +237,108 @@
         field.value = inputs.acor_contact.dodaac;
       }
     }    
+    // current Contract exists
+    if(inputs.given_acq_package.current_contract_and_recurring_information.current_contract_exists == "YES"){
+      // tabLabel is current_contract.incumbent_contractor_name
+      if (field.tabLabel.toString() === "current_contract.incumbent_contractor_name"){
+        field.value = inputs.given_acq_package.current_contract_and_recurring_information.incumbent_contractor_name;
+      }
+      // tabLabel is current_contract.contract_number
+      if (field.tabLabel.toString() === "current_contract.contract_number"){
+        field.value = inputs.given_acq_package.current_contract_and_recurring_information.contract_number;
+      }
+      // tabLabel is current_contract.task_delivery_order_number
+      if (field.tabLabel.toString() === "current_contract.task_delivery_order_number"){
+        field.value = inputs.given_acq_package.current_contract_and_recurring_information.task_delivery_order_number;
+      }
+      // tabLabel is current_contract.contract_order_expiration_date
+      if (field.tabLabel.toString() === "current_contract.contract_order_expiration_date"){
+        field.value = inputs.given_acq_package.current_contract_and_recurring_information.contract_order_expiration_date;
+      }
+    }
+    // tabLabel is composite.requested_pop_text
+    if (field.tabLabel.toString() === "composite.requested_pop_text"){
+      // Format the base Period text as "Base period: N &lt;Day(s) | Month(s) | Year(s)&gt;"
+      var basePeriod = inputs.given_acq_package.period_of_performance.base_period;
+      var formattedText = "";
+      formattedText += basePeriod.period_type.getDisplayValue();
+      formattedText += " period: ";
+      formattedText += basePeriod.period_unit_count.getDisplayValue();
+      formattedText += " ";
+      formattedText += basePeriod.period_unit.getDisplayValue();
+      
+      // The option_periods on the record is a formatted like "ID1,ID2". Those IDs can then
+      // be looked up on the atat_period GlideRecord to fetch the full object data.
+      var optionPeriodIds = inputs.given_acq_package.period_of_performance.option_periods.split(',');
+      var gr = new GlideRecord("x_g_dis_atat_period");
+      for (var i = 0; i &lt; optionPeriodIds.length; i++) {
+        gr.get(optionPeriodIds[i]);
+        // If the period is an option period, format the text
+        if (gr.period_type == "OPTION") {
+        // Format the option Period text as "Option period M: N &lt;Days(s) | Month(s) | Year(s)&gt;"
+        formattedText += ", ";
+        formattedText += gr.period_type.getDisplayValue();
+        formattedText += " period ",
+        formattedText += gr.option_order.getDisplayValue();
+        formattedText += ": ";
+        formattedText += gr.period_unit_count.getDisplayValue();
+        formattedText += " ";
+        formattedText += gr.period_unit.getDisplayValue();
+        }
+      }
+      field.value = formattedText;
+      
+    }
+    // tabLabel is composite.pop_start_date_text AND there is a requested PoP start date
+    if (field.tabLabel.toString() === "composite.requested_pop_text" &amp;&amp; inputs.given_acq_package.period.period_of_performance.pop_start_request === "YES"){
+      // display value
+      var dis_val = getDisplayValue("time_frame", inputs.given_acq_package.period_of_performance.time_frame);
+      field.value = dis_val;
+    }
+    // tabLabel is project_overview.emergency_declaration_yes AND in support of an emergency declaration
+    if (field.tabLabel.toString() === "project_overview.emergency_declaration_yes" &amp;&amp; inputs.given_acq_package.project_overview.emergency_declaration){
+      field.value = "X";
+    }
+    // tabLabel is project_overview.emergency_declaration_no AND NOT in support of an emergency declaration
+    if (field.tabLabel.toString() === " project_overview.emergency_declaration_no" &amp;&amp; !inputs.given_acq_package.project_overview.emergency_declaration){
+      field.value = "X";	
+    }
+    // tabLabel is current_contract.current_contract_exists_yes AND a current contract exists
+    if (field.tabLabel.toString() === "current_contract.current_contract_exists_yes" &amp;&amp; inputs.given_acq_package.current_contract_and_recurring_information.current_contract_exists === "YES"){
+      field.value = "X";
+    }
+    // tabLabel is current_contract.current_contract_exists_no AND a current contract DOES NOT exist
+    if (field.tabLabel.toString() === "current_contract.current_contract_exists_no" &amp;&amp; inputs.given_acq_package.current_contract_and_recurring_information.current_contract_exists === "NO"){
+      field.value = "X";
+    }
+    // tabLabel is fair_opportunity.exception_to_fair_opportunity_yes AND there is an exception to the fair opportunity process
+    if (field.tabLabel.toString() === "fair_opportunity.exception_to_fair_opportunity_yes" &amp;&amp;
+        inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "YES_FAR_16_505_B_2_I_B" || inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "YES_FAR_16_505_B_2_I_C" ){
+      field.value = "X";
+    	
+    }
+    // tabLabel is fair_opportunity.exception_to_fair_opportunity_no AND there IS NOT an exception to the fair opportunity process
+    if (field.tabLabel.toString() === "fair_opportunity.exception_to_fair_opportunity_no" &amp;&amp;
+        inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "NO_NONE"){
+      field.value = "X";
+    	
+    }
+    // tabLabel is period_of_performance.recurring_requirement_yes AND there is a recurring requirement
+    if (field.tabLabel.toString() === "period_of_performance.recurring_requirement_yes" &amp;&amp; inputs.given_acq_package.period_of_performance.recurring_requirement === "YES"){
+    field.value = "X";
+    }
+    // tabLabel is period_of_performance.recurring_requirement_no AND there is NOT a recurring requirement
+    if (field.tabLabel.toString() === "period_of_performance.recurring_requirement_no" &amp;&amp; inputs.given_acq_package.period_of_performance.recurring_requirement === "NO"){
+    field.value = "X";
+    }
+    // tabLabel is period_of_performance.pop_start_request_yes AND there is a requested PoP start date
+     if (field.tabLabel.toString() === "period_of_performance.pop_start_request_yes" &amp;&amp; inputs.given_acq_package.period_of_performance.pop_start_request === "YES"){
+     field.value = "X";
+     }
+    // tabLabel is period_of_performance.pop_start_request_no AND there is NOT a requested PoP start date
+     if (field.tabLabel.toString() === "period_of_performance.pop_start_request_no" &amp;&amp; inputs.given_acq_package.period_of_performance.pop_start_request === "NO"){
+     field.value = "X";
+     }
     
     
     
@@ -1855,17 +1957,17 @@
     <sys_hub_action_plan action="INSERT_OR_UPDATE">
         <action_id display_value="ATAT Fill DocuSign Fields Helper">bee1a06087025510bc86b889cebb355c</action_id>
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"4e6984aa1bc211107c458623604bcb73","name":"plan","plan_signature":null}}</plan>
-        <snapshot>7ec1812687ce5110ec3b777acebb35dc</snapshot>
+        <snapshot>bc2f85e287029110ec3b777acebb35ec</snapshot>
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 21:05:43</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>4e6984aa1bc211107c458623604bcb73</sys_id>
-        <sys_mod_count>11</sys_mod_count>
+        <sys_mod_count>12</sys_mod_count>
         <sys_overrides/>
         <sys_scope/>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-23 01:12:06</sys_updated_on>
+        <sys_updated_on>2022-09-23 02:10:24</sys_updated_on>
     </sys_hub_action_plan>
     <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
@@ -2001,10 +2103,10 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 21:05:41</sys_created_on>
         <sys_id>696944aa1bc211107c458623604bcbc1</sys_id>
-        <sys_mod_count>11</sys_mod_count>
+        <sys_mod_count>12</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-23 01:12:04</sys_updated_on>
+        <sys_updated_on>2022-09-23 02:10:22</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=696944aa1bc211107c458623604bcbc1"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -2015,9 +2117,9 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 21:05:41</sys_created_on>
         <sys_id>716944aa1bc211107c458623604bcbed</sys_id>
-        <sys_mod_count>10</sys_mod_count>
+        <sys_mod_count>11</sys_mod_count>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-23 01:12:04</sys_updated_on>
+        <sys_updated_on>2022-09-23 02:10:22</sys_updated_on>
         <value>(function execute(inputs, outputs) {
 // ... code ...
  var fields = inputs.given_fields;
@@ -2071,7 +2173,7 @@
       if (field.tabLabel.toString() === "contacts#cor.email"){
         field.value = inputs.cor_contact.email;
       }
-      // tabLabel is contacts#cor.phone_and_extension FIX
+      // tabLabel is contacts#cor.phone_and_extension
       if (field.tabLabel.toString() === "contacts#cor.phone_and_extension"){
         field.value = inputs.cor_contact.phone_and_extension;
       }
@@ -2100,6 +2202,92 @@
         field.value = inputs.acor_contact.dodaac;
       }
     }    
+    // current Contract exists
+    if(inputs.given_acq_package.current_contract_and_recurring_information.current_contract_exists == "YES"){
+      // tabLabel is current_contract.incumbent_contractor_name
+      if (field.tabLabel.toString() === "current_contract.incumbent_contractor_name"){
+        field.value = inputs.given_acq_package.current_contract_and_recurring_information.incumbent_contractor_name;
+      }
+      // tabLabel is current_contract.contract_number
+      if (field.tabLabel.toString() === "current_contract.contract_number"){
+        field.value = inputs.given_acq_package.current_contract_and_recurring_information.contract_number;
+      }
+      // tabLabel is current_contract.task_delivery_order_number
+      if (field.tabLabel.toString() === "current_contract.task_delivery_order_number"){
+        field.value = inputs.given_acq_package.current_contract_and_recurring_information.task_delivery_order_number;
+      }
+      // tabLabel is current_contract.contract_order_expiration_date
+      if (field.tabLabel.toString() === "current_contract.contract_order_expiration_date"){
+        field.value = inputs.given_acq_package.current_contract_and_recurring_information.contract_order_expiration_date;
+      }
+    }
+    // tabLabel is composite.requested_pop_text
+    if (field.tabLabel.toString() === "composite.requested_pop_text"){
+      // Format the base Period text as "Base period: N &lt;Day(s) | Month(s) | Year(s)&gt;"
+      var basePeriod = inputs.given_acq_package.period_of_performance.base_period;
+      var formattedText = "";
+      formattedText += basePeriod.period_type.getDisplayValue();
+      formattedText += " period: ";
+      formattedText += basePeriod.period_unit_count.getDisplayValue();
+      formattedText += " ";
+      formattedText += basePeriod.period_unit.getDisplayValue();
+      
+      // The option_periods on the record is a formatted like "ID1,ID2". Those IDs can then
+      // be looked up on the atat_period GlideRecord to fetch the full object data.
+      var optionPeriodIds = inputs.given_acq_package.period_of_performance.option_periods.split(',');
+      var gr = new GlideRecord("x_g_dis_atat_period");
+      for (var i = 0; i &lt; optionPeriodIds.length; i++) {
+        gr.get(optionPeriodIds[i]);
+        // If the period is an option period, format the text
+        if (gr.period_type == "OPTION") {
+        // Format the option Period text as "Option period M: N &lt;Days(s) | Month(s) | Year(s)&gt;"
+        formattedText += ", ";
+        formattedText += gr.period_type.getDisplayValue();
+        formattedText += " period ",
+        formattedText += gr.option_order.getDisplayValue();
+        formattedText += ": ";
+        formattedText += gr.period_unit_count.getDisplayValue();
+        formattedText += " ";
+        formattedText += gr.period_unit.getDisplayValue();
+        }
+      }
+      field.value = formattedText;
+      
+    }
+    // tabLabel is composite.pop_start_date_text AND there is a requested PoP start date
+    if (field.tabLabel.toString() === "composite.requested_pop_text" &amp;&amp; inputs.given_acq_package.period.period_of_performance.pop_start_request === "YES"){
+      // display value
+      var dis_val = getDisplayValue("time_frame", inputs.given_acq_package.period_of_performance.time_frame);
+      field.value = dis_val;
+    }
+    // tabLabel is project_overview.emergency_declaration_yes AND in support of an emergency declaration
+    if (field.tabLabel.toString() === "project_overview.emergency_declaration_yes" &amp;&amp; inputs.given_acq_package.project_overview.emergency_declaration){
+      field.value = "X";
+    }
+    // tabLabel is project_overview.emergency_declaration_no AND NOT in support of an emergency declaration
+    if (field.tabLabel.toString() === " project_overview.emergency_declaration_no" &amp;&amp; !inputs.given_acq_package.project_overview.emergency_declaration){
+      field.value = "X";	
+    }
+    // tabLabel is current_contract.current_contract_exists_yes AND a current contract exists
+    if (field.tabLabel.toString() === "current_contract.current_contract_exists_yes" &amp;&amp; inputs.given_acq_package.current_contract_and_recurring_information.current_contract_exists === "YES"){
+      field.value = "X";
+    }
+    // tabLabel is current_contract.current_contract_exists_no AND a current contract DOES NOT exist
+    if (field.tabLabel.toString() === "current_contract.current_contract_exists_no" &amp;&amp; inputs.given_acq_package.current_contract_and_recurring_information.current_contract_exists === "NO"){
+      field.value = "X";
+    }
+    // tabLabel is fair_opportunity.exception_to_fair_opportunity_yes AND there is an exception to the fair opportunity process
+    if (field.tabLabel.toString() === "fair_opportunity.exception_to_fair_opportunity_yes" &amp;&amp;
+        inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "YES_FAR_16_505_B_2_I_B" || inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "YES_FAR_16_505_B_2_I_C" ){
+      field.value = "X"
+    	
+    }
+    // tabLabel is fair_opportunity.exception_to_fair_opportunity_no AND there IS NOT an exception to the fair opportunity process
+    if (field.tabLabel.toString() === "fair_opportunity.exception_to_fair_opportunity_no" &amp;&amp;
+        inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "NO_NONE"){
+      field.value = "X"
+    	
+    }
     
     
     
