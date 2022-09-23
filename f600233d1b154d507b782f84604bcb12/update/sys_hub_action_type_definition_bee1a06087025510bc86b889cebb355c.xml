@@ -20,14 +20,14 @@
         <natlang/>
         <outputs/>
         <outputs/>
-        <state>draft</state>
+        <state>published</state>
         <sys_class_name>sys_hub_action_type_definition</sys_class_name>
         <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-09-16 17:44:57</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>bee1a06087025510bc86b889cebb355c</sys_id>
-        <sys_mod_count>102</sys_mod_count>
+        <sys_mod_count>117</sys_mod_count>
         <sys_name>ATAT Fill DocuSign Fields Helper</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -35,7 +35,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_bee1a06087025510bc86b889cebb355c</sys_update_name>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-23 02:19:15</sys_updated_on>
+        <sys_updated_on>2022-09-23 03:12:30</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -138,10 +138,10 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 19:16:33</sys_created_on>
         <sys_id>cb60bf521b8211107c458623604bcb7b</sys_id>
-        <sys_mod_count>77</sys_mod_count>
+        <sys_mod_count>82</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-23 02:19:15</sys_updated_on>
+        <sys_updated_on>2022-09-23 03:12:15</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=cb60bf521b8211107c458623604bcb7b"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -152,232 +152,305 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 19:16:33</sys_created_on>
         <sys_id>0b60bb161b8211107c458623604bcb71</sys_id>
-        <sys_mod_count>73</sys_mod_count>
+        <sys_mod_count>78</sys_mod_count>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-23 02:19:15</sys_updated_on>
+        <sys_updated_on>2022-09-23 03:12:15</sys_updated_on>
         <value>(function execute(inputs, outputs) {
-// ... code ...
- var fields = inputs.given_fields;
- var newFields = [];
-  fields.forEach(function(field) {
-    var label = field.tabLabel.toString();
-    outputs.frog = label;
-    
-    /* working test
-    if (field.tabLabel.toString() === "project_overview.title"){
-        field.value = "crabber";
-    }*/
-    
-    // tabLabel is project_overview.title
-    if (field.tabLabel.toString() === "project_overview.title"){
-        field.value = inputs.given_acq_package.project_overview.title;
-    }
-    // tabLabel is project_overview.scope
-    if (field.tabLabel.toString() === "project_overview.scope"){
-        field.value = inputs.given_acq_package.project_overview.scope;
-    }
-    // tabLabel is organization.service_agency (needs display value)
-    if (field.tabLabel.toString() === "organization.service_agency"){
-      // display value
-      var dis_val = getDisplayValue("service_agency", inputs.given_acq_package.organization.service_agency);
-      field.value = dis_val;
-    }
-    // tabLabel is composite.organization
-    if (field.tabLabel.toString() === "composite.organization"){
-      // check if service_agency is DISA
-      if (inputs.given_acq_package.organization.service_agency == "DEFENSE_INFORMATION_SYSTEMS_AGENCY"){
-      	// get display value
-        var dis_val = getDisplayValue("disa_organization", inputs.given_acq_package.organization.disa_organization);
-        field.value = dis_val;
-      }
-      else {
-      	field.value = inputs.given_acq_package.organization.organization_name;
-      }
-    }
-    // tabLabel is contacts#mo.formal_name
-    if (field.tabLabel.toString() === "contacts#mo.formal_name"){
-        field.value = inputs.mo_contact.formal_name;
-    }
-    // package has a COR contact
-    if (inputs.cor_contact){
-      // tabLabel is contacts#cor.formal_name
-      if (field.tabLabel.toString() === "contacts#cor.formal_name"){
-        field.value = inputs.cor_contact.formal_name;
-      }
-      // tabLabel is contacts#cor.email
-      if (field.tabLabel.toString() === "contacts#cor.email"){
-        field.value = inputs.cor_contact.email;
-      }
-      // tabLabel is contacts#cor.phone_and_extension
-      if (field.tabLabel.toString() === "contacts#cor.phone_and_extension"){
-        field.value = inputs.cor_contact.phone_and_extension;
-      }
-      // tabLabel is contacts#cor.dodaac
-      if (field.tabLabel.toString() === "contacts#cor.dodaac"){
-        field.value = inputs.cor_contact.dodaac;
-      }
-      
-    }
-    // package has an ACOR contact
-  	if (inputs.acor_contact){
-      // tabLabel is contacts#acor.formal_name
-      if (field.tabLabel.toString() === "contacts#cor.formal_name"){
-        field.value = inputs.acor_contact.formal_name;
-      }
-      // tabLabel is contacts#acor.email
-      if (field.tabLabel.toString() === "contacts#cor.email"){
-        field.value = inputs.acor_contact.email;
-      }
-      // tabLabel is contacts#acor.phone_and_extension FIX
-      if (field.tabLabel.toString() === "contacts#cor.phone_and_extension"){
-        field.value = inputs.acor_contact.phone_and_extension;
-      }
-      // tabLabel is contacts#acor.dodaac
-      if (field.tabLabel.toString() === "contacts#cor.dodaac"){
-        field.value = inputs.acor_contact.dodaac;
-      }
-    }    
-    // current Contract exists
-    if(inputs.given_acq_package.current_contract_and_recurring_information.current_contract_exists == "YES"){
-      // tabLabel is current_contract.incumbent_contractor_name
-      if (field.tabLabel.toString() === "current_contract.incumbent_contractor_name"){
-        field.value = inputs.given_acq_package.current_contract_and_recurring_information.incumbent_contractor_name;
-      }
-      // tabLabel is current_contract.contract_number
-      if (field.tabLabel.toString() === "current_contract.contract_number"){
-        field.value = inputs.given_acq_package.current_contract_and_recurring_information.contract_number;
-      }
-      // tabLabel is current_contract.task_delivery_order_number
-      if (field.tabLabel.toString() === "current_contract.task_delivery_order_number"){
-        field.value = inputs.given_acq_package.current_contract_and_recurring_information.task_delivery_order_number;
-      }
-      // tabLabel is current_contract.contract_order_expiration_date
-      if (field.tabLabel.toString() === "current_contract.contract_order_expiration_date"){
-        field.value = inputs.given_acq_package.current_contract_and_recurring_information.contract_order_expiration_date;
-      }
-    }
-    // tabLabel is composite.requested_pop_text
-    if (field.tabLabel.toString() === "composite.requested_pop_text"){
-      // Format the base Period text as "Base period: N &lt;Day(s) | Month(s) | Year(s)&gt;"
-      var basePeriod = inputs.given_acq_package.period_of_performance.base_period;
-      var formattedText = "";
-      formattedText += basePeriod.period_type.getDisplayValue();
-      formattedText += " period: ";
-      formattedText += basePeriod.period_unit_count.getDisplayValue();
-      formattedText += " ";
-      formattedText += basePeriod.period_unit.getDisplayValue();
-      
-      // The option_periods on the record is a formatted like "ID1,ID2". Those IDs can then
-      // be looked up on the atat_period GlideRecord to fetch the full object data.
-      var optionPeriodIds = inputs.given_acq_package.period_of_performance.option_periods.split(',');
-      var gr = new GlideRecord("x_g_dis_atat_period");
-      for (var i = 0; i &lt; optionPeriodIds.length; i++) {
-        gr.get(optionPeriodIds[i]);
-        // If the period is an option period, format the text
-        if (gr.period_type == "OPTION") {
-        // Format the option Period text as "Option period M: N &lt;Days(s) | Month(s) | Year(s)&gt;"
-        formattedText += ", ";
-        formattedText += gr.period_type.getDisplayValue();
-        formattedText += " period ",
-        formattedText += gr.option_order.getDisplayValue();
-        formattedText += ": ";
-        formattedText += gr.period_unit_count.getDisplayValue();
-        formattedText += " ";
-        formattedText += gr.period_unit.getDisplayValue();
-        }
-      }
-      field.value = formattedText;
-      
-    }
-    // tabLabel is composite.pop_start_date_text AND there is a requested PoP start date
-    if (field.tabLabel.toString() === "composite.requested_pop_text" &amp;&amp; inputs.given_acq_package.period.period_of_performance.pop_start_request === "YES"){
-      // display value
-      var dis_val = getDisplayValue("time_frame", inputs.given_acq_package.period_of_performance.time_frame);
-      field.value = dis_val;
-    }
-    // tabLabel is project_overview.emergency_declaration_yes AND in support of an emergency declaration
-    if (field.tabLabel.toString() === "project_overview.emergency_declaration_yes" &amp;&amp; inputs.given_acq_package.project_overview.emergency_declaration){
-      field.value = "X";
-    }
-    // tabLabel is project_overview.emergency_declaration_no AND NOT in support of an emergency declaration
-    if (field.tabLabel.toString() === " project_overview.emergency_declaration_no" &amp;&amp; !inputs.given_acq_package.project_overview.emergency_declaration){
-      field.value = "X";	
-    }
-    // tabLabel is current_contract.current_contract_exists_yes AND a current contract exists
-    if (field.tabLabel.toString() === "current_contract.current_contract_exists_yes" &amp;&amp; inputs.given_acq_package.current_contract_and_recurring_information.current_contract_exists === "YES"){
-      field.value = "X";
-    }
-    // tabLabel is current_contract.current_contract_exists_no AND a current contract DOES NOT exist
-    if (field.tabLabel.toString() === "current_contract.current_contract_exists_no" &amp;&amp; inputs.given_acq_package.current_contract_and_recurring_information.current_contract_exists === "NO"){
-      field.value = "X";
-    }
-    // tabLabel is fair_opportunity.exception_to_fair_opportunity_yes AND there is an exception to the fair opportunity process
-    if (field.tabLabel.toString() === "fair_opportunity.exception_to_fair_opportunity_yes" &amp;&amp;
-        inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "YES_FAR_16_505_B_2_I_B" || inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "YES_FAR_16_505_B_2_I_C" ){
-      field.value = "X";
-    	
-    }
-    // tabLabel is fair_opportunity.exception_to_fair_opportunity_no AND there IS NOT an exception to the fair opportunity process
-    if (field.tabLabel.toString() === "fair_opportunity.exception_to_fair_opportunity_no" &amp;&amp;
-        inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "NO_NONE"){
-      field.value = "X";
-    	
-    }
-    // tabLabel is period_of_performance.recurring_requirement_yes AND there is a recurring requirement
-    if (field.tabLabel.toString() === "period_of_performance.recurring_requirement_yes" &amp;&amp; inputs.given_acq_package.period_of_performance.recurring_requirement === "YES"){
-    field.value = "X";
-    }
-    // tabLabel is period_of_performance.recurring_requirement_no AND there is NOT a recurring requirement
-    if (field.tabLabel.toString() === "period_of_performance.recurring_requirement_no" &amp;&amp; inputs.given_acq_package.period_of_performance.recurring_requirement === "NO"){
-    field.value = "X";
-    }
-    // tabLabel is period_of_performance.pop_start_request_yes AND there is a requested PoP start date
-     if (field.tabLabel.toString() === "period_of_performance.pop_start_request_yes" &amp;&amp; inputs.given_acq_package.period_of_performance.pop_start_request === "YES"){
-     field.value = "X";
-     }
-    // tabLabel is period_of_performance.pop_start_request_no AND there is NOT a requested PoP start date
-     if (field.tabLabel.toString() === "period_of_performance.pop_start_request_no" &amp;&amp; inputs.given_acq_package.period_of_performance.pop_start_request === "NO"){
-     field.value = "X";
-     }
-    
-    
-    
-    
-    //////
-    var newField = {
-    "field_id": field.field_id,
-    "field_val": field.value,
-    "field_cat": field.category,
-      "field_selected": "false"
-    }
-    
-   
-    newFields.push(newField);
- });
- outputs.fields = newFields;
-  
-  // This will get the display value
-  function getDisplayValue(choice_set_element, choice_value){
-    var sysChoice = new GlideRecord("sys_choice");
-	sysChoice.addQuery("element", choice_set_element);
-	sysChoice.addQuery("value", choice_value);
-	sysChoice.query();
-	while (sysChoice.next()) {
-  		return sysChoice.label;
-	}
-  };
-  
-  
+    // ... code ...
+    var fields = inputs.given_fields;
+    var newFields = [];
+    fields.forEach(function (field) {
+        var label = field.tabLabel.toString();
+        outputs.frog = label;
 
-  
-  
-  
-  
-  
-  
-  
-})(inputs, outputs);
-</value>
+        /* working test
+        if (field.tabLabel.toString() === "project_overview.title"){
+            field.value = "crabber";
+        }*/
+
+        // tabLabel is project_overview.title
+        if (field.tabLabel.toString() === "project_overview.title") {
+            field.value = inputs.given_acq_package.project_overview.title;
+        }
+        // tabLabel is project_overview.scope
+        if (field.tabLabel.toString() === "project_overview.scope") {
+            field.value = inputs.given_acq_package.project_overview.scope;
+        }
+        // tabLabel is organization.service_agency (needs display value)
+        if (field.tabLabel.toString() === "organization.service_agency") {
+            // display value
+            var dis_val = getDisplayValue("service_agency", inputs.given_acq_package.organization.service_agency);
+            field.value = dis_val;
+        }
+        // tabLabel is composite.organization
+        if (field.tabLabel.toString() === "composite.organization") {
+            // check if service_agency is DISA
+            if (inputs.given_acq_package.organization.service_agency == "DEFENSE_INFORMATION_SYSTEMS_AGENCY") {
+                // get display value
+                var dis_val = getDisplayValue("disa_organization", inputs.given_acq_package.organization.disa_organization);
+                field.value = dis_val;
+            }
+            else {
+                field.value = inputs.given_acq_package.organization.organization_name;
+            }
+        }
+        // tabLabel is contacts#mo.formal_name
+        if (field.tabLabel.toString() === "contacts#mo.formal_name") {
+            field.value = inputs.mo_contact.formal_name;
+        }
+        // package has a COR contact
+        if (inputs.cor_contact) {
+            // tabLabel is contacts#cor.formal_name
+            if (field.tabLabel.toString() === "contacts#cor.formal_name") {
+                field.value = inputs.cor_contact.formal_name;
+            }
+            // tabLabel is contacts#cor.email
+            if (field.tabLabel.toString() === "contacts#cor.email") {
+                field.value = inputs.cor_contact.email;
+            }
+            // tabLabel is contacts#cor.phone_and_extension
+            if (field.tabLabel.toString() === "contacts#cor.phone_and_extension") {
+                field.value = inputs.cor_contact.phone_and_extension;
+            }
+            // tabLabel is contacts#cor.dodaac
+            if (field.tabLabel.toString() === "contacts#cor.dodaac") {
+                field.value = inputs.cor_contact.dodaac;
+            }
+
+        }
+        // package has an ACOR contact
+        if (inputs.acor_contact) {
+            // tabLabel is contacts#acor.formal_name
+            if (field.tabLabel.toString() === "contacts#cor.formal_name") {
+                field.value = inputs.acor_contact.formal_name;
+            }
+            // tabLabel is contacts#acor.email
+            if (field.tabLabel.toString() === "contacts#cor.email") {
+                field.value = inputs.acor_contact.email;
+            }
+            // tabLabel is contacts#acor.phone_and_extension FIX
+            if (field.tabLabel.toString() === "contacts#cor.phone_and_extension") {
+                field.value = inputs.acor_contact.phone_and_extension;
+            }
+            // tabLabel is contacts#acor.dodaac
+            if (field.tabLabel.toString() === "contacts#cor.dodaac") {
+                field.value = inputs.acor_contact.dodaac;
+            }
+        }
+        // current Contract exists
+        if (inputs.given_acq_package.current_contract_and_recurring_information.current_contract_exists == "YES") {
+            // tabLabel is current_contract.incumbent_contractor_name
+            if (field.tabLabel.toString() === "current_contract.incumbent_contractor_name") {
+                field.value = inputs.given_acq_package.current_contract_and_recurring_information.incumbent_contractor_name;
+            }
+            // tabLabel is current_contract.contract_number
+            if (field.tabLabel.toString() === "current_contract.contract_number") {
+                field.value = inputs.given_acq_package.current_contract_and_recurring_information.contract_number;
+            }
+            // tabLabel is current_contract.task_delivery_order_number
+            if (field.tabLabel.toString() === "current_contract.task_delivery_order_number") {
+                field.value = inputs.given_acq_package.current_contract_and_recurring_information.task_delivery_order_number;
+            }
+            // tabLabel is current_contract.contract_order_expiration_date
+            if (field.tabLabel.toString() === "current_contract.contract_order_expiration_date") {
+                field.value = inputs.given_acq_package.current_contract_and_recurring_information.contract_order_expiration_date;
+            }
+        }
+        // tabLabel is composite.requested_pop_text
+        if (field.tabLabel.toString() === "composite.requested_pop_text") {
+            // Format the base Period text as "Base period: N &lt;Day(s) | Month(s) | Year(s)&gt;"
+            var basePeriod = inputs.given_acq_package.period_of_performance.base_period;
+            var formattedText = "";
+            formattedText += basePeriod.period_type.getDisplayValue();
+            formattedText += " period: ";
+            formattedText += basePeriod.period_unit_count.getDisplayValue();
+            formattedText += " ";
+            formattedText += basePeriod.period_unit.getDisplayValue();
+
+            // The option_periods on the record is a formatted like "ID1,ID2". Those IDs can then
+            // be looked up on the atat_period GlideRecord to fetch the full object data.
+            var optionPeriodIds = inputs.given_acq_package.period_of_performance.option_periods.split(',');
+            var gr = new GlideRecord("x_g_dis_atat_period");
+            for (var i = 0; i &lt; optionPeriodIds.length; i++) {
+                gr.get(optionPeriodIds[i]);
+                // If the period is an option period, format the text
+                if (gr.period_type == "OPTION") {
+                    // Format the option Period text as "Option period M: N &lt;Days(s) | Month(s) | Year(s)&gt;"
+                    formattedText += ", ";
+                    formattedText += gr.period_type.getDisplayValue();
+                    formattedText += " period ",
+                        formattedText += gr.option_order.getDisplayValue();
+                    formattedText += ": ";
+                    formattedText += gr.period_unit_count.getDisplayValue();
+                    formattedText += " ";
+                    formattedText += gr.period_unit.getDisplayValue();
+                }
+            }
+            field.value = formattedText;
+
+        }
+        // tabLabel is composite.pop_start_date_text AND there is a requested PoP start date
+        if (field.tabLabel.toString() === "composite.requested_pop_text" &amp;&amp; inputs.given_acq_package.period_of_performance.pop_start_request === "YES") {
+            // display value
+            var dis_val = getDisplayValue("time_frame", inputs.given_acq_package.period_of_performance.time_frame);
+            field.value = dis_val;
+        }
+        // tabLabel is project_overview.emergency_declaration_yes AND in support of an emergency declaration
+        if (field.tabLabel.toString() === "project_overview.emergency_declaration_yes" &amp;&amp; inputs.given_acq_package.project_overview.emergency_declaration == "YES") {
+            field.value = "X";
+        }
+        // tabLabel is project_overview.emergency_declaration_no AND NOT in support of an emergency declaration
+        if (field.tabLabel.toString() === " project_overview.emergency_declaration_no" &amp;&amp; !inputs.given_acq_package.project_overview.emergency_declaration == "NO") {
+            field.value = "X";
+        }
+        // tabLabel is current_contract.current_contract_exists_yes AND a current contract exists
+        if (field.tabLabel.toString() === "current_contract.current_contract_exists_yes" &amp;&amp; inputs.given_acq_package.current_contract_and_recurring_information.current_contract_exists === "YES") {
+            field.value = "X";
+        }
+        // tabLabel is current_contract.current_contract_exists_no AND a current contract DOES NOT exist
+        if (field.tabLabel.toString() === "current_contract.current_contract_exists_no" &amp;&amp; inputs.given_acq_package.current_contract_and_recurring_information.current_contract_exists === "NO") {
+            field.value = "X";
+        }
+        // tabLabel is fair_opportunity.exception_to_fair_opportunity_yes AND there is an exception to the fair opportunity process
+        if (field.tabLabel.toString() === "fair_opportunity.exception_to_fair_opportunity_yes" &amp;&amp;
+            inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "YES_FAR_16_505_B_2_I_B" || inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "YES_FAR_16_505_B_2_I_C") {
+            field.value = "X";
+        }
+        // tabLabel is fair_opportunity.exception_to_fair_opportunity_no AND there IS NOT an exception to the fair opportunity process
+        if (field.tabLabel.toString() === "fair_opportunity.exception_to_fair_opportunity_no" &amp;&amp;
+            inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "NO_NONE") {
+            field.value = "X";
+        }
+        // tabLabel is period_of_performance.recurring_requirement_yes AND there is a recurring requirement
+        if (field.tabLabel.toString() === "period_of_performance.recurring_requirement_yes" &amp;&amp; inputs.given_acq_package.period_of_performance.recurring_requirement === "YES") {
+            field.value = "X";
+        }
+        // tabLabel is period_of_performance.recurring_requirement_no AND there is NOT a recurring requirement
+        if (field.tabLabel.toString() === "period_of_performance.recurring_requirement_no" &amp;&amp; inputs.given_acq_package.period_of_performance.recurring_requirement === "NO") {
+            field.value = "X";
+        }
+        // tabLabel is period_of_performance.pop_start_request_yes AND there is a requested PoP start date
+        if (field.tabLabel.toString() === "period_of_performance.pop_start_request_yes" &amp;&amp; inputs.given_acq_package.period_of_performance.pop_start_request === "YES") {
+            field.value = "X";
+        }
+        // tabLabel is period_of_performance.pop_start_request_no AND there is NOT a requested PoP start date
+        if (field.tabLabel.toString() === "period_of_performance.pop_start_request_no" &amp;&amp; inputs.given_acq_package.period_of_performance.pop_start_request === "NO") {
+            field.value = "X";
+        }
+        // tabLabel is sensitive_information.pii_present_yes AND contract involves PII
+        if (field.tabLabel.toString() === "sensitive_information.pii_present_yes" &amp;&amp; inputs.given_acq_package.sensitive_information.pii_present === "YES") {
+            field.value = "X";
+        }
+        // tabLabel is sensitive_information.pii_present_no AND contract does not involve PII
+        if (field.tabLabel.toString() === "sensitive_information.pii_present_no" &amp;&amp; inputs.given_acq_package.sensitive_information.pii_present === "NO") {
+            field.value = "X";
+        }
+        // tabLabel is sensitive_information.baa_required_yes AND a BAA is required
+        if (field.tabLabel.toString() === "sensitive_information.baa_required_yes" &amp;&amp; inputs.given_acq_package.sensitive_information.baa_required === "YES") {
+            field.value = "X";
+        }
+        // tabLabel is sensitive_information.baa_required_no AND a BAA is NOT required
+        if (field.tabLabel.toString() === "sensitive_information.baa_required_no" &amp;&amp; inputs.given_acq_package.sensitive_information.baa_required === "NO") {
+            field.value = "X";
+        }
+        // tabLabel is sensitive_information.potential_to_be_harmful_yes AND public disclosure would be harmful to govt
+        if (field.tabLabel.toString() === "sensitive_information.potential_to_be_harmful_yes" &amp;&amp; inputs.given_acq_package.sensitive_information.potential_to_be_harmful === "YES") {
+            field.value = "X";
+        }
+        // tabLabel is sensitive_information.potential_to_be_harmful_no AND public disclosure would NOT be harmful to govt
+        if (field.tabLabel.toString() === "sensitive_information.potential_to_be_harmful_no" &amp;&amp; inputs.given_acq_package.sensitive_information.potential_to_be_harmful === "NO") {
+            field.value = "X";
+        }
+        // tabLabel is gfe_overview.gfe_gfp_furnished_yes AND govt will furnish equipment or property
+        if (field.tabLabel.toString() === "gfe_overview.gfe_gfp_furnished_yes" &amp;&amp; inputs.given_acq_package.gfe_gfp_furnished === "YES") {
+            field.value = "X";
+        }
+        // tabLabel is gfe_overview.gfe_gfp_furnished_no AND govt will NOT furnish equipment or property
+        if (field.tabLabel.toString() === "gfe_overview.gfe_gfp_furnished_no" &amp;&amp; inputs.given_acq_package.gfe_gfp_furnished === "NO") {
+            field.value = "X";
+        }
+        // tabLabel is sensitive_information.section_508_sufficient_yes AND Section 508 requirements are sufficient
+        if (field.tabLabel.toString() === "sensitive_information.section_508_sufficient_yes" &amp;&amp; inputs.given_acq_package.sensitive_information.section_508_sufficient === "YES") {
+            field.value = "X";
+        }
+        // tabLabel is sensitive_information.section_508_sufficient_no AND Section 508 requirements are NOT sufficient
+        if (field.tabLabel.toString() === "sensitive_information.section_508_sufficient_no" &amp;&amp; inputs.given_acq_package.sensitive_information.section_508_sufficient === "NO") {
+            field.value = "X";
+        }
+        // public disclosure would be harmful to govt, specify FOIA Coordinator info
+        if (inputs.given_acq_package.sensitive_information.potential_to_be_harmful === "YES") {
+            // tabLabel is sensitive_information.foia_full_name
+            if (field.tabLabel.toString() === "sensitive_information.foia_full_name") {
+                field.value = inputs.given_acq_package.sensitive_information.foia_full_name;
+            }
+            // tablLabel is sensitive_information.foia_email
+            if (field.tabLabel.toString() === "sensitive_information.foia_email") {
+                field.value = inputs.given_acq_package.sensitive_information.foia_email;
+            }
+            // tabLabel is composite.foia_coordinator_address
+            if (field.tabLabel.toString() === "composite.foia_coordinator_address") {
+                var str1 = inputs.given_acq_package.sensitive_information.foia_street_address_1;
+                var str2 = inputs.given_acq_package.sensitive_information.foia_street_address_2;
+                var city = inputs.given_acq_package.sensitive_information.foia_city_apo_fpo;
+                var state = inputs.given_acq_package.sensitive_information.foia_state_province_state_code;
+                var zip = inputs.given_acq_package.sensitive_information.foia_zip_postal_code;
+                var country = inputs.given_acq_package.sensitive_information.foia_country;
+                var line1 = str1;
+                if (str2.length &gt; 0) {
+                    line1 += ", " + str2;
+                }
+                line1 += "\n";
+                var line2 = city + ", " + state + " " + zip + "\n";
+                var line3 = country;
+                field.value = line1 + line2 + line3;
+
+            }
+
+
+        }
+        // tabLabel is contract_type.type_ffp AND contract type is Firm Fixed Price
+        if (field.tabLabel.toString() === "contract_type.type_ffp" &amp;&amp; inputs.given_acq_package.contract_type.firm_fixed_price) {
+            field.value = "X";
+        }
+        // tabLabel is contract_type.type_tm AND contract type is Time And Materials
+        if (field.tabLabel.toString() === "contract_type.type_tm" &amp;&amp; inputs.given_acq_package.contract_type.time_and_materials) {
+            field.value = "X";
+        }
+        // tabLabel is contract_type.type_tm_justification AND contract type is Time And Materials
+        if (field.tabLabel.toString() === "contract_type.type_tm_justification" &amp;&amp; inputs.given_acq_package.contract_type.time_and_materials) {
+            field.value = inputs.given_acq_package.contract_type.contract_type_justification;
+        }
+
+
+
+
+
+
+        //////
+        var newField = {
+            "field_id": field.field_id,
+            "field_val": field.value,
+            "field_cat": field.category,
+            "field_selected": "false"
+        }
+
+
+        newFields.push(newField);
+    });
+    outputs.fields = newFields;
+
+    // This will get the display value
+    function getDisplayValue(choice_set_element, choice_value) {
+        var sysChoice = new GlideRecord("sys_choice");
+        sysChoice.addQuery("element", choice_set_element);
+        sysChoice.addQuery("value", choice_value);
+        sysChoice.query();
+        while (sysChoice.next()) {
+            return sysChoice.label;
+        }
+    };
+
+})(inputs, outputs);</value>
         <variable display_value="Script">71aa7f6647032200b4fad7527c9a719b</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -1957,17 +2030,17 @@
     <sys_hub_action_plan action="INSERT_OR_UPDATE">
         <action_id display_value="ATAT Fill DocuSign Fields Helper">bee1a06087025510bc86b889cebb355c</action_id>
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"4e6984aa1bc211107c458623604bcb73","name":"plan","plan_signature":null}}</plan>
-        <snapshot>bc2f85e287029110ec3b777acebb35ec</snapshot>
+        <snapshot>b65d556687429110ec3b777acebb3583</snapshot>
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 21:05:43</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>4e6984aa1bc211107c458623604bcb73</sys_id>
-        <sys_mod_count>12</sys_mod_count>
+        <sys_mod_count>15</sys_mod_count>
         <sys_overrides/>
         <sys_scope/>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-23 02:10:24</sys_updated_on>
+        <sys_updated_on>2022-09-23 03:12:31</sys_updated_on>
     </sys_hub_action_plan>
     <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
@@ -2103,10 +2176,10 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 21:05:41</sys_created_on>
         <sys_id>696944aa1bc211107c458623604bcbc1</sys_id>
-        <sys_mod_count>12</sys_mod_count>
+        <sys_mod_count>15</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-23 02:10:22</sys_updated_on>
+        <sys_updated_on>2022-09-23 03:12:29</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=696944aa1bc211107c458623604bcbc1"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -2117,216 +2190,305 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-09-22 21:05:41</sys_created_on>
         <sys_id>716944aa1bc211107c458623604bcbed</sys_id>
-        <sys_mod_count>11</sys_mod_count>
+        <sys_mod_count>14</sys_mod_count>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-23 02:10:22</sys_updated_on>
+        <sys_updated_on>2022-09-23 03:12:29</sys_updated_on>
         <value>(function execute(inputs, outputs) {
-// ... code ...
- var fields = inputs.given_fields;
- var newFields = [];
-  fields.forEach(function(field) {
-    var label = field.tabLabel.toString();
-    outputs.frog = label;
-    
-    /* working test
-    if (field.tabLabel.toString() === "project_overview.title"){
-        field.value = "crabber";
-    }*/
-    
-    // tabLabel is project_overview.title
-    if (field.tabLabel.toString() === "project_overview.title"){
-        field.value = inputs.given_acq_package.project_overview.title;
-    }
-    // tabLabel is project_overview.scope
-    if (field.tabLabel.toString() === "project_overview.scope"){
-        field.value = inputs.given_acq_package.project_overview.scope;
-    }
-    // tabLabel is organization.service_agency (needs display value)
-    if (field.tabLabel.toString() === "organization.service_agency"){
-      // display value
-      var dis_val = getDisplayValue("service_agency", inputs.given_acq_package.organization.service_agency);
-      field.value = dis_val;
-    }
-    // tabLabel is composite.organization
-    if (field.tabLabel.toString() === "composite.organization"){
-      // check if service_agency is DISA
-      if (inputs.given_acq_package.organization.service_agency == "DEFENSE_INFORMATION_SYSTEMS_AGENCY"){
-      	// get display value
-        var dis_val = getDisplayValue("disa_organization", inputs.given_acq_package.organization.disa_organization);
-        field.value = dis_val;
-      }
-      else {
-      	field.value = inputs.given_acq_package.organization.organization_name;
-      }
-    }
-    // tabLabel is contacts#mo.formal_name
-    if (field.tabLabel.toString() === "contacts#mo.formal_name"){
-        field.value = inputs.mo_contact.formal_name;
-    }
-    // package has a COR contact
-    if (inputs.cor_contact){
-      // tabLabel is contacts#cor.formal_name
-      if (field.tabLabel.toString() === "contacts#cor.formal_name"){
-        field.value = inputs.cor_contact.formal_name;
-      }
-      // tabLabel is contacts#cor.email
-      if (field.tabLabel.toString() === "contacts#cor.email"){
-        field.value = inputs.cor_contact.email;
-      }
-      // tabLabel is contacts#cor.phone_and_extension
-      if (field.tabLabel.toString() === "contacts#cor.phone_and_extension"){
-        field.value = inputs.cor_contact.phone_and_extension;
-      }
-      // tabLabel is contacts#cor.dodaac
-      if (field.tabLabel.toString() === "contacts#cor.dodaac"){
-        field.value = inputs.cor_contact.dodaac;
-      }
-      
-    }
-    // package has an ACOR contact
-  	if (inputs.acor_contact){
-      // tabLabel is contacts#acor.formal_name
-      if (field.tabLabel.toString() === "contacts#cor.formal_name"){
-        field.value = inputs.acor_contact.formal_name;
-      }
-      // tabLabel is contacts#acor.email
-      if (field.tabLabel.toString() === "contacts#cor.email"){
-        field.value = inputs.acor_contact.email;
-      }
-      // tabLabel is contacts#acor.phone_and_extension FIX
-      if (field.tabLabel.toString() === "contacts#cor.phone_and_extension"){
-        field.value = inputs.acor_contact.phone_and_extension;
-      }
-      // tabLabel is contacts#acor.dodaac
-      if (field.tabLabel.toString() === "contacts#cor.dodaac"){
-        field.value = inputs.acor_contact.dodaac;
-      }
-    }    
-    // current Contract exists
-    if(inputs.given_acq_package.current_contract_and_recurring_information.current_contract_exists == "YES"){
-      // tabLabel is current_contract.incumbent_contractor_name
-      if (field.tabLabel.toString() === "current_contract.incumbent_contractor_name"){
-        field.value = inputs.given_acq_package.current_contract_and_recurring_information.incumbent_contractor_name;
-      }
-      // tabLabel is current_contract.contract_number
-      if (field.tabLabel.toString() === "current_contract.contract_number"){
-        field.value = inputs.given_acq_package.current_contract_and_recurring_information.contract_number;
-      }
-      // tabLabel is current_contract.task_delivery_order_number
-      if (field.tabLabel.toString() === "current_contract.task_delivery_order_number"){
-        field.value = inputs.given_acq_package.current_contract_and_recurring_information.task_delivery_order_number;
-      }
-      // tabLabel is current_contract.contract_order_expiration_date
-      if (field.tabLabel.toString() === "current_contract.contract_order_expiration_date"){
-        field.value = inputs.given_acq_package.current_contract_and_recurring_information.contract_order_expiration_date;
-      }
-    }
-    // tabLabel is composite.requested_pop_text
-    if (field.tabLabel.toString() === "composite.requested_pop_text"){
-      // Format the base Period text as "Base period: N &lt;Day(s) | Month(s) | Year(s)&gt;"
-      var basePeriod = inputs.given_acq_package.period_of_performance.base_period;
-      var formattedText = "";
-      formattedText += basePeriod.period_type.getDisplayValue();
-      formattedText += " period: ";
-      formattedText += basePeriod.period_unit_count.getDisplayValue();
-      formattedText += " ";
-      formattedText += basePeriod.period_unit.getDisplayValue();
-      
-      // The option_periods on the record is a formatted like "ID1,ID2". Those IDs can then
-      // be looked up on the atat_period GlideRecord to fetch the full object data.
-      var optionPeriodIds = inputs.given_acq_package.period_of_performance.option_periods.split(',');
-      var gr = new GlideRecord("x_g_dis_atat_period");
-      for (var i = 0; i &lt; optionPeriodIds.length; i++) {
-        gr.get(optionPeriodIds[i]);
-        // If the period is an option period, format the text
-        if (gr.period_type == "OPTION") {
-        // Format the option Period text as "Option period M: N &lt;Days(s) | Month(s) | Year(s)&gt;"
-        formattedText += ", ";
-        formattedText += gr.period_type.getDisplayValue();
-        formattedText += " period ",
-        formattedText += gr.option_order.getDisplayValue();
-        formattedText += ": ";
-        formattedText += gr.period_unit_count.getDisplayValue();
-        formattedText += " ";
-        formattedText += gr.period_unit.getDisplayValue();
-        }
-      }
-      field.value = formattedText;
-      
-    }
-    // tabLabel is composite.pop_start_date_text AND there is a requested PoP start date
-    if (field.tabLabel.toString() === "composite.requested_pop_text" &amp;&amp; inputs.given_acq_package.period.period_of_performance.pop_start_request === "YES"){
-      // display value
-      var dis_val = getDisplayValue("time_frame", inputs.given_acq_package.period_of_performance.time_frame);
-      field.value = dis_val;
-    }
-    // tabLabel is project_overview.emergency_declaration_yes AND in support of an emergency declaration
-    if (field.tabLabel.toString() === "project_overview.emergency_declaration_yes" &amp;&amp; inputs.given_acq_package.project_overview.emergency_declaration){
-      field.value = "X";
-    }
-    // tabLabel is project_overview.emergency_declaration_no AND NOT in support of an emergency declaration
-    if (field.tabLabel.toString() === " project_overview.emergency_declaration_no" &amp;&amp; !inputs.given_acq_package.project_overview.emergency_declaration){
-      field.value = "X";	
-    }
-    // tabLabel is current_contract.current_contract_exists_yes AND a current contract exists
-    if (field.tabLabel.toString() === "current_contract.current_contract_exists_yes" &amp;&amp; inputs.given_acq_package.current_contract_and_recurring_information.current_contract_exists === "YES"){
-      field.value = "X";
-    }
-    // tabLabel is current_contract.current_contract_exists_no AND a current contract DOES NOT exist
-    if (field.tabLabel.toString() === "current_contract.current_contract_exists_no" &amp;&amp; inputs.given_acq_package.current_contract_and_recurring_information.current_contract_exists === "NO"){
-      field.value = "X";
-    }
-    // tabLabel is fair_opportunity.exception_to_fair_opportunity_yes AND there is an exception to the fair opportunity process
-    if (field.tabLabel.toString() === "fair_opportunity.exception_to_fair_opportunity_yes" &amp;&amp;
-        inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "YES_FAR_16_505_B_2_I_B" || inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "YES_FAR_16_505_B_2_I_C" ){
-      field.value = "X"
-    	
-    }
-    // tabLabel is fair_opportunity.exception_to_fair_opportunity_no AND there IS NOT an exception to the fair opportunity process
-    if (field.tabLabel.toString() === "fair_opportunity.exception_to_fair_opportunity_no" &amp;&amp;
-        inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "NO_NONE"){
-      field.value = "X"
-    	
-    }
-    
-    
-    
-    
-    //////
-    var newField = {
-    "field_id": field.field_id,
-    "field_val": field.value,
-    "field_cat": field.category,
-      "field_selected": "false"
-    }
-    
-   
-    newFields.push(newField);
- });
- outputs.fields = newFields;
-  
-  // This will get the display value
-  function getDisplayValue(choice_set_element, choice_value){
-    var sysChoice = new GlideRecord("sys_choice");
-	sysChoice.addQuery("element", choice_set_element);
-	sysChoice.addQuery("value", choice_value);
-	sysChoice.query();
-	while (sysChoice.next()) {
-  		return sysChoice.label;
-	}
-  };
-  
-  
+    // ... code ...
+    var fields = inputs.given_fields;
+    var newFields = [];
+    fields.forEach(function (field) {
+        var label = field.tabLabel.toString();
+        outputs.frog = label;
 
-  
-  
-  
-  
-  
-  
-  
-})(inputs, outputs);
-</value>
+        /* working test
+        if (field.tabLabel.toString() === "project_overview.title"){
+            field.value = "crabber";
+        }*/
+
+        // tabLabel is project_overview.title
+        if (field.tabLabel.toString() === "project_overview.title") {
+            field.value = inputs.given_acq_package.project_overview.title;
+        }
+        // tabLabel is project_overview.scope
+        if (field.tabLabel.toString() === "project_overview.scope") {
+            field.value = inputs.given_acq_package.project_overview.scope;
+        }
+        // tabLabel is organization.service_agency (needs display value)
+        if (field.tabLabel.toString() === "organization.service_agency") {
+            // display value
+            var dis_val = getDisplayValue("service_agency", inputs.given_acq_package.organization.service_agency);
+            field.value = dis_val;
+        }
+        // tabLabel is composite.organization
+        if (field.tabLabel.toString() === "composite.organization") {
+            // check if service_agency is DISA
+            if (inputs.given_acq_package.organization.service_agency == "DEFENSE_INFORMATION_SYSTEMS_AGENCY") {
+                // get display value
+                var dis_val = getDisplayValue("disa_organization", inputs.given_acq_package.organization.disa_organization);
+                field.value = dis_val;
+            }
+            else {
+                field.value = inputs.given_acq_package.organization.organization_name;
+            }
+        }
+        // tabLabel is contacts#mo.formal_name
+        if (field.tabLabel.toString() === "contacts#mo.formal_name") {
+            field.value = inputs.mo_contact.formal_name;
+        }
+        // package has a COR contact
+        if (inputs.cor_contact) {
+            // tabLabel is contacts#cor.formal_name
+            if (field.tabLabel.toString() === "contacts#cor.formal_name") {
+                field.value = inputs.cor_contact.formal_name;
+            }
+            // tabLabel is contacts#cor.email
+            if (field.tabLabel.toString() === "contacts#cor.email") {
+                field.value = inputs.cor_contact.email;
+            }
+            // tabLabel is contacts#cor.phone_and_extension
+            if (field.tabLabel.toString() === "contacts#cor.phone_and_extension") {
+                field.value = inputs.cor_contact.phone_and_extension;
+            }
+            // tabLabel is contacts#cor.dodaac
+            if (field.tabLabel.toString() === "contacts#cor.dodaac") {
+                field.value = inputs.cor_contact.dodaac;
+            }
+
+        }
+        // package has an ACOR contact
+        if (inputs.acor_contact) {
+            // tabLabel is contacts#acor.formal_name
+            if (field.tabLabel.toString() === "contacts#cor.formal_name") {
+                field.value = inputs.acor_contact.formal_name;
+            }
+            // tabLabel is contacts#acor.email
+            if (field.tabLabel.toString() === "contacts#cor.email") {
+                field.value = inputs.acor_contact.email;
+            }
+            // tabLabel is contacts#acor.phone_and_extension FIX
+            if (field.tabLabel.toString() === "contacts#cor.phone_and_extension") {
+                field.value = inputs.acor_contact.phone_and_extension;
+            }
+            // tabLabel is contacts#acor.dodaac
+            if (field.tabLabel.toString() === "contacts#cor.dodaac") {
+                field.value = inputs.acor_contact.dodaac;
+            }
+        }
+        // current Contract exists
+        if (inputs.given_acq_package.current_contract_and_recurring_information.current_contract_exists == "YES") {
+            // tabLabel is current_contract.incumbent_contractor_name
+            if (field.tabLabel.toString() === "current_contract.incumbent_contractor_name") {
+                field.value = inputs.given_acq_package.current_contract_and_recurring_information.incumbent_contractor_name;
+            }
+            // tabLabel is current_contract.contract_number
+            if (field.tabLabel.toString() === "current_contract.contract_number") {
+                field.value = inputs.given_acq_package.current_contract_and_recurring_information.contract_number;
+            }
+            // tabLabel is current_contract.task_delivery_order_number
+            if (field.tabLabel.toString() === "current_contract.task_delivery_order_number") {
+                field.value = inputs.given_acq_package.current_contract_and_recurring_information.task_delivery_order_number;
+            }
+            // tabLabel is current_contract.contract_order_expiration_date
+            if (field.tabLabel.toString() === "current_contract.contract_order_expiration_date") {
+                field.value = inputs.given_acq_package.current_contract_and_recurring_information.contract_order_expiration_date;
+            }
+        }
+        // tabLabel is composite.requested_pop_text
+        if (field.tabLabel.toString() === "composite.requested_pop_text") {
+            // Format the base Period text as "Base period: N &lt;Day(s) | Month(s) | Year(s)&gt;"
+            var basePeriod = inputs.given_acq_package.period_of_performance.base_period;
+            var formattedText = "";
+            formattedText += basePeriod.period_type.getDisplayValue();
+            formattedText += " period: ";
+            formattedText += basePeriod.period_unit_count.getDisplayValue();
+            formattedText += " ";
+            formattedText += basePeriod.period_unit.getDisplayValue();
+
+            // The option_periods on the record is a formatted like "ID1,ID2". Those IDs can then
+            // be looked up on the atat_period GlideRecord to fetch the full object data.
+            var optionPeriodIds = inputs.given_acq_package.period_of_performance.option_periods.split(',');
+            var gr = new GlideRecord("x_g_dis_atat_period");
+            for (var i = 0; i &lt; optionPeriodIds.length; i++) {
+                gr.get(optionPeriodIds[i]);
+                // If the period is an option period, format the text
+                if (gr.period_type == "OPTION") {
+                    // Format the option Period text as "Option period M: N &lt;Days(s) | Month(s) | Year(s)&gt;"
+                    formattedText += ", ";
+                    formattedText += gr.period_type.getDisplayValue();
+                    formattedText += " period ",
+                        formattedText += gr.option_order.getDisplayValue();
+                    formattedText += ": ";
+                    formattedText += gr.period_unit_count.getDisplayValue();
+                    formattedText += " ";
+                    formattedText += gr.period_unit.getDisplayValue();
+                }
+            }
+            field.value = formattedText;
+
+        }
+        // tabLabel is composite.pop_start_date_text AND there is a requested PoP start date
+        if (field.tabLabel.toString() === "composite.requested_pop_text" &amp;&amp; inputs.given_acq_package.period_of_performance.pop_start_request === "YES") {
+            // display value
+            var dis_val = getDisplayValue("time_frame", inputs.given_acq_package.period_of_performance.time_frame);
+            field.value = dis_val;
+        }
+        // tabLabel is project_overview.emergency_declaration_yes AND in support of an emergency declaration
+        if (field.tabLabel.toString() === "project_overview.emergency_declaration_yes" &amp;&amp; inputs.given_acq_package.project_overview.emergency_declaration == "YES") {
+            field.value = "X";
+        }
+        // tabLabel is project_overview.emergency_declaration_no AND NOT in support of an emergency declaration
+        if (field.tabLabel.toString() === " project_overview.emergency_declaration_no" &amp;&amp; !inputs.given_acq_package.project_overview.emergency_declaration == "NO") {
+            field.value = "X";
+        }
+        // tabLabel is current_contract.current_contract_exists_yes AND a current contract exists
+        if (field.tabLabel.toString() === "current_contract.current_contract_exists_yes" &amp;&amp; inputs.given_acq_package.current_contract_and_recurring_information.current_contract_exists === "YES") {
+            field.value = "X";
+        }
+        // tabLabel is current_contract.current_contract_exists_no AND a current contract DOES NOT exist
+        if (field.tabLabel.toString() === "current_contract.current_contract_exists_no" &amp;&amp; inputs.given_acq_package.current_contract_and_recurring_information.current_contract_exists === "NO") {
+            field.value = "X";
+        }
+        // tabLabel is fair_opportunity.exception_to_fair_opportunity_yes AND there is an exception to the fair opportunity process
+        if (field.tabLabel.toString() === "fair_opportunity.exception_to_fair_opportunity_yes" &amp;&amp;
+            inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "YES_FAR_16_505_B_2_I_B" || inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "YES_FAR_16_505_B_2_I_C") {
+            field.value = "X";
+        }
+        // tabLabel is fair_opportunity.exception_to_fair_opportunity_no AND there IS NOT an exception to the fair opportunity process
+        if (field.tabLabel.toString() === "fair_opportunity.exception_to_fair_opportunity_no" &amp;&amp;
+            inputs.given_acq_package.fair_opportunity.exception_to_fair_opportunity === "NO_NONE") {
+            field.value = "X";
+        }
+        // tabLabel is period_of_performance.recurring_requirement_yes AND there is a recurring requirement
+        if (field.tabLabel.toString() === "period_of_performance.recurring_requirement_yes" &amp;&amp; inputs.given_acq_package.period_of_performance.recurring_requirement === "YES") {
+            field.value = "X";
+        }
+        // tabLabel is period_of_performance.recurring_requirement_no AND there is NOT a recurring requirement
+        if (field.tabLabel.toString() === "period_of_performance.recurring_requirement_no" &amp;&amp; inputs.given_acq_package.period_of_performance.recurring_requirement === "NO") {
+            field.value = "X";
+        }
+        // tabLabel is period_of_performance.pop_start_request_yes AND there is a requested PoP start date
+        if (field.tabLabel.toString() === "period_of_performance.pop_start_request_yes" &amp;&amp; inputs.given_acq_package.period_of_performance.pop_start_request === "YES") {
+            field.value = "X";
+        }
+        // tabLabel is period_of_performance.pop_start_request_no AND there is NOT a requested PoP start date
+        if (field.tabLabel.toString() === "period_of_performance.pop_start_request_no" &amp;&amp; inputs.given_acq_package.period_of_performance.pop_start_request === "NO") {
+            field.value = "X";
+        }
+        // tabLabel is sensitive_information.pii_present_yes AND contract involves PII
+        if (field.tabLabel.toString() === "sensitive_information.pii_present_yes" &amp;&amp; inputs.given_acq_package.sensitive_information.pii_present === "YES") {
+            field.value = "X";
+        }
+        // tabLabel is sensitive_information.pii_present_no AND contract does not involve PII
+        if (field.tabLabel.toString() === "sensitive_information.pii_present_no" &amp;&amp; inputs.given_acq_package.sensitive_information.pii_present === "NO") {
+            field.value = "X";
+        }
+        // tabLabel is sensitive_information.baa_required_yes AND a BAA is required
+        if (field.tabLabel.toString() === "sensitive_information.baa_required_yes" &amp;&amp; inputs.given_acq_package.sensitive_information.baa_required === "YES") {
+            field.value = "X";
+        }
+        // tabLabel is sensitive_information.baa_required_no AND a BAA is NOT required
+        if (field.tabLabel.toString() === "sensitive_information.baa_required_no" &amp;&amp; inputs.given_acq_package.sensitive_information.baa_required === "NO") {
+            field.value = "X";
+        }
+        // tabLabel is sensitive_information.potential_to_be_harmful_yes AND public disclosure would be harmful to govt
+        if (field.tabLabel.toString() === "sensitive_information.potential_to_be_harmful_yes" &amp;&amp; inputs.given_acq_package.sensitive_information.potential_to_be_harmful === "YES") {
+            field.value = "X";
+        }
+        // tabLabel is sensitive_information.potential_to_be_harmful_no AND public disclosure would NOT be harmful to govt
+        if (field.tabLabel.toString() === "sensitive_information.potential_to_be_harmful_no" &amp;&amp; inputs.given_acq_package.sensitive_information.potential_to_be_harmful === "NO") {
+            field.value = "X";
+        }
+        // tabLabel is gfe_overview.gfe_gfp_furnished_yes AND govt will furnish equipment or property
+        if (field.tabLabel.toString() === "gfe_overview.gfe_gfp_furnished_yes" &amp;&amp; inputs.given_acq_package.gfe_gfp_furnished === "YES") {
+            field.value = "X";
+        }
+        // tabLabel is gfe_overview.gfe_gfp_furnished_no AND govt will NOT furnish equipment or property
+        if (field.tabLabel.toString() === "gfe_overview.gfe_gfp_furnished_no" &amp;&amp; inputs.given_acq_package.gfe_gfp_furnished === "NO") {
+            field.value = "X";
+        }
+        // tabLabel is sensitive_information.section_508_sufficient_yes AND Section 508 requirements are sufficient
+        if (field.tabLabel.toString() === "sensitive_information.section_508_sufficient_yes" &amp;&amp; inputs.given_acq_package.sensitive_information.section_508_sufficient === "YES") {
+            field.value = "X";
+        }
+        // tabLabel is sensitive_information.section_508_sufficient_no AND Section 508 requirements are NOT sufficient
+        if (field.tabLabel.toString() === "sensitive_information.section_508_sufficient_no" &amp;&amp; inputs.given_acq_package.sensitive_information.section_508_sufficient === "NO") {
+            field.value = "X";
+        }
+        // public disclosure would be harmful to govt, specify FOIA Coordinator info
+        if (inputs.given_acq_package.sensitive_information.potential_to_be_harmful === "YES") {
+            // tabLabel is sensitive_information.foia_full_name
+            if (field.tabLabel.toString() === "sensitive_information.foia_full_name") {
+                field.value = inputs.given_acq_package.sensitive_information.foia_full_name;
+            }
+            // tablLabel is sensitive_information.foia_email
+            if (field.tabLabel.toString() === "sensitive_information.foia_email") {
+                field.value = inputs.given_acq_package.sensitive_information.foia_email;
+            }
+            // tabLabel is composite.foia_coordinator_address
+            if (field.tabLabel.toString() === "composite.foia_coordinator_address") {
+                var str1 = inputs.given_acq_package.sensitive_information.foia_street_address_1;
+                var str2 = inputs.given_acq_package.sensitive_information.foia_street_address_2;
+                var city = inputs.given_acq_package.sensitive_information.foia_city_apo_fpo;
+                var state = inputs.given_acq_package.sensitive_information.foia_state_province_state_code;
+                var zip = inputs.given_acq_package.sensitive_information.foia_zip_postal_code;
+                var country = inputs.given_acq_package.sensitive_information.foia_country;
+                var line1 = str1;
+                if (str2.length &gt; 0) {
+                    line1 += ", " + str2;
+                }
+                line1 += "\n";
+                var line2 = city + ", " + state + " " + zip + "\n";
+                var line3 = country;
+                field.value = line1 + line2 + line3;
+
+            }
+
+
+        }
+        // tabLabel is contract_type.type_ffp AND contract type is Firm Fixed Price
+        if (field.tabLabel.toString() === "contract_type.type_ffp" &amp;&amp; inputs.given_acq_package.contract_type.firm_fixed_price) {
+            field.value = "X";
+        }
+        // tabLabel is contract_type.type_tm AND contract type is Time And Materials
+        if (field.tabLabel.toString() === "contract_type.type_tm" &amp;&amp; inputs.given_acq_package.contract_type.time_and_materials) {
+            field.value = "X";
+        }
+        // tabLabel is contract_type.type_tm_justification AND contract type is Time And Materials
+        if (field.tabLabel.toString() === "contract_type.type_tm_justification" &amp;&amp; inputs.given_acq_package.contract_type.time_and_materials) {
+            field.value = inputs.given_acq_package.contract_type.contract_type_justification;
+        }
+
+
+
+
+
+
+        //////
+        var newField = {
+            "field_id": field.field_id,
+            "field_val": field.value,
+            "field_cat": field.category,
+            "field_selected": "false"
+        }
+
+
+        newFields.push(newField);
+    });
+    outputs.fields = newFields;
+
+    // This will get the display value
+    function getDisplayValue(choice_set_element, choice_value) {
+        var sysChoice = new GlideRecord("sys_choice");
+        sysChoice.addQuery("element", choice_set_element);
+        sysChoice.addQuery("value", choice_value);
+        sysChoice.query();
+        while (sysChoice.next()) {
+            return sysChoice.label;
+        }
+    };
+
+})(inputs, outputs);</value>
         <variable display_value="Script">71aa7f6647032200b4fad7527c9a719b</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
