@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.Request</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>ATAT class that helps make general request to external resources (EDS, CSS, etc.).</description>
+        <name>Request</name>
+        <script><![CDATA[var Request = Class.create();
+Request.prototype = {
+    initialize: function() {
+		// methods
+		this.GET = "GET";
+		this.POST = "POST";
+		this.PUT = "PUT";
+		this.PATCH = "PATCH";
+		this.DELETE = "DELETE";
+		
+		// mutual auths
+		this.JKS_443 = "jks443"; // CSS, EDA/PDS
+		this.JKS_8443 = "jks8443"; // EDMS
+    },
+    // Sends a request based on the request properties provided
+	// @param {object} - object that contains request properties endpoint, method, mutual auth
+	//  mutual auth property is optional
+	makeRequest: function (req) {
+		// Outbound REST message
+		var request = new sn_ws.RESTMessageV2();
+		
+		// Request set-up
+		request.setEndpoint(req.endpoint);
+		request.setHttpMethod(req.method);
+		request.setLogLevel("all");
+		request.setMutualAuth(req.mutualAuth || this.JKS_443);
+		
+		// Make request and return response
+		return request.execute();
+	},
+	// Checks the status code and adds an error property if request not successful
+	// @param {array} - array of acceptable success codes
+	// @param {response object} - response object returned from RESTMessageV2 execute() method
+	checkResponseCode: function (successCodes, response) {
+		if (!listContains(response.getStatusCode(), successCodes)) {
+			var errorMessage = "Status Code: " + response.getStatusCode() + ". ";
+			errorMessage += "Response: " + response.getBody() + ". ";
+			
+			return {
+				body: response.getBody(),
+				statusCode: response.getStatusCode(),
+				headers: response.getAllHeaders(),
+				error: errorMessage,
+			};
+		}
+
+		return {
+			body: response.getBody(),
+			statusCode: response.getStatusCode(),
+			headers: response.getAllHeaders(),
+		};
+	},
+	// Checks the status code and adds an error property if request not successful
+	// @param {request object} - request properties (endpoint, method, mutual auth)
+	// @param {array} - array of acceptable success codes (default [200])
+	getSuccessfulResponse: function (reqProps, successCodes) {
+		var errClient = new ErrorHandler();
+		var response = this.makeRequest(reqProps);
+		response = this.checkResponseCode(successCodes || [200], response);
+		if (response.error) {
+			throw errClient.createError("Request error for " + reqProps.endpoint + ". " + response.error, "RequestError");
+		}
+		gs.debug("External request successful. Endpoint: " + reqProps.endpoint);
+		return response;
+	},
+
+    type: 'Request'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-09-22 01:05:38</sys_created_on>
+        <sys_id>5d76f38e970611106fa8b4b3f153afc4</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Request</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_5d76f38e970611106fa8b4b3f153afc4</sys_update_name>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-09-22 20:52:18</sys_updated_on>
+    </sys_script_include>
+</record_update>
