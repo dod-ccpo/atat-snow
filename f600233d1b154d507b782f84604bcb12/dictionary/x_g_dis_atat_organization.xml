@@ -7,6 +7,7 @@
                 <element inactive_on_update="false" label="U.S." value="US"/>
             </choice>
         </element>
+        <element label="Agency" max_length="32" name="agency" reference="x_g_dis_atat_agency" type="reference"/>
         <element label="City" max_length="50" name="city" type="string"/>
         <element calculation="(function calculatedFieldValue(current) {&#10;  if (!current.organization_name) {&#10;    return current.disa_organization.getDisplayValue();&#10;  }&#10;  else {&#10;    return current.organization_name;&#10;  }&#10;})(current);" display="true" label="Computed Name" max_length="80" name="computed_name" type="string" virtual="true"/>
         <element label="Country" max_length="75" name="country" type="string"/>
@@ -130,5 +131,8 @@
         <element label="Street Address 1" max_length="100" name="street_address_1" type="string"/>
         <element label="Street Address 2" max_length="100" name="street_address_2" type="string"/>
         <element label="Zip Code" max_length="10" name="zip_code" type="string"/>
+        <index name="index">
+            <element name="agency"/>
+        </index>
     </element>
 </database>
