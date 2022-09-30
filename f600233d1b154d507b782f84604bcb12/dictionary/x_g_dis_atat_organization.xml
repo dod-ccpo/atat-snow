@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Organization" max_length="40" name="x_g_dis_atat_organization" sizeclass="0" type="collection">
+    <element label="Organization" max_length="40" name="x_g_dis_atat_organization" sizeclass="1" type="collection">
         <element choice="1" label="Address Type" max_length="10" name="address_type" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Foreign" value="FOREIGN"/>
@@ -7,6 +7,7 @@
                 <element inactive_on_update="false" label="U.S." value="US"/>
             </choice>
         </element>
+        <element label="Agency" max_length="32" name="agency" reference="x_g_dis_atat_agency" type="reference"/>
         <element label="City" max_length="50" name="city" type="string"/>
         <element calculation="(function calculatedFieldValue(current) {&#10;  if (!current.organization_name) {&#10;    return current.disa_organization.getDisplayValue();&#10;  }&#10;  else {&#10;    return current.organization_name;&#10;  }&#10;})(current);" display="true" label="Computed Name" max_length="80" name="computed_name" type="string" virtual="true"/>
         <element label="Country" max_length="75" name="country" type="string"/>
@@ -68,67 +69,12 @@
         </element>
         <element label="DoDAAC" max_length="6" name="dodaac" type="string"/>
         <element label="Organization Name" max_length="80" name="organization_name" type="string"/>
-        <element choice="1" label="Service/Agency" max_length="100" name="service_agency" type="choice">
-            <choice>
-                <element inactive_on_update="false" label="Communications &amp; Electronics Command" value="COMMUNICATIONS_AND_ELECTRONICS_COMMAND"/>
-                <element inactive_on_update="false" label="Defense Advanced Research Project Agency (DARPA)" value="DEFENSE_ADVANCED_RESEARCH_PROJECT_AGENCY"/>
-                <element inactive_on_update="false" label="Defense Commissary Agency" value="DEFENSE_COMMISSARY_AGENCY"/>
-                <element inactive_on_update="false" label="Defense Contract Audit Agency (DCAA)" value="DEFENSE_CONTRACT_AUDIT_AGENCY"/>
-                <element inactive_on_update="false" label="Defense Contract Management Agency (DCMA)" value="DEFENSE_CONTRACT_MANAGEMENT_AGENCY"/>
-                <element inactive_on_update="false" label="Defense Counterintelligence and Security Agency" value="DEFENSE_COUNTERINTELLIGENCE_AND_SECURITY_AGENCY"/>
-                <element inactive_on_update="false" label="Defense Criminal Investigation Service" value="DEFENSE_CRIMINAL_INVESTIGATION_SERVICE"/>
-                <element inactive_on_update="false" label="Defense Finance and Accounting Service" value="DEFENSE_FINANCE_AND_ACCOUNTING_SERVICE"/>
-                <element inactive_on_update="false" label="Defense Information Systems Agency (DISA)" value="DEFENSE_INFORMATION_SYSTEMS_AGENCY"/>
-                <element inactive_on_update="false" label="Defense Intelligence Agency (DIA)" value="DEFENSE_INTELLIGENCE_AGENCY"/>
-                <element inactive_on_update="false" label="Defense Logistics Agency (DLA)" value="DEFENESE_LOGISTICS_AGENCY"/>
-                <element inactive_on_update="false" label="Defense Media Activity (DMA)" value="DEFENSE_MEDIA_ACTIVITY"/>
-                <element inactive_on_update="false" label="Defense Security Cooperation Agency" value="DEFENSE_SECURITY_COOPERATION_AGENCY"/>
-                <element inactive_on_update="false" label="Defense Technical Information Center" value="DEFENSE_TECHNICAL_INFORMATION_CENTER"/>
-                <element inactive_on_update="false" label="Defense Threat Reduction Center (DTRA)" value="DEFENSE_THREAT_REDUCTION_CENTER"/>
-                <element inactive_on_update="false" label="Department of Defense" value="DEPARTMENT_OF_DEFENSE"/>
-                <element inactive_on_update="false" label="Department of Homeland Security" value="DEPARTMENT_OF_HOMELAND_SECURITY"/>
-                <element inactive_on_update="false" label="Department of Housing and Urban Development" value="DEPARTMENT_OF_HOUSING_AND_URBAN_DEVELOPMENT"/>
-                <element inactive_on_update="false" label="Department of State" value="DEPARTMENT_OF_STATE"/>
-                <element inactive_on_update="false" label="Drug Enforcement Agency" value="DRUG_ENFORCEMENT_AGENCY"/>
-                <element inactive_on_update="false" label="Executive Office of the President" value="EXECUTIVE_OFFICE_OF_THE_PRESIDENT"/>
-                <element inactive_on_update="false" label="Federal Aviation Administration" value="FEDERAL_AVIATION_ADMINISTRATION"/>
-                <element inactive_on_update="false" label="Federal Bureau of Investigation" value="FEDERAL_BUREAU_OF_INVESTIGATION"/>
-                <element inactive_on_update="false" label="Federal Communications Commission" value="FEDERAL_COMMUNICATIONS_COMMISSION"/>
-                <element inactive_on_update="false" label="Joint Chiefs of Staff" value="JOINT_CHIEFS_OF_STAFF"/>
-                <element inactive_on_update="false" label="Joint Forces Command" value="JOINT_FORCES_COMMAND"/>
-                <element inactive_on_update="false" label="Joint Information Operations Warfare Command" value="JOINT_INFORMATION_OPERATIONS_WARFARE_COMMAND"/>
-                <element inactive_on_update="false" label="Joint Logistics Systems Center" value="JOINT_LOGISTICS_SYSTEMS_CENTER"/>
-                <element inactive_on_update="false" label="Joint Staff Comptroller" value="JOINT_STAFF_COMPTROLLER"/>
-                <element inactive_on_update="false" label="Joint System Engineering &amp; Integration Office (JSEIO)" value="JOINT_SYSTEM_ENGINEERING_AND_INTEGRATION_OFFICE"/>
-                <element inactive_on_update="false" label="Military Health System (MHS) Defense Health Agency (DHA)" value="MILITARY_HEALTH_SYSTEM_DEFENSE_HEALTH_AGENCY"/>
-                <element inactive_on_update="false" label="Military Sealift Command" value="MILITARY_SEALIFT_COMMAND"/>
-                <element inactive_on_update="false" label="National Geospatial Intelligence Agency" value="NATIONAL_GEOSPATIAL_INTELLIGENCE_AGENCY"/>
-                <element inactive_on_update="false" label="National Ground Intelligence Agency" value="NATIONAL_GROUND_INTELLIGENCE_AGENCY"/>
-                <element inactive_on_update="false" label="National Guard Bureau" value="NATIONAL_GUARD_BUREAU"/>
-                <element inactive_on_update="false" label="National Security Agency" value="NATIONAL_SECURITY_AGENCY"/>
-                <element inactive_on_update="false" label="Office of the Security of Defense (OSD)" value="OFFICE_OF_THE_SECURITY_OF_DEFENSE"/>
-                <element inactive_on_update="false" label="U.S. Africa Command" value="US_AFRICA_COMMAND"/>
-                <element inactive_on_update="false" label="U.S. Air Force" value="US_AIR_FORCE"/>
-                <element inactive_on_update="false" label="U.S. Air Force Europe (USAFE)" value="US_AIR_FORCE_EUROPE"/>
-                <element inactive_on_update="false" label="U.S. Army" value="US_ARMY"/>
-                <element inactive_on_update="false" label="U.S. Central Command (USCENTCOM)" value="US_CENTRAL_COMMAND"/>
-                <element inactive_on_update="false" label="U.S. Coast Guard" value="US_COAST_GUARD"/>
-                <element inactive_on_update="false" label="U.S. Cyber Command" value="US_CYBER_COMMAND"/>
-                <element inactive_on_update="false" label="U.S. Department of Agriculture" value="US_DEPARTMENT_OF_AGRICULTURE"/>
-                <element inactive_on_update="false" label="U.S. European Command (USEUCOM)" value="US_EUROPEAN_COMMAND"/>
-                <element inactive_on_update="false" label="U.S. Marine Corps" value="US_MARINE_CORPS"/>
-                <element inactive_on_update="false" label="U.S. Navy" value="US_NAVY"/>
-                <element inactive_on_update="false" label="U.S. Northern Command (USNORTHCOM)" value="US_NORTHERN_COMMAND"/>
-                <element inactive_on_update="false" label="U.S. Pacific Command (USPACCOM)" value="US_PACIFIC_COMMAND"/>
-                <element inactive_on_update="false" label="U.S. Southern Command (USSOUTHCOM)" value="US_SOUTHERN_COMMAND"/>
-                <element inactive_on_update="false" label="U.S. Special Operations Command (USSOCOM)" value="US_SPECIAL_OPERATIONS_COMMAND"/>
-                <element inactive_on_update="false" label="U.S. Strategic Command (USSTRATCOM)" value="US_STRATEGIC_COMMAND"/>
-                <element inactive_on_update="false" label="U.S. Transportation Command (USTRANSCOM)" value="US_TRANSPORTATION_COMMAND"/>
-            </choice>
-        </element>
         <element label="State" max_length="50" name="state" type="string"/>
         <element label="Street Address 1" max_length="100" name="street_address_1" type="string"/>
         <element label="Street Address 2" max_length="100" name="street_address_2" type="string"/>
         <element label="Zip Code" max_length="10" name="zip_code" type="string"/>
+        <index name="index">
+            <element name="agency"/>
+        </index>
     </element>
 </database>
