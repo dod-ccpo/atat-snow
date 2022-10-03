@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Acquisition Package" max_length="40" name="x_g_dis_atat_acquisition_package" sizeclass="14" type="collection">
+    <element label="Acquisition Package" max_length="40" name="x_g_dis_atat_acquisition_package" sizeclass="13" type="collection">
         <element label="Classification Level" max_length="32" name="classification_level" reference="x_g_dis_atat_classification_level" type="reference"/>
         <element label="Contract Award" max_length="32" name="contract_award" reference="x_g_dis_atat_award_history" type="reference"/>
         <element label="Contract Considerations" max_length="32" name="contract_considerations" reference="x_g_dis_atat_contract_considerations" type="reference"/>
@@ -8,6 +8,7 @@
         <element label="CSS Pre-Award ID" max_length="10" name="css_pre_award_id" type="string"/>
         <element label="Current Contract Information" max_length="32" name="current_contract_and_recurring_information" reference="x_g_dis_atat_current_contract_and_recurring_information" type="reference"/>
         <element label="Current Environment" max_length="32" name="current_environment" reference="x_g_dis_atat_current_environment" type="reference"/>
+        <element label="DITCO KO" max_length="32" name="ditco_ko" reference="x_g_dis_atat_ditco_contract_specialist" type="reference"/>
         <element label="DocuSign Envelope ID" max_length="50" name="docusign_envelope_id" type="string"/>
         <element label="Fair Opportunity" max_length="32" name="fair_opportunity" reference="x_g_dis_atat_fair_opportunity" type="reference"/>
         <element label="Funding Plans" max_length="4000" name="funding_plans" reference="x_g_dis_atat_funding_plan" type="glide_list"/>
@@ -27,35 +28,35 @@
             </choice>
         </element>
         <element label="Period Of Performance" max_length="32" name="period_of_performance" reference="x_g_dis_atat_period_of_performance" type="reference"/>
-        <element label="Primary Reviewer" max_length="32" name="primary_reviewer" reference="sys_user" type="reference"/>
+        <element label="DITCO CS" max_length="32" name="primary_reviewer" reference="x_g_dis_atat_ditco_contract_specialist" type="reference"/>
         <element label="Project Overview" max_length="32" name="project_overview" reference="x_g_dis_atat_project_overview" type="reference"/>
         <element label="Requirements Cost Estimate" max_length="32" name="requirements_cost_estimate" reference="x_g_dis_atat_requirements_cost_estimate" type="reference"/>
         <element label="Secondary Reviewers" max_length="4000" name="secondary_reviewers" reference="sys_user" type="glide_list"/>
         <element label="Selected Service Offerings" max_length="4000" name="selected_service_offerings" reference="x_g_dis_atat_selected_service_offering" type="glide_list"/>
         <element label="Sensitive Information" max_length="32" name="sensitive_information" reference="x_g_dis_atat_sensitive_information" type="reference"/>
         <index name="index">
-            <element name="funding_request"/>
-        </index>
-        <index name="index2">
             <element name="fair_opportunity"/>
         </index>
-        <index name="index3">
+        <index name="index2">
             <element name="project_overview"/>
         </index>
-        <index name="index4">
+        <index name="index3">
             <element name="gfe_overview"/>
         </index>
-        <index name="index5">
+        <index name="index4">
             <element name="sensitive_information"/>
         </index>
-        <index name="index6">
+        <index name="index5">
             <element name="classification_level"/>
         </index>
-        <index name="index7">
+        <index name="index6">
             <element name="contract_considerations"/>
         </index>
-        <index name="index8">
+        <index name="index7">
             <element name="contract_award"/>
+        </index>
+        <index name="index8">
+            <element name="funding_request"/>
         </index>
         <index name="index9">
             <element name="contract_type"/>
@@ -67,12 +68,15 @@
             <element name="requirements_cost_estimate"/>
         </index>
         <index name="index12">
-            <element name="organization"/>
+            <element name="ditco_ko"/>
         </index>
         <index name="index13">
-            <element name="primary_reviewer"/>
+            <element name="organization"/>
         </index>
         <index name="index14">
+            <element name="primary_reviewer"/>
+        </index>
+        <index name="index15">
             <element name="current_environment"/>
         </index>
     </element>
