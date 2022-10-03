@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Costs" max_length="40" name="x_g_dis_atat_costs" sizeclass="168" type="collection">
+    <element label="Costs" max_length="40" name="x_g_dis_atat_costs" sizeclass="0" type="collection">
+        <element label="Agency" max_length="32" name="agency" reference="x_g_dis_atat_agency" type="reference"/>
         <element label="CLIN" max_length="40" name="clin" type="string"/>
         <element label="CSP" max_length="32" name="csp" reference="x_g_dis_atat_cloud_service_provider" type="reference"/>
         <element label="Is Actual" max_length="40" name="is_actual" type="boolean"/>
@@ -15,12 +16,15 @@
             <element name="csp"/>
         </index>
         <index name="index2">
-            <element name="portfolio"/>
+            <element name="agency"/>
         </index>
         <index name="index3">
-            <element name="organization"/>
+            <element name="portfolio"/>
         </index>
         <index name="index4">
+            <element name="organization"/>
+        </index>
+        <index name="index5">
             <element name="service_agency"/>
         </index>
     </element>
