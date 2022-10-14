@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Acquisition Package" max_length="40" name="x_g_dis_atat_acquisition_package" sizeclass="15" type="collection">
+    <element label="Acquisition Package" max_length="40" name="x_g_dis_atat_acquisition_package" sizeclass="6" type="collection">
         <element label="Classification Level" max_length="32" name="classification_level" reference="x_g_dis_atat_classification_level" type="reference"/>
         <element label="Contract Award" max_length="32" name="contract_award" reference="x_g_dis_atat_award_history" type="reference"/>
         <element label="Contract Considerations" max_length="32" name="contract_considerations" reference="x_g_dis_atat_contract_considerations" type="reference"/>
@@ -30,6 +30,7 @@
                 <element inactive_on_update="false" label="Deleted" sequence="6" value="DELETED"/>
             </choice>
         </element>
+        <element label="Pending Operators" max_length="4000" name="pending_operators" reference="x_g_dis_atat_operator" type="glide_list"/>
         <element label="Period Of Performance" max_length="32" name="period_of_performance" reference="x_g_dis_atat_period_of_performance" type="reference"/>
         <element label="DITCO CS" max_length="32" name="primary_reviewer" reference="x_g_dis_atat_ditco_contract_specialist" type="reference"/>
         <element label="Project Overview" max_length="32" name="project_overview" reference="x_g_dis_atat_project_overview" type="reference"/>
@@ -38,37 +39,37 @@
         <element label="Selected Service Offerings" max_length="4000" name="selected_service_offerings" reference="x_g_dis_atat_selected_service_offering" type="glide_list"/>
         <element label="Sensitive Information" max_length="32" name="sensitive_information" reference="x_g_dis_atat_sensitive_information" type="reference"/>
         <index name="index">
-            <element name="funding_request"/>
-        </index>
-        <index name="index2">
             <element name="fair_opportunity"/>
         </index>
-        <index name="index3">
+        <index name="index2">
             <element name="project_overview"/>
         </index>
-        <index name="index4">
+        <index name="index3">
             <element name="gfe_overview"/>
         </index>
-        <index name="index5">
+        <index name="index4">
             <element name="sensitive_information"/>
         </index>
-        <index name="index6">
+        <index name="index5">
             <element name="classification_level"/>
         </index>
-        <index name="index7">
+        <index name="index6">
             <element name="contract_considerations"/>
         </index>
-        <index name="index8">
+        <index name="index7">
             <element name="contract_award"/>
         </index>
-        <index name="index9">
+        <index name="index8">
             <element name="contract_type"/>
         </index>
-        <index name="index10">
+        <index name="index9">
             <element name="period_of_performance"/>
         </index>
-        <index name="index11">
+        <index name="index10">
             <element name="requirements_cost_estimate"/>
+        </index>
+        <index name="index11">
+            <element name="funding_request"/>
         </index>
         <index name="index12">
             <element name="ditco_ko"/>
