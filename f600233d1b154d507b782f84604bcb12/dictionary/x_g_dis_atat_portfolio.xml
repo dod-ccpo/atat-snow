@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Portfolio" max_length="40" name="x_g_dis_atat_portfolio" sizeclass="1" type="collection">
+    <element label="Portfolio" max_length="40" name="x_g_dis_atat_portfolio" sizeclass="3" type="collection">
         <element label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
         <element label="Active Task Order" max_length="32" name="active_task_order" reference="x_g_dis_atat_task_order" type="reference"/>
         <element label="CSP" max_length="32" name="csp" reference="x_g_dis_atat_cloud_service_provider" type="reference"/>
         <element label="CSP Portfolio ID" max_length="200" name="csp_portfolio_id" type="string"/>
         <element label="Dashboard Link" max_length="1024" name="dashboard_link" type="url"/>
+        <element label="Last Updated" max_length="40" name="last_updated" type="glide_date_time"/>
         <element display="true" label="Name" max_length="60" name="name" type="string"/>
         <element label="Pending Operators" max_length="4000" name="operators" reference="x_g_dis_atat_operator" type="glide_list"/>
         <element label="Portfolio Managers" max_length="4000" name="portfolio_managers" reference="sys_user" type="glide_list"/>
