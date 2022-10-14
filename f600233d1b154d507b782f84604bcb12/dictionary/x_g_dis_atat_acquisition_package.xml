@@ -5,6 +5,7 @@
         <element label="Contract Considerations" max_length="32" name="contract_considerations" reference="x_g_dis_atat_contract_considerations" type="reference"/>
         <element label="Contract Modifications" max_length="4000" name="contract_modifications" reference="x_g_dis_atat_award_history" type="glide_list"/>
         <element label="Contract Type" max_length="32" name="contract_type" reference="x_g_dis_atat_contract_type" type="reference"/>
+        <element label="Contributors" max_length="4000" name="contributors" reference="sys_user" type="glide_list"/>
         <element label="CSS Pre-Award ID" max_length="10" name="css_pre_award_id" type="string"/>
         <element label="CSS Tracking Number" max_length="100" name="css_tracking_number" type="string"/>
         <element label="Current Contract Information" max_length="32" name="current_contract_and_recurring_information" reference="x_g_dis_atat_current_contract_and_recurring_information" type="reference"/>
@@ -22,10 +23,11 @@
         <element choice="1" default="DRAFT" label="Status" max_length="40" name="package_status" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Draft" sequence="1" value="DRAFT"/>
-                <element inactive_on_update="false" label="Under Review" sequence="2" value="UNDER_REVIEW"/>
-                <element inactive_on_update="false" label="Accepted" sequence="3" value="ACCEPTED"/>
+                <element inactive_on_update="false" label="Waiting for Signatures" sequence="2" value="WAITING_FOR_SIGNATURES"/>
+                <element inactive_on_update="false" label="Waiting for Task Order" sequence="3" value="WAITING_FOR_TASK_ORDER"/>
                 <element inactive_on_update="false" label="Task Order Awarded" sequence="4" value="TASK_ORDER_AWARDED"/>
-                <element inactive_on_update="false" label="Cancelled" sequence="5" value="CANCELLED"/>
+                <element inactive_on_update="false" label="Archived" sequence="5" value="ARCHIVED"/>
+                <element inactive_on_update="false" label="Deleted" sequence="6" value="DELETED"/>
             </choice>
         </element>
         <element label="Period Of Performance" max_length="32" name="period_of_performance" reference="x_g_dis_atat_period_of_performance" type="reference"/>
@@ -36,28 +38,28 @@
         <element label="Selected Service Offerings" max_length="4000" name="selected_service_offerings" reference="x_g_dis_atat_selected_service_offering" type="glide_list"/>
         <element label="Sensitive Information" max_length="32" name="sensitive_information" reference="x_g_dis_atat_sensitive_information" type="reference"/>
         <index name="index">
-            <element name="fair_opportunity"/>
+            <element name="funding_request"/>
         </index>
         <index name="index2">
-            <element name="project_overview"/>
+            <element name="fair_opportunity"/>
         </index>
         <index name="index3">
-            <element name="gfe_overview"/>
+            <element name="project_overview"/>
         </index>
         <index name="index4">
-            <element name="sensitive_information"/>
+            <element name="gfe_overview"/>
         </index>
         <index name="index5">
-            <element name="classification_level"/>
+            <element name="sensitive_information"/>
         </index>
         <index name="index6">
-            <element name="contract_considerations"/>
+            <element name="classification_level"/>
         </index>
         <index name="index7">
-            <element name="contract_award"/>
+            <element name="contract_considerations"/>
         </index>
         <index name="index8">
-            <element name="funding_request"/>
+            <element name="contract_award"/>
         </index>
         <index name="index9">
             <element name="contract_type"/>

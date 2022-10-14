@@ -77,6 +77,13 @@
 				grTaskOrder.setValue("clins", clins.toString());
 				grTaskOrder.setValue("portfolio", portfolio.sys_id);
 				var newTaskOrderSysID = grTaskOrder.insert();
+                 // Update CLINs with newTaskOrderSysID
+                 clins.forEach(function (clin) {
+                    var grClin = new GlideRecord("x_g_dis_atat_clin");
+                    grClin.get(clin);
+                    grClin.task_order = newTaskOrderSysID;
+					grClin.update();
+                });
 				// Return response
 				var responseMessage = "Success: created " + clins.length + " CLIN(s)";
 				result = {
@@ -125,13 +132,13 @@
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-06-23 20:09:28</sys_created_on>
         <sys_id>d393df0197141110c351f5b3f153af5d</sys_id>
-        <sys_mod_count>8</sys_mod_count>
+        <sys_mod_count>14</sys_mod_count>
         <sys_name>edaPdsResult</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_d393df0197141110c351f5b3f153af5d</sys_update_name>
-        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-08-12 20:56:23</sys_updated_on>
+        <sys_updated_by>zach.clark</sys_updated_by>
+        <sys_updated_on>2022-10-05 19:41:59</sys_updated_on>
     </sys_script_include>
 </record_update>
