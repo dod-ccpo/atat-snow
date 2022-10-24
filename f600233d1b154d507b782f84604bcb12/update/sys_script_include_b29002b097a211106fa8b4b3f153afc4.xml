@@ -9,138 +9,136 @@
         <name>Igce</name>
         <script><![CDATA[var Igce = Class.create();
 Igce.prototype = {
-	
-	acquisitionPackageSysId: null,
-	
-    initialize: function(acquisitionPackageSysId) {
-		this.acquisitionPackageSysId = acquisitionPackageSysId;
+
+    acquisitionPackageSysId: null,
+
+    initialize: function (acquisitionPackageSysId) {
+        this.acquisitionPackageSysId = acquisitionPackageSysId;
     },
 
-	getEstimatedObligation: function(filterFn) {
-		return this.getPayload().templatePayload.periodsEstimate.map(function(estimate) {
-			return estimate.periodLineItems;
-		}).reduce(function(pre, cur) {
-			return pre.concat(cur);
-		}).reduce(function (result, item) {
-			return result + (item.monthlyPrice * item.monthsInPeriod);
-		}, 0);
-	},
-	
-	getEstimatedBaseYearObligation: function() {
-		return this.getPayload().templatePayload.periodsEstimate.filter(function(estimate) {
-			return estimate.period.periodType == "BASE";
-		}).map(function(estimate) {
-			return estimate.periodLineItems;
-		}).reduce(function(pre, cur) {
-			return pre.concat(cur);
-		}).reduce(function (result, item) {
-			return result + (item.monthlyPrice * item.monthsInPeriod);
-		}, 0);		
-	},
-	
-	getPayload: function() {
-		// Replace this with the real implementation
-		return {
-			documentType: "INDEPENDENT_GOVERNMENT_COST_ESTIMATE",
-			templatePayload: {
-				surgeCapabilities: 34,
-				fundingDocument: {
-					fundingType: "FS_FORM",
-					orderNumber: "O2206-097-097-184790",
-					gtcNumber: "A2201-097-097-18092",
-				},
-				periodsEstimate: [
-					{
-						period: { periodUnit: "YEAR", periodUnitCount: "1", periodType: "BASE", optionOrder: "" },
-						periodLineItems: [
-							{
-								clin: "3000",
-								idiqClin: "3000 Cloud Support UNCLASSIFIED",
-								dowTaskNumber: "4.2.2.1",
-								serviceOffering: "Cloud Audit/Monitoring Tools",
-								itemDescriptionOrConfigSummary: "Monitoring network data",
-								monthlyPrice: 394.38,
-								monthsInPeriod: 36,
-							},
-							{
-								clin: "2000",
-								idiqClin: "2000 Cloud SECRET",
-								dowTaskNumber: "4.2.2.2",
-								serviceOffering: "Special custom built app - not SNOW",
-								itemDescriptionOrConfigSummary: "To handle special cases that can not be done in SNOW",
-								monthlyPrice: 799.0,
-								monthsInPeriod: 36,
-							},
-							{
-								clin: "1000",
-								idiqClin: "1000 Cloud UNCLASSIFIED ",
-								dowTaskNumber: "4.2.2.3",
-								serviceOffering: "Application",
-								itemDescriptionOrConfigSummary: "Staging App",
-								monthlyPrice: 1200.0,
-								monthsInPeriod: 36,
-							},
-							{
-								clin: "1000",
-								idiqClin: "1000 Cloud UNCLASSIFIED ",
-								dowTaskNumber: "4.2.2.4",
-								serviceOffering: "Application",
-								itemDescriptionOrConfigSummary: "Basic App ",
-								monthlyPrice: 1200.0,
-								monthsInPeriod: 36,
-							},
-						],
-					},
-					{
-						period: { periodUnit: "WEEK", periodUnitCount: 12, periodType: "OPTION", optionOrder: 2 },
-						periodLineItems: [
-							{
-								clin: "3002",
-								idiqClin: "3000 Cloud Support UNCLASSIFIED",
-								dowTaskNumber: "4.2.2.5",
-								serviceOffering: "Cloud Audit/Monitoring Tools",
-								itemDescriptionOrConfigSummary: "Monitoring network data",
-								monthlyPrice: 394.38,
-								monthsInPeriod: 36,
-							},
-							{
-								clin: "2002",
-								idiqClin: "2000 Cloud SECRET",
-								dowTaskNumber: "4.2.2.6",
-								serviceOffering: "Special custom built app - not SNOW",
-								itemDescriptionOrConfigSummary: "To handle special cases that can not be done in SNOW",
-								monthlyPrice: 799.0,
-								monthsInPeriod: 36,
-							},
-							{
-								clin: "1002",
-								idiqClin: "1000 Cloud UNCLASSIFIED ",
-								dowTaskNumber: "4.2.2.7",
-								serviceOffering: "Application",
-								itemDescriptionOrConfigSummary: "Basic App ",
-								monthlyPrice: 1200.0,
-								monthsInPeriod: 36,
-							},
-						],
-					},
-				],
-			},
-		};
-	},	
+    getEstimatedObligation: function (filterFn) {
+        return this.getPayload().templatePayload.periodsEstimate.map(function (estimate) {
+            return estimate.periodLineItems;
+        }).reduce(function (pre, cur) {
+            return pre.concat(cur);
+        }).reduce(function (result, item) {
+            return result + (item.monthlyPrice * item.monthsInPeriod);
+        }, 0);
+    },
 
-    type: 'Igce'
+    getEstimatedBaseYearObligation: function () {
+        return this.getPayload().templatePayload.periodsEstimate.filter(function (estimate) {
+            return estimate.period.periodType == "BASE";
+        }).map(function (estimate) {
+            return estimate.periodLineItems;
+        }).reduce(function (pre, cur) {
+            return pre.concat(cur);
+        }).reduce(function (result, item) {
+            return result + (item.monthlyPrice * item.monthsInPeriod);
+        }, 0);
+    },
+
+    getPackagePeriods: function (base, options) {
+        var mappedPeriods = {};
+        if (base) {
+            mappedPeriods[base] = {
+                periodType: base.period_type.toString(),
+                periodUnitCount: base.period_unit_count.toString(),
+                periodUnit: base.period_unit.toString(),
+                optionOrder: base.option_order.toString()
+            };
+        }
+        if (options) {
+            getListRecords(options,
+                ['period_type', 'period_unit_count', 'period_unit', 'option_order'],
+                'x_g_dis_atat_period')
+                .forEach(function (period) {
+                    var id = period.sys_id;
+                    delete period.sys_id;
+                    mappedPeriods[id] = {
+                        periodType: period.period_type,
+                        periodUnitCount: period.period_unit_count,
+                        periodUnit: period.period_unit,
+                        optionOrder: period.option_order,
+                    };
+                });
+        }
+        return mappedPeriods;
+    },
+
+
+
+    getPayload: function () {
+        // Package is a reference to the acq package
+        var acq_package = this.acquisitionPackageSysId;
+        var periodOfPerformance = acq_package.period_of_performance;
+        // TODO: 
+        // In order to prevent SNOW Error: Cannot convert null to an object.,Detail: Cannot convert null to an object.
+        // Check for missing fields, return an error if they don't exist
+
+
+        var package_periods_by_id = this.getPackagePeriods(
+            periodOfPerformance.base_period, periodOfPerformance.option_periods
+        );
+
+        var logOps;
+
+        if (periodOfPerformance.option_periods) {
+            logOps = periodOfPerformance
+                .option_periods.split(",")
+                .map(function (periodId) { return package_periods_by_id[periodId] });
+        } else {
+            logOps = [];
+        }
+
+        // Format periods into IGCE schema format (periods_estimate)
+        var periods_estimate = [];
+        var optionPeriods = logOps;
+        var basePeriod = {
+            period: package_periods_by_id[periodOfPerformance.base_period.toString()],
+            periodLineItems: []
+        }
+        periods_estimate.push(basePeriod);
+        optionPeriods.forEach(function (item) {
+            periods_estimate.push({
+                "period": {
+                    "periodType": item.periodType,
+                    "periodUnitCount": item.periodUnitCount,
+                    "periodUnit": item.periodUnit,
+                    "optionOrder": item.optionOrder
+                }, "periodLineItems": []
+            });
+        });
+
+
+        return this.periods_estimate;
+
+
+        // This returns the sysId
+        // return this.acquisitionPackageSysId;
+        // When called with
+        // var igcePayload = new Igce(inputs.pre_process_package).getPayload();
+        // outputs.test_payload = igcePayload;
+        // We can get the full reference....
+        // Port code over....
+
+
+
+
+
+    }
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>jeff.segal-ctr</sys_created_by>
         <sys_created_on>2022-10-12 15:53:33</sys_created_on>
         <sys_id>b29002b097a211106fa8b4b3f153afc4</sys_id>
-        <sys_mod_count>9</sys_mod_count>
+        <sys_mod_count>14</sys_mod_count>
         <sys_name>Igce</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_b29002b097a211106fa8b4b3f153afc4</sys_update_name>
-        <sys_updated_by>jeff.segal-ctr</sys_updated_by>
-        <sys_updated_on>2022-10-12 18:42:26</sys_updated_on>
+        <sys_updated_by>zach.clark</sys_updated_by>
+        <sys_updated_on>2022-10-24 18:03:04</sys_updated_on>
     </sys_script_include>
 </record_update>
