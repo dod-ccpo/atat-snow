@@ -1,0 +1,1717 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_action_type_definition">
+    <sys_hub_action_type_definition action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <action_status/>
+        <action_template/>
+        <active>true</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <compiler_build>glide-rome-06-23-2021__patch5-12-15-2021_01-04-2022_2221.zip</compiler_build>
+        <copied_from/>
+        <copied_from_name/>
+        <description>- update portfolio to provisioned=true
+- update portfolio provisioned date to now
+- update portfolio pending operators to null
+
+- update portfolio operators to provisioned=true
+- update portfolio operators provisioned date to now</description>
+        <ih_action>false</ih_action>
+        <internal_name>update_portfolio_to_provisioned</internal_name>
+        <label_cache>[{"name":"{{action.acquisition_package}}","label":"action➛Acquisition Package","type":"action","ref":"","reference_display":"Acquisition Package","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.acquisition_package.sys_id}}","label":"action➛Acquisition Package➛Sys ID","type":"action","ref":"","reference_display":"Sys ID","base_type":"GUID","parent_table_name":"x_g_dis_atat_acquisition_package","column_name":"sys_id","choices":null,"attributes":{}},{"name":"{{action.acquisition_package.number}}","label":"action➛Acquisition Package➛Number","type":"action","ref":"","reference_display":"Number","base_type":"string","parent_table_name":"x_g_dis_atat_acquisition_package","column_name":"number","choices":null,"attributes":{}},{"name":"{{step[de81465e-449f-448a-882e-4bad1556f478].variable}}","label":"step➛Now date➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[de81465e-449f-448a-882e-4bad1556f478].now}}","label":"step➛Now date➛now","type":"step","ref":"","reference_display":"","base_type":"glide_date_time","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[e978f6bd-6b34-4798-a185-89aa211c18bc].record}}","label":"step➛Look Up Portfolio➛Portfolio Record","type":"step","ref":"x_g_dis_atat_portfolio","reference_display":"","base_type":"document_id","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[e978f6bd-6b34-4798-a185-89aa211c18bc].record.name}}","label":"step➛Look Up Portfolio➛Portfolio Record➛Name","type":"step","ref":"","reference_display":"Name","base_type":"string","parent_table_name":"x_g_dis_atat_portfolio","column_name":"name","choices":null,"attributes":{}},{"name":"{{step[e978f6bd-6b34-4798-a185-89aa211c18bc].record.sys_id}}","label":"step➛Look Up Portfolio➛Portfolio Record➛Sys ID","type":"step","ref":"","reference_display":"Sys ID","base_type":"GUID","parent_table_name":"x_g_dis_atat_portfolio","column_name":"sys_id","choices":null,"attributes":{}},{"name":"{{step[982b33ad-443d-452f-ab89-9e7195d32a56].count}}","label":"step➛Update Operators➛Count","type":"step","ref":"","reference_display":"","base_type":"integer","parent_table_name":"","column_name":"","choices":null,"attributes":{}}]</label_cache>
+        <master_snapshot>da02306197ba1110cf3cfd9fe153af4f</master_snapshot>
+        <name>Update Portfolio to Provisioned</name>
+        <natlang/>
+        <outputs/>
+        <state>published</state>
+        <sys_class_name>sys_hub_action_type_definition</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 03:51:00</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>a63c2ce9977a1110cf3cfd9fe153afa1</sys_id>
+        <sys_mod_count>13</sys_mod_count>
+        <sys_name>Update Portfolio to Provisioned</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_hub_action_type_definition_a63c2ce9977a1110cf3cfd9fe153afa1</sys_update_name>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <system_level>false</system_level>
+        <type/>
+    </sys_hub_action_type_definition>
+    <sys_translated_text action="delete_multiple" query="documentkey=a63c2ce9977a1110cf3cfd9fe153afa1"/>
+    <sys_variable_value action="delete_multiple" query="document_key=a63c2ce9977a1110cf3cfd9fe153afa1"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_type_definition</document>
+        <document_key>a63c2ce9977a1110cf3cfd9fe153afa1</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:08:03</sys_created_on>
+        <sys_id>182074ed977a1110cf3cfd9fe153afb7</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:08:32</sys_updated_on>
+        <value>{"version":"1.0","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}},"complexObjectSchema":{"FlowDesigner:FD042074ede67a1110e8eefa8fbc65ab95":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"integer\",\"default_value\":\"\",\"label\":\"Code\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"Message\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FD042074ede67a1110e8eefa8fbc65ab95.$type_facets":{"SimpleMapFacet":"{\"sourceId\":\"\",\"default_value\":\"\",\"label\":\"Action Status\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"uiUniqueId\":\"246ff1a1-36e6-4303-bff0-a6b9edd8dc55\",\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FD042074ede67a1110e8eefa8fbc65ab95\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"sourceUiUniqueId\":\"\",\"sourceType\":\"\",\"hint\":\"\",\"uiType\":\"object\",\"order\":\"1\",\"max_length\":\"65000\"}"}},"serializationFormat":"JSON"}</value>
+        <variable display_value="Action Status">082074ed977a1110cf3cfd9fe153af98</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_type_definition</document>
+        <document_key>a63c2ce9977a1110cf3cfd9fe153afa1</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:08:03</sys_created_on>
+        <sys_id>542074ed977a1110cf3cfd9fe153afb7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:08:03</sys_updated_on>
+        <value>0</value>
+        <variable display_value="Don't Treat as Error">182074ed977a1110cf3cfd9fe153af9f</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_action_output_a63c2ce9977a1110cf3cfd9fe153afa1^id=a63c2ce9977a1110cf3cfd9fe153afa1"/>
+    <sys_hub_step_instance action="delete_multiple" query="action=a63c2ce9977a1110cf3cfd9fe153afa1^sys_idNOT IN21cf20ed977a1110cf3cfd9fe153af82,3dcf20ed977a1110cf3cfd9fe153afde,71cf20ed977a1110cf3cfd9fe153afe6,79cf20ed977a1110cf3cfd9fe153afd5,b9cf20ed977a1110cf3cfd9fe153afec,f1cf20ed977a1110cf3cfd9fe153aff7"/>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="Update Portfolio to Provisioned">a63c2ce9977a1110cf3cfd9fe153afa1</action>
+        <cid>de81465e-449f-448a-882e-4bad1556f478</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <label>Now date</label>
+        <order>1</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Script">106afb6647032200b4fad7527c9a71e7</step_type>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:30</sys_created_on>
+        <sys_id>21cf20ed977a1110cf3cfd9fe153af82</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:30</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=21cf20ed977a1110cf3cfd9fe153af82"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>21cf20ed977a1110cf3cfd9fe153af82</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:30</sys_created_on>
+        <sys_id>31cf20ed977a1110cf3cfd9fe153afc6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:30</sys_updated_on>
+        <value>35aa573fd7802200bdbaee5b5e610375</value>
+        <variable display_value="MID Application">f5e56d79b3101300176b051a16a8dce4</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>21cf20ed977a1110cf3cfd9fe153af82</document_key>
+        <order>600</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:30</sys_created_on>
+        <sys_id>b9cf20ed977a1110cf3cfd9fe153afc6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:30</sys_updated_on>
+        <value>(function execute(inputs, outputs) {
+  outputs.now = new GlideDateTime();
+})(inputs, outputs);
+</value>
+        <variable display_value="Script">71aa7f6647032200b4fad7527c9a719b</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_step_ext_output_21cf20ed977a1110cf3cfd9fe153af82^id=21cf20ed977a1110cf3cfd9fe153af82"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7^id=21cf20ed977a1110cf3cfd9fe153af82"/>
+    <sys_hub_step_ext_output action="delete_multiple" query="model=21cf20ed977a1110cf3cfd9fe153af82^sys_idNOT INb9cf20ed977a1110cf3cfd9fe153afbb"/>
+    <sys_hub_step_ext_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=glide_date_time,uiTypeLabel=Date/Time,uiUniqueId=0ed06a27-99ba-4624-b73f-ad10e36df7bd</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>now</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">glide_date_time</internal_type>
+        <label>now</label>
+        <mandatory>true</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Now date">21cf20ed977a1110cf3cfd9fe153af82</model>
+        <model_id>21cf20ed977a1110cf3cfd9fe153af82</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_output_21cf20ed977a1110cf3cfd9fe153af82</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_output</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:30</sys_created_on>
+        <sys_id>b9cf20ed977a1110cf3cfd9fe153afbb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:30</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_output>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_step_ext_output_21cf20ed977a1110cf3cfd9fe153af82^sys_idNOT INb1cf20ed977a1110cf3cfd9fe153afc1"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>now</element>
+        <help/>
+        <hint/>
+        <label>now</label>
+        <language>en</language>
+        <name>var__m_sys_hub_step_ext_output_21cf20ed977a1110cf3cfd9fe153af82</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:30</sys_created_on>
+        <sys_id>b1cf20ed977a1110cf3cfd9fe153afc1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:30</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="Update Portfolio to Provisioned">a63c2ce9977a1110cf3cfd9fe153afa1</action>
+        <cid>2ec572ba-b5b9-4880-b4e5-ceee31757b39</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <inputs/>
+        <label>Update Portfolio</label>
+        <order>3</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Update Record">b51f683667003200553fafb49585ef3f</step_type>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:31</sys_created_on>
+        <sys_id>3dcf20ed977a1110cf3cfd9fe153afde</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:31</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=3dcf20ed977a1110cf3cfd9fe153afde"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>3dcf20ed977a1110cf3cfd9fe153afde</document_key>
+        <order>200</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:31</sys_created_on>
+        <sys_id>3dcf20ed977a1110cf3cfd9fe153afe4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:31</sys_updated_on>
+        <value>x_g_dis_atat_portfolio</value>
+        <variable display_value="Table">3930d57267003200553fafb49585efc5</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=3dcf20ed977a1110cf3cfd9fe153afde"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>record</field>
+        <id>3dcf20ed977a1110cf3cfd9fe153afde</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:31</sys_created_on>
+        <sys_id>b9cf20ed977a1110cf3cfd9fe153afe4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:31</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_b51f683667003200553fafb49585ef3f</table>
+        <value>{{step[e978f6bd-6b34-4798-a185-89aa211c18bc].record}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>table_name</field>
+        <id>3dcf20ed977a1110cf3cfd9fe153afde</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:31</sys_created_on>
+        <sys_id>35cf20ed977a1110cf3cfd9fe153afe4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:31</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_b51f683667003200553fafb49585ef3f</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>update_record_field_values</field>
+        <id>3dcf20ed977a1110cf3cfd9fe153afde</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:31</sys_created_on>
+        <sys_id>f5cf20ed977a1110cf3cfd9fe153afe4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:31</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_b51f683667003200553fafb49585ef3f</table>
+        <value>provisioned=true^provisioned_date={{step[de81465e-449f-448a-882e-4bad1556f478].now}}^operators=</value>
+    </sys_element_mapping>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="Update Portfolio to Provisioned">a63c2ce9977a1110cf3cfd9fe153afa1</action>
+        <cid>9f96a651-6b9f-435a-bbd8-7fa6a9e453d0</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <inputs/>
+        <label>Log step</label>
+        <order>4</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Log">a03fea9bc712220061f553c6f09763b1</step_type>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:31</sys_created_on>
+        <sys_id>71cf20ed977a1110cf3cfd9fe153afe6</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:31</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=71cf20ed977a1110cf3cfd9fe153afe6"/>
+    <sys_element_mapping action="delete_multiple" query="id=71cf20ed977a1110cf3cfd9fe153afe6"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>log_message</field>
+        <id>71cf20ed977a1110cf3cfd9fe153afe6</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:31</sys_created_on>
+        <sys_id>f5cf20ed977a1110cf3cfd9fe153afeb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:31</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_a03fea9bc712220061f553c6f09763b1</table>
+        <value>Portfolio: {{step[e978f6bd-6b34-4798-a185-89aa211c18bc].record.name}}﻿ (Sys ID: {{step[e978f6bd-6b34-4798-a185-89aa211c18bc].record.sys_id}}) has been PROVISIONED.﻿</value>
+    </sys_element_mapping>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="Update Portfolio to Provisioned">a63c2ce9977a1110cf3cfd9fe153afa1</action>
+        <cid>e978f6bd-6b34-4798-a185-89aa211c18bc</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <inputs/>
+        <label>Look Up Portfolio</label>
+        <order>2</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Look Up Record">dc9c26043b23220057a4a2e334efc447</step_type>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:31</sys_created_on>
+        <sys_id>79cf20ed977a1110cf3cfd9fe153afd5</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:31</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=79cf20ed977a1110cf3cfd9fe153afd5"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>79cf20ed977a1110cf3cfd9fe153afd5</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:31</sys_created_on>
+        <sys_id>35cf20ed977a1110cf3cfd9fe153afdd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:31</sys_updated_on>
+        <value>x_g_dis_atat_portfolio</value>
+        <variable display_value="Table">f9cc66043b23220057a4a2e334efc42f</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=79cf20ed977a1110cf3cfd9fe153afd5"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>conditions</field>
+        <id>79cf20ed977a1110cf3cfd9fe153afd5</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:31</sys_created_on>
+        <sys_id>b1cf20ed977a1110cf3cfd9fe153afdd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:31</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_dc9c26043b23220057a4a2e334efc447</table>
+        <value>acquisition_package={{action.acquisition_package}}^provisioned=false</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>lookup_table_name</field>
+        <id>79cf20ed977a1110cf3cfd9fe153afd5</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:31</sys_created_on>
+        <sys_id>fdcf20ed977a1110cf3cfd9fe153afdc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:31</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_dc9c26043b23220057a4a2e334efc447</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="Update Portfolio to Provisioned">a63c2ce9977a1110cf3cfd9fe153afa1</action>
+        <cid>982b33ad-443d-452f-ab89-9e7195d32a56</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <inputs/>
+        <label>Update Operators</label>
+        <order>5</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Update Multiple Records">a3dfc066c7dd00105312134c95c26014</step_type>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:31</sys_created_on>
+        <sys_id>b9cf20ed977a1110cf3cfd9fe153afec</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:31</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=b9cf20ed977a1110cf3cfd9fe153afec"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>b9cf20ed977a1110cf3cfd9fe153afec</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:31</sys_created_on>
+        <sys_id>79cf20ed977a1110cf3cfd9fe153aff5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:31</sys_updated_on>
+        <value>x_g_dis_atat_operator</value>
+        <variable display_value="Table">c530d466c7dd00105312134c95c26066</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=b9cf20ed977a1110cf3cfd9fe153afec"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>conditions</field>
+        <id>b9cf20ed977a1110cf3cfd9fe153afec</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:31</sys_created_on>
+        <sys_id>71cf20ed977a1110cf3cfd9fe153aff5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:31</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_a3dfc066c7dd00105312134c95c26014</table>
+        <value>portfolio={{step[e978f6bd-6b34-4798-a185-89aa211c18bc].record}}^provisioned=false</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>field_values</field>
+        <id>b9cf20ed977a1110cf3cfd9fe153afec</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:31</sys_created_on>
+        <sys_id>f5cf20ed977a1110cf3cfd9fe153aff5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:31</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_a3dfc066c7dd00105312134c95c26014</table>
+        <value>provisioned=true^provisioned_date={{step[de81465e-449f-448a-882e-4bad1556f478].now}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>table_name</field>
+        <id>b9cf20ed977a1110cf3cfd9fe153afec</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:31</sys_created_on>
+        <sys_id>35cf20ed977a1110cf3cfd9fe153aff5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:31</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_a3dfc066c7dd00105312134c95c26014</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="Update Portfolio to Provisioned">a63c2ce9977a1110cf3cfd9fe153afa1</action>
+        <cid>fab22579-0cb5-4d2d-a1eb-a0f02c371655</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <inputs/>
+        <label>Log step</label>
+        <order>6</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Log">a03fea9bc712220061f553c6f09763b1</step_type>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:31</sys_created_on>
+        <sys_id>f1cf20ed977a1110cf3cfd9fe153aff7</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:31</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=f1cf20ed977a1110cf3cfd9fe153aff7"/>
+    <sys_element_mapping action="delete_multiple" query="id=f1cf20ed977a1110cf3cfd9fe153aff7"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>log_message</field>
+        <id>f1cf20ed977a1110cf3cfd9fe153aff7</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:31</sys_created_on>
+        <sys_id>b9cf60ed977a1110cf3cfd9fe153af07</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:31</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_a03fea9bc712220061f553c6f09763b1</table>
+        <value>A total of {{step[982b33ad-443d-452f-ab89-9e7195d32a56].count}}﻿ Operators for Portfolio: {{step[e978f6bd-6b34-4798-a185-89aa211c18bc].record.name}} (Sys ID: {{step[e978f6bd-6b34-4798-a185-89aa211c18bc].record.sys_id}}﻿) have been PROVISIONED.</value>
+    </sys_element_mapping>
+    <sys_hub_action_input action="delete_multiple" query="model=a63c2ce9977a1110cf3cfd9fe153afa1^sys_idNOT INa9cf20ed977a1110cf3cfd9fe153af73"/>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference,uiUniqueId=1c803491-cf4f-4c0a-b905-af8c4920adea</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table>x_g_dis_atat_acquisition_package</choice_table>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>acquisition_package</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>Acquisition Package</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="Update Portfolio to Provisioned">a63c2ce9977a1110cf3cfd9fe153afa1</model>
+        <model_id>a63c2ce9977a1110cf3cfd9fe153afa1</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_input_a63c2ce9977a1110cf3cfd9fe153afa1</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference display_value="" name="x_g_dis_atat_acquisition_package">x_g_dis_atat_acquisition_package</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:30</sys_created_on>
+        <sys_id>a9cf20ed977a1110cf3cfd9fe153af73</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:30</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_output action="delete_multiple" query="model=a63c2ce9977a1110cf3cfd9fe153afa1^sys_idNOT IN082074ed977a1110cf3cfd9fe153af98,182074ed977a1110cf3cfd9fe153af9f"/>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>action_error_output=true,co_type_name=FD042074ede67a1110e8eefa8fbc65ab95,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=object,uiTypeLabel=Object,uiUniqueId=246ff1a1-36e6-4303-bff0-a6b9edd8dc55</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>__action_status__</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Action Status</label>
+        <mandatory>false</mandatory>
+        <max_length>65000</max_length>
+        <model display_value="Update Portfolio to Provisioned">a63c2ce9977a1110cf3cfd9fe153afa1</model>
+        <model_id>a63c2ce9977a1110cf3cfd9fe153afa1</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_output_a63c2ce9977a1110cf3cfd9fe153afa1</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:08:02</sys_created_on>
+        <sys_id>082074ed977a1110cf3cfd9fe153af98</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:08:02</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>action_error_output=true,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=boolean,uiTypeLabel=True/False,uiUniqueId=81fe89c4-bbd0-425c-9b74-1638cdcdc5b8,visible_in_ui=false</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value>true</default_value>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>__dont_treat_as_error__</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="">boolean</internal_type>
+        <label>Don't Treat as Error</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Update Portfolio to Provisioned">a63c2ce9977a1110cf3cfd9fe153afa1</model>
+        <model_id>a63c2ce9977a1110cf3cfd9fe153afa1</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_output_a63c2ce9977a1110cf3cfd9fe153afa1</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:08:02</sys_created_on>
+        <sys_id>182074ed977a1110cf3cfd9fe153af9f</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:08:03</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_action_status_metadata action="delete_multiple" query="action_type_id=a63c2ce9977a1110cf3cfd9fe153afa1^sys_idNOT IN39cf60ed977a1110cf3cfd9fe153af0a"/>
+    <sys_hub_action_status_metadata action="INSERT_OR_UPDATE">
+        <action_type_id display_value="Update Portfolio to Provisioned">a63c2ce9977a1110cf3cfd9fe153afa1</action_type_id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:31</sys_created_on>
+        <sys_id>39cf60ed977a1110cf3cfd9fe153af0a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:31</sys_updated_on>
+    </sys_hub_action_status_metadata>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_input_a63c2ce9977a1110cf3cfd9fe153afa1^sys_idNOT IN25cf20ed977a1110cf3cfd9fe153af7f"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>acquisition_package</element>
+        <help/>
+        <hint/>
+        <label>Acquisition Package</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_a63c2ce9977a1110cf3cfd9fe153afa1</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:06:30</sys_created_on>
+        <sys_id>25cf20ed977a1110cf3cfd9fe153af7f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:06:30</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_output_a63c2ce9977a1110cf3cfd9fe153afa1^sys_idNOT IN102074ed977a1110cf3cfd9fe153afb4,902074ed977a1110cf3cfd9fe153af9e"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>__dont_treat_as_error__</element>
+        <help/>
+        <hint/>
+        <label>Don't Treat as Error</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_a63c2ce9977a1110cf3cfd9fe153afa1</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:08:03</sys_created_on>
+        <sys_id>102074ed977a1110cf3cfd9fe153afb4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:08:03</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>__action_status__</element>
+        <help/>
+        <hint/>
+        <label>Action Status</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_a63c2ce9977a1110cf3cfd9fe153afa1</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:08:02</sys_created_on>
+        <sys_id>902074ed977a1110cf3cfd9fe153af9e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:08:02</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_hub_action_plan action="delete_multiple" query="action_id=a63c2ce9977a1110cf3cfd9fe153afa1^sys_idNOT INf602706197ba1110cf3cfd9fe153af59"/>
+    <sys_hub_action_plan action="INSERT_OR_UPDATE">
+        <action_id display_value="Update Portfolio to Provisioned">a63c2ce9977a1110cf3cfd9fe153afa1</action_id>
+        <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"f602706197ba1110cf3cfd9fe153af59","name":"plan","plan_signature":null}}</plan>
+        <snapshot>2602306197ba1110cf3cfd9fe153afad</snapshot>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:25</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>f602706197ba1110cf3cfd9fe153af59</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:25</sys_updated_on>
+    </sys_hub_action_plan>
+    <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <action_status/>
+        <action_template/>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>- update portfolio to provisioned=true
+- update portfolio provisioned date to now
+- update portfolio pending operators to null
+
+- update portfolio operators to provisioned=true
+- update portfolio operators provisioned date to now</description>
+        <internal_name>update_portfolio_to_provisioned</internal_name>
+        <label_cache>[{"name":"{{action.acquisition_package}}","label":"action➛Acquisition Package","type":"action","ref":"","reference_display":"Acquisition Package","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.acquisition_package.sys_id}}","label":"action➛Acquisition Package➛Sys ID","type":"action","ref":"","reference_display":"Sys ID","base_type":"GUID","parent_table_name":"x_g_dis_atat_acquisition_package","column_name":"sys_id","choices":null,"attributes":{}},{"name":"{{action.acquisition_package.number}}","label":"action➛Acquisition Package➛Number","type":"action","ref":"","reference_display":"Number","base_type":"string","parent_table_name":"x_g_dis_atat_acquisition_package","column_name":"number","choices":null,"attributes":{}},{"name":"{{step[de81465e-449f-448a-882e-4bad1556f478].variable}}","label":"step➛Now date➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[de81465e-449f-448a-882e-4bad1556f478].now}}","label":"step➛Now date➛now","type":"step","ref":"","reference_display":"","base_type":"glide_date_time","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[e978f6bd-6b34-4798-a185-89aa211c18bc].record}}","label":"step➛Look Up Portfolio➛Portfolio Record","type":"step","ref":"x_g_dis_atat_portfolio","reference_display":"","base_type":"document_id","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[e978f6bd-6b34-4798-a185-89aa211c18bc].record.name}}","label":"step➛Look Up Portfolio➛Portfolio Record➛Name","type":"step","ref":"","reference_display":"Name","base_type":"string","parent_table_name":"x_g_dis_atat_portfolio","column_name":"name","choices":null,"attributes":{}},{"name":"{{step[e978f6bd-6b34-4798-a185-89aa211c18bc].record.sys_id}}","label":"step➛Look Up Portfolio➛Portfolio Record➛Sys ID","type":"step","ref":"","reference_display":"Sys ID","base_type":"GUID","parent_table_name":"x_g_dis_atat_portfolio","column_name":"sys_id","choices":null,"attributes":{}},{"name":"{{step[982b33ad-443d-452f-ab89-9e7195d32a56].count}}","label":"step➛Update Operators➛Count","type":"step","ref":"","reference_display":"","base_type":"integer","parent_table_name":"","column_name":"","choices":null,"attributes":{}}]</label_cache>
+        <master>true</master>
+        <name>Update Portfolio to Provisioned</name>
+        <natlang/>
+        <outputs/>
+        <parent_action display_value="Update Portfolio to Provisioned">a63c2ce9977a1110cf3cfd9fe153afa1</parent_action>
+        <sys_class_name>sys_hub_action_type_snapshot</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:22</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>da02306197ba1110cf3cfd9fe153af4f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:22</sys_updated_on>
+        <system_level>false</system_level>
+        <type/>
+    </sys_hub_action_type_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=da02306197ba1110cf3cfd9fe153af4f"/>
+    <sys_variable_value action="delete_multiple" query="document_key=da02306197ba1110cf3cfd9fe153af4f"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_type_snapshot</document>
+        <document_key>da02306197ba1110cf3cfd9fe153af4f</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>6602306197ba1110cf3cfd9fe153afab</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <value>{"version":"1.0","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}},"complexObjectSchema":{"FlowDesigner:FD96023061edba1110ed2cb0912b007297":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"integer\",\"default_value\":\"\",\"label\":\"Code\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"Message\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FD96023061edba1110ed2cb0912b007297.$type_facets":{"SimpleMapFacet":"{\"default_value\":\"\",\"label\":\"Action Status\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"uiUniqueId\":\"246ff1a1-36e6-4303-bff0-a6b9edd8dc55\",\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FD96023061edba1110ed2cb0912b007297\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"object\",\"order\":\"1\",\"max_length\":\"65000\"}"}},"serializationFormat":"JSON"}</value>
+        <variable display_value="Action Status">1e02306197ba1110cf3cfd9fe153af99</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_type_snapshot</document>
+        <document_key>da02306197ba1110cf3cfd9fe153af4f</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>a202306197ba1110cf3cfd9fe153afab</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <value>0</value>
+        <variable display_value="Don't Treat as Error">d202306197ba1110cf3cfd9fe153afa0</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_action_output_da02306197ba1110cf3cfd9fe153af4f^id=da02306197ba1110cf3cfd9fe153af4f"/>
+    <sys_hub_step_instance action="delete_multiple" query="action=da02306197ba1110cf3cfd9fe153af4f^sys_idNOT IN1e02306197ba1110cf3cfd9fe153af85,5202306197ba1110cf3cfd9fe153af6a,5602306197ba1110cf3cfd9fe153af92,5e02306197ba1110cf3cfd9fe153af7f,5e02306197ba1110cf3cfd9fe153af8a,9202306197ba1110cf3cfd9fe153af79"/>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="Update Portfolio to Provisioned">da02306197ba1110cf3cfd9fe153af4f</action>
+        <cid>9f96a651-6b9f-435a-bbd8-7fa6a9e453d0</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <inputs/>
+        <label>Log step</label>
+        <order>4</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Log">a03fea9bc712220061f553c6f09763b1</step_type>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>1e02306197ba1110cf3cfd9fe153af85</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=1e02306197ba1110cf3cfd9fe153af85"/>
+    <sys_element_mapping action="delete_multiple" query="id=1e02306197ba1110cf3cfd9fe153af85"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>log_message</field>
+        <id>1e02306197ba1110cf3cfd9fe153af85</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>1e02306197ba1110cf3cfd9fe153af89</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_a03fea9bc712220061f553c6f09763b1</table>
+        <value>Portfolio: {{step[e978f6bd-6b34-4798-a185-89aa211c18bc].record.name}}﻿ (Sys ID: {{step[e978f6bd-6b34-4798-a185-89aa211c18bc].record.sys_id}}) has been PROVISIONED.﻿</value>
+    </sys_element_mapping>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="Update Portfolio to Provisioned">da02306197ba1110cf3cfd9fe153af4f</action>
+        <cid>de81465e-449f-448a-882e-4bad1556f478</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <label>Now date</label>
+        <order>1</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Script">106afb6647032200b4fad7527c9a71e7</step_type>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:22</sys_created_on>
+        <sys_id>5202306197ba1110cf3cfd9fe153af6a</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=5202306197ba1110cf3cfd9fe153af6a"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>5202306197ba1110cf3cfd9fe153af6a</document_key>
+        <order>600</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>9e02306197ba1110cf3cfd9fe153af76</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <value>(function execute(inputs, outputs) {
+  outputs.now = new GlideDateTime();
+})(inputs, outputs);
+</value>
+        <variable display_value="Script">71aa7f6647032200b4fad7527c9a719b</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>5202306197ba1110cf3cfd9fe153af6a</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>da02306197ba1110cf3cfd9fe153af76</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <value>35aa573fd7802200bdbaee5b5e610375</value>
+        <variable display_value="MID Application">f5e56d79b3101300176b051a16a8dce4</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_step_ext_output_5202306197ba1110cf3cfd9fe153af6a^id=5202306197ba1110cf3cfd9fe153af6a"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7^id=5202306197ba1110cf3cfd9fe153af6a"/>
+    <sys_hub_step_ext_output action="delete_multiple" query="model=5202306197ba1110cf3cfd9fe153af6a^sys_idNOT IN5e02306197ba1110cf3cfd9fe153af6d"/>
+    <sys_hub_step_ext_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=glide_date_time,uiTypeLabel=Date/Time,uiUniqueId=0ed06a27-99ba-4624-b73f-ad10e36df7bd</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>now</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">glide_date_time</internal_type>
+        <label>now</label>
+        <mandatory>true</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Now date">5202306197ba1110cf3cfd9fe153af6a</model>
+        <model_id>5202306197ba1110cf3cfd9fe153af6a</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_output_5202306197ba1110cf3cfd9fe153af6a</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_output</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>5e02306197ba1110cf3cfd9fe153af6d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_output>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_step_ext_output_5202306197ba1110cf3cfd9fe153af6a^sys_idNOT IN5e02306197ba1110cf3cfd9fe153af72"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>now</element>
+        <help/>
+        <hint/>
+        <label>now</label>
+        <language>en</language>
+        <name>var__m_sys_hub_step_ext_output_5202306197ba1110cf3cfd9fe153af6a</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>5e02306197ba1110cf3cfd9fe153af72</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="Update Portfolio to Provisioned">da02306197ba1110cf3cfd9fe153af4f</action>
+        <cid>fab22579-0cb5-4d2d-a1eb-a0f02c371655</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <inputs/>
+        <label>Log step</label>
+        <order>6</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Log">a03fea9bc712220061f553c6f09763b1</step_type>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>5602306197ba1110cf3cfd9fe153af92</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=5602306197ba1110cf3cfd9fe153af92"/>
+    <sys_element_mapping action="delete_multiple" query="id=5602306197ba1110cf3cfd9fe153af92"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>log_message</field>
+        <id>5602306197ba1110cf3cfd9fe153af92</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>1602306197ba1110cf3cfd9fe153af96</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_a03fea9bc712220061f553c6f09763b1</table>
+        <value>A total of {{step[982b33ad-443d-452f-ab89-9e7195d32a56].count}}﻿ Operators for Portfolio: {{step[e978f6bd-6b34-4798-a185-89aa211c18bc].record.name}} (Sys ID: {{step[e978f6bd-6b34-4798-a185-89aa211c18bc].record.sys_id}}﻿) have been PROVISIONED.</value>
+    </sys_element_mapping>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="Update Portfolio to Provisioned">da02306197ba1110cf3cfd9fe153af4f</action>
+        <cid>2ec572ba-b5b9-4880-b4e5-ceee31757b39</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <inputs/>
+        <label>Update Portfolio</label>
+        <order>3</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Update Record">b51f683667003200553fafb49585ef3f</step_type>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>5e02306197ba1110cf3cfd9fe153af7f</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=5e02306197ba1110cf3cfd9fe153af7f"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>5e02306197ba1110cf3cfd9fe153af7f</document_key>
+        <order>200</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>5a02306197ba1110cf3cfd9fe153af84</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <value>x_g_dis_atat_portfolio</value>
+        <variable display_value="Table">3930d57267003200553fafb49585efc5</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=5e02306197ba1110cf3cfd9fe153af7f"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>record</field>
+        <id>5e02306197ba1110cf3cfd9fe153af7f</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>d602306197ba1110cf3cfd9fe153af84</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_b51f683667003200553fafb49585ef3f</table>
+        <value>{{step[e978f6bd-6b34-4798-a185-89aa211c18bc].record}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>table_name</field>
+        <id>5e02306197ba1110cf3cfd9fe153af7f</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>5202306197ba1110cf3cfd9fe153af84</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_b51f683667003200553fafb49585ef3f</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>update_record_field_values</field>
+        <id>5e02306197ba1110cf3cfd9fe153af7f</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>1602306197ba1110cf3cfd9fe153af84</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_b51f683667003200553fafb49585ef3f</table>
+        <value>provisioned=true^provisioned_date={{step[de81465e-449f-448a-882e-4bad1556f478].now}}^operators=</value>
+    </sys_element_mapping>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="Update Portfolio to Provisioned">da02306197ba1110cf3cfd9fe153af4f</action>
+        <cid>982b33ad-443d-452f-ab89-9e7195d32a56</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <inputs/>
+        <label>Update Operators</label>
+        <order>5</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Update Multiple Records">a3dfc066c7dd00105312134c95c26014</step_type>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>5e02306197ba1110cf3cfd9fe153af8a</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=5e02306197ba1110cf3cfd9fe153af8a"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>5e02306197ba1110cf3cfd9fe153af8a</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>5e02306197ba1110cf3cfd9fe153af90</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <value>x_g_dis_atat_operator</value>
+        <variable display_value="Table">c530d466c7dd00105312134c95c26066</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=5e02306197ba1110cf3cfd9fe153af8a"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>conditions</field>
+        <id>5e02306197ba1110cf3cfd9fe153af8a</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>5602306197ba1110cf3cfd9fe153af90</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_a3dfc066c7dd00105312134c95c26014</table>
+        <value>portfolio={{step[e978f6bd-6b34-4798-a185-89aa211c18bc].record}}^provisioned=false</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>field_values</field>
+        <id>5e02306197ba1110cf3cfd9fe153af8a</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>da02306197ba1110cf3cfd9fe153af90</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_a3dfc066c7dd00105312134c95c26014</table>
+        <value>provisioned=true^provisioned_date={{step[de81465e-449f-448a-882e-4bad1556f478].now}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>table_name</field>
+        <id>5e02306197ba1110cf3cfd9fe153af8a</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>1a02306197ba1110cf3cfd9fe153af90</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_a3dfc066c7dd00105312134c95c26014</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="Update Portfolio to Provisioned">da02306197ba1110cf3cfd9fe153af4f</action>
+        <cid>e978f6bd-6b34-4798-a185-89aa211c18bc</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <inputs/>
+        <label>Look Up Portfolio</label>
+        <order>2</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Look Up Record">dc9c26043b23220057a4a2e334efc447</step_type>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>9202306197ba1110cf3cfd9fe153af79</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=9202306197ba1110cf3cfd9fe153af79"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>9202306197ba1110cf3cfd9fe153af79</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>d602306197ba1110cf3cfd9fe153af7e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <value>x_g_dis_atat_portfolio</value>
+        <variable display_value="Table">f9cc66043b23220057a4a2e334efc42f</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=9202306197ba1110cf3cfd9fe153af79"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>conditions</field>
+        <id>9202306197ba1110cf3cfd9fe153af79</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>5602306197ba1110cf3cfd9fe153af7e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_dc9c26043b23220057a4a2e334efc447</table>
+        <value>acquisition_package={{action.acquisition_package}}^provisioned=false</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>lookup_table_name</field>
+        <id>9202306197ba1110cf3cfd9fe153af79</id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>9202306197ba1110cf3cfd9fe153af7e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_dc9c26043b23220057a4a2e334efc447</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_action_input action="delete_multiple" query="model=da02306197ba1110cf3cfd9fe153af4f^sys_idNOT INd202306197ba1110cf3cfd9fe153af53"/>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference,uiUniqueId=1c803491-cf4f-4c0a-b905-af8c4920adea</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table>x_g_dis_atat_acquisition_package</choice_table>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>acquisition_package</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>Acquisition Package</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="Update Portfolio to Provisioned">da02306197ba1110cf3cfd9fe153af4f</model>
+        <model_id>da02306197ba1110cf3cfd9fe153af4f</model_id>
+        <model_table>sys_hub_action_type_snapshot</model_table>
+        <name>var__m_sys_hub_action_input_da02306197ba1110cf3cfd9fe153af4f</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference display_value="" name="x_g_dis_atat_acquisition_package">x_g_dis_atat_acquisition_package</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:22</sys_created_on>
+        <sys_id>d202306197ba1110cf3cfd9fe153af53</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:22</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_output action="delete_multiple" query="model=da02306197ba1110cf3cfd9fe153af4f^sys_idNOT IN1e02306197ba1110cf3cfd9fe153af99,d202306197ba1110cf3cfd9fe153afa0"/>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>action_error_output=true,co_type_name=FD96023061edba1110ed2cb0912b007297,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=object,uiTypeLabel=Object,uiUniqueId=246ff1a1-36e6-4303-bff0-a6b9edd8dc55</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>__action_status__</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Action Status</label>
+        <mandatory>false</mandatory>
+        <max_length>65000</max_length>
+        <model display_value="Update Portfolio to Provisioned">da02306197ba1110cf3cfd9fe153af4f</model>
+        <model_id>da02306197ba1110cf3cfd9fe153af4f</model_id>
+        <model_table>sys_hub_action_type_snapshot</model_table>
+        <name>var__m_sys_hub_action_output_da02306197ba1110cf3cfd9fe153af4f</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>1e02306197ba1110cf3cfd9fe153af99</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>action_error_output=true,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=boolean,uiTypeLabel=True/False,uiUniqueId=81fe89c4-bbd0-425c-9b74-1638cdcdc5b8,visible_in_ui=false</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value>true</default_value>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>__dont_treat_as_error__</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="">boolean</internal_type>
+        <label>Don't Treat as Error</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Update Portfolio to Provisioned">da02306197ba1110cf3cfd9fe153af4f</model>
+        <model_id>da02306197ba1110cf3cfd9fe153af4f</model_id>
+        <model_table>sys_hub_action_type_snapshot</model_table>
+        <name>var__m_sys_hub_action_output_da02306197ba1110cf3cfd9fe153af4f</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>d202306197ba1110cf3cfd9fe153afa0</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_action_status_metadata action="delete_multiple" query="action_type_id=da02306197ba1110cf3cfd9fe153af4f^sys_idNOT IN2202306197ba1110cf3cfd9fe153afad"/>
+    <sys_hub_action_status_metadata action="INSERT_OR_UPDATE">
+        <action_type_id display_value="Update Portfolio to Provisioned">da02306197ba1110cf3cfd9fe153af4f</action_type_id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>2202306197ba1110cf3cfd9fe153afad</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+    </sys_hub_action_status_metadata>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_input_da02306197ba1110cf3cfd9fe153af4f^sys_idNOT IN5602306197ba1110cf3cfd9fe153af5b"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>acquisition_package</element>
+        <help/>
+        <hint/>
+        <label>Acquisition Package</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_da02306197ba1110cf3cfd9fe153af4f</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:22</sys_created_on>
+        <sys_id>5602306197ba1110cf3cfd9fe153af5b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:22</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_output_da02306197ba1110cf3cfd9fe153af4f^sys_idNOT IN5e02306197ba1110cf3cfd9fe153af9e,9e02306197ba1110cf3cfd9fe153afa7"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>__action_status__</element>
+        <help/>
+        <hint/>
+        <label>Action Status</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_da02306197ba1110cf3cfd9fe153af4f</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>5e02306197ba1110cf3cfd9fe153af9e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>__dont_treat_as_error__</element>
+        <help/>
+        <hint/>
+        <label>Don't Treat as Error</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_da02306197ba1110cf3cfd9fe153af4f</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-27 04:16:23</sys_created_on>
+        <sys_id>9e02306197ba1110cf3cfd9fe153afa7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-27 04:16:23</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_hub_action_type_definition action="update">
+        <sys_id>a63c2ce9977a1110cf3cfd9fe153afa1</sys_id>
+        <latest_snapshot>da02306197ba1110cf3cfd9fe153af4f</latest_snapshot>
+    </sys_hub_action_type_definition>
+</record_update>
