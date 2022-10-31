@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Environment Instance" max_length="40" name="x_g_dis_atat_environment_instance" sizeclass="1" type="collection">
+    <element label="Environment Instance" max_length="40" name="x_g_dis_atat_environment_instance" sizeclass="2" type="collection">
         <element label="Classification Level" max_length="32" name="classification_level" reference="x_g_dis_atat_classification_level" type="reference"/>
         <element choice="1" label="CSP Region" max_length="40" name="csp_region" type="choice">
             <choice/>
@@ -56,7 +56,7 @@
                 <element inactive_on_update="false" label="TB" value="TB"/>
             </choice>
         </element>
-        <element default="javascript:current.getTableName();" label="Class" max_length="80" name="sys_class_name" type="sys_class_name"/>
+        <element default="javascript:current.getTableName();" dynamic_default_value="b5cb83a85f220100a9ad2572f2b4773c" label="Class" max_length="80" name="sys_class_name" type="sys_class_name" use_dynamic_default="true"/>
         <index name="index">
             <element name="classification_level"/>
         </index>
