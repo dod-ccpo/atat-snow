@@ -7,101 +7,85 @@
         <client_callable>false</client_callable>
         <description>ATAT function to get a JWT from Contract Support System (CSS) to retreived information related to contracts.</description>
         <name>getCssJwt</name>
-        <script><![CDATA[function getCssJwt(endpoint) {
-  // helper classes
-  var errClient = new ErrorHandler();
-  var jwtClient = new Jwt();
-  var reqClient = new Request();
+        <script><![CDATA[function getCssJwt() {
+	// helper classes
+	var errClient = new ErrorHandler();
+	var jwtClient = new Jwt();
+	var reqClient = new Request();
 
-  // GlideRecord variables 
-  var ATAT_CONFIG_TABLE = "x_g_dis_atat_configuration";
-  var currentCssJwt = new GlideRecord(ATAT_CONFIG_TABLE);
-  var previousCssJwt = new GlideRecord(ATAT_CONFIG_TABLE);
-  var cssEndpoint = new GlideRecord(ATAT_CONFIG_TABLE);	
-	
-	// Look up the endpoint if not passed in
-	try {
-		if (!endpoint) {
-			cssEndpoint.addQuery("name", "cssBaseUrl");
-			cssEndpoint.query();
-			if (!cssEndpoint.next()) {
-				gs.error("No endpoint found in ATAT Configuration.");
-				return null;
-			}
-			else {
-				endpoint = cssEndpoint.value + "/api/Auth/cert";
-			}
+	// GlideRecord variables 
+	var ATAT_CONFIG_TABLE = "x_g_dis_atat_configuration";
+	var currentCssJwt = new GlideRecord(ATAT_CONFIG_TABLE);
+	var previousCssJwt = new GlideRecord(ATAT_CONFIG_TABLE);
+	//var cssEndpoint = new GlideRecord(ATAT_CONFIG_TABLE);	
+
+	var endpoint = gs.getProperty("x_g_dis_atat.css.baseUrl") + "/api/Auth/cert";
+	// request variables
+	var configName = "cssJwt";
+	var successCodes = [200];
+	var reqProps = {
+		endpoint: endpoint,
+		method: reqClient.POST,
+		mutualAuth: reqClient.JKS_443,
+	};
+	var response;
+
+	try {  
+		previousCssJwt.addQuery("name", configName);
+		previousCssJwt.query();
+
+		if (!previousCssJwt.next()) {
+			response = reqClient.getSuccessfulResponse(reqProps, successCodes);
+			gs.info("Request and create CSS JWT config.");
+
+			// create record
+			currentCssJwt.initialize();
+			currentCssJwt.name = configName;
+			currentCssJwt.description = "CSS JWT for getting information related to contract records.";
+			currentCssJwt.value = response.body.replaceAll('"', "");
+			currentCssJwt.insert();
+
+			return currentCssJwt.value;
 		}
+
+		var jwtId = previousCssJwt.sys_id;
+		var jwt = previousCssJwt.value;
+		var decodedJwt = jwtClient.decodeAndParseJwt(jwt);
+		var isExpired = jwtClient.isJwtExpired(decodedJwt.payload.exp);
+
+		if (jwt && !isExpired) {
+			return jwt;
+		}
+
+		if (jwt && isExpired) {
+			response = reqClient.getSuccessfulResponse(reqProps, successCodes);
+			gs.info("Request and update CSS JWT config.");
+
+			// update record
+			currentCssJwt.get(jwtId);
+			currentCssJwt.value = response.body.replaceAll('"', "");
+			currentCssJwt.update();
+
+			return currentCssJwt.value;
+		}
+
+		return jwt;
+
 	} catch (error) {
 		errClient.errorLogger(error);
 	}
-	
-  // request variables
-  var configName = "cssJwt";
-  var successCodes = [200];
-  var reqProps = {
-    endpoint: endpoint,
-	method: reqClient.POST,
-	mutualAuth: reqClient.JKS_443,
-  };
-  var response;
-
-  try {  
-    previousCssJwt.addQuery("name", configName);
-    previousCssJwt.query();
-
-    if (!previousCssJwt.next()) {
-      response = reqClient.getSuccessfulResponse(reqProps, successCodes);
-      gs.info("Request and create CSS JWT config.");
-
-      // create record
-      currentCssJwt.initialize();
-      currentCssJwt.name = configName;
-      currentCssJwt.description = "CSS JWT for getting information related to contract records.";
-      currentCssJwt.value = response.body.replaceAll('"', "");
-      currentCssJwt.insert();
-
-      return currentCssJwt.value;
-    }
-
-    var jwtId = previousCssJwt.sys_id;
-    var jwt = previousCssJwt.value;
-	var decodedJwt = jwtClient.decodeAndParseJwt(jwt);
-    var isExpired = jwtClient.isJwtExpired(decodedJwt.payload.exp);
-
-    if (jwt && !isExpired) {
-      return jwt;
-    }
-
-    if (jwt && isExpired) {
-      response = reqClient.getSuccessfulResponse(reqProps, successCodes);
-      gs.info("Request and update CSS JWT config.");
-
-      // update record
-      currentCssJwt.get(jwtId);
-      currentCssJwt.value = response.body.replaceAll('"', "");
-      currentCssJwt.update();
-
-      return currentCssJwt.value;
-    }
-   
-    return jwt;
-
-  } catch (error) {
-    errClient.errorLogger(error);
-  }
 }]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-09-22 02:38:55</sys_created_on>
         <sys_id>9738ccda974611106fa8b4b3f153af13</sys_id>
-        <sys_mod_count>7</sys_mod_count>
+        <sys_mod_count>8</sys_mod_count>
         <sys_name>getCssJwt</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_9738ccda974611106fa8b4b3f153af13</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2022-10-02 18:25:42</sys_updated_on>
+        <sys_updated_on>2022-10-30 00:57:43</sys_updated_on>
     </sys_script_include>
 </record_update>
