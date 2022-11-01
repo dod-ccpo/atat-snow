@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="DAPPS:Funding Requirement" max_length="40" name="x_g_dis_atat_funding_requirement" type="collection">
+        <element label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
+        <element label="Funding Plan" max_length="32" name="funding_plan" reference="x_g_dis_atat_funding_plan" type="reference"/>
+        <element label="Funding Request" max_length="32" name="funding_request" reference="x_g_dis_atat_funding_request" type="reference"/>
+        <element label="Funds Obligated" max_length="20" name="funds_obligated" type="currency"/>
+        <element label="Funds Total" max_length="20" name="funds_total" type="currency"/>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Incrementally Funded" max_length="40" name="incrementally_funded" type="choice">
+            <choice/>
+        </element>
+        <element label="PoP End Date" max_length="40" name="pop_end_date" type="glide_date"/>
+        <element label="PoP Start Date" max_length="40" name="pop_start_date" type="glide_date"/>
+        <element label="Task Order Number" max_length="40" name="task_order_number" type="string"/>
+        <index name="index">
+            <element name="funding_request"/>
+        </index>
+        <index name="index2">
+            <element name="acquisition_package"/>
+        </index>
+        <index name="index3">
+            <element name="funding_plan"/>
+        </index>
+    </element>
+</database>
