@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml,multipart/form-data</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>GET</http_method>
+        <name>edms-multipart-attachment</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+
+  var params = request.queryParams;
+  var hostRecord = params.packageId;
+  var attachmentId = params.attachmentDocSysId;
+  var boundary = params.boundary;
+
+  response.setContentType("text/plain");
+  response.setStatus(200);
+
+  // multipart generation using stream writer
+  var writer = response.getStreamWriter();
+
+  var classification = '----' + boundary + "\r\n";
+  classification += 'Content-Disposition: form-data; name="classification"\r\n';
+  classification += 'Content-Type: ' + 'text/plain' + '\r\n\r\n';
+  classification += 'Pre-Solicitation';
+  writer.writeString(classification);
+
+  var docType = '\r\n----' + boundary + "\r\n";
+  docType += 'Content-Disposition: form-data; name="documentType"\r\n';
+  docType += 'Content-Type: ' + 'text/plain' + '\r\n\r\n';
+  docType += '003 - Requirements Package Documents (to include Req Checklist, Section 508, IGCE, etc)';
+  writer.writeString(docType);
+
+  var indexFields = '\r\n----' + boundary + "\r\n";
+  indexFields += 'Content-Disposition: form-data; name="indexFields"\r\n';
+  indexFields += 'Content-Type: ' + 'text/plain' + '\r\n\r\n';
+  indexFields += JSON.stringify([
+    { name: "Description", value: "Requirements Checklist, to include Section 508" },
+    { name: "Pre-Solicitation", value: "testPostAwardId" }
+  ]);
+  writer.writeString(indexFields);
+
+  var fileName = '\r\n----' + boundary + "\r\n";
+  fileName += 'Content-Disposition: form-data; name="fileName"\r\n';
+  fileName += 'Content-Type: ' + 'text/plain' + '\r\n\r\n';
+  fileName += 'Requirements-Checklist.pdf';
+  writer.writeString(fileName);
+
+  var file = '\r\n----' + boundary + "\r\n";
+  file += 'Content-Disposition: form-data; name="file"\r\n';
+  file += 'Content-Type: ' + 'application/pdf' + '\r\n\r\n';
+  writer.writeString(file);
+
+  var attachmentContent = new GlideSysAttachment().getContentStream(attachmentId);
+  writer.writeStream(attachmentContent);
+
+  var multipartEnd = '\r\n----' + boundary + '--\r\n';
+  writer.writeString(multipartEnd);
+
+
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_g_dis_atat/edms/edms-multipart-attachment</operation_uri>
+        <produces>application/json,application/xml,text/xml,multipart/form-data</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/edms-multipart-attachment</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-10-31 06:00:31</sys_created_on>
+        <sys_id>95dead32977611106fa8b4b3f153af05</sys_id>
+        <sys_mod_count>25</sys_mod_count>
+        <sys_name>edms-multipart-attachment</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_ws_operation_95dead32977611106fa8b4b3f153af05</sys_update_name>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-11-01 03:08:40</sys_updated_on>
+        <web_service_definition display_value="EDMS">a4ae657e973611106fa8b4b3f153aff7</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>
