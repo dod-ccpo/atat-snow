@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Task Order" max_length="40" name="x_g_dis_atat_task_order" sizeclass="1" type="collection">
-        <element label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
+    <element label="ATAT:Task Order" max_length="40" name="x_g_dis_atat_task_order" sizeclass="8" type="collection">
         <element label="CLINs" max_length="4000" name="clins" reference="x_g_dis_atat_clin" type="glide_list"/>
-        <element label="Funding Plan" max_length="32" name="funding_plan" reference="x_g_dis_atat_funding_plan" type="reference"/>
-        <element label="Funding Request" max_length="32" name="funding_request" reference="x_g_dis_atat_funding_request" type="reference"/>
-        <element label="Funds Obligated" max_length="20" name="funds_obligated" type="currency"/>
-        <element label="Funds Total" max_length="20" name="funds_total" type="currency"/>
-        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Incrementally Funded" max_length="40" name="incrementally_funded" type="choice">
-            <choice>
-                <element inactive_on_update="false" label="Unselected" sequence="0" value="UNSELECTED"/>
-                <element inactive_on_update="false" label="Yes" sequence="1" value="YES"/>
-                <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
-            </choice>
-        </element>
         <element label="PoP End Date" max_length="40" name="pop_end_date" type="glide_date"/>
         <element label="PoP Start Date" max_length="40" name="pop_start_date" type="glide_date"/>
         <element label="Portfolio" max_length="32" name="portfolio" reference="x_g_dis_atat_portfolio" type="reference"/>
@@ -26,16 +14,7 @@
             </choice>
         </element>
         <index name="index">
-            <element name="funding_request"/>
-        </index>
-        <index name="index2">
             <element name="portfolio"/>
-        </index>
-        <index name="index3">
-            <element name="acquisition_package"/>
-        </index>
-        <index name="index4">
-            <element name="funding_plan"/>
         </index>
     </element>
 </database>
