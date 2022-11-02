@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Acquisition Package" max_length="40" name="x_g_dis_atat_acquisition_package" sizeclass="6" type="collection">
+    <element label="DAPPS:Acquisition Package" max_length="40" name="x_g_dis_atat_acquisition_package" sizeclass="8" type="collection">
         <element label="Classification Level" max_length="32" name="classification_level" reference="x_g_dis_atat_classification_level" type="reference"/>
         <element label="Contract Award" max_length="32" name="contract_award" reference="x_g_dis_atat_award_history" type="reference"/>
         <element label="Contract Considerations" max_length="32" name="contract_considerations" reference="x_g_dis_atat_contract_considerations" type="reference"/>
@@ -16,6 +16,7 @@
         <element label="Fair Opportunity" max_length="32" name="fair_opportunity" reference="x_g_dis_atat_fair_opportunity" type="reference"/>
         <element label="Funding Plans" max_length="4000" name="funding_plans" reference="x_g_dis_atat_funding_plan" type="glide_list"/>
         <element label="Funding Request" max_length="32" name="funding_request" reference="x_g_dis_atat_funding_request" type="reference"/>
+        <element label="Funding Requirement" max_length="32" name="funding_requirement" reference="x_g_dis_atat_funding_requirement" type="reference"/>
         <element label="GFE Overview" max_length="32" name="gfe_overview" reference="x_g_dis_atat_gfe_overview" type="reference"/>
         <element label="IDIQ CLINs" max_length="4000" name="idiq_clins" reference="x_g_dis_atat_idiq_clin" type="glide_list"/>
         <element label="Mission Owners" max_length="4000" name="mission_owners" reference="sys_user" type="glide_list"/>
@@ -83,6 +84,9 @@
         </index>
         <index name="index15">
             <element name="current_environment"/>
+        </index>
+        <index name="index16">
+            <element name="funding_requirement"/>
         </index>
     </element>
 </database>
