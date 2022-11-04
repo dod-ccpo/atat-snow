@@ -27,15 +27,15 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>c5c9be2997e01110ef86d200f153afd3</sys_id>
-        <sys_mod_count>15</sys_mod_count>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name>Persist Costs Payload</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_c5c9be2997e01110ef86d200f153afd3</sys_update_name>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-10-28 18:08:58</sys_updated_on>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2022-11-04 00:30:29</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -303,18 +303,6 @@ function handleCostObject(costObject, outputs) {
         <table>var__m_sys_hub_step_ext_input_e05af6e597e01110ef86d200f153afcc</table>
         <value>{{action.cost_response}}</value>
     </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>script</field>
-        <id>e05af6e597e01110ef86d200f153afcc</id>
-        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
-        <sys_created_on>2022-10-28 17:27:22</sys_created_on>
-        <sys_id>b2a030c697b691106fa8b4b3f153af7a</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-10-28 17:27:22</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
-    </sys_element_mapping>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_step_ext_output_e05af6e597e01110ef86d200f153afcc^id=e05af6e597e01110ef86d200f153afcc"/>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7^id=e05af6e597e01110ef86d200f153afcc"/>
     <sys_hub_step_ext_input action="delete_multiple" query="model=e05af6e597e01110ef86d200f153afcc^sys_idNOT IN802eba6d2f609110e58359a72799b6e8"/>
@@ -562,6 +550,7 @@ function handleCostObject(costObject, outputs) {
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_step_ext_output>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=e05af6e597e01110ef86d200f153afcc"/>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_step_ext_output_e05af6e597e01110ef86d200f153afcc^sys_idNOT INab51c7212fa09110e58359a72799b686,ab51c7212fa09110e58359a72799b68c"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>num_creates</element>
@@ -576,7 +565,7 @@ function handleCostObject(costObject, outputs) {
         <sys_created_on>2022-07-07 18:21:20</sys_created_on>
         <sys_id>ab51c7212fa09110e58359a72799b686</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>num_creates</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -599,7 +588,7 @@ function handleCostObject(costObject, outputs) {
         <sys_created_on>2022-07-07 18:21:20</sys_created_on>
         <sys_id>ab51c7212fa09110e58359a72799b68c</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>num_updates</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -691,6 +680,7 @@ function handleCostObject(costObject, outputs) {
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_action_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=dad9726997e01110ef86d200f153afd1"/>
     <sys_hub_action_output action="delete_multiple" query="model=c5c9be2997e01110ef86d200f153afd3^sys_idNOT IN10df7ffa2f241110e58359a72799b60a,205af66997e01110ef86d200f153af6f,a85af66997e01110ef86d200f153af75,f0f08c0f2f241110e58359a72799b6d4"/>
     <sys_hub_action_output action="INSERT_OR_UPDATE">
         <active>true</active>
@@ -775,6 +765,8 @@ function handleCostObject(costObject, outputs) {
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_action_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=10df7ffa2f241110e58359a72799b60a"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=10df7ffa2f241110e58359a72799b60a"/>
     <sys_hub_action_output action="INSERT_OR_UPDATE">
         <active>true</active>
         <array>false</array>
@@ -858,6 +850,8 @@ function handleCostObject(costObject, outputs) {
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_action_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=205af66997e01110ef86d200f153af6f"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=205af66997e01110ef86d200f153af6f"/>
     <sys_hub_action_output action="INSERT_OR_UPDATE">
         <active>true</active>
         <array>false</array>
@@ -941,6 +935,8 @@ function handleCostObject(costObject, outputs) {
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_action_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=a85af66997e01110ef86d200f153af75"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=a85af66997e01110ef86d200f153af75"/>
     <sys_hub_action_output action="INSERT_OR_UPDATE">
         <active>true</active>
         <array>false</array>
@@ -1024,6 +1020,9 @@ function handleCostObject(costObject, outputs) {
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_action_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=f0f08c0f2f241110e58359a72799b6d4"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=f0f08c0f2f241110e58359a72799b6d4"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=c5c9be2997e01110ef86d200f153afd3"/>
     <sys_hub_action_status_metadata action="delete_multiple" query="action_type_id=c5c9be2997e01110ef86d200f153afd3^sys_idNOT INaed9726997e01110ef86d200f153afda"/>
     <sys_hub_action_status_metadata action="INSERT_OR_UPDATE">
         <action_type_id display_value="Persist Costs Payload">c5c9be2997e01110ef86d200f153afd3</action_type_id>
@@ -1036,7 +1035,7 @@ function handleCostObject(costObject, outputs) {
     </sys_hub_action_status_metadata>
     <sys_hub_status_condition action="delete_multiple" query="action_status_metadata_id=aed9726997e01110ef86d200f153afda^sys_idNOT IN4ad203a12fa09110e58359a72799b66e"/>
     <sys_hub_status_condition action="INSERT_OR_UPDATE">
-        <action_status_metadata_id display_value="Created 2022-07-07 10:48:29">aed9726997e01110ef86d200f153afda</action_status_metadata_id>
+        <action_status_metadata_id display_value="Created 07/07/2022 13:48:29">aed9726997e01110ef86d200f153afda</action_status_metadata_id>
         <condition>{{step[858c980e-50bd-448c-a1f7-7af6adc2f0c1].__step_status__.message}}=Error: Cannot convert null to an object.,Detail: Cannot convert null to an object.^NQ{{step[858c980e-50bd-448c-a1f7-7af6adc2f0c1].__step_status__.message}}=Error: Empty JSON string,Detail: Empty JSON string</condition>
         <dont_treat_as_error>true</dont_treat_as_error>
         <label>empty array</label>
@@ -1063,7 +1062,7 @@ function handleCostObject(costObject, outputs) {
         <sys_created_on>2022-07-07 17:48:29</sys_created_on>
         <sys_id>aed9726997e01110ef86d200f153afd6</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Cost Response</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -1073,6 +1072,7 @@ function handleCostObject(costObject, outputs) {
         <url/>
         <url_target/>
     </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_action_input_c5c9be2997e01110ef86d200f153afd3"/>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_output_c5c9be2997e01110ef86d200f153afd3^sys_idNOT IN245af66997e01110ef86d200f153af74,78f08c0f2f241110e58359a72799b6d8,b85af66997e01110ef86d200f153af7d,d4df7ffa2f241110e58359a72799b611"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>__action_status__</element>
@@ -1087,7 +1087,7 @@ function handleCostObject(costObject, outputs) {
         <sys_created_on>2022-07-07 17:50:33</sys_created_on>
         <sys_id>245af66997e01110ef86d200f153af74</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Action Status</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -1110,7 +1110,7 @@ function handleCostObject(costObject, outputs) {
         <sys_created_on>2022-07-11 20:11:32</sys_created_on>
         <sys_id>78f08c0f2f241110e58359a72799b6d8</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Updated Cost Records</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -1133,7 +1133,7 @@ function handleCostObject(costObject, outputs) {
         <sys_created_on>2022-07-07 17:50:33</sys_created_on>
         <sys_id>b85af66997e01110ef86d200f153af7d</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Don't Treat as Error</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -1156,7 +1156,7 @@ function handleCostObject(costObject, outputs) {
         <sys_created_on>2022-07-11 20:06:35</sys_created_on>
         <sys_id>d4df7ffa2f241110e58359a72799b611</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>New Cost Records</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -1166,6 +1166,7 @@ function handleCostObject(costObject, outputs) {
         <url/>
         <url_target/>
     </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_action_output_c5c9be2997e01110ef86d200f153afd3"/>
     <sys_hub_action_plan action="delete_multiple" query="action_id=c5c9be2997e01110ef86d200f153afd3^sys_idNOT IN7dda72a997e01110ef86d200f153af47"/>
     <sys_hub_action_plan action="INSERT_OR_UPDATE">
         <action_id display_value="Persist Costs Payload">c5c9be2997e01110ef86d200f153afd3</action_id>
@@ -1483,18 +1484,6 @@ function handleCostObject(costObject, outputs) {
         <table>var__m_sys_hub_step_ext_input_25da32a997e01110ef86d200f153afee</table>
         <value>{{action.cost_response}}</value>
     </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>script</field>
-        <id>25da32a997e01110ef86d200f153afee</id>
-        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
-        <sys_created_on>2022-10-28 17:27:36</sys_created_on>
-        <sys_id>8eb070c697b691106fa8b4b3f153aff2</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-10-28 17:27:36</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
-    </sys_element_mapping>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_step_ext_output_25da32a997e01110ef86d200f153afee^id=25da32a997e01110ef86d200f153afee"/>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7^id=25da32a997e01110ef86d200f153afee"/>
     <sys_hub_step_ext_input action="delete_multiple" query="model=25da32a997e01110ef86d200f153afee^sys_idNOT INe73247612fa09110e58359a72799b64a"/>
@@ -1742,6 +1731,7 @@ function handleCostObject(costObject, outputs) {
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_step_ext_output>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=25da32a997e01110ef86d200f153afee"/>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_step_ext_output_25da32a997e01110ef86d200f153afee^sys_idNOT INaf3247612fa09110e58359a72799b662,af3247612fa09110e58359a72799b668"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>num_creates</element>
@@ -1756,7 +1746,7 @@ function handleCostObject(costObject, outputs) {
         <sys_created_on>2022-07-07 18:25:09</sys_created_on>
         <sys_id>af3247612fa09110e58359a72799b662</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>num_creates</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -1779,7 +1769,7 @@ function handleCostObject(costObject, outputs) {
         <sys_created_on>2022-07-07 18:25:10</sys_created_on>
         <sys_id>af3247612fa09110e58359a72799b668</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>num_updates</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -1871,6 +1861,7 @@ function handleCostObject(costObject, outputs) {
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_action_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=6dda32a997e01110ef86d200f153afe6"/>
     <sys_hub_action_output action="delete_multiple" query="model=edda32a997e01110ef86d200f153afe3^sys_idNOT IN76f0cc0f2f241110e58359a72799b6d7,a9da32a997e01110ef86d200f153aff8,a9da72a997e01110ef86d200f153af0b,f810000f2f241110e58359a72799b6ce"/>
     <sys_hub_action_output action="INSERT_OR_UPDATE">
         <active>true</active>
@@ -1955,6 +1946,8 @@ function handleCostObject(costObject, outputs) {
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_action_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=76f0cc0f2f241110e58359a72799b6d7"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=76f0cc0f2f241110e58359a72799b6d7"/>
     <sys_hub_action_output action="INSERT_OR_UPDATE">
         <active>true</active>
         <array>false</array>
@@ -2038,6 +2031,8 @@ function handleCostObject(costObject, outputs) {
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_action_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=a9da32a997e01110ef86d200f153aff8"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=a9da32a997e01110ef86d200f153aff8"/>
     <sys_hub_action_output action="INSERT_OR_UPDATE">
         <active>true</active>
         <array>false</array>
@@ -2121,6 +2116,8 @@ function handleCostObject(costObject, outputs) {
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_action_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=a9da72a997e01110ef86d200f153af0b"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=a9da72a997e01110ef86d200f153af0b"/>
     <sys_hub_action_output action="INSERT_OR_UPDATE">
         <active>true</active>
         <array>false</array>
@@ -2204,6 +2201,9 @@ function handleCostObject(costObject, outputs) {
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_action_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=f810000f2f241110e58359a72799b6ce"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=f810000f2f241110e58359a72799b6ce"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=edda32a997e01110ef86d200f153afe3"/>
     <sys_hub_action_status_metadata action="delete_multiple" query="action_type_id=edda32a997e01110ef86d200f153afe3^sys_idNOT INf9da72a997e01110ef86d200f153af18"/>
     <sys_hub_action_status_metadata action="INSERT_OR_UPDATE">
         <action_type_id display_value="Persist Costs Payload">edda32a997e01110ef86d200f153afe3</action_type_id>
@@ -2216,7 +2216,7 @@ function handleCostObject(costObject, outputs) {
     </sys_hub_action_status_metadata>
     <sys_hub_status_condition action="delete_multiple" query="action_status_metadata_id=f9da72a997e01110ef86d200f153af18^sys_idNOT IN403af0ce97b691106fa8b4b3f153af38"/>
     <sys_hub_status_condition action="INSERT_OR_UPDATE">
-        <action_status_metadata_id display_value="Created 2022-07-07 10:52:48">f9da72a997e01110ef86d200f153af18</action_status_metadata_id>
+        <action_status_metadata_id display_value="Created 07/07/2022 13:52:48">f9da72a997e01110ef86d200f153af18</action_status_metadata_id>
         <condition>{{step[858c980e-50bd-448c-a1f7-7af6adc2f0c1].__step_status__.message}}=Error: Cannot convert null to an object.,Detail: Cannot convert null to an object.^NQ{{step[858c980e-50bd-448c-a1f7-7af6adc2f0c1].__step_status__.message}}=Error: Empty JSON string,Detail: Empty JSON string</condition>
         <dont_treat_as_error>true</dont_treat_as_error>
         <label>empty array</label>
@@ -2243,7 +2243,7 @@ function handleCostObject(costObject, outputs) {
         <sys_created_on>2022-07-07 17:52:48</sys_created_on>
         <sys_id>21da32a997e01110ef86d200f153afec</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Cost Response</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2253,6 +2253,7 @@ function handleCostObject(costObject, outputs) {
         <url/>
         <url_target/>
     </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_action_input_edda32a997e01110ef86d200f153afe3"/>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_output_edda32a997e01110ef86d200f153afe3^sys_idNOT IN25da72a997e01110ef86d200f153af0a,69da72a997e01110ef86d200f153af13,7010000f2f241110e58359a72799b6d3,faf0cc0f2f241110e58359a72799b6db"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>__action_status__</element>
@@ -2267,7 +2268,7 @@ function handleCostObject(costObject, outputs) {
         <sys_created_on>2022-07-07 17:52:48</sys_created_on>
         <sys_id>25da72a997e01110ef86d200f153af0a</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Action Status</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2290,7 +2291,7 @@ function handleCostObject(costObject, outputs) {
         <sys_created_on>2022-07-07 17:52:48</sys_created_on>
         <sys_id>69da72a997e01110ef86d200f153af13</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Don't Treat as Error</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2313,7 +2314,7 @@ function handleCostObject(costObject, outputs) {
         <sys_created_on>2022-07-11 20:07:43</sys_created_on>
         <sys_id>7010000f2f241110e58359a72799b6d3</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>New Cost Records</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2336,7 +2337,7 @@ function handleCostObject(costObject, outputs) {
         <sys_created_on>2022-07-11 20:11:40</sys_created_on>
         <sys_id>faf0cc0f2f241110e58359a72799b6db</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Updated Cost Records</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2346,6 +2347,7 @@ function handleCostObject(costObject, outputs) {
         <url/>
         <url_target/>
     </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_action_output_edda32a997e01110ef86d200f153afe3"/>
     <sys_hub_action_type_definition action="update">
         <sys_id>c5c9be2997e01110ef86d200f153afd3</sys_id>
         <latest_snapshot>edda32a997e01110ef86d200f153afe3</latest_snapshot>

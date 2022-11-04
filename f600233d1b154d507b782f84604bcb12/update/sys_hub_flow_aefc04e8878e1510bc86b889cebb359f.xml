@@ -44,6 +44,8 @@ This Subflow will fill the DocuSign fields, required to use the Action "Set Fiel
     </sys_hub_flow>
     <sys_translated_text action="delete_multiple" query="documentkey=aefc04e8878e1510bc86b889cebb359f"/>
     <sys_variable_value action="delete_multiple" query="document_key=aefc04e8878e1510bc86b889cebb359f"/>
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=aefc04e8878e1510bc86b889cebb359f"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=aefc04e8878e1510bc86b889cebb359f"/>
     <sys_flow_cat_variable_model action="delete_multiple" query="id=aefc04e8878e1510bc86b889cebb359f^sys_idNOT IN2afc04e8878e1510bc86b889cebb35a3"/>
     <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
         <id>aefc04e8878e1510bc86b889cebb359f</id>
@@ -56,6 +58,7 @@ This Subflow will fill the DocuSign fields, required to use the Action "Set Fiel
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-09-16 16:13:27</sys_updated_on>
     </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=2afc04e8878e1510bc86b889cebb35a3"/>
     <sys_hub_flow_input action="delete_multiple" query="model=aefc04e8878e1510bc86b889cebb359f^sys_idNOT IN247ec86c878e1510bc86b889cebb35c0,4b07d8e087ce1510bc86b889cebb3572"/>
     <sys_hub_flow_input action="INSERT_OR_UPDATE">
         <active>true</active>
@@ -219,6 +222,10 @@ This Subflow will fill the DocuSign fields, required to use the Action "Set Fiel
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_flow_input>
+    <sys_hub_flow_output action="delete_multiple" query="model=aefc04e8878e1510bc86b889cebb359f"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=aefc04e8878e1510bc86b889cebb359f"/>
+    <sys_hub_action_instance action="delete_multiple" query="flow=aefc04e8878e1510bc86b889cebb359f"/>
+    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=aefc04e8878e1510bc86b889cebb359f"/>
     <sys_hub_flow_logic action="delete_multiple" query="flow=aefc04e8878e1510bc86b889cebb359f^sys_idNOT IN02bd986c87ce1510bc86b889cebb35ec,8abd986c87ce1510bc86b889cebb35f0"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">411757121b4211107c458623604bcbb6</block>
@@ -265,6 +272,8 @@ This Subflow will fill the DocuSign fields, required to use the Action "Set Fiel
         <table>var__m_sys_hub_flow_logic_input_098e1dc5c3e232002841b63b12d3ae33</table>
         <value>{{subflow.Fields}}</value>
     </sys_element_mapping>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=02bd986c87ce1510bc86b889cebb35ec"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=02bd986c87ce1510bc86b889cebb35ec"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">dd1757121b4211107c458623604bcbbc</block>
         <comment/>
@@ -296,6 +305,7 @@ This Subflow will fill the DocuSign fields, required to use the Action "Set Fiel
     </sys_hub_flow_logic>
     <sys_variable_value action="delete_multiple" query="document_key=8abd986c87ce1510bc86b889cebb35f0"/>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_aefc04e8878e1510bc86b889cebb359f^id=8abd986c87ce1510bc86b889cebb35f0"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=8abd986c87ce1510bc86b889cebb35f0"/>
     <sys_hub_input_scripts action="delete_multiple" query="instance=8abd986c87ce1510bc86b889cebb35f0^sys_idNOT IN8abd986c87ce1510bc86b889cebb35f1"/>
     <sys_hub_input_scripts action="INSERT_OR_UPDATE">
         <active>true</active>
@@ -310,6 +320,7 @@ This Subflow will fill the DocuSign fields, required to use the Action "Set Fiel
         <sys_updated_by>zach.clark</sys_updated_by>
         <sys_updated_on>2022-09-22 17:25:50</sys_updated_on>
     </sys_hub_input_scripts>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=aefc04e8878e1510bc86b889cebb359f"/>
     <sys_hub_flow_variable action="delete_multiple" query="model=aefc04e8878e1510bc86b889cebb359f^sys_idNOT INc6bd986c87ce1510bc86b889cebb35e3"/>
     <sys_hub_flow_variable action="INSERT_OR_UPDATE">
         <active>true</active>
@@ -406,7 +417,7 @@ This Subflow will fill the DocuSign fields, required to use the Action "Set Fiel
         <sys_created_on>2022-09-16 16:57:27</sys_created_on>
         <sys_id>0307d8e087ce1510bc86b889cebb3587</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Acquisition Package</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -429,7 +440,7 @@ This Subflow will fill the DocuSign fields, required to use the Action "Set Fiel
         <sys_created_on>2022-09-16 16:19:52</sys_created_on>
         <sys_id>607e00ac878e1510bc86b889cebb35a4</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Fields</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -439,4 +450,24 @@ This Subflow will fill the DocuSign fields, required to use the Action "Set Fiel
         <url/>
         <url_target/>
     </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_aefc04e8878e1510bc86b889cebb359f"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_aefc04e8878e1510bc86b889cebb359f"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_aefc04e8878e1510bc86b889cebb359f"/>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=aefc04e8878e1510bc86b889cebb359f"/>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=aefc04e8878e1510bc86b889cebb359f^sys_idNOT IN702abf3fdbb619d0b1227ea5f3961917"/>
+    <sys_flow_subflow_plan action="INSERT_OR_UPDATE">
+        <plan>com.snc.process_flow.engine.ProcessPlan@18fbd77</plan>
+        <plan_id display_value="ATAT Fill DocuSign Fields">aefc04e8878e1510bc86b889cebb359f</plan_id>
+        <snapshot>a42a7f3fdbb619d0b1227ea5f39619b0</snapshot>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2022-11-03 18:36:58</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>702abf3fdbb619d0b1227ea5f3961917</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2022-11-03 18:36:58</sys_updated_on>
+    </sys_flow_subflow_plan>
 </record_update>

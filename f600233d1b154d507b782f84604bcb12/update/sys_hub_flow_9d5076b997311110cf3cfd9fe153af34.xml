@@ -29,19 +29,21 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>9d5076b997311110cf3cfd9fe153af34</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name>Evaluate Alerts For CLIN</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_flow_9d5076b997311110cf3cfd9fe153af34</sys_update_name>
-        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-09 19:53:01</sys_updated_on>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2022-11-04 00:30:58</sys_updated_on>
         <type>subflow</type>
     </sys_hub_flow>
     <sys_translated_text action="delete_multiple" query="documentkey=9d5076b997311110cf3cfd9fe153af34"/>
     <sys_variable_value action="delete_multiple" query="document_key=9d5076b997311110cf3cfd9fe153af34"/>
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=9d5076b997311110cf3cfd9fe153af34"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=9d5076b997311110cf3cfd9fe153af34"/>
     <sys_flow_cat_variable_model action="delete_multiple" query="id=9d5076b997311110cf3cfd9fe153af34^sys_idNOT IN915076b997311110cf3cfd9fe153af36"/>
     <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
         <id>9d5076b997311110cf3cfd9fe153af34</id>
@@ -54,6 +56,7 @@
         <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-09-08 15:03:53</sys_updated_on>
     </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=915076b997311110cf3cfd9fe153af36"/>
     <sys_hub_flow_input action="delete_multiple" query="model=9d5076b997311110cf3cfd9fe153af34^sys_idNOT IN0fb23a7d97311110cf3cfd9fe153afd8"/>
     <sys_hub_flow_input action="INSERT_OR_UPDATE">
         <active>true</active>
@@ -136,6 +139,8 @@
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_flow_input>
+    <sys_hub_flow_output action="delete_multiple" query="model=9d5076b997311110cf3cfd9fe153af34"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=9d5076b997311110cf3cfd9fe153af34"/>
     <sys_hub_action_instance action="delete_multiple" query="flow=9d5076b997311110cf3cfd9fe153af34^sys_idNOT INdbb23a7d97311110cf3cfd9fe153aff4"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
@@ -198,6 +203,8 @@
         <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
         <value>Error in Evaluate Alerts For CLIN. Code: {{aa3816f1-b04c-4fb8-afd8-0d9c87eb9e06.__status__.code}}, Message: {{aa3816f1-b04c-4fb8-afd8-0d9c87eb9e06.__status__.message}}</value>
     </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=dbb23a7d97311110cf3cfd9fe153aff4"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=dbb23a7d97311110cf3cfd9fe153aff4"/>
     <sys_hub_sub_flow_instance action="delete_multiple" query="flow=9d5076b997311110cf3cfd9fe153af34^sys_idNOT INdecbb45697351110cf3cfd9fe153afca,e0637ebd97311110cf3cfd9fe153afa9"/>
     <sys_hub_sub_flow_instance action="INSERT_OR_UPDATE">
         <comment/>
@@ -246,18 +253,6 @@
         <sys_updated_on>2022-09-09 19:51:39</sys_updated_on>
         <table>var__m_sys_hub_flow_input_032bf41697351110cf3cfd9fe153af1d</table>
         <value>{{subflow.clin}}</value>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>wait_for_completion</field>
-        <id>decbb45697351110cf3cfd9fe153afca</id>
-        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
-        <sys_created_on>2022-09-09 19:51:39</sys_created_on>
-        <sys_id>22cbb45697351110cf3cfd9fe153afd9</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-09 19:51:39</sys_updated_on>
-        <table>var__m_sys_hub_sub_flow_instance_inputs_decbb45697351110cf3cfd9fe153afca</table>
-        <value/>
     </sys_element_mapping>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_sub_flow_instance_inputs_decbb45697351110cf3cfd9fe153afca^id=decbb45697351110cf3cfd9fe153afca"/>
     <sys_hub_sub_flow_instance_inputs action="delete_multiple" query="model=decbb45697351110cf3cfd9fe153afca^sys_idNOT INdecbb45697351110cf3cfd9fe153afcb"/>
@@ -342,6 +337,7 @@
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_sub_flow_instance_inputs>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=decbb45697351110cf3cfd9fe153afca"/>
     <sys_hub_sub_flow_instance action="INSERT_OR_UPDATE">
         <comment/>
         <display_text/>
@@ -473,6 +469,7 @@
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_sub_flow_instance_inputs>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=e0637ebd97311110cf3cfd9fe153afa9"/>
     <sys_hub_flow_logic action="delete_multiple" query="flow=9d5076b997311110cf3cfd9fe153af34^sys_idNOT IN20637ebd97311110cf3cfd9fe153afa7,5fb23a7d97311110cf3cfd9fe153afec,d3b23a7d97311110cf3cfd9fe153afea,dbb23a7d97311110cf3cfd9fe153afe6"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">a4637ebd97311110cf3cfd9fe153afa6</block>
@@ -504,6 +501,8 @@
         <workflow_reference/>
     </sys_hub_flow_logic>
     <sys_variable_value action="delete_multiple" query="document_key=20637ebd97311110cf3cfd9fe153afa7"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=20637ebd97311110cf3cfd9fe153afa7"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=20637ebd97311110cf3cfd9fe153afa7"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">d7b23a7d97311110cf3cfd9fe153afec</block>
         <comment/>
@@ -563,6 +562,8 @@
         <variable display_value="Error Status">0f72a5a25b132010b61ea2013781c749</variable>
     </sys_variable_value>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_logic_input_35d60003e6022010a5e40cdd1254dd23^id=5fb23a7d97311110cf3cfd9fe153afec"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=5fb23a7d97311110cf3cfd9fe153afec"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=5fb23a7d97311110cf3cfd9fe153afec"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">5fb23a7d97311110cf3cfd9fe153afe9</block>
         <comment/>
@@ -593,6 +594,8 @@
         <workflow_reference/>
     </sys_hub_flow_logic>
     <sys_variable_value action="delete_multiple" query="document_key=d3b23a7d97311110cf3cfd9fe153afea"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=d3b23a7d97311110cf3cfd9fe153afea"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=d3b23a7d97311110cf3cfd9fe153afea"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">dfb23a7d97311110cf3cfd9fe153afe5</block>
         <comment/>
@@ -623,6 +626,10 @@
         <workflow_reference/>
     </sys_hub_flow_logic>
     <sys_variable_value action="delete_multiple" query="document_key=dbb23a7d97311110cf3cfd9fe153afe6"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=dbb23a7d97311110cf3cfd9fe153afe6"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=dbb23a7d97311110cf3cfd9fe153afe6"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=9d5076b997311110cf3cfd9fe153af34"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=9d5076b997311110cf3cfd9fe153af34"/>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_9d5076b997311110cf3cfd9fe153af34^sys_idNOT IN5fb23a7d97311110cf3cfd9fe153afe1"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>clin</element>
@@ -637,7 +644,7 @@
         <sys_created_on>2022-09-08 15:14:23</sys_created_on>
         <sys_id>5fb23a7d97311110cf3cfd9fe153afe1</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>CLIN</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -647,6 +654,10 @@
         <url/>
         <url_target/>
     </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_9d5076b997311110cf3cfd9fe153af34"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_9d5076b997311110cf3cfd9fe153af34"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_9d5076b997311110cf3cfd9fe153af34"/>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=9d5076b997311110cf3cfd9fe153af34"/>
     <sys_flow_subflow_plan action="delete_multiple" query="plan_id=9d5076b997311110cf3cfd9fe153af34^sys_idNOT IN5e1cfc5697351110cf3cfd9fe153afb3"/>
     <sys_flow_subflow_plan action="INSERT_OR_UPDATE">
         <plan>com.snc.process_flow.engine.ProcessPlan@1f6664b</plan>
@@ -704,6 +715,8 @@
     </sys_hub_flow_snapshot>
     <sys_translated_text action="delete_multiple" query="documentkey=b11cbc5697351110cf3cfd9fe153afb9"/>
     <sys_variable_value action="delete_multiple" query="document_key=b11cbc5697351110cf3cfd9fe153afb9"/>
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=b11cbc5697351110cf3cfd9fe153afb9"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=b11cbc5697351110cf3cfd9fe153afb9"/>
     <sys_flow_cat_variable_model action="delete_multiple" query="id=b11cbc5697351110cf3cfd9fe153afb9^sys_idNOT IN7d1cbc5697351110cf3cfd9fe153afb9"/>
     <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
         <id>b11cbc5697351110cf3cfd9fe153afb9</id>
@@ -716,6 +729,7 @@
         <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-09-09 19:52:58</sys_updated_on>
     </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=7d1cbc5697351110cf3cfd9fe153afb9"/>
     <sys_hub_flow_input action="delete_multiple" query="model=b11cbc5697351110cf3cfd9fe153afb9^sys_idNOT INb11cbc5697351110cf3cfd9fe153afbb"/>
     <sys_hub_flow_input action="INSERT_OR_UPDATE">
         <active>true</active>
@@ -798,6 +812,8 @@
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_flow_input>
+    <sys_hub_flow_output action="delete_multiple" query="model=b11cbc5697351110cf3cfd9fe153afb9"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=b11cbc5697351110cf3cfd9fe153afb9"/>
     <sys_hub_action_instance action="delete_multiple" query="flow=b11cbc5697351110cf3cfd9fe153afb9^sys_idNOT INf51cbc5697351110cf3cfd9fe153aff0"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
@@ -860,6 +876,8 @@
         <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
         <value>Error in Evaluate Alerts For CLIN. Code: {{aa3816f1-b04c-4fb8-afd8-0d9c87eb9e06.__status__.code}}, Message: {{aa3816f1-b04c-4fb8-afd8-0d9c87eb9e06.__status__.message}}</value>
     </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=f51cbc5697351110cf3cfd9fe153aff0"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=f51cbc5697351110cf3cfd9fe153aff0"/>
     <sys_hub_sub_flow_instance action="delete_multiple" query="flow=b11cbc5697351110cf3cfd9fe153afb9^sys_idNOT IN391cbc5697351110cf3cfd9fe153aff2,4a1cfc5697351110cf3cfd9fe153af04"/>
     <sys_hub_sub_flow_instance action="INSERT_OR_UPDATE">
         <comment/>
@@ -908,18 +926,6 @@
         <sys_updated_on>2022-09-09 19:52:59</sys_updated_on>
         <table>var__m_sys_hub_flow_input_e40332bd97311110cf3cfd9fe153af40</table>
         <value>{{subflow.clin}}</value>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>wait_for_completion</field>
-        <id>391cbc5697351110cf3cfd9fe153aff2</id>
-        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
-        <sys_created_on>2022-09-09 19:52:59</sys_created_on>
-        <sys_id>821cfc5697351110cf3cfd9fe153af04</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-09 19:52:59</sys_updated_on>
-        <table>var__m_sys_hub_sub_flow_instance_inputs_391cbc5697351110cf3cfd9fe153aff2</table>
-        <value/>
     </sys_element_mapping>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_sub_flow_instance_inputs_391cbc5697351110cf3cfd9fe153aff2^id=391cbc5697351110cf3cfd9fe153aff2"/>
     <sys_hub_sub_flow_instance_inputs action="delete_multiple" query="model=391cbc5697351110cf3cfd9fe153aff2^sys_idNOT INf11cbc5697351110cf3cfd9fe153aff3"/>
@@ -1004,6 +1010,7 @@
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_sub_flow_instance_inputs>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=391cbc5697351110cf3cfd9fe153aff2"/>
     <sys_hub_sub_flow_instance action="INSERT_OR_UPDATE">
         <comment/>
         <display_text/>
@@ -1051,18 +1058,6 @@
         <sys_updated_on>2022-09-09 19:52:59</sys_updated_on>
         <table>var__m_sys_hub_flow_input_032bf41697351110cf3cfd9fe153af1d</table>
         <value>{{subflow.clin}}</value>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>wait_for_completion</field>
-        <id>4a1cfc5697351110cf3cfd9fe153af04</id>
-        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
-        <sys_created_on>2022-09-09 19:52:59</sys_created_on>
-        <sys_id>021cfc5697351110cf3cfd9fe153af11</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-09-09 19:52:59</sys_updated_on>
-        <table>var__m_sys_hub_sub_flow_instance_inputs_4a1cfc5697351110cf3cfd9fe153af04</table>
-        <value/>
     </sys_element_mapping>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_sub_flow_instance_inputs_4a1cfc5697351110cf3cfd9fe153af04^id=4a1cfc5697351110cf3cfd9fe153af04"/>
     <sys_hub_sub_flow_instance_inputs action="delete_multiple" query="model=4a1cfc5697351110cf3cfd9fe153af04^sys_idNOT IN061cfc5697351110cf3cfd9fe153af05"/>
@@ -1147,6 +1142,7 @@
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_sub_flow_instance_inputs>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=4a1cfc5697351110cf3cfd9fe153af04"/>
     <sys_hub_flow_logic action="delete_multiple" query="flow=b11cbc5697351110cf3cfd9fe153afb9^sys_idNOT IN311cbc5697351110cf3cfd9fe153afdf,751cbc5697351110cf3cfd9fe153afe2,b11cbc5697351110cf3cfd9fe153afe5,fd1cbc5697351110cf3cfd9fe153afe7"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">dfb23a7d97311110cf3cfd9fe153afe5</block>
@@ -1178,6 +1174,8 @@
         <workflow_reference/>
     </sys_hub_flow_logic>
     <sys_variable_value action="delete_multiple" query="document_key=311cbc5697351110cf3cfd9fe153afdf"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=311cbc5697351110cf3cfd9fe153afdf"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=311cbc5697351110cf3cfd9fe153afdf"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">5fb23a7d97311110cf3cfd9fe153afe9</block>
         <comment/>
@@ -1208,6 +1206,8 @@
         <workflow_reference/>
     </sys_hub_flow_logic>
     <sys_variable_value action="delete_multiple" query="document_key=751cbc5697351110cf3cfd9fe153afe2"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=751cbc5697351110cf3cfd9fe153afe2"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=751cbc5697351110cf3cfd9fe153afe2"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">a4637ebd97311110cf3cfd9fe153afa6</block>
         <comment/>
@@ -1238,6 +1238,8 @@
         <workflow_reference/>
     </sys_hub_flow_logic>
     <sys_variable_value action="delete_multiple" query="document_key=b11cbc5697351110cf3cfd9fe153afe5"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=b11cbc5697351110cf3cfd9fe153afe5"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=b11cbc5697351110cf3cfd9fe153afe5"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">d7b23a7d97311110cf3cfd9fe153afec</block>
         <comment/>
@@ -1297,6 +1299,10 @@
         <variable display_value="Error Status">0f72a5a25b132010b61ea2013781c749</variable>
     </sys_variable_value>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_logic_input_35d60003e6022010a5e40cdd1254dd23^id=fd1cbc5697351110cf3cfd9fe153afe7"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=fd1cbc5697351110cf3cfd9fe153afe7"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=fd1cbc5697351110cf3cfd9fe153afe7"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=b11cbc5697351110cf3cfd9fe153afb9"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=b11cbc5697351110cf3cfd9fe153afb9"/>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_b11cbc5697351110cf3cfd9fe153afb9^sys_idNOT IN791cbc5697351110cf3cfd9fe153afd8"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>clin</element>
@@ -1311,7 +1317,7 @@
         <sys_created_on>2022-09-09 19:52:58</sys_created_on>
         <sys_id>791cbc5697351110cf3cfd9fe153afd8</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>CLIN</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -1321,6 +1327,9 @@
         <url/>
         <url_target/>
     </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_b11cbc5697351110cf3cfd9fe153afb9"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_b11cbc5697351110cf3cfd9fe153afb9"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_b11cbc5697351110cf3cfd9fe153afb9"/>
     <sys_hub_flow action="update">
         <sys_id>9d5076b997311110cf3cfd9fe153af34</sys_id>
         <latest_snapshot>b11cbc5697351110cf3cfd9fe153afb9</latest_snapshot>
