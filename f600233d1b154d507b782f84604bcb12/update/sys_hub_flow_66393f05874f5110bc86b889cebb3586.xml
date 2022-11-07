@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>false</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <compiler_build/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Periodically polls /provisioning-jobs to ensure SNOW stays up to date on Provisioning Jobs results</description>
+        <internal_name>prov_update_provisioning_jobs</internal_name>
+        <label_cache>[{"name":"18db4b13-0ff2-4643-96c6-459e853aac76.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FD1fcafe6939e01110fdc2ee5eb9f2999e","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"29df7452-080f-43f2-b815-0f1077b70c46"}},{"name":"18db4b13-0ff2-4643-96c6-459e853aac76.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"89313553-3555-4213-8979-6790927f14ab"}},{"name":"18db4b13-0ff2-4643-96c6-459e853aac76.response_body","label":"1➛Response Body","reference_display":"Response Body","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"7c5f2903-194a-4968-be28-89fdf94281a0"}}]</label_cache>
+        <latest_snapshot/>
+        <master_snapshot/>
+        <name>PROV: Update Provisioning Jobs</name>
+        <natlang/>
+        <outputs/>
+        <remote_trigger_id/>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>draft</status>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-11-07 15:45:24</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>66393f05874f5110bc86b889cebb3586</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>PROV: Update Provisioning Jobs</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_hub_flow_66393f05874f5110bc86b889cebb3586</sys_update_name>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-11-07 16:04:01</sys_updated_on>
+        <type>flow</type>
+    </sys_hub_flow>
+    <sys_translated_text action="delete_multiple" query="documentkey=66393f05874f5110bc86b889cebb3586"/>
+    <sys_variable_value action="delete_multiple" query="document_key=66393f05874f5110bc86b889cebb3586"/>
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=66393f05874f5110bc86b889cebb3586^sys_idNOT IN840d3b09874f5110bc86b889cebb35c7"/>
+    <sys_hub_trigger_instance action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="PROV: Update Provisioning Jobs">66393f05874f5110bc86b889cebb3586</flow>
+        <name>Repeat</name>
+        <remote_sys_id/>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-11-07 16:01:53</sys_created_on>
+        <sys_id>840d3b09874f5110bc86b889cebb35c7</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-11-07 16:04:01</sys_updated_on>
+        <trigger_definition display_value="Repeat">f63f0d94c32222002841b63b12d3aeed</trigger_definition>
+        <trigger_inputs/>
+        <trigger_outputs/>
+        <trigger_type>repeat</trigger_type>
+    </sys_hub_trigger_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=840d3b09874f5110bc86b889cebb35c7"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_trigger_instance</document>
+        <document_key>840d3b09874f5110bc86b889cebb35c7</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-11-07 16:01:53</sys_created_on>
+        <sys_id>c40d3b09874f5110bc86b889cebb35c8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-11-07 16:01:53</sys_updated_on>
+        <value>1970-01-01 01:00:00</value>
+        <variable display_value="Repeat">1c5f4d94c32222002841b63b12d3aeb3</variable>
+    </sys_variable_value>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=66393f05874f5110bc86b889cebb3586"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=66393f05874f5110bc86b889cebb3586^sys_idNOT INae393f05874f5110bc86b889cebb3587"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>66393f05874f5110bc86b889cebb3586</id>
+        <name>PROV: Update Provisioning Jobs</name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-11-07 15:45:24</sys_created_on>
+        <sys_id>ae393f05874f5110bc86b889cebb3587</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-11-07 15:45:24</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=ae393f05874f5110bc86b889cebb3587"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=66393f05874f5110bc86b889cebb3586"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=66393f05874f5110bc86b889cebb3586"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=66393f05874f5110bc86b889cebb3586"/>
+    <sys_hub_action_instance action="delete_multiple" query="flow=66393f05874f5110bc86b889cebb3586^sys_idNOT IN74ec7709874f5110bc86b889cebb35c9"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_type display_value="HOTH API GET Request">bacabe6997e01110ef86d200f153afe5</action_type>
+        <action_type_parent/>
+        <comment/>
+        <compiled_snapshot/>
+        <display_text/>
+        <flow display_value="PROV: Update Provisioning Jobs">66393f05874f5110bc86b889cebb3586</flow>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-11-07 16:01:24</sys_created_on>
+        <sys_id>74ec7709874f5110bc86b889cebb35c9</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-11-07 16:04:01</sys_updated_on>
+        <ui_id>18db4b13-0ff2-4643-96c6-459e853aac76</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=74ec7709874f5110bc86b889cebb35c9"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>74ec7709874f5110bc86b889cebb35c9</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-11-07 16:01:24</sys_created_on>
+        <sys_id>78ec7709874f5110bc86b889cebb35cb</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-11-07 16:04:01</sys_updated_on>
+        <value>/provisioning-jobs</value>
+        <variable display_value="Resource Path">d588444e97f291106fa8b4b3f153afa1</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_action_input_bacabe6997e01110ef86d200f153afe5^id=74ec7709874f5110bc86b889cebb35c9"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=74ec7709874f5110bc86b889cebb35c9"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=74ec7709874f5110bc86b889cebb35c9"/>
+    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=66393f05874f5110bc86b889cebb3586"/>
+    <sys_hub_flow_logic action="delete_multiple" query="flow=66393f05874f5110bc86b889cebb3586"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=66393f05874f5110bc86b889cebb3586"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=66393f05874f5110bc86b889cebb3586"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_66393f05874f5110bc86b889cebb3586"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_66393f05874f5110bc86b889cebb3586"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_66393f05874f5110bc86b889cebb3586"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_66393f05874f5110bc86b889cebb3586"/>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=66393f05874f5110bc86b889cebb3586"/>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=66393f05874f5110bc86b889cebb3586"/>
+</record_update>
