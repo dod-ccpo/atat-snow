@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="DAPPS:Current Environment Instance" max_length="40" name="x_g_dis_atat_current_environment_instance" sizeclass="0" type="collection">
+    <element label="DAPPS:Current Environment Instance" max_length="40" name="x_g_dis_atat_current_environment_instance" type="collection">
         <element label="Additional Information" max_length="40" name="additional_information" type="string"/>
         <element label="Classification Level" max_length="32" name="classification_level" reference="x_g_dis_atat_classification_level" type="reference"/>
         <element label="Current Payment Arrangement" max_length="40" name="current_payment_arrangement" type="string"/>
@@ -12,6 +12,7 @@
                 <element inactive_on_update="false" label="PB" sequence="3" value="PB"/>
             </choice>
         </element>
+        <element label="Deployed Regions" max_length="4000" name="deployed_regions" reference="x_g_dis_atat_dapps_region" type="glide_list"/>
         <element label="Licensing" max_length="40" name="licensing" type="string"/>
         <element label="Memory" max_length="40" name="memory" type="integer"/>
         <element label="Number of Similar Instances" max_length="40" name="number_of_similar_instances" type="integer"/>
