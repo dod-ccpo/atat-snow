@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="DAPPS:Current Environment Instance" max_length="40" name="x_g_dis_atat_current_environment_instance" sizeclass="0" type="collection">
+        <element label="Additional Information" max_length="40" name="additional_information" type="string"/>
+        <element label="Classification Level" max_length="32" name="classification_level" reference="x_g_dis_atat_classification_level" type="reference"/>
+        <element label="Current Payment Arrangement" max_length="40" name="current_payment_arrangement" type="string"/>
+        <element label="Current Usage Description" max_length="40" name="current_usage_description" type="string"/>
+        <element label="Data Egress Monthly Amount" max_length="40" name="data_egress_monthly_amount" type="integer"/>
+        <element choice="1" label="Data Egress Monthly Unit" max_length="40" name="data_egress_monthly_unit" type="choice">
+            <choice/>
+        </element>
+        <element label="Licensing" max_length="40" name="licensing" type="string"/>
+        <element label="Memory" max_length="40" name="memory" type="integer"/>
+        <element label="Number of Similar Instances" max_length="40" name="number_of_similar_instances" type="integer"/>
+        <element label="Number of  vCPUs" max_length="40" name="number_of_vcpus" type="integer"/>
+        <element label="Operating System" max_length="40" name="operating_system" type="string"/>
+        <element label="Performance Tier" max_length="40" name="performance_tier" type="string"/>
+        <element label="Pricing Period Expiration Date" max_length="40" name="pricing_period_expiration_date" type="glide_date"/>
+        <element label="Processor Speed" max_length="40" name="processor_speed" type="string"/>
+        <element label="Storage Amount" max_length="40" name="storage_amount" type="integer"/>
+        <element choice="1" label="Storage Unit" max_length="40" name="storage_unit" type="choice">
+            <choice/>
+        </element>
+        <index name="index">
+            <element name="classification_level"/>
+        </index>
+    </element>
+</database>
