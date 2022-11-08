@@ -6,7 +6,11 @@
         <element label="Current Usage Description" max_length="40" name="current_usage_description" type="string"/>
         <element label="Data Egress Monthly Amount" max_length="40" name="data_egress_monthly_amount" type="integer"/>
         <element choice="1" label="Data Egress Monthly Unit" max_length="40" name="data_egress_monthly_unit" type="choice">
-            <choice/>
+            <choice>
+                <element inactive_on_update="false" label="GB" sequence="1" value="GB"/>
+                <element inactive_on_update="false" label="TB" sequence="2" value="TB"/>
+                <element inactive_on_update="false" label="PB" sequence="3" value="PB"/>
+            </choice>
         </element>
         <element label="Licensing" max_length="40" name="licensing" type="string"/>
         <element label="Memory" max_length="40" name="memory" type="integer"/>
@@ -18,7 +22,11 @@
         <element label="Processor Speed" max_length="40" name="processor_speed" type="string"/>
         <element label="Storage Amount" max_length="40" name="storage_amount" type="integer"/>
         <element choice="1" label="Storage Unit" max_length="40" name="storage_unit" type="choice">
-            <choice/>
+            <choice>
+                <element inactive_on_update="false" label="GB" sequence="1" value="GB"/>
+                <element inactive_on_update="false" label="TB" sequence="2" value="TB"/>
+                <element inactive_on_update="false" label="PB" sequence="3" value="PB"/>
+            </choice>
         </element>
         <index name="index">
             <element name="classification_level"/>
