@@ -9,5 +9,13 @@
         <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Has System Documentation" max_length="40" name="has_system_documentation" type="choice">
             <choice/>
         </element>
+        <element choice="1" label="Performance Tier" max_length="40" name="performance_tier" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Provides a balance of compute, memory &amp; network" sequence="1" value="General Purpose"/>
+                <element inactive_on_update="false" label="Supports compute-bound applications that benefit from high performance processors" sequence="2" value="Compute Optimized"/>
+                <element inactive_on_update="false" label="Designed to deliver fast performance for workloads that process large data sets in memory" sequence="3" value="Memory Optimized"/>
+                <element inactive_on_update="false" label="Designed for high, sequential read and write workloads to very large data sets on local storage" sequence="4" value="Storage Optimized"/>
+            </choice>
+        </element>
     </element>
 </database>
