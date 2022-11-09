@@ -1,10 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element label="DAPPS:Current Environment" max_length="40" name="x_g_dis_atat_current_environment" type="collection">
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Additional Growth" max_length="40" name="additional_growth" type="choice">
+            <choice/>
+        </element>
+        <element label="Anticipated Yearly Additional Capacity" max_length="40" name="anticipated_yearly_additional_capacity" type="integer"/>
+        <element label="Applications Need Architectural Design" max_length="200" name="applications_need_architectural_design" type="string"/>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Current Environment Exists" max_length="40" name="current_environment_exists" type="choice">
+            <choice/>
+        </element>
+        <element choice="1" choice_field="can_access_package" label="Current Environment Replicated Optimized" max_length="40" name="current_environment_replicated_optimized" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="I need my current functions replicated using JWCC offerings." sequence="1" value="YES_REPLICATE"/>
+                <element inactive_on_update="false" label="I need my current functions optimized using JWCC offerings." sequence="2" value="YES_OPTIMIZE"/>
+                <element inactive_on_update="false" label="No. My current environment does not meet my current needs." sequence="3" value="NO"/>
+            </choice>
+        </element>
+        <element label="Data Classifications Impact Levels" max_length="4000" name="data_classifications_impact_levels" reference="x_g_dis_atat_classification_level" type="glide_list"/>
+        <element label="Environment Classifications Cloud" max_length="4000" name="environment_classifications_cloud" reference="x_g_dis_atat_classification_level" type="glide_list"/>
+        <element label="Environment Classifications Onprem" max_length="4000" name="environment_classifications_onprem" reference="x_g_dis_atat_classification_level" type="glide_list"/>
+        <element label="Environment Instances" max_length="4000" name="environment_instances" type="glide_list"/>
+        <element choice="1" label="Environment Location" max_length="40" name="environment_location" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Cloud computing environment" sequence="1" value="CLOUD"/>
+                <element inactive_on_update="false" label="On-premise environment" sequence="2" value="ONPREM"/>
+                <element inactive_on_update="false" label="Hybrid environment" sequence="3" value="HYBRID"/>
+            </choice>
+        </element>
+        <element label="External Factors Architectural Design" max_length="800" name="external_factors_architectural_design" type="string"/>
         <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Has Migration Documentation" max_length="40" name="has_migration_documentation" type="choice">
+            <choice/>
+        </element>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Has Phased Approach" max_length="40" name="has_phased_approach" type="choice">
             <choice/>
         </element>
         <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Has System Documentation" max_length="40" name="has_system_documentation" type="choice">
             <choice/>
         </element>
+        <element label="Migration Documentation" max_length="4000" name="migration_documentation" reference="sys_attachment" type="glide_list"/>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Needs Architectural Design Services" max_length="40" name="needs_architectural_design_services" type="choice">
+            <choice/>
+        </element>
+        <element label="Phased Approach Schedule" max_length="800" name="phased_approach_schedule" type="string"/>
+        <element label="Statement Architectural Design" max_length="800" name="statement_architectural_design" type="string"/>
+        <element label="Statement Replicated Optimized" max_length="800" name="statement_replicated_optimized" type="string"/>
+        <element label="System Documentation" max_length="4000" name="system_documentation" reference="sys_attachment" type="glide_list"/>
     </element>
 </database>
