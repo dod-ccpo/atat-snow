@@ -10,10 +10,10 @@
         <script><![CDATA[var Igce = Class.create();
 Igce.prototype = {
 
-    acquisitionPackageSysId: null,
+    acquisitionPackage: null,
 
-    initialize: function (acquisitionPackageSysId) {
-        this.acquisitionPackageSysId = acquisitionPackageSysId;
+    initialize: function (acquisitionPackage) {
+        this.acquisitionPackage = acquisitionPackage;
     },
 
     getEstimatedObligation: function (filterFn) {
@@ -348,7 +348,7 @@ Igce.prototype = {
         return formatted_clin_info;
     },
     getPayload: function () {
-        var acq_package = this.acquisitionPackageSysId;
+        var acq_package = this.acquisitionPackage;
         var periodOfPerformance = acq_package.period_of_performance;
         var currentEnvironment = acq_package.current_environment;
         var selectedServiceOfferings = acq_package.selected_service_offerings;
@@ -452,13 +452,13 @@ Igce.prototype = {
         <sys_created_by>jeff.segal-ctr</sys_created_by>
         <sys_created_on>2022-10-12 15:53:33</sys_created_on>
         <sys_id>b29002b097a211106fa8b4b3f153afc4</sys_id>
-        <sys_mod_count>15</sys_mod_count>
+        <sys_mod_count>16</sys_mod_count>
         <sys_name>Igce</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_b29002b097a211106fa8b4b3f153afc4</sys_update_name>
-        <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2022-10-26 20:32:44</sys_updated_on>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2022-11-11 16:20:27</sys_updated_on>
     </sys_script_include>
 </record_update>
