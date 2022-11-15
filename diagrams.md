@@ -6,6 +6,7 @@ erDiagram
     PORTFOLIO ||--|{ TASK-ORDER : "funded by"
     TASK-ORDER ||--|{ CLIN : ""
     PORTFOLIO ||--|{ COSTS : ""
+    COSTS }|--|| CLIN : ""
     COSTS }|--|| CLOUD-SERVICE-PROVIDER : "billed by"
     COSTS }|--|{ TASK-ORDER : "billed against"
     COSTS }|--|| ORGANIZATION : "incurred by"
