@@ -35,7 +35,7 @@ erDiagram
         Reference task_order FK
         Reference clin FK
         Boolean active
-        Choice alert_type
+        Choice alert_type "SPENDING_ACTUAL/SPENDING_FORECAST/TIME_REMAINING"
         String threshold_violation_amount
         DateTime last_notification_date
     }
@@ -49,10 +49,10 @@ erDiagram
         URL dashboard_link "deep link to CSP"
         DateTime last_updated
         String name
-        Choice funding_status
+        Choice portfolio_funding_status "ON_TRACK/AT_RISK/FUNDING_AT_RISK/EXPIRED/DELINQUENT/EXPIRING_SOON"
         List portfolio_managers "to sys_user"
         List portfolio_viewers "to sys_user"
-        Choice portfolio_status
+        Choice portfolio_status "ACTIVE/ARCHIVED/PROCESSING"
         Boolean provisioned
         DateTime provisioned_date
         String provisioning_failure_cause
@@ -66,12 +66,12 @@ erDiagram
         Reference funding_request FK
         List clins FK
         String task_order_number
-        Choice task_order_status
+        Choice task_order_status "ON_TRACK/AT_RISK/EXPIRED/UPCOMING"
         Date pop_start_date
         Date pop_end_date
         Currency funds_total
         Currency funds_obligated
-        Choice incrementally_funded
+        Choice incrementally_funded "Y/N"
     }
     CLIN {
         GUID sys_id PK
@@ -93,12 +93,12 @@ erDiagram
     }
     COSTS {
         GUID sys_id PK
+        Reference clin FK
         Reference csp FK
         Reference portfolio FK
         Reference organization FK
         Reference agency FK
         String task_order_number
-        String clin
         Boolean is_actual "actual/forecast"
         Currency value
         Date year_month "ignore day"
@@ -128,6 +128,7 @@ erDiagram
     PORTFOLIO ||--|{ COSTS : "has (from CSPs)"
     PORTFOLIO ||--|{ SYS_USER : "portfolio managers and viewers"
     PORTFOLIO ||--|{ OPERATOR : "pending operators"
+    COSTS }|--|| CLIN : ""
     COSTS }|--|| CLOUD-SERVICE-PROVIDER : "billed by"
     COSTS }|--|{ TASK-ORDER : "billed against"
     COSTS }|--|| ORGANIZATION : "incurred by"
@@ -149,7 +150,7 @@ erDiagram
         GUID sys_id PK
         Reference classification_level FK
         Choice contract "JWCC"
-        Choice contract_type "FFP, T&M"
+        Choice contract_type "FFP/T&M"
         String description
         String idiq_clin
     }
@@ -162,7 +163,7 @@ erDiagram
         Reference contract_type FK
         List contributors FK "to sys_user"
         List mission_owners FK "to sys_user"
-        Reference current_contract_information FK
+        Reference current_contract_and_recurring_information FK
         Reference current_environment FK
         Reference ditco_ko FK
         Reference fair_opportunity FK
@@ -181,7 +182,7 @@ erDiagram
         List selected_service_offerings FK
         Reference sensitive_information FK
         String number
-        Choice status
+        Choice package_status "DRAFT/WAITING_FOR_SIGNATURES/WAITING_FOR_TASK_ORDER/TASK_ORDER_AWARDED/ARCHIVED/DELETED"
         String css_pre_award_id "Contract Support System"
         String css_tracking_number "Contract Support System"
         String docusign_envelope_id
@@ -196,15 +197,15 @@ erDiagram
     CONTACTS {
         GUID sys_id PK
         Reference rank_components FK
-        Choice type "MISSION_OWNER, COR, ACOR, FINANCIAL_POC, JWCC_CONTRACTING_OFFICER"
-        Boolean can_access_package "WARN referenced for Y/N/U in many places"
+        Choice type "MISSION_OWNER/COR/ACOR/FINANCIAL_POC/JWCC_CONTRACTING_OFFICER"
+        Boolean can_access_package "Y/N; defined here, referenced in many places"
         String salesforce_record_id
-        Choice grade_civ "GS-01:15, SES"
-        Choice role
+        Choice grade_civ "GS-01:15/SES"
+        Choice role "CIVILIAN/CONTRACTOR/MILITARY"
         String dodaac
         String email
         String title
-        Choice salutation
+        Choice salutation "MR/MRS/MS/MISS/DR"
         String first_name
         String middle_name
         String last_name
@@ -219,25 +220,25 @@ erDiagram
         GUID sys_id PK
         String name
         String abbreviation
-        Choice grade
-        Choice branch
+        Choice grade "E-1:9/O-1:10/W-1:5"
+        Choice branch "AIR_FORCE/ARMY/COAST_GUARD/MARINE_CORPS/NAVY/SPACE_FORCE"
     }
     PROVISIONING-JOB {
         GUID sys_id PK
         Reference acquisition_package FK
-        Choice job_type
+        Choice job_type "ADD_PORTFOLIO/ADD_OPERATORS/ADD_FUNDING_SOURCE"
         String payload
-        Choice status
+        Choice status "NOT_STARTED/IN_PROGRESS/SUCCESS/FAILURE"
         String status_message
     }
     ORGANIZATION {
         GUID sys_id PK
         Reference agency FK
         String computed_name "calculated value"
-        Choice disa_organization
+        Choice disa_organization "> 50 options"
         String organization_name "when non-DISA"
         String dodaac
-        Choice address_type
+        Choice address_type "US/MILITARY/FOREIGN"
         String street_address_1
         String street_address_2
         String city
@@ -252,20 +253,21 @@ erDiagram
         String accessibility_reqs_508
         Choice section_508_sufficient
         String system_of_record_name
-        Choice potential_to_be_harmful
+        Choice potential_to_be_harmful "if disclosed"
         Choice pii_present
         Choice baa_required "Business Associate Agreement"
-        Choice foia_address_type "FOREIGN, MILITARY, US"
+        Choice foia_address_type "FOREIGN/MILITARY/US"
         String foia_state_province_state_code
         String foia_street_address_1
         String foia_street_address_2
         String foia_city_apo_fpo
         String foia_country
         String foia_zip_postal_code
+        String work_to_be_performed
     }
     AWARD-HISTORY {
         GUID sys_id PK
-        Choice contract_award_type "INITIAL_AWARD, MODIFICATION"
+        Choice contract_award_type "INITIAL_AWARD/MODIFICATION"
         Date effective_date
         Integer modification_order
     }
@@ -322,7 +324,7 @@ erDiagram
         GUID sys_id PK
         Reference fs_form FK
         Reference mipr FK
-        Choice funding_request_type "FS_FORM, MIPR"
+        Choice funding_request_type "FS_FORM/MIPR"
     }
     FUNDING-REQUEST-FS-FORM {
         GUID sys_id PK
@@ -368,9 +370,9 @@ erDiagram
     }
     PERIOD {
         GUID sys_id PK
-        Choice period_type "BASE, OPTION"
+        Choice period_type "BASE/OPTION"
         Integer period_unit_count
-        Choice period_unit "DAY, WEEK, MONTH, YEAR"
+        Choice period_unit "DAY/WEEK/MONTH/YEAR"
         Integer option_order
     }
     REQUIREMENTS-COST-ESTIMATE {
@@ -419,8 +421,8 @@ erDiagram
     }
     CLASSIFICATION-LEVEL {
         GUID sys_id PK
-        Choice classification "U, S, TS"
-        Choice impact_level "IL2, IL4, IL5, IL6"
+        Choice classification "U/S/TS"
+        Choice impact_level "IL2/IL4/IL5/IL6"
         String display "calculated value"
     }
     ENVIRONMENT-INSTANCE {
@@ -429,26 +431,28 @@ erDiagram
         List selected_periods FK
         Choice need_for_entire_task_order_duration "true=select all periods"
         String instance_name
-        Choice instance_location "CSP, ON_PREMISE, HYBRID"
+        Choice instance_location "CSP/ON_PREMISE/HYBRID"
         Choice csp_region "empty; TODO change to ref Region table"
         String operating_system_licensing
-        Choice pricing_model "RESERVED, PAY_AS_YOU_GO"
+        Choice pricing_model "RESERVED/PAY_AS_YOU_GO"
         Date pricing_model_expiration
         Choice performance_tier "empty; TODO"
         Integer number_of_vcpus
         Integer memory_amount
-        Choice memory_unit "GB, TB"
+        Choice memory_unit "GB/TB"
         Choice storage_type "empty; TODO"
         Integer storage_amount
-        Choice storage_unit "GB, TB; TODO add PB"
+        Choice storage_unit "GB/TB; TODO add PB"
         Integer data_egress_monthly_amount
-        Choice data_egress_monthly_unit "GB, TB; TODO add PB"
+        Choice data_egress_monthly_unit "GB/TB; TODO add PB"
     }
     CURRENT-ENVIRONMENT {
         GUID sys_id PK
+        List environment_instances FK
         String additional_information
         Choice has_migration_documentation
         Choice has_system_documentation
+        Boolean current_environment_exists
     }
     CURRENT-ENVIRONMENT-SYSTEM-DOCUMENTATION {
         GUID sys_id PK "TODO replace table with List column"
@@ -461,7 +465,7 @@ erDiagram
         Reference acquisition_package FK
         Reference document_type FK
         FileAttachment file
-        Choice document_status "DRAFT, READY_FOR_REVIEW, ACTION_REQUESTED, COMPLETED"
+        Choice document_status "DRAFT/READY_FOR_REVIEW/ACTION_REQUESTED/COMPLETED"
     }
     PACKAGE-DOCUMENT-TYPE {
         GUID sys_id PK
