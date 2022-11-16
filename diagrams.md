@@ -171,7 +171,6 @@ erDiagram
         List funding_plans FK
         Reference funding_request FK
         Reference funding_requirement FK
-        Reference gfe_overview FK "TODO delete table"
         List idiq_clins FK
         Reference organization FK
         List pending_operator FK
@@ -360,14 +359,6 @@ erDiagram
         Currency amount
         String description
         Integer order
-    }
-    GFE-OVERVIEW {
-        GUID sys_id PK
-        String property_custodian_name
-        String dpas_custodian_number "Defense Property Accountability System"
-        Choice property_accountable
-        Choice gfe_gfp_furnished
-        String dpas_unit_identification_code
     }
     PERIOD {
         GUID sys_id PK
