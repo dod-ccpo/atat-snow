@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="DAPPS:Region" max_length="40" name="x_g_dis_atat_region" type="collection">
+        <element label="Description" max_length="100" name="description" type="string"/>
+        <element choice="1" label="Group" mandatory="true" max_length="40" name="group" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Within Continental United States" sequence="1" value="CONUS"/>
+                <element inactive_on_update="false" label="Outside of Continental United States" sequence="2" value="OCONUS"/>
+            </choice>
+        </element>
+        <element display="true" label="Name" max_length="100" name="name" type="string"/>
+        <element label="Sequence" max_length="40" name="sequence" type="integer"/>
+    </element>
+</database>
