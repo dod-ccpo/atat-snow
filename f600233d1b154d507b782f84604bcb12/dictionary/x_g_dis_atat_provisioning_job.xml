@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Provisioning Job" max_length="40" name="x_g_dis_atat_provisioning_job" sizeclass="5" type="collection">
+    <element label="ATAT:Provisioning Job" max_length="40" name="x_g_dis_atat_provisioning_job" sizeclass="4" type="collection">
         <element display="true" label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
+        <element label="CSP Job ID" max_length="500" name="csp_job_id" type="string"/>
+        <element label="HOTH Job ID" max_length="500" name="hoth_job_id" type="string"/>
         <element choice="3" default="ADD_PORTFOLIO" label="Job Type" mandatory="true" max_length="40" name="job_type" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Add Funding Source(s)" value="ADD_FUNDING_SOURCE"/>
@@ -11,10 +13,10 @@
         <element label="Payload" max_length="2000" name="payload" type="string"/>
         <element choice="3" default="NOT_STARTED" label="Status" max_length="40" name="status" type="choice">
             <choice>
-                <element inactive_on_update="false" label="Failure" value="FAILURE"/>
+                <element inactive_on_update="false" label="Complete" value="COMPLETE"/>
+                <element inactive_on_update="false" label="Failed" value="FAILED"/>
                 <element inactive_on_update="false" label="In Progress" value="IN_PROGRESS"/>
                 <element inactive_on_update="false" label="Not Started" value="NOT_STARTED"/>
-                <element inactive_on_update="false" label="Success" value="SUCCESS"/>
             </choice>
         </element>
         <element label="Status Message" max_length="300" name="status_message" type="string"/>
