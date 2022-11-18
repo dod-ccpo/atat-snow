@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="x_g_dis_atat_environment_instance" label="DAPPS:Database Environment Instance" max_length="40" name="x_g_dis_atat_database_environment_instance" type="collection">
+        <element choice="1" label="Database Licensing" max_length="40" name="database_licensing" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Transfer Existing" sequence="1" value="TRANSFER_EXISTING"/>
+                <element inactive_on_update="false" label="New" sequence="2" value="NEW"/>
+            </choice>
+        </element>
+        <element choice="1" label="Database Type" max_length="40" name="database_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Analytical" sequence="1" value="ANALYTICAL"/>
+                <element inactive_on_update="false" label="Transactional" sequence="2" value="TRANSACTIONAL"/>
+                <element inactive_on_update="false" label="Graph" sequence="3" value="GRAPH"/>
+                <element inactive_on_update="false" label="Relational" sequence="4" value="RELATIONAL"/>
+                <element inactive_on_update="false" label="Other" sequence="5" value="OTHER"/>
+            </choice>
+        </element>
+        <element label="Database Type Other" max_length="100" name="database_type_other" type="string"/>
+    </element>
+</database>
