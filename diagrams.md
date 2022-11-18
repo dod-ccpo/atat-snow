@@ -418,6 +418,7 @@ erDiagram
         Choice operating_type "DEV_TESTING/PREPRODUCTION/PRODUCTION/COOP_DISASTERRECOVERY"
         Choice operating_environment "VM/CONTAINERS/SERVERLESS/VIRTUAL_DESKTOP"
         String anticipated_need_usage
+        String additional_information
     }
     DATABASE-ENVIRONMENT-INSTANCE {
         Extends ENVIRONMENT-INSTANCE "inherits cols"
@@ -493,7 +494,6 @@ erDiagram
         String statement_architectural_design
         String applications_need_architectural_design
         String external_factors_architectural_design
-        String additional_information
     }
     PACKAGE-DOCUMENT {
         GUID sys_id PK
