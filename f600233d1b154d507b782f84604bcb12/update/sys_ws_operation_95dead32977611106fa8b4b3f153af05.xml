@@ -23,7 +23,7 @@
       documentType: packageDocument.document_type.edms_document_type.toString(),
       fileName: packageDocument.document_type.file_name.toString(),
       attachmentFile: packageDocument.file.toString(),
-      indexFields: params.indexFields
+      indexFields: JSON.parse(params.indexFields)
     };
   } else {
 	errorMessage = "No document (ID: " + documentId + ") was found for Package (ID: " + packageId + ")."; 
@@ -52,7 +52,12 @@
 
   var indexFields = '\r\n--' + boundary + "\r\n";
   indexFields += 'Content-Disposition: form-data; name="indexFields"\r\n\r\n';
-  indexFields += multipartInfo.indexFields;
+
+  var fieldsList = [];
+  for ( var name in multipartInfo.indexFields) {
+    fieldsList.push({ name: name, value: multipartInfo.indexFields[name]});
+  }
+  indexFields += JSON.stringify(fieldsList);
   writer.writeString(indexFields);
 
   var fileName = '\r\n--' + boundary + "\r\n";
@@ -88,14 +93,14 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-10-31 06:00:31</sys_created_on>
         <sys_id>95dead32977611106fa8b4b3f153af05</sys_id>
-        <sys_mod_count>43</sys_mod_count>
+        <sys_mod_count>44</sys_mod_count>
         <sys_name>edms-multipart-attachment</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_ws_operation_95dead32977611106fa8b4b3f153af05</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-11-23 00:02:39</sys_updated_on>
+        <sys_updated_on>2022-11-23 02:38:10</sys_updated_on>
         <web_service_definition display_value="EDMS">a4ae657e973611106fa8b4b3f153aff7</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
