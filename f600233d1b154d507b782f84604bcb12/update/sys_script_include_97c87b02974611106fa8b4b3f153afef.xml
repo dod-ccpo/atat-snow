@@ -15,6 +15,7 @@ ErrorHandler.prototype = {
 		this.RECORD_NOT_FOUND = "RecordNotFound";
 		this.DUPLICATE_RECORD = "DuplicateRecord";
 		this.COST_RESPONSE_ERROR = "CostResponseError";
+		this.METHOD_ERROR = "MethodError";
     },
 	// Creates a generic "Error" or named Error object
 	// @para {string} - error message to provide
@@ -65,6 +66,9 @@ ErrorHandler.prototype = {
 			case this.COST_RESPONSE_ERROR:
 				gs.error(error.message);
 				break;
+			case this.METHOD_ERROR:
+				gs.error(error.message);
+				break;
 			default:
 				gs.error("Uncaught Internal SNOW error => " + error + ". Error Stack => " + error.stack);
 		}
@@ -76,13 +80,13 @@ ErrorHandler.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-09-22 01:15:51</sys_created_on>
         <sys_id>97c87b02974611106fa8b4b3f153afef</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_name>ErrorHandler</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_97c87b02974611106fa8b4b3f153afef</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-10-28 17:29:45</sys_updated_on>
+        <sys_updated_on>2022-11-29 14:14:00</sys_updated_on>
     </sys_script_include>
 </record_update>
