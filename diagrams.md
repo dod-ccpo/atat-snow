@@ -435,6 +435,7 @@ erDiagram
     CLASSIFICATION-INSTANCE {
         GUID sys_id PK
         Reference classification_level FK "to Classification Level"
+        List classified_information_types FK "to Classified Information Type"
         List selected_periods FK "to Period"
         String dow_task_number
         Currency monthly_price
@@ -447,6 +448,12 @@ erDiagram
         Choice impact_level "IL2/IL4/IL5/IL6"
         String display "calculated value"
     }
+    CLASSIFIED-INFORMATION-TYPE {
+        GUID sys_id PK
+        String name
+        String description
+        Integer sequence
+    }
     REGION {
         GUID sys_id PK
         String description
@@ -457,6 +464,7 @@ erDiagram
     ENVIRONMENT-INSTANCE {
         GUID sys_id PK
         Reference classification_level FK "to Classification Level"
+        List classified_information_types FK "to Classified Information Type"
         List selected_periods FK "to Period"
         Reference region FK "to Region"
         Choice need_for_entire_task_order_duration "true=select all periods"
@@ -566,9 +574,11 @@ erDiagram
     SELECTED-SERVICE-OFFERING ||--|| CLASSIFICATION-INSTANCE : ""
     SELECTED-SERVICE-OFFERING ||--|{ ESTIMATED-ENVIRONMENT-INSTANCE : ""
     CLASSIFICATION-INSTANCE }|--|| CLASSIFICATION-LEVEL : ""
+    CLASSIFICATION-INSTANCE ||--|| CLASSIFIED-INFORMATION-TYPE : "S and TS only"
     CLASSIFICATION-INSTANCE ||--|{ PERIOD : ""
     %% base table
     ENVIRONMENT-INSTANCE }|--|{ CLASSIFICATION-LEVEL : ""
+    ENVIRONMENT-INSTANCE ||--|| CLASSIFIED-INFORMATION-TYPE : "S and TS only"
     ENVIRONMENT-INSTANCE ||--|{ PERIOD : ""
     ENVIRONMENT-INSTANCE ||--|| REGION : ""
     %% attempt to illustrate table inheritance
