@@ -420,6 +420,12 @@ erDiagram
         String anticipated_need_usage
         String additional_information
     }
+    COMPUTE-ENVIRONMENT-INSTANCE {
+        Extends ENVIRONMENT-INSTANCE "inherits cols"
+        GUID sys_id PK
+        Choice environment_type "DEV_TEST/PRE_PROD/PROD_STAGING/COOP_DISASTER_RECOVERY"
+        Choice operating_environment "VIRTUAL/CONTAINERS/SERVERLESS/END_USER_COMPUTING_VIRTUAL_DESKTOP"
+    }
     DATABASE-ENVIRONMENT-INSTANCE {
         Extends ENVIRONMENT-INSTANCE "inherits cols"
         Choice database_type "ANALYTICAL/TRANSACTIONAL/GRAPH/RELATIONAL/OTHER"
@@ -569,6 +575,7 @@ erDiagram
     ENVIRONMENT-INSTANCE ||--|| ESTIMATED-ENVIRONMENT-INSTANCE: "extended by"
     ENVIRONMENT-INSTANCE ||--|| CURRENT-ENVIRONMENT-INSTANCE: "extended by"
     ENVIRONMENT-INSTANCE ||--|| DATABASE-ENVIRONMENT-INSTANCE: "extended by"
+    ENVIRONMENT-INSTANCE ||--|| COMPUTE-ENVIRONMENT-INSTANCE: "extended by"
     %% current environment
     ACQUISITION-PACKAGE ||--o| CURRENT-ENVIRONMENT : ""
     CURRENT-ENVIRONMENT ||--|{ CURRENT-ENVIRONMENT-INSTANCE : ""
