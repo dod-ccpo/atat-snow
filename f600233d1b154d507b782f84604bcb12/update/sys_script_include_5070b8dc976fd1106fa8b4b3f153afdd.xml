@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.Ifp</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>ATAT class for creating an Incremental Funding Plan (IFP) payload and related functionality.&#13;
+Payload is sent to the HOTH API for document generation.&#13;
+</description>
+        <name>Ifp</name>
+        <script><![CDATA[var Ifp = Class.create();
+Ifp.prototype = {
+    M2M_CONTACTS_TABLE:  "x_g_dis_atat_m2m_contacts_acquisition",
+    FUNDING_INCREMENT_TABLE: "x_g_dis_atat_funding_increment",
+    errUtil: new ErrorHandler(),
+    acquisitionPackage: null,
+    
+    initialize: function(acqPackage) {
+      this.acquisitionPackage = acqPackage;
+    },
+
+    /**
+     * Looks up all contacts created and associated with acquisition
+     * packages. This is different from the information provided with
+     * the global User account. 
+     *
+     * return {array} - an array package contacts (e.g., MO, COR, etc.)
+     */
+    getContacts: function() {
+      try {
+        var contacts = [];
+        var m2m = new GlideRecord(this.M2M_CONTACTS_TABLE);
+        m2m.addQuery("acquisition_package", this.acquisitionPackage.sys_id);
+        m2m.query();
+        while (m2m.hasNext()) {
+          m2m.next();
+          contacts.push({
+            contactType: m2m.contacts.type.toString(),
+            formalName: m2m.contacts.formal_name.toString(),
+          });
+        }
+
+        return contacts;
+
+      } catch (error) {
+        throw this.errUtil.createError("IFP --> getContacts() " + error, this.errUtil.METHOD_ERROR);
+      }
+    },
+
+    /**
+     * Look up a funding request type inside of a Funding Requirement
+     * record for a given acquisition package. 
+     *
+     * @param {GlideRecord} - Funding Request record
+     * return {object} - funding document information (e.g., MIPR number)
+     */
+    getFundingDocument: function(fundingRequest) {
+      try {
+        var fundingType = fundingRequest.funding_request_type.toString();
+        if (!fundingType) {
+          var pkgInfo = this.errUtil.getRecordLogInfo(this.acquisitionPackage, "number");
+          var errorMessage = "No fundingType found for " + pkgInfo.allInfo + ". ";
+          errorMessage += "Please provide Funding Request." ;
+          throw this.errUtil.createError(errorMessage, this.errUtil.RECORD_NOT_FOUND);
+        }
+
+        if (fundingType === "MIPR") {
+          return {
+            fundingType: fundingType,
+            miprNumber: fundingRequest.mipr.mipr_number.toString(),
+          };
+        }
+
+        return {
+          fundingType: fundingType, // FS_FORM
+          gtcNumber: fundingRequest.fs_form.gtc_number.toString(),
+          orderNumber: fundingRequest.fs_form.order_number.toString(),
+        };
+
+      } catch (err) {
+        throw this.errUtil.createError("IFP --> getFundingDocument() " + err, this.errUtil.METHOD_ERROR);
+      }
+    },
+    /**
+     * Looks up up all incremental funding records from a Funding Plan
+     * and provide the information contained in each.
+     *
+     * @params {GlideRecord} - Funding Plan record
+     * return {array} - an array of funding increments
+     */
+    getFundingIncrements: function(fundingPlan) {
+      var fundingIncrements = fundingPlan.remaining_amount_increments;
+
+      try {
+        if (!fundingIncrements) {
+          var pkgInfo = this.errUtil.getRecordLogInfo(this.acquisitionPackage, "number");
+          var errorMessage = "No fundingIncrements found for " + pkgInfo.allInfo + ". ";
+          errorMessage += "Please provide Funding Plan." ;
+          throw this.errUtil.createError(errorMessage, this.errUtil.INVALID_INPUT);
+        }
+
+        var fundingIncrementList = getListRecords(
+          fundingIncrements,
+          ["amount", "description", "order"],
+          this.FUNDING_INCREMENT_TABLE
+        ).map(removeSysId);
+
+        return fundingIncrementList;
+
+      } catch (err) {
+        throw this.errUtil.createError("IFP --> getFundingIncrements() " + err, this.errUtil.METHOD_ERROR);
+      }
+    },
+
+    /**
+     * Gather all information needed for IFP document generation and 
+     * creates a payload. Instantiate the IFP class with an acquistion
+     * package recore before using this method.
+     * 
+     * return {object} - an IFP payload for HOTH API
+     */
+    getPayload: function() {
+      try {
+        var acqPackage = this.acquisitionPackage;
+        var fundingRequirement = acqPackage.funding_requirement;
+        var isIncrementallyFunded = convertToBoolean(fundingRequirement.incrementally_funded);
+
+        if (!isIncrementallyFunded) {
+          var pkgInfo = this.errUtil.getRecordLogInfo(acqPackage, "number");
+          var message = "Package " + pkgInfo.allInfo + " is not incrementally funded and does not ";
+          message += "require an IFP. If an IFP is needed ensure 'YES' is selected for Incrementally ";
+          message += "Funded in the Funding Requirement section.";
+          throw this.errUtil.createError(message, this.errUtil.INVALID_INPUT);
+        }
+
+        var fundingRequest = fundingRequirement.funding_request;
+        var fundingPlan = fundingRequirement.funding_plan;
+      
+        var moList = this.getContacts()
+          .filter(function(contact) { return contact.contactType === "MISSION_OWNER"; });
+
+        return {
+          documentType: "INCREMENTAL_FUNDING_PLAN",
+          templatePayload: {
+            requirementsTitle: acqPackage.project_overview.title.toString(),
+            missionOwner: moList[0].formalName, // first mission owner
+            estimatedTaskOrderValue: parseFloat(fundingPlan.estimated_task_order_value.toString()),
+            initialAmount: parseFloat(fundingPlan.initial_amount.toString()),
+            remainingAmount: parseFloat(fundingPlan.remaining_amount.toString()),
+            fundingDocument: this.getFundingDocument(fundingRequest),
+            fundingIncrements: this.getFundingIncrements(fundingPlan),
+            scheduleText: fundingPlan.schedule_text.toString(),
+            contractNumber: "TBD",
+            taskOrderNumber: "TBD",
+          }
+        };
+
+      } catch(err) {
+        throw this.errUtil.createError("Error getting IFP payload. " + err, this.errUtil.INVALID_INPUT);
+      }
+    },
+    
+    type: 'Ifp'
+};
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-11-29 14:21:01</sys_created_on>
+        <sys_id>5070b8dc976fd1106fa8b4b3f153afdd</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Ifp</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_5070b8dc976fd1106fa8b4b3f153afdd</sys_update_name>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-11-29 20:04:46</sys_updated_on>
+    </sys_script_include>
+</record_update>
