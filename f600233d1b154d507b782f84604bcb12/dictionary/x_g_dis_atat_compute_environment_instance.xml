@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="x_g_dis_atat_environment_instance" label="DAPPS:Compute Environment Instance" max_length="40" name="x_g_dis_atat_compute_environment_instance" type="collection">
+        <element choice="1" label="Environment Type" max_length="40" name="environment_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Development/Test" sequence="1" value="DEV_TEST"/>
+                <element inactive_on_update="false" label="Pre-production" sequence="2" value="PRE_PROD"/>
+                <element inactive_on_update="false" label="Production/Staging" sequence="3" value="PROD_STAGING"/>
+                <element inactive_on_update="false" label="Continuity of Operations/Disaster Recovery" sequence="4" value="COOP_DISASTER_RECOVERY"/>
+            </choice>
+        </element>
+        <element choice="1" label="Operating Environment" max_length="40" name="operating_environment" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Virtual Machine" sequence="1" value="VIRTUAL"/>
+                <element inactive_on_update="false" label="Containers" sequence="2" value="CONTAINERS"/>
+                <element inactive_on_update="false" label="Serverless Computing" sequence="3" value="SERVERLESS"/>
+                <element inactive_on_update="false" label="End User Computing Virtual Desktop" sequence="4" value="END_USER_COMPUTING_VIRTUAL_DESKTOP"/>
+            </choice>
+        </element>
+    </element>
+</database>
