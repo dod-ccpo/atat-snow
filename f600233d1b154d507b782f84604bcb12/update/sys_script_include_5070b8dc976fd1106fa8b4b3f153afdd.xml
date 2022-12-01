@@ -137,14 +137,16 @@ Ifp.prototype = {
         var fundingRequest = fundingRequirement.funding_request;
         var fundingPlan = fundingRequirement.funding_plan;
       
-        var moList = this.getContacts()
-          .filter(function(contact) { return contact.contactType === "MISSION_OWNER"; });
+        var contacts = this.getContacts();
+		var moList = contacts.filter(function(contact) { return contact.contactType === "MISSION_OWNER"; });
+		var financialPocList = contacts.filter(function(contact) { return contact.contactType === "FINANCIAL_POC"; });
 
         return {
           documentType: "INCREMENTAL_FUNDING_PLAN",
           templatePayload: {
             requirementsTitle: acqPackage.project_overview.title.toString(),
             missionOwner: moList[0].formalName, // first mission owner
+			financialPoc: financialPocList[0].formalName, // first financial POC
             estimatedTaskOrderValue: parseFloat(fundingPlan.estimated_task_order_value.toString()),
             initialAmount: parseFloat(fundingPlan.initial_amount.toString()),
             remainingAmount: parseFloat(fundingPlan.remaining_amount.toString()),
@@ -168,13 +170,13 @@ Ifp.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-11-29 14:21:01</sys_created_on>
         <sys_id>5070b8dc976fd1106fa8b4b3f153afdd</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_name>Ifp</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_5070b8dc976fd1106fa8b4b3f153afdd</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-11-29 20:04:46</sys_updated_on>
+        <sys_updated_on>2022-12-01 17:57:47</sys_updated_on>
     </sys_script_include>
 </record_update>
