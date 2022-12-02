@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="DAPPS:Evaluation Plan" max_length="40" name="x_g_dis_atat_evaluation_plan" type="collection">
+        <element label="Custom Differentiators" max_length="1000" name="custom_differentiators" type="string"/>
+        <element label="Custom Specifications" max_length="1000" name="custom_specifications" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Has Custom Specifications" max_length="40" name="has_custom_specifications" type="choice">
+            <choice/>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Method" max_length="40" name="method" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Lowest Price Technically Acceptable" sequence="1" value="LPTA"/>
+                <element inactive_on_update="false" label="Best Value Trade-Off" sequence="2" value="BVTO"/>
+                <element inactive_on_update="false" label="Best Use" sequence="3" value="BEST_USE"/>
+                <element inactive_on_update="false" label="Lowest Risk" sequence="4" value="LOWEST_RISK"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Source Selection" max_length="40" name="source_selection" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Government User does not require a technical proposal" sequence="1" value="NO_TECH_PROPOSAL"/>
+                <element inactive_on_update="false" label="Government User requires a technical proposal" sequence="2" value="TECH_PROPOSAL"/>
+                <element inactive_on_update="false" label="Government would like to purchase a set lump sum dollar amount of offerings from any one Contractor" sequence="3" value="SET_LUMP_SUM"/>
+                <element inactive_on_update="false" label="Government to purchase an equal set lump sum dollar amount of offerings from each Contractor" sequence="4" value="EQUAL_SET_LUMP_SUM"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Standard Differentiators" max_length="4000" name="standard_differentiators" reference="x_g_dis_atat_eval_plan_differentiator" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Standard Specifications" max_length="4000" name="standard_specifications" reference="x_g_dis_atat_eval_plan_assessment_area" type="glide_list"/>
+    </element>
+</database>

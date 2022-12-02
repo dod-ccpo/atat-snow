@@ -172,6 +172,7 @@ erDiagram
         Reference current_contract_and_recurring_information FK "to Current Contract Information And Recurring Information"
         Reference current_environment FK "to Current Environment"
         Reference ditco_ko FK "to DITCO Contract Specialist"
+        Reference evaluation_plan FK "to Evaluation Plan"
         Reference fair_opportunity FK "to Fair Opportunity"
         List funding_plans FK "to Funding Plan"
         Reference funding_request FK "to Funding Request"
@@ -310,6 +311,28 @@ erDiagram
         Choice recurring_requirement
         Choice pop_start_request
         Choice time_frame
+    }
+    EVALUATION-PLAN {
+        GUID sys_id PK
+        List standard_differentiators FK "to Eval Plan Differentiator"
+        List standard_specifications FK "to Eval Plan Assessment Area"
+        Choice source_selection "NO_TECH_PROPOSAL/TECH_PROPOSAL/SET_LUMP_SUM/EQUAL_SET_LUMP_SUM"
+        Choice method "LPTA/BVTO/BEST_USE/LOWEST_RISK"
+        Choice has_custom_specifications "Y/N"
+        String custom_specifications
+        String custom_differentiators
+    }
+    EVAL-PLAN-DIFFERENTIATOR {
+        GUID sys_id PK
+        String name
+        String description
+        Integer sequence
+    }
+    EVAL-PLAN-ASSESSMENT-AREA {
+        GUID sys_id PK
+        String name
+        String description
+        Integer sequence
     }
     FAIR-OPPORTUNITY {
         GUID sys_id PK
@@ -592,8 +615,10 @@ erDiagram
     CURRENT-ENVIRONMENT-INSTANCE }|--o{ REGION: "deployed to"
     CURRENT-ENVIRONMENT ||--o{ SYS_ATTACHMENT : "system and migration docs"
     CURRENT-ENVIRONMENT ||--|{ CLASSIFICATION-LEVEL : "environs and data"
-
-
+    %% evaluation plan
+    ACQUISITION-PACKAGE ||--|| EVALUATION-PLAN : ""
+    EVALUATION-PLAN ||--o{ EVAL-PLAN-DIFFERENTIATOR : "BVTO only"
+    EVALUATION-PLAN ||--o{ EVAL-PLAN-ASSESSMENT-AREA : "SET_LUMP_SUM only"
     %% funding
     ACQUISITION-PACKAGE ||--|| FUNDING-REQUIREMENT : ""
     FUNDING-REQUIREMENT ||--|{ FUNDING-PLAN : ""
