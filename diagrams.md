@@ -197,6 +197,7 @@ erDiagram
         String css_tracking_number "Contract Support System"
         String docusign_envelope_id
         Boolean edms_folder_created "Electronic Document Management System"
+        Choice docgen_job_status "NOT_STARTED/IN_PROGRESS/SUCCESS/FAILURE"
     }
     PROJECT-OVERVIEW {
         GUID sys_id PK
@@ -238,7 +239,7 @@ erDiagram
         Reference acquisition_package FK "to Acquisition Package"
         Choice job_type "ADD_PORTFOLIO/ADD_OPERATORS/ADD_FUNDING_SOURCE"
         String payload
-        Choice status "NOT_STARTED/IN_PROGRESS/SUCCESS/FAILURE"
+        Choice status "NOT_STARTED/IN_PROGRESS/SUCCESS/FAILURE; defined here"
         String status_message
     }
     ORGANIZATION {
