@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.AtatHelper</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>ATAT class that contains commonly used utility functions that can be used throughout the application.</description>
+        <name>AtatHelper</name>
+        <script><![CDATA[var AtatHelper = Class.create();
+AtatHelper.prototype = {
+    M2M_CONTACTS_TABLE:  "x_g_dis_atat_m2m_contacts_acquisition",
+	CONTACTS_TABLE: "x_g_dis_atat_contacts",
+	PERIOD_TABLE: "x_g_dis_atat_period",
+	errUtil: new ErrorHandler(),
+   
+    initialize: function() {
+    },
+  /**
+   * Query for many-to-many (m2m) contact records that associate the contacts and
+   * acquisition package records. A limit of records to can be provided but
+   * defaults to 50. 
+   *
+   * @param {(string | GlideRecord)} packageSysId - package sysId (or package GlideRecord)
+   * @param {number} [limit=50] - max records to return
+   * @return {string[]} an array of m2m contact record sysIds 
+   */
+  getAssociatedContacts: function(packageSysId, returnLimit) {
+    try {
+      var limit = returnLimit ? returnLimit : 50;
+      return new global.GlideQuery(this.M2M_CONTACTS_TABLE)
+        .where("acquisition_package", packageSysId)
+        .select(["contacts"])
+        .map(function(m2m) { return m2m.contacts; })
+        .toArray(limit);
+    } catch (error) {
+      throw this.errUtil.createError(
+          "AtatHelper --> getAssociatedContacts() " + error,
+          this.errUtil.METHOD_ERROR
+      );
+    }
+  },
+  /**
+   * Query package contacts and sort based on type for the Mission Owner,
+   * COR, ACOR, Financial POC and the remainder as Other. The field "type"
+   * is required.
+   *
+   * @param {string[]} contactIds - contact record sysIds
+   * @param {string[]} fields - columns to be returned from the query 
+   * @param {number} [limit=50] - limit of contacts to return from query
+   * @return {object} object that contains the sorted contact types
+   */
+  getContactsInfo: function(contactIds, fields, returnLimit) {
+    try {
+      if (!listContains("type", fields)) {
+        throw this.errUtil.createError(
+          "AtatHelper --> getContactsInfo(): The 'type' field is missing.",
+          this.errUtil.INVALID_INPUT
+        );
+      }
+
+      var limit = returnLimit ? returnLimit : 50;
+      var contacts = { mo: [], cor: [], acor: [], finPoc: [], other: [] };
+
+      new global.GlideQuery(this.CONTACTS_TABLE)
+        .where("sys_id", "IN", contactIds)
+        .select(fields)
+        .toArray(limit)
+		.map(removeSysId)
+        .forEach(function(contact) {
+          switch (contact.type) {
+            case "MISSION_OWNER":
+              contacts["mo"].push(contact);
+              break;
+            case "COR":
+              contacts["cor"].push(contact);
+              break;
+            case "ACOR":
+              contacts["acor"].push(contact);
+              break;
+            case "FINANCIAL_POC":
+              contacts["finPoc"].push(contact);
+              break;
+            default:
+              contacts["other"].push(contact);
+          }
+        });
+      return contacts;
+    } catch (error) {
+      var newError = this.errUtil.createError(
+          "AtatHelper --> getContactsInfo() " + error,
+          this.errUtil.METHOD_ERROR
+      );
+      this.errUtil.errorLogger(newError);
+    }
+  },
+  /**
+   * Construct the full FOIA address based on the parts stored
+   * in the Sensitive Information table.
+   *
+   * @param {GlideRecord} sensitiveInfo - package sensitive information record
+   * @return {string} complete FOIA address
+   */ 
+  constructFoiaAddress: function(sensitiveInfo) {
+    var str1 = sensitiveInfo.foia_street_address_1;
+    var str2 = sensitiveInfo.foia_street_address_2;
+    var city = sensitiveInfo.foia_city_apo_fpo;
+    var state = sensitiveInfo.foia_state_province_state_code;
+    var zip = sensitiveInfo.foia_zip_postal_code;
+    var country = sensitiveInfo.foia_country;
+    var line1 = str1;
+    if (str2.length > 0) {
+      line1 += ", " + str2;
+    }
+    line1 += "\n";
+    var line2 = city + ", " + state + " " + zip + "\n";
+    var line3 = country;
+
+    return line1 + line2 + line3;
+  },
+  /**
+   * Query for Periods.
+   *
+   * @param {string[]} periodIds - list of period ids to retrieve
+   * @return {Optional[]} array of periods
+   */
+  getPeriods: function(periodIds) {
+    try {
+      var periodFields = ["period_type", "period_unit_count", "period_unit", "option_order"];
+      return getListRecords(
+        periodIds, 
+        periodFields,
+        this.PERIOD_TABLE
+      ).map(removeSysId);
+    } catch (error) {
+      var errorMessage = "AataHelper --> getPeriods(): " + error;
+      throw this.errUtil.createError(errorMessage, this.errUtil.METHOD_ERROR);
+    }
+  },
+
+
+    type: 'AtatHelper'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-12-02 20:49:47</sys_created_on>
+        <sys_id>9027655d97a7d5106fa8b4b3f153afba</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>AtatHelper</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_9027655d97a7d5106fa8b4b3f153afba</sys_update_name>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-02 20:49:47</sys_updated_on>
+    </sys_script_include>
+</record_update>
