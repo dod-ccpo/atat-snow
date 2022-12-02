@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.RequirementsChecklist</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>ATAT class for creating a Requirements Checklist document payload and related functionality.&#13;
+Payload is sent to the HOTH API for document generation.&#13;
+</description>
+        <name>RequirementsChecklist</name>
+        <script><![CDATA[var RequirementsChecklist = Class.create();
+RequirementsChecklist.prototype = {
+  errUtil: new ErrorHandler(),
+  atatUtil: new AtatHelper(),
+  acquisitionPackage: null,
+
+  initialize: function(acqPackage) {
+    this.acquisitionPackage = acqPackage;
+  },
+
+  getPayload: function() {
+    try {
+      var acqPackage = this.acquisitionPackage;
+      var ctb = convertToBoolean;
+      var cc = acqPackage.current_contract_and_recurring_information;
+
+      // get package contacts and relevant information
+      var contactIds = this.atatUtil.getAssociatedContacts(acqPackage.sys_id);
+      var requiredFields = ["type", "formal_name", "email", "phone_and_extension", "dodaac"];
+      var contacts = this.atatUtil.getContactsInfo(contactIds, requiredFields);
+		
+      // periods (there should only be one base period)
+      var basePeriod = this.atatUtil.getPeriods(acqPackage.period_of_performance.base_period)[0];
+      var optionPeriods = this.atatUtil.getPeriods(acqPackage.period_of_performance.option_periods);
+
+      return {
+        projectOverview: {
+          title: acqPackage.project_overview.title.toString(),
+          scope: acqPackage.project_overview.scope.toString(),
+          emergencyDeclaration: ctb(acqPackage.project_overview.emergency_declaration),
+        },
+        organization: {
+          agency: acqPackage.organization.agency.label.toString(),
+          name: acqPackage.organization.computed_name.toString(),
+        },
+        contacts: {
+          missionOwnerName: contacts.mo[0].formal_name,
+          cor: contacts.cor[0],
+          acor: contacts.acor[0],
+        },
+        currentContract: {
+          exists: ctb(cc.current_contract_exists),
+          incumbentContractorName: cc.incumbent_contractor_name.toString(),
+          contractNumber: cc.contract_number.toString(),
+          taskOrderNumber: cc.task_delivery_order_number.toString(),
+          contractExpiration: cc.contract_order_expiration_date.toString(),
+        },
+        execptionToFairOpportunity: acqPackage.fair_opportunity.exception_to_fair_opportunity.toString(),
+        periodOfPerformance: {
+          basePeriod: basePeriod,
+          optionPeriods: optionPeriods, 
+          popStartRequest: ctb(acqPackage.period_of_performance.pop_start_request),
+          requestedPopStartDate: acqPackage.period_of_performance.requested_pop_start_date.toString(),
+          timeFrame: acqPackage.period_of_performance.time_frame.toString(),
+          recurringRequirement: ctb(acqPackage.period_of_performance.recurring_requirement),
+        },
+        contractType: {
+          firmFixedPrice: ctb(acqPackage.contract_type.firm_fixed_price),
+          timeAndMaterials: ctb(acqPackage.contract_type.time_and_materials),
+          justification: acqPackage.contract_type.contract_type_justification.toString(),
+        },
+        sensitiveInformation: {
+          baaRequired: ctb(acqPackage.sensitive_information.baa_required),
+          potentialToBeHarmful: ctb(acqPackage.sensitive_information.potential_to_be_harmful),
+          foiaContact: {
+            fullName: acqPackage.sensitive_information.foia_full_name.toString(),
+            email: acqPackage.sensitive_information.foia_email.toString(),
+            address: this.atatUtil.constructFoiaAddress(acqPackage.sensitive_information),
+          },
+          section508: {
+            section508Sufficient: ctb(acqPackage.sensitive_information.section_508_sufficient),
+          },
+        }
+      };
+
+    } catch (error) {
+		
+      errorMessage = "Error creating the Requirements Checklist payload. " + error;
+      this.errUtil.errorLogger(
+        this.errUtil.createError(
+          errorMessage,
+          this.errUtil.INVALID_INPUT
+        )
+      );
+    }
+
+  },
+
+  type: 'RequirementsChecklist'
+};
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-12-02 20:50:47</sys_created_on>
+        <sys_id>324825d997a7d5106fa8b4b3f153af7c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>RequirementsChecklist</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_324825d997a7d5106fa8b4b3f153af7c</sys_update_name>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-02 20:50:47</sys_updated_on>
+    </sys_script_include>
+</record_update>

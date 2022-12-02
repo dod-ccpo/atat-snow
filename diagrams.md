@@ -188,12 +188,16 @@ erDiagram
         List secondary_reviewers FK "to sys_user"
         List selected_service_offerings FK "to Selected Service Offering"
         Reference sensitive_information FK "to Sensitive Information"
+        Reference cor FK "to Contacts"
+        Reference acor FK "to Contacts"
+        Reference primary_contact FK "to Contacts"
         String number
         Choice package_status "DRAFT/WAITING_FOR_SIGNATURES/WAITING_FOR_TASK_ORDER/TASK_ORDER_AWARDED/ARCHIVED/DELETED"
         String css_pre_award_id "Contract Support System"
         String css_tracking_number "Contract Support System"
         String docusign_envelope_id
         Boolean edms_folder_created "Electronic Document Management System"
+        Choice docgen_job_status "NOT_STARTED/IN_PROGRESS/SUCCESS/FAILURE"
     }
     PROJECT-OVERVIEW {
         GUID sys_id PK
@@ -235,7 +239,7 @@ erDiagram
         Reference acquisition_package FK "to Acquisition Package"
         Choice job_type "ADD_PORTFOLIO/ADD_OPERATORS/ADD_FUNDING_SOURCE"
         String payload
-        Choice status "NOT_STARTED/IN_PROGRESS/SUCCESS/FAILURE"
+        Choice status "NOT_STARTED/IN_PROGRESS/SUCCESS/FAILURE; defined here"
         String status_message
     }
     ORGANIZATION {
@@ -376,6 +380,7 @@ erDiagram
         Reference acquisition_package FK "to Acquisition Package"
         Reference funding_plan FK "to Funding Plan"
         Reference funding_request FK "to Funding Request"
+        Reference financial_poc FK "to Contacts"
         Currency funds_obligated
         Currency funds_total
         Choice incrementally_funded
@@ -567,7 +572,7 @@ erDiagram
     ACQUISITION-PACKAGE }|--|| CLASSIFICATION-LEVEL : ""
     ACQUISITION-PACKAGE ||--|| PORTFOLIO : "generates"
     ACQUISITION-PACKAGE ||--|| PROJECT-OVERVIEW : ""
-    ACQUISITION-PACKAGE }|--|{ CONTACTS : "m2m table omitted"
+    ACQUISITION-PACKAGE ||--|{ CONTACTS : ""
     CONTACTS ||--o| MILITARY-RANK : "military have"
     ACQUISITION-PACKAGE }|--|| ORGANIZATION : "supports mission of"
     ORGANIZATION ||--|{ AGENCY : ""
@@ -622,6 +627,7 @@ erDiagram
     %% funding
     ACQUISITION-PACKAGE ||--|| FUNDING-REQUIREMENT : ""
     FUNDING-REQUIREMENT ||--|{ FUNDING-PLAN : ""
+    FUNDING-REQUIREMENT ||--|| CONTACTS : ""
     FUNDING-PLAN ||--o{ FUNDING-INCREMENT : ""
     FUNDING-PLAN ||--|| SYS_ATTACHMENT : "funding plan"
     ACQUISITION-PACKAGE ||--|{ FUNDING-PLAN : "TODO remove, refactor via funding requirement"
