@@ -162,7 +162,6 @@ erDiagram
     }
     ACQUISITION-PACKAGE {
         GUID sys_id PK
-        Reference classification_level FK "to Classification Level"
         Reference contract_award FK "to Award History"
         Reference contract_considerations FK "to Contract Considerations"
         List contract_modifications FK "to Award History"
@@ -567,9 +566,14 @@ erDiagram
         URL endpoint
         String name
     }
+    SELECTED-CLASSIFICATION-LEVEL {
+        GUID sys_id PK ""
+        Reference acquisition_package FK "to Acquisition Package"
+        Reference classification_level FK "to Classification Level"
+        List classified_information_types FK "to Classified Information Type"
+    }
 
     ACQUISITION-PACKAGE ||--|| SYS_USER : "MOs, contributors, reviewers"
-    ACQUISITION-PACKAGE }|--|| CLASSIFICATION-LEVEL : ""
     ACQUISITION-PACKAGE ||--|| PORTFOLIO : "generates"
     ACQUISITION-PACKAGE ||--|| PROJECT-OVERVIEW : ""
     ACQUISITION-PACKAGE ||--|{ CONTACTS : ""
@@ -595,6 +599,9 @@ erDiagram
     PACKAGE-DOCUMENT }|--|| ACQUISITION-PACKAGE : ""
     PACKAGE-DOCUMENT ||--|| PACKAGE-DOCUMENT-TYPE : ""
     PACKAGE-DOCUMENT ||--|| SYS_ATTACHMENT : "Package document"
+    SELECTED-CLASSIFICATION-LEVEL ||--|| ACQUISITION-PACKAGE : ""
+    SELECTED-CLASSIFICATION-LEVEL ||--|| CLASSIFICATION-LEVEL : ""
+    SELECTED-CLASSIFICATION-LEVEL ||--o{ CLASSIFIED-INFORMATION-TYPE : "S and TS only"
 
     %% DoW Performance Requirements
     ACQUISITION-PACKAGE ||--|| SELECTED-SERVICE-OFFERING : ""
