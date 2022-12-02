@@ -172,6 +172,7 @@ erDiagram
         Reference current_contract_and_recurring_information FK "to Current Contract Information And Recurring Information"
         Reference current_environment FK "to Current Environment"
         Reference ditco_ko FK "to DITCO Contract Specialist"
+        Reference evaluation_plan FK "to Evaluation Plan"
         Reference fair_opportunity FK "to Fair Opportunity"
         List funding_plans FK "to Funding Plan"
         Reference funding_request FK "to Funding Request"
@@ -311,6 +312,28 @@ erDiagram
         Choice pop_start_request
         Choice time_frame
     }
+    EVALUATION-PLAN {
+        GUID sys_id PK
+        List standard_differentiators FK "to Eval Plan Differentiator"
+        List standard_specifications FK "to Eval Plan Assessment Area"
+        Choice source_selection "NO_TECH_PROPOSAL/TECH_PROPOSAL/SET_LUMP_SUM/EQUAL_SET_LUMP_SUM"
+        Choice method "LPTA/BVTO/BEST_USE/LOWEST_RISK"
+        Choice has_custom_specifications "Y/N"
+        String custom_specifications
+        String custom_differentiators
+    }
+    EVAL-PLAN-DIFFERENTIATOR {
+        GUID sys_id PK
+        String name
+        String description
+        Integer sequence
+    }
+    EVAL-PLAN-ASSESSMENT-AREA {
+        GUID sys_id PK
+        String name
+        String description
+        Integer sequence
+    }
     FAIR-OPPORTUNITY {
         GUID sys_id PK
         Choice exception_to_fair_opportunity
@@ -420,6 +443,12 @@ erDiagram
         String anticipated_need_usage
         String additional_information
     }
+    COMPUTE-ENVIRONMENT-INSTANCE {
+        Extends ENVIRONMENT-INSTANCE "inherits cols"
+        GUID sys_id PK
+        Choice environment_type "DEV_TEST/PRE_PROD/PROD_STAGING/COOP_DISASTER_RECOVERY"
+        Choice operating_environment "VIRTUAL/CONTAINERS/SERVERLESS/END_USER_COMPUTING_VIRTUAL_DESKTOP"
+    }
     DATABASE-ENVIRONMENT-INSTANCE {
         Extends ENVIRONMENT-INSTANCE "inherits cols"
         Choice database_type "ANALYTICAL/TRANSACTIONAL/GRAPH/RELATIONAL/OTHER"
@@ -429,6 +458,7 @@ erDiagram
     CLASSIFICATION-INSTANCE {
         GUID sys_id PK
         Reference classification_level FK "to Classification Level"
+        List classified_information_types FK "to Classified Information Type"
         List selected_periods FK "to Period"
         String dow_task_number
         Currency monthly_price
@@ -441,6 +471,12 @@ erDiagram
         Choice impact_level "IL2/IL4/IL5/IL6"
         String display "calculated value"
     }
+    CLASSIFIED-INFORMATION-TYPE {
+        GUID sys_id PK
+        String name
+        String description
+        Integer sequence
+    }
     REGION {
         GUID sys_id PK
         String description
@@ -451,6 +487,7 @@ erDiagram
     ENVIRONMENT-INSTANCE {
         GUID sys_id PK
         Reference classification_level FK "to Classification Level"
+        List classified_information_types FK "to Classified Information Type"
         List selected_periods FK "to Period"
         Reference region FK "to Region"
         Choice need_for_entire_task_order_duration "true=select all periods"
@@ -560,23 +597,28 @@ erDiagram
     SELECTED-SERVICE-OFFERING ||--|| CLASSIFICATION-INSTANCE : ""
     SELECTED-SERVICE-OFFERING ||--|{ ESTIMATED-ENVIRONMENT-INSTANCE : ""
     CLASSIFICATION-INSTANCE }|--|| CLASSIFICATION-LEVEL : ""
+    CLASSIFICATION-INSTANCE ||--|| CLASSIFIED-INFORMATION-TYPE : "S and TS only"
     CLASSIFICATION-INSTANCE ||--|{ PERIOD : ""
     %% base table
     ENVIRONMENT-INSTANCE }|--|{ CLASSIFICATION-LEVEL : ""
+    ENVIRONMENT-INSTANCE ||--|| CLASSIFIED-INFORMATION-TYPE : "S and TS only"
     ENVIRONMENT-INSTANCE ||--|{ PERIOD : ""
     ENVIRONMENT-INSTANCE ||--|| REGION : ""
     %% attempt to illustrate table inheritance
     ENVIRONMENT-INSTANCE ||--|| ESTIMATED-ENVIRONMENT-INSTANCE: "extended by"
     ENVIRONMENT-INSTANCE ||--|| CURRENT-ENVIRONMENT-INSTANCE: "extended by"
     ENVIRONMENT-INSTANCE ||--|| DATABASE-ENVIRONMENT-INSTANCE: "extended by"
+    ENVIRONMENT-INSTANCE ||--|| COMPUTE-ENVIRONMENT-INSTANCE: "extended by"
     %% current environment
     ACQUISITION-PACKAGE ||--o| CURRENT-ENVIRONMENT : ""
     CURRENT-ENVIRONMENT ||--|{ CURRENT-ENVIRONMENT-INSTANCE : ""
     CURRENT-ENVIRONMENT-INSTANCE }|--o{ REGION: "deployed to"
     CURRENT-ENVIRONMENT ||--o{ SYS_ATTACHMENT : "system and migration docs"
     CURRENT-ENVIRONMENT ||--|{ CLASSIFICATION-LEVEL : "environs and data"
-
-
+    %% evaluation plan
+    ACQUISITION-PACKAGE ||--|| EVALUATION-PLAN : ""
+    EVALUATION-PLAN ||--o{ EVAL-PLAN-DIFFERENTIATOR : "BVTO only"
+    EVALUATION-PLAN ||--o{ EVAL-PLAN-ASSESSMENT-AREA : "SET_LUMP_SUM only"
     %% funding
     ACQUISITION-PACKAGE ||--|| FUNDING-REQUIREMENT : ""
     FUNDING-REQUIREMENT ||--|{ FUNDING-PLAN : ""
