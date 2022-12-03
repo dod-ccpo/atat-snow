@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="DAPPS:Current Environment" max_length="40" name="x_g_dis_atat_current_environment" sizeclass="0" type="collection">
+    <element label="DAPPS:Current Environment" max_length="40" name="x_g_dis_atat_current_environment" sizeclass="1" type="collection">
         <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Additional Growth" max_length="40" name="additional_growth" type="choice">
             <choice/>
         </element>
         <element label="Anticipated Yearly Additional Capacity" max_length="40" name="anticipated_yearly_additional_capacity" type="integer"/>
         <element label="Applications Need Architectural Design" max_length="1000" name="applications_need_architectural_design" type="string"/>
-        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Current Environment Exists" max_length="40" name="current_environment_exists" type="choice">
-            <choice/>
-        </element>
+        <element default="False" label="Current Environment Exists" max_length="40" name="current_environment_exists" type="boolean"/>
         <element choice="1" label="Current Environment Replicated Optimized" max_length="40" name="current_environment_replicated_optimized" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Yes, Replicate" sequence="1" value="YES_REPLICATE"/>

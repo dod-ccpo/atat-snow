@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Costs" max_length="40" name="x_g_dis_atat_costs" sizeclass="1" type="collection">
+    <element label="ATAT:Costs" max_length="40" name="x_g_dis_atat_costs" sizeclass="12" type="collection">
         <element label="Agency" max_length="32" name="agency" reference="x_g_dis_atat_agency" type="reference"/>
         <element label="CLIN" max_length="32" name="clin" reference="x_g_dis_atat_clin" type="reference"/>
         <element label="CSP" max_length="32" name="csp" reference="x_g_dis_atat_cloud_service_provider" type="reference"/>
@@ -10,19 +10,19 @@
         <element label="Value" max_length="20" name="value" type="currency"/>
         <element label="Year-Month" max_length="40" name="year_month" type="glide_date"/>
         <index name="index">
-            <element name="clin"/>
-        </index>
-        <index name="index2">
             <element name="csp"/>
         </index>
+        <index name="index2">
+            <element name="clin"/>
+        </index>
         <index name="index3">
-            <element name="portfolio"/>
+            <element name="agency"/>
         </index>
         <index name="index4">
-            <element name="organization"/>
+            <element name="portfolio"/>
         </index>
         <index name="index5">
-            <element name="agency"/>
+            <element name="organization"/>
         </index>
     </element>
 </database>

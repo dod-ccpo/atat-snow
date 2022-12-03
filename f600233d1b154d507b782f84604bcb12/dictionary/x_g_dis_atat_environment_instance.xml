@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="DAPPS:Environment Instance" max_length="40" name="x_g_dis_atat_environment_instance" sizeclass="0" type="collection">
+    <element label="DAPPS:Environment Instance" max_length="40" name="x_g_dis_atat_environment_instance" sizeclass="2" type="collection">
         <element label="Classification Level" max_length="32" name="classification_level" reference="x_g_dis_atat_classification_level" type="reference"/>
         <element label="Classified Information Types" max_length="4000" name="classified_information_types" reference="x_g_dis_atat_classified_information_type" type="glide_list"/>
         <element label="Data Egress Monthly Amount" max_length="40" name="data_egress_monthly_amount" type="integer"/>
@@ -72,10 +72,10 @@
         </element>
         <element default="javascript:current.getTableName();" label="Class" max_length="80" name="sys_class_name" type="sys_class_name"/>
         <index name="index">
-            <element name="classification_level"/>
+            <element name="region"/>
         </index>
         <index name="index2">
-            <element name="region"/>
+            <element name="classification_level"/>
         </index>
         <index name="index3">
             <element name="sys_class_name"/>
