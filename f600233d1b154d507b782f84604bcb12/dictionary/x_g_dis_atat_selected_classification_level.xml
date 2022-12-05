@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="DAPPS:Selected Classification Level" max_length="40" name="x_g_dis_atat_selected_classification_level" type="collection">
+    <element label="DAPPS:Selected Classification Level" max_length="40" name="x_g_dis_atat_selected_classification_level" sizeclass="0" type="collection">
         <element label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
         <element label="Classification Level" max_length="32" name="classification_level" reference="x_g_dis_atat_classification_level" type="reference"/>
         <element label="Classified Information Types" max_length="4000" name="classified_information_types" reference="x_g_dis_atat_classified_information_type" type="glide_list"/>
+        <element label="Data Egress Monthly Amount" max_length="40" name="data_egress_monthly_amount" type="integer"/>
+        <element choice="3" choice_field="storage_unit" choice_table="x_g_dis_atat_environment_instance" label="Data Egress Monthly Unit" max_length="40" name="data_egress_monthly_unit" type="choice">
+            <choice/>
+        </element>
+        <element label="Data Growth Estimate Percentage" max_length="40" name="data_growth_estimate_percentage" type="string"/>
+        <element choice="1" choice_field="user_growth_estimate_type" choice_table="x_g_dis_atat_selected_classification_level" label="Data Growth Estimate Type" max_length="40" name="data_growth_estimate_type" type="choice">
+            <choice/>
+        </element>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Data Increase" max_length="40" name="data_increase" type="choice">
+            <choice/>
+        </element>
+        <element choice="3" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Increase in Users" max_length="40" name="increase_in_users" type="choice">
+            <choice/>
+        </element>
+        <element label="Users per Region" max_length="4000" name="users_per_region" type="string"/>
+        <element label="User Growth Estimate Percentage" max_length="40" name="user_growth_estimate_percentage" type="string"/>
+        <element choice="1" label="User Growth Estimate Type" max_length="40" name="user_growth_estimate_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Single" sequence="1" value="SINGLE"/>
+                <element inactive_on_update="false" label="Multiple" sequence="2" value="MULTIPLE"/>
+            </choice>
+        </element>
         <index name="index">
             <element name="classification_level"/>
         </index>

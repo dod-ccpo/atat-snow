@@ -571,6 +571,15 @@ erDiagram
         Reference acquisition_package FK "to Acquisition Package"
         Reference classification_level FK "to Classification Level"
         List classified_information_types FK "to Classified Information Type"
+        String users_per_region "stringified json w/ sys_id/count pairs"
+        Choice increase_in_users "Y/N"
+        Choice user_growth_estimate_type "SINGLE/MULTIPLE; defined here"
+        String user_growth_estimate_percentage "one or many"
+        Integer data_egress_monthly_amount
+        Choice data_egress_monthly_unit "GB/TB/PB"
+        Choice data_increase "Y/N"
+        Choice data_growth_estimate_type "SINGLE/MULTIPLE"
+        String data_growth_estimate_percentage "one or many"
     }
 
     ACQUISITION-PACKAGE ||--|| SYS_USER : "MOs, contributors, reviewers"
