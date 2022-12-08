@@ -459,6 +459,9 @@ erDiagram
         String database_type_other
         Choice database_licensing "TRANSFER_EXISTING/NEW"
     }
+    STORAGE-ENVIRONMENT-INSTANCE {
+        Extends ENVIRONMENT-INSTANCE "inherits cols"
+    }
     CLASSIFICATION-INSTANCE {
         GUID sys_id PK
         Reference classification_level FK "to Classification Level"
@@ -630,6 +633,7 @@ erDiagram
     ENVIRONMENT-INSTANCE ||--|| CURRENT-ENVIRONMENT-INSTANCE: "extended by"
     ENVIRONMENT-INSTANCE ||--|| DATABASE-ENVIRONMENT-INSTANCE: "extended by"
     ENVIRONMENT-INSTANCE ||--|| COMPUTE-ENVIRONMENT-INSTANCE: "extended by"
+    ENVIRONMENT-INSTANCE ||--|| STORAGE-ENVIRONMENT-INSTANCE: "extended by"
     %% current environment
     ACQUISITION-PACKAGE ||--o| CURRENT-ENVIRONMENT : ""
     CURRENT-ENVIRONMENT ||--|{ CURRENT-ENVIRONMENT-INSTANCE : ""
