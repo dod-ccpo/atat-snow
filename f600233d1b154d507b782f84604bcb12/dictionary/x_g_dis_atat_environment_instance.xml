@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="DAPPS:Environment Instance" max_length="40" name="x_g_dis_atat_environment_instance" sizeclass="0" type="collection">
+    <element label="DAPPS:Environment Instance" max_length="40" name="x_g_dis_atat_environment_instance" sizeclass="1" type="collection">
+        <element label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
+        <element label="Anticipated Need or Usage" max_length="1000" name="anticipated_need_or_usage" type="string"/>
         <element label="Classification Level" max_length="32" name="classification_level" reference="x_g_dis_atat_classification_level" type="reference"/>
         <element label="Classified Information Types" max_length="4000" name="classified_information_types" reference="x_g_dis_atat_classified_information_type" type="glide_list"/>
         <element label="Data Egress Monthly Amount" max_length="40" name="data_egress_monthly_amount" type="integer"/>
@@ -36,6 +38,12 @@
         <element label="Number of Instances" max_length="40" name="number_of_instances" type="integer"/>
         <element label="Number of vCPUs" max_length="40" name="number_of_vcpus" type="integer"/>
         <element label="Operating System" max_length="100" name="operating_system" type="string"/>
+        <element choice="1" label="Operating System Licensing" max_length="40" name="operating_system_licensing" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Transfer Existing" sequence="1" value="TRANSFER_EXISTING"/>
+                <element inactive_on_update="false" label="New" sequence="2" value="NEW"/>
+            </choice>
+        </element>
         <element choice="1" label="Performance Tier" max_length="40" name="performance_tier" type="choice">
             <choice>
                 <element inactive_on_update="false" label="General" sequence="1" value="GENERAL"/>
@@ -75,9 +83,12 @@
             <element name="classification_level"/>
         </index>
         <index name="index2">
-            <element name="region"/>
+            <element name="acquisition_package"/>
         </index>
         <index name="index3">
+            <element name="region"/>
+        </index>
+        <index name="index4">
             <element name="sys_class_name"/>
         </index>
     </element>

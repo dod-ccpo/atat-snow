@@ -493,6 +493,7 @@ erDiagram
     }
     ENVIRONMENT-INSTANCE {
         GUID sys_id PK
+        Reference acquisition_package FK "to Acquisition Package"
         Reference classification_level FK "to Classification Level"
         List classified_information_types FK "to Classified Information Type"
         List selected_periods FK "to Period"
@@ -515,6 +516,8 @@ erDiagram
         Choice storage_unit "GB/TB/PB; defined here"
         Integer data_egress_monthly_amount
         Choice data_egress_monthly_unit "GB/TB/PB"
+        Choice operating_system_licensing "TRANSFER_EXISTING/NEW"
+        String anticipated_need_or_usage
     }
     CURRENT-ENVIRONMENT {
         GUID sys_id PK
