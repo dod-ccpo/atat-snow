@@ -38,6 +38,12 @@
         <element label="Number of Instances" max_length="40" name="number_of_instances" type="integer"/>
         <element label="Number of vCPUs" max_length="40" name="number_of_vcpus" type="integer"/>
         <element label="Operating System" max_length="100" name="operating_system" type="string"/>
+        <element choice="1" label="Operating System Licensing" max_length="40" name="operating_system_licensing" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Transfer Existing" sequence="1" value="TRANSFER_EXISTING"/>
+                <element inactive_on_update="false" label="New" sequence="2" value="NEW"/>
+            </choice>
+        </element>
         <element choice="1" label="Performance Tier" max_length="40" name="performance_tier" type="choice">
             <choice>
                 <element inactive_on_update="false" label="General" sequence="1" value="GENERAL"/>
