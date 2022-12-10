@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.Dow</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>ATAT class for creating an Description Of Work (DOW) payload and related functionality.&#13;
+Payload is sent to the HOTH API for document generation.&#13;
+</description>
+        <name>Dow</name>
+        <script><![CDATA[var Dow = Class.create();
+Dow.prototype = {
+  AWARDS_HIS_TABLE: "x_g_dis_atat_award_history",
+  SELECTED_SER_OFF_TABLE: "x_g_dis_atat_selected_service_offering",
+  SELECTED_CLASS_LVL_TABLE: "x_g_dis_atat_selected_classification_level",
+  CUR_ENV_INST_TABLE: "x_g_dis_atat_current_environment_instance",
+  ENV_INST_TABLE: "x_g_dis_atat_environment_instance",
+
+  atatUtil: new AtatHelper(),
+  errUtil: new ErrorHandler(),
+  ctb: this.convertToBoolean,
+  acquisitionPackage: null,
+
+  initialize: function(acqPackage) {
+    this.acquisitionPackage = acqPackage;
+  },
+
+  /**
+   * Format awards to be camelCase for HOTH API specicification.
+   *
+   * @param {GlideRecord} award - an award record
+   * return {object} award with camelCase properties
+   */
+  mapAwards: function(awards) {
+    try {
+      return awards.map(function(award) {
+        award.contractAwardType = award.contract_award_type;
+        award.effectiveDate = award.effective_date;
+        award.modificationOrder = award.modification_order;
+
+        // remove previous properties
+        delete award.contract_award_type;
+        delete award.effective_date;
+        delete award.modification_order;
+
+        return award;
+      });
+
+    } catch (error) {
+      throw this.errUtil.createError(
+        "Dow --> mapAwards(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+  },
+  /**
+   * Gather the contract award and modifications for a given package.
+   *
+   * @param {array} awardIds - list of award records (awards or modifications)
+   * @return {array} award records
+   */
+  getAwardHistory: function(awardIds) {
+    try {
+      return getListRecords(
+        awardIds,
+        ['contract_award_type', 'modification_order', 'effective_date'],
+        this.AWARDS_HIS_TABLE)
+        .map(removeSysId);
+
+    } catch (error) {
+      throw this.errUtil.createError(
+        "Dow --> getAwardHistory(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+  },
+  /**
+   * Get current environment instances.
+   *
+   * @param {array} currentEnvIds - list of environment instance ids
+   * @return {array} an array of current environment instances
+   */
+  getCurrentEnvInstances: function(currentEnvIds) {
+    try {
+      var requiredFields = [
+        "instance_name", "instance_location", "number_of_instances",
+        "region", "deployed_regions", "users_per_region",
+        "need_for_entire_task_order_duration", "selected_periods",
+        "classification_level", "classified_information_types",
+
+        "operating_type", "operating_environment", "operating_system", "licensing",
+        "data_egress_monthly_amount", "data_egress_monthly_unit",
+        "memory_amount", "memory_unit", "storage_amount", "storage_unit", "storage_type",
+        "number_of_vcpus", "performance_tier", "processor_speed",
+        "pricing_model", "pricing_model_expiration",
+
+        "is_traffic_spike_event_based", "traffic_spike_event_description",
+        "is_traffic_spike_period_based", "traffic_spike_period_description",
+        "additional_information", "current_usage_description", "anticipated_need_usage",
+      ];
+
+      return getListRecords(currentEnvIds, requiredFields, this.CUR_ENV_INST_TABLE)
+        .map(removeSysId);
+
+    } catch (error) {
+      throw this.errUtil.createError(
+        "Dow --> getCurrentEnvInstances(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+
+  },
+  /**
+   * Gather current environment information.
+   *
+   * @param {GlideRecord} currentEnv - current environment record
+   * @return {object} a currentEnvironment object containing relevant information
+   */
+  getCurrentEnvironmentInfo: function(currentEnv) {
+	var ctb = this.ctb;
+    try {
+      // sections 3 and 4.1 of DOW
+      return {
+        // background
+        currentEnvironmentExists: ctb(currentEnv.current_environment_exists),
+        hasSystemDocumentation: ctb(currentEnv.has_system_documentation),
+        // Q: are these documents to be included in the package or do they have
+        // to be included in the actual DOW?
+        systemDocumentation: currentEnv.system_documentation.toString(), // List
+        hasMigrationDocumentation: ctb(currentEnv.has_migration_documentation),
+        migrationDocumentation: currentEnv.migration_documentation.toString(), // List
+        envLocation: currentEnv.env_location.toString(), // CLOUD/HYBRID/ON_PREM
+        // TODO: get information for impact levels
+        envClassificationsCloud: currentEnv.env_classifications_cloud.toString(), // List
+        envClassificationsOnprem: currentEnv.env_classifications_onprem.toString(), // List
+        // environment instances 
+        // Q: current usage?? Evenly/Event/HighUsage
+        // contained inside each instance
+        envInstances: this.getCurrentEnvInstances(currentEnv.env_instances), // List
+
+
+        // currentEnv
+        additionalGrowth: ctb(currentEnv.additional_growth),
+        anticipatedYearlyAdditionalCapacity: parseInt(currentEnv.anticipated_yearly_additional_capacity),
+        // replicated or optimized
+        currentEnvironmentReplicatedOptimized: currentEnv.current_environment_replicated_optimized.toString(),
+        statementReplicatedOptimized: currentEnv.statement_replicated_optimized.toString(),
+        hasPhasedApproach: ctb(currentEnv.has_phased_approach),
+        phasedApproachSchedule: currentEnv.phased_approach_schedule.toString(),
+        // architect design
+        needsArchitecturalDesignServices: ctb(currentEnv.needs_architectural_design_services),
+        statementArchitecturalDesign: currentEnv.statement_architectural_design.toString(),
+        // TODO: get information for impact levels
+        dataClassificationsImpactLevels: currentEnv.data_classifications_impact_levels.toString(), // List
+        externalFactorsArchitecturalDesign: currentEnv.external_factors_architectural_design.toString(),
+        applicationsNeedArchitecturalDesign: currentEnv.applications_need_architectural_design.toString(),
+        // cloud support needed
+        // Q: should there be an option for this in currentEnv??
+      };
+
+    } catch (error) {
+      throw this.errUtil.createError(
+        "Dow --> getCurrentEnvironmentInfo(): " + error,
+        this.errUtil.METHOD_ERROR
+		);
+    }
+
+  },
+  /**
+   * Get Selected Service Offerings that related to section 4.2.x.x to 4.3.x.x
+   * The Selected Service Offerings are for XaaS, Cloud Support Packages.
+   *
+   * @param {array} selectedServiceIds - a list of selected service offering ids 
+   * @return {array} of selected service offerings with information for each
+   */
+  getSelectedServiceOfferings: function(selectedServiceIds) {
+    try {
+      var requiredFields = [
+        "classification_instances", "estimated_environment_instances",
+        "service_offering", "other_service_offering"
+      ];
+      return getListRecords(selectedServiceIds, requiredFields, this.SELECTED_SER_OFF_TABLE);
+
+    } catch (error) {
+      throw this.errUtil.createError(
+        "Dow --> getSelectedServiceOfferings(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+
+  },
+  /**
+   * Get a Package Period of Performance (PoP).
+   *
+   * @param {GlideRecord} pop - a package period of perforamnce record
+   * @param {object} mappedPeriods - mapping of package periods
+   * @return {object} a package PoP with required information 
+   */
+  getPackagePop: function(pop, mappedPeriods) {
+    try {
+      var optionPeriods = [];
+      pop.option_periods.split(",").forEach(function(id) { optionPeriods.push(mappedPeriods[id]); });
+      return {
+        basePeriod: mappedPeriods[pop.base_period.toString()],
+        optionPeriods: optionPeriods,
+        popStartRequest: this.ctb(pop.pop_start_request),
+        requestedPopStartDate: pop.requested_pop_start_date.toString(),
+        timeFrame: pop.time_frame.toString(),
+        recurringRequirement: this.ctb(pop.recurring_requirement)
+      };
+
+    } catch (error) {
+      throw this.errUtil.createError(
+        "Dow --> getPackagePop(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+
+  },
+  /**
+   * Gather all information needed for DOW document generation and 
+   * creates a payload. Instantiate the DOW class with an acquistion
+   * package record before using this method.
+   * 
+   * return {object} - an DOW payload for HOTH API
+   */
+  getPayload: function() {
+    try {
+      var ctb = this.ctb;
+      var acqPacakage = this.acquisitionPackage;
+      var cci = acqPacakage.current_contract_and_recurring_information;
+      var cc = acqPacakage.contract_considerations;
+      
+      // award related 
+      var awardIds = acqPacakage.contract_award + "," + acqPacakage.contract_modifications;
+
+      // Pop related
+      var pop = acqPacakage.period_of_performance;
+      var periods = this.atatUtil.getPeriods(pop.base_period + "," + pop.option_periods);
+      var mappedPeriods = this.atatUtil.mapPackagePeriods(periods);
+
+
+      // hoth DoW generated-document payload
+      return {
+        documentType: "DESCRIPTION_OF_WORK_DOCX",
+        templatePayload: {
+          // initial award and modifications; first table at top
+          awardHistory: this.mapAwards(this.getAwardHistory(awardIds)),
+
+          // second table at top
+          contractInformation: {
+            currentContractExists: ctb(cci.current_contract_exists),
+            contractNumber: cci.contract_number.toString(),
+            contractExpirationDate: cci.contract_order_expiration_date.toString(),
+            incumbentContractorName: cci.incumbent_contractor_name.toString(),
+            previousTaskOrderNumber: cci.task_delivery_order_number.toString()
+          },
+
+          // project overview (sections 1 and 2)
+          toTitle: acqPacakage.project_overview.title.toString(),
+          scope: acqPacakage.project_overview.scope.toString(),
+          scopeSurge: acqPacakage.requirements_cost_estimate.surge_capabilities.toString(),
+
+          // sections 3 and 4.1-3 
+          currentEnvironment: this.getCurrentEnvironmentInfo(acqPacakage.current_environment),
+          selectedClassificationLevels: [],
+          // section 4.2-4.3
+          xaasOfferings: [],
+          cloudSupportPackages: [],
+
+
+          // section 5 - Contract Data Requirements List (CDRL)
+          // - no data, text/table only?
+
+          // section 6 - Performance Standards 
+          // - no data, text only ?
+ 
+          // section 7
+          periodOfPerformance: this.getPackagePop(acqPacakage.period_of_performance, mappedPeriods),
+          // TODO: add task/subtask selected periods and need for entire duration??
+
+          // section 8 - Security Requirements
+          // Selected Classified Levels ??
+
+          // section 9 - GFP/GFE/GFI
+          // - no data, text only ?
+
+          // section 10
+          contractConsiderations: {
+            // 10a
+            potentialConflictOfInterest: ctb(cc.potential_conflict_of_interest),
+            conflictOfInterestExplanation: cc.conflict_of_interest_explanation.toString(),
+            // 10b
+            packagingShippingNoneApply: ctb(cc.packaging_shipping_none_apply),
+            packagingShippingOther: ctb(cc.packaging_shipping_other),
+            packagingShippingOtherExplanation:
+              cc.packaging_shipping_other_explanation.toString(),
+            contractorProvidedTransfer: ctb(cc.contractor_provided_transfer),
+            // 10c Supply Chain Risk Management 
+            // - no data, just text?
+
+            // 10d Training 
+            // - no data, just text?
+
+            // 10e
+            piiPresent: ctb(acqPacakage.sensitive_information.pii_present),
+            systemOfRecordName: acqPacakage.sensitive_information.system_of_record_name.toString(),
+            // 10f
+            travel: [],
+
+            contractorRequiredTraining: ctb(cc.contractor_required_training),
+
+          },
+
+          // section 11
+          // - no data, text only?
+
+        }
+      };
+
+    } catch (error) {
+      var errorMessage = "Error creating the DOW payload. " + error; 
+      this.errUtil.errorLogger(
+        this.errUtil.createError(
+          errorMessage,
+          this.errUtil.INVALID_INPUT
+        )
+      );
+    }
+  },
+
+  type: 'Dow'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-12-10 00:50:30</sys_created_on>
+        <sys_id>3d46262b97a751106fa8b4b3f153af90</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Dow</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_3d46262b97a751106fa8b4b3f153af90</sys_update_name>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-10 00:50:30</sys_updated_on>
+    </sys_script_include>
+</record_update>
