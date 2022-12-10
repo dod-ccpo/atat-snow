@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="x_g_dis_atat_environment_instance" label="DAPPS:Cloud Support Environment Instance" max_length="40" name="x_g_dis_atat_cloud_support_environment_instance" type="collection">
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Personnel Onsite Access" max_length="40" name="personnel_onsite_access" type="choice">
+            <choice/>
+        </element>
+        <element choice="1" label="TS Contractor Clearance Type" max_length="40" name="ts_contractor_clearance_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Top Secret" sequence="1" value="TS"/>
+                <element inactive_on_update="false" label="Top Secret/Sensitive Compartmented Information" sequence="2" value="TS_SCI"/>
+            </choice>
+        </element>
+    </element>
+</database>
