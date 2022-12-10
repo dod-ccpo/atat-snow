@@ -131,11 +131,54 @@ AtatHelper.prototype = {
         periodIds, 
         periodFields,
         this.PERIOD_TABLE
-      ).map(removeSysId);
+      );
     } catch (error) {
-      var errorMessage = "AataHelper --> getPeriods(): " + error;
+      var errorMessage = "AtatHelper --> getPeriods(): " + error;
       throw this.errUtil.createError(errorMessage, this.errUtil.METHOD_ERROR);
     }
+  },
+  /**
+   * Format periods properties into camelCase to support sending to HOTH application.
+   *
+   * @param {array} periods - an array of periods
+   * @return {array} of periods with camelCase properties
+   */
+  mapPeriods: function(periods) {
+    return periods.map(function(period) {
+      // map properties according to HOTH API
+      period.periodType = period.period_type;
+      period.periodUnitCount = period.period_unit_count;
+      period.periodUnit = period.period_unit;
+      period.optionOrder = period.option_order;
+
+      // remove old properties	
+      delete period.period_type;
+      delete period.period_unit_count;
+      delete period.period_unit;
+      delete period.option_order;
+
+      return period;
+    });
+  },
+  /**
+   * Map periods ids for a given package to allow easier retreiveal for the
+   * different instances.
+   *
+   * @param {array} periods - PoP periods
+   * return {object} an object contianing Id mapping of each period for a PoP
+   */
+  mapPackagePeriods: function(periods) {
+    var mappedPeriods = {};
+    if (periods) {
+      this.mapPeriods(periods)
+        .forEach(function(period) {
+          var id = period.sys_id;
+          delete period.sys_id;
+          mappedPeriods[id] = period;
+        });
+    }
+
+    return mappedPeriods;
   },
 
 
@@ -145,13 +188,13 @@ AtatHelper.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-02 20:49:47</sys_created_on>
         <sys_id>9027655d97a7d5106fa8b4b3f153afba</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_name>AtatHelper</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_9027655d97a7d5106fa8b4b3f153afba</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-12-02 20:49:47</sys_updated_on>
+        <sys_updated_on>2022-12-10 00:55:42</sys_updated_on>
     </sys_script_include>
 </record_update>
