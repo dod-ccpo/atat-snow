@@ -21,7 +21,8 @@ Dow.prototype = {
   CLOUD_SUP_ENV_ISNT_TABLE: "x_g_dis_atat_cloud_support_environment_instance",
   CLASS_LVL_TABLE: "x_g_dis_atat_classification_level",
   CLASS_INFO_TYPE_TABLE: "x_g_dis_atat_classified_information_type",
-
+  REGION_TABLE: "x_g_dis_atat_region",
+	
   // base instance fields
   ENV_INST_FIELDS: [
     "instance_name", "instance_location", "number_of_instances",
@@ -59,6 +60,7 @@ Dow.prototype = {
   arrUtil: new global.ArrayUtil(),
   ctb: this.convertToBoolean,
   acquisitionPackage: null,
+  mappedPeriods: null,
 
   initialize: function(acqPackage) {
     this.acquisitionPackage = acqPackage;
@@ -114,19 +116,119 @@ Dow.prototype = {
     }
   },
   /**
+   * Get classification level
+   *
+   * @param {array} classLevelIds - classification level ids
+   * @return {array} array of classification level objects 
+   */
+  getClassificationLevels: function(classLevelIds) {
+    if (!classLevelIds) {
+      gs.info("No Classification Level ids provided.");
+      return [];
+    }
+    try {
+      return getListRecords(
+        classLevelIds,
+        ["classification", "display", "impact_level"],
+        this.CLASS_LVL_TABLE
+      ).map(removeSysId);
+
+    } catch (error) {
+      throw this.errUtil.createError(
+        "Dow --> getClassificationLevels(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+
+  },
+  /**
+   * Get classified information types
+   *
+   * @param {array} classTypeIds - classified info type ids
+   * @return {array} array of classifed info type objects 
+   */
+  getClassifiedInfoTypes: function(classTypeIds) {
+    if (!classTypeIds) {
+      gs.info("No Classified Inofrmation Type ids provided.");
+      return [];
+    }
+    try {
+      return getListRecords(
+        classTypeIds,
+        ["name", "description", "sequence"],
+        CLASS_INFO_TYPE_TABLE
+      ).map(removeSysId);
+
+    } catch (error) {
+      throw this.errUtil.createError(
+        "Dow --> getClassifiedInfoTypes(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+
+  },
+  /**
+   * Get regions 
+   *
+   * @param {array} regionIds - region ids
+   * @return {array} array of region objects 
+   */
+  getRegions: function(regionIds) {
+    if (!regionIds) {
+      gs.info("No Region ids provided.");
+      return [];
+    }
+    try {
+      return getListRecords(
+        regionIds,
+        ["name", "description", "sequence", "group"],
+        this.REGION_TABLE 
+      ).map(removeSysId);
+
+    } catch (error) {
+      throw this.errUtil.createError(
+        "Dow --> getRegions(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+
+  },
+  /**
    * Get current environment instances.
    *
-   * @param {array} currentEnvIds - list of environment instance ids
    * @return {array} an array of current environment instances
    */
-  getCurrentEnvInstances: function(currentEnvIds) {
+  getCurrentEnvInstances: function() {
     try {
-      var requiredFields = this.arrUtil.concat(
-        this.ENV_INST_FIELDS, 
-        this.CUR_ENV_INST_FIELDS);
+      var mappedPeriods = this.mappedPeriods;
+      var ctb = this.ctb;
 
-      return getListRecords(currentEnvIds, requiredFields, this.CUR_ENV_INST_TABLE)
-        .map(removeSysId);
+      var currentEnvInstances = this.findPackageRecords(this.CUR_ENV_INST_TABLE);
+      currentEnvInstances = this.atatUtil.snakeToCamelCase(
+        currentEnvInstances,
+        this.arrUtil.concat(this.ENV_INST_FIELDS, this.CUR_ENV_INST_FIELDS)
+      );
+
+      return currentEnvInstances.map(function(instance) {
+        // format special case properties (e.g, nested records, YES/NO fields, etc.)
+        instance["isTrafficSpikeEventBased"] = ctb(instance.isTrafficSpikeEventBased);
+        instance["isTrafficSpikePeriodBased"] = ctb(instance.isTrafficSpikePeriodBased);
+        instance["needForEntireTaskOrderDuration"] = ctb(instance.needForEntireTaskOrderDuration);
+        instance["region"] = Dow.prototype.getRegions(instance.region);
+        instance["deployedRegions"] = Dow.prototype.getRegions(instance.deployedRegions);
+        instance["classifiedInformationTypes"] = Dow.prototype.getClassifiedInfoTypes(
+          instance.classifiedInformationTypes
+        );
+        if (!instance.needForEntireTaskOrderDuration) {
+          instance["selectedPeriods"] = instance.selectedPeriods
+            .split(",")
+            .map(function(periodId) {
+              return mappedPeriods[periodId];
+          });
+        }
+
+        return instance;
+      });
 
     } catch (error) {
       throw this.errUtil.createError(
@@ -136,6 +238,7 @@ Dow.prototype = {
     }
 
   },
+
   /**
    * Gather current environment information.
    *
@@ -162,7 +265,7 @@ Dow.prototype = {
         // environment instances 
         // Q: current usage?? Evenly/Event/HighUsage
         // contained inside each instance
-        envInstances: this.getCurrentEnvInstances(currentEnv.env_instances), // List
+        envInstances: this.getCurrentEnvInstances(), // List
 
 
         // currentEnv
@@ -327,7 +430,6 @@ Dow.prototype = {
         return [];
     }
 
-
   },
 
   /**
@@ -350,7 +452,7 @@ Dow.prototype = {
       // Pop related
       var pop = acqPacakage.period_of_performance;
       var periods = this.atatUtil.getPeriods(pop.base_period + "," + pop.option_periods);
-      var mappedPeriods = this.atatUtil.mapPackagePeriods(periods);
+      this.mappedPeriods = this.atatUtil.mapPackagePeriods(periods);
 
 
       // hoth DoW generated-document payload
@@ -390,7 +492,7 @@ Dow.prototype = {
           // - no data, text only ?
  
           // section 7
-          periodOfPerformance: this.getPackagePop(acqPacakage.period_of_performance, mappedPeriods),
+          periodOfPerformance: this.getPackagePop(acqPacakage.period_of_performance, this.mappedPeriods),
           // TODO: add task/subtask selected periods and need for entire duration??
 
           // section 8 - Security Requirements
@@ -449,13 +551,13 @@ Dow.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-10 00:50:30</sys_created_on>
         <sys_id>3d46262b97a751106fa8b4b3f153af90</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name>Dow</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_3d46262b97a751106fa8b4b3f153af90</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-12-11 00:14:46</sys_updated_on>
+        <sys_updated_on>2022-12-11 03:32:49</sys_updated_on>
     </sys_script_include>
 </record_update>
