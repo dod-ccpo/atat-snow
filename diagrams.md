@@ -435,6 +435,9 @@ erDiagram
         Reference service_offering FK "to Service Offering"
         Reference architectural_design_requirement FK "to Architectural Design Requirement"
         String other_service_offering
+        Currency cost_estimate
+        String igce_title
+        String igce_description
     }
     ESTIMATED-ENVIRONMENT-INSTANCE {
         Extends ENVIRONMENT-INSTANCE "inherits cols"
@@ -537,6 +540,9 @@ erDiagram
         Choice operating_system_licensing "TRANSFER_EXISTING/NEW"
         String anticipated_need_or_usage
         String usage_description
+        Currency cost_estimate
+        String igce_title
+        String igce_description
     }
     CURRENT-ENVIRONMENT {
         GUID sys_id PK
