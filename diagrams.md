@@ -205,7 +205,7 @@ erDiagram
         String statement
         String applications_needing_design
         String external_factors
-        Choice Source "DOW/CURRENT_ENVIRONMENT"
+        Choice source "DOW/CURRENT_ENVIRONMENT"
     }
     PROJECT-OVERVIEW {
         GUID sys_id PK
