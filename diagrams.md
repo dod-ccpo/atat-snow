@@ -185,7 +185,7 @@ erDiagram
         Reference project_overview FK "to Project Overview"
         Reference requirements_cost_estimate FK "to Requirements Cost Estimate"
         List secondary_reviewers FK "to sys_user"
-        List selected_service_offerings FK "to Selected Service Offering"
+        List selected_service_offerings FK "INACTIVE"
         Reference sensitive_information FK "to Sensitive Information"
         Reference cor FK "to Contacts"
         Reference acor FK "to Contacts"
@@ -429,11 +429,15 @@ erDiagram
     }
     SELECTED-SERVICE-OFFERING {
         GUID sys_id PK
+        Reference acquisition_package FK "to Acquisition Package"
         List classification_instances FK "to Classification Instance"
         List estimated_environment_instances FK "to Estimated Environment Instance"
         Reference service_offering FK "to Service Offering"
         Reference architectural_design_requirement FK "to Architectural Design Requirement"
         String other_service_offering
+        Currency cost_estimate
+        String igce_title
+        String igce_description
     }
     ESTIMATED-ENVIRONMENT-INSTANCE {
         Extends ENVIRONMENT-INSTANCE "inherits cols"
@@ -467,6 +471,7 @@ erDiagram
         Choice database_type "ANALYTICAL/TRANSACTIONAL/GRAPH/RELATIONAL/OTHER"
         String database_type_other
         Choice database_licensing "TRANSFER_EXISTING/NEW"
+        String network_performance
     }
     CLOUD-SUPPORT-ENVIRONMENT-INSTANCE {
         Extends ENVIRONMENT-INSTANCE "inherits cols"
@@ -534,6 +539,10 @@ erDiagram
         Choice data_egress_monthly_unit "GB/TB/PB"
         Choice operating_system_licensing "TRANSFER_EXISTING/NEW"
         String anticipated_need_or_usage
+        String usage_description
+        Currency cost_estimate
+        String igce_title
+        String igce_description
     }
     CURRENT-ENVIRONMENT {
         GUID sys_id PK
@@ -633,7 +642,7 @@ erDiagram
     ARCHITECTURAL-DESIGN-REQUIREMENT ||--|| CLASSIFICATION-LEVEL : ""
 
     %% DoW Performance Requirements
-    ACQUISITION-PACKAGE ||--|| SELECTED-SERVICE-OFFERING : ""
+    SELECTED-SERVICE-OFFERING ||--|| ACQUISITION-PACKAGE : ""
     SELECTED-SERVICE-OFFERING }|--|{ SERVICE-OFFERING : ""
     SELECTED-SERVICE-OFFERING ||--|| CLASSIFICATION-INSTANCE : ""
     SELECTED-SERVICE-OFFERING ||--|{ ESTIMATED-ENVIRONMENT-INSTANCE : ""

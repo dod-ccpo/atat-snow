@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element label="DAPPS:Selected Service Offering" max_length="40" name="x_g_dis_atat_selected_service_offering" sizeclass="0" type="collection">
+        <element label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
         <element label="Architectural Design Requirement" max_length="32" name="architectural_design_requirement" reference="x_g_dis_atat_architectural_design_requirement" type="reference"/>
         <element label="Classification Instances" max_length="4000" name="classification_instances" reference="x_g_dis_atat_classification_instance" type="glide_list"/>
+        <element label="Cost Estimate" max_length="20" name="cost_estimate" type="currency"/>
+        <element label="IGCE Description" max_length="1000" name="igce_description" type="string"/>
+        <element label="IGCE Title" max_length="200" name="igce_title" type="string"/>
         <element label="Other Service Offering" max_length="100" name="other_service_offering" type="string"/>
         <element label="Service Offering" max_length="32" name="service_offering" reference="x_g_dis_atat_service_offering" type="reference"/>
         <index name="index">
+            <element name="acquisition_package"/>
+        </index>
+        <index name="index2">
             <element name="service_offering"/>
         </index>
     </element>
