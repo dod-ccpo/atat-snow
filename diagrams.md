@@ -185,7 +185,7 @@ erDiagram
         Reference project_overview FK "to Project Overview"
         Reference requirements_cost_estimate FK "to Requirements Cost Estimate"
         List secondary_reviewers FK "to sys_user"
-        List selected_service_offerings FK "to Selected Service Offering"
+        List selected_service_offerings FK "INACTIVE"
         Reference sensitive_information FK "to Sensitive Information"
         Reference cor FK "to Contacts"
         Reference acor FK "to Contacts"
@@ -197,6 +197,15 @@ erDiagram
         String docusign_envelope_id
         Boolean edms_folder_created "Electronic Document Management System"
         Choice docgen_job_status "NOT_STARTED/IN_PROGRESS/SUCCESS/FAILURE"
+    }
+    ARCHITECTURAL-DESIGN-REQUIREMENT {
+        GUID sys_id PK
+        Reference acquisition_package FK "to Acquisition Package"
+        List data_classification_levels FK "to Classification Level"
+        String statement
+        String applications_needing_design
+        String external_factors
+        Choice source "DOW/CURRENT_ENVIRONMENT"
     }
     PROJECT-OVERVIEW {
         GUID sys_id PK
@@ -416,16 +425,21 @@ erDiagram
     SERVICE-OFFERING {
         GUID sys_id PK
         String description
-        Choice service_offering_group
+        Choice service_offering_group "ADVISORY_ASSISTANCE/APPLICATIONS/COMPUTE/DATABASE/DEVELOPER_TOOLS/DOCUMENTATION_SUPPORT/EDGE_COMPUTING/GENERAL_CLOUD_SUPPORT/HELP_DESK_SERVICES/IOT/MACHINE_LEARNING/NETWORKING/PORTABILITY_PLAN/SECURITY/STORAGE/TRAINING; defined here"
         Integer sequence
         String name
     }
     SELECTED-SERVICE-OFFERING {
         GUID sys_id PK
+        Reference acquisition_package FK "to Acquisition Package"
         List classification_instances FK "to Classification Instance"
         List estimated_environment_instances FK "to Estimated Environment Instance"
         Reference service_offering FK "to Service Offering"
+        Reference architectural_design_requirement FK "INACTIVE"
         String other_service_offering
+        Currency cost_estimate
+        String igce_title
+        String igce_description
     }
     ESTIMATED-ENVIRONMENT-INSTANCE {
         Extends ENVIRONMENT-INSTANCE "inherits cols"
@@ -442,22 +456,35 @@ erDiagram
         String traffic_spike_event_description
         String traffic_spike_period_description
         String users_per_region "stringified json obj w/ sys_id:count pairs"
-        Choice operating_type "DEV_TESTING/PREPRODUCTION/PRODUCTION/COOP_DISASTERRECOVERY"
-        Choice operating_environment "VM/CONTAINERS/SERVERLESS/VIRTUAL_DESKTOP"
+        Choice environment_type "DEV_TEST/PRE_PROD/PROD_STAGING/COOP_DISASTER_RECOVERY"
+        Choice operating_environment "VIRTUAL/CONTAINERS/SERVERLESS/END_USER_COMPUTING_VIRTUAL_DESKTOP"
         String anticipated_need_usage
         String additional_information
     }
     COMPUTE-ENVIRONMENT-INSTANCE {
         Extends ENVIRONMENT-INSTANCE "inherits cols"
         GUID sys_id PK
-        Choice environment_type "DEV_TEST/PRE_PROD/PROD_STAGING/COOP_DISASTER_RECOVERY"
-        Choice operating_environment "VIRTUAL/CONTAINERS/SERVERLESS/END_USER_COMPUTING_VIRTUAL_DESKTOP"
+        Choice environment_type "DEV_TEST/PRE_PROD/PROD_STAGING/COOP_DISASTER_RECOVERY; defined here"
+        Choice operating_environment "VIRTUAL/CONTAINERS/SERVERLESS/END_USER_COMPUTING_VIRTUAL_DESKTOP; defined here"
     }
     DATABASE-ENVIRONMENT-INSTANCE {
         Extends ENVIRONMENT-INSTANCE "inherits cols"
+        GUID sys_id PK
         Choice database_type "ANALYTICAL/TRANSACTIONAL/GRAPH/RELATIONAL/OTHER"
         String database_type_other
         Choice database_licensing "TRANSFER_EXISTING/NEW"
+        String network_performance
+    }
+    CLOUD-SUPPORT-ENVIRONMENT-INSTANCE {
+        Extends ENVIRONMENT-INSTANCE "inherits cols"
+        GUID sys_id PK
+        Choice personnel_onsite_access "Y/N"
+        Choice ts_contractor_clearance_type "TS/TS_SCI"
+        Choice service_type "ADVISORY_ASSISTANCE/APPLICATIONS/COMPUTE/DATABASE/DEVELOPER_TOOLS/DOCUMENTATION_SUPPORT/EDGE_COMPUTING/GENERAL_CLOUD_SUPPORT/HELP_DESK_SERVICES/IOT/MACHINE_LEARNING/NETWORKING/PORTABILITY_PLAN/SECURITY/STORAGE/TRAINING"
+    }
+    STORAGE-ENVIRONMENT-INSTANCE {
+        Extends ENVIRONMENT-INSTANCE "inherits cols"
+        GUID sys_id PK
     }
     CLASSIFICATION-INSTANCE {
         GUID sys_id PK
@@ -490,6 +517,7 @@ erDiagram
     }
     ENVIRONMENT-INSTANCE {
         GUID sys_id PK
+        Reference acquisition_package FK "to Acquisition Package"
         Reference classification_level FK "to Classification Level"
         List classified_information_types FK "to Classified Information Type"
         List selected_periods FK "to Period"
@@ -512,6 +540,12 @@ erDiagram
         Choice storage_unit "GB/TB/PB; defined here"
         Integer data_egress_monthly_amount
         Choice data_egress_monthly_unit "GB/TB/PB"
+        Choice operating_system_licensing "TRANSFER_EXISTING/NEW"
+        String anticipated_need_or_usage
+        String usage_description
+        Currency cost_estimate
+        String igce_title
+        String igce_description
     }
     CURRENT-ENVIRONMENT {
         GUID sys_id PK
@@ -520,7 +554,7 @@ erDiagram
         List env_classifications_cloud FK "to Classification Level"
         List env_classifications_onprem FK "to Classification Level"
         List migration_documentation FK "to sys_attachment"
-        List data_classifications_impact_levels FK "to Classification Level"
+        Reference architectural_design_requirement FK "INACTIVE"
         Choice current_environment_exists "Y/N"
         Choice has_system_documentation "Y/N"
         Choice has_migration_documentation "Y/N"
@@ -532,9 +566,6 @@ erDiagram
         Choice has_phased_approach "Y/N"
         String phased_approach_schedule
         Choice needs_architectural_design_services "Y/N"
-        String statement_architectural_design
-        String applications_need_architectural_design
-        String external_factors_architectural_design
     }
     PACKAGE-DOCUMENT {
         GUID sys_id PK
@@ -611,18 +642,21 @@ erDiagram
     SELECTED-CLASSIFICATION-LEVEL ||--|| ACQUISITION-PACKAGE : ""
     SELECTED-CLASSIFICATION-LEVEL ||--|| CLASSIFICATION-LEVEL : ""
     SELECTED-CLASSIFICATION-LEVEL ||--o{ CLASSIFIED-INFORMATION-TYPE : "S and TS only"
+    ARCHITECTURAL-DESIGN-REQUIREMENT ||--|| ACQUISITION-PACKAGE : ""
+    ARCHITECTURAL-DESIGN-REQUIREMENT ||--|| CLASSIFICATION-LEVEL : ""
 
     %% DoW Performance Requirements
-    ACQUISITION-PACKAGE ||--|| SELECTED-SERVICE-OFFERING : ""
+    SELECTED-SERVICE-OFFERING ||--|| ACQUISITION-PACKAGE : ""
     SELECTED-SERVICE-OFFERING }|--|{ SERVICE-OFFERING : ""
     SELECTED-SERVICE-OFFERING ||--|| CLASSIFICATION-INSTANCE : ""
     SELECTED-SERVICE-OFFERING ||--|{ ESTIMATED-ENVIRONMENT-INSTANCE : ""
     CLASSIFICATION-INSTANCE }|--|| CLASSIFICATION-LEVEL : ""
-    CLASSIFICATION-INSTANCE ||--|| CLASSIFIED-INFORMATION-TYPE : "S and TS only"
+    CLASSIFICATION-INSTANCE ||--o{ CLASSIFIED-INFORMATION-TYPE : "S and TS only"
     CLASSIFICATION-INSTANCE ||--|{ PERIOD : ""
     %% base table
+    ENVIRONMENT-INSTANCE ||--|| ACQUISITION-PACKAGE : ""
     ENVIRONMENT-INSTANCE }|--|{ CLASSIFICATION-LEVEL : ""
-    ENVIRONMENT-INSTANCE ||--|| CLASSIFIED-INFORMATION-TYPE : "S and TS only"
+    ENVIRONMENT-INSTANCE ||--o{ CLASSIFIED-INFORMATION-TYPE : "S and TS only"
     ENVIRONMENT-INSTANCE ||--|{ PERIOD : ""
     ENVIRONMENT-INSTANCE ||--|| REGION : ""
     %% attempt to illustrate table inheritance
@@ -630,6 +664,8 @@ erDiagram
     ENVIRONMENT-INSTANCE ||--|| CURRENT-ENVIRONMENT-INSTANCE: "extended by"
     ENVIRONMENT-INSTANCE ||--|| DATABASE-ENVIRONMENT-INSTANCE: "extended by"
     ENVIRONMENT-INSTANCE ||--|| COMPUTE-ENVIRONMENT-INSTANCE: "extended by"
+    ENVIRONMENT-INSTANCE ||--|| STORAGE-ENVIRONMENT-INSTANCE: "extended by"
+    ENVIRONMENT-INSTANCE ||--|| CLOUD-SUPPORT-ENVIRONMENT-INSTANCE: "extended by"
     %% current environment
     ACQUISITION-PACKAGE ||--o| CURRENT-ENVIRONMENT : ""
     CURRENT-ENVIRONMENT ||--|{ CURRENT-ENVIRONMENT-INSTANCE : ""

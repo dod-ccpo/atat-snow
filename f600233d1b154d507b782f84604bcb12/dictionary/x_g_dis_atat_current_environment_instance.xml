@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element extends="x_g_dis_atat_environment_instance" label="DAPPS:Current Environment Instance" max_length="40" name="x_g_dis_atat_current_environment_instance" type="collection">
+    <element extends="x_g_dis_atat_environment_instance" label="DAPPS:Current Environment Instance" max_length="40" name="x_g_dis_atat_current_environment_instance" sizeclass="0" type="collection">
         <element label="Additional Information" max_length="500" name="additional_information" type="string"/>
         <element label="Anticipated Need Usage" max_length="500" name="anticipated_need_usage" type="string"/>
         <element choice="1" label="Current Usage Description" max_length="40" name="current_usage_description" type="choice">
@@ -9,6 +9,14 @@
             </choice>
         </element>
         <element label="Deployed Regions" max_length="4000" name="deployed_regions" reference="x_g_dis_atat_region" type="glide_list"/>
+        <element choice="1" choice_field="environment_type" choice_table="x_g_dis_atat_compute_environment_instance" label="Environment Type" max_length="40" name="environment_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Development/Test" sequence="0" value="DEV_TEST"/>
+                <element inactive_on_update="false" label="Pre-production" sequence="1" value="PRE_PROD"/>
+                <element inactive_on_update="false" label="Production/Staging" sequence="2" value="PROD_STAGING"/>
+                <element inactive_on_update="false" label="Continuity of Operations/Disaster Recovery" sequence="3" value="COOP_DISASTER_RECOVERY"/>
+            </choice>
+        </element>
         <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Is Traffic Spike Event Based" max_length="40" name="is_traffic_spike_event_based" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Unselected" sequence="0" value="UNSELECTED"/>
@@ -23,20 +31,12 @@
                 <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
             </choice>
         </element>
-        <element choice="1" label="Operating Environment" max_length="40" name="operating_environment" type="choice">
+        <element choice="1" choice_field="operating_environment" choice_table="x_g_dis_atat_compute_environment_instance" label="Operating Environment" max_length="40" name="operating_environment" type="choice">
             <choice>
-                <element inactive_on_update="false" label="Virtual Machine" sequence="1" value="VM"/>
-                <element inactive_on_update="false" label="Containers" sequence="2" value="CONTAINERS"/>
-                <element inactive_on_update="false" label="Serverless Computing" sequence="3" value="SERVERLESS"/>
-                <element inactive_on_update="false" label="Virtual Desktop" sequence="4" value="VIRTUAL_DESKTOP"/>
-            </choice>
-        </element>
-        <element choice="1" label="Operating Type" max_length="40" name="operating_type" type="choice">
-            <choice>
-                <element inactive_on_update="false" label="Development/Testing" sequence="1" value="DEV_TESTING"/>
-                <element inactive_on_update="false" label="Pre-production" sequence="2" value="PREPRODUCTION"/>
-                <element inactive_on_update="false" label="Production" sequence="3" value="PRODUCTION"/>
-                <element inactive_on_update="false" label="Continuity of Operations/Disaster Recovery" sequence="4" value="COOP_DISASTERRECOVERY"/>
+                <element inactive_on_update="false" label="Virtual Machine" sequence="0" value="VIRTUAL"/>
+                <element inactive_on_update="false" label="Containers" sequence="1" value="CONTAINERS"/>
+                <element inactive_on_update="false" label="Serverless Computing" sequence="2" value="SERVERLESS"/>
+                <element inactive_on_update="false" label="End User Computing Virtual Desktop" sequence="3" value="END_USER_COMPUTING_VIRTUAL_DESKTOP"/>
             </choice>
         </element>
         <element label="Traffic Spike Event Description" max_length="500" name="traffic_spike_event_description" type="string"/>
