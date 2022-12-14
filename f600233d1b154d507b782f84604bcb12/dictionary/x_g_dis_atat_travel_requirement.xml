@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="DAPPS:Travel Requirement" max_length="40" name="x_g_dis_atat_travel_requirement" type="collection">
+        <element label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
+        <element label="Duration In Days" max_length="40" name="duration_in_days" type="integer"/>
+        <element label="Number of Travelers" max_length="40" name="number_of_travelers" type="integer"/>
+        <element label="Number of Trips" max_length="40" name="number_of_trips" type="integer"/>
+        <element label="Selected Periods" max_length="4000" name="selected_periods" reference="x_g_dis_atat_period" type="glide_list"/>
+        <element label="Trip Location" max_length="100" name="trip_location" type="string"/>
+        <index name="index">
+            <element name="acquisition_package"/>
+        </index>
+    </element>
+</database>

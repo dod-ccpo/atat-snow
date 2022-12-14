@@ -627,6 +627,15 @@ erDiagram
         Choice service_offering_group "ADVISORY_ASSISTANCE/APPLICATIONS/COMPUTE/DATABASE/DEVELOPER_TOOLS/DOCUMENTATION_SUPPORT/EDGE_COMPUTING/GENERAL_CLOUD_SUPPORT/HELP_DESK_SERVICES/IOT/MACHINE_LEARNING/NETWORKING/PORTABILITY_PLAN/SECURITY/STORAGE/TRAINING"
         Choice ts_contractor_clearance_type "TS/TS_SCI"
     }
+    TRAVEL-REQUIREMENT  {
+        GUID sys_id PK
+        Reference acquisition_package FK "to Acquisition Package"
+        List selected_periods FK "to Period"
+        String trip_location
+        Integer duration_in_days
+        Integer number_of_travelers
+        Integer number_of_trips
+    }
 
     ACQUISITION-PACKAGE ||--|| SYS_USER : "MOs, contributors, reviewers"
     ACQUISITION-PACKAGE ||--|| PORTFOLIO : "generates"
@@ -661,6 +670,8 @@ erDiagram
     ARCHITECTURAL-DESIGN-REQUIREMENT ||--|| CLASSIFICATION-LEVEL : ""
     SECURITY-REQUIREMENT ||--|| ACQUISITION-PACKAGE : ""
     SECURITY-REQUIREMENT ||--o{ CLASSIFIED-INFORMATION-TYPE : ""
+    TRAVEL-REQUIREMENT ||--|| ACQUISITION-PACKAGE : """
+    TRAVEL-REQUIREMENT ||--|{ PERIOD : ""
 
     %% DoW Performance Requirements
     SELECTED-SERVICE-OFFERING ||--|| ACQUISITION-PACKAGE : ""
