@@ -200,10 +200,12 @@ erDiagram
     }
     ARCHITECTURAL-DESIGN-REQUIREMENT {
         GUID sys_id PK
+        Reference acquisition_package FK "to Acquisition Package"
         List data_classification_levels FK "to Classification Level"
         String statement
         String applications_needing_design
         String external_factors
+        Choice source "DOW/CURRENT_ENVIRONMENT"
     }
     PROJECT-OVERVIEW {
         GUID sys_id PK
@@ -423,7 +425,7 @@ erDiagram
     SERVICE-OFFERING {
         GUID sys_id PK
         String description
-        Choice service_offering_group
+        Choice service_offering_group "ADVISORY_ASSISTANCE/APPLICATIONS/COMPUTE/DATABASE/DEVELOPER_TOOLS/DOCUMENTATION_SUPPORT/EDGE_COMPUTING/GENERAL_CLOUD_SUPPORT/HELP_DESK_SERVICES/IOT/MACHINE_LEARNING/NETWORKING/PORTABILITY_PLAN/SECURITY/STORAGE/TRAINING; defined here"
         Integer sequence
         String name
     }
@@ -433,7 +435,7 @@ erDiagram
         List classification_instances FK "to Classification Instance"
         List estimated_environment_instances FK "to Estimated Environment Instance"
         Reference service_offering FK "to Service Offering"
-        Reference architectural_design_requirement FK "to Architectural Design Requirement"
+        Reference architectural_design_requirement FK "INACTIVE"
         String other_service_offering
         Currency cost_estimate
         String igce_title
@@ -478,6 +480,7 @@ erDiagram
         GUID sys_id PK
         Choice personnel_onsite_access "Y/N"
         Choice ts_contractor_clearance_type "TS/TS_SCI"
+        Choice service_type "ADVISORY_ASSISTANCE/APPLICATIONS/COMPUTE/DATABASE/DEVELOPER_TOOLS/DOCUMENTATION_SUPPORT/EDGE_COMPUTING/GENERAL_CLOUD_SUPPORT/HELP_DESK_SERVICES/IOT/MACHINE_LEARNING/NETWORKING/PORTABILITY_PLAN/SECURITY/STORAGE/TRAINING"
     }
     STORAGE-ENVIRONMENT-INSTANCE {
         Extends ENVIRONMENT-INSTANCE "inherits cols"
@@ -551,7 +554,7 @@ erDiagram
         List env_classifications_cloud FK "to Classification Level"
         List env_classifications_onprem FK "to Classification Level"
         List migration_documentation FK "to sys_attachment"
-        Reference architectural_design_requirement FK "to Architectural Design Requirement"
+        Reference architectural_design_requirement FK "INACTIVE"
         Choice current_environment_exists "Y/N"
         Choice has_system_documentation "Y/N"
         Choice has_migration_documentation "Y/N"
@@ -639,6 +642,7 @@ erDiagram
     SELECTED-CLASSIFICATION-LEVEL ||--|| ACQUISITION-PACKAGE : ""
     SELECTED-CLASSIFICATION-LEVEL ||--|| CLASSIFICATION-LEVEL : ""
     SELECTED-CLASSIFICATION-LEVEL ||--o{ CLASSIFIED-INFORMATION-TYPE : "S and TS only"
+    ARCHITECTURAL-DESIGN-REQUIREMENT ||--|| ACQUISITION-PACKAGE : ""
     ARCHITECTURAL-DESIGN-REQUIREMENT ||--|| CLASSIFICATION-LEVEL : ""
 
     %% DoW Performance Requirements
@@ -646,7 +650,6 @@ erDiagram
     SELECTED-SERVICE-OFFERING }|--|{ SERVICE-OFFERING : ""
     SELECTED-SERVICE-OFFERING ||--|| CLASSIFICATION-INSTANCE : ""
     SELECTED-SERVICE-OFFERING ||--|{ ESTIMATED-ENVIRONMENT-INSTANCE : ""
-    SELECTED-SERVICE-OFFERING ||--o| ARCHITECTURAL-DESIGN-REQUIREMENT : ""
     CLASSIFICATION-INSTANCE }|--|| CLASSIFICATION-LEVEL : ""
     CLASSIFICATION-INSTANCE ||--o{ CLASSIFIED-INFORMATION-TYPE : "S and TS only"
     CLASSIFICATION-INSTANCE ||--|{ PERIOD : ""
@@ -669,7 +672,6 @@ erDiagram
     CURRENT-ENVIRONMENT-INSTANCE }|--o{ REGION: "deployed to"
     CURRENT-ENVIRONMENT ||--o{ SYS_ATTACHMENT : "system and migration docs"
     CURRENT-ENVIRONMENT ||--|{ CLASSIFICATION-LEVEL : "environs and data"
-    CURRENT-ENVIRONMENT ||--o| ARCHITECTURAL-DESIGN-REQUIREMENT : ""
     %% evaluation plan
     ACQUISITION-PACKAGE ||--|| EVALUATION-PLAN : ""
     EVALUATION-PLAN ||--o{ EVAL-PLAN-DIFFERENTIATOR : "BVTO only"
