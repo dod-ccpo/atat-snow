@@ -619,6 +619,14 @@ erDiagram
         Choice data_growth_estimate_type "SINGLE/MULTIPLE"
         String data_growth_estimate_percentage "one or many"
     }
+    SECURITY-REQUIREMENT  {
+        GUID sys_id PK
+        Reference acquisition_package FK "to Acquisition Package"
+        List advisory_services_secret FK "to Classified Information Type"
+        List advisory_services_top_secret FK "to Classified Information Type"
+        Choice service_offering_group "ADVISORY_ASSISTANCE/APPLICATIONS/COMPUTE/DATABASE/DEVELOPER_TOOLS/DOCUMENTATION_SUPPORT/EDGE_COMPUTING/GENERAL_CLOUD_SUPPORT/HELP_DESK_SERVICES/IOT/MACHINE_LEARNING/NETWORKING/PORTABILITY_PLAN/SECURITY/STORAGE/TRAINING"
+        Choice ts_contractor_clearance_type "TS/TS_SCI"
+    }
 
     ACQUISITION-PACKAGE ||--|| SYS_USER : "MOs, contributors, reviewers"
     ACQUISITION-PACKAGE ||--|| PORTFOLIO : "generates"
@@ -651,6 +659,8 @@ erDiagram
     SELECTED-CLASSIFICATION-LEVEL ||--o{ CLASSIFIED-INFORMATION-TYPE : "S and TS only"
     ARCHITECTURAL-DESIGN-REQUIREMENT ||--|| ACQUISITION-PACKAGE : ""
     ARCHITECTURAL-DESIGN-REQUIREMENT ||--|| CLASSIFICATION-LEVEL : ""
+    SECURITY-REQUIREMENT ||--|| ACQUISITION-PACKAGE : ""
+    SECURITY-REQUIREMENT ||--o{ CLASSIFIED-INFORMATION-TYPE : ""
 
     %% DoW Performance Requirements
     SELECTED-SERVICE-OFFERING ||--|| ACQUISITION-PACKAGE : ""
