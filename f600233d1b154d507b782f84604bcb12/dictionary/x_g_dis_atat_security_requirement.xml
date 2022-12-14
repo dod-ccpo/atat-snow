@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="DAPPS:Security Requirement" max_length="40" name="x_g_dis_atat_security_requirement" type="collection">
+        <element label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
+        <element label="Advisory Services SECRET" max_length="4000" name="advisory_services_secret" reference="x_g_dis_atat_classified_information_type" type="glide_list"/>
+        <element label="Advisory Services TOP SECRET" max_length="4000" name="advisory_services_top_secret" reference="x_g_dis_atat_classified_information_type" type="glide_list"/>
+        <element choice="1" choice_field="service_offering_group" choice_table="x_g_dis_atat_service_offering" label="Service Offering Group" max_length="40" name="service_offering_group" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Compute" sequence="0" value="COMPUTE"/>
+                <element inactive_on_update="false" label="Developer Tools and Services" sequence="1" value="DEVELOPER_TOOLS"/>
+                <element inactive_on_update="false" label="Applications" sequence="2" value="APPLICATIONS"/>
+                <element inactive_on_update="false" label="Advanced Technology and Algorithmic Techniques (Machine Learning)" sequence="3" value="MACHINE_LEARNING"/>
+                <element inactive_on_update="false" label="Networking" sequence="4" value="NETWORKING"/>
+                <element inactive_on_update="false" label="Security" sequence="5" value="SECURITY"/>
+                <element inactive_on_update="false" label="Edge Computing and Tactical Edge (TE)" sequence="6" value="EDGE_COMPUTING"/>
+                <element inactive_on_update="false" label="Internet of Things (IoT)" sequence="7" value="IOT"/>
+                <element inactive_on_update="false" label="General Iaas" sequence="8" value="General Iaas"/>
+                <element inactive_on_update="false" label="Database" sequence="11" value="DATABASE"/>
+                <element inactive_on_update="false" label="Storage" sequence="12" value="STORAGE"/>
+                <element inactive_on_update="false" label="Portability plan" sequence="13" value="PORTABILITY_PLAN"/>
+                <element inactive_on_update="false" label="Advisory and assistance" sequence="14" value="ADVISORY_ASSISTANCE"/>
+                <element inactive_on_update="false" label="Help desk services" sequence="15" value="HELP_DESK_SERVICES"/>
+                <element inactive_on_update="false" label="Training" sequence="16" value="TRAINING"/>
+                <element inactive_on_update="false" label="Documentation support" sequence="17" value="DOCUMENTATION_SUPPORT"/>
+                <element inactive_on_update="false" label="General cloud support" sequence="18" value="GENERAL_CLOUD_SUPPORT"/>
+            </choice>
+        </element>
+        <element choice="1" label="TS Contractor Clearance Type" max_length="40" name="ts_contractor_clearance_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Top Secret" sequence="1" value="TS"/>
+                <element inactive_on_update="false" label="Top Secret/Sensitive Compartmented Information (TS/SCI)" sequence="2" value="TS_SCI"/>
+            </choice>
+        </element>
+        <index name="index">
+            <element name="acquisition_package"/>
+        </index>
+    </element>
+</database>
