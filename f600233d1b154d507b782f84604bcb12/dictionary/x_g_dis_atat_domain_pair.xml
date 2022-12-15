@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="DAPPS:Domain Pair" max_length="40" name="x_g_dis_atat_domain_pair" type="collection">
+        <element choice="3" choice_field="classification" choice_table="x_g_dis_atat_classification_level" label="Domain1" mandatory="true" max_length="40" name="domain1" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Unclassified" sequence="0" value="U"/>
+                <element inactive_on_update="false" label="Secret" sequence="1" value="S"/>
+                <element inactive_on_update="false" label="Top Secret" sequence="2" value="TS"/>
+            </choice>
+        </element>
+        <element choice="3" choice_field="classification" choice_table="x_g_dis_atat_classification_level" label="Domain2" mandatory="true" max_length="40" name="domain2" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Unclassified" sequence="0" value="U"/>
+                <element inactive_on_update="false" label="Secret" sequence="1" value="S"/>
+                <element inactive_on_update="false" label="Top Secret" sequence="2" value="TS"/>
+            </choice>
+        </element>
+        <element label="Label" max_length="30" name="label" type="string"/>
+        <element label="Value" max_length="10" name="value" type="string"/>
+    </element>
+</database>
