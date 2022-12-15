@@ -14,7 +14,7 @@
                 <element inactive_on_update="false" label="Top Secret" sequence="2" value="TS"/>
             </choice>
         </element>
-        <element label="Label" max_length="30" name="label" type="string"/>
-        <element label="Value" max_length="10" name="value" type="string"/>
+        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;&#9;var output = '';&#13;&#10;    if (current.domain1 &amp;&amp; current.domain2) {&#13;&#10;        output += current.domain1.getDisplayValue();&#13;&#10;        output += ' to ';&#13;&#10;        output += current.domain2.getDisplayValue();&#13;&#10;    }&#13;&#10;    return output;&#13;&#10;})(current);" display="true" label="Label" max_length="30" name="label" type="string" virtual="true"/>
+        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;&#9;var output = '';&#13;&#10;    if (current.domain1 &amp;&amp; current.domain2) {&#13;&#10;        output += current.domain1.toString();&#13;&#10;        output += '_TO_';&#13;&#10;        output += current.domain2.toString();&#13;&#10;    }&#13;&#10;    return output;&#13;&#10;})(current);" label="Value" max_length="10" name="value" type="string" virtual="true"/>
     </element>
 </database>
