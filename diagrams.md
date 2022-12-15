@@ -636,6 +636,23 @@ erDiagram
         Integer number_of_travelers
         Integer number_of_trips
     }
+    CROSS-DOMAIN-SOLUTION  {
+        GUID sys_id PK
+        Reference acquisition_package FK "to Acquisition Package"
+        List selected_periods FK "to Period"
+        Choice need_for_entire_task_order_duration "Y/N"
+        Choice cross_domain_solution_required "Y/N"
+        String projected_file_stream_type
+        String anticipated_need_or_usage
+        String traffic_per_domain_pair "stringified json w/ {<domain pair>:<monthly traffic estimate in GB>} pairs"
+    }
+    DOMAIN-PAIR {
+        GUID sys_id PK
+        Choice domain1 "reference to Classification Level.classification"
+        Choice domain2 "reference to Classification Level.classification"
+        String value "calculated value"
+        String label "calculated value"
+    }
 
     ACQUISITION-PACKAGE ||--|| SYS_USER : "MOs, contributors, reviewers"
     ACQUISITION-PACKAGE ||--|| PORTFOLIO : "generates"
@@ -672,6 +689,8 @@ erDiagram
     SECURITY-REQUIREMENT ||--o{ CLASSIFIED-INFORMATION-TYPE : ""
     TRAVEL-REQUIREMENT ||--|| ACQUISITION-PACKAGE : ""
     TRAVEL-REQUIREMENT ||--|{ PERIOD : ""
+    CROSS-DOMAIN-SOLUTION ||--|| ACQUISITION-PACKAGE : ""
+    CROSS-DOMAIN-SOLUTION ||--|{ PERIOD : ""
 
     %% DoW Performance Requirements
     SELECTED-SERVICE-OFFERING ||--|| ACQUISITION-PACKAGE : ""
