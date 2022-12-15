@@ -493,6 +493,10 @@ erDiagram
         Extends ENVIRONMENT-INSTANCE "inherits cols"
         GUID sys_id PK
     }
+    GENERAL-XAAS-ENVIRONMENT-INSTANCE {
+        Extends ENVIRONMENT-INSTANCE "inherits cols"
+        GUID sys_id PK
+    }
     CLASSIFICATION-INSTANCE {
         GUID sys_id PK
         Reference classification_level FK "to Classification Level"
@@ -712,6 +716,7 @@ erDiagram
     ENVIRONMENT-INSTANCE ||--|| DATABASE-ENVIRONMENT-INSTANCE: "extended by"
     ENVIRONMENT-INSTANCE ||--|| COMPUTE-ENVIRONMENT-INSTANCE: "extended by"
     ENVIRONMENT-INSTANCE ||--|| STORAGE-ENVIRONMENT-INSTANCE: "extended by"
+    ENVIRONMENT-INSTANCE ||--|| GENERAL-XAAS-ENVIRONMENT-INSTANCE: "extended by"
     ENVIRONMENT-INSTANCE ||--|| CLOUD-SUPPORT-ENVIRONMENT-INSTANCE: "extended by"
     %% current environment
     ACQUISITION-PACKAGE ||--o| CURRENT-ENVIRONMENT : ""
