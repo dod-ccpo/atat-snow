@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="DAPPS:Cross Domain Solution" max_length="40" name="x_g_dis_atat_cross_domain_solution" type="collection">
+        <element label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
+        <element label="Anticipated Need or Usage" max_length="1000" name="anticipated_need_or_usage" type="string"/>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Cross Domain Solution Required" max_length="40" name="cross_domain_solution_required" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Unselected" sequence="0" value="UNSELECTED"/>
+                <element inactive_on_update="false" label="Yes" sequence="1" value="YES"/>
+                <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
+            </choice>
+        </element>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Need for Entire Task Order Duration" max_length="40" name="need_for_entire_task_order_duration" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Unselected" sequence="0" value="UNSELECTED"/>
+                <element inactive_on_update="false" label="Yes" sequence="1" value="YES"/>
+                <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
+            </choice>
+        </element>
+        <element label="Projected File Stream Type" max_length="100" name="projected_file_stream_type" type="string"/>
+        <element label="Selected Periods" max_length="4000" name="selected_periods" reference="x_g_dis_atat_period" type="glide_list"/>
+        <element label="Traffic per Domain Pair" max_length="4000" name="traffic_per_domain_pair" type="string"/>
+        <index name="index">
+            <element name="acquisition_package"/>
+        </index>
+    </element>
+</database>
