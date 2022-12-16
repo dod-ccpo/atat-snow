@@ -585,7 +585,9 @@ Dow.prototype = {
   getPackagePop: function(pop, mappedPeriods) {
     try {
       var optionPeriods = [];
-      pop.option_periods.split(",").forEach(function(id) { optionPeriods.push(mappedPeriods[id]); });
+      if (pop.option_periods.toString())  {
+        pop.option_periods.split(",").forEach(function(id) { optionPeriods.push(mappedPeriods[id]); });
+      }
       return {
         basePeriod: mappedPeriods[pop.base_period.toString()],
         optionPeriods: optionPeriods,
@@ -1020,13 +1022,13 @@ Dow.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-10 00:50:30</sys_created_on>
         <sys_id>3d46262b97a751106fa8b4b3f153af90</sys_id>
-        <sys_mod_count>8</sys_mod_count>
+        <sys_mod_count>9</sys_mod_count>
         <sys_name>Dow</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_3d46262b97a751106fa8b4b3f153af90</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-12-16 15:47:55</sys_updated_on>
+        <sys_updated_on>2022-12-16 17:13:26</sys_updated_on>
     </sys_script_include>
 </record_update>
