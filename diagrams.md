@@ -185,7 +185,7 @@ erDiagram
         Reference project_overview FK "to Project Overview"
         Reference requirements_cost_estimate FK "to Requirements Cost Estimate"
         List secondary_reviewers FK "to sys_user"
-        List selected_service_offerings FK "INACTIVE"
+        List selected_service_offerings FK "(column INACTIVE)"
         Reference sensitive_information FK "to Sensitive Information"
         Reference cor FK "to Contacts"
         Reference acor FK "to Contacts"
@@ -435,7 +435,7 @@ erDiagram
         List classification_instances FK "to Classification Instance"
         List estimated_environment_instances FK "to Estimated Environment Instance"
         Reference service_offering FK "to Service Offering"
-        Reference architectural_design_requirement FK "INACTIVE"
+        Reference architectural_design_requirement FK "(column INACTIVE)"
         String other_service_offering
         Currency cost_estimate
         String igce_title
@@ -479,10 +479,21 @@ erDiagram
         Extends ENVIRONMENT-INSTANCE "inherits cols"
         GUID sys_id PK
         Choice personnel_onsite_access "Y/N"
-        Choice ts_contractor_clearance_type "TS/TS_SCI"
+        Choice ts_contractor_clearance_type "(column INACTIVE)"
         Choice service_type "ADVISORY_ASSISTANCE/APPLICATIONS/COMPUTE/DATABASE/DEVELOPER_TOOLS/DOCUMENTATION_SUPPORT/EDGE_COMPUTING/GENERAL_CLOUD_SUPPORT/HELP_DESK_SERVICES/IOT/MACHINE_LEARNING/NETWORKING/PORTABILITY_PLAN/SECURITY/STORAGE/TRAINING"
+        String training_requirement_title
+        Choice training_format "ONSITE_INSTRUCTOR_CONUS/ONSITE_INSTRUCTOR_OCONUS/VIRTUAL_INSTRUCTOR/VIRTUAL_SELF_LED/NO_PREFERENCE"
+        Integer personnel_requiring_training
+        Choice training_facility_type "GOVERNMENT_FACILITY/NON_GOVERNMENT_FACILITY"
+        String training_location
+        String training_time_zone
+        Choice can_train_in_unclass_env "Y/N"
     }
     STORAGE-ENVIRONMENT-INSTANCE {
+        Extends ENVIRONMENT-INSTANCE "inherits cols"
+        GUID sys_id PK
+    }
+    GENERAL-XAAS-ENVIRONMENT-INSTANCE {
         Extends ENVIRONMENT-INSTANCE "inherits cols"
         GUID sys_id PK
     }
@@ -554,7 +565,7 @@ erDiagram
         List env_classifications_cloud FK "to Classification Level"
         List env_classifications_onprem FK "to Classification Level"
         List migration_documentation FK "to sys_attachment"
-        Reference architectural_design_requirement FK "INACTIVE"
+        Reference architectural_design_requirement FK "(column INACTIVE)"
         Choice current_environment_exists "Y/N"
         Choice has_system_documentation "Y/N"
         Choice has_migration_documentation "Y/N"
@@ -612,6 +623,40 @@ erDiagram
         Choice data_growth_estimate_type "SINGLE/MULTIPLE"
         String data_growth_estimate_percentage "one or many"
     }
+    SECURITY-REQUIREMENT  {
+        GUID sys_id PK
+        Reference acquisition_package FK "to Acquisition Package"
+        List advisory_services_secret FK "to Classified Information Type"
+        List advisory_services_top_secret FK "to Classified Information Type"
+        Choice service_offering_group "ADVISORY_ASSISTANCE/APPLICATIONS/COMPUTE/DATABASE/DEVELOPER_TOOLS/DOCUMENTATION_SUPPORT/EDGE_COMPUTING/GENERAL_CLOUD_SUPPORT/HELP_DESK_SERVICES/IOT/MACHINE_LEARNING/NETWORKING/PORTABILITY_PLAN/SECURITY/STORAGE/TRAINING"
+        Choice ts_contractor_clearance_type "TS/TS_SCI"
+    }
+    TRAVEL-REQUIREMENT  {
+        GUID sys_id PK
+        Reference acquisition_package FK "to Acquisition Package"
+        List selected_periods FK "to Period"
+        String trip_location
+        Integer duration_in_days
+        Integer number_of_travelers
+        Integer number_of_trips
+    }
+    CROSS-DOMAIN-SOLUTION  {
+        GUID sys_id PK
+        Reference acquisition_package FK "to Acquisition Package"
+        List selected_periods FK "to Period"
+        Choice need_for_entire_task_order_duration "Y/N"
+        Choice cross_domain_solution_required "Y/N"
+        String projected_file_stream_type
+        String anticipated_need_or_usage
+        String traffic_per_domain_pair "stringified json w/ {<domain pair>:<monthly traffic estimate in GB>} pairs"
+    }
+    DOMAIN-PAIR {
+        GUID sys_id PK
+        Choice domain1 "reference to Classification Level.classification"
+        Choice domain2 "reference to Classification Level.classification"
+        String value "calculated value"
+        String label "calculated value"
+    }
 
     ACQUISITION-PACKAGE ||--|| SYS_USER : "MOs, contributors, reviewers"
     ACQUISITION-PACKAGE ||--|| PORTFOLIO : "generates"
@@ -644,6 +689,12 @@ erDiagram
     SELECTED-CLASSIFICATION-LEVEL ||--o{ CLASSIFIED-INFORMATION-TYPE : "S and TS only"
     ARCHITECTURAL-DESIGN-REQUIREMENT ||--|| ACQUISITION-PACKAGE : ""
     ARCHITECTURAL-DESIGN-REQUIREMENT ||--|| CLASSIFICATION-LEVEL : ""
+    SECURITY-REQUIREMENT ||--|| ACQUISITION-PACKAGE : ""
+    SECURITY-REQUIREMENT ||--o{ CLASSIFIED-INFORMATION-TYPE : ""
+    TRAVEL-REQUIREMENT ||--|| ACQUISITION-PACKAGE : ""
+    TRAVEL-REQUIREMENT ||--|{ PERIOD : ""
+    CROSS-DOMAIN-SOLUTION ||--|| ACQUISITION-PACKAGE : ""
+    CROSS-DOMAIN-SOLUTION ||--|{ PERIOD : ""
 
     %% DoW Performance Requirements
     SELECTED-SERVICE-OFFERING ||--|| ACQUISITION-PACKAGE : ""
@@ -665,6 +716,7 @@ erDiagram
     ENVIRONMENT-INSTANCE ||--|| DATABASE-ENVIRONMENT-INSTANCE: "extended by"
     ENVIRONMENT-INSTANCE ||--|| COMPUTE-ENVIRONMENT-INSTANCE: "extended by"
     ENVIRONMENT-INSTANCE ||--|| STORAGE-ENVIRONMENT-INSTANCE: "extended by"
+    ENVIRONMENT-INSTANCE ||--|| GENERAL-XAAS-ENVIRONMENT-INSTANCE: "extended by"
     ENVIRONMENT-INSTANCE ||--|| CLOUD-SUPPORT-ENVIRONMENT-INSTANCE: "extended by"
     %% current environment
     ACQUISITION-PACKAGE ||--o| CURRENT-ENVIRONMENT : ""
