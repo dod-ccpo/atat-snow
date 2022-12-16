@@ -2,6 +2,13 @@
     <element label="DAPPS:IGCE Estimate" max_length="40" name="x_g_dis_atat_igce_estimate" type="collection">
         <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
         <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Classification Instance" max_length="32" name="classification_instance" reference="x_g_dis_atat_classification_instance" type="reference"/>
+        <element choice="1" label="Contract Type" max_length="40" name="contract_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Firm Fixed Price" sequence="1" value="FFP"/>
+                <element inactive_on_update="false" label="Time And Materials" sequence="2" value="T&amp;M"/>
+                <element inactive_on_update="false" label="To Be Determined" sequence="3" value="TBD"/>
+            </choice>
+        </element>
         <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Cross Domain Solution" max_length="32" name="cross_domain_solution" reference="x_g_dis_atat_cross_domain_solution" type="reference"/>
         <element label="Description" max_length="4000" name="description" type="string"/>
         <element label="DOW Task Number" max_length="20" name="dow_task_number" type="string"/>
