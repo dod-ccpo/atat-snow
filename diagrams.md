@@ -663,9 +663,12 @@ erDiagram
         Reference selected_service_offering FK "to Selected Service Offering"
         Reference classification_instance FK "to Classification Instance"
         Reference cross_domain_solution FK "to Cross Domain Solution"
+        Choice contract_type "FFP/T&M/TBD"
         String title
         String description
-        Currency monthly_price
+        Currency unit_price
+        Integer quantity
+        Choice unit "EACH/MONTHS/PEOPLE/PERIOD/SESSIONS"
         String dow_task_number
     }
 
