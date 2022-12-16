@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="DAPPS:IGCE Estimate" max_length="40" name="x_g_dis_atat_igce_estimate" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Classification Instance" max_length="32" name="classification_instance" reference="x_g_dis_atat_classification_instance" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Cross Domain Solution" max_length="32" name="cross_domain_solution" reference="x_g_dis_atat_cross_domain_solution" type="reference"/>
+        <element label="Description" max_length="4000" name="description" type="string"/>
+        <element label="DOW Task Number" max_length="20" name="dow_task_number" type="string"/>
+        <element attributes="edge_encryption_enabled=true,omit_sys_original=true" label="Monthly Price" max_length="20" name="monthly_price" type="currency"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Selected Service Offering" max_length="32" name="selected_service_offering" reference="x_g_dis_atat_selected_service_offering" type="reference"/>
+        <element label="Title" max_length="300" name="title" type="string"/>
+        <index name="index">
+            <element name="selected_service_offering"/>
+        </index>
+        <index name="index2">
+            <element name="classification_instance"/>
+        </index>
+        <index name="index3">
+            <element name="acquisition_package"/>
+        </index>
+        <index name="index4">
+            <element name="cross_domain_solution"/>
+        </index>
+    </element>
+</database>
