@@ -9,13 +9,13 @@
         <name>AtatHelper</name>
         <script><![CDATA[var AtatHelper = Class.create();
 AtatHelper.prototype = {
-    M2M_CONTACTS_TABLE:  "x_g_dis_atat_m2m_contacts_acquisition",
-	CONTACTS_TABLE: "x_g_dis_atat_contacts",
-	PERIOD_TABLE: "x_g_dis_atat_period",
-	errUtil: new ErrorHandler(),
-   
-    initialize: function() {
-    },
+  M2M_CONTACTS_TABLE: "x_g_dis_atat_m2m_contacts_acquisition",
+  CONTACTS_TABLE: "x_g_dis_atat_contacts",
+  PERIOD_TABLE: "x_g_dis_atat_period",
+  errUtil: new ErrorHandler(),
+
+  initialize: function() {
+  },
   /**
    * Query for many-to-many (m2m) contact records that associate the contacts and
    * acquisition package records. A limit of records to can be provided but
@@ -35,8 +35,8 @@ AtatHelper.prototype = {
         .toArray(limit);
     } catch (error) {
       throw this.errUtil.createError(
-          "AtatHelper --> getAssociatedContacts() " + error,
-          this.errUtil.METHOD_ERROR
+        "AtatHelper --> getAssociatedContacts() " + error,
+        this.errUtil.METHOD_ERROR
       );
     }
   },
@@ -66,7 +66,7 @@ AtatHelper.prototype = {
         .where("sys_id", "IN", contactIds)
         .select(fields)
         .toArray(limit)
-		.map(removeSysId)
+        .map(removeSysId)
         .forEach(function(contact) {
           switch (contact.type) {
             case "MISSION_OWNER":
@@ -88,8 +88,8 @@ AtatHelper.prototype = {
       return contacts;
     } catch (error) {
       var newError = this.errUtil.createError(
-          "AtatHelper --> getContactsInfo() " + error,
-          this.errUtil.METHOD_ERROR
+        "AtatHelper --> getContactsInfo() " + error,
+        this.errUtil.METHOD_ERROR
       );
       this.errUtil.errorLogger(newError);
     }
@@ -100,7 +100,7 @@ AtatHelper.prototype = {
    *
    * @param {GlideRecord} sensitiveInfo - package sensitive information record
    * @return {string} complete FOIA address
-   */ 
+   */
   constructFoiaAddress: function(sensitiveInfo) {
     var str1 = sensitiveInfo.foia_street_address_1;
     var str2 = sensitiveInfo.foia_street_address_2;
@@ -128,7 +128,7 @@ AtatHelper.prototype = {
     try {
       var periodFields = ["period_type", "period_unit_count", "period_unit", "option_order"];
       return getListRecords(
-        periodIds, 
+        periodIds,
         periodFields,
         this.PERIOD_TABLE
       );
@@ -161,7 +161,7 @@ AtatHelper.prototype = {
     });
   },
   /**
-   * Map periods ids for a given package to allow easier retreiveal for the
+   * Map periods ids for a given package to allow easier retrieval for the
    * different instances.
    *
    * @param {array} periods - PoP periods
@@ -189,6 +189,10 @@ AtatHelper.prototype = {
    * @return {array} an array of objects with camelCase properties
    */
   snakeToCamelCase: function(records, fields) {
+    if (!records) {
+      gs.warn("No records found to transform into camelCase.");
+      return [];
+    }
     try {
       var snakeToCamelFieldMapping = {};
       fields.forEach(function(snakeField) {
@@ -221,20 +225,19 @@ AtatHelper.prototype = {
   },
 
 
-
-    type: 'AtatHelper'
+  type: 'AtatHelper'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-02 20:49:47</sys_created_on>
         <sys_id>9027655d97a7d5106fa8b4b3f153afba</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_name>AtatHelper</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_9027655d97a7d5106fa8b4b3f153afba</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-12-11 00:12:55</sys_updated_on>
+        <sys_updated_on>2022-12-16 15:55:23</sys_updated_on>
     </sys_script_include>
 </record_update>
