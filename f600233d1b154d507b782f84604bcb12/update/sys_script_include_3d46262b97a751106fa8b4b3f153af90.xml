@@ -16,6 +16,7 @@ Dow.prototype = {
   SELECTED_SER_OFF_TABLE: "x_g_dis_atat_selected_service_offering",
   SERVICE_OFFERING_TABLE: "x_g_dis_atat_service_offering",
   ENV_INST_TABLE: "x_g_dis_atat_environment_instance",
+  STORAGE_ENV_INST_TABLE: "x_g_dis_atat_storage_environment_instance",
   CUR_ENV_INST_TABLE: "x_g_dis_atat_current_environment_instance",
   COMP_ENV_INST_TABLE: "x_g_dis_atat_compute_environment_instance",
   DB_ENV_INST_TABLE: "x_g_dis_atat_database_environment_instance",
@@ -25,11 +26,14 @@ Dow.prototype = {
   CLASS_INFO_TYPE_TABLE: "x_g_dis_atat_classified_information_type",
   REGION_TABLE: "x_g_dis_atat_region",
   ARCH_DESIGN_TABLE: "x_g_dis_atat_architectural_design_requirement",
+  SECURITY_REQUIREMENT_TABLE: "x_g_dis_atat_security_requirement",
+  CROSS_DOMAIN_SOLN_TABLE: "x_g_dis_atat_cross_domain_solution",
+  TRAVEL_REQUIREMENT_TABLE: "x_g_dis_atat_travel_requirement",
 
   // base instance fields
   ENV_INST_FIELDS: [
-    "instance_name", "instance_location", "number_of_instances",
-    "operating_system", "licensing", "region",
+    "instance_name", "instance_location", "number_of_instances", "usage_description",
+    "anticipated_need_or_usage", "operating_system", "licensing", "region",
     "need_for_entire_task_order_duration", "selected_periods",
     "classification_level", "classified_information_types",
     "data_egress_monthly_amount", "data_egress_monthly_unit",
@@ -46,8 +50,32 @@ Dow.prototype = {
   ],
   COMP_ENV_INST_FIELDS: ["environment_type", "operating_environment"],
   DB_ENV_INST_FIELDS: ["database_licensing", "database_type", "database_type_other"],
-  CLOUD_SUP_ENV_INST_FIELDS: ["personnel_onsite_access", "ts_contractor_clearance_type"],
+  CLOUD_SUP_ENV_INST_FIELDS: [
+    "personnel_onsite_access", "service_type",
+  ],
   // other fields
+  ARCH_DESIGN_FIELDS: [
+    "statement", "applications_needing_design", "external_factors", "source",
+    "data_classification_levels",
+  ],
+  SECURITY_REQUIREMENT_FIELDS: [
+    "advisory_services_secret", "advisory_services_top_secret", "service_offering_group",
+    "ts_contractor_clearance_type"
+  ],
+  CROSS_DOMAIN_SOLN_FIELDS: [
+    "anticipated_need_or_usage", "cross_domain_solution_required", "selected_periods",
+    "need_for_entire_task_order_duration", "projected_file_stream_type",
+    "traffic_per_domain_pair"
+  ],
+  TRAVEL_REQUIREMENT_FIELDS: [
+    "duration_in_days", "number_of_travelers", "number_of_trips", "selected_periods",
+    "trip_location",
+  ],
+  SELECTED_SER_OFF_FIELDS: [
+    "classification_instances", "other_service_offering", "service_offering",
+    // not needed
+    // "cost_estimate", "igce_description", "igce_title",
+  ],
   SELECTED_CLASS_LVL_FIELDS: [
     "classification_level", "classified_information_types",
     "data_egress_monthly_amount", "data_egress_monthly_unit",
@@ -57,7 +85,16 @@ Dow.prototype = {
   ],
   CLASS_INST_FIELDS: [
     "classification_level", "classified_information_types", "selected_periods",
-    "need_for_entire_task_order_duration", "usage_description"
+    "need_for_entire_task_order_duration", "usage_description", "dow_task_number"
+  ],
+  SERVICE_OFFERING_FEILDS: ["name", "description", "service_offering_group", "sequence"],
+  XAAS_SERVICE_GROUPS: [
+    "COMPUTE", "DEVELOPER_TOOLS", "APPLICATIONS", "MACHINE_LEARNING", "NETWORKING",
+    "SECURITY", "DATABASE", "STORAGE", "EDGE_COMPUTING", "IOT", "GENERAL_XAAS"
+  ],
+  CLOUD_SUPPORT_PACKAGES: [
+    "PORTABILITY_PLAN", "ADVISORY_ASSISTANCE", "HELP_DESK_SERVICES", "TRAINING",
+    "DOCUMENTATION_SUPPORT", "GENERAL_CLOUD_SUPPORT"
   ],
 
   atatUtil: new AtatHelper(),
@@ -73,6 +110,63 @@ Dow.prototype = {
     var pop = acqPackageRecord.period_of_performance;
     var periods = this.atatUtil.getPeriods(pop.base_period + "," + pop.option_periods);
     this.mappedPeriods = this.atatUtil.mapPackagePeriods(periods);
+  },
+  /**
+   * Combine table fields for base and extended tables.
+   * Example - Environment Instance and Compute Enviornment
+   * Instance table fields.
+   *
+   * @param {string} table - name of the table to return fields
+   * @param {array} an array of field names
+   */
+  getTableFields: function(table) {
+    try {
+      var currentEnvInstFields = [];
+      var computeEnvInstFields = [];
+      var databaseEnvInstFields = [];
+      var cloudSupportEnvInstFields = [];
+
+      Dow.prototype.ENV_INST_FIELDS.forEach(function(field) {
+        currentEnvInstFields.push(field);
+        computeEnvInstFields.push(field);
+        databaseEnvInstFields.push(field);
+        cloudSupportEnvInstFields.push(field);
+      });
+
+      Dow.prototype.CUR_ENV_INST_FIELDS.forEach(function(field) {
+        currentEnvInstFields.push(field);
+      });
+      Dow.prototype.COMP_ENV_INST_FIELDS.forEach(function(field) {
+        computeEnvInstFields.push(field);
+      });
+      Dow.prototype.DB_ENV_INST_FIELDS.forEach(function(field) {
+        databaseEnvInstFields.push(field);
+      });
+      Dow.prototype.CLOUD_SUP_ENV_INST_FIELDS.forEach(function(field) {
+        cloudSupportEnvInstFields.push(field);
+      });
+
+      switch (table) {
+        case Dow.prototype.CUR_ENV_INST_TABLE:
+          return currentEnvInstFields;
+        case Dow.prototype.COMP_ENV_INST_TABLE:
+          return computeEnvInstFields;
+        case Dow.prototype.DB_ENV_INST_TABLE:
+          return databaseEnvInstFields;
+        case Dow.prototype.CLOUD_SUP_ENV_ISNT_TABLE:
+          return cloudSupportEnvInstFields;
+        default:
+          gs.warn("No fields found for " + table);
+          return []
+      }
+
+    } catch (error) {
+      throw this.errUtil.createError(
+        "Dow --> getTableFields(): " + error,
+        this.errUtil.METHOD_ERROR
+      )
+    }
+
   },
 
   /**
@@ -136,41 +230,16 @@ Dow.prototype = {
       return [];
     }
     try {
-      return getListRecords(
+      var records = getListRecords(
         instanceIds,
         Dow.prototype.CLASS_INST_FIELDS,
         Dow.prototype.CLASS_INST_TABLE
-      )
-        .map(function(instance) {
-          // selected instance periods
-          instance.need_for_entire_task_order_duration = Dow.prototype.ctb(
-            instance.need_for_entire_task_order_duration
-          );
-          if (!instance.need_for_entire_task_order_duration) {
-            instance["selected_periods"] = instance.selected_periods
-              .split(",")
-              .map(function(periodId) {
-                return mappedPeriods[periodId];
-              });
-          }
-          return instance;
-        })
-        .map(function(instance) {
-          // get classified info type for instance
-          instance.classified_information_types = Dow.prototype.getClassifiedInfoTypes(
-            instance.classified_information_types
-          );
-          return instance;
-        })
-        .map(function(instance) {
-          // get classification level for instance
-          instance.classification_level = Dow.prototype.getClassificationLevels(
-            instance.classification_level
-          );
-          return instance;
-        })
-        .map(removeSysId);
+      ).map(removeSysId);
 
+      // transforms fields, while leaving the other fields alone.
+      // TODO: might want to look at this a little closer to ensure it will be okay
+      records = Dow.prototype.transformRecordInfo(records, mappedPeriods);
+      return Dow.prototype.atatUtil.snakeToCamelCase(records, Dow.prototype.CLASS_INST_FIELDS);
 
     } catch (error) {
       throw this.errUtil.createError(
@@ -192,11 +261,15 @@ Dow.prototype = {
       return [];
     }
     try {
-      return getListRecords(
+      var fields = ["classification", "display", "impact_level"];
+
+      var records = getListRecords(
         classLevelIds,
-        ["classification", "display", "impact_level"],
+        fields,
         this.CLASS_LVL_TABLE
       ).map(removeSysId);
+
+      return Dow.prototype.atatUtil.snakeToCamelCase(records, fields)
 
     } catch (error) {
       throw this.errUtil.createError(
@@ -261,31 +334,133 @@ Dow.prototype = {
   /**
    * Get Architectural Design Requirement
    *
-   * @param {array} archDesignIds - architectural design requirement 
+   * @param {string} packageId - package sysId 
    * @return {array} array of architectural design requirement objects 
    */
-  getArchitectDesignRequirements: function(archDesignIds) {
-    if (!archDesignIds) {
-      gs.warn("No Architectural Design Requirement ids provided.");
-      return [];
-    }
+  getArchitectDesignRequirements: function(packageId) {
     try {
-      var archDesigns = getListRecords(
-        archDesignIds,
-        ["statement", "applications_needing_design", "external_factors", "data_classification_levels"],
-        this.ARCH_DESIGN_TABLE
-      ).map(removeSysId);
+      var archDesigns = Dow.prototype.findPackageRecords(Dow.prototype.ARCH_DESIGN_TABLE, packageId);
 
-      return archDesigns.map(function(design) {
+      archDesigns = archDesigns.map(function(design) {
         design.data_classification_levels = Dow.prototype.getClassificationLevels(
           design.data_classification_levels
         );
         return design;
-      });
+      }).map(removeSysId);
+
+      return Dow.prototype.atatUtil.snakeToCamelCase(archDesigns, Dow.prototype.ARCH_DESIGN_FIELDS);
 
     } catch (error) {
       throw this.errUtil.createError(
         "Dow --> getArchitectDesignRequirements(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+
+  },
+  /**
+   * Get Security Requirements for a package
+   *
+   * @param {string} packageId - package sys_id
+   * @return {array} an array of security requirement records
+   */
+  getSecurityRequirements: function(packageId) {
+    try {
+      var table = Dow.prototype.SECURITY_REQUIREMENT_TABLE;
+      var securtityRequirements = Dow.prototype.findPackageRecords(table, packageId)
+        .map(function(requirement) {
+          // secret
+          requirement.advisory_services_secret = Dow.prototype.getClassifiedInfoTypes(
+            requirement.advisory_services_secret
+          );
+          // top secret
+          requirement.advisory_services_top_secret = Dow.prototype.getClassifiedInfoTypes(
+            requirement.advisory_services_top_secret
+          );
+          return requirement;
+        });
+      return Dow.prototype.atatUtil.snakeToCamelCase(
+        securtityRequirements,
+        Dow.prototype.SECURITY_REQUIREMENT_FIELDS
+      );
+
+    } catch (error) {
+      throw this.errUtil.createError(
+        "Dow --> getSecurityRequirements(): " + error,
+        this.errUtil.METHOD_ERROR
+
+      );
+    }
+
+  },
+  /** 
+   * Get Cross Domain Solutions (CDS) for a package
+   *
+   * @param {string}  packageId - package sys_id
+   * @return {an array} an array of CDS records 
+   */
+  getCrossDomainSolution: function(packageId, mappedPeriods) {
+    try {
+      var ctb = Dow.prototype.ctb;
+      var table = Dow.prototype.CROSS_DOMAIN_SOLN_TABLE;
+      var crossDomainSoln = Dow.prototype.findPackageRecords(table, packageId)
+        .map(function(cds) {
+          cds["cross_domain_solution_required"] = ctb(cds.cross_domain_solution_required);
+          cds["need_for_entire_task_order_duration"] = ctb(cds.need_for_entire_task_order_duration);
+          if (!cds.need_for_entire_task_order_duration) {
+            cds["selected_periods"] = cds.selected_periods
+              .split(",")
+              .map(function(periodId) {
+                return mappedPeriods[periodId];
+              });
+
+          }
+          return cds;
+        });
+
+      crossDomainSoln = Dow.prototype.atatUtil.snakeToCamelCase(
+        crossDomainSoln,
+        Dow.prototype.CROSS_DOMAIN_SOLN_FIELDS
+      );
+
+      return crossDomainSoln.length === 1 ? crossDomainSoln[0] : null;
+    } catch (error) {
+      throw this.errUtil.createError(
+        "Dow --> getCrossDomainSolution(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+  },
+  /**
+   * Get Trips related to a package
+   *
+   * @param {string} packageId - a package sys_id
+   * @return {array} an array of trip records
+   */
+  getTrips: function(packageId, mappedPeriods) {
+    try {
+      var table = Dow.prototype.TRAVEL_REQUIREMENT_TABLE;
+      var trips = Dow.prototype.findPackageRecords(table, packageId)
+        .map(function(trip) {
+          trip["selected_periods"] = trip.selected_periods
+            .split(",")
+            .map(function(periodId) {
+              return mappedPeriods[periodId];
+            });
+          return trip;
+        });
+
+      trips = Dow.prototype.atatUtil.snakeToCamelCase(
+        trips,
+        Dow.prototype.TRAVEL_REQUIREMENT_FIELDS
+      );
+
+      return trips;
+      // return trips.length > 1 ? trips : [];
+
+    } catch (error) {
+      throw this.errUtil.createError(
+        "Dow --> getTrips(): " + error,
         this.errUtil.METHOD_ERROR
       );
     }
@@ -297,34 +472,18 @@ Dow.prototype = {
    *
    * @return {array} an array of current environment instances
    */
-  getCurrentEnvInstances: function() {
+  getCurrentEnvInstances: function(packageId) {
     try {
       var mappedPeriods = this.mappedPeriods;
       var ctb = this.ctb;
-
-      var currentEnvInstances = this.findPackageRecords(this.CUR_ENV_INST_TABLE);
-      currentEnvInstances = this.atatUtil.snakeToCamelCase(
-        currentEnvInstances,
-        this.arrUtil.concat(this.ENV_INST_FIELDS, this.CUR_ENV_INST_FIELDS)
-      );
+      var table = Dow.prototype.CUR_ENV_INST_TABLE;
+      var currentEnvInstances = Dow.prototype.getInstances(table, packageId, mappedPeriods);
 
       return currentEnvInstances.map(function(instance) {
         // format special case properties (e.g, nested records, YES/NO fields, etc.)
         instance["isTrafficSpikeEventBased"] = ctb(instance.isTrafficSpikeEventBased);
         instance["isTrafficSpikePeriodBased"] = ctb(instance.isTrafficSpikePeriodBased);
-        instance["needForEntireTaskOrderDuration"] = ctb(instance.needForEntireTaskOrderDuration);
-        instance["region"] = Dow.prototype.getRegions(instance.region);
         instance["deployedRegions"] = Dow.prototype.getRegions(instance.deployedRegions);
-        instance["classifiedInformationTypes"] = Dow.prototype.getClassifiedInfoTypes(
-          instance.classifiedInformationTypes
-        );
-        if (!instance.needForEntireTaskOrderDuration) {
-          instance["selectedPeriods"] = instance.selectedPeriods
-            .split(",")
-            .map(function(periodId) {
-              return mappedPeriods[periodId];
-            });
-        }
 
         return instance;
       });
@@ -352,21 +511,12 @@ Dow.prototype = {
         // background
         currentEnvironmentExists: ctb(currentEnv.current_environment_exists),
         hasSystemDocumentation: ctb(currentEnv.has_system_documentation),
-        // Q: are these documents to be included in the package or do they have
-        // to be included in the actual DOW?
-        systemDocumentation: currentEnv.system_documentation.toString(), // List
         hasMigrationDocumentation: ctb(currentEnv.has_migration_documentation),
-        migrationDocumentation: currentEnv.migration_documentation.toString(), // List
-        envLocation: currentEnv.env_location.toString(), // CLOUD/HYBRID/ON_PREM
-        // TODO: get information for impact levels
-        envClassificationsCloud: this.getClassificationLevels(currentEnv.env_classifications_cloud), // List
-        envClassificationsOnprem: this.getClassificationLevels(currentEnv.env_classifications_onprem), // List
-
+        envLocation: currentEnv.env_location.toString(),
+        envClassificationsCloud: this.getClassificationLevels(currentEnv.env_classifications_cloud),
+        envClassificationsOnprem: this.getClassificationLevels(currentEnv.env_classifications_onprem),
         // environment instances 
-        // Q: current usage?? Evenly/Event/HighUsage
-        // contained inside each instance
-        envInstances: this.getCurrentEnvInstances(), // List
-
+        envInstances: this.getCurrentEnvInstances(this.acquisitionPackage.sys_id),
 
         // currentEnv
         additionalGrowth: ctb(currentEnv.additional_growth),
@@ -378,9 +528,7 @@ Dow.prototype = {
         phasedApproachSchedule: currentEnv.phased_approach_schedule.toString(),
         // architect design
         needsArchitecturalDesignServices: ctb(currentEnv.needs_architectural_design_services),
-        architecturalDesignRequirement: this.getArchitectDesignRequirements(
-          currentEnv.architectural_design_requirement
-        ),
+        architecturalDesignRequirement: this.getArchitectDesignRequirements(this.acquisitionPackage.sys_id),
         // cloud support needed
         // Q: should there be an option for this in currentEnv??
       };
@@ -400,17 +548,20 @@ Dow.prototype = {
    * @param {array} selectedServiceIds - a list of selected service offering ids 
    * @return {array} of selected service offerings with information for each
    */
-  getSelectedServiceOfferings: function(selectedServiceIds) {
+  getSelectedServiceOfferings: function(packageId) {
     try {
       var getClassificationInstances = this.getClassificationInstances;
       var mappedPeriods = this.mappedPeriods;
-      var requiredFields = [
-        "classification_instances", "architectural_design_requirement",
-        "service_offering", "other_service_offering"
-      ];
-      return getListRecords(selectedServiceIds, requiredFields, Dow.prototype.SELECTED_SER_OFF_TABLE)
+      var serviceOfferingFields = Dow.prototype.SERVICE_OFFERING_FEILDS;
+      var selectedServices = Dow.prototype.findPackageRecords(
+        Dow.prototype.SELECTED_SER_OFF_TABLE,
+        packageId
+      );
+
+      // get additional info and transform keys to snake case
+      selectedServices
         .map(function(service) {
-          // populate classification
+          // populate classification instances
           service.classification_instances = getClassificationInstances(
             service.classification_instances,
             mappedPeriods
@@ -418,20 +569,21 @@ Dow.prototype = {
           return service;
         })
         .map(function(service) {
-          var serviceOffering = new GlideRecord(Dow.prototype.SERVICE_OFFERING_TABLE);
-          serviceOffering.get(service.service_offering);
-          if (serviceOffering.isValidRecord) {
-            service.service_offering = {
-              name: serviceOffering.name.toString(),
-              description: serviceOffering.description.toString(),
-              service_offering_group: serviceOffering.service_offering_group.toString(),
-              sequence: serviceOffering.sequence.toString()
-            };
-
-          }
-          return service;
+          // 1) get service offering
+          var serviceOffering = getListRecords(
+            service.service_offering,
+            Dow.prototype.SERVICE_OFFERING_FEILDS,
+            Dow.prototype.SERVICE_OFFERING_TABLE
+          ).map(removeSysId);
+          // 2) turn keys to camel case
+          serviceOffering = Dow.prototype.atatUtil.snakeToCamelCase(serviceOffering, serviceOfferingFields);
+          // 3) ensure only one service offering or make null
+          serviceOffering = serviceOffering.length === 1 ? serviceOffering[0] : null;
+          service.service_offering = serviceOffering;
+          return service
         });
 
+      return Dow.prototype.atatUtil.snakeToCamelCase(selectedServices, Dow.prototype.SELECTED_SER_OFF_FIELDS);
 
     } catch (error) {
       throw this.errUtil.createError(
@@ -510,140 +662,166 @@ Dow.prototype = {
     }
   },
   /**
-   * Get a XaaS service offerings for a package.
+   * Transforms common columns in records related to Dow data.
+   * - get nested records (classification level)
+   * - converts Yes/No into booleans
+   * - get selected periods
    *
+   * @param {array} records - records to be transformed
+   * @param {object} mappedPeriods - mapped PoP periods for a package
+   * @return {object[]} an array of transformed records 
+   */
+  transformRecordInfo: function(records, mappedPeriods) {
+    try {
+      return records.map(function(record) {
+        var level = Dow.prototype.getClassificationLevels(record.classification_level);
+        record["classification_level"] = level.length === 1 ? level[0] : null;
+        record["classified_information_types"] = Dow.prototype.getClassifiedInfoTypes(
+          record.classified_information_types
+        );
+        var region = Dow.prototype.getRegions(record.region);
+        record["region"] = region.length === 1 ? region[0] : null;
+        record["need_for_entire_task_order_duration"] = Dow.prototype.ctb(
+          record.need_for_entire_task_order_duration
+        );
+        if (!record.need_for_entire_task_order_duration) {
+          record["selected_periods"] = record.selected_periods
+            .split(",")
+            .map(function(periodId) {
+              return mappedPeriods[periodId];
+            });
+        }
+        return record
+      });
+
+
+    } catch (error) {
+      throw this.errUtil.createError(
+        "Dow --> transformRecordInfo(): " + error,
+        this.errUtil.METHOD_ERROR
+      )
+    }
+  },
+  /** 
+   * Get X Instances related to Dow records including nested information 
+   * and return the record. Column names are converted to camelCase
+   * in the process as well for the HOTH API.
+   *
+   * @param {string} table - instance table name
+   * @param {string} packageId - pacakge sysId
+   * @param {object} mappedPeriods - package mapped PoP periods
+   * @return {array} an array of package records
+   */
+  getInstances: function(table, packageId, mappedPeriods) {
+    try {
+      // 1) get all database instances for package
+      var instances = Dow.prototype.findPackageRecords(
+        table,
+        packageId
+      );
+      // 2) configure any special cases (e.g., nested sys_ids, YES/NO, etc.)
+      instances = Dow.prototype.transformRecordInfo(
+        instances,
+        mappedPeriods
+      );
+      // 3) convert to camel case
+      instances = Dow.prototype.atatUtil.snakeToCamelCase(
+        instances,
+        Dow.prototype.getTableFields(table)
+      );
+
+      return instances;
+
+    } catch (error) {
+      throw this.errUtil.createError(
+        "Dow --> getInstances(): " + error,
+        this.errUtil.METHOD_ERROR
+      )
+    }
+
+  },
+  /**
+   * Get Selected Service Offerings for a package.
+   *
+   * @param {string} packageId - a package sys_id
+   * @param {object} mappedPeriods - a package mapped PoP periods
    * @return {array} an array of XaaS selected service offerings 
    */
-  getXaasOfferings: function(serviceOfferingIds, packageId) {
+  getServicesInfo: function(packageId, mappedPeriods) {
     try {
-      var findPackageRecords = Dow.prototype.findPackageRecords;
-      var selectedServices = this.getSelectedServiceOfferings(serviceOfferingIds);
+      var selectedServices = this.getSelectedServiceOfferings(packageId);
+      var table, configs;
 
-      var instanceConfigurations;
-      var computeEnvInstFields = [];
-      var databaseEnvInstFields = [];
-      var cloudSupportEnvInstFields = [];
-
-      Dow.prototype.ENV_INST_FIELDS.forEach(function(field) {
-        computeEnvInstFields.push(field);
-        databaseEnvInstFields.push(field);
-        cloudSupportEnvInstFields.push(field);
-      });
-
-      Dow.prototype.COMP_ENV_INST_FIELDS.forEach(function(field) {
-        computeEnvInstFields.push(field);
-      });
-      Dow.prototype.DB_ENV_INST_FIELDS.forEach(function(field) {
-        databaseEnvInstFields.push(field);
-      });
-      Dow.prototype.CLOUD_SUP_ENV_INST_FIELDS.forEach(function(field) {
-        cloudSupportEnvInstFields.push(field);
-      });
-
-      // XaaS
-      var xaasServiceGroups = [
-        "COMPUTE", "DEVLOPER_TOOLS", "APPLICATIONS", "MACHINE_LEARNING", "NETWORKING",
-        "SECURITY", "DATABASE", "STORAGE", "EDGE_COMPUTING", "IOT", "GENERAL_XAAS"
-      ];
+      // XaaS Services
       var xaasOfferings = selectedServices.filter(function(service) {
         return listContains(
-          service.service_offering.service_offering_group.toString(),
-          xaasServiceGroups
+          service.serviceOffering.serviceOfferingGroup,
+          Dow.prototype.XAAS_SERVICE_GROUPS
         );
       });
 
       // get instances relevante for the Service Group (Compute -> compute instance) 
       xaasOfferings = xaasOfferings.map(function(offering) {
-        switch (offering.service_offering.service_offering_group) {
+        switch (offering.serviceOffering.serviceOfferingGroup) {
           case "COMPUTE":
-            instanceConfigurations = findPackageRecords(
-              Dow.prototype.COMP_ENV_INST_TABLE,
-              packageId
-            );
-            instanceConfigurations = this.atatUtil.snakeToCamelCase(
-              instanceConfigurations,
-              computeEnvInstFields
-            );
+            table = Dow.prototype.COMP_ENV_INST_TABLE;
+            configs = Dow.prototype.getInstances(table, packageId, mappedPeriods);
             return {
               serviceOffering: offering,
-              instanceConfigurations: instanceConfigurations
+              instanceConfigurations: configs
             };
           case "DATABASE":
-            instanceConfigurations = findPackageRecords(
-              Dow.prototype.DB_ENV_INST_TABLE,
-              packageId
-            );
-            instanceConfigurations = this.atatUtil.snakeToCamelCase(
-              instanceConfigurations,
-              databaseEnvInstFields
-            );
+            table = Dow.prototype.DB_ENV_INST_TABLE;
+            configs = Dow.prototype.getInstances(table, packageId, mappedPeriods);
             return {
               serviceOffering: offering,
-              instanceConfigurations: instanceConfigurations
+              instanceConfigurations: configs
+            };
+          case "STORAGE":
+            table = Dow.prototype.STORAGE_ENV_INST_TABLE;
+            configs = Dow.prototype.getInstances(table, packageId, mappedPeriods);
+            return {
+              serviceOffering: offering,
+              instanceConfigurations: configs
             };
           default:
-            instanceConfigurations = findPackageRecords(
-              Dow.prototype.ENV_INST_TABLE,
-              packageId
-            );
-            instanceConfigurations = this.atatUtil.snakeToCamelCase(
-              instanceConfigurations,
-              Dow.prototype.ENV_INST_FIELDS
-            );
+            // No isntance configurations required only serviceOffering
             return {
               serviceOffering: offering,
-              instanceConfigurations: instanceConfigurations
+              instanceConfigurations: []
             };
-
         }
       });
 
       // Cloud Support
-      var cloudSupportPackages = [
-        "PORTABILITY_PLAN", "ADVISORY_ASSISTANCE", "HELP_DESK_SERVICES", "TRAINING",
-        "DOCUMENTATION_SUPPORT", "GENERAL_CLOUD_SUPPORT"
-      ];
       var cloudSupportServices = selectedServices.filter(function(service) {
         return listContains(
-          service.service_offering.service_offering_group.toString(),
-          cloudSupportPackages
+          service.serviceOffering.serviceOfferingGroup,
+          Dow.prototype.CLOUD_SUPPORT_PACKAGES
         );
       });
 
       // get instances relevante for the Cloud Support Packages (Advisory, Migration, etc.) 
-      cloudSupportServices = cloudSupportServices.map(function(support) {
-        switch (support.service_offering.service_offering_group) {
-          case "TRAINING":
-            return {
-              serviceOffering: support,
-              supportingInfo: findPackageRecords(
-                // TODO: update with TRAINING 
-                Dow.prototype.ENV_INST_TABLE,
-                packageId
-              )
-            };
-          default:
-            return {
-              serviceOffering: support,
-              supportingInfo: findPackageRecords(
-                Dow.prototype.ENV_INST_TABLE,
-                packageId
-              )
-            };
-        }
+      var table = Dow.prototype.CLOUD_SUP_ENV_ISNT_TABLE;
+      var configs = Dow.prototype.getInstances(table, packageId, mappedPeriods);
+      cloudSupportServices = cloudSupportServices.map(function(supportService) {
+        var service = supportService.serviceOffering.serviceOfferingGroup;
+        var info = configs.filter(function(info) { return service === info.serviceType; });
+
+        return {
+          serviceOffering: supportService,
+          supportingInfo: info
+        };
 
       });
 
-
       return {
         xaas: xaasOfferings,
-        cloudSupport: cloudSupportServices
+        cloudSupport: cloudSupportServices,
       };
-
-
     } catch (error) {
       throw this.errUtil.createError(
-        "Dow --> getXaasOfferings(): " + error,
+        "Dow --> getServicesInfo(): " + error,
         this.errUtil.METHOD_ERROR
       );
     }
@@ -658,34 +836,13 @@ Dow.prototype = {
    */
   findPackageRecords: function(table, packageSysId) {
     var packageId = packageSysId ? packageSysId : this.acquisitionPackage.sys_id;
-    var limit = 50;
+    var limit = 50; // arbitrary
 
-    var currentEnvInstFields = [];
-    var computeEnvInstFields = [];
-    var databaseEnvInstFields = [];
-    var cloudSupportEnvInstFields = [];
-
-    Dow.prototype.ENV_INST_FIELDS.forEach(function(field) {
-      currentEnvInstFields.push(field);
-      computeEnvInstFields.push(field);
-      databaseEnvInstFields.push(field);
-      cloudSupportEnvInstFields.push(field);
-    });
-
-    Dow.prototype.CUR_ENV_INST_FIELDS.forEach(function(field) {
-      currentEnvInstFields.push(field);
-    });
-    Dow.prototype.COMP_ENV_INST_FIELDS.forEach(function(field) {
-      computeEnvInstFields.push(field);
-    });
-    Dow.prototype.DB_ENV_INST_FIELDS.forEach(function(field) {
-      databaseEnvInstFields.push(field);
-    });
-    Dow.prototype.CLOUD_SUP_ENV_INST_FIELDS.forEach(function(field) {
-      cloudSupportEnvInstFields.push(field);
-    });
-
-
+    // composed fields to avoid unexpected side affects when using arrUtil.concat()
+    var currentEnvInstFields = Dow.prototype.getTableFields(Dow.prototype.CUR_ENV_INST_TABLE);
+    var computeEnvInstFields = Dow.prototype.getTableFields(Dow.prototype.COMP_ENV_INST_TABLE);
+    var databaseEnvInstFields = Dow.prototype.getTableFields(Dow.prototype.DB_ENV_INST_TABLE);
+    var cloudSupportEnvInstFields = Dow.prototype.getTableFields(Dow.prototype.CLOUD_SUP_ENV_ISNT_TABLE);
 
     switch (table) {
       case Dow.prototype.ENV_INST_TABLE:
@@ -713,11 +870,35 @@ Dow.prototype = {
           .where("acquisition_package", packageId)
           .select(cloudSupportEnvInstFields)
           .toArray(limit);
-
+      case Dow.prototype.SELECTED_SER_OFF_TABLE:
+        return new global.GlideQuery(table)
+          .where("acquisition_package", packageId)
+          .select(Dow.prototype.SELECTED_SER_OFF_FIELDS)
+          .toArray(limit);
       case Dow.prototype.SELECTED_CLASS_LVL_TABLE:
         return new global.GlideQuery(table)
           .where("acquisition_package", packageId)
           .select(Dow.prototype.SELECTED_CLASS_LVL_FIELDS)
+          .toArray(limit);
+      case Dow.prototype.ARCH_DESIGN_TABLE:
+        return new global.GlideQuery(table)
+          .where("acquisition_package", packageId)
+          .select(Dow.prototype.ARCH_DESIGN_FIELDS)
+          .toArray(limit);
+      case Dow.prototype.SECURITY_REQUIREMENT_TABLE:
+        return new global.GlideQuery(table)
+          .where("acquisition_package", packageId)
+          .select(Dow.prototype.SECURITY_REQUIREMENT_FIELDS)
+          .toArray(limit);
+      case Dow.prototype.CROSS_DOMAIN_SOLN_TABLE:
+        return new global.GlideQuery(table)
+          .where("acquisition_package", packageId)
+          .select(Dow.prototype.CROSS_DOMAIN_SOLN_FIELDS)
+          .toArray(limit);
+      case Dow.prototype.TRAVEL_REQUIREMENT_TABLE:
+        return new global.GlideQuery(table)
+          .where("acquisition_package", packageId)
+          .select(Dow.prototype.TRAVEL_REQUIREMENT_FIELDS)
           .toArray(limit);
       default:
         gs.warn("Table " + table + " is not known to be associated with a package.");
@@ -740,18 +921,18 @@ Dow.prototype = {
       var cci = acqPackage.current_contract_and_recurring_information;
       var cc = acqPackage.contract_considerations;
 
-      // award related 
-      var awardIds = acqPackage.contract_award + "," + acqPackage.contract_modifications;
+      // awards 
+      var awardIds;
+      if (acqPackage.contract_award && acqPackage.contract_modifications) {
+        awardIds = acqPackage.contract_award + "," + acqPackage.contract_modifications;
+      } else if (acqPackage.contract_award) {
+        awardIds = acqPackage.contract_award 
+      }
 
-      //       // Pop related
-      //       var pop = acqPackage.period_of_performance;
-      //       var periods = this.atatUtil.getPeriods(pop.base_period + "," + pop.option_periods);
-      //       this.mappedPeriods = this.atatUtil.mapPackagePeriods(periods);
-      var services = this.getXaasOfferings(acqPackage.selected_service_offerings, acqPackage.sys_id);
-      gs.info("SELECTED SERVICE OFFERINGS: " + JSON.stringify(services));
+      // service offerings
+      var services = this.getServicesInfo(acqPackage.sys_id, this.mappedPeriods);
 
-
-      // hoth DoW generated-document payload
+      // HOTH DoW generated-document payload
       return {
         documentType: "DESCRIPTION_OF_WORK_DOCX",
         templatePayload: {
@@ -778,6 +959,7 @@ Dow.prototype = {
 
           // section 4.2-4.3
           xaasOfferings: services.xaas,
+          crossDomainSolutions: this.getCrossDomainSolution(acqPackage.sys_id, this.mappedPeriods),
           cloudSupportPackages: services.cloudSupport,
 
 
@@ -789,10 +971,9 @@ Dow.prototype = {
 
           // section 7
           periodOfPerformance: this.getPackagePop(acqPackage.period_of_performance, this.mappedPeriods),
-          // TODO: add task/subtask selected periods and need for entire duration??
 
           // section 8 - Security Requirements
-          // Selected Classified Levels ??
+          securityRequirements: this.getSecurityRequirements(acqPackage.sys_id),
 
           // section 9 - GFP/GFE/GFI
           // - no data, text only ?
@@ -818,15 +999,11 @@ Dow.prototype = {
             piiPresent: ctb(acqPackage.sensitive_information.pii_present),
             systemOfRecordName: acqPackage.sensitive_information.system_of_record_name.toString(),
             // 10f
-            travel: [],
-
-            contractorRequiredTraining: ctb(cc.contractor_required_training),
-
+            travel: this.getTrips(acqPackage.sys_id, this.mappedPeriods),
           },
 
           // section 11
           // - no data, text only?
-
         }
       };
 
@@ -848,13 +1025,13 @@ Dow.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-10 00:50:30</sys_created_on>
         <sys_id>3d46262b97a751106fa8b4b3f153af90</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_name>Dow</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_3d46262b97a751106fa8b4b3f153af90</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-12-13 15:45:16</sys_updated_on>
+        <sys_updated_on>2022-12-16 04:00:44</sys_updated_on>
     </sys_script_include>
 </record_update>
