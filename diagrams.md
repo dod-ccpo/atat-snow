@@ -197,6 +197,7 @@ erDiagram
         String docusign_envelope_id
         Boolean edms_folder_created "Electronic Document Management System"
         Choice docgen_job_status "NOT_STARTED/IN_PROGRESS/SUCCESS/FAILURE"
+        Choice contracting_shop "DITCO/OTHER"
     }
     ARCHITECTURAL-DESIGN-REQUIREMENT {
         GUID sys_id PK
