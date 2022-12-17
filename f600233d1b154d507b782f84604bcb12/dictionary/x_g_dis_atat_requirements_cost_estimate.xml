@@ -5,6 +5,12 @@
         <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Has DOW and PoP" max_length="40" name="has_dow_and_pop" type="choice">
             <choice/>
         </element>
+        <element choice="1" label="Optimize/Replicate Option" max_length="40" name="optimize_replicate_option" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="I want to apply the same price estimate to all performance periods." sequence="1" value="SINGLE"/>
+                <element inactive_on_update="false" label="I want to estimate a different price for the base and each option period." sequence="2" value="MULTIPLE"/>
+            </choice>
+        </element>
         <element display="true" label="Surge Capabilities" max_length="40" name="surge_capabilities" type="string"/>
         <index name="index">
             <element name="acquisition_package"/>
