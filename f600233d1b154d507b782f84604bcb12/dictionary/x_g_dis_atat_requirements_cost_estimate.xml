@@ -25,6 +25,13 @@
                 <element inactive_on_update="false" label="I want to estimate a different price for the base and each option period." sequence="2" value="MULTIPLE"/>
             </choice>
         </element>
+        <element choice="1" label="Previous Cost Estimate Comparison Option" max_length="40" name="previous_cost_estimate_comparison_option" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="The previous cost estimate was more than the actual prices paid." sequence="1" value="MORE_THAN"/>
+                <element inactive_on_update="false" label="The previous cost estimate was less than the actual prices paid." sequence="2" value="LESS_THAN"/>
+                <element inactive_on_update="false" label="The previous cost estimate was approximately the same as the actual prices paid." sequence="3" value="SAME"/>
+            </choice>
+        </element>
         <element active="false" display="true" label="Surge Capabilities" max_length="40" name="surge_capabilities" type="string"/>
         <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Surge Requirement Capabilities" max_length="40" name="surge_requirement_capabilities" type="choice">
             <choice/>
