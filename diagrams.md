@@ -183,7 +183,7 @@ erDiagram
         Reference period_of_performance FK "to Period of Performance"
         Reference ditco_cs FK "to DITCO Contract Specialist"
         Reference project_overview FK "to Project Overview"
-        Reference requirements_cost_estimate FK "to Requirements Cost Estimate"
+        Reference requirements_cost_estimate FK "(column INACTIVE)"
         List secondary_reviewers FK "to sys_user"
         List selected_service_offerings FK "(column INACTIVE)"
         Reference sensitive_information FK "to Sensitive Information"
@@ -420,8 +420,23 @@ erDiagram
     }
     REQUIREMENTS-COST-ESTIMATE {
         GUID sys_id PK
-        String surge_capabilities
-        Integer contracting_office_fee_pct
+        Reference acquisition_package FK "to Acquisition Package"
+        Choice architectural_design_current_environment_option "SINGLE/MULTIPLE"
+        String architectural_design_current_environment_estimated_values "stringified json w/ {<period>:<price estimate>} pairs"
+        Choice architectural_design_performance_requirements_option "SINGLE/MULTIPLE"
+        String architectural_design_performance_requirements_estimated_values "stringified json w/ {<period>:<price estimate>} pairs"
+        Choice contracting_office_other_charges_fee "Y/N"
+        Integer contracting_office_other_fee_percentage
+        Integer contracting_office_fee_pct "(column INACTIVE)"
+        String cost_estimate_description
+        Choice has_dow_and_pop "Y/N"
+        Choice optimize_replicate_option "SINGLE/MULTIPLE"
+        String optimize_replicate_estimated_values "stringified json w/ {<period>:<price estimate>} pairs"
+        Choice previous_cost_estimate_comparison_option "MORE_THAN/LESS_THAN/SAME"
+        Integer previous_cost_estimate_comparison_percentage
+        Choice surge_requirement_capabilities "Y/N"
+        Integer surge_requirement_capacity
+        String surge_capabilities "(column INACTIVE)"
     }
     SERVICE-OFFERING {
         GUID sys_id PK
@@ -690,7 +705,6 @@ erDiagram
     ACQUISITION-PACKAGE ||--|| FAIR-OPPORTUNITY : ""
     ACQUISITION-PACKAGE ||--|| GFE-OVERVIEW : "TODO delete table"
     PERIOD-OF-PERFORMANCE ||--|{ PERIOD : "base and option"
-    ACQUISITION-PACKAGE ||--|| REQUIREMENTS-COST-ESTIMATE : ""
     ACQUISITION-PACKAGE }|--|{ DITCO-CONTRACT-SPECIALIST : "KO and CS"
     DITCO-CONTRACT-SPECIALIST ||--|| SYS_USER : "KO and CS"
     ACQUISITION-PACKAGE }|--|{ IDIQ-CLIN : "contract specific"
@@ -714,6 +728,7 @@ erDiagram
     IGCE-ESTIMATE ||--|| SELECTED-SERVICE-OFFERING : ""
     IGCE-ESTIMATE ||--|| CLASSIFICATION-INSTANCE : ""
     IGCE-ESTIMATE ||--|| CROSS-DOMAIN-SOLUTION : ""
+    REQUIREMENTS-COST-ESTIMATE }|--|| ACQUISITION-PACKAGE : ""
 
     %% DoW Performance Requirements
     SELECTED-SERVICE-OFFERING }|--|| ACQUISITION-PACKAGE : ""
