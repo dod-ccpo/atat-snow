@@ -183,7 +183,7 @@ erDiagram
         Reference period_of_performance FK "to Period of Performance"
         Reference ditco_cs FK "to DITCO Contract Specialist"
         Reference project_overview FK "to Project Overview"
-        Reference requirements_cost_estimate FK "to Requirements Cost Estimate"
+        Reference requirements_cost_estimate FK "(column INACTIVE)"
         List secondary_reviewers FK "to sys_user"
         List selected_service_offerings FK "(column INACTIVE)"
         Reference sensitive_information FK "to Sensitive Information"
@@ -197,6 +197,7 @@ erDiagram
         String docusign_envelope_id
         Boolean edms_folder_created "Electronic Document Management System"
         Choice docgen_job_status "NOT_STARTED/IN_PROGRESS/SUCCESS/FAILURE"
+        Choice contracting_shop "DITCO/OTHER"
     }
     ARCHITECTURAL-DESIGN-REQUIREMENT {
         GUID sys_id PK
@@ -419,8 +420,23 @@ erDiagram
     }
     REQUIREMENTS-COST-ESTIMATE {
         GUID sys_id PK
-        String surge_capabilities
-        Integer contracting_office_fee_pct
+        Reference acquisition_package FK "to Acquisition Package"
+        Choice architectural_design_current_environment_option "SINGLE/MULTIPLE"
+        String architectural_design_current_environment_estimated_values "stringified json w/ {<period>:<price estimate>} pairs"
+        Choice architectural_design_performance_requirements_option "SINGLE/MULTIPLE"
+        String architectural_design_performance_requirements_estimated_values "stringified json w/ {<period>:<price estimate>} pairs"
+        Choice contracting_office_other_charges_fee "Y/N"
+        Integer contracting_office_other_fee_percentage
+        Integer contracting_office_fee_pct "(column INACTIVE)"
+        String cost_estimate_description
+        Choice has_dow_and_pop "Y/N"
+        Choice optimize_replicate_option "SINGLE/MULTIPLE"
+        String optimize_replicate_estimated_values "stringified json w/ {<period>:<price estimate>} pairs"
+        Choice previous_cost_estimate_comparison_option "MORE_THAN/LESS_THAN/SAME"
+        Integer previous_cost_estimate_comparison_percentage
+        Choice surge_requirement_capabilities "Y/N"
+        Integer surge_requirement_capacity
+        String surge_capabilities "(column INACTIVE)"
     }
     SERVICE-OFFERING {
         GUID sys_id PK
@@ -437,9 +453,9 @@ erDiagram
         Reference service_offering FK "to Service Offering"
         Reference architectural_design_requirement FK "(column INACTIVE)"
         String other_service_offering
-        Currency cost_estimate
-        String igce_title
-        String igce_description
+        Currency cost_estimate "(column INACTIVE)"
+        String igce_title "(column INACTIVE)"
+        String igce_description "(column INACTIVE)"
     }
     ESTIMATED-ENVIRONMENT-INSTANCE {
         Extends ENVIRONMENT-INSTANCE "inherits cols"
@@ -502,8 +518,8 @@ erDiagram
         Reference classification_level FK "to Classification Level"
         List classified_information_types FK "to Classified Information Type"
         List selected_periods FK "to Period"
-        String dow_task_number
-        Currency monthly_price
+        String dow_task_number "(column INACTIVE)"
+        Currency monthly_price "(column INACTIVE)"
         Choice need_for_entire_task_order_duration
         String usage_description
     }
@@ -554,9 +570,9 @@ erDiagram
         Choice operating_system_licensing "TRANSFER_EXISTING/NEW"
         String anticipated_need_or_usage
         String usage_description
-        Currency cost_estimate
-        String igce_title
-        String igce_description
+        Currency cost_estimate "(column INACTIVE)"
+        String igce_title "(column INACTIVE)"
+        String igce_description "(column INACTIVE)"
     }
     CURRENT-ENVIRONMENT {
         GUID sys_id PK
@@ -657,6 +673,20 @@ erDiagram
         String value "calculated value"
         String label "calculated value"
     }
+    IGCE-ESTIMATE {
+        GUID sys_id PK
+        Reference acquisition_package FK "to Acquisition Package"
+        Reference selected_service_offering FK "to Selected Service Offering"
+        Reference classification_instance FK "to Classification Instance"
+        Reference cross_domain_solution FK "to Cross Domain Solution"
+        Choice contract_type "FFP/T&M/TBD"
+        String title
+        String description
+        Currency unit_price
+        Integer quantity
+        Choice unit "EACH/MONTHS/PEOPLE/PERIOD/SESSIONS"
+        String dow_task_number
+    }
 
     ACQUISITION-PACKAGE ||--|| SYS_USER : "MOs, contributors, reviewers"
     ACQUISITION-PACKAGE ||--|| PORTFOLIO : "generates"
@@ -675,7 +705,6 @@ erDiagram
     ACQUISITION-PACKAGE ||--|| FAIR-OPPORTUNITY : ""
     ACQUISITION-PACKAGE ||--|| GFE-OVERVIEW : "TODO delete table"
     PERIOD-OF-PERFORMANCE ||--|{ PERIOD : "base and option"
-    ACQUISITION-PACKAGE ||--|| REQUIREMENTS-COST-ESTIMATE : ""
     ACQUISITION-PACKAGE }|--|{ DITCO-CONTRACT-SPECIALIST : "KO and CS"
     DITCO-CONTRACT-SPECIALIST ||--|| SYS_USER : "KO and CS"
     ACQUISITION-PACKAGE }|--|{ IDIQ-CLIN : "contract specific"
@@ -684,20 +713,25 @@ erDiagram
     PACKAGE-DOCUMENT }|--|| ACQUISITION-PACKAGE : ""
     PACKAGE-DOCUMENT ||--|| PACKAGE-DOCUMENT-TYPE : ""
     PACKAGE-DOCUMENT ||--|| SYS_ATTACHMENT : "Package document"
-    SELECTED-CLASSIFICATION-LEVEL ||--|| ACQUISITION-PACKAGE : ""
+    SELECTED-CLASSIFICATION-LEVEL }|--|| ACQUISITION-PACKAGE : ""
     SELECTED-CLASSIFICATION-LEVEL ||--|| CLASSIFICATION-LEVEL : ""
     SELECTED-CLASSIFICATION-LEVEL ||--o{ CLASSIFIED-INFORMATION-TYPE : "S and TS only"
-    ARCHITECTURAL-DESIGN-REQUIREMENT ||--|| ACQUISITION-PACKAGE : ""
+    ARCHITECTURAL-DESIGN-REQUIREMENT }|--|| ACQUISITION-PACKAGE : ""
     ARCHITECTURAL-DESIGN-REQUIREMENT ||--|| CLASSIFICATION-LEVEL : ""
-    SECURITY-REQUIREMENT ||--|| ACQUISITION-PACKAGE : ""
+    SECURITY-REQUIREMENT }|--|| ACQUISITION-PACKAGE : ""
     SECURITY-REQUIREMENT ||--o{ CLASSIFIED-INFORMATION-TYPE : ""
-    TRAVEL-REQUIREMENT ||--|| ACQUISITION-PACKAGE : ""
+    TRAVEL-REQUIREMENT }|--|| ACQUISITION-PACKAGE : ""
     TRAVEL-REQUIREMENT ||--|{ PERIOD : ""
-    CROSS-DOMAIN-SOLUTION ||--|| ACQUISITION-PACKAGE : ""
+    CROSS-DOMAIN-SOLUTION }|--|| ACQUISITION-PACKAGE : ""
     CROSS-DOMAIN-SOLUTION ||--|{ PERIOD : ""
+    IGCE-ESTIMATE }|--|| ACQUISITION-PACKAGE : ""
+    IGCE-ESTIMATE ||--|| SELECTED-SERVICE-OFFERING : ""
+    IGCE-ESTIMATE ||--|| CLASSIFICATION-INSTANCE : ""
+    IGCE-ESTIMATE ||--|| CROSS-DOMAIN-SOLUTION : ""
+    REQUIREMENTS-COST-ESTIMATE }|--|| ACQUISITION-PACKAGE : ""
 
     %% DoW Performance Requirements
-    SELECTED-SERVICE-OFFERING ||--|| ACQUISITION-PACKAGE : ""
+    SELECTED-SERVICE-OFFERING }|--|| ACQUISITION-PACKAGE : ""
     SELECTED-SERVICE-OFFERING }|--|{ SERVICE-OFFERING : ""
     SELECTED-SERVICE-OFFERING ||--|| CLASSIFICATION-INSTANCE : ""
     SELECTED-SERVICE-OFFERING ||--|{ ESTIMATED-ENVIRONMENT-INSTANCE : ""
@@ -705,7 +739,7 @@ erDiagram
     CLASSIFICATION-INSTANCE ||--o{ CLASSIFIED-INFORMATION-TYPE : "S and TS only"
     CLASSIFICATION-INSTANCE ||--|{ PERIOD : ""
     %% base table
-    ENVIRONMENT-INSTANCE ||--|| ACQUISITION-PACKAGE : ""
+    ENVIRONMENT-INSTANCE }|--|| ACQUISITION-PACKAGE : ""
     ENVIRONMENT-INSTANCE }|--|{ CLASSIFICATION-LEVEL : ""
     ENVIRONMENT-INSTANCE ||--o{ CLASSIFIED-INFORMATION-TYPE : "S and TS only"
     ENVIRONMENT-INSTANCE ||--|{ PERIOD : ""

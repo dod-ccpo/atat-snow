@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element label="DAPPS:Acquisition Package" max_length="40" name="x_g_dis_atat_acquisition_package" sizeclass="14" type="collection">
         <element label="ACOR" max_length="32" name="acor" reference="x_g_dis_atat_contacts" type="reference"/>
+        <element choice="1" label="Contracting Shop" max_length="40" name="contracting_shop" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Defense Information Technology Contracting Organization (DITCO)" sequence="1" value="DITCO"/>
+                <element inactive_on_update="false" label="Other" sequence="2" value="OTHER"/>
+            </choice>
+        </element>
         <element label="Contract Award" max_length="32" name="contract_award" reference="x_g_dis_atat_award_history" type="reference"/>
         <element label="Contract Considerations" max_length="32" name="contract_considerations" reference="x_g_dis_atat_contract_considerations" type="reference"/>
         <element label="Contract Modifications" max_length="4000" name="contract_modifications" reference="x_g_dis_atat_award_history" type="glide_list"/>
@@ -13,7 +19,12 @@
         <element label="Current Environment" max_length="32" name="current_environment" reference="x_g_dis_atat_current_environment" type="reference"/>
         <element label="DITCO KO" max_length="32" name="ditco_ko" reference="x_g_dis_atat_ditco_contract_specialist" type="reference"/>
         <element choice="3" choice_field="status" choice_table="x_g_dis_atat_provisioning_job" default="NOT_STARTED" label="DOCGEN Job Status" max_length="40" name="docgen_job_status" type="choice">
-            <choice/>
+            <choice>
+                <element inactive_on_update="false" label="Complete" sequence="0" value="COMPLETE"/>
+                <element inactive_on_update="false" label="Failed" sequence="1" value="FAILED"/>
+                <element inactive_on_update="false" label="In Progress" sequence="2" value="IN_PROGRESS"/>
+                <element inactive_on_update="false" label="Not Started" sequence="3" value="NOT_STARTED"/>
+            </choice>
         </element>
         <element label="DocuSign Envelope ID" max_length="50" name="docusign_envelope_id" type="string"/>
         <element label="EDMS Folder Created" max_length="40" name="edms_folder_created" type="boolean"/>
@@ -44,7 +55,7 @@
         <element label="Project Overview" max_length="32" name="project_overview" reference="x_g_dis_atat_project_overview" type="reference"/>
         <element label="Requirements Cost Estimate" max_length="32" name="requirements_cost_estimate" reference="x_g_dis_atat_requirements_cost_estimate" type="reference"/>
         <element label="Secondary Reviewers" max_length="4000" name="secondary_reviewers" reference="sys_user" type="glide_list"/>
-        <element active="false" label="Selected Service Offerings" max_length="4000" name="selected_service_offerings" reference="x_g_dis_atat_selected_service_offering" type="glide_list"/>
+        <element attributes="no_sort=true,slushbucket_ref_no_expand=true" label="Selected Service Offerings" max_length="4000" name="selected_service_offerings" reference="x_g_dis_atat_selected_service_offering" type="glide_list"/>
         <element label="Sensitive Information" max_length="32" name="sensitive_information" reference="x_g_dis_atat_sensitive_information" type="reference"/>
         <index name="index">
             <element name="fair_opportunity"/>
