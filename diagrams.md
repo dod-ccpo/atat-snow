@@ -425,18 +425,36 @@ erDiagram
         String architectural_design_current_environment_estimated_values "stringified json w/ {<period>:<price estimate>} pairs"
         Choice architectural_design_performance_requirements_option "SINGLE/MULTIPLE"
         String architectural_design_performance_requirements_estimated_values "stringified json w/ {<period>:<price estimate>} pairs"
-        Choice contracting_office_other_charges_fee "Y/N"
-        Integer contracting_office_other_fee_percentage
+        Choice contracting_office_other_charges_fee "(column INACTIVE)"
+        Integer contracting_office_other_fee_percentage "(column INACTIVE)"
         Integer contracting_office_fee_pct "(column INACTIVE)"
-        String cost_estimate_description
+        String cost_estimate_description "(column INACTIVE)"
         Choice has_dow_and_pop "Y/N"
         Choice optimize_replicate_option "SINGLE/MULTIPLE"
         String optimize_replicate_estimated_values "stringified json w/ {<period>:<price estimate>} pairs"
-        Choice previous_cost_estimate_comparison_option "MORE_THAN/LESS_THAN/SAME"
-        Integer previous_cost_estimate_comparison_percentage
+        Choice previous_cost_estimate_comparison_option "(column INACTIVE)"
+        Integer previous_cost_estimate_comparison_percentage "(column INACTIVE)"
         Choice surge_requirement_capabilities "Y/N"
         Integer surge_requirement_capacity
         String surge_capabilities "(column INACTIVE)"
+        Choice how_est_dev_contracting_office_other_charges_fee "Y/N"
+        Integer how_est_dev_contracting_office_other_fee_percentage
+        Choice how_est_dev_prev_cost_estimate_comp_option "MORE_THAN/LESS_THAN/SAME"
+        Integer how_est_dev_prev_cost_estimate_comp_percentage
+        String how_est_dev_tools_used "CSV list"
+        String how_est_dev_other_tools_used
+        String how_est_dev_cost_estimate_description
+        Choice travel_option "SINGLE/MULTIPLE"
+        String travel_estimated_values "CSV list"
+    }
+    TRAINING-ESTIMATE {
+        GUID sys_id PK
+        Reference requirements_cost_estimate FK "to Requirements Cost Estimate"
+        Choice training_unit "PER_PERSON/PER_CLASS/SUBSCRIPTION"
+        Choice subscription_type "ANNUAL/MONTHLY"
+        Currency estimated_price_per_training_unit
+        Choice training_option "SINGLE/MULTIPLE"
+        String training_estimated_values "CSV list"
     }
     SERVICE-OFFERING {
         GUID sys_id PK
@@ -729,6 +747,7 @@ erDiagram
     IGCE-ESTIMATE ||--|| CLASSIFICATION-INSTANCE : ""
     IGCE-ESTIMATE ||--|| CROSS-DOMAIN-SOLUTION : ""
     REQUIREMENTS-COST-ESTIMATE }|--|| ACQUISITION-PACKAGE : ""
+    TRAINING-ESTIMATE }|--|| REQUIREMENTS-COST-ESTIMATE : ""
 
     %% DoW Performance Requirements
     SELECTED-SERVICE-OFFERING }|--|| ACQUISITION-PACKAGE : ""
