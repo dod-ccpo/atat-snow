@@ -22,6 +22,13 @@
             <choice/>
         </element>
         <element label="How Est Dev Contracting Office Other Fee Percentage" max_length="40" name="how_est_dev_contracting_office_other_fee_percentage" type="integer"/>
+        <element choice="1" label="How Est Dev Prev Cost Estimate Comp Option" max_length="40" name="how_est_dev_prev_cost_estimate_comp_option" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="The previous cost estimate was more than the actual prices paid." sequence="1" value="MORE_THAN"/>
+                <element inactive_on_update="false" label="The previous cost estimate was less than the actual prices paid." sequence="2" value="LESS_THAN"/>
+                <element inactive_on_update="false" label="The previous cost estimate was approximately the same as the actual prices paid." sequence="3" value="SAME"/>
+            </choice>
+        </element>
         <element label="Optimize/Replicate Estimated Values" max_length="4000" name="optimize_replicate_estimated_values" type="string"/>
         <element choice="1" label="Optimize/Replicate Option" max_length="40" name="optimize_replicate_option" type="choice">
             <choice>
@@ -29,7 +36,7 @@
                 <element inactive_on_update="false" label="I want to estimate a different price for the base and each option period." sequence="2" value="MULTIPLE"/>
             </choice>
         </element>
-        <element choice="1" label="Previous Cost Estimate Comparison Option" max_length="40" name="previous_cost_estimate_comparison_option" type="choice">
+        <element active="false" choice="1" label="Previous Cost Estimate Comparison Option" max_length="40" name="previous_cost_estimate_comparison_option" type="choice">
             <choice>
                 <element inactive_on_update="false" label="The previous cost estimate was more than the actual prices paid." sequence="1" value="MORE_THAN"/>
                 <element inactive_on_update="false" label="The previous cost estimate was less than the actual prices paid." sequence="2" value="LESS_THAN"/>
