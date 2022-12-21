@@ -449,7 +449,8 @@ erDiagram
     }
     TRAINING-ESTIMATE {
         GUID sys_id PK
-        Reference requirements_cost_estimate FK "to Requirements Cost Estimate"
+        Reference acquisition_package FK "to Acquisition Package"
+        Reference requirements_cost_estimate FK "(column INACTIVE)"
         Choice training_unit "PER_PERSON/PER_CLASS/SUBSCRIPTION"
         Choice subscription_type "ANNUAL/MONTHLY"
         Currency estimated_price_per_training_unit
@@ -747,7 +748,7 @@ erDiagram
     IGCE-ESTIMATE ||--|| CLASSIFICATION-INSTANCE : ""
     IGCE-ESTIMATE ||--|| CROSS-DOMAIN-SOLUTION : ""
     REQUIREMENTS-COST-ESTIMATE }|--|| ACQUISITION-PACKAGE : ""
-    TRAINING-ESTIMATE }|--|| REQUIREMENTS-COST-ESTIMATE : ""
+    TRAINING-ESTIMATE }|--|| ACQUISITION-PACKAGE : ""
 
     %% DoW Performance Requirements
     SELECTED-SERVICE-OFFERING }|--|| ACQUISITION-PACKAGE : ""
