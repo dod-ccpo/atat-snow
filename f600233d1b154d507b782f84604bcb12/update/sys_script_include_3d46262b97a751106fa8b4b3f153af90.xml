@@ -963,6 +963,11 @@ Dow.prototype = {
           // section 5 - Contract Data Requirements List (CDRL)
           // based on selected services and contract type
           // IDIQ CLINs attached to acq pkg might can help with this?
+          contractType: {
+            firmFixedPrice: ctb(acqPackage.contract_type.firm_fixed_price.toString()),
+            timeAndMaterials: ctb(acqPackage.contract_type.time_and_materials.toString()),
+            contractTypeJustification: acqPackage.contract_type.contract_type_justification.toString(),
+          },
 
           // section 7
           periodOfPerformance: this.getPackagePop(acqPackage.period_of_performance, this.mappedPeriods),
@@ -1015,13 +1020,13 @@ Dow.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-10 00:50:30</sys_created_on>
         <sys_id>3d46262b97a751106fa8b4b3f153af90</sys_id>
-        <sys_mod_count>11</sys_mod_count>
+        <sys_mod_count>12</sys_mod_count>
         <sys_name>Dow</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_3d46262b97a751106fa8b4b3f153af90</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-12-16 19:14:53</sys_updated_on>
+        <sys_updated_on>2022-12-21 19:31:31</sys_updated_on>
     </sys_script_include>
 </record_update>
