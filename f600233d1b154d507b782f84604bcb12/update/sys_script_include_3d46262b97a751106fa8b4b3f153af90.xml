@@ -511,8 +511,6 @@ Dow.prototype = {
         // architect design
         needsArchitecturalDesignServices: ctb(currentEnv.needs_architectural_design_services.toString()),
         architecturalDesignRequirement: this.getArchitectDesignRequirements(this.acquisitionPackage.sys_id),
-        // cloud support needed
-        // Q: should there be an option for this in currentEnv??
       };
 
     } catch (error) {
@@ -697,7 +695,7 @@ Dow.prototype = {
    */
   getInstances: function(table, packageId, mappedPeriods) {
     try {
-      // 1) get all database instances for package
+      // 1) get all instances for package
       var instances = Dow.prototype.findPackageRecords(
         table,
         packageId
@@ -730,7 +728,7 @@ Dow.prototype = {
    * @param {object} mappedPeriods - a package mapped PoP periods
    * @return {array} an array of XaaS selected service offerings 
    */
-  getServicesInfo: function(packageId, mappedPeriods) {
+  getXaasServices: function(packageId, mappedPeriods) {
     try {
       var table, configs;
       var selectedServices = this.getSelectedServiceOfferings(packageId);
@@ -784,42 +782,34 @@ Dow.prototype = {
         });
       }
 
-      // Cloud Support
-      var cloudSupportServices = selectedServices.filter(function(service) {
-        return listContains(
-          service.serviceOffering.serviceOfferingGroup,
-          Dow.prototype.CLOUD_SUPPORT_PACKAGES
-        );
-      });
+      return xaasOfferings;
 
-      if (cloudSupportServices.length > 1) {
-        // get instances relevante for the Cloud Support Packages (Advisory, Migration, etc.) 
-        table = Dow.prototype.CLOUD_SUP_ENV_ISNT_TABLE;
-        configs = Dow.prototype.getInstances(table, packageId, mappedPeriods);
-        cloudSupportServices = cloudSupportServices.map(function(supportService) {
-          var service = supportService.serviceOffering.serviceOfferingGroup;
-          var info = configs.filter(function(info) { return service === info.serviceType; });
-
-          return {
-            serviceOffering: supportService,
-            supportingInfo: info
-          };
-
-        });
-      }
-
-      return {
-        xaas: xaasOfferings,
-        cloudSupport: cloudSupportServices,
-      };
     } catch (error) {
       throw this.errUtil.createError(
-        "Dow --> getServicesInfo(): " + error,
+        "Dow --> getXaasServices(): " + error,
         this.errUtil.METHOD_ERROR
       );
     }
   },
+  /**
+   * Get Cloud Support Packages for a package.
+   *
+   * @param {string} packageId - a package sys_id
+   * @param {object} mappedPeriods - a package mapped PoP periods
+   * @return {array} an array of Cloud Support Env Instances 
+   */
+  getCloudSupportInstances: function(packageId, mappedPeriods) {
+    try {
+      var table = Dow.prototype.CLOUD_SUP_ENV_ISNT_TABLE
+      return Dow.prototype.getInstances(table, packageId, mappedPeriods);
 
+    } catch (error) {
+      throw this.errUtil.createError(
+        "Dow --> getCloudSupportInstances(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+  },
   /**
    * Query a table and find records related to a package. 
    * Only the first 50 records are returned.
@@ -927,9 +917,6 @@ Dow.prototype = {
         this.AWARDS_HIS_FIELDS
       );
 
-      // service offerings
-      var services = this.getServicesInfo(acqPackage.sys_id, this.mappedPeriods);
-
       // HOTH DoW generated-document payload
       return {
         documentType: "DESCRIPTION_OF_WORK_DOCX",
@@ -955,14 +942,12 @@ Dow.prototype = {
           selectedClassificationLevels: this.getSelectedClassificationLevels(),
 
           // section 4.2-4.3
-          xaasOfferings: services.xaas,
+          xaasOfferings: this.getXaasServices(acqPackage.sys_id, this.mappedPeriods),
           crossDomainSolutions: this.getCrossDomainSolution(acqPackage.sys_id, this.mappedPeriods),
-          cloudSupportPackages: services.cloudSupport,
-
+          cloudSupportPackages: this.getCloudSupportInstances(acqPackage.sys_id, this.mappedPeriods), 
 
           // section 5 - Contract Data Requirements List (CDRL)
           // based on selected services and contract type
-          // IDIQ CLINs attached to acq pkg might can help with this?
           contractType: {
             firmFixedPrice: ctb(acqPackage.contract_type.firm_fixed_price.toString()),
             timeAndMaterials: ctb(acqPackage.contract_type.time_and_materials.toString()),
@@ -1020,13 +1005,13 @@ Dow.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-10 00:50:30</sys_created_on>
         <sys_id>3d46262b97a751106fa8b4b3f153af90</sys_id>
-        <sys_mod_count>12</sys_mod_count>
+        <sys_mod_count>13</sys_mod_count>
         <sys_name>Dow</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_3d46262b97a751106fa8b4b3f153af90</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-12-21 19:31:31</sys_updated_on>
+        <sys_updated_on>2022-12-22 08:45:04</sys_updated_on>
     </sys_script_include>
 </record_update>
