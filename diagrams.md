@@ -695,16 +695,20 @@ erDiagram
     IGCE-ESTIMATE {
         GUID sys_id PK
         Reference acquisition_package FK "to Acquisition Package"
-        Reference selected_service_offering FK "to Selected Service Offering"
+        Reference selected_service_offering FK "(column INACTIVE)"
         Reference classification_instance FK "to Classification Instance"
         Reference cross_domain_solution FK "to Cross Domain Solution"
+        Reference environment_instance FK "to Environment Instance"
+        Reference classification_level FK "to Classification Level"
         Choice contract_type "FFP/T&M/TBD"
         String title
         String description
         Currency unit_price
-        Integer quantity
-        Choice unit "EACH/MONTHS/PEOPLE/PERIOD/SESSIONS"
+        Integer quantity "(column INACTIVE)"
+        Choice unit "EACH/MONTHS/PEOPLE/PERIOD/SESSIONS/YEAR"
         String dow_task_number
+        Choice idiq_clin_type "CLOUD/CLOUD_SUPPORT"
+        String unit_quantity "integer or stringified json w/ {<period>:<quantity>} pairs"
     }
 
     ACQUISITION-PACKAGE ||--|| SYS_USER : "MOs, contributors, reviewers"
