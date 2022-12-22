@@ -693,22 +693,22 @@ erDiagram
         String label "calculated value"
     }
     IGCE-ESTIMATE {
-        GUID sys_id PK
+        GUID sys_id PK "Estimates are based on instance data"
         Reference acquisition_package FK "to Acquisition Package"
         Reference selected_service_offering FK "(column INACTIVE)"
-        Reference classification_instance FK "to Classification Instance"
-        Reference cross_domain_solution FK "to Cross Domain Solution"
-        Reference environment_instance FK "to Environment Instance"
+        Reference environment_instance FK "instance option; to Environment Instance"
+        Reference classification_instance FK "instance option; to Classification Instance"
+        Reference cross_domain_solution FK "instance option; to Cross Domain Solution"
         Reference classification_level FK "to Classification Level"
         Choice contract_type "FFP/T&M/TBD"
-        String title
-        String description
+        String title "composed from instance data"
+        String description "composed from instance data"
         Currency unit_price
         Integer quantity "(column INACTIVE)"
+        String unit_quantity "integer or stringified json w/ {<period>:<quantity>} pairs"
         Choice unit "EACH/MONTHS/PEOPLE/PERIOD/SESSIONS/YEAR"
         String dow_task_number
         Choice idiq_clin_type "CLOUD/CLOUD_SUPPORT"
-        String unit_quantity "integer or stringified json w/ {<period>:<quantity>} pairs"
     }
 
     ACQUISITION-PACKAGE ||--|| SYS_USER : "MOs, contributors, reviewers"
