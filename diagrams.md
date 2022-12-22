@@ -425,18 +425,37 @@ erDiagram
         String architectural_design_current_environment_estimated_values "stringified json w/ {<period>:<price estimate>} pairs"
         Choice architectural_design_performance_requirements_option "SINGLE/MULTIPLE"
         String architectural_design_performance_requirements_estimated_values "stringified json w/ {<period>:<price estimate>} pairs"
-        Choice contracting_office_other_charges_fee "Y/N"
-        Integer contracting_office_other_fee_percentage
+        Choice contracting_office_other_charges_fee "(column INACTIVE)"
+        Integer contracting_office_other_fee_percentage "(column INACTIVE)"
         Integer contracting_office_fee_pct "(column INACTIVE)"
-        String cost_estimate_description
+        String cost_estimate_description "(column INACTIVE)"
         Choice has_dow_and_pop "Y/N"
         Choice optimize_replicate_option "SINGLE/MULTIPLE"
         String optimize_replicate_estimated_values "stringified json w/ {<period>:<price estimate>} pairs"
-        Choice previous_cost_estimate_comparison_option "MORE_THAN/LESS_THAN/SAME"
-        Integer previous_cost_estimate_comparison_percentage
+        Choice previous_cost_estimate_comparison_option "(column INACTIVE)"
+        Integer previous_cost_estimate_comparison_percentage "(column INACTIVE)"
         Choice surge_requirement_capabilities "Y/N"
         Integer surge_requirement_capacity
         String surge_capabilities "(column INACTIVE)"
+        Choice how_est_dev_contracting_office_other_charges_fee "Y/N"
+        Integer how_est_dev_contracting_office_other_fee_percentage
+        Choice how_est_dev_prev_cost_estimate_comp_option "MORE_THAN/LESS_THAN/SAME"
+        Integer how_est_dev_prev_cost_estimate_comp_percentage
+        String how_est_dev_tools_used "CSV list"
+        String how_est_dev_other_tools_used
+        String how_est_dev_cost_estimate_description
+        Choice travel_option "SINGLE/MULTIPLE"
+        String travel_estimated_values "CSV list"
+    }
+    TRAINING-ESTIMATE {
+        GUID sys_id PK
+        Reference acquisition_package FK "to Acquisition Package"
+        Reference requirements_cost_estimate FK "(column INACTIVE)"
+        Choice training_unit "PER_PERSON/PER_CLASS/SUBSCRIPTION"
+        Choice subscription_type "ANNUAL/MONTHLY"
+        Currency estimated_price_per_training_unit
+        Choice training_option "SINGLE/MULTIPLE"
+        String training_estimated_values "CSV list"
     }
     SERVICE-OFFERING {
         GUID sys_id PK
@@ -674,18 +693,22 @@ erDiagram
         String label "calculated value"
     }
     IGCE-ESTIMATE {
-        GUID sys_id PK
+        GUID sys_id PK "Estimates are based on instance data"
         Reference acquisition_package FK "to Acquisition Package"
-        Reference selected_service_offering FK "to Selected Service Offering"
-        Reference classification_instance FK "to Classification Instance"
-        Reference cross_domain_solution FK "to Cross Domain Solution"
+        Reference selected_service_offering FK "(column INACTIVE)"
+        Reference environment_instance FK "instance option; to Environment Instance"
+        Reference classification_instance FK "instance option; to Classification Instance"
+        Reference cross_domain_solution FK "instance option; to Cross Domain Solution"
+        Reference classification_level FK "to Classification Level"
         Choice contract_type "FFP/T&M/TBD"
-        String title
-        String description
+        String title "composed from instance data"
+        String description "composed from instance data"
         Currency unit_price
-        Integer quantity
-        Choice unit "EACH/MONTHS/PEOPLE/PERIOD/SESSIONS"
+        Integer quantity "(column INACTIVE)"
+        String unit_quantity "integer or stringified json w/ {<period>:<quantity>} pairs"
+        Choice unit "EACH/MONTHS/PEOPLE/PERIOD/SESSIONS/YEAR"
         String dow_task_number
+        Choice idiq_clin_type "CLOUD/CLOUD_SUPPORT"
     }
 
     ACQUISITION-PACKAGE ||--|| SYS_USER : "MOs, contributors, reviewers"
@@ -729,6 +752,7 @@ erDiagram
     IGCE-ESTIMATE ||--|| CLASSIFICATION-INSTANCE : ""
     IGCE-ESTIMATE ||--|| CROSS-DOMAIN-SOLUTION : ""
     REQUIREMENTS-COST-ESTIMATE }|--|| ACQUISITION-PACKAGE : ""
+    TRAINING-ESTIMATE }|--|| ACQUISITION-PACKAGE : ""
 
     %% DoW Performance Requirements
     SELECTED-SERVICE-OFFERING }|--|| ACQUISITION-PACKAGE : ""
