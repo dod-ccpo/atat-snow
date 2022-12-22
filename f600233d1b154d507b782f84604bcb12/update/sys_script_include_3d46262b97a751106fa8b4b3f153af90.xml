@@ -319,9 +319,10 @@ Dow.prototype = {
    * Get Architectural Design Requirement
    *
    * @param {string} packageId - package sysId 
-   * @return {array} array of architectural design requirement objects 
+   * @param {string} source - the area the architectural design related to in the package 
+   * @return {object|null} architectural design requirement for a package (DOW or CURR ENV) 
    */
-  getArchitectDesignRequirements: function(packageId) {
+  getArchitectDesignRequirement: function(packageId, source) {
     try {
       var archDesigns = Dow.prototype.findPackageRecords(Dow.prototype.ARCH_DESIGN_TABLE, packageId);
 
@@ -332,11 +333,15 @@ Dow.prototype = {
         return design;
       }).map(removeSysId);
 
-      return Dow.prototype.atatUtil.snakeToCamelCase(archDesigns, Dow.prototype.ARCH_DESIGN_FIELDS);
+      var design = Dow.prototype.atatUtil
+        .snakeToCamelCase(archDesigns, Dow.prototype.ARCH_DESIGN_FIELDS)
+        .filter(function(design) { return design.source === source });
+
+      return design[0] ? design[0] : null; 
 
     } catch (error) {
       throw this.errUtil.createError(
-        "Dow --> getArchitectDesignRequirements(): " + error,
+        "Dow --> getArchitectDesignRequirement(): " + error,
         this.errUtil.METHOD_ERROR
       );
     }
@@ -488,6 +493,12 @@ Dow.prototype = {
   getCurrentEnvironmentInfo: function(currentEnv) {
     var ctb = this.ctb;
     try {
+      // only the Current Environment architectural design
+      var archDesign = this.getArchitectDesignRequirement(
+        this.acquisitionPackage.sys_id,
+        "CURRENT_ENVIRONMENT" 
+      );
+
       // sections 3 and 4.1 of DOW
       return {
         // background
@@ -510,7 +521,7 @@ Dow.prototype = {
         phasedApproachSchedule: currentEnv.phased_approach_schedule.toString(),
         // architect design
         needsArchitecturalDesignServices: ctb(currentEnv.needs_architectural_design_services.toString()),
-        architecturalDesignRequirement: this.getArchitectDesignRequirements(this.acquisitionPackage.sys_id),
+        architecturalDesignRequirement: archDesign,
       };
 
     } catch (error) {
@@ -912,9 +923,15 @@ Dow.prototype = {
       } else if (acqPackage.contract_award) {
         awardIds = acqPackage.contract_award;
       }
+
       var awards = this.atatUtil.snakeToCamelCase(
         this.getAwardHistory(awardIds), 
         this.AWARDS_HIS_FIELDS
+      );
+
+      var archDesign = Dow.prototype.getArchitectDesignRequirement(
+        this.acquisitionPackage.sys_id,
+        "DOW" 
       );
 
       // HOTH DoW generated-document payload
@@ -942,6 +959,7 @@ Dow.prototype = {
           selectedClassificationLevels: this.getSelectedClassificationLevels(),
 
           // section 4.2-4.3
+          architecturalDesignRequirement: archDesign,
           xaasOfferings: this.getXaasServices(acqPackage.sys_id, this.mappedPeriods),
           crossDomainSolutions: this.getCrossDomainSolution(acqPackage.sys_id, this.mappedPeriods),
           cloudSupportPackages: this.getCloudSupportInstances(acqPackage.sys_id, this.mappedPeriods), 
@@ -1005,13 +1023,13 @@ Dow.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-10 00:50:30</sys_created_on>
         <sys_id>3d46262b97a751106fa8b4b3f153af90</sys_id>
-        <sys_mod_count>13</sys_mod_count>
+        <sys_mod_count>14</sys_mod_count>
         <sys_name>Dow</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_3d46262b97a751106fa8b4b3f153af90</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-12-22 08:45:04</sys_updated_on>
+        <sys_updated_on>2022-12-22 16:51:34</sys_updated_on>
     </sys_script_include>
 </record_update>
