@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="DAPPS:IGCE Estimate" max_length="40" name="x_g_dis_atat_igce_estimate" type="collection">
+    <element label="DAPPS:IGCE Estimate" max_length="40" name="x_g_dis_atat_igce_estimate" sizeclass="0" type="collection">
         <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
         <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Classification Instance" max_length="32" name="classification_instance" reference="x_g_dis_atat_classification_instance" type="reference"/>
         <element choice="1" label="Contract Type" max_length="40" name="contract_type" type="choice">
@@ -22,6 +22,7 @@
                 <element inactive_on_update="false" label="people" sequence="3" value="PEOPLE"/>
                 <element inactive_on_update="false" label="period" sequence="4" value="PERIOD"/>
                 <element inactive_on_update="false" label="sessions" sequence="5" value="SESSIONS"/>
+                <element inactive_on_update="false" label="year" sequence="6" value="YEAR"/>
             </choice>
         </element>
         <element label="Unit Price" max_length="20" name="unit_price" type="currency"/>
