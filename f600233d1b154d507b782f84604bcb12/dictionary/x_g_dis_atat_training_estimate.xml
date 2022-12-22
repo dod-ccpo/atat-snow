@@ -3,7 +3,7 @@
         <element label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
         <element label="Estimated Price Per Training Unit" max_length="20" name="estimated_price_per_training_unit" type="currency"/>
         <element active="false" label="Requirements Cost Estimate" max_length="32" name="requirements_cost_estimate" reference="x_g_dis_atat_requirements_cost_estimate" type="reference"/>
-        <element choice="1" label="Subscription Type" max_length="40" name="subscription_type" type="choice">
+        <element active="false" choice="1" label="Subscription Type" max_length="40" name="subscription_type" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Annual subscription" sequence="1" value="ANNUAL"/>
                 <element inactive_on_update="false" label="Monthly subscription" sequence="2" value="MONTHLY"/>
@@ -20,7 +20,8 @@
             <choice>
                 <element inactive_on_update="false" label="Individual training course (Pay per person)" sequence="1" value="PER_PERSON"/>
                 <element inactive_on_update="false" label="Individual training course (Pay per class/session)" sequence="2" value="PER_CLASS"/>
-                <element inactive_on_update="false" label="Subscription based" sequence="3" value="SUBSCRIPTION"/>
+                <element inactive_on_update="false" label="Annual subscription" sequence="3" value="ANNUAL_SUBSCRIPTION"/>
+                <element inactive_on_update="false" label="Monthly subscription" sequence="4" value="MONTHLY_SUBSCRIPTION"/>
             </choice>
         </element>
         <index name="index">
