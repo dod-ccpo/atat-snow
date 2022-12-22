@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_dictionary action="INSERT_OR_UPDATE" element="months_in_period" table="x_g_dis_atat_period">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes/>
+        <audit>false</audit>
+        <calculation><![CDATA[function calculateMonths(unit_count, unit) {
+    var ERROR_VALUE = -1;
+    //check parameter types
+    if (typeof unit_count !== "number") {
+        gs.debug("Function calculateMonths accepts a number for parameter unit_count.  Received " + typeof unit_count + " instead.");
+    }
+    if (typeof unit !== "string") {
+        gs.debug("Function calculateMonths accepts a string for parameter unit.  Received " + typeof unit + " instead.");
+    }
+    //ensure unit count is greater than zero
+    if (unit_count < 0) {
+        gs.debug("Parameter unit_count for function calculateMonths is expected to be greater than 0.  Received " + unit_count);
+        return ERROR_VALUE;
+    }
+    //perform the calcuation
+    switch (unit) {
+        case "YEAR":
+            var MONTHS_PER_YEAR = 12;
+            return unit_count * MONTHS_PER_YEAR;
+        case "MONTH":
+            return unit_count;
+        case "WEEK":
+            /* Average weeks in a month = 4.345 ( X weeks / 4.345 = Y months) */
+            /* Ex 1: 36 weeks (36/4.345 = 8.285 --> Round up to 9 months) */
+            /* Ex 2: 1 week (1/4.345 = 0.230 --> Round up to 1 month) */
+            var AVG_WEEKS_PER_MONTH = 4.345;
+            return Math.ceil(unit_count / AVG_WEEKS_PER_MONTH);
+        case "DAY":
+            /* Average days in a month = 30.4167  ( X days / 30.4167 = Y months) */
+            /* Ex 1: 252 days (259/30.4167 = 8.284 --> Round up to 9 months) */
+            /* Ex 2: 1 day (1/30.4167 = 0.032 --> Round up to 1 month) */
+            var AVG_DAYS_PER_MONTH = 30.4167;
+            return Math.ceil(unit_count / AVG_DAYS_PER_MONTH);
+        default:
+            gs.debug("Parameter unit for function calculateMonths is expected to be one of YEAR/MONTH/WEEK/DAY.  Received " + unit);
+            return ERROR_VALUE;
+    }
+}
+
+(function calculatedFieldValue(current) {
+    return calculateMonths(current.period_unit_count, current.period_unit.toString());
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label>Months in Period</column_label>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>months_in_period</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <internal_type display_value="Integer">integer</internal_type>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <name>x_g_dis_atat_period</name>
+        <next_element/>
+        <primary>false</primary>
+        <read_only>true</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_dictionary</sys_class_name>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-12-22 19:48:44</sys_created_on>
+        <sys_id>9460607b97b31110cf3cfd9fe153afcc</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_name>Months in Period</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_dictionary_x_g_dis_atat_period_months_in_period</sys_update_name>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-12-22 21:31:29</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>true</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_dictionary>
+</record_update>
