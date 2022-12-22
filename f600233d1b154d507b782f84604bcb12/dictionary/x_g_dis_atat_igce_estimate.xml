@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="DAPPS:IGCE Estimate" max_length="40" name="x_g_dis_atat_igce_estimate" type="collection">
+    <element label="DAPPS:IGCE Estimate" max_length="40" name="x_g_dis_atat_igce_estimate" sizeclass="0" type="collection">
         <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
         <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Classification Instance" max_length="32" name="classification_instance" reference="x_g_dis_atat_classification_instance" type="reference"/>
+        <element label="Classification Level" max_length="32" name="classification_level" reference="x_g_dis_atat_classification_level" type="reference"/>
         <element choice="1" label="Contract Type" max_length="40" name="contract_type" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Firm Fixed Price" sequence="1" value="FFP"/>
@@ -12,6 +13,13 @@
         <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Cross Domain Solution" max_length="32" name="cross_domain_solution" reference="x_g_dis_atat_cross_domain_solution" type="reference"/>
         <element label="Description" max_length="4000" name="description" type="string"/>
         <element label="DOW Task Number" max_length="20" name="dow_task_number" type="string"/>
+        <element label="Environment Instance" max_length="32" name="environment_instance" reference="x_g_dis_atat_environment_instance" type="reference"/>
+        <element choice="1" label="IDIQ CLIN Type" max_length="40" name="idiq_clin_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Cloud" sequence="1" value="CLOUD"/>
+                <element inactive_on_update="false" label="Cloud Support" sequence="2" value="CLOUD_SUPPORT"/>
+            </choice>
+        </element>
         <element label="Quantity" max_length="40" name="quantity" type="integer"/>
         <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Selected Service Offering" max_length="32" name="selected_service_offering" reference="x_g_dis_atat_selected_service_offering" type="reference"/>
         <element label="Title" max_length="300" name="title" type="string"/>
@@ -22,19 +30,27 @@
                 <element inactive_on_update="false" label="people" sequence="3" value="PEOPLE"/>
                 <element inactive_on_update="false" label="period" sequence="4" value="PERIOD"/>
                 <element inactive_on_update="false" label="sessions" sequence="5" value="SESSIONS"/>
+                <element inactive_on_update="false" label="year" sequence="6" value="YEAR"/>
             </choice>
         </element>
         <element label="Unit Price" max_length="20" name="unit_price" type="currency"/>
+        <element label="Unit Quantity" max_length="4000" name="unit_quantity" type="string"/>
         <index name="index">
             <element name="selected_service_offering"/>
         </index>
         <index name="index2">
-            <element name="classification_instance"/>
+            <element name="classification_level"/>
         </index>
         <index name="index3">
-            <element name="acquisition_package"/>
+            <element name="environment_instance"/>
         </index>
         <index name="index4">
+            <element name="classification_instance"/>
+        </index>
+        <index name="index5">
+            <element name="acquisition_package"/>
+        </index>
+        <index name="index6">
             <element name="cross_domain_solution"/>
         </index>
     </element>
