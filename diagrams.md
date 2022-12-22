@@ -451,8 +451,8 @@ erDiagram
         GUID sys_id PK
         Reference acquisition_package FK "to Acquisition Package"
         Reference requirements_cost_estimate FK "(column INACTIVE)"
-        Choice training_unit "PER_PERSON/PER_CLASS/SUBSCRIPTION"
-        Choice subscription_type "ANNUAL/MONTHLY"
+        Choice training_unit "PER_PERSON/PER_CLASS/ANNUAL_SUBSCRIPTION/MONTHLY_SUBSCRIPTION"
+        Choice subscription_type "(column INACTIVE)"
         Currency estimated_price_per_training_unit
         Choice training_option "SINGLE/MULTIPLE"
         String training_estimated_values "CSV list"
