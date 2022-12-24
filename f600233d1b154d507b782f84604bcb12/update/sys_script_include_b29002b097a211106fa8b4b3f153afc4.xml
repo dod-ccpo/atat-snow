@@ -10,37 +10,20 @@
         <script><![CDATA[var Igce = Class.create();
 Igce.prototype = {
     IGCE_ESTIMATE_TABLE: "x_g_dis_atat_igce_estimate",
-    IGCE_ESTIMATE_FIELDS: ["acquisition_package", "classification_instance", "classification_level", "contract_type",
+    IGCE_ESTIMATE_FIELDS: ["acquisition_package", "classification_instance", "classification_level", "contract_type", "cross_domain_solution",
         "dow_task_number", "environment_instance", "idiq_clin_type", "title", "unit", "unit_price", "unit_quantity"],
-
+    ENV_INST_TABLE: "x_g_dis_atat_environment_instance",
+    CLASS_INST_TABLE: "x_g_dis_atat_classification_instance",
+    CROSS_DOMAIN_SOLN_TABLE: "x_g_dis_atat_cross_domain_solution",
+    SELECTED_PERIOD_FIELDS: ["need_for_entire_task_order_duration", "selected_periods"],
+    CLASSIFICATION_LEVEL_TABLE: "x_g_dis_atat_classification_level",
+    TRAVEL_REQ_TABLE: "x_g_dis_atat_travel_requirement",
+    TRAVEL_REQ_FIELDS: ["selected_periods", "duration_in_days", "number_of_travelers", "trip_location", "number_of_trips"],
     acquisitionPackage: null,
 
     initialize: function (acquisitionPackage) {
         this.acquisitionPackage = acquisitionPackage;
     },
-
-    getEstimatedObligation: function (filterFn) {
-        return this.getPayload().templatePayload.periodsEstimate.map(function (estimate) {
-            return estimate.periodLineItems;
-        }).reduce(function (pre, cur) {
-            return pre.concat(cur);
-        }).reduce(function (result, item) {
-            return result + (item.monthlyPrice * item.monthsInPeriod);
-        }, 0);
-    },
-
-    getEstimatedBaseYearObligation: function () {
-        return this.getPayload().templatePayload.periodsEstimate.filter(function (estimate) {
-            return estimate.period.periodType == "BASE";
-        }).map(function (estimate) {
-            return estimate.periodLineItems;
-        }).reduce(function (pre, cur) {
-            return pre.concat(cur);
-        }).reduce(function (result, item) {
-            return result + (item.monthlyPrice * item.monthsInPeriod);
-        }, 0);
-    },
-
     getPackagePeriods: function (base, options) {
         // This returns the periods in the IGCE schema for the Periods Estimate Object
         var mappedPeriods = [];
@@ -73,12 +56,11 @@ Igce.prototype = {
         return mappedPeriods;
     },
 
-    getInstanceInfo: function (instance) {
+    getInstancePeriodInfo: function (instance) {
         //This function retrieves:
-        // classification_level
         // selected_periods
         // need_for_entire_task_order_duration
-        // Appending it to the given Classification Instance, Environment Instance, Estimated Environment Instance
+        // Appending it to the given Instance
 
         var selectedPeriodsFields = ["period_type", "option_order", "period_unit", "period_unit_count"];
 
@@ -107,199 +89,69 @@ Igce.prototype = {
             };
             instance.selected_periods = selectedPeriods;
         }
-
-        var classLevel = new global.GlideQuery("x_g_dis_atat_classification_level")
-            .get(instance.classification_level.toString(),
-                ["impact_level", "classification"])
-            .orElse(null);
-
-        classLevel = removeSysId(classLevel);
-        instance.classification_level = classLevel;
         return instance;
     },
 
-    getNestedIgceServiceInfo: function (selectedService) {
-        // Get Service Offering or user created offering for each selection
-        var offering;
-        if (selectedService.service_offering) {
-            offering = new global.GlideQuery("x_g_dis_atat_service_offering")
-                .get(selectedService.service_offering,
-                    ["service_offering_group", "name"])
-                .orElse(null);
-            offering = removeSysId(offering);
-        } else {
-            offering = {
-                name: selectedService.other_service_offering.toString(),
-                service_offering_group: null
-            };
-        }
-        selectedService.service_offering = offering;
-
-        // Get Classification Instances info
-        if (selectedService.classification_instances) {
-            var classificationInstanceFields = [
-                "need_for_entire_task_order_duration", "usage_description",
-                "classification_level", "selected_periods", "monthly_price", "dow_task_number"];
-            selectedService.classification_instances = getListRecords(
-                selectedService.classification_instances.toString(),
-                classificationInstanceFields,
-                "x_g_dis_atat_classification_instance").map(removeSysId).map(Igce.prototype.getInstanceInfo);
-
-        }
-
-        // Get Estimated Environment Instances
-        if (selectedService.estimated_environment_instances) {
-            var estimatedEnvironmentInstanceFields = [
-                "need_for_entire_task_order_duration", "classification_level", "selected_periods", "monthly_price",
-                "dow_task_number", "instance_name", "instance_location", "number_of_vcpus", "storage_amount",
-                "storage_type", "memory_amount", "memory_unit", "data_egress_monthly_amount", "data_egress_monthly_unit"
-            ];
-            selectedService.estimated_environment_instances = getListRecords(
-                selectedService.estimated_environment_instances.toString(),
-                estimatedEnvironmentInstanceFields,
-                "x_g_dis_atat_estimated_environment_instance").map(removeSysId).map(Igce.prototype.getInstanceInfo);
-        }
-        return selectedService;
-    },
-    getSelectedServiceOfferings: function (selectedServiceOfferings) {
-        // Retrieve selected service offerings, classification instances, and estimated environment instances 
-        var selectedServiceFields = [
-            "other_service_offering", "service_offering",
-            "classification_instances", "estimated_environment_instances"
-        ];
-
-        var selected_service_offerings = getListRecords(
-            selectedServiceOfferings.toString(),
-            selectedServiceFields,
-            "x_g_dis_atat_selected_service_offering")
-            .map(removeSysId)
-            .map(this.getNestedIgceServiceInfo);
-
-        return selected_service_offerings;
-    },
-    getCurrentEnvironment: function (currentEnvironment) {
-        // Retrieve Environment Instance Fields
-        var environmentInstanceFields = [
-            "need_for_entire_task_order_duration", "instance_name",
-            "classification_level", "selected_periods"];
-        var env = new GlideRecord("x_g_dis_atat_current_environment");
-        env.get(currentEnvironment.toString());
-
-        var current_environment = getListRecords(
-            env.environment_instances.toString(),
-            environmentInstanceFields,
-            "x_g_dis_atat_environment_instance").map(removeSysId).map(Igce.prototype.getInstanceInfo);
-        return current_environment;
-    },
-
-    mapEnvironmentInstance: function (data_to_map, periods_estimate, formatted_idiq_clins, is_current_env, service_offering) {
-        // This works for Environment Instance or Estimated Environment Instance
-        // For each Environment Instance in the data_to_map array
+    mapIgceToPeriodsEstimate: function (data_to_map, periods_estimate) {
+        // For each item in IGCE estimates
         data_to_map.forEach(function (item) {
-            // Create environment configuration summary
-            var configSummary = item.instance_location + " " + item.number_of_vcpus + " vCPU(s) "
-                + item.storage_amount + " " + item.storage_type + " Storage "
-                + item.memory_amount + " " + item.memory_unit + " Memory"
-                + item.data_egress_monthly_unit + " " + item.data_egress_monthly_amount + " Data Egress."
-
-
-            var serviceOffering, monthlyPrice, dowTaskNumber;
-            // If its the current environment...
-            if (is_current_env) {
-                dowTaskNumber = "4.1.1";
-                monthlyPrice = "N/A";
-                serviceOffering = "Current Environment - " + item.instance_name;
-
-            }
-            else {
-                dowTaskNumber = item.dow_task_number;
-                serviceOffering = service_offering;
-                monthlyPrice = item.monthly_price;
-            }
-
             // If the Environment Instance is NOT needed for the entire TO duration
             // Map it to the periods specified in period_line_items
-            if (!item.need_for_entire_task_order_duration) {
+            if (!item.instance_info.need_for_entire_task_order_duration) {
 
-                // For each period in the selected_periods array of the estimated environment instance
-                item.selected_periods.forEach(function (period) {
+                // For each period in the selected_periods array the instance
+                item.instance_info.selected_periods.forEach(function (period) {
 
                     // Map period_type and base_period of the periods_estimate array
                     var formattedPeriodOutput = periods_estimate.map(function (input) {
                         return input.period.periodType + input.period.optionOrder;
                     });
 
-
                     var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(period.periodType + period.optionOrder);
 
-
-                    // Insert into periods_estimate, under the specified period and period_line_items /////////////////////Fix this output
+                    // Insert into periods_estimate, under the specified period and period_line_items 
                     periods_estimate[indexOfCurrentPeriod].periodLineItems.push({
-                        "clin": "1000",
-                        "idiqClin": getClinFromDowTask(item.dow_task_number, formatted_idiq_clins),
-                        "dowTaskNumber": dowTaskNumber,
-                        "serviceOffering": serviceOffering,
-                        "itemDescriptionOrConfigSummary": configSummary,
-                        "monthlyPrice": monthlyPrice,
-                        "monthsInPeriod": monthsInPeriod(period.periodUnit, period.periodUnitCount),
+                        "idiqClin": Igce.prototype.determineIdiqClin(item.classification_level, item.idiq_clin_type),
+                        "contract": item.contract_type,
+                        "dowTaskNumber": item.dow_task_number,
+                        "title": item.title,
+                        "description": item.description,
+                        "unitPrice": item.unit_price,
+                        "unitQuantity": item.unit_quantity,
+                        "unit": item.unit.toLowerCase(), //TODO -> what does the JSON string look like, there are no examples in sandbox
                     });
                 });
             }
-            // Else if the Current Environment is needed for the entire TO duration
+            // Else if the Environment Instance is needed for the entire TO duration
             // Map it to each period in the periods_estimate array
-            else if (item.need_for_entire_task_order_duration) {
+            else if (item.instance_info.need_for_entire_task_order_duration) {
                 periods_estimate.forEach(function (period) {
                     period.periodLineItems.push({
-                        "clin": "x001",
-                        "idiqClin": getClinFromDowTask(item.dow_task_number, formatted_idiq_clins),
-                        "dowTaskNumber": dowTaskNumber,
-                        "serviceOffering": serviceOffering,
-                        "itemDescriptionOrConfigSummary": configSummary,
-                        "monthlyPrice": monthlyPrice,
-                        "monthsInPeriod": monthsInPeriod(period.period.periodUnit, period.period.periodUnitCount),
+                        "idiqClin": Igce.prototype.determineIdiqClin(item.classification_level, item.idiq_clin_type),
+                        "contract": item.contract_type,
+                        "dowTaskNumber": item.dow_task_number,
+                        "title": item.title,
+                        "description": item.description,
+                        "unitPrice": item.unit_price,
+                        "unit": item.unit.toLowerCase(), //TODO -> what does the JSON string look like? there are no examples in sandbox
                     });
                 });
             }
         });
     },
-    mapClassificationInstance: function (data_to_map, periods_estimate, formatted_idiq_clins, service_offering) {
-        data_to_map.forEach(function (instance) { ////FOR EACH CLASSIFICATION INSTANCE
-            // Check if need for entire task order duration is false
-            // If false, use the selected_periods array of the classification instance
-            if (!instance.need_for_entire_task_order_duration) {
-                // For each period in the selected_periods array of the classification instance
-                instance.selected_periods.forEach(function (period) {
-                    // Map period_type and base_period of the periods_estimate array
-                    var formattedPeriodOutput = periods_estimate.map(function (input) {
-                        return input.period.periodType + input.period.optionOrder;
-                    });
-                    var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(period.periodType + period.optionOrder);
-                    // Insert into periods_estimate, under the specified period and period_line_items
-                    periods_estimate[indexOfCurrentPeriod].periodLineItems.push({
-                        "clin": "x001",
-                        "idiqClin": getClinFromDowTask(instance.dow_task_number, formatted_idiq_clins),
-                        "dowTaskNumber": instance.dow_task_number,
-                        "serviceOffering": service_offering.name,
-                        "itemDescriptionOrConfigSummary": instance.usage_description,
-                        "monthlyPrice": instance.monthly_price,
-                        "monthsInPeriod": monthsInPeriod(period.periodUnit, period.periodUnitCount),
 
-                    });
-                });
-            }
-            // If instance is needed for the entire task_order_duration, add it to all period_line_items
-            else if (instance.need_for_entire_task_order_duration) {
-                periods_estimate.forEach(function (period) {
-                    period.periodLineItems.push({
-                        "clin": "x001",
-                        "idiqClin": getClinFromDowTask(instance.dow_task_number, formatted_idiq_clins),
-                        "dowTaskNumber": instance.dow_task_number,
-                        "serviceOffering": service_offering.name,
-                        "itemDescriptionOrConfigSummary": instance.usage_description,
-                        "monthlyPrice": instance.monthly_price,
-                        "monthsInPeriod": monthsInPeriod(period.period.periodUnit, period.period.periodUnitCount),
-                    });
-                });
+    getTravelRequirements: function (packageSysId) {
+        var packageId = packageSysId ? packageSysId : this.acquisitionPackage.sys_id;
+        var limit = 50; // arbitrary
+        return new global.GlideQuery(Igce.prototype.TRAVEL_REQ_TABLE)
+            .where("acquisition_package", packageId)
+            .select(Igce.prototype.TRAVEL_REQ_FIELDS)
+            .toArray(limit);
+    },
+    getTravelRequirementsProperties: function (travel) {
+        travel.forEach(function (item) {
+            if (item.selected_periods) {
+                Igce.prototype.getInstancePeriodInfo(instance_data);
             }
         });
     },
@@ -311,25 +163,67 @@ Igce.prototype = {
             .select(Igce.prototype.IGCE_ESTIMATE_FIELDS)
             .toArray(limit);
     },
+    getIgceInstanceData: function (table, id) {
+        var instance_data = new global.GlideQuery(table).get(id, Igce.prototype.SELECTED_PERIOD_FIELDS).orElse(null);
+        var instance_data_with_periods = Igce.prototype.getInstancePeriodInfo(instance_data);
+        return instance_data_with_periods;
+    },
+    getClassificationLevel: function (classificationId) {
+        var classification_level = new global.GlideQuery(Igce.prototype.CLASSIFICATION_LEVEL_TABLE).get(classificationId, ["classification"]).orElse(null);
+        return classification_level.classification;
+    },
+    determineIdiqClin: function (classification, idiq_clin_type) {
+        if (classification === "U" && idiq_clin_type === "CLOUD") {
+            return "x001/x017 Cloud UNCLASSIFIED"
+        }
+        if (classification === "U" && idiq_clin_type === "CLOUD_SUPPORT") {
+            return "x002/x018 Cloud Support UNCLASSIFIED"
+        }
+        if (classification === "S" && idiq_clin_type === "CLOUD") {
+            return "x003/x019 Cloud SECRET CLASSIFIED"
+        }
+        if (classification === "S" && idiq_clin_type === "CLOUD_SUPPORT") {
+            return "x004/x020 Cloud Support SECRET CLASSIFIED"
+        }
+        if (classification === "TS" && idiq_clin_type === "CLOUD") {
+            return "x005/x021 Cloud TOP SECRET CLASSIFIED"
+        }
+        if (classification === "TS" && idiq_clin_type === "CLOUD_SUPPORT") {
+            return "x006/x022 Cloud Support TOP SECRET CLASSIFIED"
+        }
+
+        // TODO: add option for (x007 Travel)
+    },
+    getIgceProperties: function (igce) {
+        // Set up IGCE object to parse through
+        igce.forEach(function (item) {
+            gs.info(JSON.stringify(item));
+
+            // IGCE estimate will always have one of the following fields:
+            // - environment_instance
+            // - classification_instance
+            // - cross_domain_solution
+            if (item.environment_instance) {
+                item.instance_info = Igce.prototype.getIgceInstanceData(Igce.prototype.ENV_INST_TABLE, item.environment_instance);
+            }
+            else if (item.classification_instance) {
+                item.instance_info = Igce.prototype.getIgceInstanceData(Igce.prototype.CLASS_INST_TABLE, item.classification_instance);
+            }
+            else if (item.cross_domain_solution) {
+                item.instance_info = Igce.prototype.getIgceInstanceData(Igce.prototype.CROSS_DOMAIN_SOLN_TABLE, item.cross_domain_solution);
+            }
+            // Get classification level
+            if (item.classification_level) {
+                item.classification_level = Igce.prototype.getClassificationLevel(item.classification_level)
+            }
+
+        });
+    },
 
     getPayload: function () {
         var acq_package = this.acquisitionPackage;
         var periodOfPerformance = acq_package.period_of_performance;
         var fundingRequest = acq_package.funding_request;
-
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // In order to prevent SNOW Error: Cannot convert null to an object.,Detail: Cannot convert null to an object.
-        // Check for missing fields, return an error if they don"t exist
-        if (!periodOfPerformance) {
-            // return an error
-            return {
-                error: "Missing Period of Performance"
-            };
-        }
-
-
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // Get Periods for Period's Estimate
         var periodsEstimate = this.getPackagePeriods(
@@ -353,10 +247,17 @@ Igce.prototype = {
                 }
             }
         }
+        // TODO -> get travel requirements and map them to periods estimate
+        // not sure if we need to use travel estimate or travel requirement (probably use travel requirement).
+        // Whichever table is selected should be added to the IGCE Estimates table
+        // var travel = this.getTravelRequirements(this.acquisitionPackage.sys_id);
 
-        var igce = Igce.prototype.getIgceEstimates(this.acquisitionPackage.sys_id);
-        // selected periods is on environment instance/ classification instance/ or cross domain solution
-
+        // Get all IGCE Estimates that have the acquisition package as the FK
+        var igce = this.getIgceEstimates(this.acquisitionPackage.sys_id);
+        // Determine selected_periods for instance_info and classification_level
+        this.getIgceProperties(igce);
+        // Map igce estimates to periods estimate
+        this.mapIgceToPeriodsEstimate(igce, periodsEstimate);
 
         // IGCE generated-document payload
         var igce_payload = {
@@ -364,8 +265,7 @@ Igce.prototype = {
             templatePayload: {
                 fundingDocument: fundingDocument,
                 periodsEstimate: periodsEstimate,
-            },
-            testIgce: igce
+            }
         };
         // Format the final payload
         return igce_payload;
@@ -375,13 +275,13 @@ Igce.prototype = {
         <sys_created_by>jeff.segal-ctr</sys_created_by>
         <sys_created_on>2022-10-12 15:53:33</sys_created_on>
         <sys_id>b29002b097a211106fa8b4b3f153afc4</sys_id>
-        <sys_mod_count>19</sys_mod_count>
+        <sys_mod_count>20</sys_mod_count>
         <sys_name>Igce</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_b29002b097a211106fa8b4b3f153afc4</sys_update_name>
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-12-22 19:20:23</sys_updated_on>
+        <sys_updated_on>2022-12-24 03:15:23</sys_updated_on>
     </sys_script_include>
 </record_update>
