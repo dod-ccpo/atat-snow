@@ -541,6 +541,9 @@ erDiagram
         Currency monthly_price "(column INACTIVE)"
         Choice need_for_entire_task_order_duration
         String usage_description
+        Choice type_of_mobility "MAN_PORTABLE/MODULAR/OTHER/NO_PREFERENCE"
+        String type_of_mobility_other
+        Choice type_of_delivery "SHIPPED/PICK_UP"
     }
     CLASSIFICATION-LEVEL {
         GUID sys_id PK
