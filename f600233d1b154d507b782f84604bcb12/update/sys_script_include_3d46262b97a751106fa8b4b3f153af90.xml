@@ -634,10 +634,12 @@ Dow.prototype = {
         selectedLevel["usersIncrease"] = Dow.prototype.ctb(selectedLevel.increaseInUsers);
         delete selectedLevel.increaseInUsers;
 
-
-        selectedLevel["classificationLevel"] = Dow.prototype.getClassificationLevels(
+        var classificationLevelList = Dow.prototype.getClassificationLevels(
           selectedLevel.classificationLevel
         ).map(removeSysId);
+        // each SelectedClassificationLevel should only have one classification level
+        selectedLevel["classificationLevel"] = classificationLevelList[0] ? classificationLevelList[0] : null;
+
 
         selectedLevel["classifiedInformationTypes"] = Dow.prototype.getClassifiedInfoTypes(
           selectedLevel.classifiedInformationTypes
@@ -811,7 +813,7 @@ Dow.prototype = {
    */
   getCloudSupportInstances: function(packageId, mappedPeriods) {
     try {
-      var table = Dow.prototype.CLOUD_SUP_ENV_ISNT_TABLE
+      var table = Dow.prototype.CLOUD_SUP_ENV_ISNT_TABLE;
       return Dow.prototype.getInstances(table, packageId, mappedPeriods);
 
     } catch (error) {
@@ -1023,13 +1025,13 @@ Dow.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-10 00:50:30</sys_created_on>
         <sys_id>3d46262b97a751106fa8b4b3f153af90</sys_id>
-        <sys_mod_count>14</sys_mod_count>
+        <sys_mod_count>15</sys_mod_count>
         <sys_name>Dow</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_3d46262b97a751106fa8b4b3f153af90</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-12-22 16:51:34</sys_updated_on>
+        <sys_updated_on>2022-12-27 14:24:32</sys_updated_on>
     </sys_script_include>
 </record_update>
