@@ -15,27 +15,11 @@ Ifp.prototype = {
 	FUNDING_INCREMENT_TABLE: "x_g_dis_atat_funding_increment",
 	USER_TABLE: "sys_user",
 	errUtil: new ErrorHandler(),
+	atatHelper: new AtatHelper(),
 	acquisitionPackage: null,
 
 	initialize: function(acqPackage) {
 		this.acquisitionPackage = acqPackage;
-	},
-	
-	/**
-	* Finds the first Mission Owner of the Acquisition Package, if it exists
-	* return User
-	*/
-	getFirstMissionOwner: function() {
-		var missionOwners = this.acquisitionPackage.mission_owners;
-		if (missionOwners) {
-			var array = missionOwners.split(",");
-			if (array.length > 0) {
-				var user = new GlideRecord(this.USER_TABLE);
-				user.get(array[0]);
-				return user;
-			}			
-		}
-		throw this.errUtil.createError("No Mission Owners found for this Acquisition Package.", this.errUtil.INVALID_INPUT);				
 	},
 
 	/**
@@ -152,7 +136,7 @@ Ifp.prototype = {
 				documentType: "INCREMENTAL_FUNDING_PLAN",
 				templatePayload: {
 					requirementsTitle: acqPackage.project_overview.title.toString(),
-					missionOwner: this.getFirstMissionOwner().name.toString(),
+					missionOwner: this.atatHelper.getFirstMissionOwner(acqPackage).name.toString(),
 					financialPoc: financialPoc.formal_name.toString(),
 					estimatedTaskOrderValue: parseFloat(fundingPlan.estimated_task_order_value.toString()),
 					initialAmount: parseFloat(fundingPlan.initial_amount.toString()),
@@ -178,13 +162,13 @@ Ifp.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-11-29 14:21:01</sys_created_on>
         <sys_id>5070b8dc976fd1106fa8b4b3f153afdd</sys_id>
-        <sys_mod_count>28</sys_mod_count>
+        <sys_mod_count>30</sys_mod_count>
         <sys_name>Ifp</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_5070b8dc976fd1106fa8b4b3f153afdd</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2022-12-28 16:17:58</sys_updated_on>
+        <sys_updated_on>2022-12-28 21:52:22</sys_updated_on>
     </sys_script_include>
 </record_update>
