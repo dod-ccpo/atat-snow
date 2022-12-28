@@ -11,8 +11,9 @@ Payload is sent to the HOTH API for document generation.&#13;
         <name>Ifp</name>
         <script><![CDATA[var Ifp = Class.create();
 Ifp.prototype = {
-	M2M_CONTACTS_TABLE:  "x_g_dis_atat_m2m_contacts_acquisition",
+	CONTACTS_TABLE:  "x_g_dis_atat_contacts",
 	FUNDING_INCREMENT_TABLE: "x_g_dis_atat_funding_increment",
+	USER_TABLE: "sys_user",
 	errUtil: new ErrorHandler(),
 	acquisitionPackage: null,
 
@@ -29,7 +30,9 @@ Ifp.prototype = {
 		if (missionOwners) {
 			var array = missionOwners.split(",");
 			if (array.length > 0) {
-				return array[0];
+				var user = new GlideRecord(this.USER_TABLE);
+				user.get(array[0]);
+				return user;
 			}			
 		}
 		throw this.errUtil.createError("No Mission Owners found for this Acquisition Package.", this.errUtil.INVALID_INPUT);				
@@ -42,8 +45,15 @@ Ifp.prototype = {
      * @param {GlideRecord} - Funding Request record
      * return {object} - funding document information (e.g., MIPR number)
      */
-	getFundingDocument: function(fundingRequest) {
+	getFundingDocument: function(fundingRequest) {				
 		try {
+			// Return a schema-compliant empty object if we don't have a Funding Request (remove this once UI supports saving one)
+			if (!fundingRequest) {
+				return {
+					fundingType: "FS_FORM",
+					orderNumber: "TBD"
+				};
+			}
 			var fundingType = fundingRequest.funding_request_type.toString();
 			if (!fundingType) {
 				var pkgInfo = this.errUtil.getRecordLogInfo(this.acquisitionPackage, "number");
@@ -122,7 +132,9 @@ Ifp.prototype = {
 
 			var fundingRequest = fundingRequirement.funding_request;
 			var fundingPlan = fundingRequirement.funding_plan;
-			var financialPoc = fundingRequirement.financial_poc;
+			//var financialPoc = fundingRequirement.financial_poc;
+			var financialPoc = new GlideRecord(this.CONTACTS_TABLE);
+			financialPoc.get(fundingRequirement.financial_poc);
 			
 			if (!fundingRequest) {
 				// Logging a warning because the UI needs to be updated to persist these objects and 
@@ -140,12 +152,12 @@ Ifp.prototype = {
 				documentType: "INCREMENTAL_FUNDING_PLAN",
 				templatePayload: {
 					requirementsTitle: acqPackage.project_overview.title.toString(),
-					missionOwner: this.getFirstMissionOwner().formalName,
-					financialPoc: financialPoc.formalName,
+					missionOwner: this.getFirstMissionOwner().name.toString(),
+					financialPoc: financialPoc.formal_name.toString(),
 					estimatedTaskOrderValue: parseFloat(fundingPlan.estimated_task_order_value.toString()),
 					initialAmount: parseFloat(fundingPlan.initial_amount.toString()),
 					remainingAmount: parseFloat(fundingPlan.remaining_amount.toString()),
-					fundingDocument: fundingRequest ? this.getFundingDocument(fundingRequest) : null,
+					fundingDocument: this.getFundingDocument(fundingRequest),
 					fundingIncrements: this.getFundingIncrements(fundingPlan),
 					scheduleText: fundingPlan.schedule_text.toString(),
 					contractNumber: gs.getProperty("x_g_dis_atat.jwcc.contractNumber"),
@@ -166,13 +178,13 @@ Ifp.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-11-29 14:21:01</sys_created_on>
         <sys_id>5070b8dc976fd1106fa8b4b3f153afdd</sys_id>
-        <sys_mod_count>15</sys_mod_count>
+        <sys_mod_count>28</sys_mod_count>
         <sys_name>Ifp</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_5070b8dc976fd1106fa8b4b3f153afdd</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2022-12-28 03:05:36</sys_updated_on>
+        <sys_updated_on>2022-12-28 16:17:58</sys_updated_on>
     </sys_script_include>
 </record_update>
