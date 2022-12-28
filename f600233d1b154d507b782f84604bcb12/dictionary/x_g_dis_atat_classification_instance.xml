@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="DAPPS:Classification Instance" max_length="40" name="x_g_dis_atat_classification_instance" sizeclass="0" type="collection">
+    <element label="DAPPS:Classification Instance" max_length="40" name="x_g_dis_atat_classification_instance" sizeclass="2753" type="collection">
         <element label="Classification Level" max_length="32" name="classification_level" reference="x_g_dis_atat_classification_level" type="reference"/>
         <element label="Classified Information Types" max_length="4000" name="classified_information_types" reference="x_g_dis_atat_classified_information_type" type="glide_list"/>
-        <element label="DOW Task Number" max_length="100" name="dow_task_number" type="string"/>
-        <element label="Monthly Price" max_length="20" name="monthly_price" type="currency"/>
+        <element active="false" label="DOW Task Number" max_length="100" name="dow_task_number" type="string"/>
+        <element active="false" label="Monthly Price" max_length="20" name="monthly_price" type="currency"/>
         <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Need for Entire Task Order Duration" max_length="40" name="need_for_entire_task_order_duration" type="choice">
             <choice/>
         </element>
         <element label="Selected Periods" max_length="4000" name="selected_periods" reference="x_g_dis_atat_period" type="glide_list"/>
+        <element choice="1" label="Type of Delivery" max_length="40" name="type_of_delivery" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Shipped" sequence="1" value="SHIPPED"/>
+                <element inactive_on_update="false" label="Pick-up" sequence="2" value="PICK_UP"/>
+            </choice>
+        </element>
+        <element choice="1" label="Type of Mobility" max_length="40" name="type_of_mobility" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Man-portable" sequence="1" value="MAN_PORTABLE"/>
+                <element inactive_on_update="false" label="Modular" sequence="2" value="MODULAR"/>
+                <element inactive_on_update="false" label="Other" sequence="3" value="OTHER"/>
+                <element inactive_on_update="false" label="No preference" sequence="4" value="NO_PREFERENCE"/>
+            </choice>
+        </element>
+        <element label="Type of Mobility Other" max_length="200" name="type_of_mobility_other" type="string"/>
         <element label="Usage Description" max_length="500" name="usage_description" type="string"/>
         <index name="index">
             <element name="classification_level"/>
