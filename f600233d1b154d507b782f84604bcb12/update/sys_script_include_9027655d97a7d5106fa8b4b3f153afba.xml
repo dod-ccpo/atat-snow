@@ -9,14 +9,34 @@
         <name>AtatHelper</name>
         <script><![CDATA[var AtatHelper = Class.create();
 AtatHelper.prototype = {
-  M2M_CONTACTS_TABLE: "x_g_dis_atat_m2m_contacts_acquisition",
-  CONTACTS_TABLE: "x_g_dis_atat_contacts",
-  PERIOD_TABLE: "x_g_dis_atat_period",
-  errUtil: new ErrorHandler(),
+	M2M_CONTACTS_TABLE: "x_g_dis_atat_m2m_contacts_acquisition",
+	CONTACTS_TABLE: "x_g_dis_atat_contacts",
+	PERIOD_TABLE: "x_g_dis_atat_period",
+	USER_TABLE: "sys_user",
+	errUtil: new ErrorHandler(),
 
-  initialize: function() {
-  },
-  /**
+	initialize: function() {
+	},
+
+
+	/**
+	* Finds the first Mission Owner of the Acquisition Package, if it exists
+	* return User
+	*/
+	getFirstMissionOwner: function(acquisitionPackage) {
+		var missionOwners = acquisitionPackage.mission_owners;
+		if (missionOwners) {
+			var array = missionOwners.split(",");
+			if (array.length > 0) {
+				var user = new GlideRecord(this.USER_TABLE);
+				user.get(array[0]);
+				return user;
+			}			
+		}
+		throw this.errUtil.createError("No Mission Owners found for this Acquisition Package.", this.errUtil.INVALID_INPUT);				
+	},
+	
+	/**
    * Query for many-to-many (m2m) contact records that associate the contacts and
    * acquisition package records. A limit of records to can be provided but
    * defaults to 50. 
@@ -25,22 +45,22 @@ AtatHelper.prototype = {
    * @param {number} [limit=50] - max records to return
    * @return {string[]} an array of m2m contact record sysIds 
    */
-  getAssociatedContacts: function(packageSysId, returnLimit) {
-    try {
-      var limit = returnLimit ? returnLimit : 50;
-      return new global.GlideQuery(this.M2M_CONTACTS_TABLE)
-        .where("acquisition_package", packageSysId)
-        .select(["contacts"])
-        .map(function(m2m) { return m2m.contacts; })
-        .toArray(limit);
-    } catch (error) {
-      throw this.errUtil.createError(
-        "AtatHelper --> getAssociatedContacts() " + error,
-        this.errUtil.METHOD_ERROR
-      );
-    }
-  },
-  /**
+	getAssociatedContacts: function(packageSysId, returnLimit) {
+		try {
+			var limit = returnLimit ? returnLimit : 50;
+			return new global.GlideQuery(this.M2M_CONTACTS_TABLE)
+				.where("acquisition_package", packageSysId)
+				.select(["contacts"])
+				.map(function(m2m) { return m2m.contacts; })
+				.toArray(limit);
+		} catch (error) {
+			throw this.errUtil.createError(
+				"AtatHelper --> getAssociatedContacts() " + error,
+				this.errUtil.METHOD_ERROR
+			);
+		}
+	},
+	/**
    * Query package contacts and sort based on type for the Mission Owner,
    * COR, ACOR, Financial POC and the remainder as Other. The field "type"
    * is required.
@@ -50,137 +70,137 @@ AtatHelper.prototype = {
    * @param {number} [limit=50] - limit of contacts to return from query
    * @return {object} object that contains the sorted contact types
    */
-  getContactsInfo: function(contactIds, fields, returnLimit) {
-    try {
-      if (!listContains("type", fields)) {
-        throw this.errUtil.createError(
-          "AtatHelper --> getContactsInfo(): The 'type' field is missing.",
-          this.errUtil.INVALID_INPUT
-        );
-      }
+	getContactsInfo: function(contactIds, fields, returnLimit) {
+		try {
+			if (!listContains("type", fields)) {
+				throw this.errUtil.createError(
+					"AtatHelper --> getContactsInfo(): The 'type' field is missing.",
+					this.errUtil.INVALID_INPUT
+				);
+			}
 
-      var limit = returnLimit ? returnLimit : 50;
-      var contacts = { mo: [], cor: [], acor: [], finPoc: [], other: [] };
+			var limit = returnLimit ? returnLimit : 50;
+			var contacts = { mo: [], cor: [], acor: [], finPoc: [], other: [] };
 
-      new global.GlideQuery(this.CONTACTS_TABLE)
-        .where("sys_id", "IN", contactIds)
-        .select(fields)
-        .toArray(limit)
-        .map(removeSysId)
-        .forEach(function(contact) {
-          switch (contact.type) {
-            case "MISSION_OWNER":
-              contacts["mo"].push(contact);
-              break;
-            case "COR":
-              contacts["cor"].push(contact);
-              break;
-            case "ACOR":
-              contacts["acor"].push(contact);
-              break;
-            case "FINANCIAL_POC":
-              contacts["finPoc"].push(contact);
-              break;
-            default:
-              contacts["other"].push(contact);
-          }
-        });
-      return contacts;
-    } catch (error) {
-      var newError = this.errUtil.createError(
-        "AtatHelper --> getContactsInfo() " + error,
-        this.errUtil.METHOD_ERROR
-      );
-      this.errUtil.errorLogger(newError);
-    }
-  },
-  /**
+			new global.GlideQuery(this.CONTACTS_TABLE)
+				.where("sys_id", "IN", contactIds)
+				.select(fields)
+				.toArray(limit)
+				.map(removeSysId)
+				.forEach(function(contact) {
+				switch (contact.type) {
+					case "MISSION_OWNER":
+						contacts["mo"].push(contact);
+						break;
+					case "COR":
+						contacts["cor"].push(contact);
+						break;
+					case "ACOR":
+						contacts["acor"].push(contact);
+						break;
+					case "FINANCIAL_POC":
+						contacts["finPoc"].push(contact);
+						break;
+					default:
+						contacts["other"].push(contact);
+				}
+			});
+			return contacts;
+		} catch (error) {
+			var newError = this.errUtil.createError(
+				"AtatHelper --> getContactsInfo() " + error,
+				this.errUtil.METHOD_ERROR
+			);
+			this.errUtil.errorLogger(newError);
+		}
+	},
+	/**
    * Construct the full FOIA address based on the parts stored
    * in the Sensitive Information table.
    *
    * @param {GlideRecord} sensitiveInfo - package sensitive information record
    * @return {string} complete FOIA address
    */
-  constructFoiaAddress: function(sensitiveInfo) {
-    var str1 = sensitiveInfo.foia_street_address_1;
-    var str2 = sensitiveInfo.foia_street_address_2;
-    var city = sensitiveInfo.foia_city_apo_fpo;
-    var state = sensitiveInfo.foia_state_province_state_code;
-    var zip = sensitiveInfo.foia_zip_postal_code;
-    var country = sensitiveInfo.foia_country;
-    var line1 = str1;
-    if (str2.length > 0) {
-      line1 += ", " + str2;
-    }
-    line1 += "\n";
-    var line2 = city + ", " + state + " " + zip + "\n";
-    var line3 = country;
+	constructFoiaAddress: function(sensitiveInfo) {
+		var str1 = sensitiveInfo.foia_street_address_1;
+		var str2 = sensitiveInfo.foia_street_address_2;
+		var city = sensitiveInfo.foia_city_apo_fpo;
+		var state = sensitiveInfo.foia_state_province_state_code;
+		var zip = sensitiveInfo.foia_zip_postal_code;
+		var country = sensitiveInfo.foia_country;
+		var line1 = str1;
+		if (str2.length > 0) {
+			line1 += ", " + str2;
+		}
+		line1 += "\n";
+		var line2 = city + ", " + state + " " + zip + "\n";
+		var line3 = country;
 
-    return line1 + line2 + line3;
-  },
-  /**
+		return line1 + line2 + line3;
+	},
+	/**
    * Query for Periods.
    *
    * @param {string[]} periodIds - list of period ids to retrieve
    * @return {Optional[]} array of periods
    */
-  getPeriods: function(periodIds) {
-    try {
-      var periodFields = ["period_type", "period_unit_count", "period_unit", "option_order"];
-      return getListRecords(
-        periodIds,
-        periodFields,
-        this.PERIOD_TABLE
-      );
-    } catch (error) {
-      var errorMessage = "AtatHelper --> getPeriods(): " + error;
-      throw this.errUtil.createError(errorMessage, this.errUtil.METHOD_ERROR);
-    }
-  },
-  /**
+	getPeriods: function(periodIds) {
+		try {
+			var periodFields = ["period_type", "period_unit_count", "period_unit", "option_order"];
+			return getListRecords(
+				periodIds,
+				periodFields,
+				this.PERIOD_TABLE
+			);
+		} catch (error) {
+			var errorMessage = "AtatHelper --> getPeriods(): " + error;
+			throw this.errUtil.createError(errorMessage, this.errUtil.METHOD_ERROR);
+		}
+	},
+	/**
    * Format periods properties into camelCase to support sending to HOTH application.
    *
    * @param {array} periods - an array of periods
    * @return {array} of periods with camelCase properties
    */
-  mapPeriods: function(periods) {
-    return periods.map(function(period) {
-      // map properties according to HOTH API
-      period.periodType = period.period_type;
-      period.periodUnitCount = period.period_unit_count;
-      period.periodUnit = period.period_unit;
-      period.optionOrder = period.option_order;
+	mapPeriods: function(periods) {
+		return periods.map(function(period) {
+			// map properties according to HOTH API
+			period.periodType = period.period_type;
+			period.periodUnitCount = period.period_unit_count;
+			period.periodUnit = period.period_unit;
+			period.optionOrder = period.option_order;
 
-      // remove old properties	
-      delete period.period_type;
-      delete period.period_unit_count;
-      delete period.period_unit;
-      delete period.option_order;
+			// remove old properties	
+			delete period.period_type;
+			delete period.period_unit_count;
+			delete period.period_unit;
+			delete period.option_order;
 
-      return period;
-    });
-  },
-  /**
+			return period;
+		});
+	},
+	/**
    * Map periods ids for a given package to allow easier retrieval for the
    * different instances.
    *
    * @param {array} periods - PoP periods
    * return {object} an object contianing Id mapping of each period for a PoP
    */
-  mapPackagePeriods: function(periods) {
-    var mappedPeriods = {};
-    if (periods) {
-      this.mapPeriods(periods)
-        .forEach(function(period) {
-          var id = period.sys_id;
-          delete period.sys_id;
-          mappedPeriods[id] = period;
-        });
-    }
+	mapPackagePeriods: function(periods) {
+		var mappedPeriods = {};
+		if (periods) {
+			this.mapPeriods(periods)
+				.forEach(function(period) {
+				var id = period.sys_id;
+				delete period.sys_id;
+				mappedPeriods[id] = period;
+			});
+		}
 
-    return mappedPeriods;
-  },
-  /**
+		return mappedPeriods;
+	},
+	/**
    * Convert object properties from snake_case to camelCase
    * to match with HOTH API specification
    *
@@ -188,56 +208,56 @@ AtatHelper.prototype = {
    * @param {array} fields - fields to covert into camelCase
    * @return {array} an array of objects with camelCase properties
    */
-  snakeToCamelCase: function(records, fields) {
-    if (!records) {
-      gs.warn("No records found to transform into camelCase.");
-      return [];
-    }
-    try {
-      var snakeToCamelFieldMapping = {};
-      fields.forEach(function(snakeField) {
-        var camelField = snakeField 
-            .split("_")
-            .map(function(word) { return word[0].toUpperCase() + word.slice(1); })
-            .join("");
+	snakeToCamelCase: function(records, fields) {
+		if (!records) {
+			gs.warn("No records found to transform into camelCase.");
+			return [];
+		}
+		try {
+			var snakeToCamelFieldMapping = {};
+			fields.forEach(function(snakeField) {
+				var camelField = snakeField 
+				.split("_")
+				.map(function(word) { return word[0].toUpperCase() + word.slice(1); })
+				.join("");
 
-        // ensure first word is lower case 
-        snakeToCamelFieldMapping[snakeField] = camelField[0].toLowerCase() + camelField.slice(1);
-      });
+				// ensure first word is lower case 
+				snakeToCamelFieldMapping[snakeField] = camelField[0].toLowerCase() + camelField.slice(1);
+			});
 
-      return records.map(function(record) {
-        var convertedRecord = {};
-        for (var snakeField in snakeToCamelFieldMapping) {
-          var camelField = snakeToCamelFieldMapping[snakeField];
-          convertedRecord[camelField] = record[snakeField];
-        }
+			return records.map(function(record) {
+				var convertedRecord = {};
+				for (var snakeField in snakeToCamelFieldMapping) {
+					var camelField = snakeToCamelFieldMapping[snakeField];
+					convertedRecord[camelField] = record[snakeField];
+				}
 
-        return convertedRecord;
-      });
+				return convertedRecord;
+			});
 
-    } catch (error) {
-      throw this.errUtil.createError(
-        "AtatHelper --> snakeToCamelCase(): " + error,
-        this.errUtil.METHOD_ERROR
-      );
-    }
+		} catch (error) {
+			throw this.errUtil.createError(
+				"AtatHelper --> snakeToCamelCase(): " + error,
+				this.errUtil.METHOD_ERROR
+			);
+		}
 
-  },
+	},
 
 
-  type: 'AtatHelper'
+	type: 'AtatHelper'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-02 20:49:47</sys_created_on>
         <sys_id>9027655d97a7d5106fa8b4b3f153afba</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_name>AtatHelper</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_9027655d97a7d5106fa8b4b3f153afba</sys_update_name>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-12-16 15:55:23</sys_updated_on>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2022-12-28 20:00:57</sys_updated_on>
     </sys_script_include>
 </record_update>
