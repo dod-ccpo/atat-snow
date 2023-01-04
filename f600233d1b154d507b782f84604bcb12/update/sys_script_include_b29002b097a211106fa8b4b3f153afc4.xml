@@ -278,7 +278,6 @@ Igce.prototype = {
                 var quantity_arr = [];
                 var obj = new global.JSON().decode(item.unit_quantity);
                 for (var key in obj) {
-                    gs.info(" key is : " + key + " and value for key is " + obj[key]);
                     // For each sys_id, query the period table and retrieve the required period fields
                     var quantity_data = new global.GlideQuery(Igce.prototype.PERIOD_TABLE).get(key, Igce.prototype.PERIOD_FIELDS).orElse(null);
                     if (quantity_data) {
@@ -337,7 +336,6 @@ Igce.prototype = {
             });
         });
     },
-
 
     getPayload: function () {
         var acq_package = this.acquisitionPackage;
@@ -419,7 +417,6 @@ Igce.prototype = {
                 contractingShop: cShop,
                 instructions: instructions,
                 surgeCapabilities: igceSurgeCapabilities,
-                // igce_test: igce
             }
         };
         // Format the final payload
@@ -430,13 +427,13 @@ Igce.prototype = {
         <sys_created_by>jeff.segal-ctr</sys_created_by>
         <sys_created_on>2022-10-12 15:53:33</sys_created_on>
         <sys_id>b29002b097a211106fa8b4b3f153afc4</sys_id>
-        <sys_mod_count>55</sys_mod_count>
+        <sys_mod_count>57</sys_mod_count>
         <sys_name>Igce</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_b29002b097a211106fa8b4b3f153afc4</sys_update_name>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2023-01-04 18:35:02</sys_updated_on>
+        <sys_updated_on>2023-01-04 20:58:25</sys_updated_on>
     </sys_script_include>
 </record_update>
