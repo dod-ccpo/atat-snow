@@ -679,6 +679,12 @@ Dow.prototype = {
           record.need_for_entire_task_order_duration
         );
         if (!record.need_for_entire_task_order_duration) {
+          // an error occurs when both the entire duration and selected periods is null
+          if (!record.selected_periods) {
+            // default to entire duration when values are both null 
+            record.need_for_entire_task_order_duration = true;
+            return record
+          }
           record["selected_periods"] = record.selected_periods
             .split(",")
             .map(function(periodId) {
@@ -954,7 +960,8 @@ Dow.prototype = {
           // project overview (sections 1 and 2)
           toTitle: acqPackage.project_overview.title.toString(),
           scope: acqPackage.project_overview.scope.toString(),
-          scopeSurge: acqPackage.requirements_cost_estimate.surge_capabilities.toString(),
+          scopeSurge: parseInt(acqPackage.requirements_cost_estimate.surge_requirement_capacity.toString()),
+          scopeRequirementCapabilities: ctb(acqPackage.requirements_cost_estimate.surge_requirement_capabilities.toString()),
 
           // sections 3 and 4.1-3 
           currentEnvironment: this.getCurrentEnvironmentInfo(acqPackage.current_environment),
@@ -1025,13 +1032,13 @@ Dow.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-10 00:50:30</sys_created_on>
         <sys_id>3d46262b97a751106fa8b4b3f153af90</sys_id>
-        <sys_mod_count>15</sys_mod_count>
+        <sys_mod_count>16</sys_mod_count>
         <sys_name>Dow</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_3d46262b97a751106fa8b4b3f153af90</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-12-27 14:24:32</sys_updated_on>
+        <sys_updated_on>2022-12-30 01:04:49</sys_updated_on>
     </sys_script_include>
 </record_update>
