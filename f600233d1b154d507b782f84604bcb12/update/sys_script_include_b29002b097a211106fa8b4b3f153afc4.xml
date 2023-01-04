@@ -136,12 +136,12 @@ Igce.prototype = {
                     // Insert into periods_estimate, under the specified period and period_line_items 
                     periods_estimate[indexOfCurrentPeriod].periodLineItems.push({
                         "idiqClin": Igce.prototype.determineIdiqClin(item.classification_level, item.idiq_clin_type),
-                        "contract": item.contract_type,
+                        "contractType": item.contract_type,
                         "dowTaskNumber": item.dow_task_number,
-                        "title": item.title,
-                        "description": item.description,
+                        "serviceTitle": item.title,
+                        "itemDescription": item.description,
                         "unitPrice": item.unit_price,
-                        "unitQuantity": item.unit_quantity, //TODO -> what does the JSON string look like, there are no examples in sandbox
+                        "quantity": 12, // item.unit_quantity, //TODO -> what does the JSON string look like, there are no examples in sandbox
                         "unit": item.unit.toLowerCase(),
                     });
                 });
@@ -152,12 +152,12 @@ Igce.prototype = {
                 periods_estimate.forEach(function (period) {
                     period.periodLineItems.push({
                         "idiqClin": Igce.prototype.determineIdiqClin(item.classification_level, item.idiq_clin_type),
-                        "contract": item.contract_type,
+                        "contractType": item.contract_type,
                         "dowTaskNumber": item.dow_task_number,
-                        "title": item.title,
-                        "description": item.description,
+                        "serviceTitle": item.title,
+                        "itemDescription": item.description,
                         "unitPrice": item.unit_price,
-                        "unitQuantity": item.unit_quantity, //TODO -> what does the JSON string look like, there are no examples in sandbox
+                        "quantity": 12, //item.unit_quantity, //TODO -> what does the JSON string look like, there are no examples in sandbox
                         "unit": item.unit.toLowerCase(),
                     });
                 });
@@ -244,7 +244,6 @@ Igce.prototype = {
             if (item.unit_quantity) {
                 // attempt to decode string
                 var obj = new global.JSON().decode(item.unit_quantity);
-                gs.info(JSON.stringify(obj));
                 for (var key in obj) {
                     gs.info(" key is : " + key + " and value for key is " + obj[key]);
                     var quantity_data = new global.GlideQuery(Igce.prototype.PERIOD_TABLE).get(key, Igce.prototype.PERIOD_FIELDS).orElse(null);
@@ -352,7 +351,7 @@ Igce.prototype = {
                 fundingDocument: fundingDocument,
                 periodsEstimate: periodsEstimate,
                 contractingShop: cShop,
-                instructions: igceInstructions,
+                instructions: instructions,
                 surgeCapabilities: igceSurgeCapabilities,
             }
         };
@@ -364,13 +363,13 @@ Igce.prototype = {
         <sys_created_by>jeff.segal-ctr</sys_created_by>
         <sys_created_on>2022-10-12 15:53:33</sys_created_on>
         <sys_id>b29002b097a211106fa8b4b3f153afc4</sys_id>
-        <sys_mod_count>22</sys_mod_count>
+        <sys_mod_count>23</sys_mod_count>
         <sys_name>Igce</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_b29002b097a211106fa8b4b3f153afc4</sys_update_name>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2023-01-04 13:28:03</sys_updated_on>
+        <sys_updated_on>2023-01-04 14:41:07</sys_updated_on>
     </sys_script_include>
 </record_update>
