@@ -29,6 +29,7 @@ Dow.prototype = {
   SECURITY_REQUIREMENT_TABLE: "x_g_dis_atat_security_requirement",
   CROSS_DOMAIN_SOLN_TABLE: "x_g_dis_atat_cross_domain_solution",
   TRAVEL_REQUIREMENT_TABLE: "x_g_dis_atat_travel_requirement",
+  REQUIREMENTS_COST_EST_TABLE: "x_g_dis_atat_requirements_cost_estimate",
 
   // base instance fields
   ENV_INST_FIELDS: [
@@ -55,6 +56,7 @@ Dow.prototype = {
   ],
   // other fields
   AWARDS_HIS_FIELDS: ['contract_award_type', 'modification_order', 'effective_date'],
+  REQUIREMENTS_COST_EST_FIELDS : ["surge_requirement_capacity", "surge_requirement_capabilities"],
   ARCH_DESIGN_FIELDS: [
     "statement", "applications_needing_design", "external_factors", "source",
     "data_classification_levels",
@@ -750,13 +752,11 @@ Dow.prototype = {
   getXaasServices: function(packageId, mappedPeriods) {
     try {
       var table, configs;
+      // Q: if compute/database/storage do not have selcted services
+      // How are they being stored? 
+      // And how are different configs being stored for each?
+      // this will not capture those services
       var selectedServices = this.getSelectedServiceOfferings(packageId);
-      if (selectedServices.length < 1) {
-        throw this.errUtil.createError(
-          "No Selected Service Offerings found for package " + packageId,
-          this.errUtil.INVALID_INPUT
-        );
-      }
 
       // XaaS Services
       var xaasOfferings = selectedServices.filter(function(service) {
@@ -767,7 +767,7 @@ Dow.prototype = {
       });
 
       if (xaasOfferings.length > 1) {
-        // get instances relevante for the Service Group (Compute -> compute instance) 
+        // get instances relevant for the Service Group (Compute -> compute instance) 
         xaasOfferings = xaasOfferings.map(function(offering) {
           switch (offering.serviceOffering.serviceOfferingGroup) {
             case "COMPUTE":
@@ -791,6 +791,7 @@ Dow.prototype = {
                 serviceOffering: offering,
                 instanceConfigurations: configs
               };
+            // Q: should general XaaS instance be included here as well
             default:
               // No isntance configurations required only serviceOffering
               return {
@@ -882,6 +883,11 @@ Dow.prototype = {
           .where("acquisition_package", packageId)
           .select(Dow.prototype.SELECTED_CLASS_LVL_FIELDS)
           .toArray(limit);
+      case Dow.prototype.REQUIREMENTS_COST_EST_TABLE:
+        return new global.GlideQuery(table)
+          .where("acquisition_package", packageId)
+          .select(Dow.prototype.REQUIREMENTS_COST_EST_FIELDS)
+          .toArray(limit);
       case Dow.prototype.ARCH_DESIGN_TABLE:
         return new global.GlideQuery(table)
           .where("acquisition_package", packageId)
@@ -942,6 +948,13 @@ Dow.prototype = {
         "DOW" 
       );
 
+      var requirementsCostList = Dow.prototype.findPackageRecords(
+        this.REQUIREMENTS_COST_EST_TABLE,
+        this.acquisitionPackage.sys_id
+      )
+      // Q: is there only one ref per pacakge for requirements costs?
+      var requirementsCostEstimate = requirementsCostList[0];
+
       // HOTH DoW generated-document payload
       return {
         documentType: "DESCRIPTION_OF_WORK_DOCX",
@@ -960,8 +973,9 @@ Dow.prototype = {
           // project overview (sections 1 and 2)
           toTitle: acqPackage.project_overview.title.toString(),
           scope: acqPackage.project_overview.scope.toString(),
-          scopeSurge: parseInt(acqPackage.requirements_cost_estimate.surge_requirement_capacity.toString()),
-          scopeRequirementCapabilities: ctb(acqPackage.requirements_cost_estimate.surge_requirement_capabilities.toString()),
+          scopeSurge: parseInt(requirementsCostEstimate.surge_requirement_capacity.toString()),
+          // NOTE: not necessarily needed, but is a part of the data to identify if capacity is present 
+          // surgeRequirementCapabilities: ctb(requirementsCostEstimate.surge_requirement_capabilities.toString()),
 
           // sections 3 and 4.1-3 
           currentEnvironment: this.getCurrentEnvironmentInfo(acqPackage.current_environment),
@@ -1032,13 +1046,13 @@ Dow.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-10 00:50:30</sys_created_on>
         <sys_id>3d46262b97a751106fa8b4b3f153af90</sys_id>
-        <sys_mod_count>16</sys_mod_count>
+        <sys_mod_count>17</sys_mod_count>
         <sys_name>Dow</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_3d46262b97a751106fa8b4b3f153af90</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-12-30 01:04:49</sys_updated_on>
+        <sys_updated_on>2023-01-05 00:46:23</sys_updated_on>
     </sys_script_include>
 </record_update>
