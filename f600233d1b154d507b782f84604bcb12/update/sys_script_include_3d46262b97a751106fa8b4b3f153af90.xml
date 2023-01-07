@@ -20,6 +20,7 @@ Dow.prototype = {
   CUR_ENV_INST_TABLE: "x_g_dis_atat_current_environment_instance",
   COMP_ENV_INST_TABLE: "x_g_dis_atat_compute_environment_instance",
   DB_ENV_INST_TABLE: "x_g_dis_atat_database_environment_instance",
+  GENERAL_XAAS_ENV_INST_TABLE: "x_g_dis_atat_general_xaas_environmentinstance",
   CLOUD_SUP_ENV_ISNT_TABLE: "x_g_dis_atat_cloud_support_environment_instance",
   CLASS_INST_TABLE: "x_g_dis_atat_classification_instance",
   CLASS_LVL_TABLE: "x_g_dis_atat_classification_level",
@@ -86,7 +87,8 @@ Dow.prototype = {
   ],
   CLASS_INST_FIELDS: [
     "classification_level", "classified_information_types", "selected_periods",
-    "need_for_entire_task_order_duration", "usage_description", "dow_task_number"
+    "need_for_entire_task_order_duration", "usage_description",
+    "type_of_delivery", "type_of_mobility", "type_of_mobility_other"
   ],
   SERVICE_OFFERING_FEILDS: ["name", "description", "service_offering_group", "sequence"],
   XAAS_SERVICE_GROUPS: [
@@ -398,6 +400,7 @@ Dow.prototype = {
         .map(function(cds) {
           cds["cross_domain_solution_required"] = ctb(cds.cross_domain_solution_required);
           cds["need_for_entire_task_order_duration"] = ctb(cds.need_for_entire_task_order_duration);
+          cds["traffic_per_domain_pair"] = JSON.parse(cds.traffic_per_domain_pair);
           if (!cds.need_for_entire_task_order_duration) {
             cds["selected_periods"] = cds.selected_periods
               .split(",")
@@ -473,6 +476,7 @@ Dow.prototype = {
         instance["isTrafficSpikeEventBased"] = ctb(instance.isTrafficSpikeEventBased);
         instance["isTrafficSpikePeriodBased"] = ctb(instance.isTrafficSpikePeriodBased);
         instance["deployedRegions"] = Dow.prototype.getRegions(instance.deployedRegions);
+        instance["usersPerRegion"] = JSON.parse(instance.usersPerRegion);
 
         return instance;
       });
@@ -516,6 +520,7 @@ Dow.prototype = {
         // currentEnv
         additionalGrowth: ctb(currentEnv.additional_growth.toString()),
         anticipatedYearlyAdditionalCapacity: parseInt(currentEnv.anticipated_yearly_additional_capacity),
+        anticipatedNeedUsage: currentEnv.anticipated_need_usage,
         // replicated or optimized
         currentEnvironmentReplicatedOptimized: currentEnv.current_environment_replicated_optimized.toString(),
         statementReplicatedOptimized: currentEnv.statement_replicated_optimized.toString(),
@@ -632,6 +637,7 @@ Dow.prototype = {
 
       return selectedClassificationLevels.map(function(selectedLevel) {
         // formating special case properties (e.g, nested records, YES/NO fields)
+        selectedLevel["usersPerRegion"] = JSON.parse(selectedLevel.usersPerRegion);
         selectedLevel["dataIncrease"] = Dow.prototype.ctb(selectedLevel.dataIncrease);
         selectedLevel["usersIncrease"] = Dow.prototype.ctb(selectedLevel.increaseInUsers);
         delete selectedLevel.increaseInUsers;
@@ -751,58 +757,38 @@ Dow.prototype = {
    */
   getXaasServices: function(packageId, mappedPeriods) {
     try {
-      var table, configs;
-      // Q: if compute/database/storage do not have selcted services
-      // How are they being stored? 
-      // And how are different configs being stored for each?
-      // this will not capture those services
+      // contains 7 of the XaaS services using Selected Service Offering table
       var selectedServices = this.getSelectedServiceOfferings(packageId);
 
-      // XaaS Services
-      var xaasOfferings = selectedServices.filter(function(service) {
-        return listContains(
-          service.serviceOffering.serviceOfferingGroup,
-          Dow.prototype.XAAS_SERVICE_GROUPS
-        );
-      });
+      // XaaS services with dedicated tables
+      var computeInstances = Dow.prototype.getInstances(
+        Dow.prototype.COMP_ENV_INST_TABLE, 
+        packageId, 
+        mappedPeriods
+      );
+      var databaseInstances = Dow.prototype.getInstances(
+        Dow.prototype.DB_ENV_INST_TABLE,
+        packageId, 
+        mappedPeriods
+      );
+      var storageInstances = Dow.prototype.getInstances(
+        Dow.prototype.STORAGE_ENV_INST_TABLE,
+        packageId, 
+        mappedPeriods
+      );
+      var generalInstances = Dow.prototype.getInstances(
+        Dow.prototype.GENERAL_XAAS_ENV_INST_TABLE,
+        packageId, 
+        mappedPeriods
+      );
 
-      if (xaasOfferings.length > 1) {
-        // get instances relevant for the Service Group (Compute -> compute instance) 
-        xaasOfferings = xaasOfferings.map(function(offering) {
-          switch (offering.serviceOffering.serviceOfferingGroup) {
-            case "COMPUTE":
-              table = Dow.prototype.COMP_ENV_INST_TABLE;
-              configs = Dow.prototype.getInstances(table, packageId, mappedPeriods);
-              return {
-                serviceOffering: offering,
-                instanceConfigurations: configs
-              };
-            case "DATABASE":
-              table = Dow.prototype.DB_ENV_INST_TABLE;
-              configs = Dow.prototype.getInstances(table, packageId, mappedPeriods);
-              return {
-                serviceOffering: offering,
-                instanceConfigurations: configs
-              };
-            case "STORAGE":
-              table = Dow.prototype.STORAGE_ENV_INST_TABLE;
-              configs = Dow.prototype.getInstances(table, packageId, mappedPeriods);
-              return {
-                serviceOffering: offering,
-                instanceConfigurations: configs
-              };
-            // Q: should general XaaS instance be included here as well
-            default:
-              // No isntance configurations required only serviceOffering
-              return {
-                serviceOffering: offering,
-                instanceConfigurations: []
-              };
-          }
-        });
+      return {
+        selectedServiceInstances: selectedServices,
+        computeInstances: computeInstances,
+        databaseInstances: databaseInstances,
+        storageInstances: storageInstances,
+        generalInstances: generalInstances,
       }
-
-      return xaasOfferings;
 
     } catch (error) {
       throw this.errUtil.createError(
@@ -1046,13 +1032,13 @@ Dow.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-10 00:50:30</sys_created_on>
         <sys_id>3d46262b97a751106fa8b4b3f153af90</sys_id>
-        <sys_mod_count>17</sys_mod_count>
+        <sys_mod_count>18</sys_mod_count>
         <sys_name>Dow</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_3d46262b97a751106fa8b4b3f153af90</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-01-05 00:46:23</sys_updated_on>
+        <sys_updated_on>2023-01-07 14:46:02</sys_updated_on>
     </sys_script_include>
 </record_update>
