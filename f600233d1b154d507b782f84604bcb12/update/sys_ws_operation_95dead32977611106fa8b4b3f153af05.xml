@@ -8,74 +8,85 @@
         <http_method>GET</http_method>
         <name>edms-multipart-attachment</name>
         <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
-  var errUtil = new ErrorHandler();
-  var params = request.queryParams;
-  var packageId = params.packageId.toString();
-  var documentId = params.documentSysId.toString();
-  var boundary = params.boundary.toString();
+	var errUtil = new ErrorHandler();
+	var params = request.queryParams;
+	var packageId = params.packageId.toString();
+	var documentType;
+	var fileName = params.fileName.toString();
+	var boundary = params.boundary.toString();
+	
+	var attachments = new GlideSysAttachment().getAttachments("x_g_dis_atat_acquisition_package", packageId);
+	while (attachments.next()) {
+		if (attachments.file_name == fileName) {
+			documentType = new AtatHelper().getDocumentMetadata(fileName).edmsDocumentType;
+			break;
+		}
+	}
+	var multipartInfo;
+	if (attachments) {
+// 		multipartInfo = {
+// 			documentType: packageDocument.document_type.edms_document_type.toString(),
+// 			fileName: packageDocument.document_type.file_name.toString(),
+// 			attachmentFile: packageDocument.file.toString(),
+// 			indexFields: JSON.parse(params.indexFields)
+// 		};
+		multipartInfo = {
+			documentType: documentType.toString(),
+			fileName: fileName.toString(),
+			attachmentFile: attachments.toString(),
+			indexFields: JSON.parse(params.indexFields)
+		};		
+	} else {
+		errorMessage = "No attachment (fileName: " + fileName + ") was found for Package (ID: " + packageId + ")."; 
+		errUtil.errorLogger(errUtil.createError(errorMessage, errUtil.INVALID_INPUT));
+	}
+
+	// Content Type and Status Code must be set before calling writeStream
+	// or the response will fail
+	response.setContentType("text/plain");
+	response.setStatus(200);
 
 
-  var packageDocument = new GlideRecord("x_g_dis_atat_package_document");
-  packageDocument.get(documentId);
-  var multipartInfo;
-  if (packageDocument.isValidRecord()) {
-    multipartInfo = {
-      documentType: packageDocument.document_type.edms_document_type.toString(),
-      fileName: packageDocument.document_type.file_name.toString(),
-      attachmentFile: packageDocument.file.toString(),
-      indexFields: JSON.parse(params.indexFields)
-    };
-  } else {
-	errorMessage = "No document (ID: " + documentId + ") was found for Package (ID: " + packageId + ")."; 
-	errUtil.errorLogger(errUtil.createError(errorMessage, errUtil.INVALID_INPUT));
-  }
-  
-  // Content Type and Status Code must be set before calling writeStream
-  // or the response will fail
-  response.setContentType("text/plain");
-  response.setStatus(200);
+	// multipart generation using stream writer
+	var writer = response.getStreamWriter();
 
+	var classification = '--' + boundary + "\r\n";
+	classification += 'Content-Disposition: form-data; name="classification"\r\n\r\n';
+	// Q: will there be any other classification we use for EDMS
+	classification += 'Pre-Solicitation';
+	writer.writeString(classification);
 
-  // multipart generation using stream writer
-  var writer = response.getStreamWriter();
+	var docType = '\r\n--' + boundary + "\r\n";
+	docType += 'Content-Disposition: form-data; name="documentType"\r\n\r\n';
+	docType += multipartInfo.documentType;
+	writer.writeString(docType);
 
-  var classification = '--' + boundary + "\r\n";
-  classification += 'Content-Disposition: form-data; name="classification"\r\n\r\n';
-  // Q: will there be any other classification we use for EDMS
-  classification += 'Pre-Solicitation';
-  writer.writeString(classification);
+	var indexFields = '\r\n--' + boundary + "\r\n";
+	indexFields += 'Content-Disposition: form-data; name="indexFields"\r\n\r\n';
 
-  var docType = '\r\n--' + boundary + "\r\n";
-  docType += 'Content-Disposition: form-data; name="documentType"\r\n\r\n';
-  docType += multipartInfo.documentType;
-  writer.writeString(docType);
+	var fieldsList = [];
+	for ( var name in multipartInfo.indexFields) {
+		fieldsList.push({ name: name, value: multipartInfo.indexFields[name]});
+	}
+	indexFields += JSON.stringify(fieldsList);
+	writer.writeString(indexFields);
 
-  var indexFields = '\r\n--' + boundary + "\r\n";
-  indexFields += 'Content-Disposition: form-data; name="indexFields"\r\n\r\n';
+	var fileNamePart = '\r\n--' + boundary + "\r\n";
+	fileNamePart += 'Content-Disposition: form-data; name="fileName"\r\n\r\n';
+	fileNamePart += multipartInfo.fileName;
+	writer.writeString(fileNamePart);
 
-  var fieldsList = [];
-  for ( var name in multipartInfo.indexFields) {
-    fieldsList.push({ name: name, value: multipartInfo.indexFields[name]});
-  }
-  indexFields += JSON.stringify(fieldsList);
-  writer.writeString(indexFields);
+	var file = '\r\n--' + boundary + "\r\n";
+	file += 'Content-Disposition: form-data; name="file"\r\n';
+	file += 'Content-Type: ' + 'application/octet-stream' + '\r\n\r\n';
+	writer.writeString(file);
 
-  var fileName = '\r\n--' + boundary + "\r\n";
-  fileName += 'Content-Disposition: form-data; name="fileName"\r\n\r\n';
-  fileName += multipartInfo.fileName;
-  writer.writeString(fileName);
+	// add file contents to multipart request
+	var attachmentContent = new GlideSysAttachment().getContentStream(multipartInfo.attachmentFile);
+	writer.writeStream(attachmentContent);
 
-  var file = '\r\n--' + boundary + "\r\n";
-  file += 'Content-Disposition: form-data; name="file"\r\n';
-  file += 'Content-Type: ' + 'application/octet-stream' + '\r\n\r\n';
-  writer.writeString(file);
-
-  // add file contents to multipart request
-  var attachmentContent = new GlideSysAttachment().getContentStream(multipartInfo.attachmentFile);
-  writer.writeStream(attachmentContent);
-
-  var multipartEnd = '\r\n--' + boundary + '--\r\n';
-  writer.writeString(multipartEnd);
+	var multipartEnd = '\r\n--' + boundary + '--\r\n';
+	writer.writeString(multipartEnd);
 
 
 })(request, response);
@@ -93,14 +104,14 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-10-31 06:00:31</sys_created_on>
         <sys_id>95dead32977611106fa8b4b3f153af05</sys_id>
-        <sys_mod_count>44</sys_mod_count>
+        <sys_mod_count>51</sys_mod_count>
         <sys_name>edms-multipart-attachment</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_ws_operation_95dead32977611106fa8b4b3f153af05</sys_update_name>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-11-23 02:38:10</sys_updated_on>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-01-07 21:10:28</sys_updated_on>
         <web_service_definition display_value="EDMS">a4ae657e973611106fa8b4b3f153aff7</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>

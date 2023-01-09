@@ -244,6 +244,48 @@ AtatHelper.prototype = {
 
 	},
 
+	/**
+   * Looks up static metadata based on the given filename
+   *
+   * @param {string} packageSysId - package sysId (or package GlideRecord)
+   * @return {} an object representing metadata for the given filename
+   */
+	getDocumentMetadata: function(filename) {
+		var metadata = {
+			"EvaluationPlan.docx": {
+				abbreviation: "EP",
+				description: "Evaluation Plan",
+				edmsDocumentType: "009 - Source Selection Documents (includes PEPs & SRDs)"
+			},
+			"IncrementalFundingPlan.docx": {
+				abbreviation: "IFP",
+				description: "Incremental Funding Plan",
+				edmsDocumentType: "003 - Requirements Package Documents (to include Req Checklist, Section 508, IGCE, etc)"
+			},
+			"RequirementsChecklist.docx": {
+				abbreviation: "RC",
+				description: "Requirements Checklist, to include Section 508",
+				edmsDocumentType: "003 - Requirements Package Documents (to include Req Checklist, Section 508, IGCE, etc)"
+			},
+			"DescriptionOfWork.docx": {
+				abbreviation: "DoW",
+				description: "Description of Work",
+				edmsDocumentType: "007 - SOW/PWS/SOO/CDRL/DID/DD 254 - ALL Revisions (but see Tab 42)"
+			},
+			"IGCE.xlsx": {
+				abbreviation: "IGCE",
+				description: "IGCE",
+				edmsDocumentType: "003 - Requirements Package Documents (to include Req Checklist, Section 508, IGCE, etc)"
+			}		
+		};
+		var entry = metadata[filename];
+		if (!entry) {
+			throw this.errUtil.createError("Could not find an entry for filename " + filename, this.errUtil.METHOD_ERROR);
+		}
+		else {
+			return entry;
+		}
+	},
 
 	type: 'AtatHelper'
 };]]></script>
@@ -251,13 +293,13 @@ AtatHelper.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-02 20:49:47</sys_created_on>
         <sys_id>9027655d97a7d5106fa8b4b3f153afba</sys_id>
-        <sys_mod_count>6</sys_mod_count>
+        <sys_mod_count>7</sys_mod_count>
         <sys_name>AtatHelper</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_9027655d97a7d5106fa8b4b3f153afba</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2022-12-28 20:00:57</sys_updated_on>
+        <sys_updated_on>2023-01-06 21:39:06</sys_updated_on>
     </sys_script_include>
 </record_update>
