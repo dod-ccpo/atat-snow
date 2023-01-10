@@ -165,6 +165,10 @@ Dow.prototype = {
       });
 
       switch (table) {
+        case Dow.prototype.ENV_INST_TABLE:
+        case Dow.prototype.STORAGE_ENV_INST_TABLE:
+        case Dow.prototype.GENERAL_XAAS_ENV_INST_TABLE:
+          return Dow.prototype.ENV_INST_FIELDS;
         case Dow.prototype.CUR_ENV_INST_TABLE:
           return currentEnvInstFields;
         case Dow.prototype.COMP_ENV_INST_TABLE:
@@ -174,7 +178,6 @@ Dow.prototype = {
         case Dow.prototype.CLOUD_SUP_ENV_ISNT_TABLE:
           return cloudSupportEnvInstFields;
         default:
-          gs.warn("No fields found for " + table);
           return []
       }
 
@@ -219,7 +222,6 @@ Dow.prototype = {
    */
   getClassificationInstances: function(instanceIds, mappedPeriods) {
     if (!instanceIds) {
-      gs.info("No Classification Instance ids provided.");
       return [];
     }
     try {
@@ -248,7 +250,6 @@ Dow.prototype = {
    */
   getClassificationLevels: function(classLevelIds) {
     if (!classLevelIds) {
-      gs.info("No Classification Level ids provided.");
       return [];
     }
     try {
@@ -278,7 +279,6 @@ Dow.prototype = {
    */
   getClassifiedInfoTypes: function(classTypeIds) {
     if (!classTypeIds) {
-      gs.info("No Classified Inofrmation Type ids provided.");
       return [];
     }
     try {
@@ -304,7 +304,6 @@ Dow.prototype = {
    */
   getRegions: function(regionIds) {
     if (!regionIds) {
-      gs.info("No Region ids provided.");
       return [];
     }
     try {
@@ -331,7 +330,6 @@ Dow.prototype = {
    */
   transformUsersPerRegion: function(usersPerRegion) {
     if (!usersPerRegion) {
-      gs.info("No usersPerRegion provided.");
       return [];
     }
     try {
@@ -886,6 +884,7 @@ Dow.prototype = {
     var limit = 50; // arbitrary
 
     // composed fields to avoid unexpected side affects when using arrUtil.concat()
+    var envInstFields = Dow.prototype.getTableFields(Dow.prototype.ENV_INST_TABLE); // base
     var currentEnvInstFields = Dow.prototype.getTableFields(Dow.prototype.CUR_ENV_INST_TABLE);
     var computeEnvInstFields = Dow.prototype.getTableFields(Dow.prototype.COMP_ENV_INST_TABLE);
     var databaseEnvInstFields = Dow.prototype.getTableFields(Dow.prototype.DB_ENV_INST_TABLE);
@@ -895,7 +894,7 @@ Dow.prototype = {
       case Dow.prototype.ENV_INST_TABLE:
         return new global.GlideQuery(table)
           .where("acquisition_package", packageId)
-          .select(Dow.prototype.ENV_INST_FIELDS)
+          .select(envInstFields)
           .toArray(limit);
       case Dow.prototype.CUR_ENV_INST_TABLE:
         return new global.GlideQuery(table)
@@ -911,6 +910,16 @@ Dow.prototype = {
         return new global.GlideQuery(table)
           .where("acquisition_package", packageId)
           .select(databaseEnvInstFields)
+          .toArray(limit);
+      case Dow.prototype.STORAGE_ENV_INST_TABLE:
+        return new global.GlideQuery(table)
+          .where("acquisition_package", packageId)
+          .select(envInstFields)
+          .toArray(limit);
+      case Dow.prototype.GENERAL_XAAS_ENV_INST_TABLE:
+        return new global.GlideQuery(table)
+          .where("acquisition_package", packageId)
+          .select(envInstFields)
           .toArray(limit);
       case Dow.prototype.CLOUD_SUP_ENV_ISNT_TABLE:
         return new global.GlideQuery(table)
@@ -1095,13 +1104,13 @@ Dow.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-10 00:50:30</sys_created_on>
         <sys_id>3d46262b97a751106fa8b4b3f153af90</sys_id>
-        <sys_mod_count>22</sys_mod_count>
+        <sys_mod_count>23</sys_mod_count>
         <sys_name>Dow</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_3d46262b97a751106fa8b4b3f153af90</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-01-10 16:53:52</sys_updated_on>
+        <sys_updated_on>2023-01-10 19:49:55</sys_updated_on>
     </sys_script_include>
 </record_update>
