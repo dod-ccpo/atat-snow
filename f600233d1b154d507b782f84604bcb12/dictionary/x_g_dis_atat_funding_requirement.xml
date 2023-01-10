@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="DAPPS:Funding Requirement" max_length="40" name="x_g_dis_atat_funding_requirement" sizeclass="0" type="collection">
+    <element label="DAPPS:Funding Requirement" max_length="40" name="x_g_dis_atat_funding_requirement" sizeclass="101" type="collection">
         <element label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
         <element label="Financial POC" max_length="32" name="financial_poc" reference="x_g_dis_atat_contacts" type="reference"/>
         <element label="Funding Plan" max_length="32" name="funding_plan" reference="x_g_dis_atat_funding_plan" type="reference"/>
@@ -17,10 +17,10 @@
         <element label="PoP Start Date" max_length="40" name="pop_start_date" type="glide_date"/>
         <element label="Task Order Number" max_length="40" name="task_order_number" type="string"/>
         <index name="index">
-            <element name="funding_request"/>
+            <element name="financial_poc"/>
         </index>
         <index name="index2">
-            <element name="financial_poc"/>
+            <element name="funding_request"/>
         </index>
         <index name="index3">
             <element name="acquisition_package"/>

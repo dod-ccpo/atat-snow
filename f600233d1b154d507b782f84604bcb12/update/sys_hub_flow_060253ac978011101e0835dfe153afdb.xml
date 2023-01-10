@@ -29,19 +29,21 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>060253ac978011101e0835dfe153afdb</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name>DOCGEN: Generate Description of Work</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_flow_060253ac978011101e0835dfe153afdb</sys_update_name>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-12-30 02:57:49</sys_updated_on>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-01-06 19:05:54</sys_updated_on>
         <type>subflow</type>
     </sys_hub_flow>
     <sys_translated_text action="delete_multiple" query="documentkey=060253ac978011101e0835dfe153afdb"/>
     <sys_variable_value action="delete_multiple" query="document_key=060253ac978011101e0835dfe153afdb"/>
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=060253ac978011101e0835dfe153afdb"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=060253ac978011101e0835dfe153afdb"/>
     <sys_flow_cat_variable_model action="delete_multiple" query="id=060253ac978011101e0835dfe153afdb^sys_idNOT INc20253ac978011101e0835dfe153afdd"/>
     <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
         <id>060253ac978011101e0835dfe153afdb</id>
@@ -54,6 +56,7 @@
         <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-06-09 20:28:50</sys_updated_on>
     </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=c20253ac978011101e0835dfe153afdd"/>
     <sys_hub_flow_input action="delete_multiple" query="model=060253ac978011101e0835dfe153afdb^sys_idNOT IN3592dbac978011101e0835dfe153af91"/>
     <sys_hub_flow_input action="INSERT_OR_UPDATE">
         <active>true</active>
@@ -136,6 +139,8 @@
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_flow_input>
+    <sys_hub_flow_output action="delete_multiple" query="model=060253ac978011101e0835dfe153afdb"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=060253ac978011101e0835dfe153afdb"/>
     <sys_hub_action_instance action="delete_multiple" query="flow=060253ac978011101e0835dfe153afdb^sys_idNOT IN5df3abe4970411101e0835dfe153af74,cf27976497c011101e0835dfe153afa5,effc00c9970411101e0835dfe153af2c,f4e25dc91bc49110c385ea85604bcb3e"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
@@ -184,6 +189,8 @@
         <table>var__m_sys_hub_action_input_4ed9607b1bef0110c385ea85604bcbcd</table>
         <value>{{subflow.acquisition_package}}</value>
     </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=5df3abe4970411101e0835dfe153af74"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=5df3abe4970411101e0835dfe153af74"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
@@ -355,6 +362,7 @@
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
         <sys_updated_on>2022-12-16 16:23:50</sys_updated_on>
     </sys_hub_input_scripts>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=cf27976497c011101e0835dfe153afa5"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
@@ -557,6 +565,7 @@
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
         <sys_updated_on>2022-12-30 02:57:18</sys_updated_on>
     </sys_hub_input_scripts>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=effc00c9970411101e0835dfe153af2c"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
@@ -660,6 +669,9 @@ Error: {{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
 Status Code: {{425ad7a6-1693-4807-9804-c451b599f0c5.__action_status__.code}}.
 Error: {{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
     </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=f4e25dc91bc49110c385ea85604bcb3e"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=f4e25dc91bc49110c385ea85604bcb3e"/>
+    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=060253ac978011101e0835dfe153afdb"/>
     <sys_hub_flow_logic action="delete_multiple" query="flow=060253ac978011101e0835dfe153afdb^sys_idNOT IN64e25dc91bc49110c385ea85604bcb16,74e25dc91bc49110c385ea85604bcb1e"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">f508b03197f391106fa8b4b3f153af4e</block>
@@ -691,6 +703,8 @@ Error: {{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
         <workflow_reference/>
     </sys_hub_flow_logic>
     <sys_variable_value action="delete_multiple" query="document_key=64e25dc91bc49110c385ea85604bcb16"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=64e25dc91bc49110c385ea85604bcb16"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=64e25dc91bc49110c385ea85604bcb16"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">bd08b03197f391106fa8b4b3f153af67</block>
         <comment/>
@@ -750,6 +764,10 @@ Error: {{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
         <variable display_value="Error Status">0f72a5a25b132010b61ea2013781c749</variable>
     </sys_variable_value>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_logic_input_35d60003e6022010a5e40cdd1254dd23^id=74e25dc91bc49110c385ea85604bcb1e"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=74e25dc91bc49110c385ea85604bcb1e"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=74e25dc91bc49110c385ea85604bcb1e"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=060253ac978011101e0835dfe153afdb"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=060253ac978011101e0835dfe153afdb"/>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_060253ac978011101e0835dfe153afdb^sys_idNOT INf592dbac978011101e0835dfe153af99"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>acquisition_package</element>
@@ -764,7 +782,7 @@ Error: {{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
         <sys_created_on>2022-06-09 20:31:16</sys_created_on>
         <sys_id>f592dbac978011101e0835dfe153af99</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Acquisition Package</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -774,6 +792,10 @@ Error: {{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
         <url/>
         <url_target/>
     </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_060253ac978011101e0835dfe153afdb"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_060253ac978011101e0835dfe153afdb"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_060253ac978011101e0835dfe153afdb"/>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=060253ac978011101e0835dfe153afdb"/>
     <sys_flow_subflow_plan action="delete_multiple" query="plan_id=060253ac978011101e0835dfe153afdb^sys_idNOT IN28650c1f87409110bc86b889cebb35ab"/>
     <sys_flow_subflow_plan action="INSERT_OR_UPDATE">
         <plan>com.snc.process_flow.engine.ProcessPlan@3fc072</plan>
@@ -831,6 +853,8 @@ Error: {{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
     </sys_hub_flow_snapshot>
     <sys_translated_text action="delete_multiple" query="documentkey=bb55881f87409110bc86b889cebb35ad"/>
     <sys_variable_value action="delete_multiple" query="document_key=bb55881f87409110bc86b889cebb35ad"/>
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=bb55881f87409110bc86b889cebb35ad"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=bb55881f87409110bc86b889cebb35ad"/>
     <sys_flow_cat_variable_model action="delete_multiple" query="id=bb55881f87409110bc86b889cebb35ad^sys_idNOT INbf55881f87409110bc86b889cebb35ae"/>
     <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
         <id>bb55881f87409110bc86b889cebb35ad</id>
@@ -843,6 +867,7 @@ Error: {{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
         <sys_updated_by>julius.fitzhugh-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-06-17 18:37:57</sys_updated_on>
     </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=bf55881f87409110bc86b889cebb35ae"/>
     <sys_hub_flow_input action="delete_multiple" query="model=bb55881f87409110bc86b889cebb35ad^sys_idNOT IN3355881f87409110bc86b889cebb35b0"/>
     <sys_hub_flow_input action="INSERT_OR_UPDATE">
         <active>true</active>
@@ -925,6 +950,8 @@ Error: {{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_flow_input>
+    <sys_hub_flow_output action="delete_multiple" query="model=bb55881f87409110bc86b889cebb35ad"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=bb55881f87409110bc86b889cebb35ad"/>
     <sys_hub_action_instance action="delete_multiple" query="flow=bb55881f87409110bc86b889cebb35ad^sys_idNOT IN8465c81f87409110bc86b889cebb3564,8865c81f87409110bc86b889cebb3538,8c65c81f87409110bc86b889cebb355c,c465c81f87409110bc86b889cebb3552"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
@@ -1029,6 +1056,8 @@ Error: {{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
 Status Code: {{425ad7a6-1693-4807-9804-c451b599f0c5.__action_status__.code}}.
 Error: {{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
     </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=8465c81f87409110bc86b889cebb3564"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=8465c81f87409110bc86b889cebb3564"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
@@ -1064,6 +1093,8 @@ Error: {{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
         <table>var__m_sys_hub_action_input_0f57b8771b234110c385ea85604bcb95</table>
         <value>{{subflow.acquisition_package}}</value>
     </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=8865c81f87409110bc86b889cebb3538"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=8865c81f87409110bc86b889cebb3538"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
@@ -1190,6 +1221,7 @@ Error: {{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
         <sys_updated_on>2022-12-30 02:57:46</sys_updated_on>
     </sys_hub_input_scripts>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=8c65c81f87409110bc86b889cebb355c"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
@@ -1325,6 +1357,8 @@ Error: {{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
         <sys_updated_on>2022-12-16 16:24:05</sys_updated_on>
     </sys_hub_input_scripts>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=c465c81f87409110bc86b889cebb3552"/>
+    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=bb55881f87409110bc86b889cebb35ad"/>
     <sys_hub_flow_logic action="delete_multiple" query="flow=bb55881f87409110bc86b889cebb35ad^sys_idNOT IN3755c81f87409110bc86b889cebb3524,7b55c81f87409110bc86b889cebb3527"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">f508b03197f391106fa8b4b3f153af4e</block>
@@ -1356,6 +1390,8 @@ Error: {{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
         <workflow_reference/>
     </sys_hub_flow_logic>
     <sys_variable_value action="delete_multiple" query="document_key=3755c81f87409110bc86b889cebb3524"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=3755c81f87409110bc86b889cebb3524"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=3755c81f87409110bc86b889cebb3524"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">bd08b03197f391106fa8b4b3f153af67</block>
         <comment/>
@@ -1415,6 +1451,10 @@ Error: {{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
         <variable display_value="enabled">dd70187cc36e20105553b740ad40dddc</variable>
     </sys_variable_value>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_logic_input_35d60003e6022010a5e40cdd1254dd23^id=7b55c81f87409110bc86b889cebb3527"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=7b55c81f87409110bc86b889cebb3527"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=7b55c81f87409110bc86b889cebb3527"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=bb55881f87409110bc86b889cebb35ad"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=bb55881f87409110bc86b889cebb35ad"/>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_bb55881f87409110bc86b889cebb35ad^sys_idNOT INe50cf80097411110986cb846f053af1a"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>acquisition_package</element>
@@ -1429,7 +1469,7 @@ Error: {{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
         <sys_created_on>2022-07-27 13:19:15</sys_created_on>
         <sys_id>e50cf80097411110986cb846f053af1a</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Acquisition Package</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -1439,6 +1479,9 @@ Error: {{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
         <url/>
         <url_target/>
     </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_bb55881f87409110bc86b889cebb35ad"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_bb55881f87409110bc86b889cebb35ad"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_bb55881f87409110bc86b889cebb35ad"/>
     <sys_hub_flow action="update">
         <sys_id>060253ac978011101e0835dfe153afdb</sys_id>
         <latest_snapshot>bb55881f87409110bc86b889cebb35ad</latest_snapshot>
