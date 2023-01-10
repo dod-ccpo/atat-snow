@@ -5,8 +5,8 @@ on:
   pull_request_target:
 
 jobs:
-  valiateCommitterEmails:
-    name: Check email matches expected
+  validateCommitterEmails:
+    name: Check commit authors' emails are from expected domains
     runs-on: ubuntu-latest
     steps:
       - name: Get commit authors
@@ -40,11 +40,11 @@ jobs:
             const totalCommits = result.repository.pullRequest.commits.totalCount;
             // Get unique email addresses
             const commitEmails = [... new Set(result.repository.pullRequest.commits.nodes.map((node) => node.commit.author.email))];
-            // Check that all emails end in "@ccpo.mil" or "@mail.mil"
-            const allEmailCcpo = commitEmails.every((email) => email.endsWith("@ccpo.mil") || email.endsWith("@mail.mil") || email.endsWith("@users.noreply.github.com"));
+            // Are all commiter email addresses from an expected domain?
+            const allFromExpectedDomain = commitEmails.every((email) => email.endsWith("@ccpo.mil") || email.endsWith("@mail.mil") || email.endsWith("@users.noreply.github.com"));
 
             core.setOutput("commit-count", totalCommits);
-            core.setOutput("all-email-ccpo", allEmailCcpo);
+            core.setOutput("all-from-expected-domain", allFromExpectedDomain);
 
       - name: Message on too many commits
         if: ${{ fromJSON(steps.get-commit-data.outputs.commit-count) > 250 }}
@@ -66,8 +66,8 @@ jobs:
               body: message,
             });
 
-      - name: Message on non-CCPO author
-        if: ${{ steps.get-commit-data.outputs.all-email-ccpo != 'true' }}
+      - name: Message on any commit author from unexpected domain
+        if: ${{ steps.get-commit-data.outputs.all-from-expected-domain != 'true' }}
         uses: actions/github-script@v6
         with:
           script: |
@@ -79,7 +79,7 @@ jobs:
             
             @dod-ccpo/platform-team Please ensure that all commit author data associated with this commit looks reasonable and
             that this is a contribution from an external user; make sure all commits from team members have proper email data
-            associated with it.
+            associated with them.
             `;
             await github.rest.issues.createComment({
               owner: context.repo.owner,
@@ -88,13 +88,13 @@ jobs:
               body: message,
             });
 
-      - name: Message on all CCPO authors
-        if: ${{ steps.get-commit-data.outputs.all-email-ccpo == 'true' }}
+      - name: Message on all commit authors from expected domains
+        if: ${{ steps.get-commit-data.outputs.all-from-expected-domain == 'true' }}
         uses: actions/github-script@v6
         with:
           script: |
             message = `
-            :white_check_mark: **All checked commits are from an @ccpo.mil email** :white_check_mark:
+            :white_check_mark: **All commits are from expected internal users** :white_check_mark:
 
             Thanks for opening this pull request! It looks like all the commit authors have set the email address for the commits.
             
