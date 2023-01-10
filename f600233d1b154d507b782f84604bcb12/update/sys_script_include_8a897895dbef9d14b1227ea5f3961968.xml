@@ -11,68 +11,77 @@ Payload is sent to the HOTH API for document generation.</description>
         <script><![CDATA[var EvalPlan = Class.create();
 EvalPlan.prototype = {
 
-	EVAL_PLAN_TABLE:  "x_g_dis_atat_evaluation_plan",
-	errUtil: new ErrorHandler(),
-	acquisitionPackage: null,    
+    EVAL_PLAN_TABLE: "x_g_dis_atat_evaluation_plan",
+    errUtil: new ErrorHandler(),
+    acquisitionPackage: null,
 
-	initialize: function(acqPackage) {
-		this.acquisitionPackage = acqPackage;
-	},
+    initialize: function(acqPackage) {
+        this.acquisitionPackage = acqPackage;
+    },
 
-	/**
-     * Gather all information needed for Eval Plan document generation and 
-     * creates a payload. Instantiate the Eval Plan class with an acquistion
-     * package recore before using this method.
+    /**
+     * Gathers all information needed for Eval Plan document generation and 
+     * creates a payload. Instantiate the Eval Plan class with an acquisition
+     * package record before using this method.
      * 
      * return {object} - an Eval Plan payload for HOTH API
      */
-	getPayload: function() {
-		try {
-			var evalPlan = this.acquisitionPackage.evaluation_plan;
-			var projectOverview = this.acquisitionPackage.project_overview;
-			if (evalPlan) {
-				return {
-					documentType: "EVALUATION_PLAN",
-					templatePayload: {
-						taskOrderTitle: projectOverview.title ? projectOverview.title.toString() : null,
-						sourceSelection: evalPlan.source_selection ? evalPlan.source_selection.toString() : null,
-						method: evalPlan.method ? evalPlan.method.toString() : null,
-						standardSpecifications: evalPlan.standard_specifications ? evalPlan.standard_specifications.toString().split(",").map(function(spec) { 
-							var record = new GlideRecord("x_g_dis_atat_eval_plan_assessment_area");
-							record.get(spec);
-							return record.name.toString();}) : null,
-						customSpecifications: evalPlan.custom_specifications ?evalPlan.custom_specifications.toString().split(",").map(function(spec) { 						
-							return spec;}) : null,
-						standardDifferentiators:  evalPlan.standard_differentiators ? evalPlan.standard_differentiators.toString().split(",").map(function(diff) { 
-							var record = new GlideRecord("x_g_dis_atat_eval_plan_differentiator");
-							record.get(diff);
-							return record.name.toString();}) : null,
-						customDifferentiators: evalPlan.custom_differentiators ? evalPlan.custom_differentiators.toString().split(",").map(function(diff) { 						
-							return diff;}) : null
-					}
-				};
-			}
-			else {
-				throw this.errUtil.createError("No Eval Plan found for this Acq Package. ", this.errUtil.INVALID_INPUT);
-			}
-		} catch(err) {
-			throw this.errUtil.createError("Error getting Eval Plan payload. " + err, this.errUtil.INVALID_INPUT);
-		}
-	},
+    getPayload: function() {
+        try {
+            var evalPlan = this.acquisitionPackage.evaluation_plan;
+            var projectOverview = this.acquisitionPackage.project_overview;
+            var customDifferentiatorsFlag = false; // if custom differentiators are specified
+            if (evalPlan) {
+                return {
+                    documentType: "EVALUATION_PLAN",
+                    templatePayload: {
+                        taskOrderTitle: projectOverview.title ? projectOverview.title.toString() : null,
+                        sourceSelection: evalPlan.source_selection ? evalPlan.source_selection.toString() : null,
+                        method: evalPlan.method ? evalPlan.method.toString() : null,
+                        standardSpecifications: evalPlan.standard_specifications ? evalPlan.standard_specifications.toString().split(",").map(function(spec) {
+                            var record = new GlideRecord("x_g_dis_atat_eval_plan_assessment_area");
+                            record.get(spec);
+                            return record.name.toString();
+                        }) : null,
+                        customSpecifications: evalPlan.custom_specifications ? evalPlan.custom_specifications.toString().split(",").map(function(spec) {
+                            return spec;
+                        }) : null,
+                        standardDifferentiators: evalPlan.standard_differentiators ? evalPlan.standard_differentiators.toString().split(",").filter(function(differentiatorSysId) {
+                            var record = new GlideRecord("x_g_dis_atat_eval_plan_differentiator");
+                            record.get(differentiatorSysId);
+                            customDifferentiatorsFlag = record.name.toString() === 'CustomDifferentiators'; // this standard differentiator is used to indicate the need include custom differentiators
+                            return !customDifferentiatorsFlag; // don't include custom indicator in list of std differentiators
+                        }).map(function(differentiatorSysId) {
+                            var record = new GlideRecord("x_g_dis_atat_eval_plan_differentiator");
+                            record.get(differentiatorSysId);
+                            return record.description.toString();
+                        }) : null,
+                        customDifferentiators: customDifferentiatorsFlag && evalPlan.custom_differentiators ? evalPlan.custom_differentiators.toString().split(",").map(function(diff) {
+                            return diff;
+                        }) : null
+                    }
+                };
+            } else {
+                throw this.errUtil.createError("No Eval Plan found for this Acq Package. ", this.errUtil.INVALID_INPUT);
+            }
+        } catch (err) {
+            throw this.errUtil.createError("Error getting Eval Plan payload. " + err, this.errUtil.INVALID_INPUT);
+        }
+    },
 
-	type: 'EvalPlan'
+    type: 'EvalPlan'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-12-02 17:05:22</sys_created_on>
         <sys_id>8a897895dbef9d14b1227ea5f3961968</sys_id>
-        <sys_mod_count>23</sys_mod_count>
+        <sys_mod_count>35</sys_mod_count>
         <sys_name>EvalPlan</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_8a897895dbef9d14b1227ea5f3961968</sys_update_name>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2022-12-12 22:19:24</sys_updated_on>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2023-01-10 00:05:07</sys_updated_on>
     </sys_script_include>
 </record_update>
