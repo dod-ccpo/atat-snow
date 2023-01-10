@@ -9,117 +9,117 @@
         <name>MultipartHelper</name>
         <script><![CDATA[var MultipartHelper = Class.create();
 MultipartHelper.prototype = {
-  initialize: function() {
-  },
-  createBody: function(packageSysId, documentSysId, indexFields) {
-    var endpoint = gs.getProperty("glide.servlet.uri") + "api/x_g_dis_atat/edms/edms-multipart-attachment";
-    var indexFieldsString = JSON.stringify(indexFields);
+	initialize: function() {
+	},
+	createBody: function(packageSysId, fileName, indexFields) {
+		var endpoint = gs.getProperty("glide.servlet.uri") + "api/x_g_dis_atat/edms/edms-multipart-attachment";
+		var indexFieldsString = JSON.stringify(indexFields);
 
-    var internalRequest = new sn_ws.RESTMessageV2();
-    internalRequest.setEndpoint(endpoint);
-    internalRequest.setHttpMethod("GET");
-    internalRequest.setRequestHeader("Accept", "multipart/form-data");
-    internalRequest.setBasicAuth(
-      gs.getProperty("x_g_dis_atat.edms.atatClient.username"),
-      gs.getProperty("x_g_dis_atat.edms.atatClient.password")
-    );
+		var internalRequest = new sn_ws.RESTMessageV2();
+		internalRequest.setEndpoint(endpoint);
+		internalRequest.setHttpMethod("GET");
+		internalRequest.setRequestHeader("Accept", "multipart/form-data");
+		internalRequest.setBasicAuth(
+			gs.getProperty("x_g_dis_atat.edms.atatClient.username"),
+			gs.getProperty("x_g_dis_atat.edms.atatClient.password")
+		);
 
-    var boundary = "----" + gs.generateGUID() + packageSysId;
+		var boundary = "----" + gs.generateGUID() + packageSysId;
 
-    // query parameters
-    internalRequest.setQueryParameter("boundary", boundary);
-    internalRequest.setQueryParameter("packageId", packageSysId);
-    internalRequest.setQueryParameter("documentSysId", documentSysId);
-    internalRequest.setQueryParameter("indexFields", indexFieldsString);
+		// query parameters
+		internalRequest.setQueryParameter("boundary", boundary);
+		internalRequest.setQueryParameter("packageId", packageSysId);
+		//     internalRequest.setQueryParameter("documentSysId", documentSysId);
+		internalRequest.setQueryParameter("fileName", fileName);
+		internalRequest.setQueryParameter("indexFields", indexFieldsString);
+		internalRequest.saveResponseBodyAsAttachment(
+			'x_g_dis_atat_acquisition_package',
+			packageSysId,
+			'TemporaryMultipartContentFile.txt'
+		);
 
-    internalRequest.saveResponseBodyAsAttachment(
-      'x_g_dis_atat_acquisition_package',
-      packageSysId,
-      'TemporaryMultipartContentFile.txt'
-    );
+		var response = internalRequest.execute();
+		var status = response.getStatusCode();
+		if (status === 200) {
+			return {
+				wasCreated: true,
+				statusCode: status,
+				bodyAttachmentId: response.getResponseAttachmentSysid(),
+				generatedBoundary: boundary,
 
-    var response = internalRequest.execute();
-    var status = response.getStatusCode();
-    if (status === 200) {
-      return {
-        wasCreated: true,
-        statusCode: status,
-        bodyAttachmentId: response.getResponseAttachmentSysid(),
-        generatedBoundary: boundary,
+			};
+		}
+		return {
+			wasCreated: false,
+			statusCode: status,
+			error: response.getErrorMessage(),
+		};
+	},
 
-      };
-    }
-    return {
-      wasCreated: false,
-      statusCode: status,
-      error: response.getErrorMessage(),
-    };
-  },
+	sendDocumentToEDMS: function(tempMultipartFile) {
+		// Create multipart request body internally with script include and REST Resource (shown aobve)
+		var bodyId = tempMultipartFile.bodyAttachmentId;  // generated temp body attatchment
+		var boundary = tempMultipartFile.generatedBoundary;
 
-  sendDocumentToEDMS: function(tempMultipartFile) {
-    // Create multipart request body internally with script include and REST Resource (shown aobve)
-    var bodyId = tempMultipartFile.bodyAttachmentId;  // generated temp body attatchment
-    var boundary = tempMultipartFile.generatedBoundary;
+		if (tempMultipartFile.wasCreated) {
+			gs.info("Temporary multipart file created. " + bodyId);
+		} else {
+			gs.error("Temporary multipart file was not created. " + tempMultipartFile.statusCode);
+			gs.error(tempMultipartFile.error);
+		}
 
-    if (tempMultipartFile.wasCreated) {
-      gs.info("Temporary multipart file created. " + bodyId);
-    } else {
-      gs.error("Temporary multipart file was not created. " + tempMultipartFile.statusCode);
-      gs.error(tempMultipartFile.error);
-    }
+		// External request to EDMS for document upload
+		var req = {
+			endpoint: gs.getProperty("x_g_dis_atat.edms.qactionBaseUrl") + "/qactapi/document/upload",
+			method: "post",
+			mutualAuth: "jks443",
+			contentType: "multipart/form-data; boundary=" + boundary,
+			extraHeaders: {
+				"X-Client-Id": gs.getProperty("x_g_dis_atat.edms.clientId"),
+				"X-API-Key": gs.getProperty("x_g_dis_atat.edms.apiKey"),
+			}
+		};
 
-    // External request to EDMS for document upload
-    var req = {
-      endpoint: gs.getProperty("x_g_dis_atat.edms.qactionBaseUrl") + "/qactapi/document/upload",
-      method: "post",
-      mutualAuth: "jks443",
-      contentType: "multipart/form-data; boundary=" + boundary,
-      extraHeaders: {
-        "X-Client-Id": gs.getProperty("x_g_dis_atat.edms.clientId"),
-        "X-API-Key": gs.getProperty("x_g_dis_atat.edms.apiKey"),
-      }
-    };
+		// Request set-up
+		var request = new sn_ws.RESTMessageV2();
+		request.setEndpoint(req.endpoint);
+		request.setHttpMethod(req.method);
+		request.setLogLevel("all");
+		request.setMutualAuth(req.mutualAuth);
+		if (req.contentType) {
+			request.setRequestHeader("Content-Type", req.contentType);
+		}
+		if (req.extraHeaders) {
+			for (var name in req.extraHeaders) {
+				request.setRequestHeader(name, req.extraHeaders[name]);
+			}
+		}
 
-    // Request set-up
-    var request = new sn_ws.RESTMessageV2();
-    request.setEndpoint(req.endpoint);
-    request.setHttpMethod(req.method);
-    request.setLogLevel("all");
-    request.setMutualAuth(req.mutualAuth);
-    if (req.contentType) {
-      request.setRequestHeader("Content-Type", req.contentType);
-    }
-    if (req.extraHeaders) {
-      for (var name in req.extraHeaders) {
-        request.setRequestHeader(name, req.extraHeaders[name]);
-      }
-    }
+		request.setRequestBodyFromAttachment(bodyId);
+		var uploadResponse = request.execute();
 
-    request.setRequestBodyFromAttachment(bodyId);
-    var uploadResponse = request.execute();
+		// delete temp multipart content attachment
+		var attachment = new GlideSysAttachment();
+		attachment.deleteAttachment(bodyId);
 
-    // delete temp multipart content attachment
-    var attachment = new GlideSysAttachment();
-    attachment.deleteAttachment(bodyId);
-
-    return uploadResponse;
-  },
+		return uploadResponse;
+	},
 
 
-  type: 'MultipartHelper'
+	type: 'MultipartHelper'
 };
 ]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-10-31 06:16:46</sys_created_on>
         <sys_id>35c37d36977611106fa8b4b3f153af94</sys_id>
-        <sys_mod_count>19</sys_mod_count>
+        <sys_mod_count>23</sys_mod_count>
         <sys_name>MultipartHelper</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_35c37d36977611106fa8b4b3f153af94</sys_update_name>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-12-28 14:41:40</sys_updated_on>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-01-09 21:09:32</sys_updated_on>
     </sys_script_include>
 </record_update>
