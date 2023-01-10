@@ -5,11 +5,11 @@ on:
   pull_request_target:
 
 jobs:
-  validateCommitterEmails:
-    name: Check commit authors' emails are from expected domains
+  validateContributorEmails:
+    name: Check that contributors are from expected domains
     runs-on: ubuntu-latest
     steps:
-      - name: Get commit authors
+      - name: Check contributors' email addresses
         id: get-commit-data
         uses: actions/github-script@v6
         with:
@@ -44,7 +44,7 @@ jobs:
             const allFromExpectedDomain = commitEmails.every((email) => email.endsWith("@ccpo.mil") || email.endsWith("@mail.mil") || email.endsWith("@users.noreply.github.com"));
 
             core.setOutput("commit-count", totalCommits);
-            core.setOutput("all-from-expected-domain", allFromExpectedDomain);
+            core.setOutput("all-contributors-from-expected-domains", allFromExpectedDomain);
 
       - name: Message on too many commits
         if: ${{ fromJSON(steps.get-commit-data.outputs.commit-count) > 250 }}
@@ -66,13 +66,13 @@ jobs:
               body: message,
             });
 
-      - name: Message on any commit author from unexpected domain
-        if: ${{ steps.get-commit-data.outputs.all-from-expected-domain != 'true' }}
+      - name: Message on any contributor from unexpected domain
+        if: ${{ steps.get-commit-data.outputs.all-contributors-from-expected-domains != 'true' }}
         uses: actions/github-script@v6
         with:
           script: |
             message = `
-            :wave: **One or more commits are from an external user** :wave:
+            :wave: **One or more commits are from an external contributor** :wave:
             
             Thanks for opening this pull request! It looks like one or more commits on this pull request are from an external
             contributor. Thanks for taking the time to make a contribution; it will be reviewed shortly.
@@ -88,13 +88,13 @@ jobs:
               body: message,
             });
 
-      - name: Message on all commit authors from expected domains
-        if: ${{ steps.get-commit-data.outputs.all-from-expected-domain == 'true' }}
+      - name: Message on all contributors from expected domains
+        if: ${{ steps.get-commit-data.outputs.all-contributors-from-expected-domains == 'true' }}
         uses: actions/github-script@v6
         with:
           script: |
             message = `
-            :white_check_mark: **All commits are from expected internal users** :white_check_mark:
+            :white_check_mark: **All commits are from internal contributors at expected domains** :white_check_mark:
 
             Thanks for opening this pull request! It looks like all the commit authors have set the email address for the commits.
             
