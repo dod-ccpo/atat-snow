@@ -712,6 +712,7 @@ erDiagram
         Choice unit "EACH/MONTH/PEOPLE/PERIOD/SESSIONS/YEAR"
         String dow_task_number
         Choice idiq_clin_type "CLOUD/CLOUD_SUPPORT"
+        String cross_domain_pair "name of a Domain Pair"
     }
 
     ACQUISITION-PACKAGE ||--|| SYS_USER : "MOs, contributors, reviewers"
