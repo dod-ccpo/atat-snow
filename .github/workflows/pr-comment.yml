@@ -5,11 +5,11 @@ on:
   pull_request_target:
 
 jobs:
-  valiateCommitterEmails:
-    name: Check email matches expected
+  validateContributorEmails:
+    name: Check that contributors are from expected domains
     runs-on: ubuntu-latest
     steps:
-      - name: Get commit authors
+      - name: Check contributors' email addresses
         id: get-commit-data
         uses: actions/github-script@v6
         with:
@@ -40,11 +40,11 @@ jobs:
             const totalCommits = result.repository.pullRequest.commits.totalCount;
             // Get unique email addresses
             const commitEmails = [... new Set(result.repository.pullRequest.commits.nodes.map((node) => node.commit.author.email))];
-            // Check that all emails end in "@ccpo.mil"
-            const allEmailCcpo = commitEmails.every((email) => email.endsWith("@ccpo.mil") || email.endsWith("@users.noreply.github.com"));
+            // Are all contributors' email addresses from an expected domain?
+            const allFromExpectedDomains = commitEmails.every((email) => email.endsWith("@ccpo.mil") || email.endsWith("@mail.mil") || email.endsWith("@users.noreply.github.com"));
 
             core.setOutput("commit-count", totalCommits);
-            core.setOutput("all-email-ccpo", allEmailCcpo);
+            core.setOutput("all-contributors-from-expected-domains", allFromExpectedDomains);
 
       - name: Message on too many commits
         if: ${{ fromJSON(steps.get-commit-data.outputs.commit-count) > 250 }}
@@ -54,10 +54,10 @@ jobs:
             message = `
             :warning: :rotating_light: **This branch has too many commits to validate** :rotating_light: :warning:
 
-            Thanks for opening this pull request! We ensure that all commit author data matches certain patterns. Unfortunately,
+            Thanks for opening this pull request! We ensure that all contributor data matches certain patterns. Unfortunately,
             there are more than 250 commits on this PR which makes it a little challenging to validate.
 
-            @dod-ccpo/platform-team Please pay extra attention to the commit author data on this pull request.
+            @dod-ccpo/platform-team Please pay extra attention to the contributor data on this pull request.
             `;
             await github.rest.issues.createComment({
               owner: context.repo.owner,
@@ -66,20 +66,20 @@ jobs:
               body: message,
             });
 
-      - name: Message on non-CCPO author
-        if: ${{ steps.get-commit-data.outputs.all-email-ccpo != 'true' }}
+      - name: Message on any contributor from unexpected domain
+        if: ${{ steps.get-commit-data.outputs.all-contributors-from-expected-domains != 'true' }}
         uses: actions/github-script@v6
         with:
           script: |
             message = `
-            :wave: **One or more commits are from an external user** :wave:
+            :wave: **One or more commits are from an external contributor** :wave:
             
             Thanks for opening this pull request! It looks like one or more commits on this pull request are from an external
             contributor. Thanks for taking the time to make a contribution; it will be reviewed shortly.
             
-            @dod-ccpo/platform-team Please ensure that all commit author data associated with this commit looks reasonable and
-            that this is a contribution from an external user; make sure all commits from team members have proper email data
-            associated with it.
+            @dod-ccpo/platform-team Please ensure that all contributor data associated with this commit looks reasonable and
+            that this is a contribution from an external contributor; make sure all commits from team members have proper email data
+            associated with them.
             `;
             await github.rest.issues.createComment({
               owner: context.repo.owner,
@@ -88,17 +88,17 @@ jobs:
               body: message,
             });
 
-      - name: Message on all CCPO authors
-        if: ${{ steps.get-commit-data.outputs.all-email-ccpo == 'true' }}
+      - name: Message on all contributors from expected domains
+        if: ${{ steps.get-commit-data.outputs.all-contributors-from-expected-domains == 'true' }}
         uses: actions/github-script@v6
         with:
           script: |
             message = `
-            :white_check_mark: **All checked commits are from an @ccpo.mil email** :white_check_mark:
+            :white_check_mark: **All commits are from internal contributors at expected domains** :white_check_mark:
 
-            Thanks for opening this pull request! It looks like all the commit authors have set the email address for the commits.
+            Thanks for opening this pull request! It looks like all the contributors have set the email address for the commits.
             
-            @dod-ccpo/platform-team Remember that anyone can set commit author information to any value. Please review the content
+            @dod-ccpo/platform-team Remember that anyone can set contributor information to any value. Please review the content
             of the pull request thoroughly, as always.
             `;
             await github.rest.issues.createComment({

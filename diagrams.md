@@ -196,7 +196,7 @@ erDiagram
         String css_tracking_number "Contract Support System"
         String docusign_envelope_id
         Boolean edms_folder_created "Electronic Document Management System"
-        Choice docgen_job_status "NOT_STARTED/IN_PROGRESS/SUCCESS/FAILURE"
+        Choice docgen_job_status "references Provisioning Job.status"
         Choice contracting_shop "DITCO/OTHER"
     }
     ARCHITECTURAL-DESIGN-REQUIREMENT {
@@ -248,7 +248,7 @@ erDiagram
         Reference acquisition_package FK "to Acquisition Package"
         Choice job_type "ADD_PORTFOLIO/ADD_OPERATORS/ADD_FUNDING_SOURCE"
         String payload
-        Choice status "NOT_STARTED/IN_PROGRESS/SUCCESS/FAILURE; defined here"
+        Choice status "NOT_STARTED/IN_PROGRESS/SUCCESS/FAILURE"
         String status_message
     }
     ORGANIZATION {
@@ -421,17 +421,17 @@ erDiagram
     REQUIREMENTS-COST-ESTIMATE {
         GUID sys_id PK
         Reference acquisition_package FK "to Acquisition Package"
-        Choice architectural_design_current_environment_option "SINGLE/MULTIPLE"
-        String architectural_design_current_environment_estimated_values "stringified json w/ {<period>:<price estimate>} pairs"
-        Choice architectural_design_performance_requirements_option "SINGLE/MULTIPLE"
-        String architectural_design_performance_requirements_estimated_values "stringified json w/ {<period>:<price estimate>} pairs"
+        Choice architectural_design_current_environment_option "references Requirements Cost Estimate.optimize_replicate_option"
+        String architectural_design_current_environment_estimated_values "stringified json w/ {'<period_sys_id>':<price estimate>} pairs"
+        Choice architectural_design_performance_requirements_option "reference Requirements Cost Estimate.optimize_replicate_option"
+        String architectural_design_performance_requirements_estimated_values "stringified json w/ {'<period_sys_id>':<price estimate>} pairs"
         Choice contracting_office_other_charges_fee "(column INACTIVE)"
         Integer contracting_office_other_fee_percentage "(column INACTIVE)"
         Integer contracting_office_fee_pct "(column INACTIVE)"
         String cost_estimate_description "(column INACTIVE)"
         Choice has_dow_and_pop "Y/N"
         Choice optimize_replicate_option "SINGLE/MULTIPLE"
-        String optimize_replicate_estimated_values "stringified json w/ {<period>:<price estimate>} pairs"
+        String optimize_replicate_estimated_values "stringified json w/ {'<period_sys_id>':<price estimate>} pairs"
         Choice previous_cost_estimate_comparison_option "(column INACTIVE)"
         Integer previous_cost_estimate_comparison_percentage "(column INACTIVE)"
         Choice surge_requirement_capabilities "Y/N"
@@ -444,7 +444,7 @@ erDiagram
         String how_est_dev_tools_used "CSV list"
         String how_est_dev_other_tools_used
         String how_est_dev_cost_estimate_description
-        Choice travel_option "SINGLE/MULTIPLE"
+        Choice travel_option "references Requirements Cost Estimate.optimize_replicate_option"
         String travel_estimated_values "CSV list"
     }
     TRAINING-ESTIMATE {
@@ -454,13 +454,13 @@ erDiagram
         Choice training_unit "PER_PERSON/PER_CLASS/ANNUAL_SUBSCRIPTION/MONTHLY_SUBSCRIPTION"
         Choice subscription_type "(column INACTIVE)"
         Currency estimated_price_per_training_unit
-        Choice training_option "SINGLE/MULTIPLE"
+        Choice training_option "references Requirements Cost Estimate.optimize_replicate_option"
         String training_estimated_values "CSV list"
     }
     SERVICE-OFFERING {
         GUID sys_id PK
         String description
-        Choice service_offering_group "ADVISORY_ASSISTANCE/APPLICATIONS/COMPUTE/DATABASE/DEVELOPER_TOOLS/DOCUMENTATION_SUPPORT/EDGE_COMPUTING/GENERAL_CLOUD_SUPPORT/HELP_DESK_SERVICES/IOT/MACHINE_LEARNING/NETWORKING/PORTABILITY_PLAN/SECURITY/STORAGE/TRAINING; defined here"
+        Choice service_offering_group "ADVISORY_ASSISTANCE/APPLICATIONS/COMPUTE/DATABASE/DEVELOPER_TOOLS/DOCUMENTATION_SUPPORT/EDGE_COMPUTING/GENERAL_CLOUD_SUPPORT/GENERAL_XAAS/HELP_DESK_SERVICES/IOT/MACHINE_LEARNING/NETWORKING/PORTABILITY_PLAN/SECURITY/STORAGE/TRAINING"
         Integer sequence
         String name
     }
@@ -490,17 +490,17 @@ erDiagram
         Choice is_traffic_spike_period_based "Y/N"
         String traffic_spike_event_description
         String traffic_spike_period_description
-        String users_per_region "stringified json obj w/ sys_id:count pairs"
-        Choice environment_type "DEV_TEST/PRE_PROD/PROD_STAGING/COOP_DISASTER_RECOVERY"
-        Choice operating_environment "VIRTUAL/CONTAINERS/SERVERLESS/END_USER_COMPUTING_VIRTUAL_DESKTOP"
+        String users_per_region "stringified json w/ {'<region_sys_id>':<user count>} pairs"
+        Choice environment_type "references Compute Environment Instance.environment_type"
+        Choice operating_environment "references Compute Environment Instance.operating_environment"
         String anticipated_need_usage
         String additional_information
     }
     COMPUTE-ENVIRONMENT-INSTANCE {
         Extends ENVIRONMENT-INSTANCE "inherits cols"
         GUID sys_id PK
-        Choice environment_type "DEV_TEST/PRE_PROD/PROD_STAGING/COOP_DISASTER_RECOVERY; defined here"
-        Choice operating_environment "VIRTUAL/CONTAINERS/SERVERLESS/END_USER_COMPUTING_VIRTUAL_DESKTOP; defined here"
+        Choice environment_type "DEV_TEST/PRE_PROD/PROD_STAGING/COOP_DISASTER_RECOVERY"
+        Choice operating_environment "VIRTUAL/CONTAINERS/SERVERLESS/END_USER_COMPUTING_VIRTUAL_DESKTOP"
     }
     DATABASE-ENVIRONMENT-INSTANCE {
         Extends ENVIRONMENT-INSTANCE "inherits cols"
@@ -515,7 +515,7 @@ erDiagram
         GUID sys_id PK
         Choice personnel_onsite_access "Y/N"
         Choice ts_contractor_clearance_type "(column INACTIVE)"
-        Choice service_type "ADVISORY_ASSISTANCE/APPLICATIONS/COMPUTE/DATABASE/DEVELOPER_TOOLS/DOCUMENTATION_SUPPORT/EDGE_COMPUTING/GENERAL_CLOUD_SUPPORT/HELP_DESK_SERVICES/IOT/MACHINE_LEARNING/NETWORKING/PORTABILITY_PLAN/SECURITY/STORAGE/TRAINING"
+        Choice service_type "references Service Offering.service_offering_group"
         String training_requirement_title
         Choice training_format "ONSITE_INSTRUCTOR_CONUS/ONSITE_INSTRUCTOR_OCONUS/VIRTUAL_INSTRUCTOR/VIRTUAL_SELF_LED/NO_PREFERENCE"
         Integer personnel_requiring_training
@@ -583,12 +583,12 @@ erDiagram
         Integer number_of_vcpus
         Integer processor_speed
         Integer memory_amount
-        Choice memory_unit "GB/TB/PB"
+        Choice memory_unit "references Environment Instance.storage_unit"
         Choice storage_type "BLOCK/OBJECT/FILE/ARCHIVE"
         Integer storage_amount
-        Choice storage_unit "GB/TB/PB; defined here"
+        Choice storage_unit "GB/TB/PB"
         Integer data_egress_monthly_amount
-        Choice data_egress_monthly_unit "GB/TB/PB"
+        Choice data_egress_monthly_unit "references Environment Instance.storage_unit"
         Choice operating_system_licensing "TRANSFER_EXISTING/NEW"
         String anticipated_need_or_usage
         String usage_description
@@ -651,22 +651,22 @@ erDiagram
         Reference acquisition_package FK "to Acquisition Package"
         Reference classification_level FK "to Classification Level"
         List classified_information_types FK "to Classified Information Type"
-        String users_per_region "stringified json w/ sys_id/count pairs"
+        String users_per_region "stringified json w/ {'<region_sys_id>':<user count>} pairs"
         Choice increase_in_users "Y/N"
-        Choice user_growth_estimate_type "SINGLE/MULTIPLE; defined here"
-        String user_growth_estimate_percentage "one or many"
+        Choice user_growth_estimate_type "SINGLE/MULTIPLE"
+        String user_growth_estimate_percentage "stringified json w/ {'<period_sys_id>':<percentage>} pairs"
         Integer data_egress_monthly_amount
-        Choice data_egress_monthly_unit "GB/TB/PB"
+        Choice data_egress_monthly_unit "references Environment Instance.storage_unit"
         Choice data_increase "Y/N"
-        Choice data_growth_estimate_type "SINGLE/MULTIPLE"
-        String data_growth_estimate_percentage "one or many"
+        Choice data_growth_estimate_type "references Selected Classification Level.user_growth_estimate_type"
+        String data_growth_estimate_percentage "stringified json w/ {'<period_sys_id>':<percentage>} pairs"
     }
     SECURITY-REQUIREMENT  {
         GUID sys_id PK
         Reference acquisition_package FK "to Acquisition Package"
         List advisory_services_secret FK "to Classified Information Type"
         List advisory_services_top_secret FK "to Classified Information Type"
-        Choice service_offering_group "ADVISORY_ASSISTANCE/APPLICATIONS/COMPUTE/DATABASE/DEVELOPER_TOOLS/DOCUMENTATION_SUPPORT/EDGE_COMPUTING/GENERAL_CLOUD_SUPPORT/HELP_DESK_SERVICES/IOT/MACHINE_LEARNING/NETWORKING/PORTABILITY_PLAN/SECURITY/STORAGE/TRAINING"
+        Choice service_offering_group "references Service Offering.service_offering_group"
         Choice ts_contractor_clearance_type "TS/TS_SCI"
     }
     TRAVEL-REQUIREMENT  {
@@ -686,14 +686,14 @@ erDiagram
         Choice cross_domain_solution_required "Y/N"
         String projected_file_stream_type
         String anticipated_need_or_usage
-        String traffic_per_domain_pair "stringified json w/ {<domain pair>:<monthly traffic estimate in GB>} pairs"
+        String traffic_per_domain_pair "stringified json w/ {'<domain_pair_sys_id>':<monthly traffic estimate in GB>} pairs"
     }
     DOMAIN-PAIR {
-        GUID sys_id PK
-        Choice domain1 "reference to Classification Level.classification"
-        Choice domain2 "reference to Classification Level.classification"
-        String value "calculated value"
-        String label "calculated value"
+        GUID sys_id PK "used to represent unidirectional traffic flow from domain1 to domain2"
+        Choice domain1 "references Classification Level.classification"
+        Choice domain2 "references Classification Level.classification"
+        String value "calculated value; e.g. U_TO_S"
+        String label "calculated value; e.g. Unclassified to Secret"
     }
     IGCE-ESTIMATE {
         GUID sys_id PK "Estimates are based on instance data"
@@ -708,10 +708,11 @@ erDiagram
         String description "composed from instance data"
         Currency unit_price
         Integer quantity "(column INACTIVE)"
-        String unit_quantity "integer or stringified json w/ {<period>:<quantity>} pairs"
-        Choice unit "EACH/MONTHS/PEOPLE/PERIOD/SESSIONS/YEAR"
+        String unit_quantity "stringified json w/ {'<period_sys_id>':<quantity of unit>} pairs"
+        Choice unit "EACH/MONTH/PEOPLE/PERIOD/SESSIONS/YEAR"
         String dow_task_number
         Choice idiq_clin_type "CLOUD/CLOUD_SUPPORT"
+        String cross_domain_pair "name of a Domain Pair"
     }
 
     ACQUISITION-PACKAGE ||--|| SYS_USER : "MOs, contributors, reviewers"
