@@ -198,6 +198,7 @@ erDiagram
         Boolean edms_folder_created "Electronic Document Management System"
         Choice docgen_job_status "references Provisioning Job.status"
         Choice contracting_shop "DITCO/OTHER"
+        String j_a_and_mrr_filenames "e.g. document1.docx,document2.pdf"
     }
     ARCHITECTURAL-DESIGN-REQUIREMENT {
         GUID sys_id PK
