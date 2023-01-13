@@ -198,6 +198,7 @@ erDiagram
         Boolean edms_folder_created "Electronic Document Management System"
         Choice docgen_job_status "references Provisioning Job.status"
         Choice contracting_shop "DITCO/OTHER"
+        String j_a_and_mrr_filenames "e.g. document1.docx,document2.pdf"
     }
     ARCHITECTURAL-DESIGN-REQUIREMENT {
         GUID sys_id PK
@@ -712,6 +713,7 @@ erDiagram
         Choice unit "EACH/MONTH/PEOPLE/PERIOD/SESSIONS/YEAR"
         String dow_task_number
         Choice idiq_clin_type "CLOUD/CLOUD_SUPPORT"
+        String cross_domain_pair "name of a Domain Pair"
     }
 
     ACQUISITION-PACKAGE ||--|| SYS_USER : "MOs, contributors, reviewers"
