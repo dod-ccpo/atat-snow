@@ -594,6 +594,7 @@ erDiagram
         Choice operating_system_licensing "TRANSFER_EXISTING/NEW"
         String anticipated_need_or_usage
         String usage_description
+        Integer instance_number
         Currency cost_estimate "(column INACTIVE)"
         String igce_title "(column INACTIVE)"
         String igce_description "(column INACTIVE)"
