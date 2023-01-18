@@ -451,6 +451,7 @@ erDiagram
     TRAINING-ESTIMATE {
         GUID sys_id PK
         Reference acquisition_package FK "to Acquisition Package"
+        Reference cloud_support_environment_instance FK "to Cloud Support Environment Instance"
         Reference requirements_cost_estimate FK "(column INACTIVE)"
         Choice training_unit "PER_PERSON/PER_CLASS/ANNUAL_SUBSCRIPTION/MONTHLY_SUBSCRIPTION"
         Choice subscription_type "(column INACTIVE)"
@@ -758,6 +759,7 @@ erDiagram
     IGCE-ESTIMATE ||--|| CROSS-DOMAIN-SOLUTION : ""
     REQUIREMENTS-COST-ESTIMATE }|--|| ACQUISITION-PACKAGE : ""
     TRAINING-ESTIMATE }|--|| ACQUISITION-PACKAGE : ""
+    TRAINING-ESTIMATE }|--|| CLOUD-SUPPORT-ENVIRONMENT-INSTANCE : ""
 
     %% DoW Performance Requirements
     SELECTED-SERVICE-OFFERING }|--|| ACQUISITION-PACKAGE : ""
