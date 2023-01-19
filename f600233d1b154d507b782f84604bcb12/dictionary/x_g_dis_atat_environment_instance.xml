@@ -4,7 +4,7 @@
         <element label="Anticipated Need or Usage" max_length="1000" name="anticipated_need_or_usage" type="string"/>
         <element label="Classification Level" max_length="32" name="classification_level" reference="x_g_dis_atat_classification_level" type="reference"/>
         <element label="Classified Information Types" max_length="4000" name="classified_information_types" reference="x_g_dis_atat_classified_information_type" type="glide_list"/>
-        <element label="Cost Estimate" max_length="20" name="cost_estimate" type="currency"/>
+        <element active="false" label="Cost Estimate" max_length="20" name="cost_estimate" type="currency"/>
         <element label="Data Egress Monthly Amount" max_length="40" name="data_egress_monthly_amount" type="integer"/>
         <element choice="1" choice_field="storage_unit" choice_table="x_g_dis_atat_environment_instance" label="Data Egress Monthly Unit" max_length="40" name="data_egress_monthly_unit" type="choice">
             <choice>
@@ -13,8 +13,8 @@
                 <element inactive_on_update="false" label="PB" sequence="2" value="PB"/>
             </choice>
         </element>
-        <element label="IGCE Description" max_length="1000" name="igce_description" type="string"/>
-        <element label="IGCE Title" max_length="200" name="igce_title" type="string"/>
+        <element active="false" label="IGCE Description" max_length="1000" name="igce_description" type="string"/>
+        <element active="false" label="IGCE Title" max_length="200" name="igce_title" type="string"/>
         <element choice="1" label="Instance Location" max_length="40" name="instance_location" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Cloud" sequence="1" value="CLOUD"/>
@@ -22,6 +22,7 @@
             </choice>
         </element>
         <element label="Instance Name" max_length="100" name="instance_name" type="string"/>
+        <element label="Instance Number" mandatory="true" max_length="40" name="instance_number" type="integer"/>
         <element label="Licensing" max_length="100" name="licensing" type="string"/>
         <element label="Memory Amount" max_length="40" name="memory_amount" type="integer"/>
         <element choice="1" choice_field="storage_unit" choice_table="x_g_dis_atat_environment_instance" label="Memory Unit" max_length="40" name="memory_unit" type="choice">
