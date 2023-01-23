@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="DAPPS:Environment Instance" max_length="40" name="x_g_dis_atat_environment_instance" sizeclass="1" type="collection">
+    <element label="DAPPS:Environment Instance" max_length="40" name="x_g_dis_atat_environment_instance" sizeclass="117" type="collection">
         <element label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
         <element label="Anticipated Need or Usage" max_length="1000" name="anticipated_need_or_usage" type="string"/>
         <element label="Classification Level" max_length="32" name="classification_level" reference="x_g_dis_atat_classification_level" type="reference"/>
@@ -85,13 +85,13 @@
         <element default="javascript:current.getTableName();" label="Class" max_length="80" name="sys_class_name" type="sys_class_name"/>
         <element label="Usage Description" max_length="1000" name="usage_description" type="string"/>
         <index name="index">
-            <element name="classification_level"/>
+            <element name="region"/>
         </index>
         <index name="index2">
-            <element name="acquisition_package"/>
+            <element name="classification_level"/>
         </index>
         <index name="index3">
-            <element name="region"/>
+            <element name="acquisition_package"/>
         </index>
         <index name="index4">
             <element name="sys_class_name"/>
