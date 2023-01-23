@@ -198,6 +198,7 @@ erDiagram
         Boolean edms_folder_created "Electronic Document Management System"
         Choice docgen_job_status "references Provisioning Job.status"
         Choice contracting_shop "DITCO/OTHER"
+        String j_a_and_mrr_filenames "e.g. document1.docx,document2.pdf"
     }
     ARCHITECTURAL-DESIGN-REQUIREMENT {
         GUID sys_id PK
@@ -450,6 +451,7 @@ erDiagram
     TRAINING-ESTIMATE {
         GUID sys_id PK
         Reference acquisition_package FK "to Acquisition Package"
+        Reference cloud_support_environment_instance FK "to Cloud Support Environment Instance"
         Reference requirements_cost_estimate FK "(column INACTIVE)"
         Choice training_unit "PER_PERSON/PER_CLASS/ANNUAL_SUBSCRIPTION/MONTHLY_SUBSCRIPTION"
         Choice subscription_type "(column INACTIVE)"
@@ -592,6 +594,7 @@ erDiagram
         Choice operating_system_licensing "TRANSFER_EXISTING/NEW"
         String anticipated_need_or_usage
         String usage_description
+        Integer instance_number
         Currency cost_estimate "(column INACTIVE)"
         String igce_title "(column INACTIVE)"
         String igce_description "(column INACTIVE)"
@@ -712,6 +715,7 @@ erDiagram
         Choice unit "EACH/MONTH/PEOPLE/PERIOD/SESSIONS/YEAR"
         String dow_task_number
         Choice idiq_clin_type "CLOUD/CLOUD_SUPPORT"
+        String cross_domain_pair "name of a Domain Pair"
     }
 
     ACQUISITION-PACKAGE ||--|| SYS_USER : "MOs, contributors, reviewers"
@@ -756,6 +760,7 @@ erDiagram
     IGCE-ESTIMATE ||--|| CROSS-DOMAIN-SOLUTION : ""
     REQUIREMENTS-COST-ESTIMATE }|--|| ACQUISITION-PACKAGE : ""
     TRAINING-ESTIMATE }|--|| ACQUISITION-PACKAGE : ""
+    TRAINING-ESTIMATE }|--|| CLOUD-SUPPORT-ENVIRONMENT-INSTANCE : ""
 
     %% DoW Performance Requirements
     SELECTED-SERVICE-OFFERING }|--|| ACQUISITION-PACKAGE : ""
