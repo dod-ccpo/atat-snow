@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="DAPPS:Evaluation Plan" max_length="40" name="x_g_dis_atat_evaluation_plan" sizeclass="1" type="collection">
+    <element label="DAPPS:Evaluation Plan" max_length="40" name="x_g_dis_atat_evaluation_plan" sizeclass="130" type="collection">
         <element label="Custom Differentiators" max_length="1000" name="custom_differentiators" type="string"/>
         <element label="Custom Specifications" max_length="1000" name="custom_specifications" type="string"/>
-        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;&#9;var output = '';&#13;&#10;&#9;if (current.source_selection) {&#13;&#10;&#9;&#9;output += current.source_selection.toString();&#13;&#10;&#9;} else {&#13;&#10;&#9;&#9;output += 'No source selection';&#13;&#10;&#9;}&#13;&#10;&#9;output += '/';&#13;&#10;&#9;if (current.method) {&#13;&#10;&#9;&#9;output += current.method.toString();&#13;&#10;&#9;} else {&#13;&#10;&#9;&#9;output += 'No evaluation method';&#13;&#10;&#9;}&#13;&#10;&#9;return output;&#13;&#10;})(current);" display="true" label="Display" max_length="40" name="display" read_only="true" type="string" virtual="true"/>
+        <element calculation="(function calculatedFieldValue(current) {&#10;&#9;var output = '';&#10;&#9;if (current.source_selection) {&#10;&#9;&#9;output += current.source_selection.toString();&#10;&#9;} else {&#10;&#9;&#9;output += 'No source selection';&#10;&#9;}&#10;&#9;output += '/';&#10;&#9;if (current.method) {&#10;&#9;&#9;output += current.method.toString();&#10;&#9;} else {&#10;&#9;&#9;output += 'No evaluation method';&#10;&#9;}&#10;&#9;return output;&#10;})(current);" display="true" label="Display" max_length="40" name="display" read_only="true" type="string" virtual="true"/>
         <element attributes="edge_encryption_enabled=true" choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Has Custom Specifications" max_length="40" name="has_custom_specifications" type="choice">
             <choice/>
         </element>

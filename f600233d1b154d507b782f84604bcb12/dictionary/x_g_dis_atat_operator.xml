@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Operator" max_length="40" name="x_g_dis_atat_operator" sizeclass="5" type="collection">
-        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;    // use display value if possible&#13;&#10;    var gr = new GlideRecord('sys_user');&#13;&#10;    if (gr.get('user_name', current.sys_created_by)) {&#13;&#10;        return gr.getDisplayValue();&#13;&#10;    }&#13;&#10;    return current.sys_created_by; // default&#13;&#10;})(current);" label="Added by" max_length="151" name="added_by" read_only="true" type="string" virtual="true"/>
+    <element label="ATAT:Operator" max_length="40" name="x_g_dis_atat_operator" sizeclass="3" type="collection">
+        <element calculation="(function calculatedFieldValue(current) {&#10;    // use display value if possible&#10;    var gr = new GlideRecord('sys_user');&#10;    if (gr.get('user_name', current.sys_created_by)) {&#10;        return gr.getDisplayValue();&#10;    }&#10;    return current.sys_created_by; // default&#10;})(current);" label="Added by" max_length="151" name="added_by" read_only="true" type="string" virtual="true"/>
         <element label="DoD ID" mandatory="true" max_length="10" name="dod_id" type="string"/>
         <element display="true" label="Email" mandatory="true" max_length="254" name="email" type="string"/>
         <element label="Needs Reset" max_length="40" name="needs_reset" type="boolean"/>
