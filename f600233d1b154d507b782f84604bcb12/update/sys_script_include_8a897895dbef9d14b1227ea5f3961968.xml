@@ -31,7 +31,8 @@ EvalPlan.prototype = {
             var projectOverview = this.acquisitionPackage.project_overview;
             var EVAL_PLAN_ASSESSMENT_AREA_TABLE = "x_g_dis_atat_eval_plan_assessment_area";
             var EVAL_PLAN_DIFFERENTIATOR_TABLE = "x_g_dis_atat_eval_plan_differentiator";
-            var includeCustomSpecificationsFlag = false; // encompasses both compliance standards, and assessment areas
+			// encompasses the existance of both compliance standards, and assessment areas
+            var includeCustomSpecificationsFlag = convertToBoolean(evalPlan.has_custom_specifications.toString());
             var includeCustomDifferentiatorsFlag = false;
             if (evalPlan) {
                 return {
@@ -45,8 +46,8 @@ EvalPlan.prototype = {
                             .filter(function(recordSysId) {
                                 var record = new GlideRecord(EVAL_PLAN_ASSESSMENT_AREA_TABLE);
                                 record.get(recordSysId);
-                                if (record.name.toString() === "CustomAssessment") { // is this the special row in the ref table?
-                                    includeCustomSpecificationsFlag = true; // include customs later
+								// CustomAssessment is a special row in the Eval Plan Assessment Area ref table
+                                if (record.name.toString() === "CustomAssessment") { 
                                     return false; // filter out this option
                                 }
                                 return true;
@@ -66,7 +67,8 @@ EvalPlan.prototype = {
                             .filter(function(recordSysId) {
                                 var record = new GlideRecord(EVAL_PLAN_DIFFERENTIATOR_TABLE);
                                 record.get(recordSysId);
-                                if (record.name.toString() === "CustomDifferentiators") { // is this the special row in the ref table?
+								// CustomDifferentiators is a special row in the Eval Plan Differentiator ref table
+                                if (record.name.toString() === "CustomDifferentiators") { 
                                     includeCustomDifferentiatorsFlag = true; // include customs later
                                     return false; // filter out this option
                                 }
@@ -98,13 +100,13 @@ EvalPlan.prototype = {
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-12-02 17:05:22</sys_created_on>
         <sys_id>8a897895dbef9d14b1227ea5f3961968</sys_id>
-        <sys_mod_count>40</sys_mod_count>
+        <sys_mod_count>41</sys_mod_count>
         <sys_name>EvalPlan</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_8a897895dbef9d14b1227ea5f3961968</sys_update_name>
-        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2023-01-13 06:22:29</sys_updated_on>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2023-01-25 21:19:00</sys_updated_on>
     </sys_script_include>
 </record_update>
