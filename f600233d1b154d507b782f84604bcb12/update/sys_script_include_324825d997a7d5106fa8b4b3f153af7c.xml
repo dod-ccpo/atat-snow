@@ -11,134 +11,146 @@ Payload is sent to the HOTH API for document generation.&#13;
         <name>RequirementsChecklist</name>
         <script><![CDATA[var RequirementsChecklist = Class.create();
 RequirementsChecklist.prototype = {
-	errUtil: new ErrorHandler(),
-	atatUtil: new AtatHelper(),
-	acquisitionPackage: null,
+  errUtil: new ErrorHandler(),
+  atatUtil: new AtatHelper(),
+  acquisitionPackage: null,
 
-	initialize: function(acqPackage) {
-		this.acquisitionPackage = acqPackage;
-	},
-	mapPeriods: function(periods) {
-		return periods.map(function(period) {
-			// map properties according to HOTH API
-			period.periodType = period.period_type;
-			period.periodUnitCount = period.period_unit_count;
-			period.periodUnit = period.period_unit;
-			period.optionOrder = period.option_order;
+  initialize: function(acqPackage) {
+    this.acquisitionPackage = acqPackage;
+  },
+  mapPeriods: function(periods) {
+    return periods.map(function(period) {
+      // map properties according to HOTH API
+      period.periodType = period.period_type;
+      period.periodUnitCount = period.period_unit_count;
+      period.periodUnit = period.period_unit;
+      period.optionOrder = period.option_order;
 
-			// remove old properties	
-			delete period.period_type;
-			delete period.period_unit_count;
-			delete period.period_unit;
-			delete period.option_order;
+      // remove old properties	
+      delete period.period_type;
+      delete period.period_unit_count;
+      delete period.period_unit;
+      delete period.option_order;
 
-			return period;
-		});
-	},
+      return period;
+    });
+  },
 
-	mapContact: function(contact) {
-		return {
-			name: contact.formal_name.toString(),
-			phoneNumber: contact.phone_and_extension.toString()
-		};		
-	},
-
-
-	getPayload: function() {
-		try {
-			var acqPackage = this.acquisitionPackage;
-			var ctb = convertToBoolean;
-			var cc = acqPackage.current_contract_and_recurring_information;
-			var currContractExists = ctb(cc.current_contract_exists.toString());
-
-			// periods (there should only be one base period)
-			var basePeriod = this.atatUtil.getPeriods(acqPackage.period_of_performance.base_period);
-			basePeriod = this.mapPeriods(basePeriod).map(removeSysId)[0];
-			var optionPeriods = this.atatUtil.getPeriods(acqPackage.period_of_performance.option_periods);
-			optionPeriods = this.mapPeriods(optionPeriods)
-				.map(removeSysId)
-				.sort(function(a, b) { return a.optionOrder - b.optionOrder; });
+  mapContact: function(contact) {
+    return {
+      name: contact.formal_name.toString(),
+      phoneNumber: contact.phone_and_extension.toString(),
+      email: contact.email.toString(),
+      dodaac: contact.dodaac.toString()
+    };
+  },
 
 
-				return {
-				documentType: "REQUIREMENTS_CHECKLIST",
-				templatePayload: {
-					projectOverview: {
-						title: acqPackage.project_overview.title.toString(),
-						scope: acqPackage.project_overview.scope.toString(),
-						emergencyDeclaration: ctb(acqPackage.project_overview.emergency_declaration.toString()),
-					},
-					organization: {
-						agency: acqPackage.organization.agency.label.toString(),
-						name: acqPackage.organization.computed_name.toString(),
-					},
-					contacts: {
-						missionOwnerName: this.atatUtil.getFirstMissionOwner(acqPackage).name.toString(),
-						cor: this.mapContact(acqPackage.cor),
-						acor: this.mapContact(acqPackage.acor),
-					},
-					currentContract: {
-						exists: currContractExists,
-						incumbentContractorName: cc.incumbent_contractor_name.toString(),
-						contractNumber: cc.contract_number.toString(),
-						taskOrderNumber: cc.task_delivery_order_number.toString(),
-						contractExpiration: cc.contract_order_expiration_date.toString(),
-					},
-					exceptionToFairOpportunity: acqPackage.fair_opportunity.exception_to_fair_opportunity.toString(),
-					periodOfPerformance: {
-						basePeriod: basePeriod,
-						optionPeriods: optionPeriods, 
-						popStartRequest: ctb(acqPackage.period_of_performance.pop_start_request.toString()),
-						requestedPopStartDate: acqPackage.period_of_performance.requested_pop_start_date.toString(),
-						timeFrame: acqPackage.period_of_performance.time_frame.toString(),
-						recurringRequirement: ctb(acqPackage.period_of_performance.recurring_requirement.toString()),
-					},
-					contractType: {
-						firmFixedPrice: ctb(acqPackage.contract_type.firm_fixed_price.toString()),
-						timeAndMaterials: ctb(acqPackage.contract_type.time_and_materials.toString()),
-						justification: acqPackage.contract_type.contract_type_justification.toString(),
-					},
-					sensitiveInformation: {
-						baaRequired: ctb(acqPackage.sensitive_information.baa_required.toString()),
-						potentialToBeHarmful: ctb(acqPackage.sensitive_information.potential_to_be_harmful.toString()),
-						foiaContact: {
-							fullName: acqPackage.sensitive_information.foia_full_name.toString(),
-							email: acqPackage.sensitive_information.foia_email.toString(),
-							address: this.atatUtil.constructFoiaAddress(acqPackage.sensitive_information),
-						},
-						section508: {
-							section508Sufficient: ctb(acqPackage.sensitive_information.section_508_sufficient.toString()),
-						},
-					}
-				}
-			};
+  getPayload: function() {
+    try {
+      var acqPackage = this.acquisitionPackage;
+      var ctb = convertToBoolean;
+      var cc = acqPackage.current_contract_and_recurring_information;
+      var pop = acqPackage.period_of_performance;
+      var currContractExists = ctb(cc.current_contract_exists.toString());
 
-		} catch (error) {
+      if (!pop.base_period.toString()) {
+        var pkgInfo = this.errUtil.getRecordLogInfo(acqPackage, "number");
+        throw this.errUtil.createError(
+          "No base period provided for " + pkgInfo.allInfo,
+          this.errUtil.INVALID_INPUT
+        );
+      }
+      // periods (there should only be one base period)
+      var basePeriod = this.atatUtil.getPeriods(pop.base_period);
+      basePeriod = this.mapPeriods(basePeriod).map(removeSysId)[0];
+      var optionPeriods = [];
+      if (pop.option_periods.toString()) {
+        optionPeriods = this.atatUtil.getPeriods(pop.option_periods);
+        optionPeriods = this.mapPeriods(optionPeriods)
+          .map(removeSysId)
+          .sort(function(a, b) { return a.optionOrder - b.optionOrder; });
+      }
 
-			errorMessage = "Error creating the Requirements Checklist payload. " + error;
-			this.errUtil.errorLogger(
-				this.errUtil.createError(
-					errorMessage,
-					this.errUtil.INVALID_INPUT
-				)
-			);
-		}
+      return {
+        documentType: "REQUIREMENTS_CHECKLIST",
+        templatePayload: {
+          projectOverview: {
+            title: acqPackage.project_overview.title.toString(),
+            scope: acqPackage.project_overview.scope.toString(),
+            emergencyDeclaration: ctb(acqPackage.project_overview.emergency_declaration.toString()),
+          },
+          organization: {
+            agency: acqPackage.organization.agency.label.toString(),
+            name: acqPackage.organization.computed_name.toString(),
+          },
+          contacts: {
+            missionOwnerName: this.atatUtil.getFirstMissionOwner(acqPackage).name.toString(),
+            cor: this.mapContact(acqPackage.cor),
+            acor: acqPackage.acor ? this.mapContact(acqPackage.acor) : null,
+          },
+          currentContract: {
+            exists: currContractExists,
+            incumbentContractorName: cc.incumbent_contractor_name.toString(),
+            contractNumber: cc.contract_number.toString(),
+            taskOrderNumber: cc.task_delivery_order_number.toString(),
+            contractExpiration: cc.contract_order_expiration_date.toString(),
+          },
+          exceptionToFairOpportunity: acqPackage.fair_opportunity.exception_to_fair_opportunity.toString(),
+          periodOfPerformance: {
+            basePeriod: basePeriod,
+            optionPeriods: optionPeriods,
+            popStartRequest: ctb(pop.pop_start_request.toString()),
+            requestedPopStartDate: pop.requested_pop_start_date.toString(),
+            timeFrame: pop.time_frame.toString(),
+            recurringRequirement: ctb(pop.recurring_requirement.toString()),
+          },
+          contractType: {
+            firmFixedPrice: ctb(acqPackage.contract_type.firm_fixed_price.toString()),
+            timeAndMaterials: ctb(acqPackage.contract_type.time_and_materials.toString()),
+            justification: acqPackage.contract_type.contract_type_justification.toString(),
+          },
+          sensitiveInformation: {
+            baaRequired: ctb(acqPackage.sensitive_information.baa_required.toString()),
+            potentialToBeHarmful: ctb(acqPackage.sensitive_information.potential_to_be_harmful.toString()),
+            foiaContact: {
+              fullName: acqPackage.sensitive_information.foia_full_name.toString(),
+              email: acqPackage.sensitive_information.foia_email.toString(),
+              address: this.atatUtil.constructFoiaAddress(acqPackage.sensitive_information),
+            },
+            section508: {
+              section508Sufficient: ctb(acqPackage.sensitive_information.section_508_sufficient.toString()),
+            },
+          }
+        }
+      };
 
-	},
+    } catch (error) {
 
-	type: 'RequirementsChecklist'
+      errorMessage = "Error creating the Requirements Checklist payload. " + error;
+      this.errUtil.errorLogger(
+        this.errUtil.createError(
+          errorMessage,
+          this.errUtil.INVALID_INPUT
+        )
+      );
+    }
+
+  },
+
+  type: 'RequirementsChecklist'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-02 20:50:47</sys_created_on>
         <sys_id>324825d997a7d5106fa8b4b3f153af7c</sys_id>
-        <sys_mod_count>25</sys_mod_count>
+        <sys_mod_count>26</sys_mod_count>
         <sys_name>RequirementsChecklist</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_324825d997a7d5106fa8b4b3f153af7c</sys_update_name>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2022-12-28 21:05:02</sys_updated_on>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2023-01-27 19:18:13</sys_updated_on>
     </sys_script_include>
 </record_update>
