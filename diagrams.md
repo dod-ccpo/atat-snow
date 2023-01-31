@@ -634,6 +634,14 @@ erDiagram
         String file_name
         String edms_document_type
     }
+    PACKAGE-DOCUMENTS-SIGNED {
+        GUID sys_id PK
+        Reference acquisition_package FK "to Acquisition Package"
+    }
+    PACKAGE-DOCUMENTS-UNSIGNED {
+        GUID sys_id PK
+        Reference acquisition_package FK "to Acquisition Package"
+    }
     UPDATE-SALESFORCE-COR-ACOR-CONTACT {
         GUID sys_id PK
         String request_body
@@ -743,6 +751,8 @@ erDiagram
     PACKAGE-DOCUMENT }|--|| ACQUISITION-PACKAGE : ""
     PACKAGE-DOCUMENT ||--|| PACKAGE-DOCUMENT-TYPE : ""
     PACKAGE-DOCUMENT ||--|| SYS_ATTACHMENT : "Package document"
+    PACKAGE-DOCUMENTS-SIGNED }|--|| ACQUISITION-PACKAGE : ""
+    PACKAGE-DOCUMENTS-UNSIGNED }|--|| ACQUISITION-PACKAGE : ""
     SELECTED-CLASSIFICATION-LEVEL }|--|| ACQUISITION-PACKAGE : ""
     SELECTED-CLASSIFICATION-LEVEL ||--|| CLASSIFICATION-LEVEL : ""
     SELECTED-CLASSIFICATION-LEVEL ||--o{ CLASSIFIED-INFORMATION-TYPE : "S and TS only"
