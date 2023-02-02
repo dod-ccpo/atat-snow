@@ -48,20 +48,20 @@ erDiagram
         GUID sys_id PK
         Reference acquisition_package FK "to Acquisition Package"
         Reference active_task_order FK "to Task Order"
-        Reference csp FK "to Cloud Service Provider"
-        List pending_operators FK "to Operator"
-        String csp_portfolio_id "from CSP"
-        URL dashboard_link "deep link to CSP"
+        Reference csp FK "(column INACTIVE)"
+        List pending_operators FK "(column INACTIVE)"
+        String csp_portfolio_id "(column INACTIVE)"
+        URL dashboard_link "(column INACTIVE)"
         DateTime last_updated
         String name
         Choice portfolio_funding_status "ON_TRACK/AT_RISK/FUNDING_AT_RISK/EXPIRED/DELINQUENT/EXPIRING_SOON"
         List portfolio_managers "to sys_user"
         List portfolio_viewers "to sys_user"
         Choice portfolio_status "ACTIVE/ARCHIVED/PROCESSING"
-        Boolean provisioned
-        DateTime provisioned_date
-        String provisioning_failure_cause
-        DateTime provisioning_request_date
+        Boolean provisioned "(column INACTIVE)"
+        DateTime provisioned_date "(column INACTIVE)"
+        String provisioning_failure_cause "(column INACTIVE)"
+        DateTime provisioning_request_date "(column INACTIVE)"
     }
     TASK-ORDER {
         GUID sys_id PK
@@ -115,15 +115,28 @@ erDiagram
         String title
         String acronym
     }
+    ENVIRONMENT {
+        GUID sys_id PK
+        Reference csp FK "to Cloud Service Provider"
+        List pending_operators FK "to Operator"
+        Reference portfolio FK "to Portfolio"
+        String name
+        URL dashboard_link "deep link to CSP"
+        Boolean provisioned
+        DateTime provisioned_date "for provisioning duration"
+        String provisioning_failure_cause
+        DateTime provisioning_request_date
+    }
     OPERATOR {
         GUID sys_id PK
         Reference portfolio FK "to Portfolio"
+        Reference environment FK "to Environment"
         String dod_id
         String email
         Boolean needs_reset
         Boolean provisioned
         DateTime provisioning_request_date
-        DateTime provisioned_date
+        DateTime provisioned_date "for provisioning duration"
         String provisioning_failure_cause
         String added_by
     }
@@ -132,8 +145,10 @@ erDiagram
     CLIN }|--|| TASK-ORDER : "part of"
     PORTFOLIO ||--|{ COSTS : "has (from CSPs)"
     PORTFOLIO ||--|{ SYS_USER : "portfolio managers and viewers"
-    PORTFOLIO ||--|{ OPERATOR : "pending operators"
-    PORTFOLIO }|--|| CLOUD-SERVICE-PROVIDER : "provisioned by"
+    PORTFOLIO ||--|{ ENVIRONMENT : "has one or more"
+    ENVIRONMENT ||--|{ OPERATOR : "pending operators"
+    ENVIRONMENT ||--|| CLOUD-SERVICE-PROVIDER : "provisioned by"
+    PROVISIONING-JOB ||--|| ENVIRONMENT : "request to provision"
     COSTS }|--|| CLIN : ""
     COSTS }|--|| CLOUD-SERVICE-PROVIDER : "billed by"
     COSTS }|--|{ TASK-ORDER : "billed against"
@@ -246,11 +261,14 @@ erDiagram
     }
     PROVISIONING-JOB {
         GUID sys_id PK
-        Reference acquisition_package FK "to Acquisition Package"
+        Reference acquisition_package FK "(column INACTIVE)"
+        Reference environment FK "to Environment"
         Choice job_type "ADD_PORTFOLIO/ADD_OPERATORS/ADD_FUNDING_SOURCE"
         String payload
         Choice status "NOT_STARTED/IN_PROGRESS/SUCCESS/FAILURE"
         String status_message
+        String csp_job_id "provided by CSP"
+        String hoth_job_id "provided by ATAT"
     }
     ORGANIZATION {
         GUID sys_id PK
