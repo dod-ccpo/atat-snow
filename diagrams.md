@@ -130,6 +130,7 @@ erDiagram
     OPERATOR {
         GUID sys_id PK
         Reference portfolio FK "to Portfolio"
+        Reference environment FK "to Environment"
         String dod_id
         String email
         Boolean needs_reset
