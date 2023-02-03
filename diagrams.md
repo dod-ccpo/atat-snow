@@ -48,16 +48,18 @@ erDiagram
         GUID sys_id PK
         Reference acquisition_package FK "to Acquisition Package"
         Reference active_task_order FK "to Task Order"
-        Reference csp FK "(column INACTIVE)"
-        List pending_operators FK "(column INACTIVE)"
-        String csp_portfolio_id "(column INACTIVE)"
-        URL dashboard_link "(column INACTIVE)"
-        DateTime last_updated
+        List portfolio_managers FK "to sys_user"
+        List portfolio_viewers FK "to sys_user"
         String name
+        String description
+        DateTime last_updated
         Choice portfolio_funding_status "ON_TRACK/AT_RISK/FUNDING_AT_RISK/EXPIRED/DELINQUENT/EXPIRING_SOON"
-        List portfolio_managers "to sys_user"
-        List portfolio_viewers "to sys_user"
         Choice portfolio_status "ACTIVE/ARCHIVED/PROCESSING"
+        
+        List pending_operators FK "(column INACTIVE)"
+        URL dashboard_link "(column INACTIVE)"
+        String csp_portfolio_id "(column INACTIVE)"
+        Reference csp FK "(column INACTIVE)"
         Boolean provisioned "(column INACTIVE)"
         DateTime provisioned_date "(column INACTIVE)"
         String provisioning_failure_cause "(column INACTIVE)"
@@ -121,6 +123,7 @@ erDiagram
         List pending_operators FK "to Operator"
         Reference portfolio FK "to Portfolio"
         String name
+        String csp_portfolio_id
         URL dashboard_link "deep link to CSP"
         Boolean provisioned
         DateTime provisioned_date "for provisioning duration"
@@ -129,7 +132,6 @@ erDiagram
     }
     OPERATOR {
         GUID sys_id PK
-        Reference portfolio FK "to Portfolio"
         Reference environment FK "to Environment"
         String dod_id
         String email
@@ -139,14 +141,17 @@ erDiagram
         DateTime provisioned_date "for provisioning duration"
         String provisioning_failure_cause
         String added_by
+        Reference portfolio FK "(column INACTIVE)"
     }
     PORTFOLIO ||--|{ TASK-ORDER : "funded by"
     TASK-ORDER ||--|{ CLIN : "has (from EDA)"
     CLIN }|--|| TASK-ORDER : "part of"
     PORTFOLIO ||--|{ COSTS : "has (from CSPs)"
-    PORTFOLIO ||--|{ SYS_USER : "portfolio managers and viewers"
-    PORTFOLIO ||--|{ ENVIRONMENT : "has one or more"
-    ENVIRONMENT ||--|{ OPERATOR : "pending operators"
+    PORTFOLIO ||--|{ SYS_USER : "portfolio managers"
+    PORTFOLIO ||--o{ SYS_USER : "portfolio viewers"
+    ENVIRONMENT ||--|{ OPERATOR : "pending"
+    OPERATOR ||--|| ENVIRONMENT : "administers"
+    ENVIRONMENT ||--|| PORTFOLIO : "belongs to"
     ENVIRONMENT ||--|| CLOUD-SERVICE-PROVIDER : "provisioned by"
     PROVISIONING-JOB ||--|| ENVIRONMENT : "request to provision"
     COSTS }|--|| CLIN : ""
@@ -261,7 +266,6 @@ erDiagram
     }
     PROVISIONING-JOB {
         GUID sys_id PK
-        Reference acquisition_package FK "(column INACTIVE)"
         Reference environment FK "to Environment"
         Choice job_type "ADD_PORTFOLIO/ADD_OPERATORS/ADD_FUNDING_SOURCE"
         String payload
@@ -269,6 +273,7 @@ erDiagram
         String status_message
         String csp_job_id "provided by CSP"
         String hoth_job_id "provided by ATAT"
+        Reference acquisition_package FK "(column INACTIVE)"
     }
     ORGANIZATION {
         GUID sys_id PK
