@@ -1,30 +1,36 @@
-### Entity-Relationship Diagram (ERD)
+### DAPPS Entity-Relationship Diagram (ERD)
 
+DISA Acquisition Package Preparation System (DAPPS)
 This diagram is simplified to emphasize core business entities and their relationships. See Relational Model for details.
 
 ```mermaid
 erDiagram
-    %% Portfolio
-    PORTFOLIO ||--|{ TASK-ORDER : "funded by"
-    TASK-ORDER ||--|{ CLIN : ""
-    PORTFOLIO ||--|{ COSTS : ""
-    PORTFOLIO }|--|| CLOUD-SERVICE-PROVIDER : "provisioned by"
-    COSTS }|--|| CLIN : ""
-    COSTS }|--|| CLOUD-SERVICE-PROVIDER : "billed by"
-    COSTS }|--|{ TASK-ORDER : "billed against"
-    COSTS }|--|| ORGANIZATION : "incurred by"
-    COSTS }|--|| AGENCY : ""
-
-    %% Package
-    ACQUISITION-PACKAGE ||--|| PORTFOLIO : "provisions"
     ACQUISITION-PACKAGE }|--|| ORGANIZATION : "supports mission of"
     ORGANIZATION ||--|{ AGENCY : ""
     ACQUISITION-PACKAGE ||--|| PERIOD-OF-PERFORMANCE : ""
-    PACKAGE-DOCUMENT }|--|| ACQUISITION-PACKAGE : ""
-    %% - funding
     ACQUISITION-PACKAGE ||--|| FUNDING-REQUIREMENT : ""
-    FUNDING-REQUIREMENT ||--|{ FUNDING-PLAN : ""
-    ACQUISITION-PACKAGE ||--|| FUNDING-REQUEST : ""
+    FUNDING-REQUIREMENT ||--|| FUNDING-PLAN : ""
+    FUNDING-REQUIREMENT ||--|| FUNDING-REQUEST : ""
+```
+
+### ATAT Entity-Relationship Diagram (ERD)
+
+Account Tracking & Automation Tool (ATAT)
+This diagram is simplified to emphasize core business entities and their relationships. See Relational Model for details.
+
+```mermaid
+erDiagram
+    PORTFOLIO ||--|| ACQUISITION-PACKAGE : "defines requirements"
+    PORTFOLIO ||--|{ TASK-ORDER : "funded by"
+    TASK-ORDER ||--|{ CLIN : "from EDA"
+    PORTFOLIO ||--|{ COSTS : "incurs"
+    ENVIRONMENT ||--|| PORTFOLIO : ""
+    ENVIRONMENT ||--|| CLOUD-SERVICE-PROVIDER : "provisioned by"
+    COSTS }|--|| CLOUD-SERVICE-PROVIDER : "billed by"
+    COSTS }|--|{ TASK-ORDER : "billed against"
+    COSTS }|--|| ORGANIZATION : "incurred by"
+    ORGANIZATION ||--|{ AGENCY : ""
+    OPERATOR ||--|| ENVIRONMENT : "administers"
 ```
 
 ### Relational Model Diagram
