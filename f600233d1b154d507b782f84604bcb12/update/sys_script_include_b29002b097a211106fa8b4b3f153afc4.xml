@@ -169,7 +169,7 @@ Igce.prototype = {
             // For each item in IGCE estimates
             data_to_map.forEach(function (item) {
                 // For each period in the selected_periods array the instance
-                item.instance_info.selected_periods.forEach(function (period) {
+                item.quantity_info_periods.forEach(function (period) {
 
                     // Map period_type and base_period of the periods_estimate array
                     var formattedPeriodOutput = periods_estimate.map(function (input) {
@@ -193,7 +193,7 @@ Igce.prototype = {
                         "itemDescription": item.description,
                         "unitPrice": item.unit_price,
                         "quantity": formattedQuantity,
-                        "unit": item.unit.toLowerCase(),
+                        "unit": period.periodUnit.toLowerCase(),
                     });
                 });
 
@@ -249,7 +249,7 @@ Igce.prototype = {
                 // Insert into periods_estimate, under the specified period and period_line_items 
                 periods_estimate[indexOfCurrentPeriod].periodLineItems.push({
                     "idiqClin": "x007 Travel",
-                    "contractType": "FFP",
+                    "contractType": "T&M",
                     "dowTaskNumber": "10f",
                     "serviceTitle": "Travel",
                     "itemDescription": item.fullTravelDescription,
@@ -494,7 +494,7 @@ Igce.prototype = {
             );
         }
     },
-    getCloudSuppportInstance: function (table, id) {
+    getCloudSupportInstance: function (table, id) {
         try {
             var cloud_support_data = new global.GlideQuery(table).get(id, Igce.prototype.CLOUD_SUPPORT_ENV_INST_FIELDS).orElse(null);
             var cloud_support_data_with_periods = Igce.prototype.getInstancePeriodInfo(cloud_support_data);
@@ -502,7 +502,7 @@ Igce.prototype = {
         }
         catch (error) {
             throw this.errUtil.createError(
-                "Igce --> getCloudSuppportInstance(): " + error,
+                "Igce --> getCloudSupportInstance(): " + error,
                 this.errUtil.METHOD_ERROR
             );
         }
@@ -538,23 +538,12 @@ Igce.prototype = {
             return "x006/x022 Cloud Support TOP SECRET CLASSIFIED"
         }
     },
+
+    // Get Igce Estimate Properties that are sys_id references
     getIgceProperties: function (igce) {
         try {
             // Set up IGCE object to parse through
             igce.forEach(function (item) {
-                // IGCE estimate will always have one of the following fields:
-                // - environment_instance
-                // - classification_instance
-                // - cross_domain_solution
-                if (item.environment_instance) {
-                    item.instance_info = Igce.prototype.getIgceInstanceData(Igce.prototype.ENV_INST_TABLE, item.environment_instance);
-                }
-                else if (item.classification_instance) {
-                    item.instance_info = Igce.prototype.getIgceInstanceData(Igce.prototype.CLASS_INST_TABLE, item.classification_instance);
-                }
-                else if (item.cross_domain_solution) {
-                    item.instance_info = Igce.prototype.getIgceInstanceData(Igce.prototype.CROSS_DOMAIN_SOLN_TABLE, item.cross_domain_solution);
-                }
                 // Get classification level
                 if (item.classification_level) {
                     item.classification_level = Igce.prototype.getClassificationLevel(item.classification_level)
@@ -574,6 +563,8 @@ Igce.prototype = {
         }
 
     },
+
+
     // Get IGCE Instructions
     getIgceInstructions: function (packageSysId) {
         try {
@@ -616,36 +607,6 @@ Igce.prototype = {
         catch (error) {
             throw this.errUtil.createError(
                 "Igce --> mapQuantity(): " + error,
-                this.errUtil.METHOD_ERROR
-            );
-        }
-    },
-    // Used specifically to map quantity_info_periods to selected_periods
-    mapIgceQuantity: function (igce) {
-        try {
-            igce.forEach(function (item) {
-                if (!item.instance_info.need_for_entire_task_order_duration) {
-                    item.quantity_info_periods.forEach(function (period_to_map) {
-                        item.instance_info.selected_periods.forEach(function (period) {
-                            if (period_to_map.periodType === period.periodType && period_to_map.periodUnitCount === period.periodUnitCount
-                                && period_to_map.optionOrder === period.optionOrder && period_to_map.periodUnit === period.periodUnit) {
-                                period.quantity = period_to_map.quantity;
-                            }
-                        });
-                    });
-                }
-                else if (item.instance_info.need_for_entire_task_order_duration) {
-                    item.quantity_info_periods.forEach(function (period_to_map) {
-                        item.instance_info.selected_periods.push(
-                            period_to_map
-                        )
-                    });
-                }
-            });
-        }
-        catch (error) {
-            throw this.errUtil.createError(
-                "Igce --> mapIgceQuantity(): " + error,
                 this.errUtil.METHOD_ERROR
             );
         }
@@ -790,7 +751,7 @@ Igce.prototype = {
         if (training_estimates.length != 0) {
             // For each Training Estimate
             training_estimates.forEach(function (training) {
-                training.training_instance_info = Igce.prototype.getCloudSuppportInstance(Igce.prototype.CLOUD_SUPPORT_ENV_INST_TABLE, training.cloud_support_environment_instance);
+                training.training_instance_info = Igce.prototype.getCloudSupportInstance(Igce.prototype.CLOUD_SUPPORT_ENV_INST_TABLE, training.cloud_support_environment_instance);
                 training.classification_info = Igce.prototype.getClassificationLevel(training.training_instance_info.classification_level);
 
                 // Check Training Unit, if it isn't ANNUAL_SUBSCRIPTION (training_option for that is always null)
@@ -811,9 +772,6 @@ Igce.prototype = {
             this.mapTrainingToPeriodsEstimate(training_estimates, periodsEstimate);
         }
 
-
-        // Get all IGCE Estimates that have the acquisition package as the FK
-        var igce = this.getIgceEstimates(this.acquisitionPackage.sys_id);
         // Get all Travel Requirements
         var travel_reqs;
 
@@ -853,10 +811,10 @@ Igce.prototype = {
             this.mapTravelToPeriodsEstimate(travel_reqs, periodsEstimate);
         }
 
+        // Get all IGCE Estimates that have the acquisition package as the FK
+        var igce = this.getIgceEstimates(this.acquisitionPackage.sys_id);
         // Determine selected_periods for instance_info and classification_level
         this.getIgceProperties(igce);
-        // Map quantity to each IGCE with selected period
-        this.mapIgceQuantity(igce)
         // Map igce estimates to periods estimate
         this.mapIgceToPeriodsEstimate(igce, periodsEstimate);
 
@@ -881,13 +839,13 @@ Igce.prototype = {
         <sys_created_by>jeff.segal-ctr</sys_created_by>
         <sys_created_on>2022-10-12 15:53:33</sys_created_on>
         <sys_id>b29002b097a211106fa8b4b3f153afc4</sys_id>
-        <sys_mod_count>75</sys_mod_count>
+        <sys_mod_count>77</sys_mod_count>
         <sys_name>Igce</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_b29002b097a211106fa8b4b3f153afc4</sys_update_name>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2023-01-26 19:53:22</sys_updated_on>
+        <sys_updated_on>2023-02-05 22:47:28</sys_updated_on>
     </sys_script_include>
 </record_update>
