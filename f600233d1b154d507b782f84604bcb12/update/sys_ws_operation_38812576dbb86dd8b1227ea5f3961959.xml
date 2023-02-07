@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>POST</http_method>
+        <name>Start Provisioning</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+	var provision = function(request, pdsResponse) {
+		var result;
+		var taskOrderNumber = request.queryParams.taskOrderNumber;
+		var requestBody = request.body.data;
+		var eda = new Eda();
+		var payload = eda.getPayload(request, response);
+		var summary = extractPdsSummary(request.queryParams.taskOrderNumber, payload);	
+		
+		try{
+			// Validate the XML before converting it to a string
+			// validateXML will return null if it passes validation
+			var xmlValid = GlideXMLUtil.validateXML(pdsResponse, false, false);
+			if (xmlValid == null){
+				
+// 				// Create Task Order
+// 				var grTaskOrder = new GlideRecord("x_g_dis_atat_task_order");
+// 				grTaskOrder.initialize();
+// 				// W911S122F0003 is the hardcoded value, this will need to be altered later
+// 				grTaskOrder.setValue("task_order_number", taskOrderNumber);
+// 				grTaskOrder.setValue("pop_start_date", startDate);
+// 				grTaskOrder.setValue("pop_end_date", endDate);
+// 				grTaskOrder.setValue("clins", clins.toString());
+// 				grTaskOrder.setValue("portfolio", portfolio.sys_id);
+// 				var newTaskOrderSysID = grTaskOrder.insert();					
+				
+				// Create Portfolio
+				var portfolio = new GlideRecord("x_g_dis_atat_portfolio");
+				portfolio.initialize();
+				portfolio.setValue("name", requestBody.portfolioName);
+				portfolio.insert();
+				
+// 				var unclassified = requestBody.environments["Unclassified"];
+// 				var secret = requestBody.environments["Secret"];
+// 				var topSecret = requestBody.environments["Top Secret"];
+// 				var createEnvironment = function(level, environment) {
+// 					var environmentRecord = new GlideRecord("x_g_dis_atat_environment");
+// 					environmentRecord.initialize();
+// 					environmentRecord.setValue("name", portfolioName + " - " + level);
+// 					environmentRecord.setValue("portfolio", portfolio);
+// 					environmentRecord.insert();					
+// 				};
+				Object.keys(requestBody.environments).forEach(function (key) {
+					var environmentRecord = new GlideRecord("x_g_dis_atat_environment");
+					environmentRecord.initialize();
+					environmentRecord.setValue("name", requestBody.portfolioName + " - " + key);
+					environmentRecord.setValue("portfolio", portfolio.sys_id);
+					environmentRecord.insert();		
+					
+					var pendingOperators = [];
+					var env = requestBody.environments[key];
+					env.operators.forEach(function(operator) {
+						var operatorRecord = new GlideRecord("x_g_dis_atat_operator");
+						operatorRecord.initialize();
+						operatorRecord.setValue("dod_id", operator.dodId);
+						operatorRecord.setValue("email", operator.email);
+						operatorRecord.setValue("portfolio", portfolio.sys_id);
+						operatorRecord.setValue("environment", environmentRecord.sys_id);
+						pendingOperators.push(operatorRecord.insert());		
+					});
+					
+					environmentRecord.setValue("pending_operators", pendingOperators);
+					environmentRecord.update();	
+				});
+				
+// 				// Parse the XML string as an XMLDocument2()
+// 				// This is required to use gs.xmlToJSON() without errors
+// 				// For more information please see: https://support.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0784264
+// 				var xmlStringBody = xmlBody.toString();
+// 				var xmlDoc = new XMLDocument2();
+// 				xmlDoc.setNamespaceAware(true);
+// 				xmlDoc.parseXML(xmlStringBody);
+// 				var jsonObject = gs.xmlToJSON(xmlDoc);
+
+// 				// As a result of parseXML, we are left with LineItems as an Array or an Object
+// 				// If it is an Array, that means there are CLIN records to create
+// 				// If it is an Object, that means there is a single CLIN record instead of a CLIN and INFOSLIN, requiring no CLIN creation
+// 				var lineItems = jsonObject.ProcurementDocument.AwardInstrument.ContractLineItems.LineItems;
+// 				var clins = [];
+// 				gs.info(Array.isArray(lineItems));
+// 				if (Array.isArray(lineItems)){
+// 					for (var i = 0; i< lineItems.length; i++){
+// 						// If LineItemType is INFOSLIN, we will create a CLIN record
+// 						if (lineItems[i].LineItemIdentifier.DFARS.LineItem.LineItemType == "INFOSLIN"){
+// 							var lineItemBase = lineItems[i].LineItemIdentifier.DFARS.LineItem.LineItemBase;
+// 							var popStartDate, popEndDate;
+// 							// We need to loop through lineItems again to find the matching CLIN that contains the popStartDate and popEndDate
+// 							for (var j = 0; j< lineItems.length; j++){
+// 								var lineItemToMatch = lineItems[j].LineItemIdentifier.DFARS.LineItem.LineItemBase;
+// 								if (lineItems[j].LineItemIdentifier.DFARS.LineItem.LineItemType == "CLIN" & lineItemToMatch == lineItemBase & lineItems[j].hasOwnProperty("LineItemDates")){
+// 									popStartDate = lineItems[j].LineItemDates.LineItemPeriod.PeriodStart.DateElement;
+// 									popEndDate = lineItems[j].LineItemDates.LineItemPeriod.PeriodEnd.DateElement;
+// 								}
+// 							}
+// 							var obligatedAmount = lineItems[i].LineItemAmounts.ItemObligatedAmount.ObligatedAmount;
+// 							// Create new CLIN record
+// 							var grClin = new GlideRecord("x_g_dis_atat_clin");
+// 							grClin.initialize();
+// 							grClin.setValue("clin_number", lineItemBase);
+// 							grClin.setValue("funds_obligated", obligatedAmount);
+// 							grClin.setValue("pop_start_date", popStartDate);
+// 							grClin.setValue("pop_end_date", popEndDate);
+// 							var newCLINSysID = grClin.insert();
+// 							clins.push(newCLINSysID);
+// 						}
+// 					}
+// 				}
+// 				// Check for created CLIN(s)
+// 				if (clins.length > 0){
+// 					// Extract startDate and endDate for the new Task Order record
+// 					var startDate = jsonObject.ProcurementDocument.AwardInstrument.ProcurementInstrumentHeader.ProcurementInstrumentDates.ProcurementInstrumentPeriods.StartDate;
+// 					var endDate = jsonObject.ProcurementDocument.AwardInstrument.ProcurementInstrumentHeader.ProcurementInstrumentDates.ProcurementInstrumentPeriods.EndDate;
+// 					// Create new Task Order parent record
+// 					var grTaskOrder = new GlideRecord("x_g_dis_atat_task_order");
+// 					grTaskOrder.initialize();
+// 					// W911S122F0003 is the hardcoded value, this will need to be altered later
+// 					grTaskOrder.setValue("task_order_number", "W911S122F0003");
+// 					grTaskOrder.setValue("pop_start_date", startDate);
+// 					grTaskOrder.setValue("pop_end_date", endDate);
+// 					grTaskOrder.setValue("clins", clins.toString());
+// 					grTaskOrder.setValue("portfolio", portfolio.sys_id);
+// 					var newTaskOrderSysID = grTaskOrder.insert();
+// 					// Update CLINs with newTaskOrderSysID
+// 					clins.forEach(function (clin) {
+// 						var grClin = new GlideRecord("x_g_dis_atat_clin");
+// 						grClin.get(clin);
+// 						grClin.task_order = newTaskOrderSysID;
+// 						grClin.update();
+// 					});
+// 					// Return response
+// 					var responseMessage = "Success: created " + clins.length + " CLIN(s)";
+// 					result = {
+// 						success: responseMessage
+// 					};
+
+// 					// Update Active Task Order
+// 					portfolio.setValue("active_task_order", newTaskOrderSysID);							
+// 					portfolio.update();
+
+// 					// Update Acquisition Package Status
+// 					var acq_pkg = new GlideRecord("x_g_dis_atat_acquisition_package");
+// 					acq_pkg.get(portfolio.acquisition_package.sys_id);
+// 					acq_pkg.package_status = "TASK_ORDER_AWARDED";
+// 					acq_pkg.update();
+
+// 					return result;
+// 				}
+// 				else {
+// 					gs.error("Error: No CLINs created");
+// 					result = {
+// 						error: "No CLINs created"
+// 					};
+// 					return result;
+// 				}	
+			}
+			else{
+				// Log error string of xmlValid and include error message
+				gs.error(xmlValid);
+				result = {
+					error: "Invalid XML"
+				};
+				return result;
+			}
+		}
+		catch (error){
+			gs.error('Internal SNOW error => ' + error);
+			gs.error('Error Stack => ' + error.stack);
+			result = {
+				error: "Internal SNOW error"
+			};
+			return result;
+		}
+	};
+	
+	var eda = new Eda();
+	var payload = eda.getPayload(request, response);
+	return provision(request, payload);
+	
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_g_dis_atat/provisioning</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/</relative_path>
+        <request_example/>
+        <requires_acl_authorization>false</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-02-07 15:04:14</sys_created_on>
+        <sys_id>38812576dbb86dd8b1227ea5f3961959</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>Start Provisioning</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_ws_operation_38812576dbb86dd8b1227ea5f3961959</sys_update_name>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-02-07 22:01:43</sys_updated_on>
+        <web_service_definition display_value="Provisioning">4ba165cadb6c6918b1227ea5f39619e4</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>

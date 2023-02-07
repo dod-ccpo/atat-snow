@@ -19,6 +19,75 @@ Eda.prototype = {
 		}
     },
 	
+	getPayload: function(request, response, provision) {
+		var error = new sn_ws_err.ServiceError();
+
+		// Ensure TO not already in use
+		var toRecord = new GlideRecord("x_g_dis_atat_task_order");
+		toRecord.addQuery("task_order_number", request.queryParams.taskOrderNumber);
+		toRecord.query();
+		if (toRecord.next()) {
+			var message = "The given Task Order is already in use in a Portfolio";
+			if (toRecord.portfolio) {
+				message += " named " + toRecord.portfolio.name;			
+			}
+			return {
+				code: "0001",
+				message: message
+			};
+		}
+
+		var acqPackage = new GlideRecord("x_g_dis_atat_acquisition_package");
+		acqPackage.get(request.queryParams.acqusitionPackageSysId);
+
+		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		// CODE BELOW for testing only - remove when JWCC TOs are available in EDA GT environment
+		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		var dummyRegex = /\d000000000000/;
+		var dummyMap = {
+			"1000000000000": "AWS",
+			"2000000000000": "Azure",
+			"3000000000000": "GCP",
+			"4000000000000": "Oracle",
+			"5000000000000": "Non-JWCC",
+		};
+		if (dummyRegex.test(request.queryParams.taskOrderNumber)) {
+			var dummyRecord = new GlideRecord("x_g_dis_atat_dapps_dummy_data");
+			dummyRecord.addQuery("name", dummyMap[request.queryParams.taskOrderNumber]);
+			dummyRecord.query();
+			dummyRecord.next();
+			return dummyRecord.content;				
+		}	
+		// END EDA HARD-CODING
+
+		// Make GET request to endpoint
+		var my_procurement_doc = this.pdsRequest(request.queryParams.taskOrderNumber);
+		if (my_procurement_doc.error){
+			if (my_procurement_doc.status_code == "204") {
+				return {
+					code: "0002",
+					message: "Could not find given Task Order."
+				};
+			}
+			else if (my_procurement_doc.error.includes("Invalid Delivery Order Number")) {
+				return {
+					code: "0004",
+					message: "Invalid Task Order format."
+				};
+			}
+			else {		
+				var pdsReqError = new sn_ws_err.ServiceError();
+				pdsReqError.setMessage(my_procurement_doc.error);
+				pdsReqError.setDetail("Check System>System Logs>Errors for thrown error from edaPdsRequest");
+				return pdsReqError;			
+			}
+
+		}
+		else{
+			return my_procurement_doc.body;
+		}		
+	},
+	
 	extractPdsSummary: function(taskOrderNumber, pdsResponse) {
 		var result;
 		try{
@@ -178,15 +247,6 @@ Eda.prototype = {
 		}
 	},
 	
-	findAddresses: function(header, addressDescription) {
-		var addresses = header.ProcurementInstrumentAddresses;
-		return addresses.filter(function(address) {
-			return address.AddressDescription == addressDescription;
-		}).map(function(address) {
-			return address.Address.OrganizationNameAddress.OrganizationName;
-		});
-	},
-	
 	pdsRequest: function(deliveryOrderNumber) {
 		var payload = {
 			endpoint: this.edaBaseUrl + "/eda-api/documents/pds",
@@ -246,13 +306,13 @@ Eda.prototype = {
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-01-24 02:42:04</sys_created_on>
         <sys_id>abc17e0edba4e918b1227ea5f39619fc</sys_id>
-        <sys_mod_count>28</sys_mod_count>
+        <sys_mod_count>34</sys_mod_count>
         <sys_name>Eda</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_abc17e0edba4e918b1227ea5f39619fc</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-01-25 20:22:06</sys_updated_on>
+        <sys_updated_on>2023-02-07 21:37:41</sys_updated_on>
     </sys_script_include>
 </record_update>

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Cloud Service Provider" max_length="40" name="x_g_dis_atat_cloud_service_provider" sizeclass="1" type="collection">
+    <element label="ATAT:Cloud Service Provider" max_length="40" name="x_g_dis_atat_cloud_service_provider" sizeclass="4" type="collection">
+        <element choice="1" choice_field="classification" choice_table="x_g_dis_atat_classification_level" label="Classification Level" max_length="40" name="classification_level" type="choice">
+            <choice/>
+        </element>
         <element label="Name" max_length="40" name="name" type="string"/>
-        <element choice="1" label="Network" max_length="40" name="network" type="choice">
+        <element active="false" choice="1" label="Network" max_length="40" name="network" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Network 1" value="NETWORK_1"/>
                 <element inactive_on_update="false" label="Network 2" value="NETWORK_2"/>

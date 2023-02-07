@@ -8,91 +8,177 @@
         <http_method>GET</http_method>
         <name>Get Task Order Details</name>
         <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
-	var error = new sn_ws_err.ServiceError();
-
-	// Ensure TO not already in use
-	var toRecord = new GlideRecord("x_g_dis_atat_task_order");
-	toRecord.addQuery("task_order_number", request.queryParams.taskOrderNumber);
-	toRecord.query();
-	if (toRecord.next()) {
-		var message = "The given Task Order is already in use in a Portfolio";
-		if (toRecord.portfolio) {
-			message += " named " + toRecord.portfolio.name;			
-		}
-		return {
-			code: "0001",
-			message: message
-		};
-	}
+	var findAddresses = function(header, addressDescription) {
+		var addresses = header.ProcurementInstrumentAddresses;
+		return addresses.filter(function(address) {
+			return address.AddressDescription == addressDescription;
+		}).map(function(address) {
+			return address.Address.OrganizationNameAddress.OrganizationName;
+		});
+	};
 	
-	var acqPackage = new GlideRecord("x_g_dis_atat_acquisition_package");
-	acqPackage.get(request.queryParams.acqusitionPackageSysId);
+	var extractPdsSummary = function(taskOrderNumber, pdsResponse) {
+		var result;
+		try{
+			// Validate the XML before converting it to a string
+			// validateXML will return null if it passes validation
+			var xmlValid = GlideXMLUtil.validateXML(pdsResponse, false, false);
+			if (xmlValid == null){
+				// Parse the XML string as an XMLDocument2()
+				// This is required to use gs.xmlToJSON() without errors
+				// For more information please see: https://support.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0784264
+				var xmlStringBody = pdsResponse.toString();
+				var xmlDoc = new XMLDocument2();
+				xmlDoc.setNamespaceAware(true);
+				xmlDoc.parseXML(xmlStringBody);
+				var jsonObject = gs.xmlToJSON(xmlDoc);
+				var header = jsonObject.ProcurementDocument.AwardInstrument.ProcurementInstrumentHeader;
+
+				// Find Contractor
+				var contractors = findAddresses(header, "Contractor");
+				if (contractors.length == 0) {
+					return {
+						code: "1000",
+						message: "Did not find any Contractors."
+					};
+				}
+				else if (contractors.length > 1) {
+					return {
+						code: "1001",
+						message: "Found more than one Contractor."
+					};
+				}
+				var contractor = contractors.toString();
+
+				// Infer CSP
+				var csp = null;
+				if (contractor.includes("Amazon Web Services")) {
+					csp = "AWS";
+				}
+				else if (contractor.includes("Google Support Services")) {
+					csp = "GCP";
+				}
+				else if (contractor.includes("Microsoft Corporation")) {
+					csp = "Azure";
+				}
+				else if (contractor.includes("Oracle America")) {
+					csp = "Oracle";
+				}
+				else {
+					return {
+						code: "0003",
+						message: "Task Order not awarded under JWCC Contract."
+					};
+				}
+
+				// Find Contract Issuing Office
+				var contractIssuingOffices = findAddresses(header, "Contract Issuing Office");
+				if (contractIssuingOffices.length == 0) {
+					return {
+						code: "1100",
+						message: "Did not find any Contract Issuing Offices."
+					};
+				}
+				else if (contractIssuingOffices.length > 1) {
+					return {
+						code: "1101",
+						message: "Found more than one Contract Issuing Office."
+					};
+				}
+				var contractIssuingOffice = contractIssuingOffices.toString();
+
+				// Infer Classification Levels
+				var classificationLevels = null;
+				var lineItems = jsonObject.ProcurementDocument.AwardInstrument.ContractLineItems.LineItems;
+				var lineItemsArray = [];
+				if (!Array.isArray(lineItems)) {
+					lineItemsArray.push(lineItems);
+				}
+				else {
+					lineItemsArray = lineItems;
+				}
+				classificationLevels = lineItemsArray.map(function(lineItem) {
+					return lineItem.LineItemIdentifier.DFARS.LineItem.LineItemBase;
+				}).filter(function(lineItem) {
+					return lineItem.length == 4;
+				}).map(function(lineItem) {
+					return lineItem.substring(2);
+				}).map(function(lineItem) {
+					switch (lineItem) {
+						case '01':
+						case '17':
+							return "Unclassified";
+						case '03':
+						case '19':
+							return "Secret";
+						case '05':
+						case '21':
+							return "Top Secret";
+						default:
+							return -1;
+					}
+				}).filter(function(level) {
+					return level != -1;
+				}).filter(function(lineItem, index, self) {
+					return self.indexOf(lineItem) === index;
+				});
+
+				// Find Total Task Order Amount
+				var otherAmounts = header.ProcurementInstrumentAmounts.OtherAmounts;
+				var otherAmountsArray = [];
+				if (!Array.isArray(otherAmounts)) {
+					otherAmountsArray.push(otherAmounts);
+				}
+				else {
+					otherAmountsArray = otherAmounts;
+				}
+				var totalAmount = otherAmountsArray.filter(function(otherAmount) {
+					return otherAmount.AmountDescription.includes("Total Contract Value");
+				}).map(function(otherAmount) {
+					return otherAmount.Amount;
+				});
+
+				// Find Funded Amount
+				var fundedAmount = otherAmountsArray.filter(function(otherAmount) {
+					return otherAmount.AmountDescription.includes("Funded Amount");
+				}).map(function(otherAmount) {
+					return otherAmount.Amount;
+				});
+
+				return {
+					taskOrderNumber: taskOrderNumber.toString(),
+					popStartDate: header.ProcurementInstrumentDates.ProcurementInstrumentPeriods.StartDate,
+					popEndDate: header.ProcurementInstrumentDates.ProcurementInstrumentPeriods.EndDate,
+					contractor: contractor,
+					csp: csp,
+					contractIssuingOffice: contractIssuingOffice,
+					totalObligatedAmount: fundedAmount.toString(),
+					totalAmount: totalAmount.toString(),
+					classificationLevels: classificationLevels
+				};
+			}
+			else{
+				// Log error string of xmlValid and include error message
+				gs.error(xmlValid);
+				result = {
+					error: "Invalid XML"
+				};
+				return result;
+			}
+		}
+		catch (error){
+			gs.error('Internal SNOW error => ' + error);
+			gs.error('Error Stack => ' + error.stack);
+			result = {
+				error: "Internal SNOW error"
+			};
+			return result;
+		}
+	};	
+	
 	var eda = new Eda();
-
-	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	// CODE BELOW for testing only - remove when JWCC TOs are available in EDA GT environment
-	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	var dummyRecord = new GlideRecord("x_g_dis_atat_dapps_dummy_data");
-	if (request.queryParams.taskOrderNumber == "1000000000000") {
-		dummyRecord.addQuery("name", "AWS");
-		dummyRecord.query();
-		dummyRecord.next();
-		return eda.extractPdsSummary(request.queryParams.taskOrderNumber, dummyRecord.content);
-	} 
-	else if (request.queryParams.taskOrderNumber == "2000000000000") {
-		dummyRecord.addQuery("name", "Azure");
-		dummyRecord.query();
-		dummyRecord.next();
-		return eda.extractPdsSummary(request.queryParams.taskOrderNumber, dummyRecord.content);
-	} 	
-	else if (request.queryParams.taskOrderNumber == "3000000000000") {
-		dummyRecord.addQuery("name", "GCP");
-		dummyRecord.query();
-		dummyRecord.next();
-		return eda.extractPdsSummary(request.queryParams.taskOrderNumber, dummyRecord.content);
-	} 	
-	else if (request.queryParams.taskOrderNumber == "4000000000000") {
-		dummyRecord.addQuery("name", "Oracle");
-		dummyRecord.query();
-		dummyRecord.next();
-		return eda.extractPdsSummary(request.queryParams.taskOrderNumber, dummyRecord.content);
-	} 	
-	else if (request.queryParams.taskOrderNumber == "5000000000000") {
-		dummyRecord.addQuery("name", "Non-JWCC");
-		dummyRecord.query();
-		dummyRecord.next();
-		return eda.extractPdsSummary(request.queryParams.taskOrderNumber, dummyRecord.content);
-	} 		
-	// END EDA HARD-CODING
-	
-	// Make GET request to endpoint
-	var my_procurement_doc = eda.pdsRequest(request.queryParams.taskOrderNumber);
-	if (my_procurement_doc.error){
-		if (my_procurement_doc.status_code == "204") {
-			return {
-				code: "0002",
-				message: "Could not find given Task Order."
-			};
-		}
-		else if (my_procurement_doc.error.includes("Invalid Delivery Order Number")) {
-			return {
-				code: "0004",
-				message: "Invalid Task Order format."
-			};
-		}
-		else {		
-			var pdsReqError = new sn_ws_err.ServiceError();
-			pdsReqError.setMessage(my_procurement_doc.error);
-			pdsReqError.setDetail("Check System>System Logs>Errors for thrown error from edaPdsRequest");
-			return pdsReqError;			
-		}
-
-	}
-	else{
-		return eda.extractPdsSummary(request.queryParams.taskOrderNumber, my_procurement_doc.body);
-		//return my_procurement_doc.body;
-	}
-	
+	var payload = eda.getPayload(request, response);
+	return extractPdsSummary(request.queryParams.taskOrderNumber, payload);	
 })(request, response);]]></operation_script>
         <operation_uri>/api/x_g_dis_atat/provisioning</operation_uri>
         <produces>application/json,application/xml,text/xml</produces>
@@ -107,14 +193,14 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-01-23 22:23:16</sys_created_on>
         <sys_id>1946bd8edb64a918b1227ea5f396197f</sys_id>
-        <sys_mod_count>22</sys_mod_count>
+        <sys_mod_count>27</sys_mod_count>
         <sys_name>Get Task Order Details</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_ws_operation_1946bd8edb64a918b1227ea5f396197f</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-01-26 18:37:57</sys_updated_on>
+        <sys_updated_on>2023-02-07 19:06:23</sys_updated_on>
         <web_service_definition display_value="Provisioning">4ba165cadb6c6918b1227ea5f39619e4</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
