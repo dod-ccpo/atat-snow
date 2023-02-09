@@ -10,52 +10,76 @@
         <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
 	var provision = function(request, pdsResponse) {
 		var result;
+		var message;
 		var taskOrderNumber = request.queryParams.taskOrderNumber;
+		var acquisitionPackageSysId = request.queryParams.acquisitionPackageSysId;
 		var requestBody = request.body.data;
 		var eda = new Eda();
-		var payload = eda.getPayload(request, response);
-		var summary = extractPdsSummary(request.queryParams.taskOrderNumber, payload);	
+		var summary = eda.extractPdsSummary(taskOrderNumber, pdsResponse);
+		var acquisitionPackageRecord = new GlideRecord("x_g_dis_atat_acquisition_package");
+		var classificationLabelMap = {
+			"Unclassified" : "U",
+			"Secret" : "S",
+			"Top Secret" : "TS"
+		};
+
+		// If we get an acquisition package sys_id, look it up
+		if (acquisitionPackageSysId) {
+			acquisitionPackageRecord.get(acquisitionPackageSysId);
+			// If we don't actually find the package, return an error
+			if (!acquisitionPackageRecord) {
+				message = "Could not find an acquisition package with sysid " + acquisitionPackageSysId;
+				gs.error(message);
+				return {
+					error: message
+				};
+			}
+		}
 		
 		try{
 			// Validate the XML before converting it to a string
 			// validateXML will return null if it passes validation
 			var xmlValid = GlideXMLUtil.validateXML(pdsResponse, false, false);
-			if (xmlValid == null){
-				
-// 				// Create Task Order
-// 				var grTaskOrder = new GlideRecord("x_g_dis_atat_task_order");
-// 				grTaskOrder.initialize();
-// 				// W911S122F0003 is the hardcoded value, this will need to be altered later
-// 				grTaskOrder.setValue("task_order_number", taskOrderNumber);
-// 				grTaskOrder.setValue("pop_start_date", startDate);
-// 				grTaskOrder.setValue("pop_end_date", endDate);
-// 				grTaskOrder.setValue("clins", clins.toString());
-// 				grTaskOrder.setValue("portfolio", portfolio.sys_id);
-// 				var newTaskOrderSysID = grTaskOrder.insert();					
+			if (xmlValid == null){							
 				
 				// Create Portfolio
 				var portfolio = new GlideRecord("x_g_dis_atat_portfolio");
 				portfolio.initialize();
 				portfolio.setValue("name", requestBody.portfolioName);
+				portfolio.setValue("portfolio_status", requestBody.portfolioAgency);
+				portfolio.setValue("agency", "PROCESSING");
+				if (acquisitionPackageRecord.sys_id) {
+					portfolio.setValue("acquisition_package", acquisitionPackageRecord.sys_id);
+				}
 				portfolio.insert();
 				
-// 				var unclassified = requestBody.environments["Unclassified"];
-// 				var secret = requestBody.environments["Secret"];
-// 				var topSecret = requestBody.environments["Top Secret"];
-// 				var createEnvironment = function(level, environment) {
-// 					var environmentRecord = new GlideRecord("x_g_dis_atat_environment");
-// 					environmentRecord.initialize();
-// 					environmentRecord.setValue("name", portfolioName + " - " + level);
-// 					environmentRecord.setValue("portfolio", portfolio);
-// 					environmentRecord.insert();					
-// 				};
 				Object.keys(requestBody.environments).forEach(function (key) {
+					
+					// Find corresponding CSP
+					var cspRecord = new GlideRecord("x_g_dis_atat_cloud_service_provider");
+					message = "Vendor " + summary.csp.toUpperCase() + " and classification level " + classificationLabelMap[key];
+					gs.info(message);
+					cspRecord.addQuery("vendor", summary.csp.toUpperCase());
+					cspRecord.addQuery("classification_level", classificationLabelMap[key]);
+					cspRecord.query();
+					cspRecord.next();
+					if (!cspRecord) {
+						message = "Could not find a CSP with Vendor " + summary.csp.toUpperCase() + " and classification level " + classificationLabelMap[key];
+						gs.error(message);
+						return {
+							error: message
+						};			
+					}
+					
+					// Create Environment Record
 					var environmentRecord = new GlideRecord("x_g_dis_atat_environment");
 					environmentRecord.initialize();
 					environmentRecord.setValue("name", requestBody.portfolioName + " - " + key);
 					environmentRecord.setValue("portfolio", portfolio.sys_id);
+					environmentRecord.setValue("csp", cspRecord.sys_id);
 					environmentRecord.insert();		
 					
+					// Create Operators
 					var pendingOperators = [];
 					var env = requestBody.environments[key];
 					env.operators.forEach(function(operator) {
@@ -68,99 +92,99 @@
 						pendingOperators.push(operatorRecord.insert());		
 					});
 					
+					// Add Operators back to Environment
 					environmentRecord.setValue("pending_operators", pendingOperators);
 					environmentRecord.update();	
 				});
 				
-// 				// Parse the XML string as an XMLDocument2()
-// 				// This is required to use gs.xmlToJSON() without errors
-// 				// For more information please see: https://support.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0784264
-// 				var xmlStringBody = xmlBody.toString();
-// 				var xmlDoc = new XMLDocument2();
-// 				xmlDoc.setNamespaceAware(true);
-// 				xmlDoc.parseXML(xmlStringBody);
-// 				var jsonObject = gs.xmlToJSON(xmlDoc);
+				// Parse the XML string as an XMLDocument2()
+				// This is required to use gs.xmlToJSON() without errors
+				// For more information please see: https://support.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0784264
+				var xmlStringBody = pdsResponse.toString();
+				var xmlDoc = new XMLDocument2();
+				xmlDoc.setNamespaceAware(true);
+				xmlDoc.parseXML(xmlStringBody);
+				var jsonObject = gs.xmlToJSON(xmlDoc);
 
-// 				// As a result of parseXML, we are left with LineItems as an Array or an Object
-// 				// If it is an Array, that means there are CLIN records to create
-// 				// If it is an Object, that means there is a single CLIN record instead of a CLIN and INFOSLIN, requiring no CLIN creation
-// 				var lineItems = jsonObject.ProcurementDocument.AwardInstrument.ContractLineItems.LineItems;
-// 				var clins = [];
-// 				gs.info(Array.isArray(lineItems));
-// 				if (Array.isArray(lineItems)){
-// 					for (var i = 0; i< lineItems.length; i++){
-// 						// If LineItemType is INFOSLIN, we will create a CLIN record
-// 						if (lineItems[i].LineItemIdentifier.DFARS.LineItem.LineItemType == "INFOSLIN"){
-// 							var lineItemBase = lineItems[i].LineItemIdentifier.DFARS.LineItem.LineItemBase;
-// 							var popStartDate, popEndDate;
-// 							// We need to loop through lineItems again to find the matching CLIN that contains the popStartDate and popEndDate
-// 							for (var j = 0; j< lineItems.length; j++){
-// 								var lineItemToMatch = lineItems[j].LineItemIdentifier.DFARS.LineItem.LineItemBase;
-// 								if (lineItems[j].LineItemIdentifier.DFARS.LineItem.LineItemType == "CLIN" & lineItemToMatch == lineItemBase & lineItems[j].hasOwnProperty("LineItemDates")){
-// 									popStartDate = lineItems[j].LineItemDates.LineItemPeriod.PeriodStart.DateElement;
-// 									popEndDate = lineItems[j].LineItemDates.LineItemPeriod.PeriodEnd.DateElement;
-// 								}
-// 							}
-// 							var obligatedAmount = lineItems[i].LineItemAmounts.ItemObligatedAmount.ObligatedAmount;
-// 							// Create new CLIN record
-// 							var grClin = new GlideRecord("x_g_dis_atat_clin");
-// 							grClin.initialize();
-// 							grClin.setValue("clin_number", lineItemBase);
-// 							grClin.setValue("funds_obligated", obligatedAmount);
-// 							grClin.setValue("pop_start_date", popStartDate);
-// 							grClin.setValue("pop_end_date", popEndDate);
-// 							var newCLINSysID = grClin.insert();
-// 							clins.push(newCLINSysID);
-// 						}
-// 					}
-// 				}
-// 				// Check for created CLIN(s)
-// 				if (clins.length > 0){
-// 					// Extract startDate and endDate for the new Task Order record
-// 					var startDate = jsonObject.ProcurementDocument.AwardInstrument.ProcurementInstrumentHeader.ProcurementInstrumentDates.ProcurementInstrumentPeriods.StartDate;
-// 					var endDate = jsonObject.ProcurementDocument.AwardInstrument.ProcurementInstrumentHeader.ProcurementInstrumentDates.ProcurementInstrumentPeriods.EndDate;
-// 					// Create new Task Order parent record
-// 					var grTaskOrder = new GlideRecord("x_g_dis_atat_task_order");
-// 					grTaskOrder.initialize();
-// 					// W911S122F0003 is the hardcoded value, this will need to be altered later
-// 					grTaskOrder.setValue("task_order_number", "W911S122F0003");
-// 					grTaskOrder.setValue("pop_start_date", startDate);
-// 					grTaskOrder.setValue("pop_end_date", endDate);
-// 					grTaskOrder.setValue("clins", clins.toString());
-// 					grTaskOrder.setValue("portfolio", portfolio.sys_id);
-// 					var newTaskOrderSysID = grTaskOrder.insert();
-// 					// Update CLINs with newTaskOrderSysID
-// 					clins.forEach(function (clin) {
-// 						var grClin = new GlideRecord("x_g_dis_atat_clin");
-// 						grClin.get(clin);
-// 						grClin.task_order = newTaskOrderSysID;
-// 						grClin.update();
-// 					});
-// 					// Return response
-// 					var responseMessage = "Success: created " + clins.length + " CLIN(s)";
-// 					result = {
-// 						success: responseMessage
-// 					};
+				// As a result of parseXML, we are left with LineItems as an Array or an Object
+				// If it is an Array, that means there are CLIN records to create
+				// If it is an Object, that means there is a single CLIN record instead of a CLIN and INFOSLIN, requiring no CLIN creation
+				var lineItems = jsonObject.ProcurementDocument.AwardInstrument.ContractLineItems.LineItems;
+				var clins = [];
+				gs.info(Array.isArray(lineItems));
+				if (Array.isArray(lineItems)){
+					for (var i = 0; i< lineItems.length; i++){
+						// If LineItemType is INFOSLIN, we will create a CLIN record
+						if (lineItems[i].LineItemIdentifier.DFARS.LineItem.LineItemType == "INFOSLIN"){
+							var lineItemBase = lineItems[i].LineItemIdentifier.DFARS.LineItem.LineItemBase;
+							var popStartDate, popEndDate;
+							// We need to loop through lineItems again to find the matching CLIN that contains the popStartDate and popEndDate
+							for (var j = 0; j< lineItems.length; j++){
+								var lineItemToMatch = lineItems[j].LineItemIdentifier.DFARS.LineItem.LineItemBase;
+								if (lineItems[j].LineItemIdentifier.DFARS.LineItem.LineItemType == "CLIN" & lineItemToMatch == lineItemBase & lineItems[j].hasOwnProperty("LineItemDates")){
+									popStartDate = lineItems[j].LineItemDates.LineItemPeriod.PeriodStart.DateElement;
+									popEndDate = lineItems[j].LineItemDates.LineItemPeriod.PeriodEnd.DateElement;
+								}
+							}
+							var obligatedAmount = lineItems[i].LineItemAmounts.ItemObligatedAmount.ObligatedAmount;
+							// Create new CLIN record
+							var grClin = new GlideRecord("x_g_dis_atat_clin");
+							grClin.initialize();
+							grClin.setValue("clin_number", lineItemBase);
+							grClin.setValue("funds_obligated", obligatedAmount);
+							grClin.setValue("pop_start_date", popStartDate);
+							grClin.setValue("pop_end_date", popEndDate);
+							var newCLINSysID = grClin.insert();
+							clins.push(newCLINSysID);
+						}
+					}
+				}
+				// Check for created CLIN(s)
+				if (clins.length > 0){
+					// Extract startDate and endDate for the new Task Order record
+					var startDate = jsonObject.ProcurementDocument.AwardInstrument.ProcurementInstrumentHeader.ProcurementInstrumentDates.ProcurementInstrumentPeriods.StartDate;
+					var endDate = jsonObject.ProcurementDocument.AwardInstrument.ProcurementInstrumentHeader.ProcurementInstrumentDates.ProcurementInstrumentPeriods.EndDate;
+					// Create new Task Order parent record
+					var taskOrderRecord = new GlideRecord("x_g_dis_atat_task_order");
+					taskOrderRecord.initialize();
+					taskOrderRecord.setValue("task_order_number", taskOrderNumber.toString());
+					taskOrderRecord.setValue("pop_start_date", startDate);
+					taskOrderRecord.setValue("pop_end_date", endDate);
+					taskOrderRecord.setValue("clins", clins.toString());
+					taskOrderRecord.setValue("portfolio", portfolio.sys_id);
+					taskOrderRecord.insert();	
+					// Update CLINs with newTaskOrderSysID
+					clins.forEach(function (clin) {
+						var grClin = new GlideRecord("x_g_dis_atat_clin");
+						grClin.get(clin);
+						grClin.task_order = taskOrderRecord.sys_id.toString();
+						grClin.update();
+					});
+					// Return response
+					var responseMessage = "Success: created " + clins.length + " CLIN(s)";
+					result = {
+						success: responseMessage
+					};
 
-// 					// Update Active Task Order
-// 					portfolio.setValue("active_task_order", newTaskOrderSysID);							
-// 					portfolio.update();
+					// Update Active Task Order
+					portfolio.setValue("active_task_order", taskOrderRecord.sys_id.toString());							
+					portfolio.update();
 
-// 					// Update Acquisition Package Status
-// 					var acq_pkg = new GlideRecord("x_g_dis_atat_acquisition_package");
-// 					acq_pkg.get(portfolio.acquisition_package.sys_id);
-// 					acq_pkg.package_status = "TASK_ORDER_AWARDED";
-// 					acq_pkg.update();
+					// Update Acquisition Package Status (if we have one)
+					if (acquisitionPackageRecord.sys_id) {					
+						acquisitionPackageRecord.package_status = "TASK_ORDER_AWARDED";
+						acquisitionPackageRecord.update();
+					}					
 
-// 					return result;
-// 				}
-// 				else {
-// 					gs.error("Error: No CLINs created");
-// 					result = {
-// 						error: "No CLINs created"
-// 					};
-// 					return result;
-// 				}	
+					return result;
+				}
+				else {
+					gs.error("Error: No CLINs created");
+					result = {
+						error: "No CLINs created"
+					};
+					return result;
+				}	
 			}
 			else{
 				// Log error string of xmlValid and include error message
@@ -183,6 +207,7 @@
 	
 	var eda = new Eda();
 	var payload = eda.getPayload(request, response);
+// 	return eda.extractPdsSummary(request.queryParams.taskOrderNumber, payload);	
 	return provision(request, payload);
 	
 })(request, response);]]></operation_script>
@@ -199,14 +224,14 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-02-07 15:04:14</sys_created_on>
         <sys_id>38812576dbb86dd8b1227ea5f3961959</sys_id>
-        <sys_mod_count>9</sys_mod_count>
+        <sys_mod_count>21</sys_mod_count>
         <sys_name>Start Provisioning</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_ws_operation_38812576dbb86dd8b1227ea5f3961959</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-02-07 22:01:43</sys_updated_on>
+        <sys_updated_on>2023-02-09 01:54:24</sys_updated_on>
         <web_service_definition display_value="Provisioning">4ba165cadb6c6918b1227ea5f39619e4</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
