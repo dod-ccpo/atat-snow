@@ -168,34 +168,52 @@ Igce.prototype = {
         try {
             // For each item in IGCE estimates
             data_to_map.forEach(function (item) {
-                // For each period in the selected_periods array the instance
-                item.quantity_info_periods.forEach(function (period) {
 
-                    // Map period_type and base_period of the periods_estimate array
-                    var formattedPeriodOutput = periods_estimate.map(function (input) {
-                        return input.period.periodType + input.period.optionOrder;
-                    });
-
-                    var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(period.periodType + period.optionOrder);
-                    if (period.quantity) {
-                        formattedQuantity = parseInt(period.quantity);
-                    }
-                    else {
-                        formattedQuantity = 0;
-                    }
-
-                    // Insert into periods_estimate, under the specified period and period_line_items 
-                    periods_estimate[indexOfCurrentPeriod].periodLineItems.push({
+                // If the service title is portability plan...
+                // Map it to the last periodLineItem
+                if (item.serviceTitle === "Portability Plan") {
+                    periods_estimate[periods_estimate.length - 1].periodLineItems.push({
                         "idiqClin": Igce.prototype.determineIdiqClin(item.classification_level, item.idiq_clin_type),
                         "contractType": item.contract_type,
                         "dowTaskNumber": "TBD",//item.dow_task_number,
                         "serviceTitle": item.title,
                         "itemDescription": item.description,
                         "unitPrice": item.unit_price,
-                        "quantity": formattedQuantity,
-                        "unit": period.periodUnit.toLowerCase(),
+                        "quantity": 1,
+                        "unit": "each",
+                    })
+
+                }
+                else {
+                    // For each period in the selected_periods array the instance
+                    item.quantity_info_periods.forEach(function (period) {
+
+                        // Map period_type and base_period of the periods_estimate array
+                        var formattedPeriodOutput = periods_estimate.map(function (input) {
+                            return input.period.periodType + input.period.optionOrder;
+                        });
+
+                        var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(period.periodType + period.optionOrder);
+                        if (period.quantity) {
+                            formattedQuantity = parseInt(period.quantity);
+                        }
+                        else {
+                            formattedQuantity = 0;
+                        }
+
+                        // Insert into periods_estimate, under the specified period and period_line_items 
+                        periods_estimate[indexOfCurrentPeriod].periodLineItems.push({
+                            "idiqClin": Igce.prototype.determineIdiqClin(item.classification_level, item.idiq_clin_type),
+                            "contractType": item.contract_type,
+                            "dowTaskNumber": "TBD",//item.dow_task_number,
+                            "serviceTitle": item.title,
+                            "itemDescription": item.description,
+                            "unitPrice": item.unit_price,
+                            "quantity": formattedQuantity,
+                            "unit": period.periodUnit.toLowerCase(),
+                        });
                     });
-                });
+                }
 
             });
         }
@@ -553,6 +571,7 @@ Igce.prototype = {
                 if (item.unit_quantity) {
                     item.quantity_info_periods = Igce.prototype.getSysIdValuePairs(item.unit_quantity);
                 }
+
             });
         }
         catch (error) {
@@ -817,7 +836,6 @@ Igce.prototype = {
         this.getIgceProperties(igce);
         // Map igce estimates to periods estimate
         this.mapIgceToPeriodsEstimate(igce, periodsEstimate);
-
         // IGCE generated-document payload
 
         var igce_payload = {
@@ -839,13 +857,13 @@ Igce.prototype = {
         <sys_created_by>jeff.segal-ctr</sys_created_by>
         <sys_created_on>2022-10-12 15:53:33</sys_created_on>
         <sys_id>b29002b097a211106fa8b4b3f153afc4</sys_id>
-        <sys_mod_count>77</sys_mod_count>
+        <sys_mod_count>78</sys_mod_count>
         <sys_name>Igce</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_b29002b097a211106fa8b4b3f153afc4</sys_update_name>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2023-02-05 22:47:28</sys_updated_on>
+        <sys_updated_on>2023-02-09 14:44:25</sys_updated_on>
     </sys_script_include>
 </record_update>
