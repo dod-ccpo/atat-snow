@@ -11,7 +11,7 @@
         <copied_from_name/>
         <description>Gather all unsigned and signed documents for an Acquisition Package and send to DITCO.</description>
         <internal_name>send_package_to_ditco</internal_name>
-        <label_cache>[]</label_cache>
+        <label_cache>[{"name":"37b220d6-1902-4a94-bbdd-64cc9d07f1c0.email","label":"1➛email","reference":"sys_email","reference_display":"email","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"37b220d6-1902-4a94-bbdd-64cc9d07f1c0.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"37b220d6-1902-4a94-bbdd-64cc9d07f1c0.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"Updated_1.current.project_overview.title","label":"Trigger➛DAPPS:Acquisition Package Record➛Project Overview➛Title","reference":"","reference_display":"Title","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_project_overview","column_name":"title"}]</label_cache>
         <latest_snapshot/>
         <master_snapshot/>
         <name>DOCGEN: Send Package to DITCO</name>
@@ -30,7 +30,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>b7f0c63647b06110f39f7601e36d4370</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_name>DOCGEN: Send Package to DITCO</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -38,7 +38,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_flow_b7f0c63647b06110f39f7601e36d4370</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-07 17:31:01</sys_updated_on>
+        <sys_updated_on>2023-02-09 05:02:26</sys_updated_on>
         <type>flow</type>
     </sys_hub_flow>
     <sys_translated_text action="delete_multiple" query="documentkey=b7f0c63647b06110f39f7601e36d4370"/>
@@ -53,10 +53,10 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-07 17:31:01</sys_created_on>
         <sys_id>f6a3423a47b06110f39f7601e36d43a0</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_scope/>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-07 17:31:01</sys_updated_on>
+        <sys_updated_on>2023-02-09 05:02:26</sys_updated_on>
         <trigger_definition display_value="Updated">bb695e60c31322002841b63b12d3aea5</trigger_definition>
         <trigger_inputs/>
         <trigger_outputs/>
@@ -271,7 +271,7 @@
         <active>true</active>
         <array>false</array>
         <array_denormalized>false</array_denormalized>
-        <attributes>child_label=FDChangeDetails,child_name=FDChangeDetails,child_type=object,child_type_label=Object,co_type_name=FDaea386b680b06110f63a684e00b6b422,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,pwd2droppable=true,uiType=array.object,uiTypeLabel=Array.Object</attributes>
+        <attributes>child_label=FDChangeDetails,child_name=FDChangeDetails,child_type=object,child_type_label=Object,co_type_name=FDec8be913d2b8a1104d233d7b6cc59347,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,pwd2droppable=true,uiType=array.object,uiTypeLabel=Array.Object</attributes>
         <audit>false</audit>
         <calculation><![CDATA[(function calculatedFieldValue(current) {
 
@@ -329,14 +329,14 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-07 17:31:01</sys_created_on>
         <sys_id>f2a3423a47b06110f39f7601e36d4393</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_name/>
         <sys_package/>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name/>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-07 17:31:01</sys_updated_on>
+        <sys_updated_on>2023-02-09 05:02:26</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
@@ -348,6 +348,126 @@
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_flow_input>
+    <sys_hub_action_instance action="delete_multiple" query="flow=b7f0c63647b06110f39f7601e36d4370^sys_idNOT IN788be91347b8a110f39f7601e36d4363"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Send Email">c1806bf4a70323008299b39f087901cb</action_type>
+        <action_type_parent/>
+        <comment>Draft email to send to DITCO (documents attached after)</comment>
+        <compiled_snapshot/>
+        <display_text/>
+        <flow display_value="DOCGEN: Send Package to DITCO">b7f0c63647b06110f39f7601e36d4370</flow>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2023-02-09 05:02:26</sys_created_on>
+        <sys_id>788be91347b8a110f39f7601e36d4363</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2023-02-09 05:02:26</sys_updated_on>
+        <ui_id>37b220d6-1902-4a94-bbdd-64cc9d07f1c0</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=788be91347b8a110f39f7601e36d4363"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>788be91347b8a110f39f7601e36d4363</document_key>
+        <order>7</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2023-02-09 05:02:26</sys_created_on>
+        <sys_id>308be91347b8a110f39f7601e36d4368</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2023-02-09 05:02:26</sys_updated_on>
+        <value/>
+        <variable display_value="Body">ad806bf4a70323008299b39f087901f2</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>788be91347b8a110f39f7601e36d4363</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2023-02-09 05:02:26</sys_created_on>
+        <sys_id>b48be91347b8a110f39f7601e36d4367</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2023-02-09 05:02:26</sys_updated_on>
+        <value>0</value>
+        <variable display_value="Include Watermark">066bb6b57303230082999cfd7bf6a7c3</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=788be91347b8a110f39f7601e36d4363"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>ah_body</field>
+        <id>788be91347b8a110f39f7601e36d4363</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2023-02-09 05:02:26</sys_created_on>
+        <sys_id>708be91347b8a110f39f7601e36d4367</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2023-02-09 05:02:26</sys_updated_on>
+        <table>var__m_sys_hub_action_input_c1806bf4a70323008299b39f087901cb</table>
+        <value>&lt;p data-tinymcerootblock=""&gt;&lt;span style="color: #172b4d; font-family: -apple-system, system-ui, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;"&gt;Please find attached all Acquisition Package documents related to the DAPPS package named&amp;nbsp;&lt;span class="data_parent_pill" style="display: inline;" contenteditable="false" data-pillvalue="{{fd_transform:c8df2475-29f8-42d9-bd04-02ca7a942515}}"&gt;&lt;span class="data_pill  accepts_transform_functions" contenteditable="false" data-pillvalue="{{fd_transform:c8df2475-29f8-42d9-bd04-02ca7a942515}}"&gt;&lt;span class="data-pill-content-container"&gt;Trigger&lt;span class="data-pill-label-caret"&gt;&lt;span class="data-pill-label-arrow"&gt;➛&lt;/span&gt;&lt;/span&gt;DAPPS:Acquisition Package Record&lt;span class="data-pill-label-caret"&gt;&lt;span class="data-pill-label-arrow"&gt;➛&lt;/span&gt;&lt;/span&gt;Project Overview&lt;span class="data-pill-label-caret"&gt;&lt;span class="data-pill-label-arrow"&gt;➛&lt;/span&gt;&lt;/span&gt;Title&lt;button id="transform_function_facade_c8df2475-29f8-42d9-bd04-02ca7a942515" class="transform_function_facade no_transform_applied"&gt;&lt;span class="inline-script-icon"&gt;&lt;span style="display: none;"&gt;​&lt;/span&gt;&lt;/span&gt;&lt;/button&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;.&lt;/span&gt;&lt;/p&gt;</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>ah_subject</field>
+        <id>788be91347b8a110f39f7601e36d4363</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2023-02-09 05:02:26</sys_created_on>
+        <sys_id>348be91347b8a110f39f7601e36d4367</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2023-02-09 05:02:26</sys_updated_on>
+        <table>var__m_sys_hub_action_input_c1806bf4a70323008299b39f087901cb</table>
+        <value>New JWCC Acquisition Package: {{Updated_1.current.project_overview.title}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>watermark_email</field>
+        <id>788be91347b8a110f39f7601e36d4363</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2023-02-09 05:02:26</sys_created_on>
+        <sys_id>388be91347b8a110f39f7601e36d4366</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2023-02-09 05:02:26</sys_updated_on>
+        <table>var__m_sys_hub_action_input_c1806bf4a70323008299b39f087901cb</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=788be91347b8a110f39f7601e36d4363^sys_idNOT IN348be91347b8a110f39f7601e36d4365"/>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <input_name>ah_to</input_name>
+        <instance>788be91347b8a110f39f7601e36d4363</instance>
+        <referenced_table>sys_hub_action_instance</referenced_table>
+        <script>{"ah_to":{"scriptActive":true,"script":"/*\n**Access Flow/Action data using the fd_data object. Script must return a value.\n**example: var shortDesc \u003d fd_data.trigger.current.short_description;\n**return shortDesc;\n*/\n\nreturn \"disa.scott.ditco.mbx.ditco-jwcc@mail.mil\";"}}</script>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2023-02-09 05:02:26</sys_created_on>
+        <sys_id>348be91347b8a110f39f7601e36d4365</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2023-02-09 05:02:26</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=b7f0c63647b06110f39f7601e36d4370^sys_idNOT IN748be91347b8a110f39f7601e36d436a"/>
+    <sys_hub_pill_compound action="INSERT_OR_UPDATE">
+        <attached_to>b7f0c63647b06110f39f7601e36d4370</attached_to>
+        <extra_info/>
+        <order>0</order>
+        <prescription>{{Updated_1.current.project_overview.title}}</prescription>
+        <source_ui_id/>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2023-02-09 05:02:26</sys_created_on>
+        <sys_id>748be91347b8a110f39f7601e36d436a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2023-02-09 05:02:26</sys_updated_on>
+        <transform_compositions>[]</transform_compositions>
+        <transform_definition_id/>
+        <ui_id>c8df2475-29f8-42d9-bd04-02ca7a942515</ui_id>
+    </sys_hub_pill_compound>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_b7f0c63647b06110f39f7601e36d4370^sys_idNOT IN72a3423a47b06110f39f7601e36d439d,7aa3423a47b06110f39f7601e36d4397,fea386b647b06110f39f7601e36d432a"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>table_name</element>
