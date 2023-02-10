@@ -168,34 +168,53 @@ Igce.prototype = {
         try {
             // For each item in IGCE estimates
             data_to_map.forEach(function (item) {
-                // For each period in the selected_periods array the instance
-                item.quantity_info_periods.forEach(function (period) {
 
-                    // Map period_type and base_period of the periods_estimate array
-                    var formattedPeriodOutput = periods_estimate.map(function (input) {
-                        return input.period.periodType + input.period.optionOrder;
-                    });
-
-                    var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(period.periodType + period.optionOrder);
-                    if (period.quantity) {
-                        formattedQuantity = parseInt(period.quantity);
-                    }
-                    else {
-                        formattedQuantity = 0;
-                    }
-
-                    // Insert into periods_estimate, under the specified period and period_line_items 
-                    periods_estimate[indexOfCurrentPeriod].periodLineItems.push({
+                // If the service title is portability plan...
+                // Map it to the Base Period
+                if (item.serviceTitle === "Portability Plan") {
+                    // Base Period is always the first item in the periods_estimate array
+                    periods_estimate[0].periodLineItems.push({
                         "idiqClin": Igce.prototype.determineIdiqClin(item.classification_level, item.idiq_clin_type),
                         "contractType": item.contract_type,
                         "dowTaskNumber": "TBD",//item.dow_task_number,
                         "serviceTitle": item.title,
-                        "itemDescription": item.description,
+                        "itemDescription": "", // filled by user
                         "unitPrice": item.unit_price,
-                        "quantity": formattedQuantity,
-                        "unit": period.periodUnit.toLowerCase(),
+                        "quantity": 1, // Always 1
+                        "unit": "each",
+                    })
+
+                }
+                else {
+                    // For each period in the selected_periods array the instance
+                    item.quantity_info_periods.forEach(function (period) {
+
+                        // Map period_type and base_period of the periods_estimate array
+                        var formattedPeriodOutput = periods_estimate.map(function (input) {
+                            return input.period.periodType + input.period.optionOrder;
+                        });
+
+                        var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(period.periodType + period.optionOrder);
+                        if (period.quantity) {
+                            formattedQuantity = parseInt(period.quantity);
+                        }
+                        else {
+                            formattedQuantity = 0;
+                        }
+
+                        // Insert into periods_estimate, under the specified period and period_line_items 
+                        periods_estimate[indexOfCurrentPeriod].periodLineItems.push({
+                            "idiqClin": Igce.prototype.determineIdiqClin(item.classification_level, item.idiq_clin_type),
+                            "contractType": item.contract_type,
+                            "dowTaskNumber": "TBD",//item.dow_task_number,
+                            "serviceTitle": item.title,
+                            "itemDescription": item.description,
+                            "unitPrice": item.unit_price,
+                            "quantity": formattedQuantity,
+                            "unit": period.periodUnit.toLowerCase(),
+                        });
                     });
-                });
+                }
 
             });
         }
@@ -538,7 +557,6 @@ Igce.prototype = {
             return "x006/x022 Cloud Support TOP SECRET CLASSIFIED"
         }
     },
-
     // Get Igce Estimate Properties that are sys_id references
     getIgceProperties: function (igce) {
         try {
@@ -553,6 +571,7 @@ Igce.prototype = {
                 if (item.unit_quantity) {
                     item.quantity_info_periods = Igce.prototype.getSysIdValuePairs(item.unit_quantity);
                 }
+
             });
         }
         catch (error) {
@@ -563,8 +582,6 @@ Igce.prototype = {
         }
 
     },
-
-
     // Get IGCE Instructions
     getIgceInstructions: function (packageSysId) {
         try {
@@ -683,6 +700,8 @@ Igce.prototype = {
         var acq_package = this.acquisitionPackage;
         var periodOfPerformance = acq_package.period_of_performance;
         var fundingRequest = acq_package.funding_request;
+        var currentEnvironment = acq_package.current_environment;
+        var contractingShop = acq_package.contracting_shop;
 
         if (!periodOfPerformance) {
             throw this.errUtil.createError(
@@ -725,25 +744,77 @@ Igce.prototype = {
             }
             var toolsUsed = "";
             if (igceInstructions.how_est_dev_tools_used) {
-                toolsUsed += igceInstructions.how_est_dev_tools_used;
-            }
-            if (igceInstructions.how_est_dev_other_tools_used) {
-                toolsUsed += " " + igceInstructions.how_est_dev_other_tools_used;
-            }
+                toolsUsed = igceInstructions.how_est_dev_tools_used;
+                // Fix leading comma
+                if (toolsUsed.substring(0, 1) === ",") {
+                    toolsUsed = toolsUsed.substring(1);
+                }
+                toolsUsed = toolsUsed
+                    .replace("AWS", "AWS pricing calculator")
+                    .replace("GOOGLE_CLOUD", "Google Cloud pricing calculator")
+                    .replace("MICROSOFT_AZURE", "Microsoft Azure pricing calculator")
+                    .replace("ORACLE_CLOUD", "Oracle Cloud pricing calculator")
+                    .replace("PREVIOUSLY_PAID_PRICES", "Prices previously paid on a same or similar contract")
+                    .replace("OTHER", igceInstructions.how_est_dev_other_tools_used);
 
+                if (igceInstructions.how_est_dev_other_tools_used) {
+                    toolsUsed = toolsUsed
+                        .replace("OTHER", igceInstructions.how_est_dev_other_tools_used);
+                }
+            }
+            var previousEstimateComparison = "";
+            if (currentEnvironment && currentEnvironment.current_environment_exists === "Yes") {
+                if (igceInstructions.how_est_dev_prev_cost_estimate_comp_option) {
+                    var cost_estimate_percentage = "";
+                    if (igceInstructions.how_est_dev_prev_cost_estimate_comp_percentage) {
+                        cost_estimate_percentage = igceInstructions.how_est_dev_prev_cost_estimate_comp_percentage.toString() + " ";
+                    }
+                    switch (igceInstructions.how_est_dev_prev_cost_estimate_comp_option) {
+                        case "MORE_THAN":
+                            previousEstimateComparison = "The previous cost estimate was " + cost_estimate_percentage + "more than the actual prices paid.";
+                            break;
+                        case "LESS_THAN":
+                            previousEstimateComparison = "The previous cost estimate was " + cost_estimate_percentage + "less than the actual prices paid.";
+                            break;
+                        case "SAME":
+                            previousEstimateComparison = "The previous cost estimate was approximately the same as the actual prices paid.";
+                            break;
+                    }
+                }
+            }
+            else {
+                previousEstimateComparison = "This is not a follow-on task order."
+            }
             instructions = {
                 estimateDescription: igceInstructions.how_est_dev_cost_estimate_description,
                 assumptionsMade: "assumptions",
                 toolsUsed: toolsUsed,
                 informationSource: "info source",
-                previousEstimateComparison: igceInstructions.how_est_dev_prev_cost_estimate_comp_option
+                previousEstimateComparison: previousEstimateComparison
             };
         }
 
         // Get Contracting Shop
         var cShop;
-        if (acq_package.contracting_shop) {
-            cShop = acq_package.contracting_shop.toString();
+        if (contractingShop) {
+            if (contractingShop.toString() === "OTHER") {
+                var fee;
+                if (igceInstructions.how_est_dev_contracting_office_other_charges_fee.toString() === "YES") {
+                    fee = igceInstructions.how_est_dev_contracting_office_other_fee_percentage;
+                }
+                else {
+                    fee = 0;
+                }
+                cShop = {
+                    name: "OTHER",
+                    fee: fee
+                }
+            }
+            else {
+                cShop = {
+                    name: "DITCO"
+                }
+            }
         }
 
         // Get Training Estimates
@@ -817,7 +888,6 @@ Igce.prototype = {
         this.getIgceProperties(igce);
         // Map igce estimates to periods estimate
         this.mapIgceToPeriodsEstimate(igce, periodsEstimate);
-
         // IGCE generated-document payload
 
         var igce_payload = {
@@ -839,13 +909,13 @@ Igce.prototype = {
         <sys_created_by>jeff.segal-ctr</sys_created_by>
         <sys_created_on>2022-10-12 15:53:33</sys_created_on>
         <sys_id>b29002b097a211106fa8b4b3f153afc4</sys_id>
-        <sys_mod_count>77</sys_mod_count>
+        <sys_mod_count>82</sys_mod_count>
         <sys_name>Igce</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_b29002b097a211106fa8b4b3f153afc4</sys_update_name>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2023-02-05 22:47:28</sys_updated_on>
+        <sys_updated_on>2023-02-09 21:52:09</sys_updated_on>
     </sys_script_include>
 </record_update>
