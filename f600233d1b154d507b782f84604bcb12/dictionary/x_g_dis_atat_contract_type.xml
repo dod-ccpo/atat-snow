@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Contract Type" max_length="40" name="x_g_dis_atat_contract_type" sizeclass="0" type="collection">
-        <element display="true" label="Contract Type Justification" max_length="2000" name="contract_type_justification" type="string"/>
+    <element label="DAPPS:Contract Type" max_length="40" name="x_g_dis_atat_contract_type" sizeclass="1" type="collection">
+        <element label="Contract Type Justification" max_length="2000" name="contract_type_justification" type="string"/>
+        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;    if (current.firm_fixed_price &amp;&amp; !current.time_and_materials) return 'FFP';&#13;&#10;    else if (!current.firm_fixed_price &amp;&amp; current.time_and_materials) return 'T&amp;M';&#13;&#10;    else if (current.firm_fixed_price &amp;&amp; current.time_and_materials) return 'TBD';&#13;&#10;    else return 'NULL';&#13;&#10;})(current);" display="true" label="Display" max_length="10" name="display" read_only="true" type="string" virtual="true"/>
         <element label="Firm Fixed Price" max_length="40" name="firm_fixed_price" type="boolean"/>
         <element label="Time And Materials" max_length="40" name="time_and_materials" type="boolean"/>
     </element>
