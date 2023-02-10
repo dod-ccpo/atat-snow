@@ -337,6 +337,7 @@ erDiagram
         String contract_type_justification "if FFP"
         Boolean firm_fixed_price
         Boolean time_and_materials
+        String display "calculated value"
     }
     CURRENT-CONTRACT-INFORMATION-AND-RECURRING-INFORMATION {
         GUID sys_id PK
