@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.Eda</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>Eda</name>
+        <script><![CDATA[var Eda = Class.create();
+Eda.prototype = {
+	edaBaseUrl: null,
+	
+    initialize: function() {
+		this.edaBaseUrl = gs.getProperty("x_g_dis_atat.eda.baseUrl");
+		if (!this.edaBaseUrl) {
+			throw {
+				code: "0500",
+				message: "eda.baseUrl is required for EDA integration"
+			};			
+		}
+    },
+	
+	getPayload: function(request, response, provision) {
+		var error = new sn_ws_err.ServiceError();
+
+		// Ensure TO not already in use
+		var toRecord = new GlideRecord("x_g_dis_atat_task_order");
+		toRecord.addQuery("task_order_number", request.queryParams.taskOrderNumber);
+		toRecord.query();
+		if (toRecord.next()) {
+			var message = "The given Task Order is already in use in a Portfolio";
+			if (toRecord.portfolio) {
+				message += " named " + toRecord.portfolio.name;			
+			}
+			throw {
+				code: "0001",
+				message: message
+			};
+		}
+
+		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		// CODE BELOW for testing only - remove when JWCC TOs are available in EDA GT environment
+		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+		var dummyRegex = /\d000000000000/;
+		var dummyMap = {
+			"1000000000000": "AWS",
+			"2000000000000": "Azure",
+			"3000000000000": "GCP",
+			"4000000000000": "Oracle",
+			"5000000000000": "Non-JWCC",
+		};
+		if (dummyRegex.test(request.queryParams.taskOrderNumber)) {
+			var dummyRecord = new GlideRecord("x_g_dis_atat_dapps_dummy_data");
+			dummyRecord.addQuery("name", dummyMap[request.queryParams.taskOrderNumber]);
+			dummyRecord.query();
+			dummyRecord.next();
+			return dummyRecord.content;				
+		}	
+		// END EDA HARD-CODING
+
+		// Make GET request to endpoint
+		var my_procurement_doc = this.pdsRequest(request.queryParams.taskOrderNumber);
+		if (my_procurement_doc.error){
+			if (my_procurement_doc.status_code == "204") {
+				throw {
+					code: "0002",
+					message: "Could not find given Task Order."
+				};
+			}
+			else if (my_procurement_doc.error.includes("Invalid Delivery Order Number")) {
+				throw {
+					code: "0004",
+					message: "Invalid Task Order format."
+				};
+			}
+			else {		
+				throw {
+					code: "0500",
+					message: my_procurement_doc.error
+				};
+			}
+
+		}
+		else{
+			return my_procurement_doc.body;
+		}		
+	},
+	
+	extractPdsSummary: function(taskOrderNumber, pdsResponse) {
+		var result;
+		// Validate the XML before converting it to a string
+		// validateXML will return null if it passes validation
+		var xmlValid = GlideXMLUtil.validateXML(pdsResponse, false, false);
+		if (xmlValid == null){
+			// Parse the XML string as an XMLDocument2()
+			// This is required to use gs.xmlToJSON() without errors
+			// For more information please see: https://support.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0784264
+			var xmlStringBody = pdsResponse.toString();
+			var xmlDoc = new XMLDocument2();
+			xmlDoc.setNamespaceAware(true);
+			xmlDoc.parseXML(xmlStringBody);
+			var jsonObject = gs.xmlToJSON(xmlDoc);
+			var header = jsonObject.ProcurementDocument.AwardInstrument.ProcurementInstrumentHeader;
+
+			// Find Contractor
+			var contractors = this.findAddresses(header, "Contractor");
+			if (contractors.length == 0) {
+				throw {
+					code: "1000",
+					message: "Did not find any Contractors."
+				};
+			}
+			else if (contractors.length > 1) {
+				throw {
+					code: "1001",
+					message: "Found more than one Contractor."
+				};
+			}
+			var contractor = contractors.toString();
+
+			// Infer CSP
+			var csp = null;
+			if (contractor.includes("Amazon Web Services")) {
+				csp = "AWS";
+			}
+			else if (contractor.includes("Google Support Services")) {
+				csp = "GCP";
+			}
+			else if (contractor.includes("Microsoft Corporation")) {
+				csp = "Azure";
+			}
+			else if (contractor.includes("Oracle America")) {
+				csp = "Oracle";
+			}
+			else {
+				throw {
+					code: "0003",
+					message: "Task Order not awarded under JWCC Contract."
+				};
+			}
+
+			// Find Contract Issuing Office
+			var contractIssuingOffices = this.findAddresses(header, "Contract Issuing Office");
+			if (contractIssuingOffices.length == 0) {
+				throw {
+					code: "1100",
+					message: "Did not find any Contract Issuing Offices."
+				};
+			}
+			else if (contractIssuingOffices.length > 1) {
+				throw {
+					code: "1101",
+					message: "Found more than one Contract Issuing Office."
+				};
+			}
+			var contractIssuingOffice = contractIssuingOffices.toString();
+
+			// Infer Classification Levels
+			var classificationLevels = null;
+			var lineItems = jsonObject.ProcurementDocument.AwardInstrument.ContractLineItems.LineItems;
+			var lineItemsArray = [];
+			if (!Array.isArray(lineItems)) {
+				lineItemsArray.push(lineItems);
+			}
+			else {
+				lineItemsArray = lineItems;
+			}
+			classificationLevels = lineItemsArray.map(function(lineItem) {
+				return lineItem.LineItemIdentifier.DFARS.LineItem.LineItemBase;
+			}).filter(function(lineItem) {
+				return lineItem.length == 4;
+			}).map(function(lineItem) {
+				return lineItem.substring(2);
+			}).map(function(lineItem) {
+				switch (lineItem) {
+					case '01':
+					case '17':
+						return "Unclassified";
+					case '03':
+					case '19':
+						return "Secret";
+					case '05':
+					case '21':
+						return "Top Secret";
+					default:
+						return -1;
+				}
+			}).filter(function(level) {
+				return level != -1;
+			}).filter(function(lineItem, index, self) {
+				return self.indexOf(lineItem) === index;
+			});
+
+			// Find Total Task Order Amount
+			var otherAmounts = header.ProcurementInstrumentAmounts.OtherAmounts;
+			var otherAmountsArray = [];
+			if (!Array.isArray(otherAmounts)) {
+				otherAmountsArray.push(otherAmounts);
+			}
+			else {
+				otherAmountsArray = otherAmounts;
+			}
+			var totalAmount = otherAmountsArray.filter(function(otherAmount) {
+				return otherAmount.AmountDescription.includes("Total Contract Value");
+			}).map(function(otherAmount) {
+				return otherAmount.Amount;
+			});
+
+			// Find Funded Amount
+			var fundedAmount = otherAmountsArray.filter(function(otherAmount) {
+				return otherAmount.AmountDescription.includes("Funded Amount");
+			}).map(function(otherAmount) {
+				return otherAmount.Amount;
+			});
+
+			return {
+				taskOrderNumber: taskOrderNumber.toString(),
+				popStartDate: header.ProcurementInstrumentDates.ProcurementInstrumentPeriods.StartDate,
+				popEndDate: header.ProcurementInstrumentDates.ProcurementInstrumentPeriods.EndDate,
+				contractor: contractor,
+				csp: csp,
+				contractIssuingOffice: contractIssuingOffice,
+				totalObligatedAmount: fundedAmount.toString(),
+				totalAmount: totalAmount.toString(),
+				classificationLevels: classificationLevels
+			};
+		}
+		else{
+			throw {
+				code: "0501",
+				message: "Invalid XML"
+			};
+		}
+	},
+	
+	findAddresses: function(header, addressDescription) {
+		var addresses = header.ProcurementInstrumentAddresses;
+		return addresses.filter(function(address) {
+			return address.AddressDescription == addressDescription;
+		}).map(function(address) {
+			return address.Address.OrganizationNameAddress.OrganizationName;
+		});
+	},	
+	
+	pdsRequest: function(deliveryOrderNumber) {
+		var payload = {
+			endpoint: this.edaBaseUrl + "/eda-api/documents/pds",
+			delivery_order_number: deliveryOrderNumber
+		};
+		var http_payload;
+		try{
+			// Outbound REST message
+			var request = new sn_ws.RESTMessageV2();
+
+			// Request set-up
+			request.setEndpoint(payload.endpoint);
+			request.setHttpMethod("get");
+			request.setLogLevel("all");
+			request.setMutualAuth(gs.getProperty("x_g_dis_atat.eda.protocolProfile"));
+
+			// Add query parameters
+			if(payload.contract_number){
+				request.setQueryParameter("contractNumber", payload.contract_number);
+			}
+			if(payload.delivery_order_number){
+				request.setQueryParameter("deliveryOrderNumber", payload.delivery_order_number);
+			}
+
+			// Make request
+			var response = request.execute();
+			// Check for errors
+			if(response.getStatusCode() != "200"){
+				gs.error(response.getStatusCode());
+				gs.error(response.getBody());
+				var errorMessage = "Error: " + response.getStatusCode() + " " + response.getBody() + " response, no XML retrieved";
+				http_payload = {
+					body: response.getBody(),
+					status_code: response.getStatusCode(),
+					headers: response.getAllHeaders(),
+					error: errorMessage
+				};
+				return http_payload;
+
+			}
+			http_payload = {
+				body: response.getBody(),
+				status_code: response.getStatusCode(),
+				headers: response.getAllHeaders(),
+			};
+			return http_payload;
+		}
+		catch(error){
+			gs.error("Internal SNOW error => " + error);
+			gs.error("Error Stack => " + error.stack);
+		}		
+	},
+
+    type: 'Eda'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-01-24 02:42:04</sys_created_on>
+        <sys_id>abc17e0edba4e918b1227ea5f39619fc</sys_id>
+        <sys_mod_count>50</sys_mod_count>
+        <sys_name>Eda</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_abc17e0edba4e918b1227ea5f39619fc</sys_update_name>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-02-09 19:43:36</sys_updated_on>
+    </sys_script_include>
+</record_update>

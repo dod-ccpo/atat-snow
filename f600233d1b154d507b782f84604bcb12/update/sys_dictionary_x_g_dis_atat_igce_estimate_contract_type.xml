@@ -6,10 +6,10 @@
         <attributes/>
         <audit>false</audit>
         <calculation><![CDATA[(function calculatedFieldValue(current) {
-
-	// Add your code here
-	return '';  // return the calculated value
-
+	if (current.acquisition_package) {
+		return current.acquisition_package.contract_type.display.toString();
+	}
+	else return 'NULL';
 })(current);]]></calculation>
         <choice>1</choice>
         <choice_field/>
@@ -38,7 +38,7 @@
         <name>x_g_dis_atat_igce_estimate</name>
         <next_element/>
         <primary>false</primary>
-        <read_only>false</read_only>
+        <read_only>true</read_only>
         <read_roles/>
         <reference/>
         <reference_cascade_rule/>
@@ -53,22 +53,22 @@
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-12-16 23:22:05</sys_created_on>
-        <sys_id>44871af597fb1110cf3cfd9fe153af3d</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_id>1a016a4e97f75110cf3cfd9fe153afd6</sys_id>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name>Contract Type</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_dictionary_x_g_dis_atat_igce_estimate_contract_type</sys_update_name>
         <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-12-16 23:22:05</sys_updated_on>
+        <sys_updated_on>2023-02-10 21:18:19</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
         <use_dependent_field>false</use_dependent_field>
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
-        <virtual>false</virtual>
+        <virtual>true</virtual>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>

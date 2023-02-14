@@ -1,30 +1,36 @@
-### Entity-Relationship Diagram (ERD)
+### DAPPS Entity-Relationship Diagram (ERD)
 
+DISA Acquisition Package Preparation System (DAPPS)
 This diagram is simplified to emphasize core business entities and their relationships. See Relational Model for details.
 
 ```mermaid
 erDiagram
-    %% Portfolio
-    PORTFOLIO ||--|{ TASK-ORDER : "funded by"
-    TASK-ORDER ||--|{ CLIN : ""
-    PORTFOLIO ||--|{ COSTS : ""
-    PORTFOLIO }|--|| CLOUD-SERVICE-PROVIDER : "provisioned by"
-    COSTS }|--|| CLIN : ""
-    COSTS }|--|| CLOUD-SERVICE-PROVIDER : "billed by"
-    COSTS }|--|{ TASK-ORDER : "billed against"
-    COSTS }|--|| ORGANIZATION : "incurred by"
-    COSTS }|--|| AGENCY : ""
-
-    %% Package
-    ACQUISITION-PACKAGE ||--|| PORTFOLIO : "provisions"
     ACQUISITION-PACKAGE }|--|| ORGANIZATION : "supports mission of"
     ORGANIZATION ||--|{ AGENCY : ""
     ACQUISITION-PACKAGE ||--|| PERIOD-OF-PERFORMANCE : ""
-    PACKAGE-DOCUMENT }|--|| ACQUISITION-PACKAGE : ""
-    %% - funding
     ACQUISITION-PACKAGE ||--|| FUNDING-REQUIREMENT : ""
-    FUNDING-REQUIREMENT ||--|{ FUNDING-PLAN : ""
-    ACQUISITION-PACKAGE ||--|| FUNDING-REQUEST : ""
+    FUNDING-REQUIREMENT ||--|| FUNDING-PLAN : ""
+    FUNDING-REQUIREMENT ||--|| FUNDING-REQUEST : ""
+```
+
+### ATAT Entity-Relationship Diagram (ERD)
+
+Account Tracking & Automation Tool (ATAT)
+This diagram is simplified to emphasize core business entities and their relationships. See Relational Model for details.
+
+```mermaid
+erDiagram
+    PORTFOLIO ||--|| ACQUISITION-PACKAGE : "defines requirements"
+    PORTFOLIO ||--|{ TASK-ORDER : "funded by"
+    TASK-ORDER ||--|{ CLIN : "from EDA"
+    PORTFOLIO ||--|{ COSTS : "incurs"
+    ENVIRONMENT ||--|| PORTFOLIO : ""
+    ENVIRONMENT ||--|| CLOUD-SERVICE-PROVIDER : "provisioned by"
+    COSTS }|--|| CLOUD-SERVICE-PROVIDER : "billed by"
+    COSTS }|--|{ TASK-ORDER : "billed against"
+    COSTS }|--|| ORGANIZATION : "incurred by"
+    ORGANIZATION ||--|{ AGENCY : ""
+    OPERATOR ||--|| ENVIRONMENT : "administers"
 ```
 
 ### Relational Model Diagram
@@ -48,20 +54,22 @@ erDiagram
         GUID sys_id PK
         Reference acquisition_package FK "to Acquisition Package"
         Reference active_task_order FK "to Task Order"
-        Reference csp FK "to Cloud Service Provider"
-        List pending_operators FK "to Operator"
-        String csp_portfolio_id "from CSP"
-        URL dashboard_link "deep link to CSP"
-        DateTime last_updated
+        List portfolio_managers FK "to sys_user"
+        List portfolio_viewers FK "to sys_user"
         String name
+        String description
+        DateTime last_updated
         Choice portfolio_funding_status "ON_TRACK/AT_RISK/FUNDING_AT_RISK/EXPIRED/DELINQUENT/EXPIRING_SOON"
-        List portfolio_managers "to sys_user"
-        List portfolio_viewers "to sys_user"
         Choice portfolio_status "ACTIVE/ARCHIVED/PROCESSING"
-        Boolean provisioned
-        DateTime provisioned_date
-        String provisioning_failure_cause
-        DateTime provisioning_request_date
+        
+        List pending_operators FK "(column INACTIVE)"
+        URL dashboard_link "(column INACTIVE)"
+        String csp_portfolio_id "(column INACTIVE)"
+        Reference csp FK "(column INACTIVE)"
+        Boolean provisioned "(column INACTIVE)"
+        DateTime provisioned_date "(column INACTIVE)"
+        String provisioning_failure_cause "(column INACTIVE)"
+        DateTime provisioning_request_date "(column INACTIVE)"
     }
     TASK-ORDER {
         GUID sys_id PK
@@ -115,25 +123,43 @@ erDiagram
         String title
         String acronym
     }
+    ENVIRONMENT {
+        GUID sys_id PK
+        Reference csp FK "to Cloud Service Provider"
+        List pending_operators FK "to Operator"
+        Reference portfolio FK "to Portfolio"
+        String name
+        String csp_portfolio_id
+        URL dashboard_link "deep link to CSP"
+        Boolean provisioned
+        DateTime provisioned_date "for provisioning duration"
+        String provisioning_failure_cause
+        DateTime provisioning_request_date
+    }
     OPERATOR {
         GUID sys_id PK
-        Reference portfolio FK "to Portfolio"
+        Reference environment FK "to Environment"
         String dod_id
         String email
         Boolean needs_reset
         Boolean provisioned
         DateTime provisioning_request_date
-        DateTime provisioned_date
+        DateTime provisioned_date "for provisioning duration"
         String provisioning_failure_cause
         String added_by
+        Reference portfolio FK "(column INACTIVE)"
     }
     PORTFOLIO ||--|{ TASK-ORDER : "funded by"
     TASK-ORDER ||--|{ CLIN : "has (from EDA)"
     CLIN }|--|| TASK-ORDER : "part of"
     PORTFOLIO ||--|{ COSTS : "has (from CSPs)"
-    PORTFOLIO ||--|{ SYS_USER : "portfolio managers and viewers"
-    PORTFOLIO ||--|{ OPERATOR : "pending operators"
-    PORTFOLIO }|--|| CLOUD-SERVICE-PROVIDER : "provisioned by"
+    PORTFOLIO ||--|{ SYS_USER : "portfolio managers"
+    PORTFOLIO ||--o{ SYS_USER : "portfolio viewers"
+    ENVIRONMENT ||--|{ OPERATOR : "pending"
+    OPERATOR ||--|| ENVIRONMENT : "administers"
+    ENVIRONMENT ||--|| PORTFOLIO : "belongs to"
+    ENVIRONMENT ||--|| CLOUD-SERVICE-PROVIDER : "provisioned by"
+    PROVISIONING-JOB ||--|| ENVIRONMENT : "request to provision"
     COSTS }|--|| CLIN : ""
     COSTS }|--|| CLOUD-SERVICE-PROVIDER : "billed by"
     COSTS }|--|{ TASK-ORDER : "billed against"
@@ -246,11 +272,14 @@ erDiagram
     }
     PROVISIONING-JOB {
         GUID sys_id PK
-        Reference acquisition_package FK "to Acquisition Package"
+        Reference environment FK "to Environment"
         Choice job_type "ADD_PORTFOLIO/ADD_OPERATORS/ADD_FUNDING_SOURCE"
         String payload
         Choice status "NOT_STARTED/IN_PROGRESS/SUCCESS/FAILURE"
         String status_message
+        String csp_job_id "provided by CSP"
+        String hoth_job_id "provided by ATAT"
+        Reference acquisition_package FK "(column INACTIVE)"
     }
     ORGANIZATION {
         GUID sys_id PK
@@ -308,6 +337,7 @@ erDiagram
         String contract_type_justification "if FFP"
         Boolean firm_fixed_price
         Boolean time_and_materials
+        String display "calculated value"
     }
     CURRENT-CONTRACT-INFORMATION-AND-RECURRING-INFORMATION {
         GUID sys_id PK
@@ -451,6 +481,7 @@ erDiagram
     TRAINING-ESTIMATE {
         GUID sys_id PK
         Reference acquisition_package FK "to Acquisition Package"
+        Reference cloud_support_environment_instance FK "to Cloud Support Environment Instance"
         Reference requirements_cost_estimate FK "(column INACTIVE)"
         Choice training_unit "PER_PERSON/PER_CLASS/ANNUAL_SUBSCRIPTION/MONTHLY_SUBSCRIPTION"
         Choice subscription_type "(column INACTIVE)"
@@ -593,6 +624,7 @@ erDiagram
         Choice operating_system_licensing "TRANSFER_EXISTING/NEW"
         String anticipated_need_or_usage
         String usage_description
+        Integer instance_number
         Currency cost_estimate "(column INACTIVE)"
         String igce_title "(column INACTIVE)"
         String igce_description "(column INACTIVE)"
@@ -631,6 +663,14 @@ erDiagram
         String abbreviation
         String file_name
         String edms_document_type
+    }
+    PACKAGE-DOCUMENTS-SIGNED {
+        GUID sys_id PK
+        Reference acquisition_package FK "to Acquisition Package"
+    }
+    PACKAGE-DOCUMENTS-UNSIGNED {
+        GUID sys_id PK
+        Reference acquisition_package FK "to Acquisition Package"
     }
     UPDATE-SALESFORCE-COR-ACOR-CONTACT {
         GUID sys_id PK
@@ -741,6 +781,8 @@ erDiagram
     PACKAGE-DOCUMENT }|--|| ACQUISITION-PACKAGE : ""
     PACKAGE-DOCUMENT ||--|| PACKAGE-DOCUMENT-TYPE : ""
     PACKAGE-DOCUMENT ||--|| SYS_ATTACHMENT : "Package document"
+    PACKAGE-DOCUMENTS-SIGNED }|--|| ACQUISITION-PACKAGE : ""
+    PACKAGE-DOCUMENTS-UNSIGNED }|--|| ACQUISITION-PACKAGE : ""
     SELECTED-CLASSIFICATION-LEVEL }|--|| ACQUISITION-PACKAGE : ""
     SELECTED-CLASSIFICATION-LEVEL ||--|| CLASSIFICATION-LEVEL : ""
     SELECTED-CLASSIFICATION-LEVEL ||--o{ CLASSIFIED-INFORMATION-TYPE : "S and TS only"
@@ -758,6 +800,7 @@ erDiagram
     IGCE-ESTIMATE ||--|| CROSS-DOMAIN-SOLUTION : ""
     REQUIREMENTS-COST-ESTIMATE }|--|| ACQUISITION-PACKAGE : ""
     TRAINING-ESTIMATE }|--|| ACQUISITION-PACKAGE : ""
+    TRAINING-ESTIMATE }|--|| CLOUD-SUPPORT-ENVIRONMENT-INSTANCE : ""
 
     %% DoW Performance Requirements
     SELECTED-SERVICE-OFFERING }|--|| ACQUISITION-PACKAGE : ""

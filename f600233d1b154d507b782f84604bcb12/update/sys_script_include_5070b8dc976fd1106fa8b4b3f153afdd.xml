@@ -103,11 +103,19 @@ Ifp.prototype = {
 	getPayload: function() {
 		try {
 			var acqPackage = this.acquisitionPackage;
-			var fundingRequirement = acqPackage.funding_requirement;
-			var isIncrementallyFunded = convertToBoolean(fundingRequirement.incrementally_funded.toString());
+			var pkgInfo = this.errUtil.getRecordLogInfo(acqPackage, "number");
+			var fundingRequirement = new GlideRecord('x_g_dis_atat_funding_requirement');
+			fundingRequirement.addQuery("acquisition_package", acqPackage.sys_id);
+			fundingRequirement.query();
+			if (fundingRequirement.hasNext()) {
+				fundingRequirement.next();     
+			}
+			else {
+				throw this.errUtil.createError("Could not find a Funding Requirement for this Acquisition Package.", this.errUtil.INVALID_INPUT);     
+			}
 
-			if (!isIncrementallyFunded) {
-				var pkgInfo = this.errUtil.getRecordLogInfo(acqPackage, "number");
+			var isIncrementallyFunded = convertToBoolean(fundingRequirement.incrementally_funded.toString());
+			if (!fundingRequirement) {
 				var message = "Package " + pkgInfo.allInfo + " is not incrementally funded and does not ";
 				message += "require an IFP. If an IFP is needed ensure 'YES' is selected for Incrementally ";
 				message += "Funded in the Funding Requirement section.";
@@ -116,7 +124,6 @@ Ifp.prototype = {
 
 			var fundingRequest = fundingRequirement.funding_request;
 			var fundingPlan = fundingRequirement.funding_plan;
-			//var financialPoc = fundingRequirement.financial_poc;
 			var financialPoc = new GlideRecord(this.CONTACTS_TABLE);
 			financialPoc.get(fundingRequirement.financial_poc);
 			
@@ -126,10 +133,10 @@ Ifp.prototype = {
 				gs.warn("No Funding Request found for this Acquisition Package.");
 			}
 			if (!fundingPlan) {
-				throw this.errUtil.createError("No Funding Plan found for this Acquisition Package.", this.errUtil.INVALID_INPUT);
+				throw this.errUtil.createError("No Funding Plan found for " + pkgInfo.allInfo + ". ", this.errUtil.INVALID_INPUT);
 			}
 			if (!financialPoc) {
-				throw this.errUtil.createError("No Financial POC found for this Acquisition Package.", this.errUtil.INVALID_INPUT);
+				throw this.errUtil.createError("No Financial POC found for " + pkgInfo.allInfo + ". ", this.errUtil.INVALID_INPUT);
 			}
 						
 			return {
@@ -144,7 +151,7 @@ Ifp.prototype = {
 					fundingDocument: this.getFundingDocument(fundingRequest),
 					fundingIncrements: this.getFundingIncrements(fundingPlan),
 					scheduleText: fundingPlan.schedule_text.toString(),
-					contractNumber: gs.getProperty("x_g_dis_atat.jwcc.contractNumber"),
+					contractNumber: "TBD", // gs.getProperty("x_g_dis_atat.jwcc.contractNumber"),
 					taskOrderNumber: "TBD",
 				}
 			};
@@ -162,13 +169,13 @@ Ifp.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-11-29 14:21:01</sys_created_on>
         <sys_id>5070b8dc976fd1106fa8b4b3f153afdd</sys_id>
-        <sys_mod_count>30</sys_mod_count>
+        <sys_mod_count>34</sys_mod_count>
         <sys_name>Ifp</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_5070b8dc976fd1106fa8b4b3f153afdd</sys_update_name>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2022-12-28 21:52:22</sys_updated_on>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2023-01-31 14:35:50</sys_updated_on>
     </sys_script_include>
 </record_update>

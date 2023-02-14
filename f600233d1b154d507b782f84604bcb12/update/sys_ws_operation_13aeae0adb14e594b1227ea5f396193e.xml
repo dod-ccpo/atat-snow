@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl/>
+        <http_method>GET</http_method>
+        <name>PDS-GET</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+	var edaBaseUrl = gs.getProperty("x_g_dis_atat.eda.baseUrl");
+	var error = null;
+	if (!edaBaseUrl) {
+		error = new sn_ws_err.ServiceError();
+		error.setMessage("eda.baseUrl is required for EDA integration");
+		return error;	
+	}
+	
+	// Create request payload
+	var payload = {
+		endpoint: edaBaseUrl + "/eda-api/documents/pds",
+		delivery_order_number: request.queryParams.deliveryOrderNumber,
+		contract_number: request.queryParams.contractNumber,
+	};
+	// Make GET request to endpoint
+	var my_procurement_doc = edaPdsRequest(payload);
+	if (my_procurement_doc.error){
+		var pdsReqError = new sn_ws_err.ServiceError();
+		pdsReqError.setMessage(my_procurement_doc.error);
+		pdsReqError.setDetail("Check System>System Logs>Errors for thrown error from edaPdsRequest");
+		return pdsReqError;
+	}
+	else{
+		return my_procurement_doc.body.toString();
+	}
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_g_dis_atat/eda</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/</relative_path>
+        <request_example/>
+        <requires_acl_authorization>false</requires_acl_authorization>
+        <requires_authentication>false</requires_authentication>
+        <requires_snc_internal_role>false</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-01-11 16:26:24</sys_created_on>
+        <sys_id>13aeae0adb14e594b1227ea5f396193e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>PDS-GET</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_ws_operation_13aeae0adb14e594b1227ea5f396193e</sys_update_name>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-01-11 16:26:24</sys_updated_on>
+        <web_service_definition display_value="EDA">841459131b6411107c458623604bcbcd</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>

@@ -3,7 +3,7 @@
         <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
         <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Classification Instance" max_length="32" name="classification_instance" reference="x_g_dis_atat_classification_instance" type="reference"/>
         <element label="Classification Level" max_length="32" name="classification_level" reference="x_g_dis_atat_classification_level" type="reference"/>
-        <element choice="1" label="Contract Type" max_length="40" name="contract_type" type="choice">
+        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;&#9;if (current.acquisition_package) {&#13;&#10;&#9;&#9;return current.acquisition_package.contract_type.display.toString();&#13;&#10;&#9;}&#13;&#10;&#9;else return 'NULL';&#13;&#10;})(current);" choice="1" label="Contract Type" max_length="40" name="contract_type" read_only="true" type="choice" virtual="true">
             <choice>
                 <element inactive_on_update="false" label="Firm Fixed Price" sequence="1" value="FFP"/>
                 <element inactive_on_update="false" label="Time And Materials" sequence="2" value="T&amp;M"/>
