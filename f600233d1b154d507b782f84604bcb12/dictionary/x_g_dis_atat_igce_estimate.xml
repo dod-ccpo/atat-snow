@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="DAPPS:IGCE Estimate" max_length="40" name="x_g_dis_atat_igce_estimate" sizeclass="0" type="collection">
+    <element label="DAPPS:IGCE Estimate" max_length="40" name="x_g_dis_atat_igce_estimate" sizeclass="40" type="collection">
         <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
         <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Classification Instance" max_length="32" name="classification_instance" reference="x_g_dis_atat_classification_instance" type="reference"/>
         <element label="Classification Level" max_length="32" name="classification_level" reference="x_g_dis_atat_classification_level" type="reference"/>
-        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;&#9;if (current.acquisition_package) {&#13;&#10;&#9;&#9;return current.acquisition_package.contract_type.display.toString();&#13;&#10;&#9;}&#13;&#10;&#9;else return 'NULL';&#13;&#10;})(current);" choice="1" label="Contract Type" max_length="40" name="contract_type" read_only="true" type="choice" virtual="true">
+        <element calculation="(function calculatedFieldValue(current) {&#10;&#9;if (current.acquisition_package) {&#10;&#9;&#9;return current.acquisition_package.contract_type.display.toString();&#10;&#9;}&#10;&#9;else return 'NULL';&#10;})(current);" choice="1" label="Contract Type" max_length="40" name="contract_type" read_only="true" type="choice" virtual="true">
             <choice>
                 <element inactive_on_update="false" label="Firm Fixed Price" sequence="1" value="FFP"/>
                 <element inactive_on_update="false" label="Time And Materials" sequence="2" value="T&amp;M"/>
@@ -40,19 +40,19 @@
             <element name="selected_service_offering"/>
         </index>
         <index name="index2">
-            <element name="classification_level"/>
-        </index>
-        <index name="index3">
-            <element name="environment_instance"/>
-        </index>
-        <index name="index4">
             <element name="classification_instance"/>
         </index>
-        <index name="index5">
+        <index name="index3">
             <element name="acquisition_package"/>
         </index>
-        <index name="index6">
+        <index name="index4">
+            <element name="classification_level"/>
+        </index>
+        <index name="index5">
             <element name="cross_domain_solution"/>
+        </index>
+        <index name="index6">
+            <element name="environment_instance"/>
         </index>
     </element>
 </database>
