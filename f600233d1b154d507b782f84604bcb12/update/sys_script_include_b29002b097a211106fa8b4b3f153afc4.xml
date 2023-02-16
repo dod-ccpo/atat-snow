@@ -30,7 +30,16 @@ Igce.prototype = {
         "how_est_dev_tools_used", //String 100
         "how_est_dev_other_tools_used", //string 100
         "travel_option", //choice I want to apply the same price estimate to all performance fields -> SINGLE, I want to estimate a different price for the base and each option period -> MULTIPLE or null
-        "travel_estimated_values" // String: Tony refactoring to sys_id: quantity on 1/13/2023
+        "travel_estimated_values", // String: Tony refactoring to sys_id: quantity on 1/13/2023
+        "optimize_replicate_option", // SINGLE / MULTIPLE / null
+        "optimize_replicate_estimated_values", //String list of values in order based on period. e.g. -> 100,200,300 (base period, option period 1, option period 2)
+        "architectural_design_current_environment_option", //need to query, not showing up in SNOW (SINGLE/ MULTIPLE/ null?)
+        "architectural_design_current_environment_estimated_values", ////String list of values in order based on period. e.g. -> 100,200,300 (base period, option period 1, option period 2)
+        "architectural_design_performance_requirements_option", //need to query, not showing up in SNOW (SINGLE/ MULTIPLE/ null?)
+        "architectural_design_performance_requirements_estimated_values", /////String list of values in order based on period. e.g. -> 100,200,300 (base period, option period 1, option period 2)
+
+
+
 
 
     ],
@@ -163,61 +172,76 @@ Igce.prototype = {
             );
         }
     },
+    validateIgceEstimateItem: function (item_to_validate) {
+        if (item_to_validate.title
+            && item_to_validate.unit_price
+            && item_to_validate.classification_level
+            && item_to_validate.idiq_clin_type
+            && item_to_validate.contract_type
+            && item_to_validate.description) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    },
 
     mapIgceToPeriodsEstimate: function (data_to_map, periods_estimate) {
         try {
             // For each item in IGCE estimates
             data_to_map.forEach(function (item) {
-
-                // If the service title is portability plan...
-                // Map it to the Base Period
-                if (item.title && item.title === "Portability Plan") {
-                    // Base Period is always the first item in the periods_estimate array
-                    periods_estimate[0].periodLineItems.push({
-                        "idiqClin": Igce.prototype.determineIdiqClin(item.classification_level, item.idiq_clin_type),
-                        "contractType": item.contract_type,
-                        "dowTaskNumber": "TBD",//item.dow_task_number,
-                        "serviceTitle": item.title,
-                        "itemDescription": "", // filled by user
-                        "unitPrice": item.unit_price,
-                        "quantity": 1, // Always 1
-                        "unit": "each",
-                    })
-
-                }
-                else {
-                    // For each period in the selected_periods array the instance
-                    item.quantity_info_periods.forEach(function (period) {
-
-                        // Map period_type and base_period of the periods_estimate array
-                        var formattedPeriodOutput = periods_estimate.map(function (input) {
-                            return input.period.periodType + input.period.optionOrder;
-                        });
-
-                        var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(period.periodType + period.optionOrder);
-                        var formattedQuantity;
-                        // If the quantity key exists on the period (mapping was successful if period.quantity exists)
-                        if (period.quantity) {
-                            // Format the quantity to months
-                            formattedQuantity = monthsInPeriod(period.periodUnit, parseInt(period.quantity));
-                        }
-                        else {
-                            formattedQuantity = 0;
-                        }
-
-
-                        // Insert into periods_estimate, under the specified period and period_line_items 
-                        periods_estimate[indexOfCurrentPeriod].periodLineItems.push({
+                // If the item meets the validation criteria
+                if (Igce.prototype.validateIgceEstimateItem(item)) {
+                    // If the service title is portability plan...
+                    // Map it to the Base Period
+                    if (item.title && item.title === "Portability Plan") {
+                        // Base Period is always the first item in the periods_estimate array
+                        periods_estimate[0].periodLineItems.push({
                             "idiqClin": Igce.prototype.determineIdiqClin(item.classification_level, item.idiq_clin_type),
                             "contractType": item.contract_type,
                             "dowTaskNumber": "TBD",//item.dow_task_number,
                             "serviceTitle": item.title,
-                            "itemDescription": item.description,
+                            "itemDescription": "", // filled by user
                             "unitPrice": item.unit_price,
-                            "quantity": formattedQuantity,
-                            "unit": "month",
+                            "quantity": 1, // Always 1
+                            "unit": "each",
+                        })
+
+                    }
+                    else {
+                        // For each period in the selected_periods array the instance
+                        item.quantity_info_periods.forEach(function (period) {
+
+                            // Map period_type and base_period of the periods_estimate array
+                            var formattedPeriodOutput = periods_estimate.map(function (input) {
+                                return input.period.periodType + input.period.optionOrder;
+                            });
+
+                            var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(period.periodType + period.optionOrder);
+                            var formattedQuantity;
+                            // If the quantity key exists on the period (mapping was successful if period.quantity exists)
+                            if (period.quantity) {
+                                // Format the quantity to months
+                                formattedQuantity = monthsInPeriod(period.periodUnit, parseInt(period.quantity));
+                            }
+                            else {
+                                formattedQuantity = 0;
+                            }
+
+
+                            // Insert into periods_estimate, under the specified period and period_line_items 
+                            periods_estimate[indexOfCurrentPeriod].periodLineItems.push({
+                                "idiqClin": Igce.prototype.determineIdiqClin(item.classification_level, item.idiq_clin_type),
+                                "contractType": item.contract_type,
+                                "dowTaskNumber": "TBD",//item.dow_task_number,
+                                "serviceTitle": item.title,
+                                "itemDescription": item.description,
+                                "unitPrice": item.unit_price,
+                                "quantity": formattedQuantity,
+                                "unit": "month",
+                            });
                         });
-                    });
+                    }
                 }
 
             });
@@ -699,6 +723,51 @@ Igce.prototype = {
             );
         }
     },
+    // Map Current Environment to Periods Estimate
+    mapCurrentEnvironmentToPeriodsEstimate: function (env_object, periods_estimate) {
+        try {
+            // Apply estimated value to all periods in PoP
+            if (env_object.value_option === "SINGLE") {
+                periods_estimate.forEach(function (period) {
+                    period.periodLineItems.push({
+                        "idiqClin": Igce.prototype.determineIdiqClin(env_object.classification_level, "CLOUD"),
+                        "contractType": env_object.contract_type,
+                        "dowTaskNumber": "TBD",
+                        "serviceTitle": "Objective-based requirements",
+                        "itemDescription": env_object.description,
+                        "unitPrice": env_object.values,
+                        "quantity": 1, // Always 1 Period 
+                        "unit": "period",
+                    })
+                });
+            }
+            // Apply estimated values to PoP based on order of values to PoP
+            else if (env_object.value_option === "MULTIPLE") {
+                // For each item in values array (e.g) 700,800,900
+                env_object.values.forEach(function (item_value) {
+                    var indexOfValue = env_object.values.indexOf(item_value); // 0 for first item, 1 for next item
+                    // Periods Estimate is in order, base period's index is always 0
+                    periods_estimate[indexOfValue].periodLineItems.push({
+                        "idiqClin": Igce.prototype.determineIdiqClin(env_object.classification_level, "CLOUD"),
+                        "contractType": env_object.contract_type,
+                        "dowTaskNumber": "TBD",
+                        "serviceTitle": "Objective-based requirements",
+                        "itemDescription": env_object.description,
+                        "unitPrice": item_value, // use item_value instead of env_object.value
+                        "quantity": 1, // Always 1 Period 
+                        "unit": "period",
+                    });
+                });
+            }
+        }
+        catch (error) {
+            throw this.errUtil.createError(
+                "Igce --> mapCurrentEnvironmentToPeriodsEstimate(): " + error,
+                this.errUtil.METHOD_ERROR
+            );
+        }
+    },
+
 
     getPayload: function () {
         var acq_package = this.acquisitionPackage;
@@ -718,6 +787,7 @@ Igce.prototype = {
         var periodsEstimate = this.getPackagePeriods(
             periodOfPerformance.base_period, periodOfPerformance.option_periods
         );
+
 
         // Get Funding Request
         var fundingDocument;
@@ -886,6 +956,90 @@ Igce.prototype = {
             this.mapTravelToPeriodsEstimate(travel_reqs, periodsEstimate);
         }
 
+        // Get Current Environment Details
+        var currentEnvOption;
+        if (igceInstructions && currentEnvironment.current_environment_exists.toString() === "YES" && currentEnvironment.current_environment_replicated_optimized) {
+            var envInstances = currentEnvironment.env_instances.toString().split(","); //List type record in SNOW isn't natively an array
+            // Set currentEnvOption, this is the string description body
+            switch (currentEnvironment.current_environment_replicated_optimized.toString()) {
+                case "YES_REPLICATE":
+                    currentEnvOption = "Replicate current environment (" + envInstances.length + " instances)";
+                    break;
+                case "YES_OPTIMIZE":
+                    currentEnvOption = "Optimize current environment (" + envInstances.length + " instances)";
+                    break;
+                case "NO":
+                    currentEnvOption = null;
+                    break;
+            }
+            var envClassOutput = [];
+            var envCloudClassifications = currentEnvironment.env_classifications_cloud.toString().split(",");
+            var envOnPremClassifications = currentEnvironment.env_classifications_onprem.toString().split(",");
+            var envHybridClasisifications = envCloudClassifications.concat(envOnPremClassifications);
+            switch (currentEnvironment.env_location.toString()) {
+                case "CLOUD":
+                    envCloudClassifications.forEach(function (item) {
+                        var envObject = Igce.prototype.getClassificationLevel(item)
+                        envClassOutput.push(envObject);
+                    });
+                    break;
+                case "ON_PREM":
+                    envOnPremClassifications.forEach(function (item) {
+                        var envObject = Igce.prototype.getClassificationLevel(item)
+                        envClassOutput.push(envObject);
+                    });
+                    break;
+                case "HYBRID":
+                    envHybridClasisifications.forEach(function (item) {
+                        var envObject = Igce.prototype.getClassificationLevel(item)
+                        envClassOutput.push(envObject);
+                    });
+                    break;
+            }
+            // Determine the highest classification level
+            // ES5 constraint
+            // TS > S > U
+            var highestClassificationLevel;
+            if (envClassOutput.indexOf("TS") !== -1) {
+                highestClassificationLevel = "TS";
+            }
+            else if (envClassOutput.indexOf("S") !== -1
+                && envClassOutput.indexOf("TS") === -1) {
+                highestClassificationLevel = "S";
+            }
+            else if (envClassOutput.indexOf("U") !== -1
+                && envClassOutput.indexOf("S") === -1
+                && envClassOutput.indexOf("TS") === -1) {
+                highestClassificationLevel = "U";
+            }
+
+            var valueOption;
+            var values;
+
+            // Mapping based on Requirements Cost Estimate (igceInstructions)
+
+            if (igceInstructions.optimize_replicate_option.toString() === "SINGLE") {
+                // Apply estimated value to all periods in PoP
+                valueOption = "SINGLE"
+                values = igceInstructions.optimize_replicate_estimated_values;
+            }
+            else if (igceInstructions.optimize_replicate_option.toString() === "MULTIPLE") {
+                // Apply estimated values to PoP based on order of values to PoP
+                var estimatedValues = igceInstructions.optimize_replicate_estimated_values.toString().split(",");
+                valueOption = "MULTIPLE";
+                values = estimatedValues;
+            }
+            var envObject = {
+                "contract_type": acq_package.contract_type.getDisplayValue(),
+                "classification_level": highestClassificationLevel,
+                "description": currentEnvOption,
+                "value_option": valueOption,
+                "values": values
+            }
+            this.mapCurrentEnvironmentToPeriodsEstimate(envObject, periodsEstimate);
+
+        }
+
         // Get all IGCE Estimates that have the acquisition package as the FK
         var igce = this.getIgceEstimates(this.acquisitionPackage.sys_id);
         // Determine selected_periods for instance_info and classification_level
@@ -901,7 +1055,7 @@ Igce.prototype = {
                 periodsEstimate: periodsEstimate,
                 contractingShop: cShop,
                 instructions: instructions,
-                surgeCapabilities: igceSurgeCapabilities
+                surgeCapabilities: igceSurgeCapabilities,
             }
         };
 
@@ -913,13 +1067,13 @@ Igce.prototype = {
         <sys_created_by>jeff.segal-ctr</sys_created_by>
         <sys_created_on>2022-10-12 15:53:33</sys_created_on>
         <sys_id>b29002b097a211106fa8b4b3f153afc4</sys_id>
-        <sys_mod_count>85</sys_mod_count>
+        <sys_mod_count>86</sys_mod_count>
         <sys_name>Igce</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_b29002b097a211106fa8b4b3f153afc4</sys_update_name>
         <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2023-02-15 21:26:17</sys_updated_on>
+        <sys_updated_on>2023-02-16 21:20:05</sys_updated_on>
     </sys_script_include>
 </record_update>
