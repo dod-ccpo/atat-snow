@@ -77,8 +77,11 @@ PackageAttachments.prototype = {
     }
   },
   /**
-   * Delete documents on the Package Documents Unsigned record that will be signed by
-   * the Mission Owner in DAPPS and uploaded to the Package Document Signed record.
+   * Delete documents on the Package Documents Unsigned record.
+   *
+   * Main purpose of this method is to delete documents that will be signed by
+   * the Mission Owner in DAPPS and uploaded to the Package Document Signed record,
+   * or documents that are will be uploaded again (e.g., J&A and MRR templates).
    *
    * Alternatively, there is a manual process for copying individual records, however
    * in the interest of time and to keep the complexcity low, all documents will be copied
@@ -87,9 +90,10 @@ PackageAttachments.prototype = {
    * Ref for copying a single attachment
    * - see https://snprotips.com/blog/2016/2/25/understanding-and-using-glideattachment#4
    *
+   * @param {string|Array} filesToDelete - an array of file names that can be deleted
    * @return {void}
    */
-  deleteSignedDocumentAttachments: function() {
+  deleteUnsignedDocumentAttachments: function(filesToDelete) {
     try {
       // get all attachments and delete the ones based on the document name.
       var attachmentsToDelete = this.attachments.getAttachments(
@@ -101,9 +105,7 @@ PackageAttachments.prototype = {
         var attachmentSysId = attachmentsToDelete.sys_id.toString();
         var fileName = attachmentsToDelete.file_name.toString();
 
-        // documents that require a signature
-        var signedFiles = ["RequirementsChecklist.docx","IGCE.xlsx", "IncrementalFundingPlan.docx"];
-        if (listContains(fileName, signedFiles)) {
+        if (listContains(fileName, filesToDelete)) {
           var message = "Deleting attachment: " + fileName;
           message += " (SysId: " + attachmentSysId + ").";
           gs.debug(message);
@@ -112,17 +114,17 @@ PackageAttachments.prototype = {
       }
     } catch (error) {
       throw this.errUtil.createError(
-        "PackageAttachments --> deleteSignedDocumentAttachments(): " + error,
+        "PackageAttachments --> deleteUnsignedDocumentAttachments(): " + error,
         this.errUtil.METHOD_ERROR
       );
     }
   },
   /**
-   * Delete all attachments on package Unsigned Document record.
+   * Delete all attachments on the Package Unsigned Document record.
    *
    * @return {void}
    */
-  deleteUnsignedRecordAttachments: function() {
+  deleteAllUnsignedDocumentAttachments: function() {
     try {
       // get the unsigned docs record (contains all unsigned docs)
       var foundAttachments = this.attachments.getAttachments(this.UNSIGNED_DOCS_TABLE, this.unsignedRecSysId);
@@ -137,7 +139,7 @@ PackageAttachments.prototype = {
       }
     } catch (error) {
       throw this.errUtil.createError(
-        "PackageAttachments --> deleteUnsignedRecordAttachments(): " + error,
+        "PackageAttachments --> deleteAllUnsignedAttachments(): " + error,
         this.errUtil.METHOD_ERROR
       );
     }
@@ -228,35 +230,36 @@ PackageAttachments.prototype = {
   },
 
   /**
-   * Gather all unsigned package documents and attach to the Package Documents Unsigned record 
-   * to be later attached to an email sent to DITCO.
+   * Prepare the Package Documents Unsigned record to copy the attachments that will be sent in an email
+   * to DITCO. Any operations needed to get the unsigned record in a state to be sent in an Email.
    *
-   * Note: currently the main method used in the Copy Attachment to Email action.
+   * After generating all the documents, the documents are gathered into the Package Documents
+   * Unsigned record for the user to download and sign specific documents (see 
+   * gatherUnsignedDocumentsForDownload). This method is to provide 
+   * any logic that is needed prior to copying the attachments to the email, which at the moemnt
+   * is removing attachemnts to prevent duplication.
+   *
+   * NOTE:It is probably a good idea to limit the user from uploading documents of the same name.
    *
    * @return {void}
    */
-  gatherUnsignedDocumentsToEmail: function() {
+  prepareUnsignedDocumentsToEmail: function() {
     try {
-      this.deleteUnsignedRecordAttachments();
-      this.copyAttachmentsToUnsignedRecord(this.PKG_TABLE, this.acquisitionPackage.sys_id.toString());
-      // NOTE: It is important that deleteSignedRecordAttachments() comes immediately after copying 
-      // the attachments on the acquisisiton package to the unsigned record to ensure that only the
-      // intended documents are deleted prior to the attachment of other documents
-      this.deleteSignedDocumentAttachments();
-      this.copyAttachmentsToUnsignedRecord(this.CURR_ENV_TABLE, this.currentEnvRecSysId);
-      this.copyAttachmentsToUnsignedRecord(this.REQ_COST_EST_TABLE, this.reqCostEstRecSysId);
+      var signedAndUnsignedFilesTotDelete = [
+        // documents that will be signed by user and uploaded to the Package Documents Signed record
+        "RequirementsChecklist.docx",
+        "IGCE.xlsx", 
+        "IncrementalFundingPlan.docx",
+        // documents that are unsigned and will be uploaded again to Package Documents Unsigned record
+        "JWCC Market Research Report (Sole Source)_Template.docx",
+        "JWCC J&A Template_Template.docx"
+      ];
+      this.deleteUnsignedDocumentAttachments(signedAndUnsignedFilesToDelete);
       
-      // NOTE: because modifying the global scope for sys_attachment is needed, this was commented
-      // out and funding request attachments are added directly in Flow Designer using the record 
-      // sysId which works and is less complex. This original work around for trying to attach
-      // a file attachment column type is no longer needed.
-      // var fundingRequest = this.acquisitionPackage.funding_request;
-      // var fundingType = fundingRequest.funding_request_type.toString();
-      // this.copyFundingRequestDocuments(fundingRequest, fundingType);
 
     } catch (error) {
       throw this.errUtil.createError(
-        "PackageAttachments --> gatherUnsignedDocumentsToEmail(): " + error,
+        "PackageAttachments --> prepareUnsignedDocumentsToEmail(): " + error,
         this.errUtil.METHOD_ERROR
       );
     }
@@ -269,10 +272,18 @@ PackageAttachments.prototype = {
    */
   gatherUnsignedDocumentsForDownload: function() {
     try {
-      this.deleteUnsignedRecordAttachments();
+      this.deleteAllUnsignedDocumentAttachments();
       this.copyAttachmentsToUnsignedRecord(this.PKG_TABLE, this.acquisitionPackage.sys_id.toString());
       this.copyAttachmentsToUnsignedRecord(this.CURR_ENV_TABLE, this.currentEnvRecSysId);
       this.copyAttachmentsToUnsignedRecord(this.REQ_COST_EST_TABLE, this.reqCostEstRecSysId);
+
+      // NOTE: because modifying the global scope for sys_attachment is needed, this was commented
+      // out and funding request attachments are added directly in Flow Designer using the record 
+      // sysId which works and is less complex. This original work around for trying to attach
+      // a file attachment column type is no longer needed.
+      // var fundingRequest = this.acquisitionPackage.funding_request;
+      // var fundingType = fundingRequest.funding_request_type.toString();
+      // this.copyFundingRequestDocuments(fundingRequest, fundingType);
       
     } catch (error) {
       throw this.errUtil.createError(
@@ -293,7 +304,7 @@ PackageAttachments.prototype = {
   copyDocumentsToEmail: function(emailSysId) {
     try {
 
-      this.gatherUnsignedDocumentsToEmail();
+      this.prepareUnsignedDocumentsToEmail();
       // NOTE: does not properly copy when used in Flow Deisnger so moved below inside of FD action
       // this.attachments.copy(this.UNSIGNED_DOCS_TABLE, this.unsignedSysId, this.EMAIL_TABLE, emailSysId);
       // this.attachments.copy(this.SIGNED_DOCS_TABLE, this.signedSysId, this.EMAIL_TABLE, emailSysId);
@@ -316,13 +327,13 @@ PackageAttachments.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-09 05:45:20</sys_created_on>
         <sys_id>4f2ce55347b8a110f39f7601e36d430a</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name>PackageAttachments</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_4f2ce55347b8a110f39f7601e36d430a</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-16 17:48:57</sys_updated_on>
+        <sys_updated_on>2023-02-16 23:24:10</sys_updated_on>
     </sys_script_include>
 </record_update>
