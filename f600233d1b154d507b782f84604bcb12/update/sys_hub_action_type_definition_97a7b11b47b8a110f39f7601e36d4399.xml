@@ -14,7 +14,7 @@
         <description>Gathers package documents and attach to an email.</description>
         <ih_action>false</ih_action>
         <internal_name>copy_package_attachments_to_email</internal_name>
-        <label_cache>[{"name":"{{action.package}}","label":"action➛Package","type":"action","ref":"","reference_display":"DAPPS:Acquisition Package","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.email_sys_id}}","label":"action➛Email Sys ID","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[9140bde9-dc16-4f1f-92e9-7cd7f1ed1b6a].variable}}","label":"step➛Copy Attachments to Email➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[9140bde9-dc16-4f1f-92e9-7cd7f1ed1b6a].funding_form_sys_id}}","label":"step➛Copy Attachments to Email➛Funding Form Sys Id","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}}]</label_cache>
+        <label_cache>[{"name":"{{action.package}}","label":"action➛Package","type":"action","ref":"","reference_display":"DAPPS:Acquisition Package","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.email_sys_id}}","label":"action➛Email Sys ID","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.package.sys_id}}","label":"action➛Package➛Sys ID","type":"action","ref":"","reference_display":"Sys ID","base_type":"GUID","parent_table_name":"x_g_dis_atat_acquisition_package","column_name":"sys_id","choices":null,"attributes":{}},{"name":"{{action.payload}}","label":"action➛payload","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"string","uiUniqueId":"dffed03a-6418-4b14-8197-db13ccc783bb"}},{"name":"{{step[9140bde9-dc16-4f1f-92e9-7cd7f1ed1b6a].variable}}","label":"step➛Copy Attachments to Email➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[9140bde9-dc16-4f1f-92e9-7cd7f1ed1b6a].funding_form_sys_id}}","label":"step➛Copy Attachments to Email➛Funding Form Sys Id","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[27a80581-5a44-4525-ace9-143a7cf46a91].variable}}","label":"step➛Copy Attachments for Download➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[27a80581-5a44-4525-ace9-143a7cf46a91].funding_form_sys_id}}","label":"step➛Copy Attachments for Download➛Funding Form Sys ID","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[175129e2-a873-4439-9088-03830082967c].records}}","label":"step➛Look up Funding Documents➛Attachment records","type":"step","ref":"","reference_display":"","base_type":"records","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[175129e2-a873-4439-9088-03830082967c].count}}","label":"step➛Look up Funding Documents➛Count","type":"step","ref":"","reference_display":"","base_type":"integer","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[b5e246a4-c0b7-400c-9a02-dfb87f0c43ff].record}}","label":"step➛Look up Unsigned Record➛DAPPS:Package Documents Unsigned Record","type":"step","ref":"x_g_dis_atat_package_documents_unsigned","reference_display":"","base_type":"document_id","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[8bc0d538-9f11-4eae-94b5-bc2d19c74f39].variable}}","label":"step➛Update Provisioning Job Records➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[8bc0d538-9f11-4eae-94b5-bc2d19c74f39].number_events}}","label":"step➛Update Provisioning Job Records➛Number Events","type":"step","ref":"","reference_display":"","base_type":"integer","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[8bc0d538-9f11-4eae-94b5-bc2d19c74f39].num_events}}","label":"step➛Update Provisioning Job Records➛Num Events","type":"step","ref":"","reference_display":"","base_type":"integer","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[8bc0d538-9f11-4eae-94b5-bc2d19c74f39].num_updates}}","label":"step➛Update Provisioning Job Records➛Num Updates","type":"step","ref":"","reference_display":"","base_type":"integer","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}}]</label_cache>
         <master_snapshot>7629f9db47b8a110f39f7601e36d43cb</master_snapshot>
         <name>Copy Package Attachments to Email</name>
         <natlang/>
@@ -35,7 +35,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_97a7b11b47b8a110f39f7601e36d4399</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-16 17:56:39</sys_updated_on>
+        <sys_updated_on>2023-02-16 23:48:05</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -124,10 +124,10 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-09 06:01:51</sys_created_on>
         <sys_id>3e19b9db47b8a110f39f7601e36d434b</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-16 17:56:30</sys_updated_on>
+        <sys_updated_on>2023-02-16 23:47:57</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=3e19b9db47b8a110f39f7601e36d434b"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -138,13 +138,13 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-09 06:01:51</sys_created_on>
         <sys_id>4f19b9db47b8a110f39f7601e36d4368</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-16 17:56:30</sys_updated_on>
+        <sys_updated_on>2023-02-16 23:47:57</sys_updated_on>
         <value>(function execute(inputs, outputs) {
 
   var attachments = new PackageAttachments(inputs.acqPackage);
-  attachments.gatherUnsignedDocumentsToEmail();
+  attachments.prepareUnsignedDocumentsToEmail();
   
   // attchment documents from below records (source)
   var unsignedTable = "x_g_dis_atat_package_documents_unsigned";
@@ -211,11 +211,11 @@
         <field>script</field>
         <id>3e19b9db47b8a110f39f7601e36d434b</id>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
-        <sys_created_on>2023-02-16 17:56:30</sys_created_on>
-        <sys_id>6fcfd43947812110f39f7601e36d4395</sys_id>
+        <sys_created_on>2023-02-16 23:47:57</sys_created_on>
+        <sys_id>044071f947c52110f39f7601e36d4359</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-16 17:56:30</sys_updated_on>
+        <sys_updated_on>2023-02-16 23:47:57</sys_updated_on>
         <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
         <value/>
     </sys_element_mapping>
@@ -1034,17 +1034,17 @@
     <sys_hub_action_plan action="INSERT_OR_UPDATE">
         <action_id display_value="Copy Package Attachments to Email">97a7b11b47b8a110f39f7601e36d4399</action_id>
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"d3293ddb47b8a110f39f7601e36d4371","name":"plan","plan_signature":null}}</plan>
-        <snapshot>f5df583947812110f39f7601e36d4316</snapshot>
+        <snapshot>3d40b1f947c52110f39f7601e36d437f</snapshot>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-09 06:02:08</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>d3293ddb47b8a110f39f7601e36d4371</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_overrides/>
         <sys_scope/>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-16 17:56:40</sys_updated_on>
+        <sys_updated_on>2023-02-16 23:48:06</sys_updated_on>
     </sys_hub_action_plan>
     <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
@@ -1058,7 +1058,7 @@
         <copied_from_name/>
         <description>Gathers package documents and attach to an email.</description>
         <internal_name>copy_package_attachments_to_email</internal_name>
-        <label_cache>[{"name":"{{action.package}}","label":"action➛Package","type":"action","ref":"","reference_display":"DAPPS:Acquisition Package","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.email_sys_id}}","label":"action➛Email Sys ID","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[9140bde9-dc16-4f1f-92e9-7cd7f1ed1b6a].variable}}","label":"step➛Copy Attachments to Email➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[9140bde9-dc16-4f1f-92e9-7cd7f1ed1b6a].funding_form_sys_id}}","label":"step➛Copy Attachments to Email➛Funding Form Sys Id","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}}]</label_cache>
+        <label_cache>[{"name":"{{action.package}}","label":"action➛Package","type":"action","ref":"","reference_display":"DAPPS:Acquisition Package","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.email_sys_id}}","label":"action➛Email Sys ID","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.package.sys_id}}","label":"action➛Package➛Sys ID","type":"action","ref":"","reference_display":"Sys ID","base_type":"GUID","parent_table_name":"x_g_dis_atat_acquisition_package","column_name":"sys_id","choices":null,"attributes":{}},{"name":"{{action.payload}}","label":"action➛payload","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"string","uiUniqueId":"dffed03a-6418-4b14-8197-db13ccc783bb"}},{"name":"{{step[9140bde9-dc16-4f1f-92e9-7cd7f1ed1b6a].variable}}","label":"step➛Copy Attachments to Email➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[9140bde9-dc16-4f1f-92e9-7cd7f1ed1b6a].funding_form_sys_id}}","label":"step➛Copy Attachments to Email➛Funding Form Sys Id","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[27a80581-5a44-4525-ace9-143a7cf46a91].variable}}","label":"step➛Copy Attachments for Download➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[27a80581-5a44-4525-ace9-143a7cf46a91].funding_form_sys_id}}","label":"step➛Copy Attachments for Download➛Funding Form Sys ID","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[175129e2-a873-4439-9088-03830082967c].records}}","label":"step➛Look up Funding Documents➛Attachment records","type":"step","ref":"","reference_display":"","base_type":"records","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[175129e2-a873-4439-9088-03830082967c].count}}","label":"step➛Look up Funding Documents➛Count","type":"step","ref":"","reference_display":"","base_type":"integer","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[b5e246a4-c0b7-400c-9a02-dfb87f0c43ff].record}}","label":"step➛Look up Unsigned Record➛DAPPS:Package Documents Unsigned Record","type":"step","ref":"x_g_dis_atat_package_documents_unsigned","reference_display":"","base_type":"document_id","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[8bc0d538-9f11-4eae-94b5-bc2d19c74f39].variable}}","label":"step➛Update Provisioning Job Records➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[8bc0d538-9f11-4eae-94b5-bc2d19c74f39].number_events}}","label":"step➛Update Provisioning Job Records➛Number Events","type":"step","ref":"","reference_display":"","base_type":"integer","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[8bc0d538-9f11-4eae-94b5-bc2d19c74f39].num_events}}","label":"step➛Update Provisioning Job Records➛Num Events","type":"step","ref":"","reference_display":"","base_type":"integer","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[8bc0d538-9f11-4eae-94b5-bc2d19c74f39].num_updates}}","label":"step➛Update Provisioning Job Records➛Num Updates","type":"step","ref":"","reference_display":"","base_type":"integer","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}}]</label_cache>
         <master>true</master>
         <name>Copy Package Attachments to Email</name>
         <natlang/>
@@ -1071,7 +1071,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>7629f9db47b8a110f39f7601e36d43cb</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_name/>
         <sys_overrides/>
         <sys_package/>
@@ -1079,7 +1079,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name/>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-09 06:02:07</sys_updated_on>
+        <sys_updated_on>2023-02-16 23:48:04</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_snapshot>
@@ -1168,10 +1168,10 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-09 06:02:07</sys_created_on>
         <sys_id>ba29f9db47b8a110f39f7601e36d43df</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-16 17:56:39</sys_updated_on>
+        <sys_updated_on>2023-02-16 23:48:05</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=ba29f9db47b8a110f39f7601e36d43df"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -1196,13 +1196,13 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-09 06:02:07</sys_created_on>
         <sys_id>cb293ddb47b8a110f39f7601e36d4305</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-16 17:56:39</sys_updated_on>
+        <sys_updated_on>2023-02-16 23:48:05</sys_updated_on>
         <value>(function execute(inputs, outputs) {
 
   var attachments = new PackageAttachments(inputs.acqPackage);
-  attachments.gatherUnsignedDocumentsToEmail();
+  attachments.prepareUnsignedDocumentsToEmail();
   
   // attchment documents from below records (source)
   var unsignedTable = "x_g_dis_atat_package_documents_unsigned";
@@ -1255,11 +1255,11 @@
         <field>script</field>
         <id>ba29f9db47b8a110f39f7601e36d43df</id>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
-        <sys_created_on>2023-02-16 17:56:39</sys_created_on>
-        <sys_id>b9df583947812110f39f7601e36d430b</sys_id>
+        <sys_created_on>2023-02-16 23:48:05</sys_created_on>
+        <sys_id>f140b1f947c52110f39f7601e36d4375</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-16 17:56:39</sys_updated_on>
+        <sys_updated_on>2023-02-16 23:48:05</sys_updated_on>
         <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
         <value/>
     </sys_element_mapping>
