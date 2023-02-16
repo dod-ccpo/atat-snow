@@ -234,6 +234,7 @@ erDiagram
         String applications_needing_design
         String external_factors
         Choice source "DOW/CURRENT_ENVIRONMENT"
+        String dow_task_number
     }
     PROJECT-OVERVIEW {
         GUID sys_id PK
@@ -488,6 +489,7 @@ erDiagram
         Currency estimated_price_per_training_unit
         Choice training_option "references Requirements Cost Estimate.optimize_replicate_option"
         String training_estimated_values "CSV list"
+        String dow_task_number
     }
     SERVICE-OFFERING {
         GUID sys_id PK
@@ -648,6 +650,7 @@ erDiagram
         Choice has_phased_approach "Y/N"
         String phased_approach_schedule
         Choice needs_architectural_design_services "Y/N"
+        String dow_task_number
     }
     PACKAGE-DOCUMENT {
         GUID sys_id PK
@@ -718,6 +721,7 @@ erDiagram
         Integer duration_in_days
         Integer number_of_travelers
         Integer number_of_trips
+        String dow_task_number
     }
     CROSS-DOMAIN-SOLUTION  {
         GUID sys_id PK
