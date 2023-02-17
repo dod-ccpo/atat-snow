@@ -79,9 +79,15 @@ PackageAttachments.prototype = {
   /**
    * Delete documents on the Package Documents Unsigned record.
    *
-   * Main purpose of this method is to delete documents that will be signed by
-   * the Mission Owner in DAPPS and uploaded to the Package Document Signed record,
-   * or documents that are will be uploaded again (e.g., J&A and MRR templates).
+   * Example: 
+   * var filesToDelete = [
+   *  // documents that are unsigned and will be uploaded again to Package Documents Unsigned record
+   *  "JWCC Market Research Report (Sole Source)_Template.docx",
+   *  "JWCC J&A Template_Template.docx"
+   *  ];
+   *
+   *  this.deleteUnsignedDocumentAttachments(filesToDelete);
+   *
    *
    * Alternatively, there is a manual process for copying individual records, however
    * in the interest of time and to keep the complexcity low, all documents will be copied
@@ -230,43 +236,9 @@ PackageAttachments.prototype = {
   },
 
   /**
-   * Prepare the Package Documents Unsigned record to copy the attachments that will be sent in an email
-   * to DITCO. Any operations needed to get the unsigned record in a state to be sent in an Email.
-   *
-   * After generating all the documents, the documents are gathered into the Package Documents
-   * Unsigned record for the user to download and sign specific documents (see 
-   * gatherUnsignedDocumentsForDownload). This method is to provide 
-   * any logic that is needed prior to copying the attachments to the email, which at the moemnt
-   * is removing attachemnts to prevent duplication.
-   *
-   * NOTE:It is probably a good idea to limit the user from uploading documents of the same name.
-   *
-   * @return {void}
-   */
-  prepareUnsignedDocumentsToEmail: function() {
-    try {
-      var signedAndUnsignedFilesToDelete = [
-        // documents that will be signed by user and uploaded to the Package Documents Signed record
-        "RequirementsChecklist.docx",
-        "IGCE.xlsx", 
-        "IncrementalFundingPlan.docx",
-        // documents that are unsigned and will be uploaded again to Package Documents Unsigned record
-        "JWCC Market Research Report (Sole Source)_Template.docx",
-        "JWCC J&A Template_Template.docx"
-      ];
-      this.deleteUnsignedDocumentAttachments(signedAndUnsignedFilesToDelete);
-      
-
-    } catch (error) {
-      throw this.errUtil.createError(
-        "PackageAttachments --> prepareUnsignedDocumentsToEmail(): " + error,
-        this.errUtil.METHOD_ERROR
-      );
-    }
-  },
-  /**
-   * Gather all unsigned package documents and attach to the Package Documents Unsigned after
-   * generation documents to download in step 9.
+   * Gather all unsigned package documents and attach to the Package Documents Unsigned record, 
+   * which occurs after document generation in step 9. This allows the user to download all 
+   * package documents after document gernation.
    *
    * @return {void}
    */
@@ -327,13 +299,13 @@ PackageAttachments.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-09 05:45:20</sys_created_on>
         <sys_id>4f2ce55347b8a110f39f7601e36d430a</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_name>PackageAttachments</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_4f2ce55347b8a110f39f7601e36d430a</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-16 23:57:43</sys_updated_on>
+        <sys_updated_on>2023-02-17 16:43:47</sys_updated_on>
     </sys_script_include>
 </record_update>
