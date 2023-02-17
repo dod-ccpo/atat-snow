@@ -33,8 +33,8 @@
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_3d1b2accdb9b51908c045e8cd3961941</sys_update_name>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-12-30 07:58:30</sys_updated_on>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2023-02-16 19:51:16</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -123,10 +123,10 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 18:00:20</sys_created_on>
         <sys_id>be6eea08dbdb51908c045e8cd3961916</sys_id>
-        <sys_mod_count>12</sys_mod_count>
+        <sys_mod_count>13</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-12-30 07:58:22</sys_updated_on>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2023-02-16 19:51:10</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=be6eea08dbdb51908c045e8cd3961916"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -137,9 +137,9 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 18:00:20</sys_created_on>
         <sys_id>766eea08dbdb51908c045e8cd396192b</sys_id>
-        <sys_mod_count>11</sys_mod_count>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-12-30 07:58:22</sys_updated_on>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2023-02-16 19:51:10</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   inputs.payload = JSON.parse(inputs.payload);
   outputs.num_events = inputs.payload.length;
@@ -161,7 +161,7 @@
     if (jobRecord.next()) {      
       // handle errors
       if (event.code &lt; 200 || event.code &gt;= 400 ) {
-        jobRecord.status = "FAILED";
+        jobRecord.status = "FAILURE";
         jobRecord.status_message = JSON.stringify(response);
         jobRecord.update();
         outputs.num_updates++;
@@ -180,7 +180,7 @@
       // portfolio 200 success (sync)
       if (response.portfolio) {
         // a success should indicate that the job is complete
-        jobRecord.status = "COMPLETE";
+        jobRecord.status = "SUCCESS";
         jobRecord.update();
         outputs.num_updates++;
 
@@ -263,12 +263,12 @@
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>script</field>
         <id>be6eea08dbdb51908c045e8cd3961916</id>
-        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
-        <sys_created_on>2022-12-30 07:58:22</sys_created_on>
-        <sys_id>f19a8bc2970ca1106fa8b4b3f153aff5</sys_id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2023-02-16 19:51:10</sys_created_on>
+        <sys_id>670abc7197052110cf3cfd9fe153af43</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-12-30 07:58:22</sys_updated_on>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2023-02-16 19:51:10</sys_updated_on>
         <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
         <value/>
     </sys_element_mapping>
@@ -900,17 +900,17 @@
     <sys_hub_action_plan action="INSERT_OR_UPDATE">
         <action_id display_value="PROV: Consume Queue Payload">3d1b2accdb9b51908c045e8cd3961941</action_id>
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"36488b44db9f51908c045e8cd3961969","name":"plan","plan_signature":null}}</plan>
-        <snapshot>3b9a0fc2970ca1106fa8b4b3f153af08</snapshot>
+        <snapshot>f01afc7197052110cf3cfd9fe153af26</snapshot>
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 19:53:23</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>36488b44db9f51908c045e8cd3961969</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_overrides/>
         <sys_scope/>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-12-30 07:58:31</sys_updated_on>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2023-02-16 19:51:17</sys_updated_on>
     </sys_hub_action_plan>
     <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
@@ -1033,10 +1033,10 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 19:53:21</sys_created_on>
         <sys_id>da484b44db9f51908c045e8cd39619f2</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-12-30 07:58:30</sys_updated_on>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2023-02-16 19:51:16</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=da484b44db9f51908c045e8cd39619f2"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -1047,9 +1047,9 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 19:53:21</sys_created_on>
         <sys_id>a6488b44db9f51908c045e8cd3961902</sys_id>
-        <sys_mod_count>3</sys_mod_count>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-12-30 07:58:30</sys_updated_on>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2023-02-16 19:51:16</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   inputs.payload = JSON.parse(inputs.payload);
   outputs.num_events = inputs.payload.length;
@@ -1071,7 +1071,7 @@
     if (jobRecord.next()) {      
       // handle errors
       if (event.code &lt; 200 || event.code &gt;= 400 ) {
-        jobRecord.status = "FAILED";
+        jobRecord.status = "FAILURE";
         jobRecord.status_message = JSON.stringify(response);
         jobRecord.update();
         outputs.num_updates++;
@@ -1090,7 +1090,7 @@
       // portfolio 200 success (sync)
       if (response.portfolio) {
         // a success should indicate that the job is complete
-        jobRecord.status = "COMPLETE";
+        jobRecord.status = "SUCCESS";
         jobRecord.update();
         outputs.num_updates++;
 
@@ -1173,12 +1173,12 @@
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>script</field>
         <id>da484b44db9f51908c045e8cd39619f2</id>
-        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
-        <sys_created_on>2022-12-30 07:58:30</sys_created_on>
-        <sys_id>3b9acbc2970ca1106fa8b4b3f153affb</sys_id>
+        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2023-02-16 19:51:16</sys_created_on>
+        <sys_id>f81afc7197052110cf3cfd9fe153af19</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2022-12-30 07:58:30</sys_updated_on>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2023-02-16 19:51:16</sys_updated_on>
         <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
         <value/>
     </sys_element_mapping>
