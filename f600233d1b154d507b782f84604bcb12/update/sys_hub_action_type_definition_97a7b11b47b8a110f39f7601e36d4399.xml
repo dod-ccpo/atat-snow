@@ -14,9 +14,9 @@
         <description>Gathers package documents and attach to an email.</description>
         <ih_action>false</ih_action>
         <internal_name>copy_package_attachments_to_email</internal_name>
-        <label_cache>[{"name":"{{action.package}}","label":"action➛Package","type":"action","ref":"","reference_display":"DAPPS:Acquisition Package","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.email_sys_id}}","label":"action➛Email Sys ID","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[9140bde9-dc16-4f1f-92e9-7cd7f1ed1b6a].variable}}","label":"step➛Copy Attachments to Email➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[9140bde9-dc16-4f1f-92e9-7cd7f1ed1b6a].funding_form_sys_id}}","label":"step➛Copy Attachments to Email➛Funding Form Sys Id","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}}]</label_cache>
+        <label_cache>[{"name":"{{action.package}}","label":"action➛Package","type":"action","ref":"","reference_display":"DAPPS:Acquisition Package","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.email_sys_id}}","label":"action➛Email Sys ID","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.package.sys_id}}","label":"action➛Package➛Sys ID","type":"action","ref":"","reference_display":"Sys ID","base_type":"GUID","parent_table_name":"x_g_dis_atat_acquisition_package","column_name":"sys_id","choices":null,"attributes":{}},{"name":"{{action.payload}}","label":"action➛payload","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"string","uiUniqueId":"dffed03a-6418-4b14-8197-db13ccc783bb"}},{"name":"{{step[9140bde9-dc16-4f1f-92e9-7cd7f1ed1b6a].variable}}","label":"step➛Copy Attachments to Email➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[9140bde9-dc16-4f1f-92e9-7cd7f1ed1b6a].funding_form_sys_id}}","label":"step➛Copy Attachments to Email➛Funding Form Sys Id","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[27a80581-5a44-4525-ace9-143a7cf46a91].variable}}","label":"step➛Copy Attachments for Download➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[27a80581-5a44-4525-ace9-143a7cf46a91].funding_form_sys_id}}","label":"step➛Copy Attachments for Download➛Funding Form Sys ID","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[175129e2-a873-4439-9088-03830082967c].records}}","label":"step➛Look up Funding Documents➛Attachment records","type":"step","ref":"","reference_display":"","base_type":"records","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[175129e2-a873-4439-9088-03830082967c].count}}","label":"step➛Look up Funding Documents➛Count","type":"step","ref":"","reference_display":"","base_type":"integer","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[b5e246a4-c0b7-400c-9a02-dfb87f0c43ff].record}}","label":"step➛Look up Unsigned Record➛DAPPS:Package Documents Unsigned Record","type":"step","ref":"x_g_dis_atat_package_documents_unsigned","reference_display":"","base_type":"document_id","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[8bc0d538-9f11-4eae-94b5-bc2d19c74f39].variable}}","label":"step➛Update Provisioning Job Records➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[8bc0d538-9f11-4eae-94b5-bc2d19c74f39].number_events}}","label":"step➛Update Provisioning Job Records➛Number Events","type":"step","ref":"","reference_display":"","base_type":"integer","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[8bc0d538-9f11-4eae-94b5-bc2d19c74f39].num_events}}","label":"step➛Update Provisioning Job Records➛Num Events","type":"step","ref":"","reference_display":"","base_type":"integer","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[8bc0d538-9f11-4eae-94b5-bc2d19c74f39].num_updates}}","label":"step➛Update Provisioning Job Records➛Num Updates","type":"step","ref":"","reference_display":"","base_type":"integer","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}}]</label_cache>
         <master_snapshot>7629f9db47b8a110f39f7601e36d43cb</master_snapshot>
-        <name>Copy Package Attachments to Email</name>
+        <name>UTIL: Copy Package Attachments to Email</name>
         <natlang/>
         <outputs/>
         <outputs/>
@@ -27,15 +27,15 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>97a7b11b47b8a110f39f7601e36d4399</sys_id>
-        <sys_mod_count>5</sys_mod_count>
-        <sys_name>Copy Package Attachments to Email</sys_name>
+        <sys_mod_count>15</sys_mod_count>
+        <sys_name>UTIL: Copy Package Attachments to Email</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_97a7b11b47b8a110f39f7601e36d4399</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-09 06:02:08</sys_updated_on>
+        <sys_updated_on>2023-02-17 17:59:59</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -49,10 +49,10 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-09 06:02:06</sys_created_on>
         <sys_id>7e29f9db47b8a110f39f7601e36d43ab</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-09 06:02:06</sys_updated_on>
-        <value>{"version":"1.0","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}},"complexObjectSchema":{"FlowDesigner:FDea29f9db96b8a110ac99de0f9b76c288":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"integer\",\"default_value\":\"\",\"label\":\"Code\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"Message\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FDea29f9db96b8a110ac99de0f9b76c288.$type_facets":{"SimpleMapFacet":"{\"sourceId\":\"\",\"default_value\":null,\"label\":\"Action Status\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"uiUniqueId\":\"6e6a2fa4-8021-491e-a90e-b2254844f199\",\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FDea29f9db96b8a110ac99de0f9b76c288\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"sourceUiUniqueId\":\"\",\"sourceType\":\"\",\"hint\":\"\",\"uiType\":\"object\",\"order\":\"2\",\"max_length\":\"-1\"}"}},"serializationFormat":"JSON"}</value>
+        <sys_updated_on>2023-02-16 17:56:30</sys_updated_on>
+        <value>{"version":"1.0","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}},"complexObjectSchema":{"FlowDesigner:FDea29f9db96b8a110ac99de0f9b76c288":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"integer\",\"default_value\":\"\",\"label\":\"Code\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"Message\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FDea29f9db96b8a110ac99de0f9b76c288.$type_facets":{"SimpleMapFacet":"{\"sourceId\":\"\",\"default_value\":\"\",\"label\":\"Action Status\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"uiUniqueId\":\"6e6a2fa4-8021-491e-a90e-b2254844f199\",\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FDea29f9db96b8a110ac99de0f9b76c288\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"sourceUiUniqueId\":\"\",\"sourceType\":\"\",\"hint\":\"\",\"uiType\":\"object\",\"order\":\"2\",\"max_length\":\"65000\"}"}},"serializationFormat":"JSON"}</value>
         <variable display_value="Action Status">3a29f9db47b8a110f39f7601e36d438d</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -108,7 +108,7 @@
     </sys_element_mapping>
     <sys_hub_step_instance action="delete_multiple" query="action=97a7b11b47b8a110f39f7601e36d4399^sys_idNOT IN3e19b9db47b8a110f39f7601e36d434b"/>
     <sys_hub_step_instance action="INSERT_OR_UPDATE">
-        <action display_value="Copy Package Attachments to Email">97a7b11b47b8a110f39f7601e36d4399</action>
+        <action display_value="UTIL: Copy Package Attachments to Email">97a7b11b47b8a110f39f7601e36d4399</action>
         <cid>9140bde9-dc16-4f1f-92e9-7cd7f1ed1b6a</cid>
         <error_handling_type>1</error_handling_type>
         <extended_inputs/>
@@ -124,10 +124,10 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-09 06:01:51</sys_created_on>
         <sys_id>3e19b9db47b8a110f39f7601e36d434b</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-09 06:01:51</sys_updated_on>
+        <sys_updated_on>2023-02-17 16:50:25</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=3e19b9db47b8a110f39f7601e36d434b"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -138,13 +138,12 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-09 06:01:51</sys_created_on>
         <sys_id>4f19b9db47b8a110f39f7601e36d4368</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-09 06:01:51</sys_updated_on>
+        <sys_updated_on>2023-02-17 16:50:25</sys_updated_on>
         <value>(function execute(inputs, outputs) {
 
-  var attachments = new EmailAttachments(inputs.acqPackage);
-  attachments.gatherUnsignedDocuments();
+  var attachments = new PackageAttachments(inputs.acqPackage);
   
   // attchment documents from below records (source)
   var unsignedTable = "x_g_dis_atat_package_documents_unsigned";
@@ -196,18 +195,6 @@
         <value>{{action.package}}</value>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>application</field>
-        <id>3e19b9db47b8a110f39f7601e36d434b</id>
-        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
-        <sys_created_on>2023-02-09 06:01:51</sys_created_on>
-        <sys_id>4f19b9db47b8a110f39f7601e36d4367</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-09 06:01:51</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>emailSysId</field>
         <id>3e19b9db47b8a110f39f7601e36d434b</id>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
@@ -223,11 +210,11 @@
         <field>script</field>
         <id>3e19b9db47b8a110f39f7601e36d434b</id>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
-        <sys_created_on>2023-02-09 06:01:51</sys_created_on>
-        <sys_id>0719b9db47b8a110f39f7601e36d4368</sys_id>
+        <sys_created_on>2023-02-16 23:47:57</sys_created_on>
+        <sys_id>044071f947c52110f39f7601e36d4359</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-09 06:01:51</sys_updated_on>
+        <sys_updated_on>2023-02-16 23:47:57</sys_updated_on>
         <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
         <value/>
     </sys_element_mapping>
@@ -542,7 +529,7 @@
         <label>Email Sys ID</label>
         <mandatory>false</mandatory>
         <max_length>8000</max_length>
-        <model display_value="Copy Package Attachments to Email">97a7b11b47b8a110f39f7601e36d4399</model>
+        <model display_value="UTIL: Copy Package Attachments to Email">97a7b11b47b8a110f39f7601e36d4399</model>
         <model_id>97a7b11b47b8a110f39f7601e36d4399</model_id>
         <model_table>sys_hub_action_type_definition</model_table>
         <name>var__m_sys_hub_action_input_97a7b11b47b8a110f39f7601e36d4399</name>
@@ -623,7 +610,7 @@
         <label>Package</label>
         <mandatory>false</mandatory>
         <max_length>32</max_length>
-        <model display_value="Copy Package Attachments to Email">97a7b11b47b8a110f39f7601e36d4399</model>
+        <model display_value="UTIL: Copy Package Attachments to Email">97a7b11b47b8a110f39f7601e36d4399</model>
         <model_id>97a7b11b47b8a110f39f7601e36d4399</model_id>
         <model_table>sys_hub_action_type_definition</model_table>
         <name>var__m_sys_hub_action_input_97a7b11b47b8a110f39f7601e36d4399</name>
@@ -707,7 +694,7 @@
         <label>Funding Form Sys ID</label>
         <mandatory>false</mandatory>
         <max_length>8000</max_length>
-        <model display_value="Copy Package Attachments to Email">97a7b11b47b8a110f39f7601e36d4399</model>
+        <model display_value="UTIL: Copy Package Attachments to Email">97a7b11b47b8a110f39f7601e36d4399</model>
         <model_id>97a7b11b47b8a110f39f7601e36d4399</model_id>
         <model_table>sys_hub_action_type_definition</model_table>
         <name>var__m_sys_hub_action_output_97a7b11b47b8a110f39f7601e36d4399</name>
@@ -790,7 +777,7 @@
         <label>Action Status</label>
         <mandatory>false</mandatory>
         <max_length>65000</max_length>
-        <model display_value="Copy Package Attachments to Email">97a7b11b47b8a110f39f7601e36d4399</model>
+        <model display_value="UTIL: Copy Package Attachments to Email">97a7b11b47b8a110f39f7601e36d4399</model>
         <model_id>97a7b11b47b8a110f39f7601e36d4399</model_id>
         <model_table>sys_hub_action_type_definition</model_table>
         <name>var__m_sys_hub_action_output_97a7b11b47b8a110f39f7601e36d4399</name>
@@ -873,7 +860,7 @@
         <label>Don't Treat as Error</label>
         <mandatory>false</mandatory>
         <max_length>40</max_length>
-        <model display_value="Copy Package Attachments to Email">97a7b11b47b8a110f39f7601e36d4399</model>
+        <model display_value="UTIL: Copy Package Attachments to Email">97a7b11b47b8a110f39f7601e36d4399</model>
         <model_id>97a7b11b47b8a110f39f7601e36d4399</model_id>
         <model_table>sys_hub_action_type_definition</model_table>
         <name>var__m_sys_hub_action_output_97a7b11b47b8a110f39f7601e36d4399</name>
@@ -917,7 +904,7 @@
     </sys_hub_action_output>
     <sys_hub_action_status_metadata action="delete_multiple" query="action_type_id=97a7b11b47b8a110f39f7601e36d4399^sys_idNOT IN8b19b9db47b8a110f39f7601e36d4376"/>
     <sys_hub_action_status_metadata action="INSERT_OR_UPDATE">
-        <action_type_id display_value="Copy Package Attachments to Email">97a7b11b47b8a110f39f7601e36d4399</action_type_id>
+        <action_type_id display_value="UTIL: Copy Package Attachments to Email">97a7b11b47b8a110f39f7601e36d4399</action_type_id>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-09 06:01:51</sys_created_on>
         <sys_id>8b19b9db47b8a110f39f7601e36d4376</sys_id>
@@ -1044,19 +1031,19 @@
     </sys_documentation>
     <sys_hub_action_plan action="delete_multiple" query="action_id=97a7b11b47b8a110f39f7601e36d4399^sys_idNOT INd3293ddb47b8a110f39f7601e36d4371"/>
     <sys_hub_action_plan action="INSERT_OR_UPDATE">
-        <action_id display_value="Copy Package Attachments to Email">97a7b11b47b8a110f39f7601e36d4399</action_id>
+        <action_id display_value="UTIL: Copy Package Attachments to Email">97a7b11b47b8a110f39f7601e36d4399</action_id>
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"d3293ddb47b8a110f39f7601e36d4371","name":"plan","plan_signature":null}}</plan>
-        <snapshot>cb293ddb47b8a110f39f7601e36d4332</snapshot>
+        <snapshot>a43a6dca47056110f39f7601e36d4313</snapshot>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-09 06:02:08</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>d3293ddb47b8a110f39f7601e36d4371</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_overrides/>
         <sys_scope/>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-09 06:02:08</sys_updated_on>
+        <sys_updated_on>2023-02-17 18:00:00</sys_updated_on>
     </sys_hub_action_plan>
     <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
@@ -1070,20 +1057,20 @@
         <copied_from_name/>
         <description>Gathers package documents and attach to an email.</description>
         <internal_name>copy_package_attachments_to_email</internal_name>
-        <label_cache>[{"name":"{{action.package}}","label":"action➛Package","type":"action","ref":"","reference_display":"DAPPS:Acquisition Package","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.email_sys_id}}","label":"action➛Email Sys ID","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[9140bde9-dc16-4f1f-92e9-7cd7f1ed1b6a].variable}}","label":"step➛Copy Attachments to Email➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[9140bde9-dc16-4f1f-92e9-7cd7f1ed1b6a].funding_form_sys_id}}","label":"step➛Copy Attachments to Email➛Funding Form Sys Id","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}}]</label_cache>
+        <label_cache>[{"name":"{{action.package}}","label":"action➛Package","type":"action","ref":"","reference_display":"DAPPS:Acquisition Package","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.email_sys_id}}","label":"action➛Email Sys ID","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.package.sys_id}}","label":"action➛Package➛Sys ID","type":"action","ref":"","reference_display":"Sys ID","base_type":"GUID","parent_table_name":"x_g_dis_atat_acquisition_package","column_name":"sys_id","choices":null,"attributes":{}},{"name":"{{action.payload}}","label":"action➛payload","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"string","uiUniqueId":"dffed03a-6418-4b14-8197-db13ccc783bb"}},{"name":"{{step[9140bde9-dc16-4f1f-92e9-7cd7f1ed1b6a].variable}}","label":"step➛Copy Attachments to Email➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[9140bde9-dc16-4f1f-92e9-7cd7f1ed1b6a].funding_form_sys_id}}","label":"step➛Copy Attachments to Email➛Funding Form Sys Id","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[27a80581-5a44-4525-ace9-143a7cf46a91].variable}}","label":"step➛Copy Attachments for Download➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[27a80581-5a44-4525-ace9-143a7cf46a91].funding_form_sys_id}}","label":"step➛Copy Attachments for Download➛Funding Form Sys ID","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[175129e2-a873-4439-9088-03830082967c].records}}","label":"step➛Look up Funding Documents➛Attachment records","type":"step","ref":"","reference_display":"","base_type":"records","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[175129e2-a873-4439-9088-03830082967c].count}}","label":"step➛Look up Funding Documents➛Count","type":"step","ref":"","reference_display":"","base_type":"integer","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[b5e246a4-c0b7-400c-9a02-dfb87f0c43ff].record}}","label":"step➛Look up Unsigned Record➛DAPPS:Package Documents Unsigned Record","type":"step","ref":"x_g_dis_atat_package_documents_unsigned","reference_display":"","base_type":"document_id","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[8bc0d538-9f11-4eae-94b5-bc2d19c74f39].variable}}","label":"step➛Update Provisioning Job Records➛variable","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[8bc0d538-9f11-4eae-94b5-bc2d19c74f39].number_events}}","label":"step➛Update Provisioning Job Records➛Number Events","type":"step","ref":"","reference_display":"","base_type":"integer","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[8bc0d538-9f11-4eae-94b5-bc2d19c74f39].num_events}}","label":"step➛Update Provisioning Job Records➛Num Events","type":"step","ref":"","reference_display":"","base_type":"integer","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}},{"name":"{{step[8bc0d538-9f11-4eae-94b5-bc2d19c74f39].num_updates}}","label":"step➛Update Provisioning Job Records➛Num Updates","type":"step","ref":"","reference_display":"","base_type":"integer","parent_table_name":"","column_name":"","choices":null,"attributes":{"sourceId":"","sourceUiUniqueId":"","sourceType":""}}]</label_cache>
         <master>true</master>
-        <name>Copy Package Attachments to Email</name>
+        <name>UTIL: Copy Package Attachments to Email</name>
         <natlang/>
         <outputs/>
         <outputs/>
-        <parent_action display_value="Copy Package Attachments to Email">97a7b11b47b8a110f39f7601e36d4399</parent_action>
+        <parent_action display_value="UTIL: Copy Package Attachments to Email">97a7b11b47b8a110f39f7601e36d4399</parent_action>
         <sys_class_name>sys_hub_action_type_snapshot</sys_class_name>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-09 06:02:07</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>7629f9db47b8a110f39f7601e36d43cb</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name/>
         <sys_overrides/>
         <sys_package/>
@@ -1091,7 +1078,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name/>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-09 06:02:07</sys_updated_on>
+        <sys_updated_on>2023-02-17 17:59:59</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_snapshot>
@@ -1164,7 +1151,7 @@
     </sys_element_mapping>
     <sys_hub_step_instance action="delete_multiple" query="action=7629f9db47b8a110f39f7601e36d43cb^sys_idNOT INba29f9db47b8a110f39f7601e36d43df"/>
     <sys_hub_step_instance action="INSERT_OR_UPDATE">
-        <action display_value="Copy Package Attachments to Email">7629f9db47b8a110f39f7601e36d43cb</action>
+        <action display_value="UTIL: Copy Package Attachments to Email">7629f9db47b8a110f39f7601e36d43cb</action>
         <cid>9140bde9-dc16-4f1f-92e9-7cd7f1ed1b6a</cid>
         <error_handling_type>1</error_handling_type>
         <extended_inputs/>
@@ -1180,10 +1167,10 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-09 06:02:07</sys_created_on>
         <sys_id>ba29f9db47b8a110f39f7601e36d43df</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-09 06:02:07</sys_updated_on>
+        <sys_updated_on>2023-02-17 16:50:38</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=ba29f9db47b8a110f39f7601e36d43df"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -1208,13 +1195,12 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-09 06:02:07</sys_created_on>
         <sys_id>cb293ddb47b8a110f39f7601e36d4305</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-09 06:02:07</sys_updated_on>
+        <sys_updated_on>2023-02-17 16:50:38</sys_updated_on>
         <value>(function execute(inputs, outputs) {
 
-  var attachments = new EmailAttachments(inputs.acqPackage);
-  attachments.gatherUnsignedDocuments();
+  var attachments = new PackageAttachments(inputs.acqPackage);
   
   // attchment documents from below records (source)
   var unsignedTable = "x_g_dis_atat_package_documents_unsigned";
@@ -1252,18 +1238,6 @@
         <value>{{action.package}}</value>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>application</field>
-        <id>ba29f9db47b8a110f39f7601e36d43df</id>
-        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
-        <sys_created_on>2023-02-09 06:02:07</sys_created_on>
-        <sys_id>c3293ddb47b8a110f39f7601e36d4305</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-09 06:02:07</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>emailSysId</field>
         <id>ba29f9db47b8a110f39f7601e36d43df</id>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
@@ -1279,11 +1253,11 @@
         <field>script</field>
         <id>ba29f9db47b8a110f39f7601e36d43df</id>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
-        <sys_created_on>2023-02-09 06:02:07</sys_created_on>
-        <sys_id>87293ddb47b8a110f39f7601e36d4305</sys_id>
+        <sys_created_on>2023-02-16 23:48:05</sys_created_on>
+        <sys_id>f140b1f947c52110f39f7601e36d4375</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-09 06:02:07</sys_updated_on>
+        <sys_updated_on>2023-02-16 23:48:05</sys_updated_on>
         <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
         <value/>
     </sys_element_mapping>
@@ -1598,7 +1572,7 @@
         <label>Email Sys ID</label>
         <mandatory>false</mandatory>
         <max_length>8000</max_length>
-        <model display_value="Copy Package Attachments to Email">7629f9db47b8a110f39f7601e36d43cb</model>
+        <model display_value="UTIL: Copy Package Attachments to Email">7629f9db47b8a110f39f7601e36d43cb</model>
         <model_id>7629f9db47b8a110f39f7601e36d43cb</model_id>
         <model_table>sys_hub_action_type_snapshot</model_table>
         <name>var__m_sys_hub_action_input_7629f9db47b8a110f39f7601e36d43cb</name>
@@ -1679,7 +1653,7 @@
         <label>Package</label>
         <mandatory>false</mandatory>
         <max_length>32</max_length>
-        <model display_value="Copy Package Attachments to Email">7629f9db47b8a110f39f7601e36d43cb</model>
+        <model display_value="UTIL: Copy Package Attachments to Email">7629f9db47b8a110f39f7601e36d43cb</model>
         <model_id>7629f9db47b8a110f39f7601e36d43cb</model_id>
         <model_table>sys_hub_action_type_snapshot</model_table>
         <name>var__m_sys_hub_action_input_7629f9db47b8a110f39f7601e36d43cb</name>
@@ -1763,7 +1737,7 @@
         <label>Action Status</label>
         <mandatory>false</mandatory>
         <max_length>65000</max_length>
-        <model display_value="Copy Package Attachments to Email">7629f9db47b8a110f39f7601e36d43cb</model>
+        <model display_value="UTIL: Copy Package Attachments to Email">7629f9db47b8a110f39f7601e36d43cb</model>
         <model_id>7629f9db47b8a110f39f7601e36d43cb</model_id>
         <model_table>sys_hub_action_type_snapshot</model_table>
         <name>var__m_sys_hub_action_output_7629f9db47b8a110f39f7601e36d43cb</name>
@@ -1846,7 +1820,7 @@
         <label>Funding Form Sys ID</label>
         <mandatory>false</mandatory>
         <max_length>8000</max_length>
-        <model display_value="Copy Package Attachments to Email">7629f9db47b8a110f39f7601e36d43cb</model>
+        <model display_value="UTIL: Copy Package Attachments to Email">7629f9db47b8a110f39f7601e36d43cb</model>
         <model_id>7629f9db47b8a110f39f7601e36d43cb</model_id>
         <model_table>sys_hub_action_type_snapshot</model_table>
         <name>var__m_sys_hub_action_output_7629f9db47b8a110f39f7601e36d43cb</name>
@@ -1929,7 +1903,7 @@
         <label>Don't Treat as Error</label>
         <mandatory>false</mandatory>
         <max_length>40</max_length>
-        <model display_value="Copy Package Attachments to Email">7629f9db47b8a110f39f7601e36d43cb</model>
+        <model display_value="UTIL: Copy Package Attachments to Email">7629f9db47b8a110f39f7601e36d43cb</model>
         <model_id>7629f9db47b8a110f39f7601e36d43cb</model_id>
         <model_table>sys_hub_action_type_snapshot</model_table>
         <name>var__m_sys_hub_action_output_7629f9db47b8a110f39f7601e36d43cb</name>
@@ -1973,7 +1947,7 @@
     </sys_hub_action_output>
     <sys_hub_action_status_metadata action="delete_multiple" query="action_type_id=7629f9db47b8a110f39f7601e36d43cb^sys_idNOT INc7293ddb47b8a110f39f7601e36d4332"/>
     <sys_hub_action_status_metadata action="INSERT_OR_UPDATE">
-        <action_type_id display_value="Copy Package Attachments to Email">7629f9db47b8a110f39f7601e36d43cb</action_type_id>
+        <action_type_id display_value="UTIL: Copy Package Attachments to Email">7629f9db47b8a110f39f7601e36d43cb</action_type_id>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-09 06:02:08</sys_created_on>
         <sys_id>c7293ddb47b8a110f39f7601e36d4332</sys_id>
