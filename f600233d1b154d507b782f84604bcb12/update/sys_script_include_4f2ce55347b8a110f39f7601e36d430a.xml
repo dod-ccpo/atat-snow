@@ -2,21 +2,22 @@
     <sys_script_include action="INSERT_OR_UPDATE">
         <access>package_private</access>
         <active>true</active>
-        <api_name>x_g_dis_atat.EmailAttachments</api_name>
+        <api_name>x_g_dis_atat.PackageAttachments</api_name>
         <caller_access/>
         <client_callable>false</client_callable>
-        <description>ATAT class for gathering unsigned and signed documents to be attached to an email sent to a recipient. &#13;
-This allows for attachmenting the actual document in the email, which is not supported with the Flow&#13;
-Designer "Send Email" action. The alternative would be to add a hyperlink to download the attachments&#13;
+        <description>ATAT class for gathering unsigned and signed documents with in an acquitiong package to allow for &#13;
+downloading or attaching the documents to an email and sent to a recipient. The methods allow&#13;
+attachmenting the actual document in an email, which is not supported with the Flow Designer &#13;
+"Send Email" action. The alternative would be to add a hyperlink to download the attachments&#13;
 directly from ServiceNow.&#13;
 &#13;
 It is also possible to attach documents from within Flow Designer using core ServiceNow actions after&#13;
-using the "Send Email" action, and is parcially used for one of the attachments.&#13;
+using the "Send Email" action, and is partially used for one of the attachments (Fudning Request docs).&#13;
 - Copy Attachment (action)&#13;
 - Delete Attachment (action)</description>
-        <name>EmailAttachments</name>
-        <script><![CDATA[var EmailAttachments = Class.create();
-EmailAttachments.prototype = {
+        <name>PackageAttachments</name>
+        <script><![CDATA[var PackageAttachments = Class.create();
+PackageAttachments.prototype = {
   UNSIGNED_DOCS_TABLE: "x_g_dis_atat_package_documents_unsigned",
   SIGNED_DOCS_TABLE: "x_g_dis_atat_package_documents_signed",
   PKG_TABLE: "x_g_dis_atat_acquisition_package",
@@ -76,8 +77,17 @@ EmailAttachments.prototype = {
     }
   },
   /**
-   * Delete documents on the Package Documents Unsigned record that will be signed by
-   * the Mission Owner in DAPPS and uploaded to the Package Document Signed record.
+   * Delete documents on the Package Documents Unsigned record.
+   *
+   * Example: 
+   * var filesToDelete = [
+   *  // documents that are unsigned and will be uploaded again to Package Documents Unsigned record
+   *  "JWCC Market Research Report (Sole Source)_Template.docx",
+   *  "JWCC J&A Template_Template.docx"
+   *  ];
+   *
+   *  this.deleteUnsignedDocumentAttachments(filesToDelete);
+   *
    *
    * Alternatively, there is a manual process for copying individual records, however
    * in the interest of time and to keep the complexcity low, all documents will be copied
@@ -86,9 +96,10 @@ EmailAttachments.prototype = {
    * Ref for copying a single attachment
    * - see https://snprotips.com/blog/2016/2/25/understanding-and-using-glideattachment#4
    *
+   * @param {string|Array} filesToDelete - an array of file names that can be deleted
    * @return {void}
    */
-  deleteSignedDocumentAttachments: function() {
+  deleteUnsignedDocumentAttachments: function(filesToDelete) {
     try {
       // get all attachments and delete the ones based on the document name.
       var attachmentsToDelete = this.attachments.getAttachments(
@@ -99,10 +110,8 @@ EmailAttachments.prototype = {
       while(attachmentsToDelete.next()) {
         var attachmentSysId = attachmentsToDelete.sys_id.toString();
         var fileName = attachmentsToDelete.file_name.toString();
-		
-		// documents that require a signature
-        var signedFiles = ["RequirementsChecklist.docx", "IGCE.xlsx", "IncrementalFundingPlan.docx"];
-        if (listContains(fileName, signedFiles)) {
+
+        if (listContains(fileName, filesToDelete)) {
           var message = "Deleting attachment: " + fileName;
           message += " (SysId: " + attachmentSysId + ").";
           gs.debug(message);
@@ -111,17 +120,17 @@ EmailAttachments.prototype = {
       }
     } catch (error) {
       throw this.errUtil.createError(
-        "EmailAttachments --> deleteSignedDocumentAttachments(): " + error,
+        "PackageAttachments --> deleteUnsignedDocumentAttachments(): " + error,
         this.errUtil.METHOD_ERROR
       );
     }
   },
   /**
-   * Delete all attachments on package Unsigned Document record.
+   * Delete all attachments on the Package Unsigned Document record.
    *
    * @return {void}
    */
-  deleteUnsignedRecordAttachments: function() {
+  deleteAllUnsignedDocumentAttachments: function() {
     try {
       // get the unsigned docs record (contains all unsigned docs)
       var foundAttachments = this.attachments.getAttachments(this.UNSIGNED_DOCS_TABLE, this.unsignedRecSysId);
@@ -136,7 +145,7 @@ EmailAttachments.prototype = {
       }
     } catch (error) {
       throw this.errUtil.createError(
-        "EmailAttachments --> deleteUnsignedRecordAttachments(): " + error,
+        "PackageAttachments --> deleteAllUnsignedAttachments(): " + error,
         this.errUtil.METHOD_ERROR
       );
     }
@@ -146,8 +155,8 @@ EmailAttachments.prototype = {
    * Copy attachments from the appropriate Funding Request documents (MIPR or FS_FORM)
    * to the unsigned documents record. 
    *
-   * Obsolete - method left in as documentation purposes of trials and error. Can be removed
-   * or refactored based on needs. 
+   * Obsolete - method left in as documentation purposes of trial and error. Can be removed
+   * or refactoed based on needs.
    *
    * This requires some manual manipulation of the attachment record because the attachments
    * are saved in a 'file_attachment' column which ServiceNow adds "ZZ_YY" as a prefix to
@@ -177,7 +186,7 @@ EmailAttachments.prototype = {
         while(fileAttachmentCol.next()) {
           // remove "ZZ_YY" from table name
           fileAttachmentCol.table_name = fileAttachmentCol.table_name.replace("ZZ_YY", "");
-          // BUG?: needs access to global scope to allow sys_attachment updates to attachment record table_name
+          // BUG?: needs access to global scope to allow sys_attachment updates to attachment record table name
           fileAttachmentCol.update();
         }
 
@@ -194,7 +203,7 @@ EmailAttachments.prototype = {
         while(fileAttachmentCol.next()) {
           // remove "ZZ_YY" from table name
           fileAttachmentCol.table_name = fileAttachmentCol.table_name.replace("ZZ_YY", "");
-          // BUG?: needs access to global scope to allow sys_attachment updates to attachment record table_name		
+          // BUG?: needs access to global scope to allow sys_attachment updates to attachment record table name
           fileAttachmentCol.update();
         }
         // copy files to signed
@@ -202,7 +211,7 @@ EmailAttachments.prototype = {
       }
     } catch (error) {
       throw this.errUtil.createError(
-        "EmailAttachments --> copyFundingRequestDocuments(): " + error,
+        "PackageAttachments --> copyFundingRequestDocuments(): " + error,
         this.errUtil.METHOD_ERROR
       );
     }
@@ -220,41 +229,37 @@ EmailAttachments.prototype = {
       this.attachments.copy(sourceTable, sourceSysId, this.UNSIGNED_DOCS_TABLE, this.unsignedRecSysId);
     } catch (error) {
       throw this.errUtil.createError(
-        "EmailAttachments --> copyAttachmentsToUnsignedRecord(): " + error,
+        "PackageAttachments --> copyAttachmentsToUnsignedRecord(): " + error,
         this.errUtil.METHOD_ERROR
       );
     }
   },
 
   /**
-   * Gather all unsigned package documents to Package Documents Unsigned.
-   *
-   * Note: currently the main method used in the Copy Attachment to Email action.
+   * Gather all unsigned package documents and attach to the Package Documents Unsigned record, 
+   * which occurs after document generation in step 9. This allows the user to download all 
+   * package documents after document gernation.
    *
    * @return {void}
    */
-  gatherUnsignedDocuments: function() {
+  gatherUnsignedDocumentsForDownload: function() {
     try {
-      this.deleteUnsignedRecordAttachments();
+      this.deleteAllUnsignedDocumentAttachments();
       this.copyAttachmentsToUnsignedRecord(this.PKG_TABLE, this.acquisitionPackage.sys_id.toString());
-      // NOTE: It is important that deleteSignedRecordAttachments() comes immediately after copying 
-      // the attachments on the acquisisiton package to the unsigned record to ensure that only the
-      // intended documents are deleted prior to the attachment of other documents
-      this.deleteSignedDocumentAttachments();
       this.copyAttachmentsToUnsignedRecord(this.CURR_ENV_TABLE, this.currentEnvRecSysId);
       this.copyAttachmentsToUnsignedRecord(this.REQ_COST_EST_TABLE, this.reqCostEstRecSysId);
-      
+
       // NOTE: because modifying the global scope for sys_attachment is needed, this was commented
       // out and funding request attachments are added directly in Flow Designer using the record 
       // sysId which works and is less complex. This original work around for trying to attach
-      // a file attachment column type is no longer needed. 
+      // a file attachment column type is no longer needed.
       // var fundingRequest = this.acquisitionPackage.funding_request;
       // var fundingType = fundingRequest.funding_request_type.toString();
       // this.copyFundingRequestDocuments(fundingRequest, fundingType);
-
+      
     } catch (error) {
       throw this.errUtil.createError(
-        "EmailAttachments --> gatherUnsignedDocuments(): " + error,
+        "PackageAttachments --> gatherUnsignedDocumentsForDownload(): " + error,
         this.errUtil.METHOD_ERROR
       );
     }
@@ -271,7 +276,7 @@ EmailAttachments.prototype = {
   copyDocumentsToEmail: function(emailSysId) {
     try {
 
-      this.gatherUnsignedDocuments();
+      this.prepareUnsignedDocumentsToEmail();
       // NOTE: does not properly copy when used in Flow Deisnger so moved below inside of FD action
       // this.attachments.copy(this.UNSIGNED_DOCS_TABLE, this.unsignedSysId, this.EMAIL_TABLE, emailSysId);
       // this.attachments.copy(this.SIGNED_DOCS_TABLE, this.signedSysId, this.EMAIL_TABLE, emailSysId);
@@ -287,20 +292,20 @@ EmailAttachments.prototype = {
     }
   },
   
-  type: 'EmailAttachments'
+  type: 'PackageAttachments'
 };
 ]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-09 05:45:20</sys_created_on>
         <sys_id>4f2ce55347b8a110f39f7601e36d430a</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_name>EmailAttachments</sys_name>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>PackageAttachments</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_4f2ce55347b8a110f39f7601e36d430a</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-09 05:45:20</sys_updated_on>
+        <sys_updated_on>2023-02-17 16:43:47</sys_updated_on>
     </sys_script_include>
 </record_update>
