@@ -9,1166 +9,1172 @@
         <name>Igce</name>
         <script><![CDATA[var Igce = Class.create();
 Igce.prototype = {
-    IGCE_ESTIMATE_TABLE: "x_g_dis_atat_igce_estimate",
-    IGCE_ESTIMATE_FIELDS: ["acquisition_package", "classification_instance", "classification_level", "contract_type", "cross_domain_solution",
-        "dow_task_number", "environment_instance", "idiq_clin_type", "title", "unit", "unit_price", "unit_quantity", "description"],
-    ENV_INST_TABLE: "x_g_dis_atat_environment_instance",
-    CLASS_INST_TABLE: "x_g_dis_atat_classification_instance",
-    CROSS_DOMAIN_SOLN_TABLE: "x_g_dis_atat_cross_domain_solution",
-    SELECTED_PERIOD_FIELDS: ["need_for_entire_task_order_duration", "selected_periods"],
-    CLASSIFICATION_LEVEL_TABLE: "x_g_dis_atat_classification_level",
-    TRAVEL_REQ_TABLE: "x_g_dis_atat_travel_requirement",
-    TRAVEL_REQ_FIELDS: ["selected_periods", "duration_in_days", "number_of_travelers", "trip_location", "number_of_trips"],
-    REQ_COST_ESTIMATE_TABLE: "x_g_dis_atat_requirements_cost_estimate",
-    REQ_COST_ESTIMATE_FIELDS: ["travel_option", "travel_estimated_values", "surge_requirement_capabilities",// y/n choice
-        "surge_requirement_capacity",// int
-        "how_est_dev_contracting_office_other_charges_fee", // choice y/n
-        "how_est_dev_contracting_office_other_fee_percentage", // int
-        "how_est_dev_prev_cost_estimate_comp_option", //MORE_THAN / LESS_THAN / SAME
-        "how_est_dev_prev_cost_estimate_comp_percentage", // integer
-        "how_est_dev_cost_estimate_description", // string 1000 chars
-        "how_est_dev_tools_used", //String 100
-        "how_est_dev_other_tools_used", //string 100
-        "travel_option", //choice I want to apply the same price estimate to all performance fields -> SINGLE, I want to estimate a different price for the base and each option period -> MULTIPLE or null
-        "travel_estimated_values", // String: Tony refactoring to sys_id: quantity on 1/13/2023
-        "optimize_replicate_option", // SINGLE / MULTIPLE / null
-        "optimize_replicate_estimated_values", //String list of values in order based on period. e.g. -> 100,200,300 (base period, option period 1, option period 2)
-        "architectural_design_current_environment_option", //need to query, not showing up in SNOW (SINGLE/ MULTIPLE/ null?)
-        "architectural_design_current_environment_estimated_values", ////String list of values in order based on period. e.g. -> 100,200,300 (base period, option period 1, option period 2)
-        "architectural_design_performance_requirements_option", //need to query, not showing up in SNOW (SINGLE/ MULTIPLE/ null?)
-        "architectural_design_performance_requirements_estimated_values", /////String list of values in order based on period. e.g. -> 100,200,300 (base period, option period 1, option period 2)
+  IGCE_ESTIMATE_TABLE: "x_g_dis_atat_igce_estimate",
+  IGCE_ESTIMATE_FIELDS: ["acquisition_package", "classification_instance", "classification_level", "contract_type", "cross_domain_solution",
+    "dow_task_number", "environment_instance", "idiq_clin_type", "title", "unit", "unit_price", "unit_quantity", "description"],
+  ENV_INST_TABLE: "x_g_dis_atat_environment_instance",
+  CLASS_INST_TABLE: "x_g_dis_atat_classification_instance",
+  CROSS_DOMAIN_SOLN_TABLE: "x_g_dis_atat_cross_domain_solution",
+  SELECTED_PERIOD_FIELDS: ["need_for_entire_task_order_duration", "selected_periods"],
+  CLASSIFICATION_LEVEL_TABLE: "x_g_dis_atat_classification_level",
+  TRAVEL_REQ_TABLE: "x_g_dis_atat_travel_requirement",
+  TRAVEL_REQ_FIELDS: ["selected_periods", "duration_in_days", "number_of_travelers", "trip_location", "number_of_trips"],
+  REQ_COST_ESTIMATE_TABLE: "x_g_dis_atat_requirements_cost_estimate",
+  REQ_COST_ESTIMATE_FIELDS: ["travel_option", "travel_estimated_values", "surge_requirement_capabilities",// y/n choice
+    "surge_requirement_capacity",// int
+    "how_est_dev_contracting_office_other_charges_fee", // choice y/n
+    "how_est_dev_contracting_office_other_fee_percentage", // int
+    "how_est_dev_prev_cost_estimate_comp_option", //MORE_THAN / LESS_THAN / SAME
+    "how_est_dev_prev_cost_estimate_comp_percentage", // integer
+    "how_est_dev_cost_estimate_description", // string 1000 chars
+    "how_est_dev_tools_used", //String 100
+    "how_est_dev_other_tools_used", //string 100
+    "travel_option", //choice I want to apply the same price estimate to all performance fields -> SINGLE, I want to estimate a different price for the base and each option period -> MULTIPLE or null
+    "travel_estimated_values", // String: Tony refactoring to sys_id: quantity on 1/13/2023
+    "optimize_replicate_option", // SINGLE / MULTIPLE / null
+    "optimize_replicate_estimated_values", //String list of values in order based on period. e.g. -> 100,200,300 (base period, option period 1, option period 2)
+    "architectural_design_current_environment_option", //need to query, not showing up in SNOW (SINGLE/ MULTIPLE/ null?)
+    "architectural_design_current_environment_estimated_values", ////String list of values in order based on period. e.g. -> 100,200,300 (base period, option period 1, option period 2)
+    "architectural_design_performance_requirements_option", //need to query, not showing up in SNOW (SINGLE/ MULTIPLE/ null?)
+    "architectural_design_performance_requirements_estimated_values", /////String list of values in order based on period. e.g. -> 100,200,300 (base period, option period 1, option period 2)
 
 
 
 
 
-    ],
-    TRAINING_ESTIMATE_TABLE: "x_g_dis_atat_training_estimate",
-    TRAINING_ESTIMATE_FIELDS: ["acquisition_package",
-        "subscription_type", //choice
-        "training_estimated_values", //4000 string with periodsys_id: quantity
-        "training_option", //choice SINGLE is for all option periods MULTIPLE is for different
-        "training_unit", //PER_PERSON 	PER_CLASS ANNUAL_SUBSCRIPTION MONTHLY_SUBSCRIPTION
-        "estimated_price_per_training_unit", //price
-        "cloud_support_environment_instance" //sys_id reference to Cloud Support Environment Instance
+  ],
+  TRAINING_ESTIMATE_TABLE: "x_g_dis_atat_training_estimate",
+  TRAINING_ESTIMATE_FIELDS: ["acquisition_package",
+    "subscription_type", //choice
+    "training_estimated_values", //4000 string with periodsys_id: quantity
+    "training_option", //choice SINGLE is for all option periods MULTIPLE is for different
+    "training_unit", //PER_PERSON 	PER_CLASS ANNUAL_SUBSCRIPTION MONTHLY_SUBSCRIPTION
+    "estimated_price_per_training_unit", //price
+    "cloud_support_environment_instance" //sys_id reference to Cloud Support Environment Instance
 
-    ],
-    PERIOD_TABLE: "x_g_dis_atat_period",
-    PERIOD_FIELDS: ["period_type", "period_unit", "period_unit_count", "option_order"],
-    CLOUD_SUPPORT_ENV_INST_TABLE: "x_g_dis_atat_cloud_support_environment_instance",
-    CLOUD_SUPPORT_ENV_INST_FIELDS: ["instance_name", // Name of Training
-        "classification_level",
-        "need_for_entire_task_order_duration", "selected_periods", // selected period fields
-        "anticipated_need_or_usage", // string description field (probably not needed)
-        "training_format", // CHOICE: ONSITE_INSTRUCTOR_CONUS, ONSITE_INSTRUCTOR_OCONUS, VIRTUAL_SELF_LED, NO_PREFERENCE
-        "training_location", // string location
-    ],
-    ARCH_DESIGN_REQ_TABLE: "x_g_dis_atat_architectural_design_requirement",
-    ARCH_DESIGN_REQ_FIELDS: ["acquisition_package",
-        "statement", //string solution statement
-        "dow_task_number",
-        "source", // choice: CURRENT_ENVIRONMENT / DOW
-        "data_classification_levels", // list of sys_id references to classification level table
-    ],
-    acquisitionPackage: null,
-    errUtil: new ErrorHandler(),
+  ],
+  PERIOD_TABLE: "x_g_dis_atat_period",
+  PERIOD_FIELDS: ["period_type", "period_unit", "period_unit_count", "option_order"],
+  CLOUD_SUPPORT_ENV_INST_TABLE: "x_g_dis_atat_cloud_support_environment_instance",
+  CLOUD_SUPPORT_ENV_INST_FIELDS: ["instance_name", // Name of Training
+    "classification_level",
+    "need_for_entire_task_order_duration", "selected_periods", // selected period fields
+    "anticipated_need_or_usage", // string description field (probably not needed)
+    "training_format", // CHOICE: ONSITE_INSTRUCTOR_CONUS, ONSITE_INSTRUCTOR_OCONUS, VIRTUAL_SELF_LED, NO_PREFERENCE
+    "training_location", // string location
+  ],
+  ARCH_DESIGN_REQ_TABLE: "x_g_dis_atat_architectural_design_requirement",
+  ARCH_DESIGN_REQ_FIELDS: ["acquisition_package",
+    "statement", //string solution statement
+    "dow_task_number",
+    "source", // choice: CURRENT_ENVIRONMENT / DOW
+    "data_classification_levels", // list of sys_id references to classification level table
+  ],
+  acquisitionPackage: null,
+  errUtil: new ErrorHandler(),
 
-    initialize: function (acquisitionPackage) {
-        this.acquisitionPackage = acquisitionPackage;
-    },
-    getEstimatedObligation: function (filterFn) {
-        return this.getPayload().templatePayload.periodsEstimate.map(function (estimate) {
-            return estimate.periodLineItems;
-        }).reduce(function (pre, cur) {
-            return pre.concat(cur);
-        }).reduce(function (result, item) {
-            return result + (item.monthlyPrice * item.monthsInPeriod);
-        }, 0);
-    },
+  initialize: function (acquisitionPackage) {
+    this.acquisitionPackage = acquisitionPackage;
+  },
+  getEstimatedObligation: function () {
+    var payload = JSON.parse(this.getPayload());
+    // var templatePayload = payload.templatePayload;
+    // gs.info("**** TEMPLATE PAYLOAD ****");
+    // gs.info(JSON.stringify(templatePayload));
+    return payload.templatePayload.periodsEstimate.map(function (estimate) {
+      return estimate.periodLineItems;
+    }).reduce(function (pre, cur) {
+      return pre.concat(cur);
+    }).reduce(function (result, item) {
+      return result + (item.monthlyPrice * item.monthsInPeriod);
+    }, 0);
+  },
 
-    getEstimatedBaseYearObligation: function () {
-        return this.getPayload().templatePayload.periodsEstimate.filter(function (estimate) {
-            return estimate.period.periodType == "BASE";
-        }).map(function (estimate) {
-            return estimate.periodLineItems;
-        }).reduce(function (pre, cur) {
-            return pre.concat(cur);
-        }).reduce(function (result, item) {
-            return result + (item.monthlyPrice * item.monthsInPeriod);
-        }, 0);
-    },
-    getPackagePeriods: function (base, options) {
-        try {
-            // This returns the periods in the IGCE schema for the Periods Estimate Object
-            var mappedPeriods = [];
-            if (base) {
-                mappedPeriods.push({
-                    "period": {
-                        "periodType": base.period_type.toString(),
-                        "periodUnitCount": base.period_unit_count.toString(),
-                        "periodUnit": base.period_unit.toString(),
-                        "optionOrder": base.option_order.toString()
-                    },
-                    "periodLineItems": [],
-                });
-            }
-            if (options) {
-                getListRecords(options,
-                    ["period_type", "period_unit_count", "period_unit", "option_order"],
-                    "x_g_dis_atat_period")
-                    .forEach(function (period) {
-                        mappedPeriods.push({
-                            "period": {
-                                "periodType": period.period_type.toString(),
-                                "periodUnitCount": period.period_unit_count.toString(),
-                                "periodUnit": period.period_unit.toString(),
-                                "optionOrder": period.option_order.toString()
-                            }, "periodLineItems": []
-                        });
-                    });
-            }
-            return mappedPeriods;
-        }
-        catch (error) {
-            throw this.errUtil.createError(
-                "Igce --> getPackagePeriods(): " + error,
-                this.errUtil.METHOD_ERROR
-            );
-        }
-    },
-
-    getInstancePeriodInfo: function (instance) {
-        //This function retrieves:
-        // selected_periods
-        // need_for_entire_task_order_duration
-        // Appending it to the given Instance
-        try {
-            var selectedPeriodsFields = ["period_type", "option_order", "period_unit", "period_unit_count"];
-
-            var entireDuration = convertToBoolean(instance.need_for_entire_task_order_duration.toString());
-            instance.need_for_entire_task_order_duration = entireDuration;
-
-            if (entireDuration) {
-                instance.selected_periods = [];
-            } else {
-                var selectedPeriods = [];
-                var retrieved_periods = getListRecords(instance.selected_periods.toString(), selectedPeriodsFields, "x_g_dis_atat_period").map(removeSysId);
-                for (var i = 0; i < retrieved_periods.length; i++) {
-                    var formatted_option_order;
-                    if (retrieved_periods[i].option_order == null) {
-                        formatted_option_order = "";
-                    }
-                    else {
-                        formatted_option_order = retrieved_periods[i].option_order.toString();
-                    }
-                    selectedPeriods.push({
-                        "periodType": retrieved_periods[i].period_type.toString(),
-                        "periodUnitCount": retrieved_periods[i].period_unit_count.toString(),
-                        "periodUnit": retrieved_periods[i].period_unit.toString(),
-                        "optionOrder": formatted_option_order
-                    });
-                };
-                instance.selected_periods = selectedPeriods;
-            }
-            return instance;
-        }
-        catch (error) {
-            throw this.errUtil.createError(
-                "Igce --> getInstancePeriodInfo(): " + error,
-                this.errUtil.METHOD_ERROR
-            );
-        }
-    },
-    validateIgceEstimateItem: function (item_to_validate) {
-        if (item_to_validate.title
-            && item_to_validate.unit_price
-            && item_to_validate.classification_level
-            && item_to_validate.idiq_clin_type
-            && item_to_validate.contract_type
-            && item_to_validate.description) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    },
-
-    mapIgceToPeriodsEstimate: function (data_to_map, periods_estimate) {
-        try {
-            // For each item in IGCE estimates
-            data_to_map.forEach(function (item) {
-                // If the item meets the validation criteria
-                if (Igce.prototype.validateIgceEstimateItem(item)) {
-                    // If the service title is portability plan...
-                    // Map it to the Base Period
-                    if (item.title && item.title === "Portability Plan") {
-                        // Base Period is always the first item in the periods_estimate array
-                        periods_estimate[0].periodLineItems.push({
-                            "idiqClin": Igce.prototype.determineIdiqClin(item.classification_level, item.idiq_clin_type),
-                            "contractType": item.contract_type,
-                            "dowTaskNumber": "TBD",//item.dow_task_number,
-                            "serviceTitle": item.title,
-                            "itemDescription": "", // filled by user
-                            "unitPrice": item.unit_price,
-                            "quantity": 1, // Always 1
-                            "unit": "each",
-                        })
-
-                    }
-                    else {
-                        // For each period in the selected_periods array the instance
-                        item.quantity_info_periods.forEach(function (period) {
-
-                            // Map period_type and base_period of the periods_estimate array
-                            var formattedPeriodOutput = periods_estimate.map(function (input) {
-                                return input.period.periodType + input.period.optionOrder;
-                            });
-
-                            var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(period.periodType + period.optionOrder);
-                            var formattedQuantity;
-                            // If the quantity key exists on the period (mapping was successful if period.quantity exists)
-                            if (period.quantity) {
-                                // Format the quantity to months
-                                formattedQuantity = monthsInPeriod(period.periodUnit, parseInt(period.quantity));
-                            }
-                            else {
-                                formattedQuantity = 0;
-                            }
-
-
-                            // Insert into periods_estimate, under the specified period and period_line_items 
-                            periods_estimate[indexOfCurrentPeriod].periodLineItems.push({
-                                "idiqClin": Igce.prototype.determineIdiqClin(item.classification_level, item.idiq_clin_type),
-                                "contractType": item.contract_type,
-                                "dowTaskNumber": "TBD",//item.dow_task_number,
-                                "serviceTitle": item.title,
-                                "itemDescription": item.description,
-                                "unitPrice": item.unit_price,
-                                "quantity": formattedQuantity,
-                                "unit": "month",
-                            });
-                        });
-                    }
-                }
-
+  getEstimatedBaseYearObligation: function () {
+    return this.getPayload().templatePayload.periodsEstimate.filter(function (estimate) {
+      return estimate.period.periodType === "BASE";
+    }).map(function (estimate) {
+      return estimate.periodLineItems;
+    }).reduce(function (pre, cur) {
+      return pre.concat(cur);
+    }).reduce(function (result, item) {
+      return result + (item.monthlyPrice * item.monthsInPeriod);
+    }, 0);
+  },
+  getPackagePeriods: function (base, options) {
+    try {
+      // This returns the periods in the IGCE schema for the Periods Estimate Object
+      var mappedPeriods = [];
+      if (base) {
+        mappedPeriods.push({
+          "period": {
+            "periodType": base.period_type.toString(),
+            "periodUnitCount": base.period_unit_count.toString(),
+            "periodUnit": base.period_unit.toString(),
+            "optionOrder": base.option_order.toString()
+          },
+          "periodLineItems": [],
+        });
+      }
+      if (options) {
+        getListRecords(options,
+          ["period_type", "period_unit_count", "period_unit", "option_order"],
+          "x_g_dis_atat_period")
+          .forEach(function (period) {
+            mappedPeriods.push({
+              "period": {
+                "periodType": period.period_type.toString(),
+                "periodUnitCount": period.period_unit_count.toString(),
+                "periodUnit": period.period_unit.toString(),
+                "optionOrder": period.option_order.toString()
+              }, "periodLineItems": []
             });
-        }
-        catch (error) {
-            throw this.errUtil.createError(
-                "Igce --> mapIgceToPeriodsEstimate(): " + error,
-                this.errUtil.METHOD_ERROR
-            );
-        }
-    },
-    mapTravelToPeriodsEstimate: function (travel_data, periods_estimate) {
-        try {
-            var travel_description_array = [];
-            // For each item in periods estimate
-            periods_estimate.forEach(function (period_item) {
+          });
+      }
+      return mappedPeriods;
+    }
+    catch (error) {
+      throw this.errUtil.createError(
+        "Igce --> getPackagePeriods(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+  },
 
-                var full_travel_description = "";
-                var unitPrice;
+  getInstancePeriodInfo: function (instance) {
+    //This function retrieves:
+    // selected_periods
+    // need_for_entire_task_order_duration
+    // Appending it to the given Instance
+    try {
+      var selectedPeriodsFields = ["period_type", "option_order", "period_unit", "period_unit_count"];
 
-                // Loop through travel data to get full_travel_description
-                travel_data.forEach(function (travel_item) {
-                    travel_item.instance_info.selected_periods.forEach(function (travel_period) {
-                        if (travel_period.periodType === period_item.period.periodType && travel_period.optionOrder === period_item.period.optionOrder) {
+      var entireDuration = convertToBoolean(instance.need_for_entire_task_order_duration.toString());
+      instance.need_for_entire_task_order_duration = entireDuration;
 
-                            full_travel_description += travel_item.travel_description;
-                            unitPrice = travel_period.quantity // travel estimated values are mapped per period
-                        }
-                    });
-                });
-                if (full_travel_description != "") {
-                    travel_description_array.push({
-                        "periodType": period_item.period.periodType,
-                        "periodUnitCount": period_item.period.periodUnitCount,
-                        "periodUnit": period_item.period.periodUnit,
-                        "optionOrder": period_item.period.optionOrder,
-                        "fullTravelDescription": full_travel_description,
-                        "unitPrice": unitPrice
-                    });
-                }
+      if (entireDuration) {
+        instance.selected_periods = [];
+      } else {
+        var selectedPeriods = [];
+        var retrieved_periods = getListRecords(instance.selected_periods.toString(), selectedPeriodsFields, "x_g_dis_atat_period").map(removeSysId);
+        for (var i = 0; i < retrieved_periods.length; i++) {
+          var formatted_option_order;
+          if (retrieved_periods[i].option_order == null) {
+            formatted_option_order = "";
+          }
+          else {
+            formatted_option_order = retrieved_periods[i].option_order.toString();
+          }
+          selectedPeriods.push({
+            "periodType": retrieved_periods[i].period_type.toString(),
+            "periodUnitCount": retrieved_periods[i].period_unit_count.toString(),
+            "periodUnit": retrieved_periods[i].period_unit.toString(),
+            "optionOrder": formatted_option_order
+          });
+        };
+        instance.selected_periods = selectedPeriods;
+      }
+      return instance;
+    }
+    catch (error) {
+      throw this.errUtil.createError(
+        "Igce --> getInstancePeriodInfo(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+  },
+  validateIgceEstimateItem: function (item_to_validate) {
+    if (item_to_validate.title
+      && item_to_validate.unit_price
+      && item_to_validate.classification_level
+      && item_to_validate.idiq_clin_type
+      && item_to_validate.contract_type
+      && item_to_validate.description) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  },
 
+  mapIgceToPeriodsEstimate: function (data_to_map, periods_estimate) {
+    try {
+      // For each item in IGCE estimates
+      data_to_map.forEach(function (item) {
+        // If the item meets the validation criteria
+        if (Igce.prototype.validateIgceEstimateItem(item)) {
+          // If the service title is portability plan...
+          // Map it to the Base Period
+          if (item.title && item.title === "Portability Plan") {
+            // Base Period is always the first item in the periods_estimate array
+            periods_estimate[0].periodLineItems.push({
+              "idiqClin": Igce.prototype.determineIdiqClin(item.classification_level, item.idiq_clin_type),
+              "contractType": item.contract_type,
+              "dowTaskNumber": "TBD",//item.dow_task_number,
+              "serviceTitle": item.title,
+              "itemDescription": "", // filled by user
+              "unitPrice": item.unit_price,
+              "quantity": 1, // Always 1
+              "unit": "each",
+            })
+
+          }
+          else {
+            // For each period in the selected_periods array the instance
+            item.quantity_info_periods.forEach(function (period) {
+
+              // Map period_type and base_period of the periods_estimate array
+              var formattedPeriodOutput = periods_estimate.map(function (input) {
+                return input.period.periodType + input.period.optionOrder;
+              });
+
+              var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(period.periodType + period.optionOrder);
+              var formattedQuantity;
+              // If the quantity key exists on the period (mapping was successful if period.quantity exists)
+              if (period.quantity) {
+                // Format the quantity to months
+                formattedQuantity = monthsInPeriod(period.periodUnit, parseInt(period.quantity));
+              }
+              else {
+                formattedQuantity = 0;
+              }
+
+
+              // Insert into periods_estimate, under the specified period and period_line_items
+              periods_estimate[indexOfCurrentPeriod].periodLineItems.push({
+                "idiqClin": Igce.prototype.determineIdiqClin(item.classification_level, item.idiq_clin_type),
+                "contractType": item.contract_type,
+                "dowTaskNumber": "TBD",//item.dow_task_number,
+                "serviceTitle": item.title,
+                "itemDescription": item.description,
+                "unitPrice": item.unit_price,
+                "quantity": formattedQuantity,
+                "unit": "month",
+              });
             });
+          }
+        }
 
-            travel_description_array.forEach(function (item) {
+      });
+    }
+    catch (error) {
+      throw this.errUtil.createError(
+        "Igce --> mapIgceToPeriodsEstimate(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+  },
+  mapTravelToPeriodsEstimate: function (travel_data, periods_estimate) {
+    try {
+      var travel_description_array = [];
+      // For each item in periods estimate
+      periods_estimate.forEach(function (period_item) {
+
+        var full_travel_description = "";
+        var unitPrice;
+
+        // Loop through travel data to get full_travel_description
+        travel_data.forEach(function (travel_item) {
+          travel_item.instance_info.selected_periods.forEach(function (travel_period) {
+            if (travel_period.periodType === period_item.period.periodType && travel_period.optionOrder === period_item.period.optionOrder) {
+
+              full_travel_description += travel_item.travel_description;
+              unitPrice = travel_period.quantity // travel estimated values are mapped per period
+            }
+          });
+        });
+        if (full_travel_description != "") {
+          travel_description_array.push({
+            "periodType": period_item.period.periodType,
+            "periodUnitCount": period_item.period.periodUnitCount,
+            "periodUnit": period_item.period.periodUnit,
+            "optionOrder": period_item.period.optionOrder,
+            "fullTravelDescription": full_travel_description,
+            "unitPrice": unitPrice
+          });
+        }
+
+      });
+
+      travel_description_array.forEach(function (item) {
+
+        // Map period_type and base_period of the periods_estimate array
+        var formattedPeriodOutput = periods_estimate.map(function (input) {
+          return input.period.periodType + input.period.optionOrder;
+        });
+
+        var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(item.periodType + item.optionOrder);
+        // Insert into periods_estimate, under the specified period and period_line_items
+        periods_estimate[indexOfCurrentPeriod].periodLineItems.push({
+          "idiqClin": "x007 Travel",
+          "contractType": "T&M",
+          "dowTaskNumber": "10f",
+          "serviceTitle": "Travel",
+          "itemDescription": item.fullTravelDescription,
+          "unitPrice": item.unitPrice,
+          "quantity": 1, //always 1
+          "unit": "period",
+        });
+
+
+      });
+    } catch (error) {
+      throw this.errUtil.createError(
+        "Igce --> mapTravelToPeriodsEstimate(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+  },
+  determineTrainingUnit: function (training_unit) {
+    switch (training_unit) {
+      case "PER_PERSON":
+        return "people";
+      case "PER_CLASS":
+        return "sessions";
+      case "MONTHLY_SUBSCRIPTION":
+        return "months";
+      default:
+        return "";
+    }
+  },
+
+  mapTrainingToPeriodsEstimate: function (training_data, periods_estimate) {
+    try {
+      // For each item in Training Data
+      training_data.forEach(function (item) {
+        if (!item.training_instance_info.need_for_entire_task_order_duration) {
+          if (item.training_unit === "ANNUAL_SUBSCRIPTION") {
+            // map to only the selected_periods
+            // For each period in the selected_periods array the instance
+            item.training_instance_info.selected_periods.forEach(function (period) {
+
+              // Map period_type and base_period of the periods_estimate array
+              var formattedPeriodOutput = periods_estimate.map(function (input) {
+                return input.period.periodType + input.period.optionOrder;
+              });
+
+              var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(period.periodType + period.optionOrder);
+
+              // Insert into periods_estimate, under the specified period and period_line_items
+              periods_estimate[indexOfCurrentPeriod].periodLineItems.push({
+                "idiqClin": Igce.prototype.determineIdiqClin(item.classification_info, "CLOUD_SUPPORT"),
+                "contractType": "TBD",
+                "dowTaskNumber": "TBD",
+                "serviceTitle": item.training_instance_info.instance_name,
+                "itemDescription": item.training_instance_info.anticipated_need_or_usage,
+                "unitPrice": item.estimated_price_per_training_unit,
+                "quantity": 1, // always 1 for ANNUAL_SUBSCRIPTION
+                "unit": "year", // always year for ANNUAL_SUBSCRIPTION
+              });
+            });
+          }
+          else if (item.training_unit === "MONTHLY_SUBSCRIPTION" || item.training_unit === "PER_PERSON" || item.training_unit === "PER_CLASS") {
+            if (item.training_option === "SINGLE") {
+              // map item.single to all values in the selected_periods
+              item.training_instance_info.selected_periods.forEach(function (period) {
 
                 // Map period_type and base_period of the periods_estimate array
                 var formattedPeriodOutput = periods_estimate.map(function (input) {
-                    return input.period.periodType + input.period.optionOrder;
+                  return input.period.periodType + input.period.optionOrder;
                 });
 
-                var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(item.periodType + item.optionOrder);
-                // Insert into periods_estimate, under the specified period and period_line_items 
+                var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(period.periodType + period.optionOrder);
+
+                // Insert into periods_estimate, under the specified period and period_line_items
                 periods_estimate[indexOfCurrentPeriod].periodLineItems.push({
-                    "idiqClin": "x007 Travel",
-                    "contractType": "T&M",
-                    "dowTaskNumber": "10f",
-                    "serviceTitle": "Travel",
-                    "itemDescription": item.fullTravelDescription,
-                    "unitPrice": item.unitPrice,
-                    "quantity": 1, //always 1
-                    "unit": "period",
+                  "idiqClin": Igce.prototype.determineIdiqClin(item.classification_info, "CLOUD_SUPPORT"),
+                  "contractType": "TBD",
+                  "dowTaskNumber": "TBD",
+                  "serviceTitle": item.training_instance_info.instance_name,
+                  "itemDescription": item.training_instance_info.anticipated_need_or_usage,
+                  "unitPrice": item.estimated_price_per_training_unit,
+                  "quantity": item.single, //
+                  "unit": Igce.prototype.determineTrainingUnit(item.training_unit), // add function to format training unit
+                });
+              });
+            }
+            else if (item.training_option === "MULTIPLE") {
+              // map to only the values in the item.multiple array
+              item.multiple.forEach(function (period) {
+
+                // Map period_type and base_period of the periods_estimate array
+                var formattedPeriodOutput = periods_estimate.map(function (input) {
+                  return input.period.periodType + input.period.optionOrder;
                 });
 
+                var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(period.periodType + period.optionOrder);
 
-            });
-        } catch (error) {
-            throw this.errUtil.createError(
-                "Igce --> mapTravelToPeriodsEstimate(): " + error,
-                this.errUtil.METHOD_ERROR
-            );
-        }
-    },
-    determineTrainingUnit: function (training_unit) {
-        switch (training_unit) {
-            case "PER_PERSON":
-                return "people";
-            case "PER_CLASS":
-                return "sessions";
-            case "MONTHLY_SUBSCRIPTION":
-                return "months";
-            default:
-                return "";
-        }
-    },
-
-    mapTrainingToPeriodsEstimate: function (training_data, periods_estimate) {
-        try {
-            // For each item in Training Data
-            training_data.forEach(function (item) {
-                if (!item.training_instance_info.need_for_entire_task_order_duration) {
-                    if (item.training_unit === "ANNUAL_SUBSCRIPTION") {
-                        // map to only the selected_periods
-                        // For each period in the selected_periods array the instance
-                        item.training_instance_info.selected_periods.forEach(function (period) {
-
-                            // Map period_type and base_period of the periods_estimate array
-                            var formattedPeriodOutput = periods_estimate.map(function (input) {
-                                return input.period.periodType + input.period.optionOrder;
-                            });
-
-                            var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(period.periodType + period.optionOrder);
-
-                            // Insert into periods_estimate, under the specified period and period_line_items 
-                            periods_estimate[indexOfCurrentPeriod].periodLineItems.push({
-                                "idiqClin": Igce.prototype.determineIdiqClin(item.classification_info, "CLOUD_SUPPORT"),
-                                "contractType": "TBD",
-                                "dowTaskNumber": "TBD",
-                                "serviceTitle": item.training_instance_info.instance_name,
-                                "itemDescription": item.training_instance_info.anticipated_need_or_usage,
-                                "unitPrice": item.estimated_price_per_training_unit,
-                                "quantity": 1, // always 1 for ANNUAL_SUBSCRIPTION
-                                "unit": "year", // always year for ANNUAL_SUBSCRIPTION
-                            });
-                        });
-                    }
-                    else if (item.training_unit === "MONTHLY_SUBSCRIPTION" || item.training_unit === "PER_PERSON" || item.training_unit === "PER_CLASS") {
-                        if (item.training_option === "SINGLE") {
-                            // map item.single to all values in the selected_periods
-                            item.training_instance_info.selected_periods.forEach(function (period) {
-
-                                // Map period_type and base_period of the periods_estimate array
-                                var formattedPeriodOutput = periods_estimate.map(function (input) {
-                                    return input.period.periodType + input.period.optionOrder;
-                                });
-
-                                var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(period.periodType + period.optionOrder);
-
-                                // Insert into periods_estimate, under the specified period and period_line_items 
-                                periods_estimate[indexOfCurrentPeriod].periodLineItems.push({
-                                    "idiqClin": Igce.prototype.determineIdiqClin(item.classification_info, "CLOUD_SUPPORT"),
-                                    "contractType": "TBD",
-                                    "dowTaskNumber": "TBD",
-                                    "serviceTitle": item.training_instance_info.instance_name,
-                                    "itemDescription": item.training_instance_info.anticipated_need_or_usage,
-                                    "unitPrice": item.estimated_price_per_training_unit,
-                                    "quantity": item.single, // 
-                                    "unit": Igce.prototype.determineTrainingUnit(item.training_unit), // add function to format training unit
-                                });
-                            });
-                        }
-                        else if (item.training_option === "MULTIPLE") {
-                            // map to only the values in the item.multiple array
-                            item.multiple.forEach(function (period) {
-
-                                // Map period_type and base_period of the periods_estimate array
-                                var formattedPeriodOutput = periods_estimate.map(function (input) {
-                                    return input.period.periodType + input.period.optionOrder;
-                                });
-
-                                var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(period.periodType + period.optionOrder);
-
-                                // Insert into periods_estimate, under the specified period and period_line_items 
-                                periods_estimate[indexOfCurrentPeriod].periodLineItems.push({
-                                    "idiqClin": Igce.prototype.determineIdiqClin(item.classification_info, "CLOUD_SUPPORT"),
-                                    "contractType": "TBD",
-                                    "dowTaskNumber": "TBD",
-                                    "serviceTitle": item.training_instance_info.instance_name,
-                                    "itemDescription": item.training_instance_info.anticipated_need_or_usage,
-                                    "unitPrice": item.estimated_price_per_training_unit,
-                                    "quantity": period.quantity, // 
-                                    "unit": Igce.prototype.determineTrainingUnit(item.training_unit), // add function to format training unit
-                                });
-                            });
-                        }
-                    }
-
-                }
-                else if (item.training_instance_info.need_for_entire_task_order_duration) {
-                    if (item.training_unit === "ANNUAL_SUBSCRIPTION") {
-                        // map to each periods_estimate because its needed for entire to duration and annual
-                        // unit is year, quantity is always 1 (melissa)
-                        periods_estimate.forEach(function (period) {
-                            period.periodLineItems.push({
-                                "idiqClin": Igce.prototype.determineIdiqClin(item.classification_info, "CLOUD_SUPPORT"),
-                                "contractType": "TBD",
-                                "dowTaskNumber": "TBD",
-                                "serviceTitle": item.training_instance_info.instance_name,
-                                "itemDescription": item.training_instance_info.anticipated_need_or_usage,
-                                "unitPrice": item.estimated_price_per_training_unit,
-                                "quantity": 1, // always 1 for ANNUAL_SUBSCRIPTION
-                                "unit": "year", // always year for ANNUAL_SUBSCRIPTION
-                            });
-                        });
-                    }
-                    else if (item.training_unit === "MONTHLY_SUBSCRIPTION" || item.training_unit === "PER_PERSON" || item.training_unit === "PER_CLASS") {
-                        if (item.training_option === "SINGLE") {
-                            // apply item.single value to each item in periods_estimate
-                            periods_estimate.forEach(function (period) {
-                                period.periodLineItems.push({
-                                    "idiqClin": Igce.prototype.determineIdiqClin(item.classification_info, "CLOUD_SUPPORT"),
-                                    "contractType": "TBD",
-                                    "dowTaskNumber": "TBD",
-                                    "serviceTitle": item.training_instance_info.instance_name,
-                                    "itemDescription": item.training_instance_info.anticipated_need_or_usage,
-                                    "unitPrice": item.estimated_price_per_training_unit,
-                                    "quantity": item.single, // 
-                                    "unit": Igce.prototype.determineTrainingUnit(item.training_unit),
-                                });
-                            });
-                        }
-                        else if (item.training_option === "MULTIPLE") {
-                            // map to only the values in the item.multiple array
-                            item.multiple.forEach(function (period) {
-
-                                // Map period_type and base_period of the periods_estimate array
-                                var formattedPeriodOutput = periods_estimate.map(function (input) {
-                                    return input.period.periodType + input.period.optionOrder;
-                                });
-
-                                var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(period.periodType + period.optionOrder);
-
-                                // Insert into periods_estimate, under the specified period and period_line_items 
-                                periods_estimate[indexOfCurrentPeriod].periodLineItems.push({
-                                    "idiqClin": Igce.prototype.determineIdiqClin(item.classification_info, "CLOUD_SUPPORT"),
-                                    "contractType": "TBD",
-                                    "dowTaskNumber": "TBD",
-                                    "serviceTitle": item.training_instance_info.instance_name,
-                                    "itemDescription": item.training_instance_info.anticipated_need_or_usage,
-                                    "unitPrice": item.estimated_price_per_training_unit,
-                                    "quantity": period.quantity, // 
-                                    "unit": Igce.prototype.determineTrainingUnit(item.training_unit),
-                                });
-                            });
-                        }
-
-                    }
-
-                }
-            });
-
-        } catch (error) {
-            throw this.errUtil.createError(
-                "Igce --> mapTrainingToPeriodsEstimate(): " + error,
-                this.errUtil.METHOD_ERROR
-            );
-        }
-    },
-
-    getTravelRequirements: function (packageSysId) {
-        try {
-            var packageId = packageSysId ? packageSysId : this.acquisitionPackage.sys_id;
-            var limit = 50; // arbitrary
-            return new global.GlideQuery(Igce.prototype.TRAVEL_REQ_TABLE)
-                .where("acquisition_package", packageId)
-                .select(Igce.prototype.TRAVEL_REQ_FIELDS)
-                .toArray(limit);
-        }
-        catch (error) {
-            throw this.errUtil.createError(
-                "Igce --> getTravelRequirements(): " + error,
-                this.errUtil.METHOD_ERROR
-            );
-        }
-    },
-    getArchDesignReqs: function (packageSysId) {
-        try {
-            var packageId = packageSysId ? packageSysId : this.acquisitionPackage.sys_id;
-            var limit = 50; // arbitrary
-            return new global.GlideQuery(Igce.prototype.ARCH_DESIGN_REQ_TABLE)
-                .where("acquisition_package", packageId)
-                .select(Igce.prototype.ARCH_DESIGN_FIELDS)
-                .toArray(limit);
-        }
-        catch (error) {
-            throw this.errUtil.createError(
-                "Igce --> getArchDesignReqs(): " + error,
-                this.errUtil.METHOD_ERROR
-            );
-        }
-    },
-    getTrainingEstimates: function (packageSysId) {
-        try {
-            var packageId = packageSysId ? packageSysId : this.acquisitionPackage.sys_id;
-            var limit = 50; // arbitrary
-            return new global.GlideQuery(Igce.prototype.TRAINING_ESTIMATE_TABLE)
-                .where("acquisition_package", packageId)
-                .select(Igce.prototype.TRAINING_ESTIMATE_FIELDS)
-                .toArray(limit);
-        }
-        catch (error) {
-            throw this.errUtil.createError(
-                "Igce --> getTrainingEstimates(): " + error,
-                this.errUtil.METHOD_ERROR
-            );
-        }
-    },
-    getIgceEstimates: function (packageSysId) {
-        try {
-            var packageId = packageSysId ? packageSysId : this.acquisitionPackage.sys_id;
-            var limit = 50; // arbitrary
-            return new global.GlideQuery(Igce.prototype.IGCE_ESTIMATE_TABLE)
-                .where("acquisition_package", packageId)
-                .select(Igce.prototype.IGCE_ESTIMATE_FIELDS)
-                .toArray(limit);
-        }
-        catch (error) {
-            throw this.errUtil.createError(
-                "Igce --> getIgceEstimates(): " + error,
-                this.errUtil.METHOD_ERROR
-            );
-        }
-    },
-    getIgceInstanceData: function (table, id) {
-        try {
-            var instance_data = new global.GlideQuery(table).get(id, Igce.prototype.SELECTED_PERIOD_FIELDS).orElse(null);
-            var instance_data_with_periods = Igce.prototype.getInstancePeriodInfo(instance_data);
-            return instance_data_with_periods;
-        }
-        catch (error) {
-            throw this.errUtil.createError(
-                "Igce --> getIgceInstanceData(): " + error,
-                this.errUtil.METHOD_ERROR
-            );
-        }
-    },
-    getCloudSupportInstance: function (table, id) {
-        try {
-            var cloud_support_data = new global.GlideQuery(table).get(id, Igce.prototype.CLOUD_SUPPORT_ENV_INST_FIELDS).orElse(null);
-            var cloud_support_data_with_periods = Igce.prototype.getInstancePeriodInfo(cloud_support_data);
-            return cloud_support_data_with_periods;
-        }
-        catch (error) {
-            throw this.errUtil.createError(
-                "Igce --> getCloudSupportInstance(): " + error,
-                this.errUtil.METHOD_ERROR
-            );
-        }
-    },
-    getClassificationLevel: function (classificationId) {
-        try {
-            var classification_level = new global.GlideQuery(Igce.prototype.CLASSIFICATION_LEVEL_TABLE).get(classificationId, ["classification"]).orElse(null);
-            return classification_level.classification;
-        } catch (error) {
-            throw this.errUtil.createError(
-                "Igce --> getClassificationLevel(): " + error,
-                this.errUtil.METHOD_ERROR
-            );
-        }
-    },
-    determineIdiqClin: function (classification, idiq_clin_type) {
-        if (classification === "U" && idiq_clin_type === "CLOUD") {
-            return "x001/x017 Cloud UNCLASSIFIED"
-        }
-        if (classification === "U" && idiq_clin_type === "CLOUD_SUPPORT") {
-            return "x002/x018 Cloud Support UNCLASSIFIED"
-        }
-        if (classification === "S" && idiq_clin_type === "CLOUD") {
-            return "x003/x019 Cloud SECRET CLASSIFIED"
-        }
-        if (classification === "S" && idiq_clin_type === "CLOUD_SUPPORT") {
-            return "x004/x020 Cloud Support SECRET CLASSIFIED"
-        }
-        if (classification === "TS" && idiq_clin_type === "CLOUD") {
-            return "x005/x021 Cloud TOP SECRET CLASSIFIED"
-        }
-        if (classification === "TS" && idiq_clin_type === "CLOUD_SUPPORT") {
-            return "x006/x022 Cloud Support TOP SECRET CLASSIFIED"
-        }
-    },
-    // Get Igce Estimate Properties that are sys_id references
-    getIgceProperties: function (igce) {
-        try {
-            // Set up IGCE object to parse through
-            igce.forEach(function (item) {
-                // Get classification level
-                if (item.classification_level) {
-                    item.classification_level = Igce.prototype.getClassificationLevel(item.classification_level)
-                }
-                // Get unit_quantity
-                // This field is a stringified JSON, sys_id: quantity
-                if (item.unit_quantity) {
-                    item.quantity_info_periods = Igce.prototype.getSysIdValuePairs(item.unit_quantity);
-                }
-
-            });
-        }
-        catch (error) {
-            throw this.errUtil.createError(
-                "Igce --> getIgceProperties(): " + error,
-                this.errUtil.METHOD_ERROR
-            );
-        }
-
-    },
-    // Get IGCE Instructions
-    getIgceInstructions: function (packageSysId) {
-        try {
-            var packageId = packageSysId ? packageSysId : this.acquisitionPackage.sys_id;
-            var limit = 50; // arbitrary
-            var igce_instructs = new global.GlideQuery(Igce.prototype.REQ_COST_ESTIMATE_TABLE)
-                .where("acquisition_package", packageId)
-                .select(Igce.prototype.REQ_COST_ESTIMATE_FIELDS)
-                .toArray(limit);
-            // This query is a bit bugged, should only need to return the object instead of an array of a single object,
-            // however there is a bug with how GlideQuery handles display values not resulting in the sys_id not being found.
-            // bandaid fix is returning the first object in the igce_instructs array
-            if (igce_instructs.length != 0) {
-                return igce_instructs[0];
-            }
-            return null;
-        }
-        catch (error) {
-            throw this.errUtil.createError(
-                "Igce --> getIgceInstructions(): " + error,
-                this.errUtil.METHOD_ERROR
-            );
-        }
-
-    },
-    // Used specifically to map quantity_info_periods to selected_periods
-    mapTravelQuantity: function (igce) {
-        try {
-            igce.forEach(function (item) {
-                item.quantity_info_periods.forEach(function (period_to_map) {
-                    item.instance_info.selected_periods.forEach(function (period) {
-                        if (period_to_map.periodType === period.periodType && period_to_map.periodUnitCount === period.periodUnitCount
-                            && period_to_map.optionOrder === period.optionOrder && period_to_map.periodUnit === period.periodUnit) {
-                            period.quantity = period_to_map.quantity;
-                        }
-                    });
+                // Insert into periods_estimate, under the specified period and period_line_items
+                periods_estimate[indexOfCurrentPeriod].periodLineItems.push({
+                  "idiqClin": Igce.prototype.determineIdiqClin(item.classification_info, "CLOUD_SUPPORT"),
+                  "contractType": "TBD",
+                  "dowTaskNumber": "TBD",
+                  "serviceTitle": item.training_instance_info.instance_name,
+                  "itemDescription": item.training_instance_info.anticipated_need_or_usage,
+                  "unitPrice": item.estimated_price_per_training_unit,
+                  "quantity": period.quantity, //
+                  "unit": Igce.prototype.determineTrainingUnit(item.training_unit), // add function to format training unit
                 });
-            });
-        }
-        catch (error) {
-            throw this.errUtil.createError(
-                "Igce --> mapQuantity(): " + error,
-                this.errUtil.METHOD_ERROR
-            );
-        }
-    },
+              });
+            }
+          }
 
-    // Used specifically to map quantity_info_periods if SINGLE period is selected
-    mapSingleQuantity: function (instance) {
-        try {
-            instance.forEach(function (item) {
-                item.instance_info.selected_periods.forEach(function (period) {
-                    {
-                        period.quantity = item.quantity_info_periods;
-                    }
+        }
+        else if (item.training_instance_info.need_for_entire_task_order_duration) {
+          if (item.training_unit === "ANNUAL_SUBSCRIPTION") {
+            // map to each periods_estimate because its needed for entire to duration and annual
+            // unit is year, quantity is always 1 (melissa)
+            periods_estimate.forEach(function (period) {
+              period.periodLineItems.push({
+                "idiqClin": Igce.prototype.determineIdiqClin(item.classification_info, "CLOUD_SUPPORT"),
+                "contractType": "TBD",
+                "dowTaskNumber": "TBD",
+                "serviceTitle": item.training_instance_info.instance_name,
+                "itemDescription": item.training_instance_info.anticipated_need_or_usage,
+                "unitPrice": item.estimated_price_per_training_unit,
+                "quantity": 1, // always 1 for ANNUAL_SUBSCRIPTION
+                "unit": "year", // always year for ANNUAL_SUBSCRIPTION
+              });
+            });
+          }
+          else if (item.training_unit === "MONTHLY_SUBSCRIPTION" || item.training_unit === "PER_PERSON" || item.training_unit === "PER_CLASS") {
+            if (item.training_option === "SINGLE") {
+              // apply item.single value to each item in periods_estimate
+              periods_estimate.forEach(function (period) {
+                period.periodLineItems.push({
+                  "idiqClin": Igce.prototype.determineIdiqClin(item.classification_info, "CLOUD_SUPPORT"),
+                  "contractType": "TBD",
+                  "dowTaskNumber": "TBD",
+                  "serviceTitle": item.training_instance_info.instance_name,
+                  "itemDescription": item.training_instance_info.anticipated_need_or_usage,
+                  "unitPrice": item.estimated_price_per_training_unit,
+                  "quantity": item.single, //
+                  "unit": Igce.prototype.determineTrainingUnit(item.training_unit),
+                });
+              });
+            }
+            else if (item.training_option === "MULTIPLE") {
+              // map to only the values in the item.multiple array
+              item.multiple.forEach(function (period) {
+
+                // Map period_type and base_period of the periods_estimate array
+                var formattedPeriodOutput = periods_estimate.map(function (input) {
+                  return input.period.periodType + input.period.optionOrder;
                 });
 
-            });
-        }
-        catch (error) {
-            throw this.errUtil.createError(
-                "Igce --> mapQuantity(): " + error,
-                this.errUtil.METHOD_ERROR
-            );
-        }
-    },
+                var indexOfCurrentPeriod = formattedPeriodOutput.indexOf(period.periodType + period.optionOrder);
 
-    getPerPeriodValue: function (per_period_json_string) {
-        var obj = new global.JSON().decode(per_period_json_string);
-        var period_value;
-        for (var key in obj) {
-            period_value = obj[key];
-        }
-        return period_value;
-    },
-
-    // Takes sys_id: quantity json string objects and returns the correct period per sys_id
-    getSysIdValuePairs: function (sys_id_json_string) {
-        try {
-            // attempt to decode string
-            var quantity_arr = [];
-            var obj = new global.JSON().decode(sys_id_json_string);
-            for (var key in obj) {
-                // For each sys_id, query the period table and retrieve the required period fields
-                var quantity_data = new global.GlideQuery(Igce.prototype.PERIOD_TABLE).get(key, Igce.prototype.PERIOD_FIELDS).orElse(null);
-                if (quantity_data) {
-                    var formatted_option_order;
-                    if (quantity_data.option_order == null) {
-                        formatted_option_order = "";
-                    }
-                    else {
-                        formatted_option_order = quantity_data.option_order.toString();
-                    }
-                    var quantity_period_info = {
-                        "periodType": quantity_data.period_type.toString(),
-                        "periodUnitCount": quantity_data.period_unit_count.toString(),
-                        "periodUnit": quantity_data.period_unit.toString(),
-                        "optionOrder": formatted_option_order,
-                        "quantity": obj[key]
-                    };
-                    quantity_arr.push(quantity_period_info);
-                }
-
-            }
-            return quantity_arr;
-        }
-        catch (error) {
-            throw this.errUtil.createError(
-                "Igce --> getSysIdValuePairs(): " + error,
-                this.errUtil.METHOD_ERROR
-            );
-        }
-    },
-
-    // Map Current Environment or Architectural Design Reqs to Periods Estimate
-    mapCurrentEnvironmentOrArchDesignReqsToPeriodsEstimate: function (env_object, periods_estimate) {
-        try {
-            // Apply estimated value to all periods in PoP
-            if (env_object.value_option === "SINGLE") {
-                periods_estimate.forEach(function (period) {
-                    period.periodLineItems.push({
-                        "idiqClin": Igce.prototype.determineIdiqClin(env_object.classification_level, "CLOUD"),
-                        "contractType": env_object.contract_type,
-                        "dowTaskNumber": "TBD",
-                        "serviceTitle": "Objective-based requirements",
-                        "itemDescription": env_object.description,
-                        "unitPrice": env_object.values,
-                        "quantity": 1, // Always 1 Period 
-                        "unit": "period",
-                    })
+                // Insert into periods_estimate, under the specified period and period_line_items
+                periods_estimate[indexOfCurrentPeriod].periodLineItems.push({
+                  "idiqClin": Igce.prototype.determineIdiqClin(item.classification_info, "CLOUD_SUPPORT"),
+                  "contractType": "TBD",
+                  "dowTaskNumber": "TBD",
+                  "serviceTitle": item.training_instance_info.instance_name,
+                  "itemDescription": item.training_instance_info.anticipated_need_or_usage,
+                  "unitPrice": item.estimated_price_per_training_unit,
+                  "quantity": period.quantity, //
+                  "unit": Igce.prototype.determineTrainingUnit(item.training_unit),
                 });
-            }
-            // Apply estimated values to PoP based on order of values to PoP
-            else if (env_object.value_option === "MULTIPLE") {
-                // For each item in values array (e.g) 700,800,900
-                env_object.values.forEach(function (item_value) {
-                    var indexOfValue = env_object.values.indexOf(item_value); // 0 for first item, 1 for next item
-                    // Periods Estimate is in order, base period's index is always 0
-                    periods_estimate[indexOfValue].periodLineItems.push({
-                        "idiqClin": Igce.prototype.determineIdiqClin(env_object.classification_level, "CLOUD"),
-                        "contractType": env_object.contract_type,
-                        "dowTaskNumber": "TBD",
-                        "serviceTitle": "Objective-based requirements",
-                        "itemDescription": env_object.description,
-                        "unitPrice": item_value, // use item_value instead of env_object.value
-                        "quantity": 1, // Always 1 Period 
-                        "unit": "period",
-                    });
-                });
-            }
-        }
-        catch (error) {
-            throw this.errUtil.createError(
-                "Igce --> mapCurrentEnvironmentToPeriodsEstimate(): " + error,
-                this.errUtil.METHOD_ERROR
-            );
-        }
-    },
-
-
-    getPayload: function () {
-        var acq_package = this.acquisitionPackage;
-        var periodOfPerformance = acq_package.period_of_performance;
-        var fundingRequest = acq_package.funding_request;
-        var currentEnvironment = acq_package.current_environment;
-        var contractingShop = acq_package.contracting_shop;
-
-        if (!periodOfPerformance) {
-            throw this.errUtil.createError(
-                "Igce --> Please provide a Period of Performance for package " + acq_package.number,
-                this.errUtil.INVALID_INPUT
-            );
-        }
-
-        // Get Periods for Period's Estimate
-        var periodsEstimate = this.getPackagePeriods(
-            periodOfPerformance.base_period, periodOfPerformance.option_periods
-        );
-
-
-        // Get Funding Request
-        var fundingDocument;
-        if (fundingRequest) {
-            if (fundingRequest.funding_request_type == "MIPR") {
-                fundingDocument = {
-                    "fundingType": fundingRequest.funding_request_type.toString(),
-                    "miprNumber": fundingRequest.mipr.mipr_number.toString()
-                }
-            }
-            else if (fundingRequest.funding_request_type == "FS_FORM") {
-                fundingDocument = {
-                    "fundingType": fundingRequest.funding_request_type.toString(),
-                    "gtcNumber": fundingRequest.fs_form.gt_c_number.toString(),
-                    "orderNumber": fundingRequest.fs_form.order_number.toString()
-                }
-            }
-        }
-
-        // Get instructions
-        var igceInstructions = this.getIgceInstructions(this.acquisitionPackage.sys_id);
-        var igceSurgeCapabilities = null;
-        var instructions = null;
-
-        if (igceInstructions) {
-            if (igceInstructions.surge_requirement_capabilities === "YES") {
-                igceSurgeCapabilities = igceInstructions.surge_requirement_capacity;
-            }
-            var toolsUsed = "";
-            if (igceInstructions.how_est_dev_tools_used) {
-                toolsUsed = igceInstructions.how_est_dev_tools_used;
-                // Fix leading comma
-                if (toolsUsed.substring(0, 1) === ",") {
-                    toolsUsed = toolsUsed.substring(1);
-                }
-                toolsUsed = toolsUsed
-                    .replace("AWS", "AWS pricing calculator")
-                    .replace("GOOGLE_CLOUD", "Google Cloud pricing calculator")
-                    .replace("MICROSOFT_AZURE", "Microsoft Azure pricing calculator")
-                    .replace("ORACLE_CLOUD", "Oracle Cloud pricing calculator")
-                    .replace("PREVIOUSLY_PAID_PRICES", "Prices previously paid on a same or similar contract")
-                    .replace("OTHER", igceInstructions.how_est_dev_other_tools_used);
-
-                if (igceInstructions.how_est_dev_other_tools_used) {
-                    toolsUsed = toolsUsed
-                        .replace("OTHER", igceInstructions.how_est_dev_other_tools_used);
-                }
-            }
-            var previousEstimateComparison = "";
-            if (currentEnvironment && currentEnvironment.current_environment_exists.toString() === "YES") {
-                if (igceInstructions.how_est_dev_prev_cost_estimate_comp_option) {
-                    var cost_estimate_percentage = "";
-                    if (igceInstructions.how_est_dev_prev_cost_estimate_comp_percentage) {
-                        cost_estimate_percentage = igceInstructions.how_est_dev_prev_cost_estimate_comp_percentage.toString() + "% ";
-                    }
-                    switch (igceInstructions.how_est_dev_prev_cost_estimate_comp_option) {
-                        case "MORE_THAN":
-                            previousEstimateComparison = "The previous cost estimate was " + cost_estimate_percentage + "more than the actual prices paid.";
-                            break;
-                        case "LESS_THAN":
-                            previousEstimateComparison = "The previous cost estimate was " + cost_estimate_percentage + "less than the actual prices paid.";
-                            break;
-                        case "SAME":
-                            previousEstimateComparison = "The previous cost estimate was approximately the same as the actual prices paid.";
-                            break;
-                    }
-                }
-            }
-            else {
-                previousEstimateComparison = "This is not a follow-on task order."
-            }
-            instructions = {
-                estimateDescription: igceInstructions.how_est_dev_cost_estimate_description,
-                assumptionsMade: "assumptions",
-                toolsUsed: toolsUsed,
-                informationSource: "info source",
-                previousEstimateComparison: previousEstimateComparison
-            };
-        }
-
-        // Get Contracting Shop
-        var cShop;
-        if (contractingShop) {
-            if (contractingShop.toString() === "OTHER") {
-                var fee;
-                if (igceInstructions.how_est_dev_contracting_office_other_charges_fee.toString() === "YES") {
-                    fee = igceInstructions.how_est_dev_contracting_office_other_fee_percentage;
-                }
-                else {
-                    fee = 0;
-                }
-                cShop = {
-                    name: "OTHER",
-                    fee: fee
-                }
-            }
-            else {
-                cShop = {
-                    name: "DITCO"
-                }
-            }
-        }
-
-        // Get Training Estimates
-        var training_estimates = this.getTrainingEstimates(this.acquisitionPackage.sys_id);
-        if (training_estimates.length != 0) {
-            // For each Training Estimate
-            training_estimates.forEach(function (training) {
-                training.training_instance_info = Igce.prototype.getCloudSupportInstance(Igce.prototype.CLOUD_SUPPORT_ENV_INST_TABLE, training.cloud_support_environment_instance);
-                training.classification_info = Igce.prototype.getClassificationLevel(training.training_instance_info.classification_level);
-
-                // Check Training Unit, if it isn't ANNUAL_SUBSCRIPTION (training_option for that is always null)
-                if (training.training_unit === "MONTHLY_SUBSCRIPTION" || training.training_unit === "PER_PERSON" || training.training_unit === "PER_CLASS") {
-                    // Determine training_option
-                    // I want to apply the same price estimate to all performance periods.
-                    if (training.training_option === "SINGLE") {
-                        // Look up Cloud Support Environment Instance
-                        var per_period_value = Igce.prototype.getPerPeriodValue(training.training_estimated_values);
-                        training.single = per_period_value;
-                    }
-                    else if (training.training_option === "MULTIPLE") {
-                        var training_cost_per_period = Igce.prototype.getSysIdValuePairs(training.training_estimated_values);
-                        training.multiple = training_cost_per_period;
-                    }
-                }
-            });
-            this.mapTrainingToPeriodsEstimate(training_estimates, periodsEstimate);
-        }
-
-        // Get all Travel Requirements
-        var travel_reqs;
-
-        if (igceInstructions && igceInstructions.travel_option) {
-            // If it is SINGLE, the same cost will be applied to each period
-            var travel_costs_per_period;
-            if (igceInstructions.travel_option === "SINGLE") {
-                // PER_PERIOD JSON
-                travel_costs_per_period = this.getPerPeriodValue(igceInstructions.travel_estimated_values);
-
-            }
-            else if (igceInstructions.travel_option === "MULTIPLE") {
-                travel_costs_per_period = this.getSysIdValuePairs(igceInstructions.travel_estimated_values);
+              });
             }
 
-            travel_reqs = this.getTravelRequirements(this.acquisitionPackage.sys_id);
-            // Format travel_reqs to mimic igce estimate format so we can reuse existing period mapping
-            travel_reqs.forEach(function (item) {
-                var periods_to_retrieve = {
-                    selected_periods: item.selected_periods,
-                    need_for_entire_task_order_duration: false
-                }
-                var periods = Igce.prototype.getInstancePeriodInfo(periods_to_retrieve);
-                item.instance_info = periods;
-                item.quantity_info_periods = travel_costs_per_period;
-                var travelDescription = "";
-                travelDescription = item.number_of_trips + " x (" + item.trip_location + ", " + item.duration_in_days + " days, " + item.number_of_travelers + " travelers); ";
-                item.travel_description = travelDescription;
-            });
-
-            if (igceInstructions.travel_option === "MULTIPLE") {
-                this.mapTravelQuantity(travel_reqs);
-            }
-            else if (igceInstructions.travel_option === "SINGLE") {
-                this.mapSingleQuantity(travel_reqs);
-            }
-            this.mapTravelToPeriodsEstimate(travel_reqs, periodsEstimate);
-        }
-
-        // Get Current Environment Details
-        var currentEnvOption;
-        if (igceInstructions && currentEnvironment.current_environment_exists.toString() === "YES" && currentEnvironment.current_environment_replicated_optimized) {
-            var envInstances = currentEnvironment.env_instances.toString().split(","); //List type record in SNOW isn't natively an array
-            // Set currentEnvOption, this is the string description body
-            switch (currentEnvironment.current_environment_replicated_optimized.toString()) {
-                case "YES_REPLICATE":
-                    currentEnvOption = "Replicate current environment (" + envInstances.length + " instances)";
-                    break;
-                case "YES_OPTIMIZE":
-                    currentEnvOption = "Optimize current environment (" + envInstances.length + " instances)";
-                    break;
-                case "NO":
-                    currentEnvOption = null;
-                    break;
-            }
-            var envClassOutput = [];
-            var envCloudClassifications = currentEnvironment.env_classifications_cloud.toString().split(",");
-            var envOnPremClassifications = currentEnvironment.env_classifications_onprem.toString().split(",");
-            var envHybridClasisifications = envCloudClassifications.concat(envOnPremClassifications);
-            switch (currentEnvironment.env_location.toString()) {
-                case "CLOUD":
-                    envCloudClassifications.forEach(function (item) {
-                        var envObject = Igce.prototype.getClassificationLevel(item)
-                        envClassOutput.push(envObject);
-                    });
-                    break;
-                case "ON_PREM":
-                    envOnPremClassifications.forEach(function (item) {
-                        var envObject = Igce.prototype.getClassificationLevel(item)
-                        envClassOutput.push(envObject);
-                    });
-                    break;
-                case "HYBRID":
-                    envHybridClasisifications.forEach(function (item) {
-                        var envObject = Igce.prototype.getClassificationLevel(item)
-                        envClassOutput.push(envObject);
-                    });
-                    break;
-            }
-            // Determine the highest classification level
-            // ES5 constraint
-            // TS > S > U
-            var highestClassificationLevel;
-            if (envClassOutput.indexOf("TS") !== -1) {
-                highestClassificationLevel = "TS";
-            }
-            else if (envClassOutput.indexOf("S") !== -1
-                && envClassOutput.indexOf("TS") === -1) {
-                highestClassificationLevel = "S";
-            }
-            else if (envClassOutput.indexOf("U") !== -1
-                && envClassOutput.indexOf("S") === -1
-                && envClassOutput.indexOf("TS") === -1) {
-                highestClassificationLevel = "U";
-            }
-
-            var valueOption;
-            var values;
-
-            // Mapping based on Requirements Cost Estimate (igceInstructions)
-
-            if (igceInstructions.optimize_replicate_option.toString() === "SINGLE") {
-                // Apply estimated value to all periods in PoP
-                valueOption = "SINGLE"
-                values = igceInstructions.optimize_replicate_estimated_values;
-            }
-            else if (igceInstructions.optimize_replicate_option.toString() === "MULTIPLE") {
-                // Apply estimated values to PoP based on order of values to PoP
-                var estimatedValues = igceInstructions.optimize_replicate_estimated_values.toString().split(",");
-                valueOption = "MULTIPLE";
-                values = estimatedValues;
-            }
-            var envObject = {
-                "contract_type": acq_package.contract_type.getDisplayValue(),
-                "classification_level": highestClassificationLevel,
-                "description": currentEnvOption,
-                "value_option": valueOption,
-                "values": values
-            }
-            this.mapCurrentEnvironmentOrArchDesignReqsToPeriodsEstimate(envObject, periodsEstimate);
+          }
 
         }
+      });
 
-        // AT-8737 Architectural Design
-        var arch_design = this.getArchDesignReqs(this.acquisitionPackage.sys_id);
-        if (arch_design.length != 0 && igceInstructions) {
-            arch_design_class_level_output = [];
-            arch_design.forEach(function (design) {
-                var archDesignClassificationLevels = design.data_classification_levels.toString().split(",");
-                archDesignClassificationLevels.forEach(function (class_level) {
-                    var class_level = Igce.prototype.getClassificationLevel(item);
-                    arch_design_class_level_output.push(class_level);
-                });
-
-                // Determine the highest classification level
-                // ES5 constraint
-                // TS > S > U
-                // Todo -> move to function to avoid repetition
-                var highestClassificationLevel;
-                if (arch_design_class_level_output.indexOf("TS") !== -1) {
-                    highestClassificationLevel = "TS";
-                }
-                else if (arch_design_class_level_output.indexOf("S") !== -1
-                    && arch_design_class_level_output.indexOf("TS") === -1) {
-                    highestClassificationLevel = "S";
-                }
-                else if (arch_design_class_level_output.indexOf("U") !== -1
-                    && arch_design_class_level_output.indexOf("S") === -1
-                    && arch_design_class_level_output.indexOf("TS") === -1) {
-                    highestClassificationLevel = "U";
-                }
-                var valueOption;
-                var values;
-                // Determine if current environment or DOW source
-                if (design.source.toString() === "DOW") {
-                    if (igceInstructions.architectural_design_performance_requirements_option.toString() === "SINGLE") {
-                        // Apply estimated value to all periods in PoP
-                        valueOption = "SINGLE"
-                        values = igceInstructions.architectural_design_performance_requirements_estimated_values;
-                    }
-                    else if (igceInstructions.architectural_design_performance_requirements_option.toString() === "MULTIPLE") {
-                        // Apply estimated values to PoP based on order of values to PoP
-                        var estimatedValues = igceInstructions.architectural_design_performance_requirements_estimated_values.toString().split(",");
-                        valueOption = "MULTIPLE";
-                        values = estimatedValues;
-                    }
-                }
-                else if (design.soure.toString() === "CURRENT_ENVIRONMENT") {
-                    if (igceInstructions.architectural_design_current_environment_option.toString() === "SINGLE") {
-                        // Apply estimated value to all periods in PoP
-                        valueOption = "SINGLE"
-                        values = igceInstructions.architectural_design_current_environment_estimated_values;
-                    }
-                    else if (igceInstructions.optimize_replicate_option.toString() === "MULTIPLE") {
-                        // Apply estimated values to PoP based on order of values to PoP
-                        var estimatedValues = igceInstructions.architectural_design_current_environment_estimated_values.toString().split(",");
-                        valueOption = "MULTIPLE";
-                        values = estimatedValues;
-                    }
-                }
-
-                var archDesignReq = {
-                    "classification_level": highestClassificationLevel,
-                    "contract_type": acq_package.contract_type.getDisplayValue(),
-                    "description": design.statement,
-                    "value_option": valueOption,
-                    "values": values
-
-                }
-                this.mapCurrentEnvironmentOrArchDesignReqsToPeriodsEstimate(archDesignReq, periodsEstimate);
-
-            });
-        }
-
-        // Get all IGCE Estimates that have the acquisition package as the FK
-        var igce = this.getIgceEstimates(this.acquisitionPackage.sys_id);
-        // Determine selected_periods for instance_info and classification_level
-        this.getIgceProperties(igce);
-        // Map igce estimates to periods estimate
-        this.mapIgceToPeriodsEstimate(igce, periodsEstimate);
-        // IGCE generated-document payload
-
-        var igce_payload = {
-            documentType: "INDEPENDENT_GOVERNMENT_COST_ESTIMATE",
-            templatePayload: {
-                fundingDocument: fundingDocument,
-                periodsEstimate: periodsEstimate,
-                contractingShop: cShop,
-                instructions: instructions,
-                surgeCapabilities: igceSurgeCapabilities,
-            }
-        };
-
-        // Format the final payload
-        return JSON.stringify(igce_payload);
+    } catch (error) {
+      throw this.errUtil.createError(
+        "Igce --> mapTrainingToPeriodsEstimate(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
     }
+  },
+
+  getTravelRequirements: function (packageSysId) {
+    try {
+      var packageId = packageSysId ? packageSysId : this.acquisitionPackage.sys_id;
+      var limit = 50; // arbitrary
+      return new global.GlideQuery(Igce.prototype.TRAVEL_REQ_TABLE)
+        .where("acquisition_package", packageId)
+        .select(Igce.prototype.TRAVEL_REQ_FIELDS)
+        .toArray(limit);
+    }
+    catch (error) {
+      throw this.errUtil.createError(
+        "Igce --> getTravelRequirements(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+  },
+  getArchDesignReqs: function (packageSysId) {
+    try {
+      var packageId = packageSysId ? packageSysId : this.acquisitionPackage.sys_id;
+      var limit = 50; // arbitrary
+      return new global.GlideQuery(Igce.prototype.ARCH_DESIGN_REQ_TABLE)
+        .where("acquisition_package", packageId)
+        .select(Igce.prototype.ARCH_DESIGN_REQ_FIELDS)
+        .toArray(limit);
+    }
+    catch (error) {
+      gs.error(error);
+      throw this.errUtil.createError(
+        "Igce --> getArchDesignReqs(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+  },
+  getTrainingEstimates: function (packageSysId) {
+    try {
+      var packageId = packageSysId ? packageSysId : this.acquisitionPackage.sys_id;
+      var limit = 50; // arbitrary
+      return new global.GlideQuery(Igce.prototype.TRAINING_ESTIMATE_TABLE)
+        .where("acquisition_package", packageId)
+        .select(Igce.prototype.TRAINING_ESTIMATE_FIELDS)
+        .toArray(limit);
+    }
+    catch (error) {
+      throw this.errUtil.createError(
+        "Igce --> getTrainingEstimates(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+  },
+  getIgceEstimates: function (packageSysId) {
+    try {
+      var packageId = packageSysId ? packageSysId : this.acquisitionPackage.sys_id;
+      var limit = 50; // arbitrary
+      return new global.GlideQuery(Igce.prototype.IGCE_ESTIMATE_TABLE)
+        .where("acquisition_package", packageId)
+        .select(Igce.prototype.IGCE_ESTIMATE_FIELDS)
+        .toArray(limit);
+    }
+    catch (error) {
+      throw this.errUtil.createError(
+        "Igce --> getIgceEstimates(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+  },
+  getIgceInstanceData: function (table, id) {
+    try {
+      var instance_data = new global.GlideQuery(table).get(id, Igce.prototype.SELECTED_PERIOD_FIELDS).orElse(null);
+      var instance_data_with_periods = Igce.prototype.getInstancePeriodInfo(instance_data);
+      return instance_data_with_periods;
+    }
+    catch (error) {
+      throw this.errUtil.createError(
+        "Igce --> getIgceInstanceData(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+  },
+  getCloudSupportInstance: function (table, id) {
+    try {
+      var cloud_support_data = new global.GlideQuery(table).get(id, Igce.prototype.CLOUD_SUPPORT_ENV_INST_FIELDS).orElse(null);
+      var cloud_support_data_with_periods = Igce.prototype.getInstancePeriodInfo(cloud_support_data);
+      return cloud_support_data_with_periods;
+    }
+    catch (error) {
+      throw this.errUtil.createError(
+        "Igce --> getCloudSupportInstance(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+  },
+  getClassificationLevel: function (classificationId) {
+    try {
+      var classification_level = new global.GlideQuery(Igce.prototype.CLASSIFICATION_LEVEL_TABLE).get(classificationId, ["classification"]).orElse(null);
+      return classification_level.classification;
+    } catch (error) {
+      throw this.errUtil.createError(
+        "Igce --> getClassificationLevel(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+  },
+  determineIdiqClin: function (classification, idiq_clin_type) {
+    if (classification === "U" && idiq_clin_type === "CLOUD") {
+      return "x001/x017 Cloud UNCLASSIFIED"
+    }
+    if (classification === "U" && idiq_clin_type === "CLOUD_SUPPORT") {
+      return "x002/x018 Cloud Support UNCLASSIFIED"
+    }
+    if (classification === "S" && idiq_clin_type === "CLOUD") {
+      return "x003/x019 Cloud SECRET CLASSIFIED"
+    }
+    if (classification === "S" && idiq_clin_type === "CLOUD_SUPPORT") {
+      return "x004/x020 Cloud Support SECRET CLASSIFIED"
+    }
+    if (classification === "TS" && idiq_clin_type === "CLOUD") {
+      return "x005/x021 Cloud TOP SECRET CLASSIFIED"
+    }
+    if (classification === "TS" && idiq_clin_type === "CLOUD_SUPPORT") {
+      return "x006/x022 Cloud Support TOP SECRET CLASSIFIED"
+    }
+  },
+  // Get Igce Estimate Properties that are sys_id references
+  getIgceProperties: function (igce) {
+    try {
+      // Set up IGCE object to parse through
+      igce.forEach(function (item) {
+        // Get classification level
+        if (item.classification_level) {
+          item.classification_level = Igce.prototype.getClassificationLevel(item.classification_level)
+        }
+        // Get unit_quantity
+        // This field is a stringified JSON, sys_id: quantity
+        if (item.unit_quantity) {
+          item.quantity_info_periods = Igce.prototype.getSysIdValuePairs(item.unit_quantity);
+        }
+
+      });
+    }
+    catch (error) {
+      throw this.errUtil.createError(
+        "Igce --> getIgceProperties(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+
+  },
+  // Get IGCE Instructions
+  getIgceInstructions: function (packageSysId) {
+    try {
+      var packageId = packageSysId ? packageSysId : this.acquisitionPackage.sys_id;
+      var limit = 50; // arbitrary
+      var igce_instructs = new global.GlideQuery(Igce.prototype.REQ_COST_ESTIMATE_TABLE)
+        .where("acquisition_package", packageId)
+        .select(Igce.prototype.REQ_COST_ESTIMATE_FIELDS)
+        .toArray(limit);
+      // This query is a bit bugged, should only need to return the object instead of an array of a single object,
+      // however there is a bug with how GlideQuery handles display values not resulting in the sys_id not being found.
+      // bandaid fix is returning the first object in the igce_instructs array
+      if (igce_instructs.length != 0) {
+        return igce_instructs[0];
+      }
+      return null;
+    }
+    catch (error) {
+      throw this.errUtil.createError(
+        "Igce --> getIgceInstructions(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+
+  },
+  // Used specifically to map quantity_info_periods to selected_periods
+  mapTravelQuantity: function (igce) {
+    try {
+      igce.forEach(function (item) {
+        item.quantity_info_periods.forEach(function (period_to_map) {
+          item.instance_info.selected_periods.forEach(function (period) {
+            if (period_to_map.periodType === period.periodType && period_to_map.periodUnitCount === period.periodUnitCount
+              && period_to_map.optionOrder === period.optionOrder && period_to_map.periodUnit === period.periodUnit) {
+              period.quantity = period_to_map.quantity;
+            }
+          });
+        });
+      });
+    }
+    catch (error) {
+      throw this.errUtil.createError(
+        "Igce --> mapQuantity(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+  },
+
+  // Used specifically to map quantity_info_periods if SINGLE period is selected
+  mapSingleQuantity: function (instance) {
+    try {
+      instance.forEach(function (item) {
+        item.instance_info.selected_periods.forEach(function (period) {
+          {
+            period.quantity = item.quantity_info_periods;
+          }
+        });
+
+      });
+    }
+    catch (error) {
+      throw this.errUtil.createError(
+        "Igce --> mapQuantity(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+  },
+
+  getPerPeriodValue: function (per_period_json_string) {
+    var obj = new global.JSON().decode(per_period_json_string);
+    var period_value;
+    for (var key in obj) {
+      period_value = obj[key];
+    }
+    return period_value;
+  },
+
+  // Takes sys_id: quantity json string objects and returns the correct period per sys_id
+  getSysIdValuePairs: function (sys_id_json_string) {
+    try {
+      // attempt to decode string
+      var quantity_arr = [];
+      var obj = new global.JSON().decode(sys_id_json_string);
+      for (var key in obj) {
+        // For each sys_id, query the period table and retrieve the required period fields
+        var quantity_data = new global.GlideQuery(Igce.prototype.PERIOD_TABLE).get(key, Igce.prototype.PERIOD_FIELDS).orElse(null);
+        if (quantity_data) {
+          var formatted_option_order;
+          if (quantity_data.option_order == null) {
+            formatted_option_order = "";
+          }
+          else {
+            formatted_option_order = quantity_data.option_order.toString();
+          }
+          var quantity_period_info = {
+            "periodType": quantity_data.period_type.toString(),
+            "periodUnitCount": quantity_data.period_unit_count.toString(),
+            "periodUnit": quantity_data.period_unit.toString(),
+            "optionOrder": formatted_option_order,
+            "quantity": obj[key]
+          };
+          quantity_arr.push(quantity_period_info);
+        }
+
+      }
+      return quantity_arr;
+    }
+    catch (error) {
+      throw this.errUtil.createError(
+        "Igce --> getSysIdValuePairs(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+  },
+
+  // Map Current Environment or Architectural Design Reqs to Periods Estimate
+  mapCurrentEnvironmentOrArchDesignReqsToPeriodsEstimate: function (env_object, periods_estimate) {
+    try {
+      // Apply estimated value to all periods in PoP
+      if (env_object.value_option === "SINGLE") {
+        periods_estimate.forEach(function (period) {
+          period.periodLineItems.push({
+            "idiqClin": Igce.prototype.determineIdiqClin(env_object.classification_level, "CLOUD"),
+            "contractType": env_object.contract_type,
+            "dowTaskNumber": "TBD",
+            "serviceTitle": "Objective-based requirements",
+            "itemDescription": env_object.description,
+            "unitPrice": env_object.values,
+            "quantity": 1, // Always 1 Period
+            "unit": "period",
+          })
+        });
+      }
+      // Apply estimated values to PoP based on order of values to PoP
+      else if (env_object.value_option === "MULTIPLE") {
+        // For each item in values array (e.g) 700,800,900
+        env_object.values.forEach(function (item_value) {
+          var indexOfValue = env_object.values.indexOf(item_value); // 0 for first item, 1 for next item
+          // Periods Estimate is in order, base period's index is always 0
+          periods_estimate[indexOfValue].periodLineItems.push({
+            "idiqClin": Igce.prototype.determineIdiqClin(env_object.classification_level, "CLOUD"),
+            "contractType": env_object.contract_type,
+            "dowTaskNumber": "TBD",
+            "serviceTitle": "Objective-based requirements",
+            "itemDescription": env_object.description,
+            "unitPrice": item_value, // use item_value instead of env_object.value
+            "quantity": 1, // Always 1 Period
+            "unit": "period",
+          });
+        });
+      }
+    }
+    catch (error) {
+      throw this.errUtil.createError(
+        "Igce --> mapCurrentEnvironmentToPeriodsEstimate(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+  },
+
+
+  getPayload: function () {
+    var acq_package = this.acquisitionPackage;
+    var periodOfPerformance = acq_package.period_of_performance;
+    var fundingRequest = acq_package.funding_request;
+    var currentEnvironment = acq_package.current_environment;
+    var contractingShop = acq_package.contracting_shop;
+
+    if (!periodOfPerformance) {
+      throw this.errUtil.createError(
+        "Igce --> Please provide a Period of Performance for package " + acq_package.number,
+        this.errUtil.INVALID_INPUT
+      );
+    }
+
+    // Get Periods for Period's Estimate
+    var periodsEstimate = this.getPackagePeriods(
+      periodOfPerformance.base_period, periodOfPerformance.option_periods
+    );
+
+
+    // Get Funding Request
+    var fundingDocument;
+    if (fundingRequest) {
+      if (fundingRequest.funding_request_type == "MIPR") {
+        fundingDocument = {
+          "fundingType": fundingRequest.funding_request_type.toString(),
+          "miprNumber": fundingRequest.mipr.mipr_number.toString()
+        }
+      }
+      else if (fundingRequest.funding_request_type == "FS_FORM") {
+        fundingDocument = {
+          "fundingType": fundingRequest.funding_request_type.toString(),
+          "gtcNumber": fundingRequest.fs_form.gt_c_number.toString(),
+          "orderNumber": fundingRequest.fs_form.order_number.toString()
+        }
+      }
+    }
+
+    // Get instructions
+    var igceInstructions = this.getIgceInstructions(this.acquisitionPackage.sys_id);
+    var igceSurgeCapabilities = null;
+    var instructions = null;
+
+    if (igceInstructions) {
+      if (igceInstructions.surge_requirement_capabilities === "YES") {
+        igceSurgeCapabilities = igceInstructions.surge_requirement_capacity;
+      }
+      var toolsUsed = "";
+      if (igceInstructions.how_est_dev_tools_used) {
+        toolsUsed = igceInstructions.how_est_dev_tools_used;
+        // Fix leading comma
+        if (toolsUsed.substring(0, 1) === ",") {
+          toolsUsed = toolsUsed.substring(1);
+        }
+        toolsUsed = toolsUsed
+          .replace("AWS", "AWS pricing calculator")
+          .replace("GOOGLE_CLOUD", "Google Cloud pricing calculator")
+          .replace("MICROSOFT_AZURE", "Microsoft Azure pricing calculator")
+          .replace("ORACLE_CLOUD", "Oracle Cloud pricing calculator")
+          .replace("PREVIOUSLY_PAID_PRICES", "Prices previously paid on a same or similar contract")
+          .replace("OTHER", igceInstructions.how_est_dev_other_tools_used);
+
+        if (igceInstructions.how_est_dev_other_tools_used) {
+          toolsUsed = toolsUsed
+            .replace("OTHER", igceInstructions.how_est_dev_other_tools_used);
+        }
+      }
+      var previousEstimateComparison = "";
+      if (currentEnvironment && currentEnvironment.current_environment_exists.toString() === "YES") {
+        if (igceInstructions.how_est_dev_prev_cost_estimate_comp_option) {
+          var cost_estimate_percentage = "";
+          if (igceInstructions.how_est_dev_prev_cost_estimate_comp_percentage) {
+            cost_estimate_percentage = igceInstructions.how_est_dev_prev_cost_estimate_comp_percentage.toString() + "% ";
+          }
+          switch (igceInstructions.how_est_dev_prev_cost_estimate_comp_option) {
+            case "MORE_THAN":
+              previousEstimateComparison = "The previous cost estimate was " + cost_estimate_percentage + "more than the actual prices paid.";
+              break;
+            case "LESS_THAN":
+              previousEstimateComparison = "The previous cost estimate was " + cost_estimate_percentage + "less than the actual prices paid.";
+              break;
+            case "SAME":
+              previousEstimateComparison = "The previous cost estimate was approximately the same as the actual prices paid.";
+              break;
+          }
+        }
+      }
+      else {
+        previousEstimateComparison = "This is not a follow-on task order."
+      }
+      instructions = {
+        estimateDescription: igceInstructions.how_est_dev_cost_estimate_description,
+        assumptionsMade: "assumptions",
+        toolsUsed: toolsUsed,
+        informationSource: "info source",
+        previousEstimateComparison: previousEstimateComparison
+      };
+    }
+
+    // Get Contracting Shop
+    var cShop;
+    if (contractingShop) {
+      if (contractingShop.toString() === "OTHER") {
+        var fee;
+        if (igceInstructions.how_est_dev_contracting_office_other_charges_fee.toString() === "YES") {
+          fee = igceInstructions.how_est_dev_contracting_office_other_fee_percentage;
+        }
+        else {
+          fee = 0;
+        }
+        cShop = {
+          name: "OTHER",
+          fee: fee
+        }
+      }
+      else {
+        cShop = {
+          name: "DITCO"
+        }
+      }
+    }
+
+    // Get Training Estimates
+    var training_estimates = this.getTrainingEstimates(this.acquisitionPackage.sys_id);
+    if (training_estimates.length != 0) {
+      // For each Training Estimate
+      training_estimates.forEach(function (training) {
+        training.training_instance_info = Igce.prototype.getCloudSupportInstance(Igce.prototype.CLOUD_SUPPORT_ENV_INST_TABLE, training.cloud_support_environment_instance);
+        training.classification_info = Igce.prototype.getClassificationLevel(training.training_instance_info.classification_level);
+
+        // Check Training Unit, if it isn't ANNUAL_SUBSCRIPTION (training_option for that is always null)
+        if (training.training_unit === "MONTHLY_SUBSCRIPTION" || training.training_unit === "PER_PERSON" || training.training_unit === "PER_CLASS") {
+          // Determine training_option
+          // I want to apply the same price estimate to all performance periods.
+          if (training.training_option === "SINGLE") {
+            // Look up Cloud Support Environment Instance
+            var per_period_value = Igce.prototype.getPerPeriodValue(training.training_estimated_values);
+            training.single = per_period_value;
+          }
+          else if (training.training_option === "MULTIPLE") {
+            var training_cost_per_period = Igce.prototype.getSysIdValuePairs(training.training_estimated_values);
+            training.multiple = training_cost_per_period;
+          }
+        }
+      });
+      this.mapTrainingToPeriodsEstimate(training_estimates, periodsEstimate);
+    }
+
+    // Get all Travel Requirements
+    var travel_reqs;
+
+    if (igceInstructions && igceInstructions.travel_option) {
+      // If it is SINGLE, the same cost will be applied to each period
+      var travel_costs_per_period;
+      if (igceInstructions.travel_option === "SINGLE") {
+        // PER_PERIOD JSON
+        travel_costs_per_period = this.getPerPeriodValue(igceInstructions.travel_estimated_values);
+
+      }
+      else if (igceInstructions.travel_option === "MULTIPLE") {
+        travel_costs_per_period = this.getSysIdValuePairs(igceInstructions.travel_estimated_values);
+      }
+
+      travel_reqs = this.getTravelRequirements(this.acquisitionPackage.sys_id);
+      // Format travel_reqs to mimic igce estimate format so we can reuse existing period mapping
+      travel_reqs.forEach(function (item) {
+        var periods_to_retrieve = {
+          selected_periods: item.selected_periods,
+          need_for_entire_task_order_duration: false
+        }
+        var periods = Igce.prototype.getInstancePeriodInfo(periods_to_retrieve);
+        item.instance_info = periods;
+        item.quantity_info_periods = travel_costs_per_period;
+        var travelDescription = "";
+        travelDescription = item.number_of_trips + " x (" + item.trip_location + ", " + item.duration_in_days + " days, " + item.number_of_travelers + " travelers); ";
+        item.travel_description = travelDescription;
+      });
+
+      if (igceInstructions.travel_option === "MULTIPLE") {
+        this.mapTravelQuantity(travel_reqs);
+      }
+      else if (igceInstructions.travel_option === "SINGLE") {
+        this.mapSingleQuantity(travel_reqs);
+      }
+      this.mapTravelToPeriodsEstimate(travel_reqs, periodsEstimate);
+    }
+
+    // Get Current Environment Details
+    var currentEnvOption;
+    if (igceInstructions && currentEnvironment.current_environment_exists.toString() === "YES" && currentEnvironment.current_environment_replicated_optimized) {
+      var envInstances = currentEnvironment.env_instances.toString().split(","); //List type record in SNOW isn't natively an array
+      // Set currentEnvOption, this is the string description body
+      switch (currentEnvironment.current_environment_replicated_optimized.toString()) {
+        case "YES_REPLICATE":
+          currentEnvOption = "Replicate current environment (" + envInstances.length + " instances)";
+          break;
+        case "YES_OPTIMIZE":
+          currentEnvOption = "Optimize current environment (" + envInstances.length + " instances)";
+          break;
+        case "NO":
+          currentEnvOption = null;
+          break;
+      }
+      var envClassOutput = [];
+      var envCloudClassifications = currentEnvironment.env_classifications_cloud.toString().split(",");
+      var envOnPremClassifications = currentEnvironment.env_classifications_onprem.toString().split(",");
+      var envHybridClassifications = envCloudClassifications.concat(envOnPremClassifications);
+      switch (currentEnvironment.env_location.toString()) {
+        case "CLOUD":
+          envCloudClassifications.forEach(function (item) {
+            var envObject = Igce.prototype.getClassificationLevel(item)
+            envClassOutput.push(envObject);
+          });
+          break;
+        case "ON_PREM":
+          envOnPremClassifications.forEach(function (item) {
+            var envObject = Igce.prototype.getClassificationLevel(item)
+            envClassOutput.push(envObject);
+          });
+          break;
+        case "HYBRID":
+          envHybridClassifications.forEach(function (item) {
+            var envObject = Igce.prototype.getClassificationLevel(item)
+            envClassOutput.push(envObject);
+          });
+          break;
+      }
+      // Determine the highest classification level
+      // ES5 constraint
+      // TS > S > U
+      var highestClassificationLevel;
+      if (envClassOutput.indexOf("TS") !== -1) {
+        highestClassificationLevel = "TS";
+      }
+      else if (envClassOutput.indexOf("S") !== -1
+        && envClassOutput.indexOf("TS") === -1) {
+        highestClassificationLevel = "S";
+      }
+      else if (envClassOutput.indexOf("U") !== -1
+        && envClassOutput.indexOf("S") === -1
+        && envClassOutput.indexOf("TS") === -1) {
+        highestClassificationLevel = "U";
+      }
+
+      var valueOption;
+      var values;
+
+      // Mapping based on Requirements Cost Estimate (igceInstructions)
+
+      if (igceInstructions.optimize_replicate_option.toString() === "SINGLE") {
+        // Apply estimated value to all periods in PoP
+        valueOption = "SINGLE"
+        values = igceInstructions.optimize_replicate_estimated_values;
+      }
+      else if (igceInstructions.optimize_replicate_option.toString() === "MULTIPLE") {
+        // Apply estimated values to PoP based on order of values to PoP
+        var estimatedValues = igceInstructions.optimize_replicate_estimated_values.toString().split(",");
+        valueOption = "MULTIPLE";
+        values = estimatedValues;
+      }
+      var envObject = {
+        "contract_type": acq_package.contract_type.getDisplayValue(),
+        "classification_level": highestClassificationLevel,
+        "description": currentEnvOption,
+        "value_option": valueOption,
+        "values": values
+      }
+      this.mapCurrentEnvironmentOrArchDesignReqsToPeriodsEstimate(envObject, periodsEstimate);
+
+    }
+
+    // AT-8737 Architectural Design
+    var arch_design = this.getArchDesignReqs(this.acquisitionPackage.sys_id);
+    var scope = this;
+    if (arch_design && arch_design.length !== 0 && igceInstructions) {
+      arch_design_class_level_output = [];
+      arch_design.forEach(function (design) {
+        var archDesignClassificationLevels = design.data_classification_levels.toString().split(",");
+        archDesignClassificationLevels.forEach(function (class_level) {
+          var class_level = Igce.prototype.getClassificationLevel(class_level);
+          arch_design_class_level_output.push(class_level);
+        });
+
+        // Determine the highest classification level
+        // ES5 constraint
+        // TS > S > U
+        // Todo -> move to function to avoid repetition
+        var highestClassificationLevel;
+        if (arch_design_class_level_output.indexOf("TS") !== -1) {
+          highestClassificationLevel = "TS";
+        }
+        else if (arch_design_class_level_output.indexOf("S") !== -1
+          && arch_design_class_level_output.indexOf("TS") === -1) {
+          highestClassificationLevel = "S";
+        }
+        else if (arch_design_class_level_output.indexOf("U") !== -1
+          && arch_design_class_level_output.indexOf("S") === -1
+          && arch_design_class_level_output.indexOf("TS") === -1) {
+          highestClassificationLevel = "U";
+        }
+        var valueOption;
+        var values;
+        // Determine if current environment or DOW source
+        if (design.source.toString() === "DOW") {
+          if (igceInstructions.architectural_design_performance_requirements_option.toString() === "SINGLE") {
+            // Apply estimated value to all periods in PoP
+            valueOption = "SINGLE"
+            values = igceInstructions.architectural_design_performance_requirements_estimated_values;
+          }
+          else if (igceInstructions.architectural_design_performance_requirements_option.toString() === "MULTIPLE") {
+            // Apply estimated values to PoP based on order of values to PoP
+            var estimatedValues = igceInstructions.architectural_design_performance_requirements_estimated_values.toString().split(",");
+            valueOption = "MULTIPLE";
+            values = estimatedValues;
+          }
+        }
+        else if (design.source.toString() === "CURRENT_ENVIRONMENT") {
+          if (igceInstructions.architectural_design_current_environment_option.toString() === "SINGLE") {
+            // Apply estimated value to all periods in PoP
+            valueOption = "SINGLE"
+            values = igceInstructions.architectural_design_current_environment_estimated_values;
+          }
+          else if (igceInstructions.optimize_replicate_option.toString() === "MULTIPLE") {
+            // Apply estimated values to PoP based on order of values to PoP
+            var estimatedValues = igceInstructions.architectural_design_current_environment_estimated_values.toString().split(",");
+            valueOption = "MULTIPLE";
+            values = estimatedValues;
+          }
+        }
+
+        var archDesignReq = {
+          "classification_level": highestClassificationLevel,
+          "contract_type": acq_package.contract_type.getDisplayValue(),
+          "description": design.statement,
+          "value_option": valueOption,
+          "values": values
+
+        }
+        scope.mapCurrentEnvironmentOrArchDesignReqsToPeriodsEstimate(archDesignReq, periodsEstimate);
+
+      });
+    }
+
+    // Get all IGCE Estimates that have the acquisition package as the FK
+    var igce = this.getIgceEstimates(this.acquisitionPackage.sys_id);
+    // Determine selected_periods for instance_info and classification_level
+    this.getIgceProperties(igce);
+    // Map igce estimates to periods estimate
+    this.mapIgceToPeriodsEstimate(igce, periodsEstimate);
+    // IGCE generated-document payload
+
+    var igce_payload = {
+      documentType: "INDEPENDENT_GOVERNMENT_COST_ESTIMATE",
+      templatePayload: {
+        fundingDocument: fundingDocument,
+        periodsEstimate: periodsEstimate,
+        contractingShop: cShop,
+        instructions: instructions,
+        surgeCapabilities: igceSurgeCapabilities,
+      }
+    };
+
+    // Format the final payload
+    return JSON.stringify(igce_payload);
+  }
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>jeff.segal-ctr</sys_created_by>
         <sys_created_on>2022-10-12 15:53:33</sys_created_on>
         <sys_id>b29002b097a211106fa8b4b3f153afc4</sys_id>
-        <sys_mod_count>87</sys_mod_count>
+        <sys_mod_count>100</sys_mod_count>
         <sys_name>Igce</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_b29002b097a211106fa8b4b3f153afc4</sys_update_name>
-        <sys_updated_by>zach.clark</sys_updated_by>
-        <sys_updated_on>2023-02-22 22:04:30</sys_updated_on>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-02-23 22:21:50</sys_updated_on>
     </sys_script_include>
 </record_update>
