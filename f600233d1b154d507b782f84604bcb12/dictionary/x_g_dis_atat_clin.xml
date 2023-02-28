@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element label="ATAT:CLIN" max_length="40" name="x_g_dis_atat_clin" sizeclass="16" type="collection">
-        <element choice="1" choice_field="classification" choice_table="x_g_dis_atat_classification_level" label="Classification Level" max_length="40" name="classification_level" type="choice">
+        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;&#13;&#10;&#9;var atatUtil = new AtatHelper();&#13;&#10;&#9;var clinTypeAndLevel = atatUtil.getClinTypeAndLevel(current.clin_number.toString());&#13;&#10;&#9;&#13;&#10;&#9;return clinTypeAndLevel.classificationLevel ? clinTypeAndLevel.classificationLevel : &quot;&quot;;&#13;&#10;&#13;&#10;})(current);&#13;&#10;" choice="1" choice_field="classification" choice_table="x_g_dis_atat_classification_level" label="Classification Level" max_length="40" name="classification_level" type="choice" virtual="true">
             <choice/>
         </element>
         <element display="true" label="CLIN Number" mandatory="true" max_length="4" name="clin_number" type="string"/>
@@ -28,7 +28,7 @@
         <element label="PoP End Date" max_length="40" name="pop_end_date" type="glide_date"/>
         <element label="PoP Start Date" max_length="40" name="pop_start_date" type="glide_date"/>
         <element label="Task Order" max_length="32" name="task_order" reference="x_g_dis_atat_task_order" type="reference"/>
-        <element choice="1" label="Type" max_length="40" name="type" type="choice">
+        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;&#13;&#10;&#9;var atatUtil = new AtatHelper();&#13;&#10;&#9;var clinTypeAndLevel = atatUtil.getClinTypeAndLevel(current.clin_number.toString());&#13;&#10;&#9;&#13;&#10;&#9;return clinTypeAndLevel.type;&#13;&#10;&#13;&#10;})(current);&#13;&#10;" choice="1" label="Type" max_length="40" name="type" read_only="true" type="choice" virtual="true">
             <choice>
                 <element inactive_on_update="false" label="Cloud" value="CLOUD"/>
                 <element inactive_on_update="false" label="Non-Cloud" value="NON_CLOUD"/>
