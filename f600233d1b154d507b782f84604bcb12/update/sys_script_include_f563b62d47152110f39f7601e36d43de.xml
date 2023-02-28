@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.HothProvisioning</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>ATAT class for containing logic for performing tasks related to HOTH provisioning, including &#13;
+constructing payloads and parsing responses. &#13;
+&#13;
+In order to keep track of where this class is used, the following list is provided. Used in the &#13;
+following locations:&#13;
+- PROV: Queue Initial Portfolio Provisioning Job (action)&#13;
+</description>
+        <name>HothProvisioning</name>
+        <script><![CDATA[var HothProvisioning = Class.create();
+HothProvisioning.prototype = {
+  PORTFOLIO_TABLE: "x_g_dis_atat_portfolio",
+  TASK_ORDER_TABLE: "x_g_dis_atat_task_order",
+  OPERATOR_TABLE: "x_g_dis_atat_operator",
+  CLIN_TABLE: "x_g_dis_atat_clin",
+
+  errUtil: new ErrorHandler(),
+
+  initialize: function() {
+  },
+  /**
+   * Get all CLINs associated with a Task Order
+   *
+   * @param {string} taskOrderSysId
+   * @return {Object[]} an array of CLINs
+   */
+  getClins: function(taskOrderSysId) {
+    try {
+      var clinTableFields = [
+        "clin_number", "pop_start_date", "pop_end_date", "classification_level", "type", 
+      ];
+      
+      return new global.GlideQuery(this.CLIN_TABLE)
+        .where("task_order", taskOrderSysId)
+        .select(clinTableFields)
+        .toArray(20)
+        .map(removeSysId);
+
+    } catch (error) {
+      throw this.errUtil.createError(
+        "HothProvisioning --> getClins(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+  },
+
+  /**
+   * Get all Task Orders associated with a Portfolio
+   *
+   * @param {string} portfolioSysId
+   * @return {Object[]} an array of task orders 
+   */
+  getTaskOrders: function(portfolioSysId) {
+    try {
+      var taskOrders = [];
+      var taskOrderRecords = new GlideRecord(this.TASK_ORDER_TABLE);
+      taskOrderRecords.addQuery("portfolio", portfolioSysId);
+      taskOrderRecords.query();
+
+      while (taskOrderRecords.next()) {
+        // Get Task Order CLINs
+        var taskOrderClins = this.getClins(taskOrderRecords.sys_id.toString());
+
+        // Gather Task Orders for a given Portfolio
+        taskOrders.push({
+          taskOrderNumber: taskOrderRecords.task_order_number.toString(),
+          popStartDate: taskOrderRecords.pop_start_date.toString(),
+          popEndDate: taskOrderRecords.pop_end_date.toString(),
+          clins: taskOrderClins,
+        });
+      }
+
+      return taskOrders;
+    } catch (error) {
+      throw this.errUtil.createError(
+        "HothProvisioning --> getTaskOrders(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+  },
+  /**
+   * Construct a request to provision a Portfolio using the HOTH API.
+   *
+   * @param {GlideRecord} portfolio - a portfolio created from acquisition package
+   * @param {string} jobId - a GUID generated within ServiceNow
+   * @return {Object} an object for provisioning a portfolio
+   */
+  createAddPortfolioPayload: function(portfolio, targetCsp, operation) {
+    try {
+      if (!portfolio || !targetCsp || !operation) {
+        throw this.errUtil.createError(
+          "No portfolio, CSP, or operation type provided.",
+          this.errUtil.INVALID_INPUT
+        );
+      }
+
+      var taskOrders = this.getTaskOrders(portfolio.sys_id.toString());
+
+      return {
+        jobId: gs.generateGUID(),
+        userId: portfolio.portfolio_managers ? portfolio.portfolio_managers.split(",")[0] : "",
+        operationType: operation,
+        targetCspName: targetCsp, 
+        payload: {
+          name: portfolio.name.toString(),
+          taskOrders: taskOrders,
+        },
+      };
+
+    } catch (error) {
+      var errorMessage = "Error creating an Add Portfolio payload. " + error;
+      this.errUtil.errorLogger(
+        this.errUtil.createError(
+          errorMessage,
+          this.errUtil.INVALID_INPUT
+        )
+      );
+    }
+  },
+
+  type: 'HothProvisioning'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2023-02-28 20:22:38</sys_created_on>
+        <sys_id>f563b62d47152110f39f7601e36d43de</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>HothProvisioning</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_f563b62d47152110f39f7601e36d43de</sys_update_name>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2023-02-28 20:22:38</sys_updated_on>
+    </sys_script_include>
+</record_update>
