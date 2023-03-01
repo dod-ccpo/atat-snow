@@ -20,9 +20,11 @@ HothProvisioning.prototype = {
   OPERATOR_TABLE: "x_g_dis_atat_operator",
   CLIN_TABLE: "x_g_dis_atat_clin",
 
+  portfolio: null,
   errUtil: new ErrorHandler(),
 
-  initialize: function() {
+  initialize: function(portfolioRecord) {
+    this.portfolio = portfolioRecord;
   },
   /**
    * Get all CLINs associated with a Task Order
@@ -53,14 +55,13 @@ HothProvisioning.prototype = {
   /**
    * Get all Task Orders associated with a Portfolio
    *
-   * @param {string} portfolioSysId
    * @return {Object[]} an array of task orders 
    */
-  getTaskOrders: function(portfolioSysId) {
+  getTaskOrders: function() {
     try {
       var taskOrders = [];
       var taskOrderRecords = new GlideRecord(this.TASK_ORDER_TABLE);
-      taskOrderRecords.addQuery("portfolio", portfolioSysId);
+      taskOrderRecords.addQuery("portfolio", this.portfolio.sys_id.toString());
       taskOrderRecords.query();
 
       while (taskOrderRecords.next()) {
@@ -87,39 +88,38 @@ HothProvisioning.prototype = {
   /**
    * Construct a request to provision a Portfolio using the HOTH API.
    *
-   * @param {GlideRecord} portfolio - a portfolio created from acquisition package
-   * @param {string} jobId - a GUID generated within ServiceNow
+   * @param {string} hothId - a GUID generated within ServiceNow for the provisioning job
+   * @param {string} targetCsp - a GUID generated within ServiceNow
+   * @param {string} operation - the provisioning operation (e.g., ADD_ENVIRONMENT)
    * @return {Object} an object for provisioning a portfolio
    */
-  createAddPortfolioPayload: function(portfolio, targetCsp, operation) {
+  createAddPortfolioPayload: function(hothId, targetCsp, operation) {
     try {
-      if (!portfolio || !targetCsp || !operation) {
+      if (!this.portfolio || !targetCsp || !operation) {
         throw this.errUtil.createError(
           "No portfolio, CSP, or operation type provided.",
           this.errUtil.INVALID_INPUT
         );
       }
 
-      var taskOrders = this.getTaskOrders(portfolio.sys_id.toString());
+      var taskOrders = this.getTaskOrders(this.portfolio.sys_id.toString());
 
       return {
-        jobId: gs.generateGUID(),
-        userId: portfolio.portfolio_managers ? portfolio.portfolio_managers.split(",")[0] : "",
+        jobId: hothId,
+        userId: this.portfolio.portfolio_managers ? this.portfolio.portfolio_managers.split(",")[0] : "",
         operationType: operation,
         targetCspName: targetCsp, 
         payload: {
-          name: portfolio.name.toString(),
+          name: this.portfolio.name.toString(),
           taskOrders: taskOrders,
         },
       };
 
     } catch (error) {
       var errorMessage = "Error creating an Add Portfolio payload. " + error;
-      this.errUtil.errorLogger(
-        this.errUtil.createError(
-          errorMessage,
-          this.errUtil.INVALID_INPUT
-        )
+      this.errUtil.createError(
+        errorMessage,
+        this.errUtil.INVALID_INPUT
       );
     }
   },
@@ -130,13 +130,13 @@ HothProvisioning.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-28 20:22:38</sys_created_on>
         <sys_id>f563b62d47152110f39f7601e36d43de</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_name>HothProvisioning</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_f563b62d47152110f39f7601e36d43de</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-28 20:22:38</sys_updated_on>
+        <sys_updated_on>2023-02-28 23:47:05</sys_updated_on>
     </sys_script_include>
 </record_update>
