@@ -235,6 +235,7 @@ erDiagram
         String external_factors
         Choice source "DOW/CURRENT_ENVIRONMENT"
         String dow_task_number
+        Choice needs_architectural_design_services "Y/N"
     }
     PROJECT-OVERVIEW {
         GUID sys_id PK
