@@ -6,6 +6,7 @@
         <annotation/>
         <callable_by_client_api>false</callable_by_client_api>
         <category/>
+        <compiler_build>glide-rome-06-23-2021__patch10-hotfix2a-09-02-2022_09-28-2022_1908.zip</compiler_build>
         <copied_from/>
         <copied_from_name/>
         <description>Queues initial portfolio provisioning job when 1) at least one Operator has been assigned and 2) EDA validation has been performed on the associated Task Order</description>
@@ -15,7 +16,6 @@
         <name>PROV: Queue Initial Portfolio Provisioning Job</name>
         <natlang/>
         <outputs/>
-        <pre_compiled>false</pre_compiled>
         <remote_trigger_id>639947cedbe92d148c045e8cd3961978</remote_trigger_id>
         <run_as>user</run_as>
         <run_with_roles/>
@@ -29,24 +29,23 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>a0ff1bf42fd15110e58359a72799b63b</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name>PROV: Queue Initial Portfolio Provisioning Job</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_flow_a0ff1bf42fd15110e58359a72799b63b</sys_update_name>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-14 21:28:17</sys_updated_on>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2023-03-15 23:30:03</sys_updated_on>
         <type>flow</type>
     </sys_hub_flow>
     <sys_translated_text action="delete_multiple" query="documentkey=a0ff1bf42fd15110e58359a72799b63b"/>
     <sys_variable_value action="delete_multiple" query="document_key=a0ff1bf42fd15110e58359a72799b63b"/>
     <sys_flow_record_trigger action="INSERT_OR_UPDATE">
         <active>true</active>
-        <condition table="x_g_dis_atat_portfolio">acquisition_package.package_status=TASK_ORDER_AWARDED^portfolio_managersISNOTEMPTY^cspISNOTEMPTY^active_task_orderISNOTEMPTY^active_task_order.clinsISNOTEMPTY^csp_idISEMPTY<item display_value="Task Order Awarded" endquery="false" field="acquisition_package.package_status" goto="false" newquery="false" operator="=" or="false" value="TASK_ORDER_AWARDED"/>
+        <condition table="x_g_dis_atat_portfolio">acquisition_package.package_status=TASK_ORDER_AWARDED^portfolio_managersISNOTEMPTY^cspISNOTEMPTY^active_task_orderISNOTEMPTY^active_task_order.clinsISNOTEMPTY^csp_idISEMPTY<item display_value="TASK_ORDER_AWARDED" endquery="false" field="acquisition_package.package_status" goto="false" newquery="false" operator="=" or="false" value="TASK_ORDER_AWARDED"/>
             <item endquery="false" field="portfolio_managers" goto="false" newquery="false" operator="ISNOTEMPTY" or="false" value=""/>
-            <item endquery="false" field="csp" goto="false" newquery="false" operator="ISNOTEMPTY" or="false" value=""/>
             <item endquery="false" field="active_task_order" goto="false" newquery="false" operator="ISNOTEMPTY" or="false" value=""/>
             <item endquery="false" field="active_task_order.clins" goto="false" newquery="false" operator="ISNOTEMPTY" or="false" value=""/>
             <item endquery="false" field="csp_id" goto="false" newquery="false" operator="ISEMPTY" or="false" value=""/>
@@ -136,7 +135,6 @@
         <variable display_value="Table">cf1e1980c32222002841b63b12d3aea0</variable>
     </sys_variable_value>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_trigger_output_a45d9180c32222002841b63b12d3aea7^id=8650eff42fd15110e58359a72799b657"/>
-    <sys_hub_flow_stage action="delete_multiple" query="flow=a0ff1bf42fd15110e58359a72799b63b"/>
     <sys_flow_cat_variable_model action="delete_multiple" query="id=a0ff1bf42fd15110e58359a72799b63b^sys_idNOT INe8ff1bf42fd15110e58359a72799b63e"/>
     <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
         <id>a0ff1bf42fd15110e58359a72799b63b</id>
@@ -149,7 +147,6 @@
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-08-11 19:26:35</sys_updated_on>
     </sys_flow_cat_variable_model>
-    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=e8ff1bf42fd15110e58359a72799b63e"/>
     <sys_hub_flow_input action="delete_multiple" query="model=a0ff1bf42fd15110e58359a72799b63b^sys_idNOT IN35506ff42fd15110e58359a72799b65e,3d50eff42fd15110e58359a72799b63d,7950eff42fd15110e58359a72799b643"/>
     <sys_hub_flow_input action="INSERT_OR_UPDATE">
         <active>true</active>
@@ -182,7 +179,6 @@
         <element>current</element>
         <element_reference>false</element_reference>
         <foreign_database/>
-        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -229,7 +225,6 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
-        <virtual_type/>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
@@ -265,7 +260,6 @@
         <element>changed_fields</element>
         <element_reference>false</element_reference>
         <foreign_database/>
-        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -312,7 +306,6 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
-        <virtual_type/>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
@@ -348,7 +341,6 @@
         <element>table_name</element>
         <element_reference>false</element_reference>
         <foreign_database/>
-        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -395,13 +387,10 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
-        <virtual_type/>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_flow_input>
-    <sys_hub_flow_output action="delete_multiple" query="model=a0ff1bf42fd15110e58359a72799b63b"/>
-    <sys_hub_alias_mapping action="delete_multiple" query="source_id=a0ff1bf42fd15110e58359a72799b63b"/>
     <sys_hub_action_instance action="delete_multiple" query="flow=a0ff1bf42fd15110e58359a72799b63b^sys_idNOT IN2cbb6b702f155110e58359a72799b618,71833c092fd55110e58359a72799b6ee,9fde1e1597b21110cf3cfd9fe153afea,a85b790adb252d148c045e8cd3961972,ac5b790adb252d148c045e8cd3961967"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
@@ -409,6 +398,7 @@
         <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
         <action_type_parent/>
         <comment>insert a provisioning job for a new portfolio</comment>
+        <compiled_snapshot>2de05916c31332002841b63b12d3aee1</compiled_snapshot>
         <display_text/>
         <flow display_value="PROV: Queue Initial Portfolio Provisioning Job">a0ff1bf42fd15110e58359a72799b63b</flow>
         <order>4</order>
@@ -515,13 +505,13 @@
         <sys_updated_by>1370228783.CTR</sys_updated_by>
         <sys_updated_on>2023-03-14 16:16:44</sys_updated_on>
     </sys_hub_input_scripts>
-    <sys_hub_alias_mapping action="delete_multiple" query="source_id=2cbb6b702f155110e58359a72799b618"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
         <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
         <action_type_parent/>
         <comment>log insertion of provisioning job</comment>
+        <compiled_snapshot>5bc1bcc6531003003bf1d9109ec587d4</compiled_snapshot>
         <display_text/>
         <flow display_value="PROV: Queue Initial Portfolio Provisioning Job">a0ff1bf42fd15110e58359a72799b63b</flow>
         <order>5</order>
@@ -562,14 +552,13 @@
         <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
         <value>Inserted Provisioning Job (Sys ID: {{d9e64b95-55b2-4f05-87ec-763b155a845b.record.sys_id}}) of type {{d9e64b95-55b2-4f05-87ec-763b155a845b.record.job_type}} for Portfolio: {{Created or Updated_1.current.name}}(Sys ID: {{Created or Updated_1.current.sys_id}})</value>
     </sys_element_mapping>
-    <sys_hub_input_scripts action="delete_multiple" query="instance=71833c092fd55110e58359a72799b6ee"/>
-    <sys_hub_alias_mapping action="delete_multiple" query="source_id=71833c092fd55110e58359a72799b6ee"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
         <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
         <action_type_parent/>
         <comment>set status to Processing and record provisioning request date</comment>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
         <display_text/>
         <flow display_value="PROV: Queue Initial Portfolio Provisioning Job">a0ff1bf42fd15110e58359a72799b63b</flow>
         <order>6</order>
@@ -714,14 +703,13 @@
         <table>var__m_sys_hub_action_input_f9d01dd2c31332002841b63b12d3aea1</table>
         <value/>
     </sys_element_mapping>
-    <sys_hub_input_scripts action="delete_multiple" query="instance=9fde1e1597b21110cf3cfd9fe153afea"/>
-    <sys_hub_alias_mapping action="delete_multiple" query="source_id=9fde1e1597b21110cf3cfd9fe153afea"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
         <action_type display_value="Look Up Record">9d09f99587003300663ca1bb36cb0ba3</action_type>
         <action_type_parent/>
         <comment>Find unclassified Environment for matching Vendor</comment>
+        <compiled_snapshot/>
         <display_text/>
         <flow display_value="PROV: Queue Initial Portfolio Provisioning Job">a0ff1bf42fd15110e58359a72799b63b</flow>
         <order>3</order>
@@ -776,14 +764,13 @@
         <table>var__m_sys_hub_action_input_9d09f99587003300663ca1bb36cb0ba3</table>
         <value/>
     </sys_element_mapping>
-    <sys_hub_input_scripts action="delete_multiple" query="instance=a85b790adb252d148c045e8cd3961972"/>
-    <sys_hub_alias_mapping action="delete_multiple" query="source_id=a85b790adb252d148c045e8cd3961972"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
         <action_type display_value="Look Up Record">9d09f99587003300663ca1bb36cb0ba3</action_type>
         <action_type_parent/>
         <comment>Find first Environment</comment>
+        <compiled_snapshot/>
         <display_text/>
         <flow display_value="PROV: Queue Initial Portfolio Provisioning Job">a0ff1bf42fd15110e58359a72799b63b</flow>
         <order>2</order>
@@ -838,9 +825,6 @@
         <table>var__m_sys_hub_action_input_9d09f99587003300663ca1bb36cb0ba3</table>
         <value/>
     </sys_element_mapping>
-    <sys_hub_input_scripts action="delete_multiple" query="instance=ac5b790adb252d148c045e8cd3961967"/>
-    <sys_hub_alias_mapping action="delete_multiple" query="source_id=ac5b790adb252d148c045e8cd3961967"/>
-    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=a0ff1bf42fd15110e58359a72799b63b"/>
     <sys_hub_flow_logic action="delete_multiple" query="flow=a0ff1bf42fd15110e58359a72799b63b^sys_idNOT IN713812b7dbc7dd508c045e8cd396190f"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">605b790adb252d148c045e8cd396195d</block>
@@ -873,7 +857,6 @@
     </sys_hub_flow_logic>
     <sys_variable_value action="delete_multiple" query="document_key=713812b7dbc7dd508c045e8cd396190f"/>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_a0ff1bf42fd15110e58359a72799b63b^id=713812b7dbc7dd508c045e8cd396190f"/>
-    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=713812b7dbc7dd508c045e8cd396190f"/>
     <sys_hub_input_scripts action="delete_multiple" query="instance=713812b7dbc7dd508c045e8cd396190f^sys_idNOT IN353812b7dbc7dd508c045e8cd3961910"/>
     <sys_hub_input_scripts action="INSERT_OR_UPDATE">
         <active>true</active>
@@ -888,7 +871,6 @@
         <sys_updated_by>1370228783.CTR</sys_updated_by>
         <sys_updated_on>2022-11-15 21:44:51</sys_updated_on>
     </sys_hub_input_scripts>
-    <sys_hub_pill_compound action="delete_multiple" query="attached_to=a0ff1bf42fd15110e58359a72799b63b"/>
     <sys_hub_flow_variable action="delete_multiple" query="model=a0ff1bf42fd15110e58359a72799b63b^sys_idNOT IN7538de77dbc7dd508c045e8cd39619fa"/>
     <sys_hub_flow_variable action="INSERT_OR_UPDATE">
         <active>true</active>
@@ -921,7 +903,6 @@
         <element>hoth_job_id</element>
         <element_reference>false</element_reference>
         <foreign_database/>
-        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -968,7 +949,6 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
-        <virtual_type/>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
@@ -987,7 +967,7 @@
         <sys_created_on>2022-08-11 19:28:19</sys_created_on>
         <sys_id>4250eff42fd15110e58359a72799b654</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Table Name</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -1010,7 +990,7 @@
         <sys_created_on>2022-08-11 19:28:19</sys_created_on>
         <sys_id>7550eff42fd15110e58359a72799b63c</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Record</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -1033,7 +1013,7 @@
         <sys_created_on>2022-08-11 19:28:19</sys_created_on>
         <sys_id>b150eff42fd15110e58359a72799b642</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Changed Fields</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -1043,9 +1023,6 @@
         <url/>
         <url_target/>
     </sys_documentation>
-    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_a0ff1bf42fd15110e58359a72799b63b"/>
-    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_a0ff1bf42fd15110e58359a72799b63b"/>
-    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_a0ff1bf42fd15110e58359a72799b63b"/>
     <sys_flow_trigger_plan action="delete_multiple" query="plan_id=a0ff1bf42fd15110e58359a72799b63b^sys_idNOT IN16d6fb37dbb619d0b1227ea5f3961952"/>
     <sys_flow_trigger_plan action="INSERT_OR_UPDATE">
         <binding_strategy>com.snc.process_flow.engine.binding.OncePerRecord</binding_strategy>
@@ -1064,7 +1041,6 @@
         <sys_updated_on>2023-03-14 21:28:17</sys_updated_on>
         <trigger display_value="">639947cedbe92d148c045e8cd3961978</trigger>
     </sys_flow_trigger_plan>
-    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=a0ff1bf42fd15110e58359a72799b63b"/>
     <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
         <acls/>
@@ -1155,7 +1131,6 @@
         <variable display_value="Condition">707dd180c32222002841b63b12d3aecb</variable>
     </sys_variable_value>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_trigger_output_a45d9180c32222002841b63b12d3aea7^id=b1d6bb37dbb619d0b1227ea5f396193f"/>
-    <sys_hub_flow_stage action="delete_multiple" query="flow=99d63b37dbb619d0b1227ea5f396190e"/>
     <sys_flow_cat_variable_model action="delete_multiple" query="id=99d63b37dbb619d0b1227ea5f396190e^sys_idNOT IN11d63b37dbb619d0b1227ea5f3961910"/>
     <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
         <id>99d63b37dbb619d0b1227ea5f396190e</id>
@@ -1168,7 +1143,6 @@
         <sys_updated_by>1370228783.CTR</sys_updated_by>
         <sys_updated_on>2022-11-03 18:22:31</sys_updated_on>
     </sys_flow_cat_variable_model>
-    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=11d63b37dbb619d0b1227ea5f3961910"/>
     <sys_hub_flow_input action="delete_multiple" query="model=99d63b37dbb619d0b1227ea5f396190e^sys_idNOT INd1d63b37dbb619d0b1227ea5f3961913,d5d63b37dbb619d0b1227ea5f39619b9,edd63b37dbb619d0b1227ea5f39619d0"/>
     <sys_hub_flow_input action="INSERT_OR_UPDATE">
         <active>true</active>
@@ -1201,7 +1175,6 @@
         <element>current</element>
         <element_reference>false</element_reference>
         <foreign_database/>
-        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -1248,7 +1221,6 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
-        <virtual_type>script</virtual_type>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
@@ -1284,7 +1256,6 @@
         <element>changed_fields</element>
         <element_reference>false</element_reference>
         <foreign_database/>
-        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -1331,7 +1302,6 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
-        <virtual_type>script</virtual_type>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
@@ -1367,7 +1337,6 @@
         <element>table_name</element>
         <element_reference>false</element_reference>
         <foreign_database/>
-        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -1414,13 +1383,10 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
-        <virtual_type>script</virtual_type>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_flow_input>
-    <sys_hub_flow_output action="delete_multiple" query="model=99d63b37dbb619d0b1227ea5f396190e"/>
-    <sys_hub_alias_mapping action="delete_multiple" query="source_id=99d63b37dbb619d0b1227ea5f396190e"/>
     <sys_hub_action_instance action="delete_multiple" query="flow=99d63b37dbb619d0b1227ea5f396190e^sys_idNOT IN29d67b37dbb619d0b1227ea5f39619df,75d6bb37dbb619d0b1227ea5f3961900,79d6bb37dbb619d0b1227ea5f3961907,879907cedbe92d148c045e8cd39619c0,b29907cedbe92d148c045e8cd39619b6"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
@@ -1428,6 +1394,7 @@
         <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
         <action_type_parent display_value="Create Record">02f0b88cc3c632002841b63b12d3aeff</action_type_parent>
         <comment>insert a provisioning job for a new portfolio</comment>
+        <compiled_snapshot>2de05916c31332002841b63b12d3aee1</compiled_snapshot>
         <display_text/>
         <flow display_value="PROV: Queue Initial Portfolio Provisioning Job">99d63b37dbb619d0b1227ea5f396190e</flow>
         <order>4</order>
@@ -1534,13 +1501,13 @@
         <sys_updated_by>1370228783.CTR</sys_updated_by>
         <sys_updated_on>2023-03-14 21:28:15</sys_updated_on>
     </sys_hub_input_scripts>
-    <sys_hub_alias_mapping action="delete_multiple" query="source_id=29d67b37dbb619d0b1227ea5f39619df"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
         <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
         <action_type_parent display_value="Log">0e0ae8c2531003003bf1d9109ec587c8</action_type_parent>
         <comment>log insertion of provisioning job</comment>
+        <compiled_snapshot>5bc1bcc6531003003bf1d9109ec587d4</compiled_snapshot>
         <display_text/>
         <flow display_value="PROV: Queue Initial Portfolio Provisioning Job">99d63b37dbb619d0b1227ea5f396190e</flow>
         <order>5</order>
@@ -1581,14 +1548,13 @@
         <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
         <value>Inserted Provisioning Job (Sys ID: {{d9e64b95-55b2-4f05-87ec-763b155a845b.record.sys_id}}) of type {{d9e64b95-55b2-4f05-87ec-763b155a845b.record.job_type}} for Portfolio: {{Created or Updated_1.current.name}}(Sys ID: {{Created or Updated_1.current.sys_id}})</value>
     </sys_element_mapping>
-    <sys_hub_input_scripts action="delete_multiple" query="instance=75d6bb37dbb619d0b1227ea5f3961900"/>
-    <sys_hub_alias_mapping action="delete_multiple" query="source_id=75d6bb37dbb619d0b1227ea5f3961900"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
         <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
         <action_type_parent display_value="Update Record">baf174c8c3c232002841b63b12d3aee4</action_type_parent>
         <comment>set status to Processing and record provisioning request date</comment>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
         <display_text/>
         <flow display_value="PROV: Queue Initial Portfolio Provisioning Job">99d63b37dbb619d0b1227ea5f396190e</flow>
         <order>6</order>
@@ -1733,14 +1699,13 @@
         <table>var__m_sys_hub_action_input_f9d01dd2c31332002841b63b12d3aea1</table>
         <value/>
     </sys_element_mapping>
-    <sys_hub_input_scripts action="delete_multiple" query="instance=79d6bb37dbb619d0b1227ea5f3961907"/>
-    <sys_hub_alias_mapping action="delete_multiple" query="source_id=79d6bb37dbb619d0b1227ea5f3961907"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
         <action_type display_value="Look Up Record">9d09f99587003300663ca1bb36cb0ba3</action_type>
         <action_type_parent display_value="Look Up Record">b93f42810b30030085c083eb37673a63</action_type_parent>
         <comment>Find unclassified Environment for matching Vendor</comment>
+        <compiled_snapshot/>
         <display_text/>
         <flow display_value="PROV: Queue Initial Portfolio Provisioning Job">99d63b37dbb619d0b1227ea5f396190e</flow>
         <order>3</order>
@@ -1795,14 +1760,13 @@
         <table>var__m_sys_hub_action_input_9d09f99587003300663ca1bb36cb0ba3</table>
         <value/>
     </sys_element_mapping>
-    <sys_hub_input_scripts action="delete_multiple" query="instance=879907cedbe92d148c045e8cd39619c0"/>
-    <sys_hub_alias_mapping action="delete_multiple" query="source_id=879907cedbe92d148c045e8cd39619c0"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
         <action_type display_value="Look Up Record">9d09f99587003300663ca1bb36cb0ba3</action_type>
         <action_type_parent display_value="Look Up Record">b93f42810b30030085c083eb37673a63</action_type_parent>
         <comment>Find first Environment</comment>
+        <compiled_snapshot/>
         <display_text/>
         <flow display_value="PROV: Queue Initial Portfolio Provisioning Job">99d63b37dbb619d0b1227ea5f396190e</flow>
         <order>2</order>
@@ -1857,9 +1821,6 @@
         <table>var__m_sys_hub_action_input_9d09f99587003300663ca1bb36cb0ba3</table>
         <value/>
     </sys_element_mapping>
-    <sys_hub_input_scripts action="delete_multiple" query="instance=b29907cedbe92d148c045e8cd39619b6"/>
-    <sys_hub_alias_mapping action="delete_multiple" query="source_id=b29907cedbe92d148c045e8cd39619b6"/>
-    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=99d63b37dbb619d0b1227ea5f396190e"/>
     <sys_hub_flow_logic action="delete_multiple" query="flow=99d63b37dbb619d0b1227ea5f396190e^sys_idNOT IN364867a947d52110f39f7601e36d4347"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">605b790adb252d148c045e8cd396195d</block>
@@ -1892,7 +1853,6 @@
     </sys_hub_flow_logic>
     <sys_variable_value action="delete_multiple" query="document_key=364867a947d52110f39f7601e36d4347"/>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_99d63b37dbb619d0b1227ea5f396190e^id=364867a947d52110f39f7601e36d4347"/>
-    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=364867a947d52110f39f7601e36d4347"/>
     <sys_hub_input_scripts action="delete_multiple" query="instance=364867a947d52110f39f7601e36d4347^sys_idNOT INb64867a947d52110f39f7601e36d4348"/>
     <sys_hub_input_scripts action="INSERT_OR_UPDATE">
         <active>true</active>
@@ -1907,7 +1867,6 @@
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
         <sys_updated_on>2023-03-01 00:09:39</sys_updated_on>
     </sys_hub_input_scripts>
-    <sys_hub_pill_compound action="delete_multiple" query="attached_to=99d63b37dbb619d0b1227ea5f396190e"/>
     <sys_hub_flow_variable action="delete_multiple" query="model=99d63b37dbb619d0b1227ea5f396190e^sys_idNOT INb24867a947d52110f39f7601e36d4326"/>
     <sys_hub_flow_variable action="INSERT_OR_UPDATE">
         <active>true</active>
@@ -1940,7 +1899,6 @@
         <element>hoth_job_id</element>
         <element_reference>false</element_reference>
         <foreign_database/>
-        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -1987,7 +1945,6 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
-        <virtual_type/>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
@@ -2006,7 +1963,7 @@
         <sys_created_on>2022-11-03 18:22:32</sys_created_on>
         <sys_id>d5d63b37dbb619d0b1227ea5f39619b5</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Record</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2029,7 +1986,7 @@
         <sys_created_on>2022-11-03 18:22:32</sys_created_on>
         <sys_id>ddd63b37dbb619d0b1227ea5f39619cc</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Changed Fields</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2052,7 +2009,7 @@
         <sys_created_on>2022-11-03 18:22:32</sys_created_on>
         <sys_id>e1d63b37dbb619d0b1227ea5f39619e4</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Table Name</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2062,12 +2019,8 @@
         <url/>
         <url_target/>
     </sys_documentation>
-    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_99d63b37dbb619d0b1227ea5f396190e"/>
-    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_99d63b37dbb619d0b1227ea5f396190e"/>
-    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_99d63b37dbb619d0b1227ea5f396190e"/>
-    <sys_hub_flow action="UPDATE">
+    <sys_hub_flow action="update">
         <sys_id>a0ff1bf42fd15110e58359a72799b63b</sys_id>
         <latest_snapshot>99d63b37dbb619d0b1227ea5f396190e</latest_snapshot>
-        <compiler_build>glide-rome-06-23-2021__patch10-hotfix2a-09-02-2022_09-28-2022_1908.zip</compiler_build>
     </sys_hub_flow>
 </record_update>
