@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="ATAT:Environment" max_length="40" name="x_g_dis_atat_environment" sizeclass="2" type="collection">
+    <element db_object_id="90c0fd70dbc16d10b1227ea5f39619aa" label="ATAT:Environment" max_length="40" name="x_g_dis_atat_environment" type="collection">
+        <element choice="1" choice_field="classification" choice_table="x_g_dis_atat_classification_level" label="Classification Level" max_length="40" name="classification_level" type="choice">
+            <choice/>
+        </element>
         <element label="CSP" max_length="32" name="csp" reference="x_g_dis_atat_cloud_service_provider" type="reference"/>
         <element label="CSP ID" max_length="2000" name="csp_id" type="string"/>
         <element label="Dashboard Link" max_length="1024" name="dashboard_link" type="url"/>

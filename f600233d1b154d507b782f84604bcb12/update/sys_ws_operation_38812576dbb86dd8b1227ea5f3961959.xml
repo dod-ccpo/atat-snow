@@ -73,7 +73,12 @@
 				environmentRecord.setValue("name", requestBody.portfolioName + " - " + key);
 				environmentRecord.setValue("portfolio", portfolio.sys_id);
 				environmentRecord.setValue("csp", cspRecord.sys_id);
-				environmentRecord.insert();		
+				environmentRecord.setValue("classification_level", cspRecord.classification_level);
+				environmentRecord.insert();
+				
+				// Update Portfolio Vendor
+				portfolio.setValue("vendor", cspRecord.vendor);
+				portfolio.update();
 
 				// Create Operators
 				var pendingOperators = [];
@@ -213,14 +218,14 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-02-07 15:04:14</sys_created_on>
         <sys_id>38812576dbb86dd8b1227ea5f3961959</sys_id>
-        <sys_mod_count>31</sys_mod_count>
+        <sys_mod_count>32</sys_mod_count>
         <sys_name>Start Provisioning</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_ws_operation_38812576dbb86dd8b1227ea5f3961959</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-02-09 19:53:15</sys_updated_on>
+        <sys_updated_on>2023-03-15 18:02:06</sys_updated_on>
         <web_service_definition display_value="Provisioning">4ba165cadb6c6918b1227ea5f39619e4</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
