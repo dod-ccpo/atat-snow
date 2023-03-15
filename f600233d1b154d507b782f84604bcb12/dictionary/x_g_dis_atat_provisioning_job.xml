@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element label="ATAT:Provisioning Job" max_length="40" name="x_g_dis_atat_provisioning_job" sizeclass="1" type="collection">
         <element active="false" display="true" label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
+        <element label="CSP Environment ID" max_length="100" name="csp_environment_id" type="string"/>
         <element label="CSP Job ID" max_length="500" name="csp_job_id" type="string"/>
+        <element label="CSP Portfolio ID" max_length="100" name="csp_portfolio_id" type="string"/>
+        <element label="CSP Task Order ID" max_length="100" name="csp_task_order_id" type="string"/>
         <element label="Environment" max_length="32" name="environment" reference="x_g_dis_atat_environment" type="reference"/>
         <element label="HOTH Job ID" max_length="500" name="hoth_job_id" type="string"/>
         <element choice="3" default="ADD_PORTFOLIO" label="Job Type" mandatory="true" max_length="40" name="job_type" type="choice">
