@@ -305,6 +305,37 @@ AtatHelper.prototype = {
       );
     }
   },
+  /**
+   * Infer the classification level and type using the CLIN number
+   *
+   * @param {string} clinNumber
+   * @return {Object} an object with the classification and type of the CLIN
+   */
+  getClinTypeAndLevel: function(clinNumber) {
+    try {
+      if (!clinNumber || clinNumber.length !== 4) {
+        return undefined;
+      }
+      switch (clinNumber.substring(2)) {
+        case '01':
+        case '17':
+          return { classificationLevel: "U", type: "CLOUD" };
+        case '03':
+        case '19':
+          return { classificationLevel: "S", type: "CLOUD" };
+        case '05':
+        case '21':
+          return { classificationLevel: "TS", type: "CLOUD" };
+        default:
+          return { type: "NON_CLOUD" };
+      }
+    } catch (error) {
+      throw this.errUtil.createError(
+        "AtatHelper --> getClinTypeAndLevel(): " + error,
+        this.errUtil.METHOD_ERROR
+      );
+    }
+  },
 
 	type: 'AtatHelper'
 };]]></script>
@@ -312,13 +343,13 @@ AtatHelper.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-02 20:49:47</sys_created_on>
         <sys_id>9027655d97a7d5106fa8b4b3f153afba</sys_id>
-        <sys_mod_count>8</sys_mod_count>
+        <sys_mod_count>9</sys_mod_count>
         <sys_name>AtatHelper</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_9027655d97a7d5106fa8b4b3f153afba</sys_update_name>
         <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-01-19 13:28:36</sys_updated_on>
+        <sys_updated_on>2023-02-28 20:46:42</sys_updated_on>
     </sys_script_include>
 </record_update>
