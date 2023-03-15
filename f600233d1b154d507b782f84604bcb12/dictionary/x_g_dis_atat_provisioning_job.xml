@@ -6,7 +6,11 @@
         <element label="HOTH Job ID" max_length="500" name="hoth_job_id" type="string"/>
         <element choice="3" default="ADD_PORTFOLIO" label="Job Type" mandatory="true" max_length="40" name="job_type" type="choice">
             <choice>
+                <element inactive_on_update="false" label="Add CSP Administrator" value="ADD_ADMINISTRATOR"/>
+                <element inactive_on_update="false" label="Add Environment" value="ADD_ENVIRONMENT"/>
                 <element inactive_on_update="false" label="Add New Portfolio" value="ADD_PORTFOLIO"/>
+                <element inactive_on_update="false" label="Add Task Order" value="ADD_TASK_ORDER"/>
+                <element inactive_on_update="false" label="Update Task Order" value="UPDATE_TASK_ORDER"/>
             </choice>
         </element>
         <element label="Payload" max_length="2000" name="payload" type="string"/>
