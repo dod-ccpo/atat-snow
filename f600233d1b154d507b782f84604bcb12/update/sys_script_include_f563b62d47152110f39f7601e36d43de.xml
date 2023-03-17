@@ -15,86 +15,108 @@ following locations:&#13;
         <name>HothProvisioning</name>
         <script><![CDATA[var HothProvisioning = Class.create();
 HothProvisioning.prototype = {
-  PORTFOLIO_TABLE: "x_g_dis_atat_portfolio",
-  TASK_ORDER_TABLE: "x_g_dis_atat_task_order",
-  OPERATOR_TABLE: "x_g_dis_atat_operator",
-  CLIN_TABLE: "x_g_dis_atat_clin",
+	PORTFOLIO_TABLE: "x_g_dis_atat_portfolio",
+	TASK_ORDER_TABLE: "x_g_dis_atat_task_order",
+	OPERATOR_TABLE: "x_g_dis_atat_operator",
+	CLIN_TABLE: "x_g_dis_atat_clin",
 
-  portfolio: null,
-  errUtil: new ErrorHandler(),
+	portfolio: null,
+	errUtil: new ErrorHandler(),
 
-  initialize: function(portfolioRecord) {
-    this.portfolio = portfolioRecord;
-  },
-  /**
-   * Get all CLINs associated with a Task Order
-   *
-   * @param {string} taskOrderSysId
-   * @return {Object[]} an array of CLINs
-   */
-  getClins: function(taskOrderSysId) {
-    try {
-      var clinTableFields = [
-        "clin_number", "pop_start_date", "pop_end_date", "classification_level", "type", 
-      ];
+	initialize: function(portfolioRecord) {
+		if (!portfolioRecord) {
+			throw this.errUtil.createError(
+				"Portfolio must not be null.",
+				this.errUtil.INVALID_INPUT
+			);
+		}
+		else {
+			this.portfolio = portfolioRecord;
+		}
+	},
+
+	convertClassificationToHothFormat: function(snowClassification) {
 		var classificationMap = {
 			U: "UNCLASSIFIED",
 			S: "SECRET",
 			TS: "TOP_SECRET"
 		};
+		return classificationMap[snowClassification];
+	},
 
-      return new global.GlideQuery(this.CLIN_TABLE)
-        .where("task_order", taskOrderSysId)
-        .select(clinTableFields)
-        .toArray(20)
-        .map(removeSysId)
-		.map(function(clin) {
-		  clin.classification_level = classificationMap[clin.classification_level];
-		  return clin;
-	  })
+	convertClassificationToSnowFormat: function(hothClassification) {
+		var classificationMap = {
+			"UNCLASSIFIED" : "U",
+			"SECRET": "S",
+			"TOP_SECRET": "TS"
+		};
+		return classificationMap[hothClassification];
+	},	
 
-    } catch (error) {
-      throw this.errUtil.createError(
-        "HothProvisioning --> getClins(): " + error,
-        this.errUtil.METHOD_ERROR
-      );
-    }
-  },
+	/**
+   * Get all CLINs associated with a Task Order
+   *
+   * @param {string} taskOrderSysId
+   * @return {Object[]} an array of CLINs
+   */
+	getClins: function(taskOrderSysId) {
+		try {
+			var clinTableFields = [
+				"clin_number", "pop_start_date", "pop_end_date", "classification_level", "type", 
+			];
 
-  /**
+			return new global.GlideQuery(this.CLIN_TABLE)
+				.where("task_order", taskOrderSysId)
+				.select(clinTableFields)
+				.toArray(20)
+				.map(removeSysId)
+				.map(function(clin) {
+				clin.classification_level = this.convertClassificationToHothFormat(clin.classification_level);
+				return clin;
+			})
+
+		} catch (error) {
+			throw this.errUtil.createError(
+				"HothProvisioning --> getClins(): " + error,
+				this.errUtil.METHOD_ERROR
+			);
+		}
+	},
+
+	/**
    * Get all Task Orders associated with a Portfolio
    *
    * @return {Object[]} an array of task orders 
    */
-  getTaskOrders: function() {
-    try {
-      var taskOrders = [];
-      var taskOrderRecords = new GlideRecord(this.TASK_ORDER_TABLE);
-      taskOrderRecords.addQuery("portfolio", this.portfolio.sys_id.toString());
-      taskOrderRecords.query();
+	getTaskOrders: function() {
+		try {
+			var taskOrders = [];
+			var taskOrderRecords = new GlideRecord(this.TASK_ORDER_TABLE);
+			taskOrderRecords.addQuery("portfolio", this.portfolio.sys_id.toString());
+			taskOrderRecords.query();
 
-      while (taskOrderRecords.next()) {
-        // Get Task Order CLINs
-        var taskOrderClins = this.getClins(taskOrderRecords.sys_id.toString());
+			while (taskOrderRecords.next()) {
+				// Get Task Order CLINs
+				var taskOrderClins = this.getClins(taskOrderRecords.sys_id.toString());
 
-        // Gather Task Orders for a given Portfolio
-        taskOrders.push({
-          taskOrderNumber: taskOrderRecords.task_order_number.toString(),
-          popStartDate: taskOrderRecords.pop_start_date.toString(),
-          popEndDate: taskOrderRecords.pop_end_date.toString(),
-          clins: taskOrderClins,
-        });
-      }
+				// Gather Task Orders for a given Portfolio
+				taskOrders.push({
+					taskOrderNumber: taskOrderRecords.task_order_number.toString(),
+					popStartDate: taskOrderRecords.pop_start_date.toString(),
+					popEndDate: taskOrderRecords.pop_end_date.toString(),
+					clins: taskOrderClins,
+				});
+			}
 
-      return taskOrders;
-    } catch (error) {
-      throw this.errUtil.createError(
-        "HothProvisioning --> getTaskOrders(): " + error,
-        this.errUtil.METHOD_ERROR
-      );
-    }
-  },
-  /**
+			return taskOrders;
+		} catch (error) {
+			throw this.errUtil.createError(
+				"HothProvisioning --> getTaskOrders(): " + error,
+				this.errUtil.METHOD_ERROR
+			);
+		}
+	},
+	/**
    * Construct a request to provision a Portfolio using the HOTH API.
    *
    * @param {string} hothId - a GUID generated within ServiceNow for the provisioning job
@@ -102,50 +124,93 @@ HothProvisioning.prototype = {
    * @param {string} operation - the provisioning operation (e.g., ADD_ENVIRONMENT)
    * @return {Object} an object for provisioning a portfolio
    */
-  createAddPortfolioPayload: function(hothId, targetCsp, operation) {
-    try {
-      if (!this.portfolio || !targetCsp || !operation) {
-        throw this.errUtil.createError(
-          "No portfolio, CSP, or operation type provided.",
-          this.errUtil.INVALID_INPUT
-        );
-      }
+	createAddPortfolioPayload: function(hothId, targetCsp, operation) {
+		try {
+			if (!this.portfolio || !targetCsp || !operation) {
+				throw this.errUtil.createError(
+					"No portfolio, CSP, or operation type provided.",
+					this.errUtil.INVALID_INPUT
+				);
+			}
 
-      var taskOrders = this.getTaskOrders(this.portfolio.sys_id.toString());
+			var taskOrders = this.getTaskOrders(this.portfolio.sys_id.toString());
 
-      return {
-        jobId: hothId,
-        userId: this.portfolio.portfolio_managers ? this.portfolio.portfolio_managers.split(",")[0] : "",
-        operationType: operation,
-        targetCspName: targetCsp, 
-        payload: {
-          name: this.portfolio.name.toString(),
-          taskOrders: taskOrders,
-        },
-      };
+			return {
+				jobId: hothId,
+				userId: this.portfolio.portfolio_managers ? this.portfolio.portfolio_managers.split(",")[0] : "",
+				operationType: operation,
+				targetCspName: targetCsp, 
+				payload: {
+					name: this.portfolio.name.toString(),
+					taskOrders: taskOrders,
+				},
+			};
 
-    } catch (error) {
-      var errorMessage = "Error creating an Add Portfolio payload. " + error;
-      this.errUtil.createError(
-        errorMessage,
-        this.errUtil.INVALID_INPUT
-      );
-    }
-  },
+		} catch (error) {
+			var errorMessage = "Error creating an Add Portfolio payload. " + error;
+			this.errUtil.createError(
+				errorMessage,
+				this.errUtil.INVALID_INPUT
+			);
+		}
+	},
 
-  type: 'HothProvisioning'
+	/**
+   * Construct a request to provision an Environment using the HOTH API.
+   *
+   * @param {string} environmentRecord - the Environment being provisioned
+   * @return {Object} a valid ADD_ENVIRONMENT Provisioning Job Payload
+   */
+	createAddEnvironmentPayload: function(environmentRecord) {
+		if (!environmentRecord) {
+			throw this.errUtil.createError(
+				"Environment must not be null.",
+				this.errUtil.INVALID_INPUT
+			);
+		}
+
+		var scope = this;
+		var hothClassificationLevel = this.convertClassificationToHothFormat(environmentRecord.classification_level.toString());
+		var jobPayload = {
+			jobId: gs.generateGUID(),
+			userId: this.portfolio.portfolio_managers ? this.portfolio.portfolio_managers.split(",")[0] : "",
+			operationType: "ADD_ENVIRONMENT",
+			targetCspName: environmentRecord.csp.name.toString(), 
+			payload: {
+				name: environmentRecord.name.toString(),
+				classificationLevel: hothClassificationLevel,
+				administrators: environmentRecord.pending_operators ? 
+				environmentRecord.pending_operators.toString().split(",")
+				.map(function (operatorSysId) {
+					var record = new GlideRecord(scope.OPERATOR_TABLE);
+					record.get(operatorSysId);
+					return {
+						email: record.email.toString(),
+						dodId: record.dod_id.toString()				
+					};
+				})
+				: null
+			},
+		};
+		if (environmentRecord.csp.cloudDistinguisher) {
+			jobPayload.payload.cloudDistinguisher = environmentRecord.csp.cloudDistinguisher;
+		}
+		return jobPayload;
+	},	
+
+	type: 'HothProvisioning'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-28 20:22:38</sys_created_on>
         <sys_id>f563b62d47152110f39f7601e36d43de</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>21</sys_mod_count>
         <sys_name>HothProvisioning</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_f563b62d47152110f39f7601e36d43de</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-14 18:31:24</sys_updated_on>
+        <sys_updated_on>2023-03-17 20:27:20</sys_updated_on>
     </sys_script_include>
 </record_update>

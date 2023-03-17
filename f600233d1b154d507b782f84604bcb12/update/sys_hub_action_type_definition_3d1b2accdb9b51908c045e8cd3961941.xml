@@ -26,7 +26,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>3d1b2accdb9b51908c045e8cd3961941</sys_id>
-        <sys_mod_count>8</sys_mod_count>
+        <sys_mod_count>22</sys_mod_count>
         <sys_name>PROV: Consume Queue Payload</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -34,7 +34,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_3d1b2accdb9b51908c045e8cd3961941</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 01:43:26</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:42:14</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -127,10 +127,10 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 18:00:20</sys_created_on>
         <sys_id>be6eea08dbdb51908c045e8cd3961916</sys_id>
-        <sys_mod_count>17</sys_mod_count>
+        <sys_mod_count>31</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 01:38:30</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:41:47</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=be6eea08dbdb51908c045e8cd3961916"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -141,9 +141,9 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 18:00:20</sys_created_on>
         <sys_id>766eea08dbdb51908c045e8cd396192b</sys_id>
-        <sys_mod_count>16</sys_mod_count>
+        <sys_mod_count>30</sys_mod_count>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 01:38:30</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:41:47</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   inputs.payload = JSON.parse(inputs.payload);
   outputs.num_events = inputs.payload.length;
@@ -154,8 +154,8 @@
     var acqPackageId;
     var portfolioId;
     var link;
-    var response = event.content.response
-    var snowJobId = event.initialSnowRequest.jobId
+    var response = event.content.response;
+    var snowJobId = event.initialSnowRequest.jobId;
     var operationType = event.initialSnowRequest.operationType;
 
     // update provisioning job
@@ -171,7 +171,7 @@
         jobRecord.update();
         outputs.num_updates++;
       }
-      
+
       if (operationType === "ADD_PORTFOLIO") {
         // portfolio 200 success (sync)
         if (response.portfolio &amp;&amp; event.code === 200) {
@@ -182,17 +182,34 @@
           portfolioId = response.portfolio.id;
           var portfolioRecord = new GlideRecord("x_g_dis_atat_portfolio");
           portfolioRecord.get(jobRecord.portfolio.sys_id);
-          
+
           // update the corresponding portfolio
           portfolioRecord.provisioned = true;
           portfolioRecord.provisioned_date = now;
-          // TODO: figure out why pending operators are not being reset
-          portfolioRecord.pending_operators = ""; // clear operators
+          portfolioRecord.operators = ""; // clear operators
           portfolioRecord.csp_id = portfolioId;
           portfolioRecord.portfolio_status = "ACTIVE";
           portfolioRecord.update();
-          
-          // TODO: kick off ADD_ENVIRONMENT provisioning job(s) here
+
+          // Find all Environments under this Portfolio
+          var environmentRecord = new GlideRecord("x_g_dis_atat_environment");
+          environmentRecord.addQuery("portfolio", jobRecord.portfolio.sys_id);
+          environmentRecord.query();
+          while (environmentRecord.hasNext()) {
+            environmentRecord.next();
+            var hoth = new HothProvisioning(portfolioRecord);
+            var payload = hoth.createAddEnvironmentPayload(environmentRecord);
+
+            var newEnvironmentJobRecord = new GlideRecord("x_g_dis_atat_provisioning_job");
+            newEnvironmentJobRecord.initialize();
+            newEnvironmentJobRecord.setValue("title", environmentRecord.name.toString());
+            newEnvironmentJobRecord.setValue("hoth_job_id", payload.jobId);
+            newEnvironmentJobRecord.setValue("job_type", "ADD_ENVIRONMENT");
+            newEnvironmentJobRecord.setValue("payload", JSON.stringify(payload));
+            newEnvironmentJobRecord.setValue("portfolio", jobRecord.portfolio.sys_id);
+            newEnvironmentJobRecord.setValue("status", "NOT_STARTED");
+            newEnvironmentJobRecord.insert();
+          }
 
           // Q: is this needed or do we want to handle portfolio status updates
           // differently?
@@ -223,6 +240,12 @@
           "Not supported",
           new ErrorHandler().METHOD_ERROR
         );        
+      }
+      else {
+        throw new ErrorHandler().createError(
+          "Operation Type '" + operationType + "' is not supported.",
+          new ErrorHandler().METHOD_ERROR
+        );    
       }
 
 
@@ -266,11 +289,11 @@
         <field>script</field>
         <id>be6eea08dbdb51908c045e8cd3961916</id>
         <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-03-17 01:17:14</sys_created_on>
-        <sys_id>3c311272dbe161548c045e8cd3961973</sys_id>
+        <sys_created_on>2023-03-17 18:34:30</sys_created_on>
+        <sys_id>939e7dcbdbeda514b1227ea5f39619ee</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 01:17:14</sys_updated_on>
+        <sys_updated_on>2023-03-17 18:34:30</sys_updated_on>
         <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
         <value/>
     </sys_element_mapping>
@@ -924,17 +947,17 @@
     <sys_hub_action_plan action="INSERT_OR_UPDATE">
         <action_id display_value="PROV: Consume Queue Payload">3d1b2accdb9b51908c045e8cd3961941</action_id>
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"36488b44db9f51908c045e8cd3961969","name":"plan","plan_signature":null}}</plan>
-        <snapshot>e437d2badbe161548c045e8cd396193b</snapshot>
+        <snapshot>49996a8fdb6da1548c045e8cd3961923</snapshot>
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 19:53:23</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>36488b44db9f51908c045e8cd3961969</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>7</sys_mod_count>
         <sys_overrides/>
         <sys_scope/>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 01:43:27</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:42:15</sys_updated_on>
     </sys_hub_action_plan>
     <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
@@ -1061,10 +1084,10 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 19:53:21</sys_created_on>
         <sys_id>da484b44db9f51908c045e8cd39619f2</sys_id>
-        <sys_mod_count>6</sys_mod_count>
+        <sys_mod_count>8</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 01:43:25</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:42:14</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=da484b44db9f51908c045e8cd39619f2"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -1075,9 +1098,9 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 19:53:21</sys_created_on>
         <sys_id>a6488b44db9f51908c045e8cd3961902</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>7</sys_mod_count>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 01:43:25</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:42:14</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   inputs.payload = JSON.parse(inputs.payload);
   outputs.num_events = inputs.payload.length;
@@ -1088,8 +1111,8 @@
     var acqPackageId;
     var portfolioId;
     var link;
-    var response = event.content.response
-    var snowJobId = event.initialSnowRequest.jobId
+    var response = event.content.response;
+    var snowJobId = event.initialSnowRequest.jobId;
     var operationType = event.initialSnowRequest.operationType;
 
     // update provisioning job
@@ -1105,7 +1128,7 @@
         jobRecord.update();
         outputs.num_updates++;
       }
-      
+
       if (operationType === "ADD_PORTFOLIO") {
         // portfolio 200 success (sync)
         if (response.portfolio &amp;&amp; event.code === 200) {
@@ -1116,17 +1139,34 @@
           portfolioId = response.portfolio.id;
           var portfolioRecord = new GlideRecord("x_g_dis_atat_portfolio");
           portfolioRecord.get(jobRecord.portfolio.sys_id);
-          
+
           // update the corresponding portfolio
           portfolioRecord.provisioned = true;
           portfolioRecord.provisioned_date = now;
-          // TODO: figure out why pending operators are not being reset
-          portfolioRecord.pending_operators = ""; // clear operators
+          portfolioRecord.operators = ""; // clear operators
           portfolioRecord.csp_id = portfolioId;
           portfolioRecord.portfolio_status = "ACTIVE";
           portfolioRecord.update();
-          
-          // TODO: kick off ADD_ENVIRONMENT provisioning job(s) here
+
+          // Find all Environments under this Portfolio
+          var environmentRecord = new GlideRecord("x_g_dis_atat_environment");
+          environmentRecord.addQuery("portfolio", jobRecord.portfolio.sys_id);
+          environmentRecord.query();
+          while (environmentRecord.hasNext()) {
+            environmentRecord.next();
+            var hoth = new HothProvisioning(portfolioRecord);
+            var payload = hoth.createAddEnvironmentPayload(environmentRecord);
+
+            var newEnvironmentJobRecord = new GlideRecord("x_g_dis_atat_provisioning_job");
+            newEnvironmentJobRecord.initialize();
+            newEnvironmentJobRecord.setValue("title", environmentRecord.name.toString());
+            newEnvironmentJobRecord.setValue("hoth_job_id", payload.jobId);
+            newEnvironmentJobRecord.setValue("job_type", "ADD_ENVIRONMENT");
+            newEnvironmentJobRecord.setValue("payload", JSON.stringify(payload));
+            newEnvironmentJobRecord.setValue("portfolio", jobRecord.portfolio.sys_id);
+            newEnvironmentJobRecord.setValue("status", "NOT_STARTED");
+            newEnvironmentJobRecord.insert();
+          }
 
           // Q: is this needed or do we want to handle portfolio status updates
           // differently?
@@ -1157,6 +1197,12 @@
           "Not supported",
           new ErrorHandler().METHOD_ERROR
         );        
+      }
+      else {
+        throw new ErrorHandler().createError(
+          "Operation Type '" + operationType + "' is not supported.",
+          new ErrorHandler().METHOD_ERROR
+        );    
       }
 
 
@@ -1200,11 +1246,11 @@
         <field>script</field>
         <id>da484b44db9f51908c045e8cd39619f2</id>
         <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-03-17 01:43:25</sys_created_on>
-        <sys_id>e037d2badbe161548c045e8cd396192d</sys_id>
+        <sys_created_on>2023-03-17 20:01:11</sys_created_on>
+        <sys_id>b0725203dba1e514b1227ea5f39619c1</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 01:43:25</sys_updated_on>
+        <sys_updated_on>2023-03-17 20:01:11</sys_updated_on>
         <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
         <value/>
     </sys_element_mapping>

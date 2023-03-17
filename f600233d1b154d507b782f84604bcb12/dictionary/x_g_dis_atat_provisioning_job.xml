@@ -5,9 +5,11 @@
         <element label="HOTH Job ID" max_length="500" name="hoth_job_id" type="string"/>
         <element choice="3" default="ADD_PORTFOLIO" label="Job Type" mandatory="true" max_length="40" name="job_type" type="choice">
             <choice>
-                <element inactive_on_update="false" label="Add Funding Source(s)" value="ADD_FUNDING_SOURCE"/>
+                <element inactive_on_update="false" label="Add Administrator to Environment" value="ADD_ADMINISTRATOR"/>
+                <element inactive_on_update="false" label="Add New Environment" value="ADD_ENVIRONMENT"/>
                 <element inactive_on_update="false" label="Add New Portfolio" value="ADD_PORTFOLIO"/>
-                <element inactive_on_update="false" label="Add Operator(s)" value="ADD_OPERATORS"/>
+                <element inactive_on_update="false" label="Add Task Order to Portfolio" value="ADD_TASK_ORDER"/>
+                <element inactive_on_update="false" label="Update Task Order in Portfolio" value="UPDATE_TASK_ORDER"/>
             </choice>
         </element>
         <element label="Payload" max_length="2000" name="payload" type="string"/>
@@ -21,6 +23,7 @@
             </choice>
         </element>
         <element label="Status Message" max_length="300" name="status_message" type="string"/>
+        <element comments="Holds descriptive title of Provisioning Job. Human use only." label="title" max_length="500" name="title" type="string"/>
         <index name="index">
             <element name="acquisition_package"/>
         </index>
