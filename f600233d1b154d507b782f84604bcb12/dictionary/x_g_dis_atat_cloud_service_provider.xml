@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="ATAT:Cloud Service Provider" max_length="40" name="x_g_dis_atat_cloud_service_provider" sizeclass="4" type="collection">
+    <element label="ATAT:Cloud Service Provider" max_length="40" name="x_g_dis_atat_cloud_service_provider" sizeclass="16" type="collection">
         <element choice="1" choice_field="classification" choice_table="x_g_dis_atat_classification_level" label="Classification Level" max_length="40" name="classification_level" type="choice">
             <choice/>
         </element>
         <element label="Cloud Distinguisher" max_length="4000" name="cloud_distinguisher" type="simple_name_values"/>
         <element label="Name" max_length="40" name="name" type="string"/>
-        <element label="Pricing Calculator URI" max_length="1024" name="pricing_calculator_uri" type="url"/>
+        <element active="false" label="Pricing Calculator URI" max_length="1024" name="pricing_calculator_uri" type="url"/>
         <element choice="3" label="Vendor" max_length="255" name="vendor" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Amazon Web Services" value="AWS"/>
