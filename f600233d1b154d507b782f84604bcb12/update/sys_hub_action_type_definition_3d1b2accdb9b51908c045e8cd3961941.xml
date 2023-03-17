@@ -8,7 +8,6 @@
         <annotation/>
         <callable_by_client_api>false</callable_by_client_api>
         <category/>
-        <compiler_build>glide-rome-06-23-2021__patch5-12-15-2021_01-04-2022_2221.zip</compiler_build>
         <copied_from/>
         <copied_from_name/>
         <description/>
@@ -19,6 +18,7 @@
         <name>PROV: Consume Queue Payload</name>
         <natlang/>
         <outputs/>
+        <pre_compiled>false</pre_compiled>
         <state>published</state>
         <sys_class_name>sys_hub_action_type_definition</sys_class_name>
         <sys_created_by>1370228783.CTR</sys_created_by>
@@ -26,15 +26,15 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>3d1b2accdb9b51908c045e8cd3961941</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>8</sys_mod_count>
         <sys_name>PROV: Consume Queue Payload</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_3d1b2accdb9b51908c045e8cd3961941</sys_update_name>
-        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2023-02-16 19:51:16</sys_updated_on>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-03-17 01:43:26</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -106,6 +106,10 @@
         <table>var__m_sys_flow_step_definition_input_a03fea9bc712220061f553c6f09763b1</table>
         <value>Received ﻿{{step[8bc0d538-9f11-4eae-94b5-bc2d19c74f39].num_events}} events and made ﻿{{step[8bc0d538-9f11-4eae-94b5-bc2d19c74f39].num_updates}} job updates.﻿</value>
     </sys_element_mapping>
+    <sys_hub_step_ext_input action="delete_multiple" query="model=59cbd380dbd391908c045e8cd3961904"/>
+    <sys_hub_step_ext_output action="delete_multiple" query="model=59cbd380dbd391908c045e8cd3961904"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=59cbd380dbd391908c045e8cd3961904"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_step_ext_output_59cbd380dbd391908c045e8cd3961904"/>
     <sys_hub_step_instance action="INSERT_OR_UPDATE">
         <action display_value="PROV: Consume Queue Payload">3d1b2accdb9b51908c045e8cd3961941</action>
         <cid>8bc0d538-9f11-4eae-94b5-bc2d19c74f39</cid>
@@ -123,10 +127,10 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 18:00:20</sys_created_on>
         <sys_id>be6eea08dbdb51908c045e8cd3961916</sys_id>
-        <sys_mod_count>13</sys_mod_count>
+        <sys_mod_count>17</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2023-02-16 19:51:10</sys_updated_on>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-03-17 01:38:30</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=be6eea08dbdb51908c045e8cd3961916"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -137,9 +141,9 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 18:00:20</sys_created_on>
         <sys_id>766eea08dbdb51908c045e8cd396192b</sys_id>
-        <sys_mod_count>12</sys_mod_count>
-        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2023-02-16 19:51:10</sys_updated_on>
+        <sys_mod_count>16</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-03-17 01:38:30</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   inputs.payload = JSON.parse(inputs.payload);
   outputs.num_events = inputs.payload.length;
@@ -152,6 +156,7 @@
     var link;
     var response = event.content.response
     var snowJobId = event.initialSnowRequest.jobId
+    var operationType = event.initialSnowRequest.operationType;
 
     // update provisioning job
     var jobRecord = new GlideRecord("x_g_dis_atat_provisioning_job");
@@ -166,66 +171,63 @@
         jobRecord.update();
         outputs.num_updates++;
       }
-
-      // status 200 success (after 202 polling - async)
-      if (response.status) {
-        jobRecord.csp_job_id = response.status.provisioningJobId;
-        jobRecord.status = response.status.status;
-        jobRecord.update();
-        outputs.num_updates++;
-        
-        portfolioId = response.status.portfolioId
-      }
-
-      // portfolio 200 success (sync)
-      if (response.portfolio) {
-        // a success should indicate that the job is complete
-        jobRecord.status = "SUCCESS";
-        jobRecord.update();
-        outputs.num_updates++;
-
-        portfolioId = response.portfolio.id;
-        link = response.portfolio.dashboardLink;
-      }
       
-      // pass on package Id to update portfolio
-      acqPackageId = jobRecord.acquisition_package.sys_id.toString();
+      if (operationType === "ADD_PORTFOLIO") {
+        // portfolio 200 success (sync)
+        if (response.portfolio &amp;&amp; event.code === 200) {
+          // a success should indicate that the job is complete
+          jobRecord.status = "SUCCESS";
+          jobRecord.update();
+          outputs.num_updates++;
+          portfolioId = response.portfolio.id;
+          var portfolioRecord = new GlideRecord("x_g_dis_atat_portfolio");
+          portfolioRecord.get(jobRecord.portfolio.sys_id);
+          
+          // update the corresponding portfolio
+          portfolioRecord.provisioned = true;
+          portfolioRecord.provisioned_date = now;
+          // TODO: figure out why pending operators are not being reset
+          portfolioRecord.pending_operators = ""; // clear operators
+          portfolioRecord.csp_id = portfolioId;
+          portfolioRecord.portfolio_status = "ACTIVE";
+          portfolioRecord.update();
+          
+          // TODO: kick off ADD_ENVIRONMENT provisioning job(s) here
+
+          // Q: is this needed or do we want to handle portfolio status updates
+          // differently?
+          // if (event.code &lt; 200 || event.code &gt;= 400) {
+          //   // update the failed portfolio
+          //   portfolioRecord.csp_portfolio_id = portfolioId;
+          //   portfolioRecord.dashboard_link = link ? link : null;
+          //   portfolioRecord.portfolio_status = "ARCHIVED";
+          //   portfolioRecord.update();
+          // }
+
+        }
+      }
+      else if (operationType === "ADD_ENVIRONMENT") {
+        //link = response.portfolio.dashboardLink;
+        //environmentRecord.dashboard_link = link ? link : null;
+
+        // status 200 success (after 202 polling - async)
+        //       if (response.status) {
+        //         jobRecord.csp_job_id = response.status.provisioningJobId;
+        //         jobRecord.status = response.status.status;
+        //         jobRecord.update();
+        //         outputs.num_updates++;
+
+        //         portfolioId = response.status.portfolioId
+        //       }    
+        throw new ErrorHandler().createError(
+          "Not supported",
+          new ErrorHandler().METHOD_ERROR
+        );        
+      }
+
 
     } else {
       gs.error("Could not find a Provisioning Job record with HOTH Job ID " + snowJobId);
-    }
-
-    // update portfolios
-    var portfolioRecord = new GlideRecord("x_g_dis_atat_portfolio");
-    portfolioRecord.addQuery("acquisition_package", acqPackageId);
-    portfolioRecord.addQuery("provisioned", false);
-    portfolioRecord.query();
-
-    if (portfolioRecord.next()) {
-      if (event.code === 200) {
-        // update the corresponding portfolio
-        portfolioRecord.provisioned = true;
-        portfolioRecord.provisioned_date = now;
-        // TODO: figure out why pending operators are not being reset
-        portfolioRecord.pending_operators = ""; // clear operators
-        portfolioRecord.csp_portfolio_id = portfolioId;
-        portfolioRecord.dashboard_link = link ? link : null;
-        portfolioRecord.portfolio_status = "ACTIVE";
-        portfolioRecord.update();
-      }
-
-      // Q: is this needed or do we want to handle portfolio status updates
-      // differently?
-      // if (event.code &lt; 200 || event.code &gt;= 400) {
-      //   // update the failed portfolio
-      //   portfolioRecord.csp_portfolio_id = portfolioId;
-      //   portfolioRecord.dashboard_link = link ? link : null;
-      //   portfolioRecord.portfolio_status = "ARCHIVED";
-      //   portfolioRecord.update();
-      // }
-
-    } else {
-      gs.error("Could not find a Portfolio record to update that is referenced by Job ID " + snowJobId)
     }
 
   });
@@ -263,12 +265,12 @@
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>script</field>
         <id>be6eea08dbdb51908c045e8cd3961916</id>
-        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
-        <sys_created_on>2023-02-16 19:51:10</sys_created_on>
-        <sys_id>670abc7197052110cf3cfd9fe153af43</sys_id>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-03-17 01:17:14</sys_created_on>
+        <sys_id>3c311272dbe161548c045e8cd3961973</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2023-02-16 19:51:10</sys_updated_on>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-03-17 01:17:14</sys_updated_on>
         <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
         <value/>
     </sys_element_mapping>
@@ -306,6 +308,7 @@
         <element>payload</element>
         <element_reference>false</element_reference>
         <foreign_database/>
+        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -352,6 +355,7 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
@@ -388,6 +392,7 @@
         <element>num_updates</element>
         <element_reference>false</element_reference>
         <foreign_database/>
+        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -434,6 +439,7 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
@@ -469,6 +475,7 @@
         <element>num_events</element>
         <element_reference>false</element_reference>
         <foreign_database/>
+        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -515,10 +522,12 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_step_ext_output>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=be6eea08dbdb51908c045e8cd3961916"/>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_step_ext_output_be6eea08dbdb51908c045e8cd3961916^sys_idNOT IN89cb9380dbd391908c045e8cd39619d6,d44bd70cdb9391908c045e8cd39619b0"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>num_updates</element>
@@ -598,6 +607,7 @@
         <element>payload</element>
         <element_reference>false</element_reference>
         <foreign_database/>
+        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -644,10 +654,12 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_action_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=ba6e6e44dbdb51908c045e8cd396196a"/>
     <sys_hub_action_output action="delete_multiple" query="model=3d1b2accdb9b51908c045e8cd3961941^sys_idNOT IN0951f64cdbdb51908c045e8cd396192f,4551f64cdbdb51908c045e8cd3961926"/>
     <sys_hub_action_output action="INSERT_OR_UPDATE">
         <active>true</active>
@@ -681,6 +693,7 @@
         <element_prototype/>
         <element_reference>false</element_reference>
         <foreign_database/>
+        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -728,10 +741,13 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_action_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=0951f64cdbdb51908c045e8cd396192f"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=0951f64cdbdb51908c045e8cd396192f"/>
     <sys_hub_action_output action="INSERT_OR_UPDATE">
         <active>true</active>
         <array>false</array>
@@ -764,6 +780,7 @@
         <element_prototype/>
         <element_reference>false</element_reference>
         <foreign_database/>
+        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -811,10 +828,14 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_action_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=4551f64cdbdb51908c045e8cd3961926"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=4551f64cdbdb51908c045e8cd3961926"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=3d1b2accdb9b51908c045e8cd3961941"/>
     <sys_hub_action_status_metadata action="delete_multiple" query="action_type_id=3d1b2accdb9b51908c045e8cd3961941^sys_idNOT INcb6eea08dbdb51908c045e8cd3961930"/>
     <sys_hub_action_status_metadata action="INSERT_OR_UPDATE">
         <action_type_id display_value="PROV: Consume Queue Payload">3d1b2accdb9b51908c045e8cd3961941</action_type_id>
@@ -825,6 +846,7 @@
         <sys_updated_by>1370228783.CTR</sys_updated_by>
         <sys_updated_on>2022-11-16 18:00:21</sys_updated_on>
     </sys_hub_action_status_metadata>
+    <sys_hub_status_condition action="delete_multiple" query="action_status_metadata_id=cb6eea08dbdb51908c045e8cd3961930"/>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_input_3d1b2accdb9b51908c045e8cd3961941^sys_idNOT INba6eea08dbdb51908c045e8cd3961913"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>payload</element>
@@ -849,6 +871,7 @@
         <url/>
         <url_target/>
     </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_action_input_3d1b2accdb9b51908c045e8cd3961941"/>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_output_3d1b2accdb9b51908c045e8cd3961941^sys_idNOT IN4151f64cdbdb51908c045e8cd396192e,8551f64cdbdb51908c045e8cd396193b"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>__action_status__</element>
@@ -896,21 +919,22 @@
         <url/>
         <url_target/>
     </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_action_output_3d1b2accdb9b51908c045e8cd3961941"/>
     <sys_hub_action_plan action="delete_multiple" query="action_id=3d1b2accdb9b51908c045e8cd3961941^sys_idNOT IN36488b44db9f51908c045e8cd3961969"/>
     <sys_hub_action_plan action="INSERT_OR_UPDATE">
         <action_id display_value="PROV: Consume Queue Payload">3d1b2accdb9b51908c045e8cd3961941</action_id>
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"36488b44db9f51908c045e8cd3961969","name":"plan","plan_signature":null}}</plan>
-        <snapshot>f01afc7197052110cf3cfd9fe153af26</snapshot>
+        <snapshot>e437d2badbe161548c045e8cd396193b</snapshot>
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 19:53:23</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>36488b44db9f51908c045e8cd3961969</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_overrides/>
         <sys_scope/>
-        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2023-02-16 19:51:17</sys_updated_on>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-03-17 01:43:27</sys_updated_on>
     </sys_hub_action_plan>
     <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
@@ -1016,6 +1040,10 @@
         <table>var__m_sys_flow_step_definition_input_a03fea9bc712220061f553c6f09763b1</table>
         <value>Received ﻿{{step[8bc0d538-9f11-4eae-94b5-bc2d19c74f39].num_events}} events and made ﻿{{step[8bc0d538-9f11-4eae-94b5-bc2d19c74f39].num_updates}} job updates.﻿</value>
     </sys_element_mapping>
+    <sys_hub_step_ext_input action="delete_multiple" query="model=ad1c9708dbd391908c045e8cd396190a"/>
+    <sys_hub_step_ext_output action="delete_multiple" query="model=ad1c9708dbd391908c045e8cd396190a"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=ad1c9708dbd391908c045e8cd396190a"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_step_ext_output_ad1c9708dbd391908c045e8cd396190a"/>
     <sys_hub_step_instance action="INSERT_OR_UPDATE">
         <action display_value="PROV: Consume Queue Payload">96484b44db9f51908c045e8cd39619d8</action>
         <cid>8bc0d538-9f11-4eae-94b5-bc2d19c74f39</cid>
@@ -1033,10 +1061,10 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 19:53:21</sys_created_on>
         <sys_id>da484b44db9f51908c045e8cd39619f2</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2023-02-16 19:51:16</sys_updated_on>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-03-17 01:43:25</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=da484b44db9f51908c045e8cd39619f2"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -1047,9 +1075,9 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 19:53:21</sys_created_on>
         <sys_id>a6488b44db9f51908c045e8cd3961902</sys_id>
-        <sys_mod_count>4</sys_mod_count>
-        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2023-02-16 19:51:16</sys_updated_on>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-03-17 01:43:25</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   inputs.payload = JSON.parse(inputs.payload);
   outputs.num_events = inputs.payload.length;
@@ -1062,6 +1090,7 @@
     var link;
     var response = event.content.response
     var snowJobId = event.initialSnowRequest.jobId
+    var operationType = event.initialSnowRequest.operationType;
 
     // update provisioning job
     var jobRecord = new GlideRecord("x_g_dis_atat_provisioning_job");
@@ -1076,66 +1105,63 @@
         jobRecord.update();
         outputs.num_updates++;
       }
-
-      // status 200 success (after 202 polling - async)
-      if (response.status) {
-        jobRecord.csp_job_id = response.status.provisioningJobId;
-        jobRecord.status = response.status.status;
-        jobRecord.update();
-        outputs.num_updates++;
-        
-        portfolioId = response.status.portfolioId
-      }
-
-      // portfolio 200 success (sync)
-      if (response.portfolio) {
-        // a success should indicate that the job is complete
-        jobRecord.status = "SUCCESS";
-        jobRecord.update();
-        outputs.num_updates++;
-
-        portfolioId = response.portfolio.id;
-        link = response.portfolio.dashboardLink;
-      }
       
-      // pass on package Id to update portfolio
-      acqPackageId = jobRecord.acquisition_package.sys_id.toString();
+      if (operationType === "ADD_PORTFOLIO") {
+        // portfolio 200 success (sync)
+        if (response.portfolio &amp;&amp; event.code === 200) {
+          // a success should indicate that the job is complete
+          jobRecord.status = "SUCCESS";
+          jobRecord.update();
+          outputs.num_updates++;
+          portfolioId = response.portfolio.id;
+          var portfolioRecord = new GlideRecord("x_g_dis_atat_portfolio");
+          portfolioRecord.get(jobRecord.portfolio.sys_id);
+          
+          // update the corresponding portfolio
+          portfolioRecord.provisioned = true;
+          portfolioRecord.provisioned_date = now;
+          // TODO: figure out why pending operators are not being reset
+          portfolioRecord.pending_operators = ""; // clear operators
+          portfolioRecord.csp_id = portfolioId;
+          portfolioRecord.portfolio_status = "ACTIVE";
+          portfolioRecord.update();
+          
+          // TODO: kick off ADD_ENVIRONMENT provisioning job(s) here
+
+          // Q: is this needed or do we want to handle portfolio status updates
+          // differently?
+          // if (event.code &lt; 200 || event.code &gt;= 400) {
+          //   // update the failed portfolio
+          //   portfolioRecord.csp_portfolio_id = portfolioId;
+          //   portfolioRecord.dashboard_link = link ? link : null;
+          //   portfolioRecord.portfolio_status = "ARCHIVED";
+          //   portfolioRecord.update();
+          // }
+
+        }
+      }
+      else if (operationType === "ADD_ENVIRONMENT") {
+        //link = response.portfolio.dashboardLink;
+        //environmentRecord.dashboard_link = link ? link : null;
+
+        // status 200 success (after 202 polling - async)
+        //       if (response.status) {
+        //         jobRecord.csp_job_id = response.status.provisioningJobId;
+        //         jobRecord.status = response.status.status;
+        //         jobRecord.update();
+        //         outputs.num_updates++;
+
+        //         portfolioId = response.status.portfolioId
+        //       }    
+        throw new ErrorHandler().createError(
+          "Not supported",
+          new ErrorHandler().METHOD_ERROR
+        );        
+      }
+
 
     } else {
       gs.error("Could not find a Provisioning Job record with HOTH Job ID " + snowJobId);
-    }
-
-    // update portfolios
-    var portfolioRecord = new GlideRecord("x_g_dis_atat_portfolio");
-    portfolioRecord.addQuery("acquisition_package", acqPackageId);
-    portfolioRecord.addQuery("provisioned", false);
-    portfolioRecord.query();
-
-    if (portfolioRecord.next()) {
-      if (event.code === 200) {
-        // update the corresponding portfolio
-        portfolioRecord.provisioned = true;
-        portfolioRecord.provisioned_date = now;
-        // TODO: figure out why pending operators are not being reset
-        portfolioRecord.pending_operators = ""; // clear operators
-        portfolioRecord.csp_portfolio_id = portfolioId;
-        portfolioRecord.dashboard_link = link ? link : null;
-        portfolioRecord.portfolio_status = "ACTIVE";
-        portfolioRecord.update();
-      }
-
-      // Q: is this needed or do we want to handle portfolio status updates
-      // differently?
-      // if (event.code &lt; 200 || event.code &gt;= 400) {
-      //   // update the failed portfolio
-      //   portfolioRecord.csp_portfolio_id = portfolioId;
-      //   portfolioRecord.dashboard_link = link ? link : null;
-      //   portfolioRecord.portfolio_status = "ARCHIVED";
-      //   portfolioRecord.update();
-      // }
-
-    } else {
-      gs.error("Could not find a Portfolio record to update that is referenced by Job ID " + snowJobId)
     }
 
   });
@@ -1173,12 +1199,12 @@
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>script</field>
         <id>da484b44db9f51908c045e8cd39619f2</id>
-        <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
-        <sys_created_on>2023-02-16 19:51:16</sys_created_on>
-        <sys_id>f81afc7197052110cf3cfd9fe153af19</sys_id>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-03-17 01:43:25</sys_created_on>
+        <sys_id>e037d2badbe161548c045e8cd396192d</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2023-02-16 19:51:16</sys_updated_on>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-03-17 01:43:25</sys_updated_on>
         <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
         <value/>
     </sys_element_mapping>
@@ -1216,6 +1242,7 @@
         <element>payload</element>
         <element_reference>false</element_reference>
         <foreign_database/>
+        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -1262,6 +1289,7 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
@@ -1298,6 +1326,7 @@
         <element>num_updates</element>
         <element_reference>false</element_reference>
         <foreign_database/>
+        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -1344,6 +1373,7 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
@@ -1379,6 +1409,7 @@
         <element>num_events</element>
         <element_reference>false</element_reference>
         <foreign_database/>
+        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -1425,10 +1456,12 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_step_ext_output>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=da484b44db9f51908c045e8cd39619f2"/>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_step_ext_output_da484b44db9f51908c045e8cd39619f2^sys_idNOT IN2d1c5708dbd391908c045e8cd39619c9,e51c9708dbd391908c045e8cd3961902"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>num_events</element>
@@ -1508,6 +1541,7 @@
         <element>payload</element>
         <element_reference>false</element_reference>
         <foreign_database/>
+        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -1554,10 +1588,12 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_action_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=5a484b44db9f51908c045e8cd39619e8"/>
     <sys_hub_action_output action="delete_multiple" query="model=96484b44db9f51908c045e8cd39619d8^sys_idNOT IN66488b44db9f51908c045e8cd3961908,e2488b44db9f51908c045e8cd3961911"/>
     <sys_hub_action_output action="INSERT_OR_UPDATE">
         <active>true</active>
@@ -1591,6 +1627,7 @@
         <element_prototype/>
         <element_reference>false</element_reference>
         <foreign_database/>
+        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -1638,10 +1675,13 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_action_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=66488b44db9f51908c045e8cd3961908"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=66488b44db9f51908c045e8cd3961908"/>
     <sys_hub_action_output action="INSERT_OR_UPDATE">
         <active>true</active>
         <array>false</array>
@@ -1674,6 +1714,7 @@
         <element_prototype/>
         <element_reference>false</element_reference>
         <foreign_database/>
+        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -1721,10 +1762,14 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_action_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=e2488b44db9f51908c045e8cd3961911"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=e2488b44db9f51908c045e8cd3961911"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=96484b44db9f51908c045e8cd39619d8"/>
     <sys_hub_action_status_metadata action="delete_multiple" query="action_type_id=96484b44db9f51908c045e8cd39619d8^sys_idNOT INe6488b44db9f51908c045e8cd3961922"/>
     <sys_hub_action_status_metadata action="INSERT_OR_UPDATE">
         <action_type_id display_value="PROV: Consume Queue Payload">96484b44db9f51908c045e8cd39619d8</action_type_id>
@@ -1735,6 +1780,7 @@
         <sys_updated_by>1370228783.CTR</sys_updated_by>
         <sys_updated_on>2022-11-16 19:53:22</sys_updated_on>
     </sys_hub_action_status_metadata>
+    <sys_hub_status_condition action="delete_multiple" query="action_status_metadata_id=e6488b44db9f51908c045e8cd3961922"/>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_input_96484b44db9f51908c045e8cd39619d8^sys_idNOT IN92484b44db9f51908c045e8cd39619f0"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>payload</element>
@@ -1759,6 +1805,7 @@
         <url/>
         <url_target/>
     </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_action_input_96484b44db9f51908c045e8cd39619d8"/>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_output_96484b44db9f51908c045e8cd39619d8^sys_idNOT IN2e488b44db9f51908c045e8cd396190f,ee488b44db9f51908c045e8cd396191c"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>__action_status__</element>
@@ -1806,8 +1853,10 @@
         <url/>
         <url_target/>
     </sys_documentation>
-    <sys_hub_action_type_definition action="update">
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_action_output_96484b44db9f51908c045e8cd39619d8"/>
+    <sys_hub_action_type_definition action="UPDATE">
         <sys_id>3d1b2accdb9b51908c045e8cd3961941</sys_id>
         <latest_snapshot>96484b44db9f51908c045e8cd39619d8</latest_snapshot>
+        <compiler_build>glide-tokyo-07-08-2022__patch6-hotfix1-02-01-2023_02-02-2023_0949.zip</compiler_build>
     </sys_hub_action_type_definition>
 </record_update>
