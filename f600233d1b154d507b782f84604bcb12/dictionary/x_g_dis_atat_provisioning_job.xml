@@ -14,6 +14,7 @@
             </choice>
         </element>
         <element label="Payload" max_length="2000" name="payload" type="string"/>
+        <element label="Portfolio" max_length="32" name="portfolio" reference="x_g_dis_atat_portfolio" type="reference"/>
         <element choice="3" default="NOT_STARTED" label="Status" max_length="40" name="status" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Failure" value="FAILURE"/>
@@ -27,6 +28,9 @@
             <element name="environment"/>
         </index>
         <index name="index2">
+            <element name="portfolio"/>
+        </index>
+        <index name="index3">
             <element name="acquisition_package"/>
         </index>
     </element>
