@@ -10,7 +10,7 @@
         <copied_from_name/>
         <description>Queues initial portfolio provisioning job when 1) at least one Operator has been assigned and 2) EDA validation has been performed on the associated Task Order</description>
         <internal_name>queue_initial_portfolio_provisioning_job</internal_name>
-        <label_cache>[{"name":"ca53916a-d4f4-4b8a-9aaa-b83ef17056d6.Record.csp.vendor","label":"2 - Look Up Record➛ATAT:Environment Record➛CSP➛Vendor","reference":"","reference_display":"Vendor","type":"choice","base_type":"choice","parent_table_name":"x_g_dis_atat_cloud_service_provider","column_name":"vendor","choices":[{"label":"Amazon Web Services","image":"","used":false,"rawLabel":"Amazon Web Services","selected":false,"missing":false,"reference":false,"value":"AWS","parameters":{"name":"x_g_dis_atat_cloud_service_provider"}},{"label":"Google Cloud Platform","image":"","used":false,"rawLabel":"Google Cloud Platform","selected":false,"missing":false,"reference":false,"value":"GCP","parameters":{"name":"x_g_dis_atat_cloud_service_provider"}},{"label":"Microsoft Azure","image":"","used":false,"rawLabel":"Microsoft Azure","selected":false,"missing":false,"reference":false,"value":"AZURE","parameters":{"name":"x_g_dis_atat_cloud_service_provider"}},{"label":"Oracle Cloud","image":"","used":false,"rawLabel":"Oracle Cloud","selected":false,"missing":false,"reference":false,"value":"ORACLE","parameters":{"name":"x_g_dis_atat_cloud_service_provider"}}]},{"name":"081ee68e-1817-43d7-9e03-6951c5111e71.__dont_treat_as_error__","label":"6➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"081ee68e-1817-43d7-9e03-6951c5111e71.__action_status__","label":"6➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"081ee68e-1817-43d7-9e03-6951c5111e71.table_name","label":"6➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"081ee68e-1817-43d7-9e03-6951c5111e71.record","label":"6➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"6ffc5018-4cdb-4ed7-9a5f-3a5d7c8fa9c7.item","label":"5➛ATAT:Operator Record","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"reference","base_type":"reference","attributes":{"pills_draggable_inside_block":"true","pills_draggable_outside_block":"false"}},{"name":"Created or Updated_1.current.sys_id","label":"Trigger➛Portfolio Record➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"x_g_dis_atat_portfolio","column_name":"sys_id"},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.record.job_type","label":"4 - Create Record➛ATAT:Provisioning Job Record➛Job Type","reference":"","reference_display":"Job Type","type":"choice","base_type":"choice","parent_table_name":"x_g_dis_atat_provisioning_job","column_name":"job_type","choices":[{"label":"Add Administrator to Environment","image":"","used":false,"rawLabel":"Add Administrator to Environment","selected":false,"missing":false,"reference":false,"value":"ADD_ADMINISTRATOR","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"label":"Add New Environment","image":"","used":false,"rawLabel":"Add New Environment","selected":false,"missing":false,"reference":false,"value":"ADD_ENVIRONMENT","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"label":"Add New Portfolio","image":"","used":false,"rawLabel":"Add New Portfolio","selected":false,"missing":false,"reference":false,"value":"ADD_PORTFOLIO","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"label":"Add Task Order to Portfolio","image":"","used":false,"rawLabel":"Add Task Order to Portfolio","selected":false,"missing":false,"reference":false,"value":"ADD_TASK_ORDER","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"label":"Update Task Order in Portfolio","image":"","used":false,"rawLabel":"Update Task Order in Portfolio","selected":false,"missing":false,"reference":false,"value":"UPDATE_TASK_ORDER","parameters":{"name":"x_g_dis_atat_provisioning_job"}}]},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.record.sys_id","label":"4 - Create Record➛ATAT:Provisioning Job Record➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"x_g_dis_atat_provisioning_job","column_name":"sys_id"},{"name":"24efc1f1-3eea-48d4-9fa0-92d77f369575.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"24efc1f1-3eea-48d4-9fa0-92d77f369575.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"24efc1f1-3eea-48d4-9fa0-92d77f369575.message","label":"5➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"eae4ca7a-5ba6-465c-b7bd-6ba1cf184947"}},{"name":"24efc1f1-3eea-48d4-9fa0-92d77f369575.status","label":"5➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"828e2127-df28-4eda-af48-ee4e876cca1e"}},{"name":"24efc1f1-3eea-48d4-9fa0-92d77f369575.count","label":"5➛Count","reference_display":"Count","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"edb3c082-a356-4943-a263-55232fc02390"}},{"name":"c8fde102-de84-46a1-9010-02fe7a4a6edb.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"c8fde102-de84-46a1-9010-02fe7a4a6edb.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"c8fde102-de84-46a1-9010-02fe7a4a6edb.table_name","label":"5➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"c8fde102-de84-46a1-9010-02fe7a4a6edb.record","label":"5➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"bbe6b7dc-037e-4063-a6e6-6270918bd709.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"bbe6b7dc-037e-4063-a6e6-6270918bd709.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"bbe6b7dc-037e-4063-a6e6-6270918bd709.Count","label":"5➛Count","reference_display":"Count","type":"integer","base_type":"integer","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"bbe6b7dc-037e-4063-a6e6-6270918bd709.Table","label":"5➛ATAT:Operator Table","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"bbe6b7dc-037e-4063-a6e6-6270918bd709.Records","label":"5➛ATAT:Operator Records","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"records","base_type":"records","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"Created or Updated_1.run_start_time","label":"Trigger➛Run Start Time","type":"glide_date_time","base_type":"glide_date_time","attributes":{"test_input_hidden":"true"}},{"name":"7ffd664e-d808-4a1b-9be2-e9c4fde0af19.__dont_treat_as_error__","label":"6 - Update Record➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"7ffd664e-d808-4a1b-9be2-e9c4fde0af19.__action_status__","label":"6 - Update Record➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"7ffd664e-d808-4a1b-9be2-e9c4fde0af19.table_name","label":"6 - Update Record➛x_g_dis_atat_portfolio Table","reference":"x_g_dis_atat_portfolio","reference_display":"x_g_dis_atat_portfolio","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"7ffd664e-d808-4a1b-9be2-e9c4fde0af19.record","label":"6 - Update Record➛x_g_dis_atat_portfolio Record","reference":"x_g_dis_atat_portfolio","reference_display":"x_g_dis_atat_portfolio","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"Created or Updated_1.current.name","label":"Trigger➛Portfolio Record➛Name","reference":"","reference_display":"Name","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_portfolio","column_name":"name"},{"name":"454d07c5-33e9-4dd4-9a14-d257befa89a4.__dont_treat_as_error__","label":"5 - Log➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"454d07c5-33e9-4dd4-9a14-d257befa89a4.__action_status__","label":"5 - Log➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"Created or Updated_1.current.operators","label":"Trigger➛Portfolio Record➛Pending Operators","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"glide_list","base_type":"glide_list","parent_table_name":"x_g_dis_atat_portfolio","column_name":"operators"},{"name":"e2b1d1e1-a3ec-4291-8f8f-3dd745c4789e.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"e2b1d1e1-a3ec-4291-8f8f-3dd745c4789e.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"e2b1d1e1-a3ec-4291-8f8f-3dd745c4789e.Count","label":"1➛Count","reference_display":"Count","type":"integer","base_type":"integer","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"e2b1d1e1-a3ec-4291-8f8f-3dd745c4789e.Table","label":"1➛CLIN Table","reference":"x_g_dis_atat_clin","reference_display":"ATAT:CLIN","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"e2b1d1e1-a3ec-4291-8f8f-3dd745c4789e.Records","label":"1➛CLIN Records","reference":"x_g_dis_atat_clin","reference_display":"ATAT:CLIN","type":"records","base_type":"records","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"8359b0e6-638d-450a-809c-b2ec5bf3a034.item","label":"2➛Items","reference_display":"Items","type":"document_id","base_type":"document_id","attributes":{"pills_draggable_inside_block":"true","pills_draggable_outside_block":"false"}},{"name":"732d228e-3910-4e09-a15f-da16cd49355d.record","label":"1➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"732d228e-3910-4e09-a15f-da16cd49355d.table_name","label":"1➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"732d228e-3910-4e09-a15f-da16cd49355d.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"732d228e-3910-4e09-a15f-da16cd49355d.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.record","label":"4 - Create Record➛ATAT:Provisioning Job Record","reference":"x_g_dis_atat_provisioning_job","reference_display":"ATAT:Provisioning Job","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.table_name","label":"4 - Create Record➛ATAT:Provisioning Job Table","reference":"x_g_dis_atat_provisioning_job","reference_display":"ATAT:Provisioning Job","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.__action_status__","label":"4 - Create Record➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.__dont_treat_as_error__","label":"4 - Create Record➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"Created or Updated_1.current","label":"Trigger - Record Created or Updated➛x_g_dis_atat_portfolio Record","reference":"x_g_dis_atat_portfolio","reference_display":"x_g_dis_atat_portfolio","type":"reference","base_type":"reference","attributes":{}},{"name":"Created or Updated_1.current.acquisition_package","label":"Trigger➛Portfolio Record➛Acquisition Package","reference":"x_g_dis_atat_acquisition_package","reference_display":"DAPPS:Acquisition Package","type":"reference","base_type":"reference","parent_table_name":"x_g_dis_atat_portfolio","column_name":"acquisition_package"},{"name":"442f160f-062b-422e-aee1-9c563c4045c6.record","label":"5➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"442f160f-062b-422e-aee1-9c563c4045c6.table_name","label":"5➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"442f160f-062b-422e-aee1-9c563c4045c6.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"442f160f-062b-422e-aee1-9c563c4045c6.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"fbf37007-3218-462d-a3ff-55be4454e848.record","label":"5➛Operator Record","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"fbf37007-3218-462d-a3ff-55be4454e848.table_name","label":"5➛Operator Table","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"fbf37007-3218-462d-a3ff-55be4454e848.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"fbf37007-3218-462d-a3ff-55be4454e848.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"flow_variable.hoth_job_id","label":"Flow Variables➛HOTH Job ID","reference":"","reference_display":"","type":"string","base_type":"string","column_name":"","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"2ade410f-636d-4f9a-b67a-c121b6332e69"}}]</label_cache>
+        <label_cache>[{"name":"ca53916a-d4f4-4b8a-9aaa-b83ef17056d6.Record.csp.vendor","label":"2 - Look Up Record➛ATAT:Environment Record➛CSP➛Vendor","reference":"","reference_display":"Vendor","type":"choice","base_type":"choice","parent_table_name":"x_g_dis_atat_cloud_service_provider","column_name":"vendor","choices":[{"used":false,"image":"","reference":false,"label":"Amazon Web Services","rawLabel":"Amazon Web Services","selected":false,"missing":false,"value":"AWS","parameters":{"name":"x_g_dis_atat_cloud_service_provider"}},{"used":false,"image":"","reference":false,"label":"Google Cloud Platform","rawLabel":"Google Cloud Platform","selected":false,"missing":false,"value":"GCP","parameters":{"name":"x_g_dis_atat_cloud_service_provider"}},{"used":false,"image":"","reference":false,"label":"Microsoft Azure","rawLabel":"Microsoft Azure","selected":false,"missing":false,"value":"AZURE","parameters":{"name":"x_g_dis_atat_cloud_service_provider"}},{"used":false,"image":"","reference":false,"label":"Oracle Cloud","rawLabel":"Oracle Cloud","selected":false,"missing":false,"value":"ORACLE","parameters":{"name":"x_g_dis_atat_cloud_service_provider"}}]},{"name":"081ee68e-1817-43d7-9e03-6951c5111e71.__dont_treat_as_error__","label":"6➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"081ee68e-1817-43d7-9e03-6951c5111e71.__action_status__","label":"6➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"081ee68e-1817-43d7-9e03-6951c5111e71.table_name","label":"6➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"081ee68e-1817-43d7-9e03-6951c5111e71.record","label":"6➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"6ffc5018-4cdb-4ed7-9a5f-3a5d7c8fa9c7.item","label":"5➛ATAT:Operator Record","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"reference","base_type":"reference","attributes":{"pills_draggable_inside_block":"true","pills_draggable_outside_block":"false"}},{"name":"Created or Updated_1.current.sys_id","label":"Trigger➛Portfolio Record➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"x_g_dis_atat_portfolio","column_name":"sys_id"},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.record.job_type","label":"4 - Create Record➛ATAT:Provisioning Job Record➛Job Type","reference":"","reference_display":"Job Type","type":"choice","base_type":"choice","parent_table_name":"x_g_dis_atat_provisioning_job","column_name":"job_type","choices":[{"used":false,"image":"","reference":false,"label":"Add Administrator to Environment","rawLabel":"Add Administrator to Environment","selected":false,"missing":false,"value":"ADD_ADMINISTRATOR","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"used":false,"image":"","reference":false,"label":"Add New Environment","rawLabel":"Add New Environment","selected":false,"missing":false,"value":"ADD_ENVIRONMENT","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"used":false,"image":"","reference":false,"label":"Add New Portfolio","rawLabel":"Add New Portfolio","selected":false,"missing":false,"value":"ADD_PORTFOLIO","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"used":false,"image":"","reference":false,"label":"Add Task Order to Portfolio","rawLabel":"Add Task Order to Portfolio","selected":false,"missing":false,"value":"ADD_TASK_ORDER","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"used":false,"image":"","reference":false,"label":"Update Task Order in Portfolio","rawLabel":"Update Task Order in Portfolio","selected":false,"missing":false,"value":"UPDATE_TASK_ORDER","parameters":{"name":"x_g_dis_atat_provisioning_job"}}]},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.record.sys_id","label":"4 - Create Record➛ATAT:Provisioning Job Record➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"x_g_dis_atat_provisioning_job","column_name":"sys_id"},{"name":"24efc1f1-3eea-48d4-9fa0-92d77f369575.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"24efc1f1-3eea-48d4-9fa0-92d77f369575.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"24efc1f1-3eea-48d4-9fa0-92d77f369575.message","label":"5➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"eae4ca7a-5ba6-465c-b7bd-6ba1cf184947"}},{"name":"24efc1f1-3eea-48d4-9fa0-92d77f369575.status","label":"5➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"828e2127-df28-4eda-af48-ee4e876cca1e"}},{"name":"24efc1f1-3eea-48d4-9fa0-92d77f369575.count","label":"5➛Count","reference_display":"Count","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"edb3c082-a356-4943-a263-55232fc02390"}},{"name":"c8fde102-de84-46a1-9010-02fe7a4a6edb.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"c8fde102-de84-46a1-9010-02fe7a4a6edb.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"c8fde102-de84-46a1-9010-02fe7a4a6edb.table_name","label":"5➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"c8fde102-de84-46a1-9010-02fe7a4a6edb.record","label":"5➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"bbe6b7dc-037e-4063-a6e6-6270918bd709.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"bbe6b7dc-037e-4063-a6e6-6270918bd709.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"bbe6b7dc-037e-4063-a6e6-6270918bd709.Count","label":"5➛Count","reference_display":"Count","type":"integer","base_type":"integer","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"bbe6b7dc-037e-4063-a6e6-6270918bd709.Table","label":"5➛ATAT:Operator Table","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"bbe6b7dc-037e-4063-a6e6-6270918bd709.Records","label":"5➛ATAT:Operator Records","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"records","base_type":"records","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"Created or Updated_1.run_start_time","label":"Trigger➛Run Start Time","type":"glide_date_time","base_type":"glide_date_time","attributes":{"test_input_hidden":"true"}},{"name":"7ffd664e-d808-4a1b-9be2-e9c4fde0af19.__dont_treat_as_error__","label":"6 - Update Record➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"7ffd664e-d808-4a1b-9be2-e9c4fde0af19.__action_status__","label":"6 - Update Record➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"7ffd664e-d808-4a1b-9be2-e9c4fde0af19.table_name","label":"6 - Update Record➛x_g_dis_atat_portfolio Table","reference":"x_g_dis_atat_portfolio","reference_display":"x_g_dis_atat_portfolio Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"7ffd664e-d808-4a1b-9be2-e9c4fde0af19.record","label":"6 - Update Record➛x_g_dis_atat_portfolio Record","reference":"x_g_dis_atat_portfolio","reference_display":"x_g_dis_atat_portfolio Record","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"Created or Updated_1.current.name","label":"Trigger - Record Created or Updated➛x_g_dis_atat_portfolio Record➛Name","reference":"","reference_display":"Name","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_portfolio","column_name":"name"},{"name":"454d07c5-33e9-4dd4-9a14-d257befa89a4.__dont_treat_as_error__","label":"5 - Log➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"454d07c5-33e9-4dd4-9a14-d257befa89a4.__action_status__","label":"5 - Log➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"Created or Updated_1.current.operators","label":"Trigger➛Portfolio Record➛Pending Operators","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"glide_list","base_type":"glide_list","parent_table_name":"x_g_dis_atat_portfolio","column_name":"operators"},{"name":"e2b1d1e1-a3ec-4291-8f8f-3dd745c4789e.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"e2b1d1e1-a3ec-4291-8f8f-3dd745c4789e.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"e2b1d1e1-a3ec-4291-8f8f-3dd745c4789e.Count","label":"1➛Count","reference_display":"Count","type":"integer","base_type":"integer","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"e2b1d1e1-a3ec-4291-8f8f-3dd745c4789e.Table","label":"1➛CLIN Table","reference":"x_g_dis_atat_clin","reference_display":"ATAT:CLIN","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"e2b1d1e1-a3ec-4291-8f8f-3dd745c4789e.Records","label":"1➛CLIN Records","reference":"x_g_dis_atat_clin","reference_display":"ATAT:CLIN","type":"records","base_type":"records","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"8359b0e6-638d-450a-809c-b2ec5bf3a034.item","label":"2➛Items","reference_display":"Items","type":"document_id","base_type":"document_id","attributes":{"pills_draggable_inside_block":"true","pills_draggable_outside_block":"false"}},{"name":"732d228e-3910-4e09-a15f-da16cd49355d.record","label":"1➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"732d228e-3910-4e09-a15f-da16cd49355d.table_name","label":"1➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"732d228e-3910-4e09-a15f-da16cd49355d.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"732d228e-3910-4e09-a15f-da16cd49355d.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.record","label":"4 - Create Record➛ATAT:Provisioning Job Record","reference":"x_g_dis_atat_provisioning_job","reference_display":"ATAT:Provisioning Job Record","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.table_name","label":"4 - Create Record➛ATAT:Provisioning Job Table","reference":"x_g_dis_atat_provisioning_job","reference_display":"ATAT:Provisioning Job Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.__action_status__","label":"4 - Create Record➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.__dont_treat_as_error__","label":"4 - Create Record➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"Created or Updated_1.current","label":"Trigger - Record Created or Updated➛x_g_dis_atat_portfolio Record","reference":"x_g_dis_atat_portfolio","reference_display":"x_g_dis_atat_portfolio","type":"reference","base_type":"reference","attributes":{}},{"name":"Created or Updated_1.current.acquisition_package","label":"Trigger➛Portfolio Record➛Acquisition Package","reference":"x_g_dis_atat_acquisition_package","reference_display":"DAPPS:Acquisition Package","type":"reference","base_type":"reference","parent_table_name":"x_g_dis_atat_portfolio","column_name":"acquisition_package"},{"name":"442f160f-062b-422e-aee1-9c563c4045c6.record","label":"5➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"442f160f-062b-422e-aee1-9c563c4045c6.table_name","label":"5➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"442f160f-062b-422e-aee1-9c563c4045c6.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"442f160f-062b-422e-aee1-9c563c4045c6.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"fbf37007-3218-462d-a3ff-55be4454e848.record","label":"5➛Operator Record","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"fbf37007-3218-462d-a3ff-55be4454e848.table_name","label":"5➛Operator Table","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"fbf37007-3218-462d-a3ff-55be4454e848.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"fbf37007-3218-462d-a3ff-55be4454e848.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"flow_variable.hoth_job_id","label":"Flow Variables➛HOTH Job ID","reference":"","reference_display":"","type":"string","base_type":"string","column_name":"","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"2ade410f-636d-4f9a-b67a-c121b6332e69"}}]</label_cache>
         <master_snapshot>99d63b37dbb619d0b1227ea5f396190e</master_snapshot>
         <name>PROV: Queue Initial Portfolio Provisioning Job</name>
         <natlang/>
@@ -22,14 +22,14 @@
         <sc_callable>false</sc_callable>
         <show_draft_actions>false</show_draft_actions>
         <show_triggered_flows>false</show_triggered_flows>
-        <status>published</status>
+        <status>draft</status>
         <sys_class_name>sys_hub_flow</sys_class_name>
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-08-11 19:26:35</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>a0ff1bf42fd15110e58359a72799b63b</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_name>PROV: Queue Initial Portfolio Provisioning Job</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -37,7 +37,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_flow_a0ff1bf42fd15110e58359a72799b63b</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 20:15:08</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:49:34</sys_updated_on>
         <type>flow</type>
     </sys_hub_flow>
     <sys_translated_text action="delete_multiple" query="documentkey=a0ff1bf42fd15110e58359a72799b63b"/>
@@ -96,10 +96,10 @@
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-08-11 19:28:19</sys_created_on>
         <sys_id>8650eff42fd15110e58359a72799b657</sys_id>
-        <sys_mod_count>46</sys_mod_count>
+        <sys_mod_count>48</sys_mod_count>
         <sys_scope/>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 20:15:08</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:49:34</sys_updated_on>
         <trigger_definition display_value="Created or Updated">a45d9180c32222002841b63b12d3aea7</trigger_definition>
         <trigger_inputs/>
         <trigger_outputs/>
@@ -154,7 +154,7 @@
         <active>true</active>
         <array>false</array>
         <array_denormalized>false</array_denormalized>
-        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=document_id</attributes>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=document_id,uiTypeLabel=Document ID</attributes>
         <audit>false</audit>
         <calculation><![CDATA[(function calculatedFieldValue(current) {
 
@@ -213,14 +213,14 @@
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-08-11 19:28:19</sys_created_on>
         <sys_id>35506ff42fd15110e58359a72799b65e</sys_id>
-        <sys_mod_count>9</sys_mod_count>
+        <sys_mod_count>10</sys_mod_count>
         <sys_name/>
         <sys_package/>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name/>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 20:15:08</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:49:26</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
@@ -320,7 +320,7 @@
         <active>true</active>
         <array>false</array>
         <array_denormalized>false</array_denormalized>
-        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name</attributes>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name,uiTypeLabel=Table Name</attributes>
         <audit>false</audit>
         <calculation><![CDATA[(function calculatedFieldValue(current) {
 
@@ -379,14 +379,14 @@
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-08-11 19:28:19</sys_created_on>
         <sys_id>7950eff42fd15110e58359a72799b643</sys_id>
-        <sys_mod_count>9</sys_mod_count>
+        <sys_mod_count>10</sys_mod_count>
         <sys_name/>
         <sys_package/>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name/>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 20:15:08</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:49:26</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
@@ -416,10 +416,10 @@
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-08-11 20:17:55</sys_created_on>
         <sys_id>2cbb6b702f155110e58359a72799b618</sys_id>
-        <sys_mod_count>90</sys_mod_count>
+        <sys_mod_count>94</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 20:15:08</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:49:34</sys_updated_on>
         <ui_id>d9e64b95-55b2-4f05-87ec-763b155a845b</ui_id>
     </sys_hub_action_instance>
     <sys_variable_value action="delete_multiple" query="document_key=2cbb6b702f155110e58359a72799b618"/>
@@ -494,11 +494,11 @@
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-08-11 20:17:55</sys_created_on>
         <sys_id>60bb6b702f155110e58359a72799b61a</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-16 22:14:36</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:49:26</sys_updated_on>
         <table>var__m_sys_hub_action_input_2de05916c31332002841b63b12d3aee1</table>
-        <value>status=NOT_STARTED^job_type=ADD_PORTFOLIO^hoth_job_id={{flow_variable.hoth_job_id}}^payload=fd-scripted^portfolio={{Created or Updated_1.current}}</value>
+        <value>status=NOT_STARTED^job_type=ADD_PORTFOLIO^hoth_job_id={{flow_variable.hoth_job_id}}^payload=fd-scripted^portfolio={{Created or Updated_1.current}}^title={{Created or Updated_1.current.name}}</value>
     </sys_element_mapping>
     <sys_hub_input_scripts action="delete_multiple" query="instance=2cbb6b702f155110e58359a72799b618^sys_idNOT INa8bb6b702f155110e58359a72799b619"/>
     <sys_hub_input_scripts action="INSERT_OR_UPDATE">
@@ -529,10 +529,10 @@
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-08-12 01:31:45</sys_created_on>
         <sys_id>71833c092fd55110e58359a72799b6ee</sys_id>
-        <sys_mod_count>68</sys_mod_count>
+        <sys_mod_count>72</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 20:15:08</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:49:34</sys_updated_on>
         <ui_id>454d07c5-33e9-4dd4-9a14-d257befa89a4</ui_id>
     </sys_hub_action_instance>
     <sys_variable_value action="delete_multiple" query="document_key=71833c092fd55110e58359a72799b6ee"/>
@@ -577,10 +577,10 @@
         <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-10-26 17:33:23</sys_created_on>
         <sys_id>9fde1e1597b21110cf3cfd9fe153afea</sys_id>
-        <sys_mod_count>60</sys_mod_count>
+        <sys_mod_count>64</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 20:15:08</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:49:34</sys_updated_on>
         <ui_id>7ffd664e-d808-4a1b-9be2-e9c4fde0af19</ui_id>
     </sys_hub_action_instance>
     <sys_variable_value action="delete_multiple" query="document_key=9fde1e1597b21110cf3cfd9fe153afea"/>
@@ -742,10 +742,10 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-03-14 15:46:12</sys_created_on>
         <sys_id>a85b790adb252d148c045e8cd3961972</sys_id>
-        <sys_mod_count>26</sys_mod_count>
+        <sys_mod_count>30</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 20:15:08</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:49:34</sys_updated_on>
         <ui_id>228e0ed6-9ec1-4a14-9ca1-b690645faf4e</ui_id>
     </sys_hub_action_instance>
     <sys_variable_value action="delete_multiple" query="document_key=a85b790adb252d148c045e8cd3961972"/>
@@ -804,10 +804,10 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-03-14 15:46:12</sys_created_on>
         <sys_id>ac5b790adb252d148c045e8cd3961967</sys_id>
-        <sys_mod_count>26</sys_mod_count>
+        <sys_mod_count>30</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 20:15:08</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:49:34</sys_updated_on>
         <ui_id>ca53916a-d4f4-4b8a-9aaa-b83ef17056d6</ui_id>
     </sys_hub_action_instance>
     <sys_variable_value action="delete_multiple" query="document_key=ac5b790adb252d148c045e8cd3961967"/>
@@ -864,7 +864,7 @@
         <extended_inputs/>
         <flow display_value="PROV: Queue Initial Portfolio Provisioning Job">a0ff1bf42fd15110e58359a72799b63b</flow>
         <flow_variable/>
-        <flow_variables_assigned>hoth_job_id</flow_variables_assigned>
+        <flow_variables_assigned/>
         <inputs/>
         <logic_definition display_value="Set Flow Variables">4f787d1e0f9b0010ecf0cc52ff767ea0</logic_definition>
         <order>1</order>
@@ -875,16 +875,15 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-15 21:44:51</sys_created_on>
         <sys_id>713812b7dbc7dd508c045e8cd396190f</sys_id>
-        <sys_mod_count>21</sys_mod_count>
+        <sys_mod_count>24</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 20:15:08</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:49:34</sys_updated_on>
         <ui_id>7bf04fd6-96cc-4cfc-8f4e-fb2d9c1c75ac</ui_id>
         <workflow_inputs/>
         <workflow_reference/>
     </sys_hub_flow_logic>
     <sys_variable_value action="delete_multiple" query="document_key=713812b7dbc7dd508c045e8cd396190f"/>
-    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_a0ff1bf42fd15110e58359a72799b63b^id=713812b7dbc7dd508c045e8cd396190f"/>
     <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=713812b7dbc7dd508c045e8cd396190f"/>
     <sys_hub_input_scripts action="delete_multiple" query="instance=713812b7dbc7dd508c045e8cd396190f^sys_idNOT IN353812b7dbc7dd508c045e8cd3961910"/>
     <sys_hub_input_scripts action="INSERT_OR_UPDATE">
@@ -901,90 +900,7 @@
         <sys_updated_on>2022-11-15 21:44:51</sys_updated_on>
     </sys_hub_input_scripts>
     <sys_hub_pill_compound action="delete_multiple" query="attached_to=a0ff1bf42fd15110e58359a72799b63b"/>
-    <sys_hub_flow_variable action="delete_multiple" query="model=a0ff1bf42fd15110e58359a72799b63b^sys_idNOT IN7538de77dbc7dd508c045e8cd39619fa"/>
-    <sys_hub_flow_variable action="INSERT_OR_UPDATE">
-        <active>true</active>
-        <array>false</array>
-        <array_denormalized>false</array_denormalized>
-        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=2ade410f-636d-4f9a-b67a-c121b6332e69</attributes>
-        <audit>false</audit>
-        <calculation><![CDATA[(function calculatedFieldValue(current) {
-
-	// Add your code here
-	return '';  // return the calculated value
-
-})(current);]]></calculation>
-        <choice/>
-        <choice_field/>
-        <choice_table/>
-        <column_label/>
-        <comments/>
-        <create_roles/>
-        <default_value/>
-        <defaultsort/>
-        <delete_roles/>
-        <dependent/>
-        <dependent_on_field/>
-        <display>false</display>
-        <dynamic_creation>false</dynamic_creation>
-        <dynamic_creation_script/>
-        <dynamic_default_value/>
-        <dynamic_ref_qual/>
-        <element>hoth_job_id</element>
-        <element_reference>false</element_reference>
-        <foreign_database/>
-        <formula/>
-        <function_definition/>
-        <function_field>false</function_field>
-        <help/>
-        <hint/>
-        <internal_type display_value="String">string</internal_type>
-        <label>HOTH Job ID</label>
-        <mandatory>false</mandatory>
-        <max_length>8000</max_length>
-        <model display_value="PROV: Queue Initial Portfolio Provisioning Job">a0ff1bf42fd15110e58359a72799b63b</model>
-        <model_id>a0ff1bf42fd15110e58359a72799b63b</model_id>
-        <model_table>sys_hub_flow</model_table>
-        <name>var__m_sys_hub_flow_variable_a0ff1bf42fd15110e58359a72799b63b</name>
-        <next_element/>
-        <order>0</order>
-        <primary>false</primary>
-        <read_only>false</read_only>
-        <read_roles/>
-        <reference/>
-        <reference_cascade_rule/>
-        <reference_floats>false</reference_floats>
-        <reference_key/>
-        <reference_qual/>
-        <reference_qual_condition/>
-        <reference_type/>
-        <sizeclass/>
-        <spell_check>false</spell_check>
-        <staged>false</staged>
-        <sys_class_name>sys_hub_flow_variable</sys_class_name>
-        <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2022-11-15 21:44:50</sys_created_on>
-        <sys_id>7538de77dbc7dd508c045e8cd39619fa</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_name>HOTH Job ID</sys_name>
-        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
-        <sys_policy/>
-        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name>sys_hub_flow_variable_7538de77dbc7dd508c045e8cd39619fa</sys_update_name>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2022-11-15 21:44:50</sys_updated_on>
-        <table_reference>false</table_reference>
-        <text_index>false</text_index>
-        <unique>false</unique>
-        <use_dependent_field>false</use_dependent_field>
-        <use_dynamic_default>false</use_dynamic_default>
-        <use_reference_qualifier>simple</use_reference_qualifier>
-        <virtual>false</virtual>
-        <virtual_type/>
-        <widget/>
-        <write_roles/>
-        <xml_view>false</xml_view>
-    </sys_hub_flow_variable>
+    <sys_hub_flow_variable action="delete_multiple" query="model=a0ff1bf42fd15110e58359a72799b63b"/>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_a0ff1bf42fd15110e58359a72799b63b^sys_idNOT IN4250eff42fd15110e58359a72799b654,7550eff42fd15110e58359a72799b63c,b150eff42fd15110e58359a72799b642"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>table_name</element>
@@ -1088,7 +1004,7 @@
         <copied_from_name/>
         <description>Queues initial portfolio provisioning job when 1) at least one Operator has been assigned and 2) EDA validation has been performed on the associated Task Order</description>
         <internal_name>prov_queue_initial_portfolio_provisioning_job</internal_name>
-        <label_cache>[{"name":"ca53916a-d4f4-4b8a-9aaa-b83ef17056d6.Record.csp.vendor","label":"2 - Look Up Record➛ATAT:Environment Record➛CSP➛Vendor","reference":"","reference_display":"Vendor","type":"choice","base_type":"choice","parent_table_name":"x_g_dis_atat_cloud_service_provider","column_name":"vendor","choices":[{"label":"Amazon Web Services","image":"","used":false,"rawLabel":"Amazon Web Services","selected":false,"missing":false,"reference":false,"value":"AWS","parameters":{"name":"x_g_dis_atat_cloud_service_provider"}},{"label":"Google Cloud Platform","image":"","used":false,"rawLabel":"Google Cloud Platform","selected":false,"missing":false,"reference":false,"value":"GCP","parameters":{"name":"x_g_dis_atat_cloud_service_provider"}},{"label":"Microsoft Azure","image":"","used":false,"rawLabel":"Microsoft Azure","selected":false,"missing":false,"reference":false,"value":"AZURE","parameters":{"name":"x_g_dis_atat_cloud_service_provider"}},{"label":"Oracle Cloud","image":"","used":false,"rawLabel":"Oracle Cloud","selected":false,"missing":false,"reference":false,"value":"ORACLE","parameters":{"name":"x_g_dis_atat_cloud_service_provider"}}]},{"name":"081ee68e-1817-43d7-9e03-6951c5111e71.__dont_treat_as_error__","label":"6➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"081ee68e-1817-43d7-9e03-6951c5111e71.__action_status__","label":"6➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"081ee68e-1817-43d7-9e03-6951c5111e71.table_name","label":"6➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"081ee68e-1817-43d7-9e03-6951c5111e71.record","label":"6➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"6ffc5018-4cdb-4ed7-9a5f-3a5d7c8fa9c7.item","label":"5➛ATAT:Operator Record","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"reference","base_type":"reference","attributes":{"pills_draggable_inside_block":"true","pills_draggable_outside_block":"false"}},{"name":"Created or Updated_1.current.sys_id","label":"Trigger➛Portfolio Record➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"x_g_dis_atat_portfolio","column_name":"sys_id"},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.record.job_type","label":"4 - Create Record➛ATAT:Provisioning Job Record➛Job Type","reference":"","reference_display":"Job Type","type":"choice","base_type":"choice","parent_table_name":"x_g_dis_atat_provisioning_job","column_name":"job_type","choices":[{"label":"Add Administrator to Environment","image":"","used":false,"rawLabel":"Add Administrator to Environment","selected":false,"missing":false,"reference":false,"value":"ADD_ADMINISTRATOR","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"label":"Add New Environment","image":"","used":false,"rawLabel":"Add New Environment","selected":false,"missing":false,"reference":false,"value":"ADD_ENVIRONMENT","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"label":"Add New Portfolio","image":"","used":false,"rawLabel":"Add New Portfolio","selected":false,"missing":false,"reference":false,"value":"ADD_PORTFOLIO","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"label":"Add Task Order to Portfolio","image":"","used":false,"rawLabel":"Add Task Order to Portfolio","selected":false,"missing":false,"reference":false,"value":"ADD_TASK_ORDER","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"label":"Update Task Order in Portfolio","image":"","used":false,"rawLabel":"Update Task Order in Portfolio","selected":false,"missing":false,"reference":false,"value":"UPDATE_TASK_ORDER","parameters":{"name":"x_g_dis_atat_provisioning_job"}}]},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.record.sys_id","label":"4 - Create Record➛ATAT:Provisioning Job Record➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"x_g_dis_atat_provisioning_job","column_name":"sys_id"},{"name":"24efc1f1-3eea-48d4-9fa0-92d77f369575.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"24efc1f1-3eea-48d4-9fa0-92d77f369575.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"24efc1f1-3eea-48d4-9fa0-92d77f369575.message","label":"5➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"eae4ca7a-5ba6-465c-b7bd-6ba1cf184947"}},{"name":"24efc1f1-3eea-48d4-9fa0-92d77f369575.status","label":"5➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"828e2127-df28-4eda-af48-ee4e876cca1e"}},{"name":"24efc1f1-3eea-48d4-9fa0-92d77f369575.count","label":"5➛Count","reference_display":"Count","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"edb3c082-a356-4943-a263-55232fc02390"}},{"name":"c8fde102-de84-46a1-9010-02fe7a4a6edb.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"c8fde102-de84-46a1-9010-02fe7a4a6edb.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"c8fde102-de84-46a1-9010-02fe7a4a6edb.table_name","label":"5➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"c8fde102-de84-46a1-9010-02fe7a4a6edb.record","label":"5➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"bbe6b7dc-037e-4063-a6e6-6270918bd709.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"bbe6b7dc-037e-4063-a6e6-6270918bd709.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"bbe6b7dc-037e-4063-a6e6-6270918bd709.Count","label":"5➛Count","reference_display":"Count","type":"integer","base_type":"integer","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"bbe6b7dc-037e-4063-a6e6-6270918bd709.Table","label":"5➛ATAT:Operator Table","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"bbe6b7dc-037e-4063-a6e6-6270918bd709.Records","label":"5➛ATAT:Operator Records","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"records","base_type":"records","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"Created or Updated_1.run_start_time","label":"Trigger➛Run Start Time","type":"glide_date_time","base_type":"glide_date_time","attributes":{"test_input_hidden":"true"}},{"name":"7ffd664e-d808-4a1b-9be2-e9c4fde0af19.__dont_treat_as_error__","label":"6 - Update Record➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"7ffd664e-d808-4a1b-9be2-e9c4fde0af19.__action_status__","label":"6 - Update Record➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"7ffd664e-d808-4a1b-9be2-e9c4fde0af19.table_name","label":"6 - Update Record➛x_g_dis_atat_portfolio Table","reference":"x_g_dis_atat_portfolio","reference_display":"x_g_dis_atat_portfolio","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"7ffd664e-d808-4a1b-9be2-e9c4fde0af19.record","label":"6 - Update Record➛x_g_dis_atat_portfolio Record","reference":"x_g_dis_atat_portfolio","reference_display":"x_g_dis_atat_portfolio","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"Created or Updated_1.current.name","label":"Trigger➛Portfolio Record➛Name","reference":"","reference_display":"Name","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_portfolio","column_name":"name"},{"name":"454d07c5-33e9-4dd4-9a14-d257befa89a4.__dont_treat_as_error__","label":"5 - Log➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"454d07c5-33e9-4dd4-9a14-d257befa89a4.__action_status__","label":"5 - Log➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"Created or Updated_1.current.operators","label":"Trigger➛Portfolio Record➛Pending Operators","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"glide_list","base_type":"glide_list","parent_table_name":"x_g_dis_atat_portfolio","column_name":"operators"},{"name":"e2b1d1e1-a3ec-4291-8f8f-3dd745c4789e.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"e2b1d1e1-a3ec-4291-8f8f-3dd745c4789e.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"e2b1d1e1-a3ec-4291-8f8f-3dd745c4789e.Count","label":"1➛Count","reference_display":"Count","type":"integer","base_type":"integer","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"e2b1d1e1-a3ec-4291-8f8f-3dd745c4789e.Table","label":"1➛CLIN Table","reference":"x_g_dis_atat_clin","reference_display":"ATAT:CLIN","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"e2b1d1e1-a3ec-4291-8f8f-3dd745c4789e.Records","label":"1➛CLIN Records","reference":"x_g_dis_atat_clin","reference_display":"ATAT:CLIN","type":"records","base_type":"records","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"8359b0e6-638d-450a-809c-b2ec5bf3a034.item","label":"2➛Items","reference_display":"Items","type":"document_id","base_type":"document_id","attributes":{"pills_draggable_inside_block":"true","pills_draggable_outside_block":"false"}},{"name":"732d228e-3910-4e09-a15f-da16cd49355d.record","label":"1➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"732d228e-3910-4e09-a15f-da16cd49355d.table_name","label":"1➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"732d228e-3910-4e09-a15f-da16cd49355d.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"732d228e-3910-4e09-a15f-da16cd49355d.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.record","label":"4 - Create Record➛ATAT:Provisioning Job Record","reference":"x_g_dis_atat_provisioning_job","reference_display":"ATAT:Provisioning Job","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.table_name","label":"4 - Create Record➛ATAT:Provisioning Job Table","reference":"x_g_dis_atat_provisioning_job","reference_display":"ATAT:Provisioning Job","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.__action_status__","label":"4 - Create Record➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.__dont_treat_as_error__","label":"4 - Create Record➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"Created or Updated_1.current","label":"Trigger - Record Created or Updated➛x_g_dis_atat_portfolio Record","reference":"x_g_dis_atat_portfolio","reference_display":"x_g_dis_atat_portfolio","type":"reference","base_type":"reference","attributes":{}},{"name":"Created or Updated_1.current.acquisition_package","label":"Trigger➛Portfolio Record➛Acquisition Package","reference":"x_g_dis_atat_acquisition_package","reference_display":"DAPPS:Acquisition Package","type":"reference","base_type":"reference","parent_table_name":"x_g_dis_atat_portfolio","column_name":"acquisition_package"},{"name":"442f160f-062b-422e-aee1-9c563c4045c6.record","label":"5➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"442f160f-062b-422e-aee1-9c563c4045c6.table_name","label":"5➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"442f160f-062b-422e-aee1-9c563c4045c6.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"442f160f-062b-422e-aee1-9c563c4045c6.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"fbf37007-3218-462d-a3ff-55be4454e848.record","label":"5➛Operator Record","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"fbf37007-3218-462d-a3ff-55be4454e848.table_name","label":"5➛Operator Table","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"fbf37007-3218-462d-a3ff-55be4454e848.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"fbf37007-3218-462d-a3ff-55be4454e848.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"flow_variable.hoth_job_id","label":"Flow Variables➛HOTH Job ID","reference":"","reference_display":"","type":"string","base_type":"string","column_name":"","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"2ade410f-636d-4f9a-b67a-c121b6332e69"}}]</label_cache>
+        <label_cache>[{"name":"ca53916a-d4f4-4b8a-9aaa-b83ef17056d6.Record.csp.vendor","label":"2 - Look Up Record➛ATAT:Environment Record➛CSP➛Vendor","reference":"","reference_display":"Vendor","type":"choice","base_type":"choice","parent_table_name":"x_g_dis_atat_cloud_service_provider","column_name":"vendor","choices":[{"used":false,"image":"","reference":false,"label":"Amazon Web Services","rawLabel":"Amazon Web Services","selected":false,"missing":false,"value":"AWS","parameters":{"name":"x_g_dis_atat_cloud_service_provider"}},{"used":false,"image":"","reference":false,"label":"Google Cloud Platform","rawLabel":"Google Cloud Platform","selected":false,"missing":false,"value":"GCP","parameters":{"name":"x_g_dis_atat_cloud_service_provider"}},{"used":false,"image":"","reference":false,"label":"Microsoft Azure","rawLabel":"Microsoft Azure","selected":false,"missing":false,"value":"AZURE","parameters":{"name":"x_g_dis_atat_cloud_service_provider"}},{"used":false,"image":"","reference":false,"label":"Oracle Cloud","rawLabel":"Oracle Cloud","selected":false,"missing":false,"value":"ORACLE","parameters":{"name":"x_g_dis_atat_cloud_service_provider"}}]},{"name":"081ee68e-1817-43d7-9e03-6951c5111e71.__dont_treat_as_error__","label":"6➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"081ee68e-1817-43d7-9e03-6951c5111e71.__action_status__","label":"6➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"081ee68e-1817-43d7-9e03-6951c5111e71.table_name","label":"6➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"081ee68e-1817-43d7-9e03-6951c5111e71.record","label":"6➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"6ffc5018-4cdb-4ed7-9a5f-3a5d7c8fa9c7.item","label":"5➛ATAT:Operator Record","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"reference","base_type":"reference","attributes":{"pills_draggable_inside_block":"true","pills_draggable_outside_block":"false"}},{"name":"Created or Updated_1.current.sys_id","label":"Trigger➛Portfolio Record➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"x_g_dis_atat_portfolio","column_name":"sys_id"},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.record.job_type","label":"4 - Create Record➛ATAT:Provisioning Job Record➛Job Type","reference":"","reference_display":"Job Type","type":"choice","base_type":"choice","parent_table_name":"x_g_dis_atat_provisioning_job","column_name":"job_type","choices":[{"used":false,"image":"","reference":false,"label":"Add Administrator to Environment","rawLabel":"Add Administrator to Environment","selected":false,"missing":false,"value":"ADD_ADMINISTRATOR","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"used":false,"image":"","reference":false,"label":"Add New Environment","rawLabel":"Add New Environment","selected":false,"missing":false,"value":"ADD_ENVIRONMENT","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"used":false,"image":"","reference":false,"label":"Add New Portfolio","rawLabel":"Add New Portfolio","selected":false,"missing":false,"value":"ADD_PORTFOLIO","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"used":false,"image":"","reference":false,"label":"Add Task Order to Portfolio","rawLabel":"Add Task Order to Portfolio","selected":false,"missing":false,"value":"ADD_TASK_ORDER","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"used":false,"image":"","reference":false,"label":"Update Task Order in Portfolio","rawLabel":"Update Task Order in Portfolio","selected":false,"missing":false,"value":"UPDATE_TASK_ORDER","parameters":{"name":"x_g_dis_atat_provisioning_job"}}]},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.record.sys_id","label":"4 - Create Record➛ATAT:Provisioning Job Record➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"x_g_dis_atat_provisioning_job","column_name":"sys_id"},{"name":"24efc1f1-3eea-48d4-9fa0-92d77f369575.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"24efc1f1-3eea-48d4-9fa0-92d77f369575.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"24efc1f1-3eea-48d4-9fa0-92d77f369575.message","label":"5➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"eae4ca7a-5ba6-465c-b7bd-6ba1cf184947"}},{"name":"24efc1f1-3eea-48d4-9fa0-92d77f369575.status","label":"5➛Status","reference_display":"Status","type":"choice","base_type":"choice","attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"828e2127-df28-4eda-af48-ee4e876cca1e"}},{"name":"24efc1f1-3eea-48d4-9fa0-92d77f369575.count","label":"5➛Count","reference_display":"Count","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"edb3c082-a356-4943-a263-55232fc02390"}},{"name":"c8fde102-de84-46a1-9010-02fe7a4a6edb.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"c8fde102-de84-46a1-9010-02fe7a4a6edb.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"c8fde102-de84-46a1-9010-02fe7a4a6edb.table_name","label":"5➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"c8fde102-de84-46a1-9010-02fe7a4a6edb.record","label":"5➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"bbe6b7dc-037e-4063-a6e6-6270918bd709.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"bbe6b7dc-037e-4063-a6e6-6270918bd709.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"bbe6b7dc-037e-4063-a6e6-6270918bd709.Count","label":"5➛Count","reference_display":"Count","type":"integer","base_type":"integer","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"bbe6b7dc-037e-4063-a6e6-6270918bd709.Table","label":"5➛ATAT:Operator Table","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"bbe6b7dc-037e-4063-a6e6-6270918bd709.Records","label":"5➛ATAT:Operator Records","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"records","base_type":"records","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"Created or Updated_1.run_start_time","label":"Trigger➛Run Start Time","type":"glide_date_time","base_type":"glide_date_time","attributes":{"test_input_hidden":"true"}},{"name":"7ffd664e-d808-4a1b-9be2-e9c4fde0af19.__dont_treat_as_error__","label":"6 - Update Record➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"7ffd664e-d808-4a1b-9be2-e9c4fde0af19.__action_status__","label":"6 - Update Record➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"7ffd664e-d808-4a1b-9be2-e9c4fde0af19.table_name","label":"6 - Update Record➛x_g_dis_atat_portfolio Table","reference":"x_g_dis_atat_portfolio","reference_display":"x_g_dis_atat_portfolio","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"7ffd664e-d808-4a1b-9be2-e9c4fde0af19.record","label":"6 - Update Record➛x_g_dis_atat_portfolio Record","reference":"x_g_dis_atat_portfolio","reference_display":"x_g_dis_atat_portfolio","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"Created or Updated_1.current.name","label":"Trigger - Record Created or Updated➛x_g_dis_atat_portfolio Record➛Name","reference":"","reference_display":"Name","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_portfolio","column_name":"name"},{"name":"454d07c5-33e9-4dd4-9a14-d257befa89a4.__dont_treat_as_error__","label":"5 - Log➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"454d07c5-33e9-4dd4-9a14-d257befa89a4.__action_status__","label":"5 - Log➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"Created or Updated_1.current.operators","label":"Trigger➛Portfolio Record➛Pending Operators","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"glide_list","base_type":"glide_list","parent_table_name":"x_g_dis_atat_portfolio","column_name":"operators"},{"name":"e2b1d1e1-a3ec-4291-8f8f-3dd745c4789e.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"e2b1d1e1-a3ec-4291-8f8f-3dd745c4789e.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"e2b1d1e1-a3ec-4291-8f8f-3dd745c4789e.Count","label":"1➛Count","reference_display":"Count","type":"integer","base_type":"integer","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"e2b1d1e1-a3ec-4291-8f8f-3dd745c4789e.Table","label":"1➛CLIN Table","reference":"x_g_dis_atat_clin","reference_display":"ATAT:CLIN","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"e2b1d1e1-a3ec-4291-8f8f-3dd745c4789e.Records","label":"1➛CLIN Records","reference":"x_g_dis_atat_clin","reference_display":"ATAT:CLIN","type":"records","base_type":"records","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"8359b0e6-638d-450a-809c-b2ec5bf3a034.item","label":"2➛Items","reference_display":"Items","type":"document_id","base_type":"document_id","attributes":{"pills_draggable_inside_block":"true","pills_draggable_outside_block":"false"}},{"name":"732d228e-3910-4e09-a15f-da16cd49355d.record","label":"1➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"732d228e-3910-4e09-a15f-da16cd49355d.table_name","label":"1➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"732d228e-3910-4e09-a15f-da16cd49355d.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"732d228e-3910-4e09-a15f-da16cd49355d.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.record","label":"4 - Create Record➛ATAT:Provisioning Job Record","reference":"x_g_dis_atat_provisioning_job","reference_display":"ATAT:Provisioning Job","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.table_name","label":"4 - Create Record➛ATAT:Provisioning Job Table","reference":"x_g_dis_atat_provisioning_job","reference_display":"ATAT:Provisioning Job","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.__action_status__","label":"4 - Create Record➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"d9e64b95-55b2-4f05-87ec-763b155a845b.__dont_treat_as_error__","label":"4 - Create Record➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"Created or Updated_1.current","label":"Trigger - Record Created or Updated➛x_g_dis_atat_portfolio Record","reference":"x_g_dis_atat_portfolio","reference_display":"x_g_dis_atat_portfolio","type":"reference","base_type":"reference","attributes":{}},{"name":"Created or Updated_1.current.acquisition_package","label":"Trigger➛Portfolio Record➛Acquisition Package","reference":"x_g_dis_atat_acquisition_package","reference_display":"DAPPS:Acquisition Package","type":"reference","base_type":"reference","parent_table_name":"x_g_dis_atat_portfolio","column_name":"acquisition_package"},{"name":"442f160f-062b-422e-aee1-9c563c4045c6.record","label":"5➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"442f160f-062b-422e-aee1-9c563c4045c6.table_name","label":"5➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"442f160f-062b-422e-aee1-9c563c4045c6.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"442f160f-062b-422e-aee1-9c563c4045c6.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"fbf37007-3218-462d-a3ff-55be4454e848.record","label":"5➛Operator Record","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"fbf37007-3218-462d-a3ff-55be4454e848.table_name","label":"5➛Operator Table","reference":"x_g_dis_atat_operator","reference_display":"ATAT:Operator","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"fbf37007-3218-462d-a3ff-55be4454e848.__action_status__","label":"5➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true"}},{"name":"fbf37007-3218-462d-a3ff-55be4454e848.__dont_treat_as_error__","label":"5➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true"}},{"name":"flow_variable.hoth_job_id","label":"Flow Variables➛HOTH Job ID","reference":"","reference_display":"","type":"string","base_type":"string","column_name":"","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"2ade410f-636d-4f9a-b67a-c121b6332e69"}}]</label_cache>
         <master>true</master>
         <name>PROV: Queue Initial Portfolio Provisioning Job</name>
         <natlang/>
@@ -1105,7 +1021,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>99d63b37dbb619d0b1227ea5f396190e</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_name/>
         <sys_overrides/>
         <sys_package/>
@@ -1113,7 +1029,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name/>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 20:15:06</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:49:38</sys_updated_on>
         <type>flow</type>
     </sys_hub_flow_snapshot>
     <sys_translated_text action="delete_multiple" query="documentkey=99d63b37dbb619d0b1227ea5f396190e"/>
@@ -1128,10 +1044,10 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-03 18:22:34</sys_created_on>
         <sys_id>b1d6bb37dbb619d0b1227ea5f396193f</sys_id>
-        <sys_mod_count>14</sys_mod_count>
+        <sys_mod_count>16</sys_mod_count>
         <sys_scope/>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 20:15:08</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:49:38</sys_updated_on>
         <trigger_definition display_value="Created or Updated">a45d9180c32222002841b63b12d3aea7</trigger_definition>
         <trigger_inputs/>
         <trigger_outputs/>
@@ -1245,14 +1161,14 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-03 18:22:31</sys_created_on>
         <sys_id>d1d63b37dbb619d0b1227ea5f3961913</sys_id>
-        <sys_mod_count>7</sys_mod_count>
+        <sys_mod_count>9</sys_mod_count>
         <sys_name/>
         <sys_package/>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name/>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 20:15:06</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:49:37</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
@@ -1411,14 +1327,14 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-03 18:22:32</sys_created_on>
         <sys_id>edd63b37dbb619d0b1227ea5f39619d0</sys_id>
-        <sys_mod_count>7</sys_mod_count>
+        <sys_mod_count>9</sys_mod_count>
         <sys_name/>
         <sys_package/>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name/>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 20:15:06</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:49:37</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
@@ -1448,10 +1364,10 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-03 18:22:33</sys_created_on>
         <sys_id>29d67b37dbb619d0b1227ea5f39619df</sys_id>
-        <sys_mod_count>18</sys_mod_count>
+        <sys_mod_count>22</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 20:15:06</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:49:38</sys_updated_on>
         <ui_id>d9e64b95-55b2-4f05-87ec-763b155a845b</ui_id>
     </sys_hub_action_instance>
     <sys_variable_value action="delete_multiple" query="document_key=29d67b37dbb619d0b1227ea5f39619df"/>
@@ -1526,11 +1442,11 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-03 18:22:33</sys_created_on>
         <sys_id>a9d67b37dbb619d0b1227ea5f39619e1</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 01:45:31</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:49:37</sys_updated_on>
         <table>var__m_sys_hub_action_input_2de05916c31332002841b63b12d3aee1</table>
-        <value>status=NOT_STARTED^job_type=ADD_PORTFOLIO^hoth_job_id={{flow_variable.hoth_job_id}}^payload=fd-scripted^portfolio={{Created or Updated_1.current}}</value>
+        <value>status=NOT_STARTED^job_type=ADD_PORTFOLIO^hoth_job_id={{flow_variable.hoth_job_id}}^payload=fd-scripted^portfolio={{Created or Updated_1.current}}^title={{Created or Updated_1.current.name}}</value>
     </sys_element_mapping>
     <sys_hub_input_scripts action="delete_multiple" query="instance=29d67b37dbb619d0b1227ea5f39619df^sys_idNOT INe9d67b37dbb619d0b1227ea5f39619e0"/>
     <sys_hub_input_scripts action="INSERT_OR_UPDATE">
@@ -1561,10 +1477,10 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-03 18:22:33</sys_created_on>
         <sys_id>75d6bb37dbb619d0b1227ea5f3961900</sys_id>
-        <sys_mod_count>18</sys_mod_count>
+        <sys_mod_count>22</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 20:15:06</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:49:38</sys_updated_on>
         <ui_id>454d07c5-33e9-4dd4-9a14-d257befa89a4</ui_id>
     </sys_hub_action_instance>
     <sys_variable_value action="delete_multiple" query="document_key=75d6bb37dbb619d0b1227ea5f3961900"/>
@@ -1609,10 +1525,10 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-03 18:22:33</sys_created_on>
         <sys_id>79d6bb37dbb619d0b1227ea5f3961907</sys_id>
-        <sys_mod_count>18</sys_mod_count>
+        <sys_mod_count>22</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 20:15:06</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:49:38</sys_updated_on>
         <ui_id>7ffd664e-d808-4a1b-9be2-e9c4fde0af19</ui_id>
     </sys_hub_action_instance>
     <sys_variable_value action="delete_multiple" query="document_key=79d6bb37dbb619d0b1227ea5f3961907"/>
@@ -1774,10 +1690,10 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-03-14 21:28:15</sys_created_on>
         <sys_id>879907cedbe92d148c045e8cd39619c0</sys_id>
-        <sys_mod_count>12</sys_mod_count>
+        <sys_mod_count>16</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 20:15:06</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:49:38</sys_updated_on>
         <ui_id>228e0ed6-9ec1-4a14-9ca1-b690645faf4e</ui_id>
     </sys_hub_action_instance>
     <sys_variable_value action="delete_multiple" query="document_key=879907cedbe92d148c045e8cd39619c0"/>
@@ -1836,10 +1752,10 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-03-14 21:28:14</sys_created_on>
         <sys_id>b29907cedbe92d148c045e8cd39619b6</sys_id>
-        <sys_mod_count>12</sys_mod_count>
+        <sys_mod_count>16</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 20:15:06</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:49:38</sys_updated_on>
         <ui_id>ca53916a-d4f4-4b8a-9aaa-b83ef17056d6</ui_id>
     </sys_hub_action_instance>
     <sys_variable_value action="delete_multiple" query="document_key=b29907cedbe92d148c045e8cd39619b6"/>
@@ -1896,7 +1812,7 @@
         <extended_inputs/>
         <flow display_value="PROV: Queue Initial Portfolio Provisioning Job">99d63b37dbb619d0b1227ea5f396190e</flow>
         <flow_variable/>
-        <flow_variables_assigned>hoth_job_id</flow_variables_assigned>
+        <flow_variables_assigned/>
         <inputs/>
         <logic_definition display_value="Set Flow Variables">4f787d1e0f9b0010ecf0cc52ff767ea0</logic_definition>
         <order>1</order>
@@ -1907,16 +1823,15 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-03-01 00:09:39</sys_created_on>
         <sys_id>364867a947d52110f39f7601e36d4347</sys_id>
-        <sys_mod_count>10</sys_mod_count>
+        <sys_mod_count>13</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 20:15:06</sys_updated_on>
+        <sys_updated_on>2023-03-17 21:49:38</sys_updated_on>
         <ui_id>7bf04fd6-96cc-4cfc-8f4e-fb2d9c1c75ac</ui_id>
         <workflow_inputs/>
         <workflow_reference/>
     </sys_hub_flow_logic>
     <sys_variable_value action="delete_multiple" query="document_key=364867a947d52110f39f7601e36d4347"/>
-    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_99d63b37dbb619d0b1227ea5f396190e^id=364867a947d52110f39f7601e36d4347"/>
     <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=364867a947d52110f39f7601e36d4347"/>
     <sys_hub_input_scripts action="delete_multiple" query="instance=364867a947d52110f39f7601e36d4347^sys_idNOT INb64867a947d52110f39f7601e36d4348"/>
     <sys_hub_input_scripts action="INSERT_OR_UPDATE">
@@ -1933,90 +1848,7 @@
         <sys_updated_on>2023-03-01 00:09:39</sys_updated_on>
     </sys_hub_input_scripts>
     <sys_hub_pill_compound action="delete_multiple" query="attached_to=99d63b37dbb619d0b1227ea5f396190e"/>
-    <sys_hub_flow_variable action="delete_multiple" query="model=99d63b37dbb619d0b1227ea5f396190e^sys_idNOT INb24867a947d52110f39f7601e36d4326"/>
-    <sys_hub_flow_variable action="INSERT_OR_UPDATE">
-        <active>true</active>
-        <array>false</array>
-        <array_denormalized>false</array_denormalized>
-        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=2ade410f-636d-4f9a-b67a-c121b6332e69</attributes>
-        <audit>false</audit>
-        <calculation><![CDATA[(function calculatedFieldValue(current) {
-
-	// Add your code here
-	return '';  // return the calculated value
-
-})(current);]]></calculation>
-        <choice/>
-        <choice_field/>
-        <choice_table/>
-        <column_label/>
-        <comments/>
-        <create_roles/>
-        <default_value/>
-        <defaultsort/>
-        <delete_roles/>
-        <dependent/>
-        <dependent_on_field/>
-        <display>false</display>
-        <dynamic_creation>false</dynamic_creation>
-        <dynamic_creation_script/>
-        <dynamic_default_value/>
-        <dynamic_ref_qual/>
-        <element>hoth_job_id</element>
-        <element_reference>false</element_reference>
-        <foreign_database/>
-        <formula/>
-        <function_definition/>
-        <function_field>false</function_field>
-        <help/>
-        <hint/>
-        <internal_type display_value="String">string</internal_type>
-        <label>HOTH Job ID</label>
-        <mandatory>false</mandatory>
-        <max_length>8000</max_length>
-        <model display_value="PROV: Queue Initial Portfolio Provisioning Job">99d63b37dbb619d0b1227ea5f396190e</model>
-        <model_id>99d63b37dbb619d0b1227ea5f396190e</model_id>
-        <model_table>sys_hub_flow_snapshot</model_table>
-        <name>var__m_sys_hub_flow_variable_99d63b37dbb619d0b1227ea5f396190e</name>
-        <next_element/>
-        <order>0</order>
-        <primary>false</primary>
-        <read_only>false</read_only>
-        <read_roles/>
-        <reference/>
-        <reference_cascade_rule/>
-        <reference_floats>false</reference_floats>
-        <reference_key/>
-        <reference_qual/>
-        <reference_qual_condition/>
-        <reference_type/>
-        <sizeclass/>
-        <spell_check>false</spell_check>
-        <staged>false</staged>
-        <sys_class_name>sys_hub_flow_variable</sys_class_name>
-        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
-        <sys_created_on>2023-03-01 00:09:39</sys_created_on>
-        <sys_id>b24867a947d52110f39f7601e36d4326</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_name>HOTH Job ID</sys_name>
-        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
-        <sys_policy/>
-        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name>sys_hub_flow_variable_b24867a947d52110f39f7601e36d4326</sys_update_name>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-03-01 00:09:39</sys_updated_on>
-        <table_reference>false</table_reference>
-        <text_index>false</text_index>
-        <unique>false</unique>
-        <use_dependent_field>false</use_dependent_field>
-        <use_dynamic_default>false</use_dynamic_default>
-        <use_reference_qualifier>simple</use_reference_qualifier>
-        <virtual>false</virtual>
-        <virtual_type/>
-        <widget/>
-        <write_roles/>
-        <xml_view>false</xml_view>
-    </sys_hub_flow_variable>
+    <sys_hub_flow_variable action="delete_multiple" query="model=99d63b37dbb619d0b1227ea5f396190e"/>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_99d63b37dbb619d0b1227ea5f396190e^sys_idNOT INd5d63b37dbb619d0b1227ea5f39619b5,ddd63b37dbb619d0b1227ea5f39619cc,e1d63b37dbb619d0b1227ea5f39619e4"/>
     <sys_documentation action="INSERT_OR_UPDATE">
         <element>current</element>
