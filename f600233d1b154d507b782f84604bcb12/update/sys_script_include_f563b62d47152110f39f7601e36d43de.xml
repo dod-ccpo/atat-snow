@@ -34,16 +34,43 @@ HothProvisioning.prototype = {
 			this.portfolio = portfolioRecord;
 		}
 	},
+	
+	/**
+   * Truncates the days from Date Strings. Temporarily needed because of a mistaken change in the ATAT 1.1.0 specification.
+   *
+   * @param {string} YYYY-MM-DD formatted Date String
+   * @return {string} YYYY-MM formatted Date String
+   */	
+	truncateDayFromDate: function(date) {
+		if (date && date.length >= 7) {
+			return date.substring(0,7);
+		}
+		else {
+			return date;
+		}
+	},
 
+	/**
+   * Converts a SNOW-formatted Date into a HOTH-formatted Date
+   *
+   * @param {string} snowClassification
+   * @return {string} HOTH-formatted Date
+   */
 	convertClassificationToHothFormat: function(snowClassification) {
 		var classificationMap = {
 			U: "UNCLASSIFIED",
 			S: "SECRET",
 			TS: "TOP_SECRET"
 		};
-		return classificationMap[snowClassification];
+		return classificationMap[snowClassification];		
 	},
 
+	/**
+   * Converts a HOTH-formatted Date into a SNOW-formatted Date
+   *
+   * @param {string} hothClassification
+   * @return {string} SNOW-formatted Date
+   */	
 	convertClassificationToSnowFormat: function(hothClassification) {
 		var classificationMap = {
 			"UNCLASSIFIED" : "U",
@@ -64,14 +91,20 @@ HothProvisioning.prototype = {
 			var clinTableFields = [
 				"clin_number", "pop_start_date", "pop_end_date", "classification_level", "type", 
 			];
-
+			
+			var scope = this;
 			return new global.GlideQuery(this.CLIN_TABLE)
 				.where("task_order", taskOrderSysId)
 				.select(clinTableFields)
 				.toArray(20)
 				.map(removeSysId)
 				.map(function(clin) {
-				clin.classification_level = this.convertClassificationToHothFormat(clin.classification_level);
+				clin.classification_level = scope.convertClassificationToHothFormat(clin.classification_level);
+				// START DATE FIX
+				// REMOVE THIS (once we add days back to the CLIN date format in the ATAT spec)
+				clin.pop_start_date = scope.truncateDayFromDate(clin.pop_start_date);				
+				clin.pop_end_date = scope.truncateDayFromDate(clin.pop_end_date);
+				// END DATE FIX
 				return clin;
 			})
 
@@ -94,19 +127,19 @@ HothProvisioning.prototype = {
 			var taskOrderRecords = new GlideRecord(this.TASK_ORDER_TABLE);
 			taskOrderRecords.addQuery("portfolio", this.portfolio.sys_id.toString());
 			taskOrderRecords.query();
-
+			
 			while (taskOrderRecords.next()) {
 				// Get Task Order CLINs
-				var taskOrderClins = this.getClins(taskOrderRecords.sys_id.toString());
+				var taskOrderClins = this.getClins(taskOrderRecords.sys_id.toString());		
 
 				// Gather Task Orders for a given Portfolio
 				taskOrders.push({
 					taskOrderNumber: taskOrderRecords.task_order_number.toString(),
-					popStartDate: taskOrderRecords.pop_start_date.toString(),
-					popEndDate: taskOrderRecords.pop_end_date.toString(),
+					popStartDate: this.truncateDayFromDate(taskOrderRecords.pop_start_date.toString()),
+					popEndDate: this.truncateDayFromDate(taskOrderRecords.pop_end_date.toString()),
 					clins: taskOrderClins,
 				});
-			}
+			}		
 
 			return taskOrders;
 		} catch (error) {
@@ -124,21 +157,21 @@ HothProvisioning.prototype = {
    * @param {string} operation - the provisioning operation (e.g., ADD_ENVIRONMENT)
    * @return {Object} an object for provisioning a portfolio
    */
-	createAddPortfolioPayload: function(hothId, targetCsp, operation) {
+	createAddPortfolioPayload: function(hothId, targetCsp) {
 		try {
-			if (!this.portfolio || !targetCsp || !operation) {
+			if (!hothId || !targetCsp) {
 				throw this.errUtil.createError(
-					"No portfolio, CSP, or operation type provided.",
+					"hothId and targetCsp must be provided.",
 					this.errUtil.INVALID_INPUT
 				);
 			}
-
+		
 			var taskOrders = this.getTaskOrders(this.portfolio.sys_id.toString());
 
 			return {
 				jobId: hothId,
 				userId: this.portfolio.portfolio_managers ? this.portfolio.portfolio_managers.split(",")[0] : "",
-				operationType: operation,
+				operationType: "ADD_PORTFOLIO",
 				targetCspName: targetCsp, 
 				payload: {
 					name: this.portfolio.name.toString(),
@@ -178,6 +211,7 @@ HothProvisioning.prototype = {
 			targetCspName: environmentRecord.csp.name.toString(), 
 			payload: {
 				name: environmentRecord.name.toString(),
+				portfolioId: this.portfolio.sys_id.toString(),
 				classificationLevel: hothClassificationLevel,
 				administrators: environmentRecord.pending_operators ? 
 				environmentRecord.pending_operators.toString().split(",")
@@ -204,13 +238,13 @@ HothProvisioning.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-28 20:22:38</sys_created_on>
         <sys_id>f563b62d47152110f39f7601e36d43de</sys_id>
-        <sys_mod_count>21</sys_mod_count>
+        <sys_mod_count>34</sys_mod_count>
         <sys_name>HothProvisioning</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_f563b62d47152110f39f7601e36d43de</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 20:27:20</sys_updated_on>
+        <sys_updated_on>2023-03-21 21:08:16</sys_updated_on>
     </sys_script_include>
 </record_update>
