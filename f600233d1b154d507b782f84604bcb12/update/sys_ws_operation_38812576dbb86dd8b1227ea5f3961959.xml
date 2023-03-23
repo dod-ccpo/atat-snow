@@ -10,7 +10,6 @@
         <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
 	var provision = function(request, pdsResponse) {
 		var result;
-		var message;
 		var taskOrderNumber = request.queryParams.taskOrderNumber;
 		var acquisitionPackageSysId = request.queryParams.acquisitionPackageSysId;
 		var requestBody = request.body.data;
@@ -73,7 +72,12 @@
 				environmentRecord.setValue("name", requestBody.portfolioName + " - " + key);
 				environmentRecord.setValue("portfolio", portfolio.sys_id);
 				environmentRecord.setValue("csp", cspRecord.sys_id);
-				environmentRecord.insert();		
+				environmentRecord.setValue("classification_level", cspRecord.classification_level);
+				environmentRecord.insert();
+
+				// Update Portfolio Vendor
+				portfolio.setValue("vendor", cspRecord.vendor);
+				portfolio.update();
 
 				// Create Operators
 				var pendingOperators = [];
@@ -102,68 +106,72 @@
 			xmlDoc.parseXML(xmlStringBody);
 			var jsonObject = gs.xmlToJSON(xmlDoc);
 
-			// As a result of parseXML, we are left with LineItems as an Array or an Object
-			// If it is an Array, that means there are CLIN records to create
-			// If it is an Object, that means there is a single CLIN record instead of a CLIN and INFOSLIN, requiring no CLIN creation
+			// Extract startDate and endDate for the new Task Order record
+			var startDate = jsonObject.ProcurementDocument.AwardInstrument.ProcurementInstrumentHeader.ProcurementInstrumentDates.ProcurementInstrumentPeriods.StartDate;
+			var endDate = jsonObject.ProcurementDocument.AwardInstrument.ProcurementInstrumentHeader.ProcurementInstrumentDates.ProcurementInstrumentPeriods.EndDate;
+			// Create new Task Order parent record
+			var taskOrderRecord = new GlideRecord("x_g_dis_atat_task_order");
+			taskOrderRecord.initialize();
+			taskOrderRecord.setValue("task_order_number", taskOrderNumber.toString());
+			taskOrderRecord.setValue("pop_start_date", startDate);
+			taskOrderRecord.setValue("pop_end_date", endDate);
+			taskOrderRecord.setValue("portfolio", portfolio.sys_id);
+			var newTaskOrderSysID = taskOrderRecord.insert();	
+
+			// Parse CLIN data
 			var lineItems = jsonObject.ProcurementDocument.AwardInstrument.ContractLineItems.LineItems;
-			var clins = [];
-			gs.info(Array.isArray(lineItems));
-			if (Array.isArray(lineItems)){
-				for (var i = 0; i< lineItems.length; i++){
-					// If LineItemType is INFOSLIN, we will create a CLIN record
-					if (lineItems[i].LineItemIdentifier.DFARS.LineItem.LineItemType == "INFOSLIN"){
-						var lineItemBase = lineItems[i].LineItemIdentifier.DFARS.LineItem.LineItemBase;
-						var popStartDate, popEndDate;
-						// We need to loop through lineItems again to find the matching CLIN that contains the popStartDate and popEndDate
-						for (var j = 0; j< lineItems.length; j++){
-							var lineItemToMatch = lineItems[j].LineItemIdentifier.DFARS.LineItem.LineItemBase;
-							if (lineItems[j].LineItemIdentifier.DFARS.LineItem.LineItemType == "CLIN" & lineItemToMatch == lineItemBase & lineItems[j].hasOwnProperty("LineItemDates")){
-								popStartDate = lineItems[j].LineItemDates.LineItemPeriod.PeriodStart.DateElement;
-								popEndDate = lineItems[j].LineItemDates.LineItemPeriod.PeriodEnd.DateElement;
-							}
-						}
-						var obligatedAmount = lineItems[i].LineItemAmounts.ItemObligatedAmount.ObligatedAmount;
-						// Create new CLIN record
-						var grClin = new GlideRecord("x_g_dis_atat_clin");
-						grClin.initialize();
-						grClin.setValue("clin_number", lineItemBase);
-						grClin.setValue("funds_obligated", obligatedAmount);
-						grClin.setValue("pop_start_date", popStartDate);
-						grClin.setValue("pop_end_date", popEndDate);
-						var newCLINSysID = grClin.insert();
-						clins.push(newCLINSysID);
-					}
-				}
-			}
-			// Check for created CLIN(s)
-			if (clins.length > 0){
-				// Extract startDate and endDate for the new Task Order record
-				var startDate = jsonObject.ProcurementDocument.AwardInstrument.ProcurementInstrumentHeader.ProcurementInstrumentDates.ProcurementInstrumentPeriods.StartDate;
-				var endDate = jsonObject.ProcurementDocument.AwardInstrument.ProcurementInstrumentHeader.ProcurementInstrumentDates.ProcurementInstrumentPeriods.EndDate;
-				// Create new Task Order parent record
-				var taskOrderRecord = new GlideRecord("x_g_dis_atat_task_order");
-				taskOrderRecord.initialize();
-				taskOrderRecord.setValue("task_order_number", taskOrderNumber.toString());
-				taskOrderRecord.setValue("pop_start_date", startDate);
-				taskOrderRecord.setValue("pop_end_date", endDate);
-				taskOrderRecord.setValue("clins", clins.toString());
-				taskOrderRecord.setValue("portfolio", portfolio.sys_id);
-				var newTaskOrderSysID = taskOrderRecord.insert();	
-				// Update CLINs with newTaskOrderSysID
-				clins.forEach(function (clin) {
-					var grClin = new GlideRecord("x_g_dis_atat_clin");
-					grClin.get(clin);
-					grClin.task_order = newTaskOrderSysID;
-					grClin.update();
+			var clins = {};
+			if (Array.isArray(lineItems)){									
+				// Gather CLINs + PoP Dates from "CLIN" entries. Do not create CLINs if we don't have PoP dates.
+				lineItems.filter(function(lineItem) {
+					return lineItem.LineItemIdentifier.DFARS.LineItem.LineItemType == "CLIN";
+				}).filter(function(lineItem) {
+					return lineItem.LineItemDates;
+				}).forEach(function(lineItem) {
+					clins[lineItem.LineItemIdentifier.DFARS.LineItem.LineItemBase] = {
+						popStartDate: lineItem.LineItemDates.LineItemPeriod.PeriodStart.DateElement,
+						popEndDate: lineItem.LineItemDates.LineItemPeriod.PeriodEnd.DateElement
+					};
 				});
+				// Next, gather Obligated Amount from "INFOSLIN" entries
+				lineItems.filter(function(lineItem) {
+					return lineItem.LineItemIdentifier.DFARS.LineItem.LineItemType == "INFOSLIN";
+				}).filter(function(lineItem) {
+					return lineItem.LineItemAmounts;
+				}).forEach(function(lineItem) {
+					clins[lineItem.LineItemIdentifier.DFARS.LineItem.LineItemBase].obligatedAmount = lineItem.LineItemAmounts.ItemObligatedAmount.ObligatedAmount;
+				});						
+			}
+
+			// Create CLIN entries
+			var clinSysIds = Object.keys(clins).map(function(number) {
+				var entry = clins[number];
+				var grClin = new GlideRecord("x_g_dis_atat_clin");
+				grClin.initialize();
+				grClin.setValue("clin_number", number);
+				grClin.setValue("task_order", newTaskOrderSysID);
+				if (entry.obligatedAmount) {
+					grClin.setValue("funds_obligated", entry.obligatedAmount);
+				}
+				grClin.setValue("pop_start_date", entry.popStartDate);
+				grClin.setValue("pop_end_date", entry.popEndDate);
+				return grClin.insert();
+			});
+			
+			// Update Task Order to add newly created CLIN children
+			taskOrderRecord.setValue("clins", clinSysIds.toString());
+			taskOrderRecord.update();
+
+			// Check for created CLIN(s)
+			if (clinSysIds.length > 0){
 				// Return response
-				var responseMessage = "Success: created " + clins.length + " CLIN(s)";
+				var responseMessage = "Success: created " + clinSysIds.length + " CLIN(s)";
 				result = {
 					success: responseMessage
 				};
 
 				// Update Active Task Order
-				portfolio.setValue("active_task_order", taskOrderRecord.sys_id.toString());							
+				portfolio.setValue("active_task_order", newTaskOrderSysID);							
 				portfolio.update();
 
 				// Update Acquisition Package Status (if we have one)
@@ -188,7 +196,7 @@
 			};
 		}
 	};
-	
+
 	try {
 		var eda = new Eda();
 		var payload = eda.getPayload(request, response);
@@ -198,7 +206,7 @@
 		response.setStatus(400);
 		response.setBody(e);
 	}	
-	
+
 })(request, response);]]></operation_script>
         <operation_uri>/api/x_g_dis_atat/provisioning</operation_uri>
         <produces>application/json,application/xml,text/xml</produces>
@@ -213,14 +221,14 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-02-07 15:04:14</sys_created_on>
         <sys_id>38812576dbb86dd8b1227ea5f3961959</sys_id>
-        <sys_mod_count>31</sys_mod_count>
+        <sys_mod_count>39</sys_mod_count>
         <sys_name>Start Provisioning</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_ws_operation_38812576dbb86dd8b1227ea5f3961959</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-02-09 19:53:15</sys_updated_on>
+        <sys_updated_on>2023-03-21 21:38:30</sys_updated_on>
         <web_service_definition display_value="Provisioning">4ba165cadb6c6918b1227ea5f39619e4</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
