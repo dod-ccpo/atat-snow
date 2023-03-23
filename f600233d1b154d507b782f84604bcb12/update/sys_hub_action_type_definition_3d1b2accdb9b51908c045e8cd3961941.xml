@@ -26,7 +26,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>3d1b2accdb9b51908c045e8cd3961941</sys_id>
-        <sys_mod_count>22</sys_mod_count>
+        <sys_mod_count>30</sys_mod_count>
         <sys_name>PROV: Consume Queue Payload</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -34,7 +34,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_3d1b2accdb9b51908c045e8cd3961941</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 21:42:14</sys_updated_on>
+        <sys_updated_on>2023-03-23 18:58:21</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -127,10 +127,10 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 18:00:20</sys_created_on>
         <sys_id>be6eea08dbdb51908c045e8cd3961916</sys_id>
-        <sys_mod_count>31</sys_mod_count>
+        <sys_mod_count>35</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 21:41:47</sys_updated_on>
+        <sys_updated_on>2023-03-23 18:57:41</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=be6eea08dbdb51908c045e8cd3961916"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -141,9 +141,9 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 18:00:20</sys_created_on>
         <sys_id>766eea08dbdb51908c045e8cd396192b</sys_id>
-        <sys_mod_count>30</sys_mod_count>
+        <sys_mod_count>34</sys_mod_count>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 21:41:47</sys_updated_on>
+        <sys_updated_on>2023-03-23 18:57:41</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   inputs.payload = JSON.parse(inputs.payload);
   outputs.num_events = inputs.payload.length;
@@ -203,6 +203,7 @@
             var newEnvironmentJobRecord = new GlideRecord("x_g_dis_atat_provisioning_job");
             newEnvironmentJobRecord.initialize();
             newEnvironmentJobRecord.setValue("title", environmentRecord.name.toString());
+            newEnvironmentJobRecord.setValue("environment", environmentRecord.sys_id.toString());
             newEnvironmentJobRecord.setValue("hoth_job_id", payload.jobId);
             newEnvironmentJobRecord.setValue("job_type", "ADD_ENVIRONMENT");
             newEnvironmentJobRecord.setValue("payload", JSON.stringify(payload));
@@ -210,36 +211,35 @@
             newEnvironmentJobRecord.setValue("status", "NOT_STARTED");
             newEnvironmentJobRecord.insert();
           }
-
-          // Q: is this needed or do we want to handle portfolio status updates
-          // differently?
-          // if (event.code &lt; 200 || event.code &gt;= 400) {
-          //   // update the failed portfolio
-          //   portfolioRecord.csp_portfolio_id = portfolioId;
-          //   portfolioRecord.dashboard_link = link ? link : null;
-          //   portfolioRecord.portfolio_status = "ARCHIVED";
-          //   portfolioRecord.update();
-          // }
-
         }
       }
       else if (operationType === "ADD_ENVIRONMENT") {
-        //link = response.portfolio.dashboardLink;
-        //environmentRecord.dashboard_link = link ? link : null;
+        
+        if (event.code === 200) {
+          jobRecord.status = "SUCCESS";
+          jobRecord.update();
+          outputs.num_updates++;
+          var environmentRecord = new GlideRecord("x_g_dis_atat_environment");
+          environmentRecord.get(jobRecord.environment.sys_id.toString());
+          
+          // Handle GetProvisioningStatus response (after async process complete)
+          if (response.status) {
+            environmentRecord.csp_id = response.status.environmentId;                         
+          }
+          // Handle regular HTTP 200 response direct from AddEnvironment request
+          else if (response.environment) {
+            environmentRecord.csp_id = response.environment.id;            
+          }
+          else {
+            throw new ErrorHandler().createError(
+              "Expected 'response.status' or 'response.environment' to be non-null",
+              new ErrorHandler().METHOD_ERROR
+            );               
+          }
+          environmentRecord.update();     
+        }
 
-        // status 200 success (after 202 polling - async)
-        //       if (response.status) {
-        //         jobRecord.csp_job_id = response.status.provisioningJobId;
-        //         jobRecord.status = response.status.status;
-        //         jobRecord.update();
-        //         outputs.num_updates++;
-
-        //         portfolioId = response.status.portfolioId
-        //       }    
-        throw new ErrorHandler().createError(
-          "Not supported",
-          new ErrorHandler().METHOD_ERROR
-        );        
+        // TODO: add support for dashboard_link    
       }
       else {
         throw new ErrorHandler().createError(
@@ -247,8 +247,6 @@
           new ErrorHandler().METHOD_ERROR
         );    
       }
-
-
     } else {
       gs.error("Could not find a Provisioning Job record with HOTH Job ID " + snowJobId);
     }
@@ -947,17 +945,17 @@
     <sys_hub_action_plan action="INSERT_OR_UPDATE">
         <action_id display_value="PROV: Consume Queue Payload">3d1b2accdb9b51908c045e8cd3961941</action_id>
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"36488b44db9f51908c045e8cd3961969","name":"plan","plan_signature":null}}</plan>
-        <snapshot>49996a8fdb6da1548c045e8cd3961923</snapshot>
+        <snapshot>079d304ddbb9e1108c045e8cd396192b</snapshot>
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 19:53:23</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>36488b44db9f51908c045e8cd3961969</sys_id>
-        <sys_mod_count>7</sys_mod_count>
+        <sys_mod_count>8</sys_mod_count>
         <sys_overrides/>
         <sys_scope/>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 21:42:15</sys_updated_on>
+        <sys_updated_on>2023-03-23 18:58:22</sys_updated_on>
     </sys_hub_action_plan>
     <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
@@ -1084,10 +1082,10 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 19:53:21</sys_created_on>
         <sys_id>da484b44db9f51908c045e8cd39619f2</sys_id>
-        <sys_mod_count>8</sys_mod_count>
+        <sys_mod_count>9</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 21:42:14</sys_updated_on>
+        <sys_updated_on>2023-03-23 18:58:21</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=da484b44db9f51908c045e8cd39619f2"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -1098,9 +1096,9 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 19:53:21</sys_created_on>
         <sys_id>a6488b44db9f51908c045e8cd3961902</sys_id>
-        <sys_mod_count>7</sys_mod_count>
+        <sys_mod_count>8</sys_mod_count>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-17 21:42:14</sys_updated_on>
+        <sys_updated_on>2023-03-23 18:58:21</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   inputs.payload = JSON.parse(inputs.payload);
   outputs.num_events = inputs.payload.length;
@@ -1160,6 +1158,7 @@
             var newEnvironmentJobRecord = new GlideRecord("x_g_dis_atat_provisioning_job");
             newEnvironmentJobRecord.initialize();
             newEnvironmentJobRecord.setValue("title", environmentRecord.name.toString());
+            newEnvironmentJobRecord.setValue("environment", environmentRecord.sys_id.toString());
             newEnvironmentJobRecord.setValue("hoth_job_id", payload.jobId);
             newEnvironmentJobRecord.setValue("job_type", "ADD_ENVIRONMENT");
             newEnvironmentJobRecord.setValue("payload", JSON.stringify(payload));
@@ -1167,36 +1166,35 @@
             newEnvironmentJobRecord.setValue("status", "NOT_STARTED");
             newEnvironmentJobRecord.insert();
           }
-
-          // Q: is this needed or do we want to handle portfolio status updates
-          // differently?
-          // if (event.code &lt; 200 || event.code &gt;= 400) {
-          //   // update the failed portfolio
-          //   portfolioRecord.csp_portfolio_id = portfolioId;
-          //   portfolioRecord.dashboard_link = link ? link : null;
-          //   portfolioRecord.portfolio_status = "ARCHIVED";
-          //   portfolioRecord.update();
-          // }
-
         }
       }
       else if (operationType === "ADD_ENVIRONMENT") {
-        //link = response.portfolio.dashboardLink;
-        //environmentRecord.dashboard_link = link ? link : null;
+        
+        if (event.code === 200) {
+          jobRecord.status = "SUCCESS";
+          jobRecord.update();
+          outputs.num_updates++;
+          var environmentRecord = new GlideRecord("x_g_dis_atat_environment");
+          environmentRecord.get(jobRecord.environment.sys_id.toString());
+          
+          // Handle GetProvisioningStatus response (after async process complete)
+          if (response.status) {
+            environmentRecord.csp_id = response.status.environmentId;                         
+          }
+          // Handle regular HTTP 200 response direct from AddEnvironment request
+          else if (response.environment) {
+            environmentRecord.csp_id = response.environment.id;            
+          }
+          else {
+            throw new ErrorHandler().createError(
+              "Expected 'response.status' or 'response.environment' to be non-null",
+              new ErrorHandler().METHOD_ERROR
+            );               
+          }
+          environmentRecord.update();     
+        }
 
-        // status 200 success (after 202 polling - async)
-        //       if (response.status) {
-        //         jobRecord.csp_job_id = response.status.provisioningJobId;
-        //         jobRecord.status = response.status.status;
-        //         jobRecord.update();
-        //         outputs.num_updates++;
-
-        //         portfolioId = response.status.portfolioId
-        //       }    
-        throw new ErrorHandler().createError(
-          "Not supported",
-          new ErrorHandler().METHOD_ERROR
-        );        
+        // TODO: add support for dashboard_link    
       }
       else {
         throw new ErrorHandler().createError(
@@ -1204,8 +1202,6 @@
           new ErrorHandler().METHOD_ERROR
         );    
       }
-
-
     } else {
       gs.error("Could not find a Provisioning Job record with HOTH Job ID " + snowJobId);
     }
