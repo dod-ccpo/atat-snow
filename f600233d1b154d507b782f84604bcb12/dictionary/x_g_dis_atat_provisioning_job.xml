@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element db_object_id="d8521508db47d99088887ea5f39619db" label="ATAT:Provisioning Job" max_length="40" name="x_g_dis_atat_provisioning_job" type="collection">
+    <element label="ATAT:Provisioning Job" max_length="40" name="x_g_dis_atat_provisioning_job" sizeclass="2" type="collection">
         <element active="false" label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
         <element label="CSP Job ID" max_length="500" name="csp_job_id" type="string"/>
         <element comments="Environment being modified by this Provisioning Job" label="Environment" max_length="32" name="environment" reference="x_g_dis_atat_environment" type="reference"/>
@@ -27,16 +27,16 @@
         <element comments="Task Order being modified by this Provisioning Job" label="Task Order" max_length="32" name="task_order" reference="x_g_dis_atat_task_order" type="reference"/>
         <element comments="Holds descriptive title of Provisioning Job. Human use only." label="title" max_length="500" name="title" type="string"/>
         <index name="index">
-            <element name="acquisition_package"/>
+            <element name="task_order"/>
         </index>
         <index name="index2">
             <element name="environment"/>
         </index>
         <index name="index3">
-            <element name="portfolio"/>
+            <element name="acquisition_package"/>
         </index>
         <index name="index4">
-            <element name="task_order"/>
+            <element name="portfolio"/>
         </index>
     </element>
 </database>
