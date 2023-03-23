@@ -209,9 +209,9 @@ HothProvisioning.prototype = {
 			userId: this.portfolio.portfolio_managers ? this.portfolio.portfolio_managers.split(",")[0] : "",
 			operationType: "ADD_ENVIRONMENT",
 			targetCspName: environmentRecord.csp.name.toString(), 
+			portfolioId: this.portfolio.csp_id.toString(),
 			payload: {
-				name: environmentRecord.name.toString(),
-				portfolioId: this.portfolio.csp_id.toString(),
+				name: environmentRecord.name.toString(),				
 				classificationLevel: hothClassificationLevel,
 				administrators: environmentRecord.pending_operators ? 
 				environmentRecord.pending_operators.toString().split(",")
@@ -238,13 +238,13 @@ HothProvisioning.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-28 20:22:38</sys_created_on>
         <sys_id>f563b62d47152110f39f7601e36d43de</sys_id>
-        <sys_mod_count>35</sys_mod_count>
+        <sys_mod_count>36</sys_mod_count>
         <sys_name>HothProvisioning</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_f563b62d47152110f39f7601e36d43de</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-22 18:19:58</sys_updated_on>
+        <sys_updated_on>2023-03-23 15:26:59</sys_updated_on>
     </sys_script_include>
 </record_update>
