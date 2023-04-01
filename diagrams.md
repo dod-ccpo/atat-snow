@@ -60,7 +60,7 @@ erDiagram
         String description
         DateTime last_updated
         Choice portfolio_funding_status "ON_TRACK/AT_RISK/FUNDING_AT_RISK/EXPIRED/DELINQUENT/EXPIRING_SOON"
-        Choice portfolio_status "ACTIVE/ARCHIVED/PROCESSING"
+        Choice portfolio_status "PROCESSING/PROVISIONING_ISSUE/ACTIVE/ARCHIVED"
         
         List pending_operators FK "(column INACTIVE)"
         URL dashboard_link "(column INACTIVE)"
@@ -129,6 +129,7 @@ erDiagram
         List pending_operators FK "to Operator"
         Reference portfolio FK "to Portfolio"
         String name
+        Choice environment_status "PROCESSING/PROVISIONING_ISSUE/PROVISIONED/ARCHIVED"
         String csp_portfolio_id
         URL dashboard_link "deep link to CSP"
         Boolean provisioned
