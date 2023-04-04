@@ -21,9 +21,10 @@
         <element label="Portfolio Managers" max_length="4000" name="portfolio_managers" reference="sys_user" type="glide_list"/>
         <element choice="1" label="Portfolio Status" max_length="40" name="portfolio_status" type="choice">
             <choice>
-                <element inactive_on_update="false" label="Active" value="ACTIVE"/>
-                <element inactive_on_update="false" label="Archived" value="ARCHIVED"/>
-                <element inactive_on_update="false" label="Processing" value="PROCESSING"/>
+                <element inactive_on_update="false" label="Processing" sequence="1" value="PROCESSING"/>
+                <element inactive_on_update="false" label="Provisioning Issue" sequence="2" value="PROVISIONING_ISSUE"/>
+                <element inactive_on_update="false" label="Active" sequence="3" value="ACTIVE"/>
+                <element inactive_on_update="false" label="Archived" sequence="4" value="ARCHIVED"/>
             </choice>
         </element>
         <element label="Portfolio Viewers" max_length="4000" name="portfolio_viewers" reference="sys_user" type="glide_list"/>
