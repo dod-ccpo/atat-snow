@@ -74,17 +74,17 @@ erDiagram
     TASK-ORDER {
         GUID sys_id PK
         Reference portfolio FK "to Portfolio"
-        Reference acquisition_package FK "to Acquisition Package"
-        Reference funding_plan FK "to Funding Plan"
-        Reference funding_request FK "to Funding Request"
         List clins FK "to CLIN"
         String task_order_number
         Choice task_order_status "ON_TRACK/AT_RISK/EXPIRED/UPCOMING"
         Date pop_start_date
         Date pop_end_date
-        Currency funds_total
-        Currency funds_obligated
-        Choice incrementally_funded "Y/N"
+        Reference acquisition_package FK "(column INACTIVE)"
+        Reference funding_plan FK "(column INACTIVE)"
+        Reference funding_request FK "(column INACTIVE)"
+        Currency funds_total "(column INACTIVE)"
+        Currency funds_obligated "(column INACTIVE)"
+        Choice incrementally_funded "(column INACTIVE)"
     }
     CLIN {
         GUID sys_id PK
