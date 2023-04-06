@@ -21,7 +21,7 @@ Dow.prototype = {
 	COMP_ENV_INST_TABLE: "x_g_dis_atat_compute_environment_instance",
 	DB_ENV_INST_TABLE: "x_g_dis_atat_database_environment_instance",
 	GENERAL_XAAS_ENV_INST_TABLE: "x_g_dis_atat_general_xaas_environmentinstance",
-	CLOUD_SUP_ENV_ISNT_TABLE: "x_g_dis_atat_cloud_support_environment_instance",
+	CLOUD_SUP_ENV_INST_TABLE: "x_g_dis_atat_cloud_support_environment_instance",
 	CLASS_INST_TABLE: "x_g_dis_atat_classification_instance",
 	CLASS_LVL_TABLE: "x_g_dis_atat_classification_level",
 	CLASS_INFO_TYPE_TABLE: "x_g_dis_atat_classified_information_type",
@@ -176,7 +176,7 @@ Dow.prototype = {
 					return computeEnvInstFields;
 				case Dow.prototype.DB_ENV_INST_TABLE:
 					return databaseEnvInstFields;
-				case Dow.prototype.CLOUD_SUP_ENV_ISNT_TABLE:
+				case Dow.prototype.CLOUD_SUP_ENV_INST_TABLE:
 					return cloudSupportEnvInstFields;
 				default:
 					return [];
@@ -881,7 +881,7 @@ Dow.prototype = {
    */
 	getCloudSupportInstances: function(packageId, mappedPeriods) {
 		try {
-			var table = Dow.prototype.CLOUD_SUP_ENV_ISNT_TABLE;
+			var table = Dow.prototype.CLOUD_SUP_ENV_INST_TABLE;
 			return Dow.prototype.getInstances(table, packageId, mappedPeriods);
 
 		} catch (error) {
@@ -907,7 +907,7 @@ Dow.prototype = {
 		var currentEnvInstFields = Dow.prototype.getTableFields(Dow.prototype.CUR_ENV_INST_TABLE);
 		var computeEnvInstFields = Dow.prototype.getTableFields(Dow.prototype.COMP_ENV_INST_TABLE);
 		var databaseEnvInstFields = Dow.prototype.getTableFields(Dow.prototype.DB_ENV_INST_TABLE);
-		var cloudSupportEnvInstFields = Dow.prototype.getTableFields(Dow.prototype.CLOUD_SUP_ENV_ISNT_TABLE);
+		var cloudSupportEnvInstFields = Dow.prototype.getTableFields(Dow.prototype.CLOUD_SUP_ENV_INST_TABLE);
 
 		switch (table) {
 			case Dow.prototype.ENV_INST_TABLE:
@@ -940,7 +940,7 @@ Dow.prototype = {
 					.where("acquisition_package", packageId)
 					.select(envInstFields)
 					.toArray(limit);
-			case Dow.prototype.CLOUD_SUP_ENV_ISNT_TABLE:
+			case Dow.prototype.CLOUD_SUP_ENV_INST_TABLE:
 				return new global.GlideQuery(table)
 					.where("acquisition_package", packageId)
 					.select(cloudSupportEnvInstFields)
