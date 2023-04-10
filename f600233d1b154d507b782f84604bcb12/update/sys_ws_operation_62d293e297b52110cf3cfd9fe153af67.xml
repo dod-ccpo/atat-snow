@@ -30,9 +30,7 @@
             gr.get(packageId);
             if (gr.isValidRecord()) { // FOUND
                 var igce = new Igce(gr);
-                var payload = igce.getPayload();
-				// TODO: Modify or add to Igce script include to arrive at the desired format
-				// for now representing data with the IGCE document payload
+                var payload = igce.getCostEstimateData();
                 response.setStatus(200);
                 response.setBody({
                     "packageId": packageId,
@@ -65,14 +63,14 @@
         <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
         <sys_created_on>2023-03-28 21:43:11</sys_created_on>
         <sys_id>62d293e297b52110cf3cfd9fe153af67</sys_id>
-        <sys_mod_count>30</sys_mod_count>
+        <sys_mod_count>31</sys_mod_count>
         <sys_name>Get Data</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_ws_operation_62d293e297b52110cf3cfd9fe153af67</sys_update_name>
         <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
-        <sys_updated_on>2023-03-28 22:53:24</sys_updated_on>
+        <sys_updated_on>2023-04-10 16:47:52</sys_updated_on>
         <web_service_definition display_value="Cost Estimate">5a663ee697352110cf3cfd9fe153afe4</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
