@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>true</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_g_dis_atat_environment</collection>
+        <condition>current.environment_status.changes()</condition>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition table="x_g_dis_atat_environment">portfolioISNOTEMPTY^EQ<item endquery="false" field="portfolio" goto="false" newquery="false" operator="ISNOTEMPTY" or="false" value=""/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Environment - Portfolio status update</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[/**
+ * Validates a Portfolio id is correct and represents an actual record
+ * @param portfolio_id id of the portfolio to examine
+ * @returns true if specified portfolio is found and valid
+ */
+function isValidPortfolio(portfolio_id) {
+    var gr = new GlideRecord('x_g_dis_atat_portfolio');
+    gr.get(portfolio_id);
+    return gr.isValidRecord();
+}
+
+/**
+ * Returns the number of child Environments in the specified Portfolio.
+ * @param portfolio_id id of the portfolio to examine
+ * @returns the number of child Environments
+ */
+function countChildEnvironments(portfolio_id) {
+    if (!isValidPortfolio(portfolio_id)) {
+        gs.warn('Could not find Portfolio ' + portfolio_id);
+    }
+    var gr = new GlideRecord('x_g_dis_atat_environment');
+    gr.addQuery('portfolio', portfolio_id);
+    gr.query();
+    return (gr.getRowCount());
+}
+
+/**
+ * Returns the number of child Environments in the specified Portfolio
+ * that have the specified status.
+ * @param portfolio_id id of the portfolio to examine
+ * @param environment_status the target status
+ * @returns the number of child Environments
+ */
+function countChildEnvironmentsWithStatus(portfolio_id, environment_status) {
+    if (!isValidPortfolio(portfolio_id)) {
+        gs.warn('Could not find Portfolio ' + portfolio_id);
+    }
+    var gr = new GlideRecord('x_g_dis_atat_environment');
+    gr.addQuery('portfolio', portfolio_id);
+    gr.addQuery('environment_status', environment_status);
+    gr.query();
+    return (gr.getRowCount());
+}
+
+
+/**
+ * Checks whether there is a child Environment with the
+ * specified status in the specified Portfolio
+ * @param portfolio_id id of the portfolio to examine
+ * @param environment_status the target status for child environments
+ * @returns true if there is at least one child env with the target status; false otherwise
+ */
+function hasChildEnvironmentWithStatus(portfolio_id, environment_status) {
+    if (!isValidPortfolio(portfolio_id)) {
+        gs.warn('Could not find Portfolio ' + portfolio_id);
+    }
+    var gr = new GlideRecord('x_g_dis_atat_environment');
+    gr.addQuery('portfolio', portfolio_id);
+    gr.addQuery('environment_status', environment_status);
+    gr.query();
+    return (gr.getRowCount() > 0);
+}
+
+/**
+ * Sets the status of the specified Portfolio
+ * @param portfolio_id id for the portfolio to update
+ * @param portfolio_status the status to set
+ */
+function setPortfolioStatus(portfolio_id, portfolio_status) {
+    if (!isValidPortfolio(portfolio_id)) {
+        gs.warn('Could not find Portfolio ' + portfolio_id);
+    }
+    var gr = new GlideRecord('x_g_dis_atat_portfolio');
+    gr.get(portfolio_id);
+    if (gr.isValidRecord() && gr.portfolio_status != portfolio_status) {
+        gs.debug('Updating status of Portfolio ' + portfolio_id + '. old: ' + gr.portfolio_status + ', updated: ' + portfolio_status);
+        gr.portfolio_status = portfolio_status;
+        gr.update();
+    }
+}
+
+/**
+ * Checks whether the specified Portfolio has the status ARCHIVED.
+ * @param portfolio_id id of the portfolio to examine
+ * @returns true if portfolio has the status ARCHIVED; false otherwise
+ */
+function portfolioIsArchived(portfolio_id) {
+    if (!isValidPortfolio(portfolio_id)) {
+        gs.warn('Could not find Portfolio ' + portfolio_id);
+    }
+    var gr = new GlideRecord('x_g_dis_atat_portfolio');
+    gr.get(portfolio_id);
+    return (gr.portfolio_status == 'ARCHIVED');
+}
+
+/**
+ * Checks whether all child Environments in the specified Portfolio
+ * have the status PROVISIONED.
+ * @param portfolio_id id of the portfolio to examine
+ */
+function allChildEnvironmentsAreProvisioned(portfolio_id) {
+    return (countChildEnvironments(portfolio_id) == countChildEnvironmentsWithStatus(portfolio_id, 'PROVISIONED'));
+}
+
+/**
+ * __This requires a trigger fired after Insert and Update and Delete__
+ * with a condition of current.environment_status.changes()
+ */
+(function executeRule(current, previous /*null when async*/ ) {
+    // No changes allowed if ARCHIVED (gray)
+    if (!portfolioIsArchived(current.portfolio)) {
+        // PROVISIONING_ISSUE (yellow) > PROCESSING (blue) > ACTIVE (green)
+        if (hasChildEnvironmentWithStatus(current.portfolio, 'PROVISIONING_ISSUE')) {
+            setPortfolioStatus(current.portfolio, 'PROVISIONING_ISSUE');
+        } else if (hasChildEnvironmentWithStatus(current.portfolio, 'PROCESSING')) {
+            setPortfolioStatus(current.portfolio, 'PROCESSING');
+        } else if (allChildEnvironmentsAreProvisioned(current.portfolio)) {
+            setPortfolioStatus(current.portfolio, 'ACTIVE');
+        }
+    } else {
+        gs.debug('Not updating status. Portfolio is archived.');
+    }
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-04-01 17:15:10</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>0c5bb63797756110cf3cfd9fe153af55</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Environment - Portfolio status update</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_0c5bb63797756110cf3cfd9fe153af55</sys_update_name>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-04-01 17:15:10</sys_updated_on>
+        <template/>
+        <when>after</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=0c5bb63797756110cf3cfd9fe153af55"/>
+</record_update>
