@@ -917,6 +917,78 @@ Igce.prototype = {
         }
     },
 
+    getCostEstimateData: function(packageSysId) {
+        try {
+            var packageId = packageSysId ? packageSysId : this.acquisitionPackage.sys_id;
+            var sampleData = {
+                "data": [{
+                        "CLIN Type & Classification": "Cloud UNCLASSIFIED",
+                        "Base Period": 1000.0,
+                        "Option 1": 1000.0,
+                        "Option 2": 1000.0,
+                        "Option 3": 1000.0,
+                        "Option 4": 1000.0,
+                        "Total": 5000.0
+                    },
+                    {
+                        "CLIN Type & Classification": "Cloud Support UNCLASSIFIED",
+                        "Base Period": 1000.0,
+                        "Option 1": 1000.0,
+                        "Option 2": 1000.0,
+                        "Option 3": 1000.0,
+                        "Option 4": 1000.0,
+                        "Total": 5000.0
+                    },
+                    {
+                        "CLIN Type & Classification": "Cloud SECRET",
+                        "Base Period": 1000.0,
+                        "Option 1": 1000.0,
+                        "Option 2": 1000.0,
+                        "Option 3": 1000.0,
+                        "Option 4": 1000.0,
+                        "Total": 5000.0
+                    },
+                    {
+                        "CLIN Type & Classification": "External ordering agency fee (1%)",
+                        "Base Period": 50.0,
+                        "Option 1": 50.0,
+                        "Option 2": 50.0,
+                        "Option 3": 50.0,
+                        "Option 4": 50.0,
+                        "Total": 250.0
+                    }
+                ],
+                "subtotal": {
+                    "Base Period": 5050.0,
+                    "Option 1": 5050.0,
+                    "Option 2": 5050.0,
+                    "Option 3": 5050.0,
+                    "Option 4": 5050.0
+                },
+                "surge": {
+                    "Base Period": 252.50,
+                    "Option 1": 252.50,
+                    "Option 2": 252.50,
+                    "Option 3": 252.50,
+                    "Option 4": 252.50
+                },
+                "total": {
+                    "Base Period": 5302.50,
+                    "Option 1": 5302.50,
+                    "Option 2": 5302.50,
+                    "Option 3": 5302.50,
+                    "Option 4": 5302.50
+                }
+            };
+            return sampleData;
+        } catch (error) {
+            throw this.errUtil.createError(
+                "Igce --> getCostEstimateData(): " + error,
+                this.errUtil.METHOD_ERROR
+            );
+        }
+    },
+
     getPayload: function() {
         var acq_package = this.acquisitionPackage;
         var periodOfPerformance = acq_package.period_of_performance;
@@ -1388,13 +1460,13 @@ Igce.prototype = {
         <sys_created_by>jeff.segal-ctr</sys_created_by>
         <sys_created_on>2022-10-12 15:53:33</sys_created_on>
         <sys_id>b29002b097a211106fa8b4b3f153afc4</sys_id>
-        <sys_mod_count>119</sys_mod_count>
+        <sys_mod_count>120</sys_mod_count>
         <sys_name>Igce</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_b29002b097a211106fa8b4b3f153afc4</sys_update_name>
         <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
-        <sys_updated_on>2023-04-10 17:13:31</sys_updated_on>
+        <sys_updated_on>2023-04-10 17:23:58</sys_updated_on>
     </sys_script_include>
 </record_update>
