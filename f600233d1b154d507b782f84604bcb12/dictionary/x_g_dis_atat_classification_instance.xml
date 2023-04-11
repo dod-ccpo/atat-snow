@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="DAPPS:Classification Instance" max_length="40" name="x_g_dis_atat_classification_instance" sizeclass="0" type="collection">
+    <element db_object_id="fda091529751211044ecfbc71153af1b" label="DAPPS:Classification Instance" max_length="40" name="x_g_dis_atat_classification_instance" type="collection">
         <element label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
         <element label="Classification Level" max_length="32" name="classification_level" reference="x_g_dis_atat_classification_level" type="reference"/>
         <element label="Classified Information Types" max_length="4000" name="classified_information_types" reference="x_g_dis_atat_classified_information_type" type="glide_list"/>
@@ -13,6 +13,12 @@
             </choice>
         </element>
         <element label="Selected Periods" max_length="4000" name="selected_periods" reference="x_g_dis_atat_period" type="glide_list"/>
+        <element choice="1" label="TS Contractor Clearance Type" max_length="40" name="ts_contractor_clearance_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Top Secret" value="TS"/>
+                <element inactive_on_update="false" label="Top Secret/Sensitive Compartmented Information" value="TS_SCI"/>
+            </choice>
+        </element>
         <element choice="1" label="Type of Delivery" max_length="40" name="type_of_delivery" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Shipped" sequence="1" value="SHIPPED"/>
