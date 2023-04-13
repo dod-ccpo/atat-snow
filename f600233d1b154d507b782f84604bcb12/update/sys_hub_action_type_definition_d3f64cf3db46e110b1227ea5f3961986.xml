@@ -1,0 +1,1928 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_action_type_definition">
+    <sys_hub_action_type_definition action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <action_status/>
+        <action_template/>
+        <active>true</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Sends an email tailored to new Contributors of Acquisition Packages</description>
+        <ih_action>false</ih_action>
+        <internal_name>contrib_send_contributor_email_notification</internal_name>
+        <label_cache>[{"name":"{{action.previous_mission_owner_name}}","label":"action➛Current Mission Owner Name","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"string","uiUniqueId":"29e650c7-bd4e-4876-86ad-41c313705219"}},{"name":"{{action.variable}}","label":"action➛variable","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.new_contributor_email}}","label":"action➛New Contributor Email","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.acquisition_package}}","label":"action➛Acquisition Package","type":"action","ref":"","reference_display":"DAPPS:Acquisition Package","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.acquisition_package.project_overview.title}}","label":"action➛Acquisition Package➛Project Overview➛Title","type":"action","ref":"","reference_display":"Title","base_type":"string","parent_table_name":"x_g_dis_atat_project_overview","column_name":"title","choices":null,"attributes":{}},{"name":"{{action.current_mission_owner_name}}","label":"action➛Current Mission Owner Name","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[8cf28f01-a619-473a-8704-2861c49ba7a9].atat_endpoint}}","label":"step➛Pre-Process➛atat_endpoint","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"string","uiUniqueId":"71f8d3cc-e4a1-49b4-9f4a-6491bd5d1a16"}}]</label_cache>
+        <master_snapshot>727b4c3fdb46e110b1227ea5f396190b</master_snapshot>
+        <name>CONTRIB: Send Contributor Email Notification</name>
+        <natlang/>
+        <outputs/>
+        <pre_compiled>false</pre_compiled>
+        <state>published</state>
+        <sys_class_name>sys_hub_action_type_definition</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:18:42</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>d3f64cf3db46e110b1227ea5f3961986</sys_id>
+        <sys_mod_count>15</sys_mod_count>
+        <sys_name>CONTRIB: Send Contributor Email Notification</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_hub_action_type_definition_d3f64cf3db46e110b1227ea5f3961986</sys_update_name>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:21</sys_updated_on>
+        <system_level>false</system_level>
+        <type/>
+    </sys_hub_action_type_definition>
+    <sys_translated_text action="delete_multiple" query="documentkey=d3f64cf3db46e110b1227ea5f3961986"/>
+    <sys_variable_value action="delete_multiple" query="document_key=d3f64cf3db46e110b1227ea5f3961986"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_type_definition</document>
+        <document_key>d3f64cf3db46e110b1227ea5f3961986</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:20:26</sys_created_on>
+        <sys_id>70670c37db46e110b1227ea5f3961958</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:20:26</sys_updated_on>
+        <value>{"version":"1.0","serializationFormat":"JSON","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}},"complexObjectSchema":{"FlowDesigner:FDACTIONSTATUS":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"true\",\"hint\":null,\"uiType\":\"integer\",\"default_value\":\"\",\"action_error_output\":\"true\",\"label\":\"Code\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"true\",\"hint\":null,\"uiType\":\"string\",\"default_value\":null,\"action_error_output\":\"true\",\"label\":\"Message\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FDACTIONSTATUS.$type_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FDACTIONSTATUS\",\"read_only\":\"true\",\"hint\":null,\"uiType\":\"object\",\"default_value\":\"\",\"label\":\"Action Status\",\"read_only_complex_object\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"0\",\"uiUniqueId\":\"8e3eb395-c990-4a7d-b8da-081a1acab7eb\"}"}}}</value>
+        <variable display_value="Action Status">7c670c37db46e110b1227ea5f3961949</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_type_definition</document>
+        <document_key>d3f64cf3db46e110b1227ea5f3961986</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:20:26</sys_created_on>
+        <sys_id>78670c37db46e110b1227ea5f3961957</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:20:26</sys_updated_on>
+        <value>0</value>
+        <variable display_value="Don't Treat as Error">30670c37db46e110b1227ea5f396194f</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_action_output_d3f64cf3db46e110b1227ea5f3961986^id=d3f64cf3db46e110b1227ea5f3961986"/>
+    <sys_hub_step_instance action="delete_multiple" query="action=d3f64cf3db46e110b1227ea5f3961986^sys_idNOT IN588844f7db46e110b1227ea5f39619a0,9197c077db46e110b1227ea5f39619eb"/>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="CONTRIB: Send Contributor Email Notification">d3f64cf3db46e110b1227ea5f3961986</action>
+        <cid>6bfe5dd8-f492-495c-a9f8-a44113e385df</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <inputs/>
+        <label>Email step</label>
+        <order>2</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Email">4c5f36a37f0b32005f58108c3ffa9126</step_type>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:25:19</sys_created_on>
+        <sys_id>588844f7db46e110b1227ea5f39619a0</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:15</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=588844f7db46e110b1227ea5f39619a0"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>588844f7db46e110b1227ea5f39619a0</document_key>
+        <order>500</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:25:19</sys_created_on>
+        <sys_id>508844f7db46e110b1227ea5f39619aa</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:27:00</sys_updated_on>
+        <value/>
+        <variable display_value="Body">8ef44f277f0b32005f58108c3ffa91f7</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>588844f7db46e110b1227ea5f39619a0</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:25:19</sys_created_on>
+        <sys_id>588844f7db46e110b1227ea5f39619a9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:25:19</sys_updated_on>
+        <value>0</value>
+        <variable display_value="Include Watermark">0fba76757303230082999cfd7bf6a7f2</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=588844f7db46e110b1227ea5f39619a0"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>body</field>
+        <id>588844f7db46e110b1227ea5f39619a0</id>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:25:19</sys_created_on>
+        <sys_id>d48844f7db46e110b1227ea5f39619a9</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:15</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_4c5f36a37f0b32005f58108c3ffa9126</table>
+        <value>&lt;p&gt;&lt;span class="data_parent_pill" style="display: inline;" contenteditable="false" data-pillvalue="{{fd_transform:b37e1a35-2da3-40b3-a767-5232fa11e274}}"&gt;&lt;span class="data_pill  accepts_transform_functions" tabindex="0" contenteditable="false" data-pillvalue="{{fd_transform:b37e1a35-2da3-40b3-a767-5232fa11e274}}"&gt;&lt;span class="data-pill-content-container"&gt;&lt;span class="pills"&gt;&lt;span class="pill-text" data-for="ah_tooltipTop" data-tip="action &amp;gt; Acquisition Package &amp;gt; Project Overview &amp;gt; Title"&gt;&lt;span class="pill-start"&gt;action&lt;/span&gt;&lt;span class="pill-arrow"&gt;&lt;span class="data-pill-label-caret"&gt;&lt;span class="data-pill-label-arrow"&gt;➛&lt;/span&gt;&lt;/span&gt;...&lt;span class="data-pill-label-caret"&gt;&lt;span class="data-pill-label-arrow"&gt;➛&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="pill-end"&gt;Title&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;button id="transform_function_facade_b37e1a35-2da3-40b3-a767-5232fa11e274" class="transform_function_facade no_transform_applied"&gt;&lt;span class="inline-script-icon"&gt;&lt;span style="display: none;"&gt;​&lt;/span&gt;&lt;/span&gt;&lt;/button&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&amp;nbsp;invited you as a contributor to the "&lt;span class="data_parent_pill" style="display: inline;" contenteditable="false" data-pillvalue="{{fd_transform:4f94e91e-bd2c-4aeb-b302-5df127d04218}}"&gt;&lt;span class="data_pill  accepts_transform_functions" tabindex="0" contenteditable="false" data-pillvalue="{{fd_transform:4f94e91e-bd2c-4aeb-b302-5df127d04218}}"&gt;&lt;span class="data-pill-content-container"&gt;&lt;span class="pills"&gt;&lt;span class="pill-text" data-for="ah_tooltipTop" data-tip="action &amp;gt; Current Mission Owner Name"&gt;&lt;span class="pill-start"&gt;action&lt;/span&gt;&lt;span class="pill-arrow"&gt;&lt;span class="data-pill-label-caret"&gt;&lt;span class="data-pill-label-arrow"&gt;➛&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="pill-end"&gt;Current Mission Owner Name&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;button id="transform_function_facade_4f94e91e-bd2c-4aeb-b302-5df127d04218" class="transform_function_facade no_transform_applied"&gt;&lt;span class="inline-script-icon"&gt;&lt;span style="display: none;"&gt;​&lt;/span&gt;&lt;/span&gt;&lt;/button&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;" package. You can now edit details about this acquistion within the DISA Acquisition Package Preparation System (DAPPS).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Access package from your dashboard:&lt;/strong&gt;&amp;nbsp;&lt;a href="https://services.disa.mil/atat"&gt;https://services.disa.mil/atat&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;This was sent from an unmonitored email address. Please do not reply to this email. If you have questions about JWCC or DAPPS, please contact our Customer Support Team at&amp;nbsp;&lt;a href="https://community.hacc.mil/s/contact?&amp;amp;RoleType=Customer" rel="nofollow"&gt;https://community.hacc.mil/s/contact?&amp;amp;RoleType=Customer&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>subject</field>
+        <id>588844f7db46e110b1227ea5f39619a0</id>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:25:19</sys_created_on>
+        <sys_id>988844f7db46e110b1227ea5f39619a8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:25:19</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_4c5f36a37f0b32005f58108c3ffa9126</table>
+        <value>JWCC requirements package shared with you: "{{action.acquisition_package.project_overview.title}}"</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>to</field>
+        <id>588844f7db46e110b1227ea5f39619a0</id>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:25:19</sys_created_on>
+        <sys_id>148844f7db46e110b1227ea5f39619a9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:25:19</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_4c5f36a37f0b32005f58108c3ffa9126</table>
+        <value>{{action.new_contributor_email}} </value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>watermark_email</field>
+        <id>588844f7db46e110b1227ea5f39619a0</id>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:25:19</sys_created_on>
+        <sys_id>508844f7db46e110b1227ea5f39619a9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:25:19</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_4c5f36a37f0b32005f58108c3ffa9126</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_step_ext_input action="delete_multiple" query="model=588844f7db46e110b1227ea5f39619a0"/>
+    <sys_hub_step_ext_output action="delete_multiple" query="model=588844f7db46e110b1227ea5f39619a0"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=588844f7db46e110b1227ea5f39619a0"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_step_ext_output_588844f7db46e110b1227ea5f39619a0"/>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="CONTRIB: Send Contributor Email Notification">d3f64cf3db46e110b1227ea5f3961986</action>
+        <cid>8cf28f01-a619-473a-8704-2861c49ba7a9</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <label>Pre-Process</label>
+        <order>1</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Script">106afb6647032200b4fad7527c9a71e7</step_type>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:21:18</sys_created_on>
+        <sys_id>9197c077db46e110b1227ea5f39619eb</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:21:18</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=9197c077db46e110b1227ea5f39619eb"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>9197c077db46e110b1227ea5f39619eb</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:21:18</sys_created_on>
+        <sys_id>1d970477db46e110b1227ea5f3961907</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:21:18</sys_updated_on>
+        <value>35aa573fd7802200bdbaee5b5e610375</value>
+        <variable display_value="MID Application">f5e56d79b3101300176b051a16a8dce4</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>9197c077db46e110b1227ea5f39619eb</document_key>
+        <order>600</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:21:18</sys_created_on>
+        <sys_id>dd970477db46e110b1227ea5f3961907</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:21:18</sys_updated_on>
+        <value>(function execute(inputs, outputs) {
+	outputs.atat_endpoint = gs.getProperty("glide.servlet.uri") + "atat";
+})(inputs, outputs);
+</value>
+        <variable display_value="Script">71aa7f6647032200b4fad7527c9a719b</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_step_ext_output_9197c077db46e110b1227ea5f39619eb^id=9197c077db46e110b1227ea5f39619eb"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7^id=9197c077db46e110b1227ea5f39619eb"/>
+    <sys_hub_step_ext_input action="delete_multiple" query="model=9197c077db46e110b1227ea5f39619eb"/>
+    <sys_hub_step_ext_output action="delete_multiple" query="model=9197c077db46e110b1227ea5f39619eb^sys_idNOT IN1997c077db46e110b1227ea5f39619f3"/>
+    <sys_hub_step_ext_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=71f8d3cc-e4a1-49b4-9f4a-6491bd5d1a16</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>atat_endpoint</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>atat_endpoint</label>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Pre-Process">9197c077db46e110b1227ea5f39619eb</model>
+        <model_id>9197c077db46e110b1227ea5f39619eb</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_output_9197c077db46e110b1227ea5f39619eb</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_output</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:21:18</sys_created_on>
+        <sys_id>1997c077db46e110b1227ea5f39619f3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:21:18</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_output>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=9197c077db46e110b1227ea5f39619eb"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_step_ext_output_9197c077db46e110b1227ea5f39619eb^sys_idNOT IN99970477db46e110b1227ea5f3961903"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>atat_endpoint</element>
+        <help/>
+        <hint/>
+        <label>atat_endpoint</label>
+        <language>en</language>
+        <name>var__m_sys_hub_step_ext_output_9197c077db46e110b1227ea5f39619eb</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:21:18</sys_created_on>
+        <sys_id>99970477db46e110b1227ea5f3961903</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:21:18</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_hub_action_input action="delete_multiple" query="model=d3f64cf3db46e110b1227ea5f3961986^sys_idNOT IN3c670c37db46e110b1227ea5f3961941,ada8c0f7db46e110b1227ea5f3961969,f8670c37db46e110b1227ea5f396193d"/>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference,uiUniqueId=29008963-04be-4c81-8d2d-04fb9d13252c</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table>x_g_dis_atat_acquisition_package</choice_table>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>acquisition_package</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>Acquisition Package</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="CONTRIB: Send Contributor Email Notification">d3f64cf3db46e110b1227ea5f3961986</model>
+        <model_id>d3f64cf3db46e110b1227ea5f3961986</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_input_d3f64cf3db46e110b1227ea5f3961986</name>
+        <next_element/>
+        <order>3</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference display_value="" name="x_g_dis_atat_acquisition_package">x_g_dis_atat_acquisition_package</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:20:26</sys_created_on>
+        <sys_id>3c670c37db46e110b1227ea5f3961941</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:20:26</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=3c670c37db46e110b1227ea5f3961941"/>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=e6cd6af3-262b-4169-8332-cfb822b2bc48</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current_mission_owner_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Current Mission Owner Name</label>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="CONTRIB: Send Contributor Email Notification">d3f64cf3db46e110b1227ea5f3961986</model>
+        <model_id>d3f64cf3db46e110b1227ea5f3961986</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_input_d3f64cf3db46e110b1227ea5f3961986</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:25:57</sys_created_on>
+        <sys_id>ada8c0f7db46e110b1227ea5f3961969</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:25:57</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=ada8c0f7db46e110b1227ea5f3961969"/>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=3da67a43-3b80-4e6f-a79e-9b1400389b7d</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>new_contributor_email</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>New Contributor Email</label>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="CONTRIB: Send Contributor Email Notification">d3f64cf3db46e110b1227ea5f3961986</model>
+        <model_id>d3f64cf3db46e110b1227ea5f3961986</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_input_d3f64cf3db46e110b1227ea5f3961986</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:20:26</sys_created_on>
+        <sys_id>f8670c37db46e110b1227ea5f396193d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:20:26</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=f8670c37db46e110b1227ea5f396193d"/>
+    <sys_hub_action_output action="delete_multiple" query="model=d3f64cf3db46e110b1227ea5f3961986^sys_idNOT IN30670c37db46e110b1227ea5f396194f,7c670c37db46e110b1227ea5f3961949"/>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>action_error_output=true,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=boolean,uiTypeLabel=True/False,uiUniqueId=a5fbf4a2-b9c4-4d2f-893a-a5e59ad9e167,visible_in_ui=false</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value>true</default_value>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>__dont_treat_as_error__</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="">boolean</internal_type>
+        <label>Don't Treat as Error</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="CONTRIB: Send Contributor Email Notification">d3f64cf3db46e110b1227ea5f3961986</model>
+        <model_id>d3f64cf3db46e110b1227ea5f3961986</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_output_d3f64cf3db46e110b1227ea5f3961986</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:20:26</sys_created_on>
+        <sys_id>30670c37db46e110b1227ea5f396194f</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:20:26</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=30670c37db46e110b1227ea5f396194f"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=30670c37db46e110b1227ea5f396194f"/>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>action_error_output=true,co_type_name=FDACTIONSTATUS,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=object,uiTypeLabel=Object,uiUniqueId=b593edbf-97ce-46f2-b93a-42c2460d4484</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>__action_status__</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Action Status</label>
+        <mandatory>false</mandatory>
+        <max_length>65000</max_length>
+        <model display_value="CONTRIB: Send Contributor Email Notification">d3f64cf3db46e110b1227ea5f3961986</model>
+        <model_id>d3f64cf3db46e110b1227ea5f3961986</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_output_d3f64cf3db46e110b1227ea5f3961986</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:20:26</sys_created_on>
+        <sys_id>7c670c37db46e110b1227ea5f3961949</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:20:26</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=7c670c37db46e110b1227ea5f3961949"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=7c670c37db46e110b1227ea5f3961949"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=d3f64cf3db46e110b1227ea5f3961986^sys_idNOT IN0de8403bdb46e110b1227ea5f3961960,45e8403bdb46e110b1227ea5f3961960,cde8403bdb46e110b1227ea5f3961960"/>
+    <sys_hub_pill_compound action="INSERT_OR_UPDATE">
+        <attached_to>d3f64cf3db46e110b1227ea5f3961986</attached_to>
+        <extra_info/>
+        <order>0</order>
+        <prescription>{{action.acquisition_package.project_overview.title}}</prescription>
+        <source_ui_id/>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:27:00</sys_created_on>
+        <sys_id>0de8403bdb46e110b1227ea5f3961960</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:27:00</sys_updated_on>
+        <transform_compositions>[]</transform_compositions>
+        <transform_definition_id/>
+        <ui_id>b37e1a35-2da3-40b3-a767-5232fa11e274</ui_id>
+    </sys_hub_pill_compound>
+    <sys_hub_pill_compound action="INSERT_OR_UPDATE">
+        <attached_to>d3f64cf3db46e110b1227ea5f3961986</attached_to>
+        <extra_info/>
+        <order>0</order>
+        <prescription>{{action.current_mission_owner_name}}</prescription>
+        <source_ui_id/>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:27:00</sys_created_on>
+        <sys_id>45e8403bdb46e110b1227ea5f3961960</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:27:00</sys_updated_on>
+        <transform_compositions>[]</transform_compositions>
+        <transform_definition_id/>
+        <ui_id>4f94e91e-bd2c-4aeb-b302-5df127d04218</ui_id>
+    </sys_hub_pill_compound>
+    <sys_hub_pill_compound action="INSERT_OR_UPDATE">
+        <attached_to>d3f64cf3db46e110b1227ea5f3961986</attached_to>
+        <extra_info/>
+        <order>0</order>
+        <prescription>{{step[8cf28f01-a619-473a-8704-2861c49ba7a9].atat_endpoint}}</prescription>
+        <source_ui_id/>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:27:00</sys_created_on>
+        <sys_id>cde8403bdb46e110b1227ea5f3961960</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:27:00</sys_updated_on>
+        <transform_compositions>[]</transform_compositions>
+        <transform_definition_id/>
+        <ui_id>8f0902d7-6bcc-4a01-8dcd-e5e80855541c</ui_id>
+    </sys_hub_pill_compound>
+    <sys_hub_action_status_metadata action="delete_multiple" query="action_type_id=d3f64cf3db46e110b1227ea5f3961986^sys_idNOT INe4374437db46e110b1227ea5f3961905"/>
+    <sys_hub_action_status_metadata action="INSERT_OR_UPDATE">
+        <action_type_id display_value="CONTRIB: Send Contributor Email Notification">d3f64cf3db46e110b1227ea5f3961986</action_type_id>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:19:36</sys_created_on>
+        <sys_id>e4374437db46e110b1227ea5f3961905</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:19:36</sys_updated_on>
+    </sys_hub_action_status_metadata>
+    <sys_hub_status_condition action="delete_multiple" query="action_status_metadata_id=e4374437db46e110b1227ea5f3961905"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_input_d3f64cf3db46e110b1227ea5f3961986^sys_idNOT IN25a8c0f7db46e110b1227ea5f396196e,70670c37db46e110b1227ea5f3961947,7c670c37db46e110b1227ea5f3961940"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current_mission_owner_name</element>
+        <help/>
+        <hint/>
+        <label>Current Mission Owner Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_d3f64cf3db46e110b1227ea5f3961986</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:25:58</sys_created_on>
+        <sys_id>25a8c0f7db46e110b1227ea5f396196e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:25:58</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>acquisition_package</element>
+        <help/>
+        <hint/>
+        <label>Acquisition Package</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_d3f64cf3db46e110b1227ea5f3961986</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:20:26</sys_created_on>
+        <sys_id>70670c37db46e110b1227ea5f3961947</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:20:26</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>new_contributor_email</element>
+        <help/>
+        <hint/>
+        <label>New Contributor Email</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_d3f64cf3db46e110b1227ea5f3961986</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:20:26</sys_created_on>
+        <sys_id>7c670c37db46e110b1227ea5f3961940</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:20:26</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_action_input_d3f64cf3db46e110b1227ea5f3961986"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_output_d3f64cf3db46e110b1227ea5f3961986^sys_idNOT IN38670c37db46e110b1227ea5f3961954,70670c37db46e110b1227ea5f396194e"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>__dont_treat_as_error__</element>
+        <help/>
+        <hint/>
+        <label>Don't Treat as Error</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_d3f64cf3db46e110b1227ea5f3961986</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:20:26</sys_created_on>
+        <sys_id>38670c37db46e110b1227ea5f3961954</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:20:26</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>__action_status__</element>
+        <help/>
+        <hint/>
+        <label>Action Status</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_d3f64cf3db46e110b1227ea5f3961986</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:20:26</sys_created_on>
+        <sys_id>70670c37db46e110b1227ea5f396194e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:20:26</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_action_output_d3f64cf3db46e110b1227ea5f3961986"/>
+    <sys_hub_action_plan action="delete_multiple" query="action_id=d3f64cf3db46e110b1227ea5f3961986^sys_idNOT IN2f7b4c3fdb46e110b1227ea5f39619e3"/>
+    <sys_hub_action_plan action="INSERT_OR_UPDATE">
+        <action_id display_value="CONTRIB: Send Contributor Email Notification">d3f64cf3db46e110b1227ea5f3961986</action_id>
+        <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"2f7b4c3fdb46e110b1227ea5f39619e3","name":"plan","plan_signature":null}}</plan>
+        <snapshot>077b4c3fdb46e110b1227ea5f3961984</snapshot>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:22</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>2f7b4c3fdb46e110b1227ea5f39619e3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:22</sys_updated_on>
+    </sys_hub_action_plan>
+    <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <action_status/>
+        <action_template/>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Sends an email tailored to new Contributors of Acquisition Packages</description>
+        <internal_name>contrib_send_contributor_email_notification</internal_name>
+        <label_cache>[{"name":"{{action.previous_mission_owner_name}}","label":"action➛Current Mission Owner Name","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"string","uiUniqueId":"29e650c7-bd4e-4876-86ad-41c313705219"}},{"name":"{{action.variable}}","label":"action➛variable","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.new_contributor_email}}","label":"action➛New Contributor Email","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.acquisition_package}}","label":"action➛Acquisition Package","type":"action","ref":"","reference_display":"DAPPS:Acquisition Package","base_type":"reference","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{action.acquisition_package.project_overview.title}}","label":"action➛Acquisition Package➛Project Overview➛Title","type":"action","ref":"","reference_display":"Title","base_type":"string","parent_table_name":"x_g_dis_atat_project_overview","column_name":"title","choices":null,"attributes":{}},{"name":"{{action.current_mission_owner_name}}","label":"action➛Current Mission Owner Name","type":"action","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{}},{"name":"{{step[8cf28f01-a619-473a-8704-2861c49ba7a9].atat_endpoint}}","label":"step➛Pre-Process➛atat_endpoint","type":"step","ref":"","reference_display":"","base_type":"string","parent_table_name":"","column_name":"","choices":null,"attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"string","uiUniqueId":"71f8d3cc-e4a1-49b4-9f4a-6491bd5d1a16"}}]</label_cache>
+        <master>true</master>
+        <name>CONTRIB: Send Contributor Email Notification</name>
+        <natlang/>
+        <outputs/>
+        <parent_action display_value="CONTRIB: Send Contributor Email Notification">d3f64cf3db46e110b1227ea5f3961986</parent_action>
+        <sys_class_name>sys_hub_action_type_snapshot</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:20</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>727b4c3fdb46e110b1227ea5f396190b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:20</sys_updated_on>
+        <system_level>false</system_level>
+        <type/>
+    </sys_hub_action_type_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=727b4c3fdb46e110b1227ea5f396190b"/>
+    <sys_variable_value action="delete_multiple" query="document_key=727b4c3fdb46e110b1227ea5f396190b"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_type_snapshot</document>
+        <document_key>727b4c3fdb46e110b1227ea5f396190b</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:21</sys_created_on>
+        <sys_id>4f7b4c3fdb46e110b1227ea5f3961974</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:21</sys_updated_on>
+        <value>{"version":"1.0","serializationFormat":"JSON","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}},"complexObjectSchema":{"FlowDesigner:FDACTIONSTATUS":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"true\",\"hint\":null,\"uiType\":\"integer\",\"default_value\":\"\",\"action_error_output\":\"true\",\"label\":\"Code\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"true\",\"hint\":null,\"uiType\":\"string\",\"default_value\":null,\"action_error_output\":\"true\",\"label\":\"Message\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FDACTIONSTATUS.$type_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FDACTIONSTATUS\",\"read_only\":\"true\",\"hint\":null,\"uiType\":\"object\",\"default_value\":\"\",\"label\":\"Action Status\",\"read_only_complex_object\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"0\",\"uiUniqueId\":\"8e3eb395-c990-4a7d-b8da-081a1acab7eb\"}"}}}</value>
+        <variable display_value="Action Status">8b7b4c3fdb46e110b1227ea5f3961967</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_type_snapshot</document>
+        <document_key>727b4c3fdb46e110b1227ea5f396190b</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:21</sys_created_on>
+        <sys_id>8b7b4c3fdb46e110b1227ea5f3961974</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:21</sys_updated_on>
+        <value>0</value>
+        <variable display_value="Don't Treat as Error">4b7b4c3fdb46e110b1227ea5f396196c</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_action_output_727b4c3fdb46e110b1227ea5f396190b^id=727b4c3fdb46e110b1227ea5f396190b"/>
+    <sys_hub_step_instance action="delete_multiple" query="action=727b4c3fdb46e110b1227ea5f396190b^sys_idNOT INc37b4c3fdb46e110b1227ea5f396192b,c77b4c3fdb46e110b1227ea5f396195f"/>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="CONTRIB: Send Contributor Email Notification">727b4c3fdb46e110b1227ea5f396190b</action>
+        <cid>8cf28f01-a619-473a-8704-2861c49ba7a9</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <label>Pre-Process</label>
+        <order>1</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Script">106afb6647032200b4fad7527c9a71e7</step_type>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:20</sys_created_on>
+        <sys_id>c37b4c3fdb46e110b1227ea5f396192b</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:20</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=c37b4c3fdb46e110b1227ea5f396192b"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>c37b4c3fdb46e110b1227ea5f396192b</document_key>
+        <order>600</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:20</sys_created_on>
+        <sys_id>877b4c3fdb46e110b1227ea5f3961950</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:20</sys_updated_on>
+        <value>(function execute(inputs, outputs) {
+	outputs.atat_endpoint = gs.getProperty("glide.servlet.uri") + "atat";
+})(inputs, outputs);
+</value>
+        <variable display_value="Script">71aa7f6647032200b4fad7527c9a719b</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>c37b4c3fdb46e110b1227ea5f396192b</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:20</sys_created_on>
+        <sys_id>8f7b4c3fdb46e110b1227ea5f396194f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:20</sys_updated_on>
+        <value>35aa573fd7802200bdbaee5b5e610375</value>
+        <variable display_value="MID Application">f5e56d79b3101300176b051a16a8dce4</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_step_ext_output_c37b4c3fdb46e110b1227ea5f396192b^id=c37b4c3fdb46e110b1227ea5f396192b"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7^id=c37b4c3fdb46e110b1227ea5f396192b"/>
+    <sys_hub_step_ext_input action="delete_multiple" query="model=c37b4c3fdb46e110b1227ea5f396192b"/>
+    <sys_hub_step_ext_output action="delete_multiple" query="model=c37b4c3fdb46e110b1227ea5f396192b^sys_idNOT IN077b4c3fdb46e110b1227ea5f3961948"/>
+    <sys_hub_step_ext_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=71f8d3cc-e4a1-49b4-9f4a-6491bd5d1a16</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>atat_endpoint</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>atat_endpoint</label>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Pre-Process">c37b4c3fdb46e110b1227ea5f396192b</model>
+        <model_id>c37b4c3fdb46e110b1227ea5f396192b</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_output_c37b4c3fdb46e110b1227ea5f396192b</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_output</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:20</sys_created_on>
+        <sys_id>077b4c3fdb46e110b1227ea5f3961948</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:20</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_output>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=c37b4c3fdb46e110b1227ea5f396192b"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_step_ext_output_c37b4c3fdb46e110b1227ea5f396192b^sys_idNOT IN8f7b4c3fdb46e110b1227ea5f396194b"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>atat_endpoint</element>
+        <help/>
+        <hint/>
+        <label>atat_endpoint</label>
+        <language>en</language>
+        <name>var__m_sys_hub_step_ext_output_c37b4c3fdb46e110b1227ea5f396192b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:20</sys_created_on>
+        <sys_id>8f7b4c3fdb46e110b1227ea5f396194b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:20</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="CONTRIB: Send Contributor Email Notification">727b4c3fdb46e110b1227ea5f396190b</action>
+        <cid>6bfe5dd8-f492-495c-a9f8-a44113e385df</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <inputs/>
+        <label>Email step</label>
+        <order>2</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Email">4c5f36a37f0b32005f58108c3ffa9126</step_type>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:20</sys_created_on>
+        <sys_id>c77b4c3fdb46e110b1227ea5f396195f</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:20</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=c77b4c3fdb46e110b1227ea5f396195f"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>c77b4c3fdb46e110b1227ea5f396195f</document_key>
+        <order>500</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:20</sys_created_on>
+        <sys_id>4f7b4c3fdb46e110b1227ea5f3961965</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:20</sys_updated_on>
+        <value/>
+        <variable display_value="Body">8ef44f277f0b32005f58108c3ffa91f7</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>c77b4c3fdb46e110b1227ea5f396195f</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:20</sys_created_on>
+        <sys_id>8b7b4c3fdb46e110b1227ea5f3961965</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:20</sys_updated_on>
+        <value>0</value>
+        <variable display_value="Include Watermark">0fba76757303230082999cfd7bf6a7f2</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=c77b4c3fdb46e110b1227ea5f396195f"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>body</field>
+        <id>c77b4c3fdb46e110b1227ea5f396195f</id>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:20</sys_created_on>
+        <sys_id>0b7b4c3fdb46e110b1227ea5f3961965</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:20</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_4c5f36a37f0b32005f58108c3ffa9126</table>
+        <value>&lt;p&gt;&lt;span class="data_parent_pill" style="display: inline;" contenteditable="false" data-pillvalue="{{fd_transform:b37e1a35-2da3-40b3-a767-5232fa11e274}}"&gt;&lt;span class="data_pill  accepts_transform_functions" tabindex="0" contenteditable="false" data-pillvalue="{{fd_transform:b37e1a35-2da3-40b3-a767-5232fa11e274}}"&gt;&lt;span class="data-pill-content-container"&gt;&lt;span class="pills"&gt;&lt;span class="pill-text" data-for="ah_tooltipTop" data-tip="action &amp;gt; Acquisition Package &amp;gt; Project Overview &amp;gt; Title"&gt;&lt;span class="pill-start"&gt;action&lt;/span&gt;&lt;span class="pill-arrow"&gt;&lt;span class="data-pill-label-caret"&gt;&lt;span class="data-pill-label-arrow"&gt;➛&lt;/span&gt;&lt;/span&gt;...&lt;span class="data-pill-label-caret"&gt;&lt;span class="data-pill-label-arrow"&gt;➛&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="pill-end"&gt;Title&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;button id="transform_function_facade_b37e1a35-2da3-40b3-a767-5232fa11e274" class="transform_function_facade no_transform_applied"&gt;&lt;span class="inline-script-icon"&gt;&lt;span style="display: none;"&gt;​&lt;/span&gt;&lt;/span&gt;&lt;/button&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&amp;nbsp;invited you as a contributor to the "&lt;span class="data_parent_pill" style="display: inline;" contenteditable="false" data-pillvalue="{{fd_transform:4f94e91e-bd2c-4aeb-b302-5df127d04218}}"&gt;&lt;span class="data_pill  accepts_transform_functions" tabindex="0" contenteditable="false" data-pillvalue="{{fd_transform:4f94e91e-bd2c-4aeb-b302-5df127d04218}}"&gt;&lt;span class="data-pill-content-container"&gt;&lt;span class="pills"&gt;&lt;span class="pill-text" data-for="ah_tooltipTop" data-tip="action &amp;gt; Current Mission Owner Name"&gt;&lt;span class="pill-start"&gt;action&lt;/span&gt;&lt;span class="pill-arrow"&gt;&lt;span class="data-pill-label-caret"&gt;&lt;span class="data-pill-label-arrow"&gt;➛&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="pill-end"&gt;Current Mission Owner Name&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;button id="transform_function_facade_4f94e91e-bd2c-4aeb-b302-5df127d04218" class="transform_function_facade no_transform_applied"&gt;&lt;span class="inline-script-icon"&gt;&lt;span style="display: none;"&gt;​&lt;/span&gt;&lt;/span&gt;&lt;/button&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;" package. You can now edit details about this acquistion within the DISA Acquisition Package Preparation System (DAPPS).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Access package from your dashboard:&lt;/strong&gt;&amp;nbsp;&lt;a href="https://services.disa.mil/atat"&gt;https://services.disa.mil/atat&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;This was sent from an unmonitored email address. Please do not reply to this email. If you have questions about JWCC or DAPPS, please contact our Customer Support Team at&amp;nbsp;&lt;a href="https://community.hacc.mil/s/contact?&amp;amp;RoleType=Customer" rel="nofollow"&gt;https://community.hacc.mil/s/contact?&amp;amp;RoleType=Customer&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>subject</field>
+        <id>c77b4c3fdb46e110b1227ea5f396195f</id>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:20</sys_created_on>
+        <sys_id>cf7b4c3fdb46e110b1227ea5f3961964</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:20</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_4c5f36a37f0b32005f58108c3ffa9126</table>
+        <value>JWCC requirements package shared with you: "{{action.acquisition_package.project_overview.title}}"</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>to</field>
+        <id>c77b4c3fdb46e110b1227ea5f396195f</id>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:20</sys_created_on>
+        <sys_id>477b4c3fdb46e110b1227ea5f3961965</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:20</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_4c5f36a37f0b32005f58108c3ffa9126</table>
+        <value>{{action.new_contributor_email}} </value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>watermark_email</field>
+        <id>c77b4c3fdb46e110b1227ea5f396195f</id>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:20</sys_created_on>
+        <sys_id>837b4c3fdb46e110b1227ea5f3961965</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:20</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_4c5f36a37f0b32005f58108c3ffa9126</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_step_ext_input action="delete_multiple" query="model=c77b4c3fdb46e110b1227ea5f396195f"/>
+    <sys_hub_step_ext_output action="delete_multiple" query="model=c77b4c3fdb46e110b1227ea5f396195f"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=c77b4c3fdb46e110b1227ea5f396195f"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_step_ext_output_c77b4c3fdb46e110b1227ea5f396195f"/>
+    <sys_hub_action_input action="delete_multiple" query="model=727b4c3fdb46e110b1227ea5f396190b^sys_idNOT IN767b4c3fdb46e110b1227ea5f396190e,be7b4c3fdb46e110b1227ea5f396191f,cb7b4c3fdb46e110b1227ea5f3961923"/>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=e6cd6af3-262b-4169-8332-cfb822b2bc48</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current_mission_owner_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Current Mission Owner Name</label>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="CONTRIB: Send Contributor Email Notification">727b4c3fdb46e110b1227ea5f396190b</model>
+        <model_id>727b4c3fdb46e110b1227ea5f396190b</model_id>
+        <model_table>sys_hub_action_type_snapshot</model_table>
+        <name>var__m_sys_hub_action_input_727b4c3fdb46e110b1227ea5f396190b</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:20</sys_created_on>
+        <sys_id>767b4c3fdb46e110b1227ea5f396190e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:20</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=767b4c3fdb46e110b1227ea5f396190e"/>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=3da67a43-3b80-4e6f-a79e-9b1400389b7d</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>new_contributor_email</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>New Contributor Email</label>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="CONTRIB: Send Contributor Email Notification">727b4c3fdb46e110b1227ea5f396190b</model>
+        <model_id>727b4c3fdb46e110b1227ea5f396190b</model_id>
+        <model_table>sys_hub_action_type_snapshot</model_table>
+        <name>var__m_sys_hub_action_input_727b4c3fdb46e110b1227ea5f396190b</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:20</sys_created_on>
+        <sys_id>be7b4c3fdb46e110b1227ea5f396191f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:20</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=be7b4c3fdb46e110b1227ea5f396191f"/>
+    <sys_hub_action_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference,uiUniqueId=29008963-04be-4c81-8d2d-04fb9d13252c</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table>x_g_dis_atat_acquisition_package</choice_table>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>acquisition_package</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>Acquisition Package</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="CONTRIB: Send Contributor Email Notification">727b4c3fdb46e110b1227ea5f396190b</model>
+        <model_id>727b4c3fdb46e110b1227ea5f396190b</model_id>
+        <model_table>sys_hub_action_type_snapshot</model_table>
+        <name>var__m_sys_hub_action_input_727b4c3fdb46e110b1227ea5f396190b</name>
+        <next_element/>
+        <order>3</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference display_value="" name="x_g_dis_atat_acquisition_package">x_g_dis_atat_acquisition_package</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_input</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:20</sys_created_on>
+        <sys_id>cb7b4c3fdb46e110b1227ea5f3961923</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:20</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=cb7b4c3fdb46e110b1227ea5f3961923"/>
+    <sys_hub_action_output action="delete_multiple" query="model=727b4c3fdb46e110b1227ea5f396190b^sys_idNOT IN4b7b4c3fdb46e110b1227ea5f396196c,8b7b4c3fdb46e110b1227ea5f3961967"/>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>action_error_output=true,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=boolean,uiTypeLabel=True/False,uiUniqueId=a5fbf4a2-b9c4-4d2f-893a-a5e59ad9e167,visible_in_ui=false</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value>true</default_value>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>__dont_treat_as_error__</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="">boolean</internal_type>
+        <label>Don't Treat as Error</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="CONTRIB: Send Contributor Email Notification">727b4c3fdb46e110b1227ea5f396190b</model>
+        <model_id>727b4c3fdb46e110b1227ea5f396190b</model_id>
+        <model_table>sys_hub_action_type_snapshot</model_table>
+        <name>var__m_sys_hub_action_output_727b4c3fdb46e110b1227ea5f396190b</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:20</sys_created_on>
+        <sys_id>4b7b4c3fdb46e110b1227ea5f396196c</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:21</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=4b7b4c3fdb46e110b1227ea5f396196c"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=4b7b4c3fdb46e110b1227ea5f396196c"/>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>action_error_output=true,co_type_name=FDACTIONSTATUS,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=object,uiTypeLabel=Object,uiUniqueId=b593edbf-97ce-46f2-b93a-42c2460d4484</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>__action_status__</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Action Status</label>
+        <mandatory>false</mandatory>
+        <max_length>65000</max_length>
+        <model display_value="CONTRIB: Send Contributor Email Notification">727b4c3fdb46e110b1227ea5f396190b</model>
+        <model_id>727b4c3fdb46e110b1227ea5f396190b</model_id>
+        <model_table>sys_hub_action_type_snapshot</model_table>
+        <name>var__m_sys_hub_action_output_727b4c3fdb46e110b1227ea5f396190b</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:20</sys_created_on>
+        <sys_id>8b7b4c3fdb46e110b1227ea5f3961967</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:20</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=8b7b4c3fdb46e110b1227ea5f3961967"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=8b7b4c3fdb46e110b1227ea5f3961967"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=727b4c3fdb46e110b1227ea5f396190b^sys_idNOT IN4b7b4c3fdb46e110b1227ea5f3961983,877b4c3fdb46e110b1227ea5f3961983,cf7b4c3fdb46e110b1227ea5f3961982"/>
+    <sys_hub_pill_compound action="INSERT_OR_UPDATE">
+        <attached_to>727b4c3fdb46e110b1227ea5f396190b</attached_to>
+        <extra_info/>
+        <order>0</order>
+        <prescription>{{step[8cf28f01-a619-473a-8704-2861c49ba7a9].atat_endpoint}}</prescription>
+        <source_ui_id/>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:21</sys_created_on>
+        <sys_id>4b7b4c3fdb46e110b1227ea5f3961983</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:21</sys_updated_on>
+        <transform_compositions>[]</transform_compositions>
+        <transform_definition_id/>
+        <ui_id>8f0902d7-6bcc-4a01-8dcd-e5e80855541c</ui_id>
+    </sys_hub_pill_compound>
+    <sys_hub_pill_compound action="INSERT_OR_UPDATE">
+        <attached_to>727b4c3fdb46e110b1227ea5f396190b</attached_to>
+        <extra_info/>
+        <order>0</order>
+        <prescription>{{action.acquisition_package.project_overview.title}}</prescription>
+        <source_ui_id/>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:21</sys_created_on>
+        <sys_id>877b4c3fdb46e110b1227ea5f3961983</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:21</sys_updated_on>
+        <transform_compositions>[]</transform_compositions>
+        <transform_definition_id/>
+        <ui_id>b37e1a35-2da3-40b3-a767-5232fa11e274</ui_id>
+    </sys_hub_pill_compound>
+    <sys_hub_pill_compound action="INSERT_OR_UPDATE">
+        <attached_to>727b4c3fdb46e110b1227ea5f396190b</attached_to>
+        <extra_info/>
+        <order>0</order>
+        <prescription>{{action.current_mission_owner_name}}</prescription>
+        <source_ui_id/>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:21</sys_created_on>
+        <sys_id>cf7b4c3fdb46e110b1227ea5f3961982</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:21</sys_updated_on>
+        <transform_compositions>[]</transform_compositions>
+        <transform_definition_id/>
+        <ui_id>4f94e91e-bd2c-4aeb-b302-5df127d04218</ui_id>
+    </sys_hub_pill_compound>
+    <sys_hub_action_status_metadata action="delete_multiple" query="action_type_id=727b4c3fdb46e110b1227ea5f396190b^sys_idNOT IN4f7b4c3fdb46e110b1227ea5f3961983"/>
+    <sys_hub_action_status_metadata action="INSERT_OR_UPDATE">
+        <action_type_id display_value="CONTRIB: Send Contributor Email Notification">727b4c3fdb46e110b1227ea5f396190b</action_type_id>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:21</sys_created_on>
+        <sys_id>4f7b4c3fdb46e110b1227ea5f3961983</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:21</sys_updated_on>
+    </sys_hub_action_status_metadata>
+    <sys_hub_status_condition action="delete_multiple" query="action_status_metadata_id=4f7b4c3fdb46e110b1227ea5f3961983"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_input_727b4c3fdb46e110b1227ea5f396190b^sys_idNOT IN0f7b4c3fdb46e110b1227ea5f3961928,4f7b4c3fdb46e110b1227ea5f3961922,7a7b4c3fdb46e110b1227ea5f3961912"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>acquisition_package</element>
+        <help/>
+        <hint/>
+        <label>Acquisition Package</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_727b4c3fdb46e110b1227ea5f396190b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:20</sys_created_on>
+        <sys_id>0f7b4c3fdb46e110b1227ea5f3961928</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:20</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>new_contributor_email</element>
+        <help/>
+        <hint/>
+        <label>New Contributor Email</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_727b4c3fdb46e110b1227ea5f396190b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:20</sys_created_on>
+        <sys_id>4f7b4c3fdb46e110b1227ea5f3961922</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:20</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current_mission_owner_name</element>
+        <help/>
+        <hint/>
+        <label>Current Mission Owner Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_input_727b4c3fdb46e110b1227ea5f396190b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:20</sys_created_on>
+        <sys_id>7a7b4c3fdb46e110b1227ea5f3961912</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:20</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_action_input_727b4c3fdb46e110b1227ea5f396190b"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_output_727b4c3fdb46e110b1227ea5f396190b^sys_idNOT IN4f7b4c3fdb46e110b1227ea5f3961971,cb7b4c3fdb46e110b1227ea5f396196b"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>__dont_treat_as_error__</element>
+        <help/>
+        <hint/>
+        <label>Don't Treat as Error</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_727b4c3fdb46e110b1227ea5f396190b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:21</sys_created_on>
+        <sys_id>4f7b4c3fdb46e110b1227ea5f3961971</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:21</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>__action_status__</element>
+        <help/>
+        <hint/>
+        <label>Action Status</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_727b4c3fdb46e110b1227ea5f396190b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-04-13 14:38:20</sys_created_on>
+        <sys_id>cb7b4c3fdb46e110b1227ea5f396196b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-13 14:38:20</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_action_output_727b4c3fdb46e110b1227ea5f396190b"/>
+    <sys_hub_action_type_definition action="UPDATE">
+        <sys_id>d3f64cf3db46e110b1227ea5f3961986</sys_id>
+        <latest_snapshot>727b4c3fdb46e110b1227ea5f396190b</latest_snapshot>
+        <compiler_build>glide-tokyo-07-08-2022__patch7-02-16-2023_02-28-2023_1844.zip</compiler_build>
+    </sys_hub_action_type_definition>
+</record_update>
