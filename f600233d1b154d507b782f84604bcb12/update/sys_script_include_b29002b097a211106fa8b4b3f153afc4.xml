@@ -5,7 +5,8 @@
         <api_name>x_g_dis_atat.Igce</api_name>
         <caller_access/>
         <client_callable>false</client_callable>
-        <description/>
+        <description>ATAT class for creating an Independent Government Cost Estimate (IGCE) payload and related functionality.&#13;
+Payload is sent to the HOTH API for document generation.</description>
         <name>Igce</name>
         <script><![CDATA[var Igce = Class.create();
 Igce.prototype = {
@@ -100,15 +101,13 @@ Igce.prototype = {
     ],
     acquisitionPackage: null,
     errUtil: new ErrorHandler(),
+    maxLimitForToArray: 100,
 
     initialize: function(acquisitionPackage) {
         this.acquisitionPackage = acquisitionPackage;
     },
     getEstimatedObligation: function() {
         var payload = JSON.parse(this.getPayload());
-        // var templatePayload = payload.templatePayload;
-        // gs.info("**** TEMPLATE PAYLOAD ****");
-        // gs.info(JSON.stringify(templatePayload));
         return payload.templatePayload.periodsEstimate
             .map(function(estimate) {
                 return estimate.periodLineItems;
@@ -570,7 +569,7 @@ Igce.prototype = {
                                     serviceTitle: item.training_instance_info.instance_name,
                                     itemDescription: item.training_instance_info.anticipated_need_or_usage,
                                     unitPrice: item.estimated_price_per_training_unit,
-                                    quantity: period.quantity, //
+                                    quantity: period.quantity,
                                     unit: Igce.prototype.determineTrainingUnit(
                                         item.training_unit
                                     ),
@@ -593,11 +592,10 @@ Igce.prototype = {
             var packageId = packageSysId ?
                 packageSysId :
                 this.acquisitionPackage.sys_id;
-            var limit = 50; // arbitrary
             return new global.GlideQuery(Igce.prototype.TRAVEL_REQ_TABLE)
                 .where("acquisition_package", packageId)
                 .select(Igce.prototype.TRAVEL_REQ_FIELDS)
-                .toArray(limit);
+                .toArray(this.maxLimitForToArray);
         } catch (error) {
             throw this.errUtil.createError(
                 "Igce --> getTravelRequirements(): " + error,
@@ -610,11 +608,10 @@ Igce.prototype = {
             var packageId = packageSysId ?
                 packageSysId :
                 this.acquisitionPackage.sys_id;
-            var limit = 50; // arbitrary
             return new global.GlideQuery(Igce.prototype.ARCH_DESIGN_REQ_TABLE)
                 .where("acquisition_package", packageId)
                 .select(Igce.prototype.ARCH_DESIGN_REQ_FIELDS)
-                .toArray(limit);
+                .toArray(this.maxLimitForToArray);
         } catch (error) {
             gs.error(error);
             throw this.errUtil.createError(
@@ -628,11 +625,10 @@ Igce.prototype = {
             var packageId = packageSysId ?
                 packageSysId :
                 this.acquisitionPackage.sys_id;
-            var limit = 50; // arbitrary
             return new global.GlideQuery(Igce.prototype.TRAINING_ESTIMATE_TABLE)
                 .where("acquisition_package", packageId)
                 .select(Igce.prototype.TRAINING_ESTIMATE_FIELDS)
-                .toArray(limit);
+                .toArray(this.maxLimitForToArray);
         } catch (error) {
             throw this.errUtil.createError(
                 "Igce --> getTrainingEstimates(): " + error,
@@ -645,11 +641,10 @@ Igce.prototype = {
             var packageId = packageSysId ?
                 packageSysId :
                 this.acquisitionPackage.sys_id;
-            var limit = 50; // arbitrary
             return new global.GlideQuery(Igce.prototype.IGCE_ESTIMATE_TABLE)
                 .where("acquisition_package", packageId)
                 .select(Igce.prototype.IGCE_ESTIMATE_FIELDS)
-                .toArray(limit);
+                .toArray(this.maxLimitForToArray);
         } catch (error) {
             throw this.errUtil.createError(
                 "Igce --> getIgceEstimates(): " + error,
@@ -754,13 +749,12 @@ Igce.prototype = {
             var packageId = packageSysId ?
                 packageSysId :
                 this.acquisitionPackage.sys_id;
-            var limit = 50; // arbitrary
             var igce_instructs = new global.GlideQuery(
                     Igce.prototype.REQ_COST_ESTIMATE_TABLE
                 )
                 .where("acquisition_package", packageId)
                 .select(Igce.prototype.REQ_COST_ESTIMATE_FIELDS)
-                .toArray(limit);
+                .toArray(this.maxLimitForToArray);
             // This query is a bit bugged, should only need to return the object instead of an array of a single object,
             // however there is a bug with how GlideQuery handles display values not resulting in the sys_id not being found.
             // bandaid fix is returning the first object in the igce_instructs array
@@ -920,7 +914,8 @@ Igce.prototype = {
     /**
      * Transforms IGCE docgen payload to JSON data needed to display Cost Estimate summary on UI
      * @param string packageSysId the acquisition package sys_id
-     * @returns JSON structure organized by IDIQ clins with cost estimates per period of the PoP
+     * @returns JSON structure organized by IDIQ clins with cost estimates per period of the PoP.
+     * Includes subtotal, contracting office fees, surge capacity fees (optional), grand total.
      */
     getCostEstimateData: function(packageSysId) {
         function sum(entry) {
@@ -983,7 +978,7 @@ Igce.prototype = {
                 return entry;
             });
 
-            // Create a single object with the subtotals for each period
+            // Calculation of subtotals for each period
             var subtotals = uniquePeriods.reduce(function(periodResult, period) {
                 periodResult[period] = data
                     .filter(function(entry) {
@@ -998,7 +993,9 @@ Igce.prototype = {
                 return periodResult;
             }, {});
 
-            // Fee calculation valid for both DITCO and OTHER
+            // Calculation for external ordering fee whether DITCO and OTHER
+
+            // TODO: fix the label below to respect DITCO/OTHER
             var fees = {
                 "CLIN Type & Classification": "External ordering agency fee (" + payload.templatePayload.contractingShop.fee + "%)",
             };
@@ -1012,28 +1009,36 @@ Igce.prototype = {
             fees.Total = sum(fees);
             data.push(fees);
 
-            // TODO Improve to lookup specific surge %; assumes 5%
-            var surge = Object.keys(subtotals).reduce(function(result, key) {
-                result[key] = subtotals[key] * 0.05;
-                return result;
-            }, {});
+            // Calculation for optional surge capability percentage
+            var surge = null;
+            if (payload.templatePayload.surgeCapabilities) {
+                surge = Object.keys(subtotals).reduce(function(result, key) {
+                    result[key] = subtotals[key] * (payload.templatePayload.surgeCapabilities * 0.01);
+                    return result;
+                }, {});
+            }
 
+            // Calculation for grand total
             var total = Object.keys(subtotals).reduce(function(result, key) {
-                result[key] = subtotals[key] + fees[key] + surge[key];
+                result[key] = subtotals[key] + fees[key];
+                if (surge) { //optional
+                    result[key] += surge[key];
+                }
                 return result;
             }, {});
             total.Total = Object.values(total).reduce(function(result, v) {
                 return result + v;
             }, 0);
 
-            var summary = {};
-            summary.data = data;
-            summary.subtotal = subtotals;
-            summary.surge = surge;
-            summary.total = total;
+            var costEstimateData = {};
+            costEstimateData.data = data;
+            costEstimateData.subtotal = subtotals;
+            if (surge) {
+                costEstimateData.surge = surge;
+            }
+            costEstimateData.total = total;
 
-            // return the transformation
-            return summary;
+            return costEstimateData;
         } catch (error) {
             throw this.errUtil.createError(
                 "Igce --> getCostEstimateData(): " + error,
@@ -1152,9 +1157,9 @@ Igce.prototype = {
             }
             instructions = {
                 estimateDescription: igceInstructions.how_est_dev_cost_estimate_description,
-                assumptionsMade: "assumptions",
+                assumptionsMade: "NOT USED",
                 toolsUsed: toolsUsed,
-                informationSource: "info source",
+                informationSource: "NOT USED",
                 previousEstimateComparison: previousEstimateComparison,
             };
         }
@@ -1514,13 +1519,13 @@ Igce.prototype = {
         <sys_created_by>jeff.segal-ctr</sys_created_by>
         <sys_created_on>2022-10-12 15:53:33</sys_created_on>
         <sys_id>b29002b097a211106fa8b4b3f153afc4</sys_id>
-        <sys_mod_count>127</sys_mod_count>
+        <sys_mod_count>130</sys_mod_count>
         <sys_name>Igce</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_b29002b097a211106fa8b4b3f153afc4</sys_update_name>
         <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
-        <sys_updated_on>2023-04-18 20:57:51</sys_updated_on>
+        <sys_updated_on>2023-04-18 22:41:51</sys_updated_on>
     </sys_script_include>
 </record_update>
