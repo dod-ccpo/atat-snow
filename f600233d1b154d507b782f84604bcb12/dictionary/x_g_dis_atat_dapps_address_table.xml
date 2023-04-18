@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="b0dfb955971221107b1372571153af30" label="DAPPS:Address Table" max_length="40" name="x_g_dis_atat_dapps_address_table" type="collection">
+        <element label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
+        <element choice="1" label="Address Type" max_length="40" name="address_type" type="string">
+            <choice/>
+        </element>
+        <element label="City/APO/FPO" max_length="50" name="city_apo_fpo" type="string"/>
+        <element label="Country" max_length="50" name="country" type="string"/>
+        <element label="Email" max_length="40" name="email" type="string"/>
+        <element label="Full Name" max_length="40" name="full_name" type="string"/>
+        <element label="State/Province/State Code" max_length="50" name="state_province_state_code" type="string"/>
+        <element label="Street Address 1" max_length="50" name="street_address_1" type="string"/>
+        <element label="Street Address 2" max_length="50" name="street_address_2" type="string"/>
+        <element choice="1" label="Category" max_length="40" name="type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Contracting Office" value="CONTRACTING_OFFICE"/>
+                <element inactive_on_update="false" label="FOIA" value="FOIA"/>
+                <element inactive_on_update="false" label="Organization" value="ORGANIZATION"/>
+            </choice>
+        </element>
+        <element label="Zip/Postal Code" max_length="40" name="zip_postal_code" type="string"/>
+        <index name="index">
+            <element name="acquisition_package"/>
+        </index>
+    </element>
+</database>

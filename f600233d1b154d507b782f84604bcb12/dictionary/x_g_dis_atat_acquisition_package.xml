@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="DAPPS:Acquisition Package" max_length="40" name="x_g_dis_atat_acquisition_package" sizeclass="163" type="collection">
+    <element db_object_id="3a80dd5e971121107b1372571153af2b" label="DAPPS:Acquisition Package" max_length="40" name="x_g_dis_atat_acquisition_package" type="collection">
         <element label="ACOR" max_length="32" name="acor" reference="x_g_dis_atat_contacts" type="reference"/>
+        <element label="Address" max_length="32" name="address" reference="x_g_dis_atat_dapps_address_table" type="reference"/>
         <element choice="1" label="Contracting Shop" max_length="40" name="contracting_shop" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Defense Information Technology Contracting Organization (DITCO)" sequence="1" value="DITCO"/>
@@ -58,58 +59,61 @@
         <element attributes="no_sort=true,slushbucket_ref_no_expand=true" label="Selected Service Offerings" max_length="4000" name="selected_service_offerings" reference="x_g_dis_atat_selected_service_offering" type="glide_list"/>
         <element label="Sensitive Information" max_length="32" name="sensitive_information" reference="x_g_dis_atat_sensitive_information" type="reference"/>
         <index name="index">
-            <element name="fair_opportunity"/>
-        </index>
-        <index name="index2">
-            <element name="project_overview"/>
-        </index>
-        <index name="index3">
-            <element name="gfe_overview"/>
-        </index>
-        <index name="index4">
-            <element name="sensitive_information"/>
-        </index>
-        <index name="index5">
             <element name="acor"/>
         </index>
-        <index name="index6">
-            <element name="contract_considerations"/>
+        <index name="index2">
+            <element name="address"/>
         </index>
-        <index name="index7">
+        <index name="index3">
             <element name="contract_award"/>
         </index>
+        <index name="index4">
+            <element name="contract_considerations"/>
+        </index>
+        <index name="index5">
+            <element name="contract_type"/>
+        </index>
+        <index name="index6">
+            <element name="cor"/>
+        </index>
+        <index name="index7">
+            <element name="current_environment"/>
+        </index>
         <index name="index8">
-            <element name="funding_request"/>
+            <element name="ditco_ko"/>
         </index>
         <index name="index9">
             <element name="evaluation_plan"/>
         </index>
         <index name="index10">
-            <element name="contract_type"/>
+            <element name="fair_opportunity"/>
         </index>
         <index name="index11">
-            <element name="period_of_performance"/>
+            <element name="funding_request"/>
         </index>
         <index name="index12">
-            <element name="requirements_cost_estimate"/>
+            <element name="gfe_overview"/>
         </index>
         <index name="index13">
-            <element name="cor"/>
-        </index>
-        <index name="index14">
-            <element name="primary_contact"/>
-        </index>
-        <index name="index15">
-            <element name="ditco_ko"/>
-        </index>
-        <index name="index16">
             <element name="organization"/>
         </index>
-        <index name="index17">
+        <index name="index14">
+            <element name="period_of_performance"/>
+        </index>
+        <index name="index15">
+            <element name="primary_contact"/>
+        </index>
+        <index name="index16">
             <element name="primary_reviewer"/>
         </index>
+        <index name="index17">
+            <element name="project_overview"/>
+        </index>
         <index name="index18">
-            <element name="current_environment"/>
+            <element name="requirements_cost_estimate"/>
+        </index>
+        <index name="index19">
+            <element name="sensitive_information"/>
         </index>
     </element>
 </database>
