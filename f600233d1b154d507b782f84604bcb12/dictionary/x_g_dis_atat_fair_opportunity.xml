@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Fair Opportunity" max_length="40" name="x_g_dis_atat_fair_opportunity" sizeclass="0" type="collection">
+    <element db_object_id="b5a091529751211044ecfbc71153af04" label="DAPPS:Fair Opportunity" max_length="40" name="x_g_dis_atat_fair_opportunity" type="collection">
+        <element label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
+        <element choice="1" label="CSP" max_length="40" name="csp" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="AWS" sequence="1" value="AWS"/>
+                <element inactive_on_update="false" label="Google Cloud" sequence="2" value="GCP"/>
+                <element inactive_on_update="false" label="Microsoft Azure" sequence="3" value="AZURE"/>
+                <element inactive_on_update="false" label="Oracle Cloud" sequence="4" value="ORACLE"/>
+            </choice>
+        </element>
         <element choice="1" display="true" label="Exception to Fair Opportunity" max_length="40" name="exception_to_fair_opportunity" type="choice">
             <choice>
                 <element inactive_on_update="false" label="No - None of the exceptions apply" value="NO_NONE"/>
@@ -8,5 +17,13 @@
                 <element inactive_on_update="false" label="Yes - The agency need for supplies... FAR 16.505(b)(2)(i)(A)" value="YES_FAR_16_505_B_2_I_A"/>
             </choice>
         </element>
+        <element label="J&amp;A" max_length="40" name="j_a" reference="x_g_dis_atat_dapps_fair_opp_j_a" type="reference"/>
+        <element label="MRR" max_length="32" name="mrr" reference="x_g_dis_atat_dapps_fair_opp_mrr" type="reference"/>
+        <index name="index">
+            <element name="acquisition_package"/>
+        </index>
+        <index name="index2">
+            <element name="mrr"/>
+        </index>
     </element>
 </database>

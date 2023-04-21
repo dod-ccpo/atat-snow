@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="3ea2b0529792611044ecfbc71153afec" label="DAPPS:Fair Opp - J&amp;A" max_length="40" name="x_g_dis_atat_dapps_fair_opp_j_a" type="collection">
+        <element label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
+        <element display="true" label="Justification" max_length="4000" name="justification" type="string"/>
+        <element label="Minimum Government Requirements" max_length="4000" name="minimum_government_requirements" type="string"/>
+        <element label="Procurement Discussion" max_length="4000" name="procurement_discussion" type="string"/>
+        <element label="Requirement Impact" max_length="4000" name="requirement_impact" type="string"/>
+        <element label="Sole Source-Product/Feature-Why Essential" max_length="4000" name="sole_source_product_feature_why_essential" type="string"/>
+        <element label="Sole Source-Govt Engs-Insufficient Time Reason" max_length="4000" name="ss_govt_engs_insufficient_time_reason" type="string"/>
+        <element label="Sole Source-Govt Engs-Platform Name" max_length="4000" name="ss_govt_engs_platform_name" type="string"/>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Sole Source-Govt Engs-Training Certified" max_length="40" name="ss_govt_engs_training_certified" type="choice">
+            <choice/>
+        </element>
+        <element choice="3" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Sole Source-Migration-Additional Time Cost" max_length="40" name="ss_migration_addl_time_cost" type="choice">
+            <choice/>
+        </element>
+        <element label="Sole Source-Migration-Estimated Cost" max_length="40" name="ss_migration_est_cost" type="currency"/>
+        <element label="Sole Source-Migration-Estimated Delay Amount" max_length="40" name="ss_migration_est_delay_amount" type="integer"/>
+        <element choice="1" label="Sole Source-Migration-Estimated Delay Unit" max_length="40" name="ss_migration_est_delay_unit" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Day(s)" sequence="1" value="DAYS"/>
+                <element inactive_on_update="false" label="Week(s)" sequence="2" value="WEEKS"/>
+                <element inactive_on_update="false" label="Month(s)" sequence="3" value="MONTHS"/>
+                <element inactive_on_update="false" label="Year(s)" sequence="4" value="YEARS"/>
+            </choice>
+        </element>
+        <element label="Sole Source-Product/Feature-Name" max_length="4000" name="ss_product_feature_name" type="string"/>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Sole Source-Product/Feature-Peculiar to CSP" max_length="40" name="ss_product_feature_peculiar_to_csp" type="choice">
+            <choice/>
+        </element>
+        <element choice="1" label="Sole Source-Product/Feature-Type" max_length="40" name="ss_product_feature_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Product" sequence="1" value="PRODUCT"/>
+                <element inactive_on_update="false" label="Feature" sequence="2" value="FEATURE"/>
+            </choice>
+        </element>
+        <element label="Sole Source-Product/Feature-Why Others Inadequate" max_length="4000" name="ss_product_feature_why_others_inadequate" type="string"/>
+        <element label="Sole Source-Cause of Situation" max_length="4000" name="ss_situation_cause" type="string"/>
+        <element label="Why CSP Is Only Capable Source" max_length="4000" name="why_csp_is_only_capable_source" type="string"/>
+        <index name="index">
+            <element name="acquisition_package"/>
+        </index>
+    </element>
+</database>
