@@ -1,10 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Portfolio" max_length="40" name="x_g_dis_atat_portfolio" type="collection">
+    <element db_object_id="e152d508db47d99088887ea5f39619d2" max_length="40" name="x_g_dis_atat_portfolio" type="collection">
         <element label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
-        <element label="Mission Owners" max_length="4000" name="mission_owners" type="glide_list"/>
+        <element label="Active Task Order" max_length="32" name="active_task_order" reference="x_g_dis_atat_task_order" type="reference"/>
+        <element label="Agency" max_length="32" name="agency" reference="x_g_dis_atat_agency" type="reference"/>
+        <element label="CSP ID" max_length="2000" name="csp_id" type="string"/>
+        <element label="Description" max_length="4000" name="description" type="string"/>
+        <element label="Last Updated" max_length="40" name="last_updated" type="glide_date_time"/>
         <element display="true" label="Name" max_length="60" name="name" type="string"/>
+        <element active="false" label="Pending Operators" max_length="4000" name="operators" reference="x_g_dis_atat_operator" type="glide_list"/>
+        <element choice="1" label="Funding Status" max_length="40" name="portfolio_funding_status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="On-Track" sequence="1" value="ON_TRACK"/>
+                <element inactive_on_update="false" label="At-Risk" sequence="2" value="AT_RISK"/>
+                <element inactive_on_update="false" label="Funding At-Risk" sequence="3" value="FUNDING_AT_RISK"/>
+                <element inactive_on_update="false" label="Expired" sequence="4" value="EXPIRED"/>
+                <element inactive_on_update="false" label="Delinquent" sequence="5" value="DELINQUENT"/>
+                <element inactive_on_update="false" label="Expiring Soon" sequence="6" value="EXPIRING_SOON"/>
+            </choice>
+        </element>
+        <element label="Portfolio Managers" max_length="4000" name="portfolio_managers" reference="sys_user" type="glide_list"/>
+        <element choice="1" label="Portfolio Status" max_length="40" name="portfolio_status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Processing" sequence="1" value="PROCESSING"/>
+                <element inactive_on_update="false" label="Provisioning Issue" sequence="2" value="PROVISIONING_ISSUE"/>
+                <element inactive_on_update="false" label="Active" sequence="3" value="ACTIVE"/>
+                <element inactive_on_update="false" label="Archived" sequence="4" value="ARCHIVED"/>
+            </choice>
+        </element>
+        <element label="Portfolio Viewers" max_length="4000" name="portfolio_viewers" reference="sys_user" type="glide_list"/>
+        <element label="Provisioned" max_length="40" name="provisioned" type="boolean"/>
+        <element label="Provisioned Date" max_length="40" name="provisioned_date" type="glide_date_time"/>
+        <element active="false" label="Provisioning Failure Cause" max_length="100" name="provisioning_failure_cause" type="string"/>
+        <element label="Provisioning Request Date" max_length="40" name="provisioning_request_date" type="glide_date_time"/>
+        <element choice="1" choice_field="vendor" choice_table="x_g_dis_atat_cloud_service_provider" label="Vendor" max_length="40" name="vendor" type="choice">
+            <choice/>
+        </element>
         <index name="index">
             <element name="acquisition_package"/>
+        </index>
+        <index name="index2">
+            <element name="active_task_order"/>
+        </index>
+        <index name="index3">
+            <element name="agency"/>
         </index>
     </element>
 </database>

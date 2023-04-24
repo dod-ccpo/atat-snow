@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.getClinFromDowTask</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Given a Description of Work Task # and array of IDIQ CLINs, determine which IDIQ CLIN should be provided</description>
+        <name>getClinFromDowTask</name>
+        <script><![CDATA[function getClinFromDowTask(dow_task_number, idiq_clins){
+	//x001/x017 Cloud UNCLASSIFIED,x002/x018 Cloud Support UNCLASSIFIED,x003/x019 Cloud SECRET CLASSIFIED,x007 Travel T&M
+	
+	if (dow_task_number == null){
+		return "xx001";
+	}
+	var dowTask = dow_task_number.substr(0,5);
+	
+	var idiqClinValue;
+	
+	
+	// Check for Cloud UNCLASSIFIED DOW sections
+	if (dowTask == "4.2.1" || dowTask == "4.2.2" || dowTask == "4.2.3"){
+		// search idiq_clins for Cloud UNCLASSIFIED
+		for (i = 0; i <idiq_clins.length; i++){
+			if (idiq_clins[i].indexOf("Cloud UNCLASSIFIED") != -1){
+				return idiq_clins[i];
+			}
+		}
+	}
+	
+	// Check for Cloud SECRET CLASSIFIED
+	else if (dowTask == "4.2.4"){
+		// search idiq_clins for Cloud SECRET CLASSIFIED
+		for (i = 0; i <idiq_clins.length; i++){
+			if (idiq_clins[i].indexOf("Cloud SECRET CLASSIFIED") != -1){
+				return idiq_clins[i];
+			}
+		}
+	}
+	// Check for Cloud TOP SECRET CLASSIFIED
+	else if (dowTask == "4.2.5"){
+		// search idiq_clins for Cloud TOP SECRET CLASSIFIED
+		for (i = 0; i <idiq_clins.length; i++){
+			if (idiq_clins[i].indexOf("Cloud TOP SECRET CLASSIFIED") != -1){
+				return idiq_clins[i];
+			}
+		}
+	}
+	// Check for Cloud Support UNCLASSIFIED DOW sections
+	else if (dowTask == "4.3.1" || dowTask == "4.3.2" || dowTask == "4.3.3"){
+		// search idiq_clins for Cloud Support UNCLASSIFIED
+		for (i = 0; i <idiq_clins.length; i++){
+			if (idiq_clins[i].indexOf("Cloud Support UNCLASSIFIED") != -1){
+				return idiq_clins[i];
+			}
+		}
+	}
+	// Check for Cloud Support SECRET CLASSIFIED
+	else if (dowTask == "4.3.4"){
+		// search idiq_clins for Cloud Support SECRET CLASSIFIED
+		for (i = 0; i <idiq_clins.length; i++){
+			if (idiq_clins[i].indexOf("Cloud Support SECRET CLASSIFIED") != -1){
+				return idiq_clins[i];
+			}
+		}
+	}
+	// Check for Cloud Support TOP SECRET CLASSIFIED
+	else if (dowTask == "4.3.5"){
+		// search idiq_clins for Cloud Support TOP SECRET CLASSIFIED
+		for (i = 0; i <idiq_clins.length; i++){
+			if (idiq_clins[i].indexOf("Cloud Support TOP SECRET CLASSIFIED") != -1){
+				return idiq_clins[i];
+			}
+		}
+	}
+	// Check for Travel
+	else if (dowTask == "10f"){
+		for (i = 0; i <idiq_clins.length; i++){
+			if (idiq_clins[i].indexOf("Travel") != -1){
+				return idiq_clins[i];
+			}
+		}
+	}
+	// Last option is External Ordering Agency Fee
+	else {
+		for (i = 0; i <idiq_clins.length; i++){
+			if (idiq_clins[i].indexOf("External Ordering Agency Fee") != -1){
+				return idiq_clins[i];
+			}
+		}
+	}
+	
+}
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>zach.clark</sys_created_by>
+        <sys_created_on>2022-08-26 03:24:31</sys_created_on>
+        <sys_id>b8e291a11ba911107c458623604bcb0c</sys_id>
+        <sys_mod_count>25</sys_mod_count>
+        <sys_name>getClinFromDowTask</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_b8e291a11ba911107c458623604bcb0c</sys_update_name>
+        <sys_updated_by>zach.clark</sys_updated_by>
+        <sys_updated_on>2022-08-26 06:09:51</sys_updated_on>
+    </sys_script_include>
+</record_update>

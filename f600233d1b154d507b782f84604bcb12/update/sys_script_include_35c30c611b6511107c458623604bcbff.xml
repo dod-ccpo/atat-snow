@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.getNestedIgceServiceInfo</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>getNestedIgceServiceInfo</name>
+        <script><![CDATA[function getNestedIgceServiceInfo(selectedService) {
+	// get service offering or user created offering for each selection
+	var offering;
+	if (selectedService.service_offering) {
+		offering = new global.GlideQuery('x_g_dis_atat_service_offering')
+			.get(selectedService.service_offering,
+			['service_offering_group', 'name'])
+			.orElse(null);
+		offering = removeSysId(offering);
+	} else {
+		offering = {
+			name: selectedService.other_service_offering.toString(),
+			service_offering_group: null
+		};
+	}
+	selectedService.service_offering = offering;
+	
+	// get classification instances info for igce
+	if (selectedService.classification_instances){ 
+	var classificationInstanceFields = [
+		'need_for_entire_task_order_duration', 'usage_description',
+		'classification_level', 'selected_periods', 'monthly_price', 'dow_task_number'];
+	selectedService.classification_instances = getListRecords(
+		selectedService.classification_instances.toString(),
+		classificationInstanceFields,
+		'x_g_dis_atat_classification_instance')
+		.map(removeSysId)
+		.map(getClassificationInstanceInfo);
+	}
+	
+	// get estimated environment instances for igce
+	if(selectedService.estimated_environment_instances){
+	var estimatedEnvironmentInstanceFields = [
+		'need_for_entire_task_order_duration','classification_level', 'selected_periods', 'monthly_price', 
+		'dow_task_number', 'instance_name', 'instance_location', 'number_of_vcpus', 'storage_amount',
+		'storage_type', 'memory_amount', 'memory_unit', 'data_egress_monthly_amount', 'data_egress_monthly_unit'
+	];
+	selectedService.estimated_environment_instances = getListRecords(
+		selectedService.estimated_environment_instances.toString(),
+		estimatedEnvironmentInstanceFields,
+		'x_g_dis_atat_estimated_environment_instance')
+		.map(removeSysId)
+		.map(getClassificationInstanceInfo);
+	}
+	return selectedService;
+}]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>zach.clark</sys_created_by>
+        <sys_created_on>2022-08-25 21:38:55</sys_created_on>
+        <sys_id>35c30c611b6511107c458623604bcbff</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>getNestedIgceServiceInfo</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_35c30c611b6511107c458623604bcbff</sys_update_name>
+        <sys_updated_by>zach.clark</sys_updated_by>
+        <sys_updated_on>2022-08-25 23:40:22</sys_updated_on>
+    </sys_script_include>
+</record_update>

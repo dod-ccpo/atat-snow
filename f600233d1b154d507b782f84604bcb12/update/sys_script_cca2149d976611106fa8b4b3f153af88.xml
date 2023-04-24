@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_g_dis_atat_operator</collection>
+        <condition>current.provisioned_date.changes() || current.provisioning_request_date.changes()</condition>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Oper - Portfolio last updated</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+
+    var now = new GlideDateTime();
+	
+	// assigning current.portfolio.last_updated does not work for updating 
+	// the portfolio so GlideRecord is used
+	var portfolioGr = new GlideRecord("x_g_dis_atat_portfolio");
+	portfolioGr.get(current.portfolio);
+	portfolioGr.last_updated = now.getDisplayValueInternal();
+	portfolioGr.update();
+	
+	var message = "Portfolio " + current.portfolio.name + " was updated due to an Operator update.";
+	gs.addInfoMessage(message);
+	gs.debug(message);
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-10-13 21:06:59</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>cca2149d976611106fa8b4b3f153af88</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Oper - Portfolio last updated</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_cca2149d976611106fa8b4b3f153af88</sys_update_name>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-10-13 21:06:59</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=cca2149d976611106fa8b4b3f153af88"/>
+</record_update>

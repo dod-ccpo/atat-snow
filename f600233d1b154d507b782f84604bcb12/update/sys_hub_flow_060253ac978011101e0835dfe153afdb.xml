@@ -1,0 +1,1486 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description/>
+        <internal_name>atat_generate_description_of_work</internal_name>
+        <label_cache>[{"name":"subflow.request_path.value","label":"Input➛Request Path➛Value","reference":"","reference_display":"Value","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_configuration","column_name":"value"},{"name":"subflow.base_url.value","label":"Input➛Base URL➛Value","reference":"","reference_display":"Value","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_configuration","column_name":"value"},{"name":"subflow.aws_region.value","label":"Input➛AWS Region➛Value","reference":"","reference_display":"Value","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_configuration","column_name":"value"},{"name":"425ad7a6-1693-4807-9804-c451b599f0c5.__action_status__.code","label":"2➛Action Status➛Code","reference":"","reference_display":"","type":"integer","base_type":"integer","column_name":"","attributes":{}},{"name":"efd37e57-8697-4189-a464-a18ae2317334.__dont_treat_as_error__","label":"4➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"efd37e57-8697-4189-a464-a18ae2317334.__action_status__","label":"4➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"85334e8e-45ac-491b-897d-2fb5bea3bf46.__status__","label":"4➛Error Status","reference_display":"Error Status","type":"object","base_type":"object","attributes":{"uiType":"object","uiTypeLabel":"Object","co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"de1452b3-6c91-4089-b625-e7d0d9add60a.__status__","label":"4➛Error Status","reference_display":"Error Status","type":"object","base_type":"object","attributes":{"uiType":"object","uiTypeLabel":"Object","co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"5f850fe6-8d85-4e5a-8e05-8df013d927e2.returnval","label":"4➛Return Value","reference_display":"Return Value","type":"string","base_type":"string","attributes":{"pills_draggable_inside_block":"false","pills_draggable_outside_block":"true"}},{"name":"5f850fe6-8d85-4e5a-8e05-8df013d927e2.result","label":"4➛Result","reference_display":"Result","type":"string","base_type":"string","attributes":{"pills_draggable_inside_block":"false","pills_draggable_outside_block":"true"}},{"name":"5f850fe6-8d85-4e5a-8e05-8df013d927e2.context","label":"4➛Context","reference":"wf_context","reference_display":"Workflow context","type":"reference","base_type":"reference","attributes":{"pills_draggable_inside_block":"false","pills_draggable_outside_block":"true"}},{"name":"5f850fe6-8d85-4e5a-8e05-8df013d927e2.state","label":"4➛State","reference_display":"State","type":"string","base_type":"string","attributes":{"pills_draggable_inside_block":"false","pills_draggable_outside_block":"true"}},{"name":"6001e91e-7a51-40b3-9a7a-b7aded8bb7ad.__dont_treat_as_error__","label":"3➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"8889ab6b-1e55-4042-b3ad-4e71036a78e5"}},{"name":"6001e91e-7a51-40b3-9a7a-b7aded8bb7ad.__action_status__","label":"3➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FD8c9b80491c041110ee542b8f7ad75312","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"48f3b9f4-ec5e-458a-8a09-05b20f450432"}},{"name":"425ad7a6-1693-4807-9804-c451b599f0c5.variable","label":"2➛Response Body","reference_display":"Response Body","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"70e33bde-cff3-42a0-8d5d-6a7a598be287"}},{"name":"subflow.acquisition_package.sys_id","label":"Input➛Acquisition Package➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"x_g_dis_atat_acquisition_package","column_name":"sys_id"},{"name":"6d60b8e4-8efd-442f-aadc-8d93f5799dc7.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"99c860d0-25e8-4104-bbb0-7b65310cf489"}},{"name":"6d60b8e4-8efd-442f-aadc-8d93f5799dc7.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FD7e57b877e8234110644d26e7d0b3013b","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"46232d67-15b6-42ff-bb91-06f93679d6ca"}},{"name":"6d60b8e4-8efd-442f-aadc-8d93f5799dc7.dow_document_data","label":"1➛DoW Document Data","reference_display":"DoW Document Data","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"f2194a2c-4fb2-4f4e-a144-1a1e4272066d"}},{"name":"57b5528c-2122-43a0-861b-6aa4c728b8ff.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"6391b310-5d9e-4d67-9d1e-90f421c55efc"}},{"name":"57b5528c-2122-43a0-861b-6aa4c728b8ff.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FD2ca65b24fbc01110936aaa164fae267c","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"55b2092b-ee6f-4ede-a3b9-3e6d9abf0e31"}},{"name":"subflow.aws_credential.sys_id","label":"Input➛AWS Credential➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"aws_credentials","column_name":"sys_id"},{"name":"425ad7a6-1693-4807-9804-c451b599f0c5.__dont_treat_as_error__","label":"2➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"6391b310-5d9e-4d67-9d1e-90f421c55efc"}},{"name":"425ad7a6-1693-4807-9804-c451b599f0c5.__action_status__","label":"2➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FD110f4be8e3801110f76b8e1112854b27","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"55b2092b-ee6f-4ede-a3b9-3e6d9abf0e31"}},{"name":"9a7b1317-5d48-4a2b-b519-051263426f64.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"99c860d0-25e8-4104-bbb0-7b65310cf489"}},{"name":"9a7b1317-5d48-4a2b-b519-051263426f64.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FD5357b877f723411026d69fd59e0e47bb","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"46232d67-15b6-42ff-bb91-06f93679d6ca"}},{"name":"9a7b1317-5d48-4a2b-b519-051263426f64.dow_document_data","label":"1➛DoW Document Data","reference_display":"DoW Document Data","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"f2194a2c-4fb2-4f4e-a144-1a1e4272066d"}},{"name":"subflow.acquisition_package","label":"Input➛Acquisition Package","reference":"x_g_dis_atat_acquisition_package","reference_display":"DAPPS:Acquisition Package","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"0357cfbf-8fe7-44b0-a4df-134adaa63a65","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.aws_credential","label":"Input➛AWS Credential","reference":"aws_credentials","reference_display":"AWS Credentials","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"1893ff1f-8a71-477f-a4ac-aeefb5a982c3","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.endpoint","label":"Input➛Endpoint","reference":"x_g_dis_atat_configuration","reference_display":"DELETE:ATAT Configuration","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"0516bf9a-e41c-43a1-bf48-a016dfb24c39","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.request_path","label":"Input➛Base URL","reference":"","reference_display":"","type":"string","base_type":"string","column_name":"","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"5be97304-a65d-431a-b414-dbfc461db58c","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.aws_region","label":"Input➛AWS Region","reference":"x_g_dis_atat_configuration","reference_display":"DELETE:ATAT Configuration","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"1b77f16b-7c50-46ff-a302-f2ecef02ec16","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.base_url","label":"Input➛Base URL","reference":"x_g_dis_atat_configuration","reference_display":"DELETE:ATAT Configuration","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"ea75d632-51d0-4938-a2b1-6d5d6b997781","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.resource_path","label":"Input➛Resource Path","reference":"x_g_dis_atat_configuration","reference_display":"DELETE:ATAT Configuration","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"868a6fa5-e63e-4621-8b34-29f962826999","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.resource_path.value","label":"Input➛Resource Path➛Value","reference":"","reference_display":"Value","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_configuration","column_name":"value"},{"name":"425ad7a6-1693-4807-9804-c451b599f0c5.error_message","label":"2➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"28752eb6-ce9e-49f8-a7b9-e3c03173a2c4"}},{"name":"425ad7a6-1693-4807-9804-c451b599f0c5.response_status","label":"2➛Response Status","reference_display":"Response Status","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"6679b850-af9e-4018-8c37-b9cea8061597"}},{"name":"subflow.apigw_api_id","label":"Input➛API Gateway ID","reference":"x_g_dis_atat_configuration","reference_display":"DELETE:ATAT Configuration","type":"reference","base_type":"reference","attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":"","uiUniqueId":"b7c7c3c2-a8c4-45e4-bebc-1795f301bac9"}},{"name":"6d60b8e4-8efd-442f-aadc-8d93f5799dc7.dow_payload","label":"1➛DOW Payload","reference_display":"DOW Payload","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"53fecb06-4ac3-4329-b6d3-065afaaa792f"}}]</label_cache>
+        <master_snapshot>bb55881f87409110bc86b889cebb35ad</master_snapshot>
+        <name>DOCGEN: Generate Description of Work</name>
+        <natlang/>
+        <outputs/>
+        <pre_compiled>false</pre_compiled>
+        <remote_trigger_id/>
+        <run_as>system</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:28:50</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>060253ac978011101e0835dfe153afdb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>DOCGEN: Generate Description of Work</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_hub_flow_060253ac978011101e0835dfe153afdb</sys_update_name>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-11 17:26:02</sys_updated_on>
+        <type>subflow</type>
+    </sys_hub_flow>
+    <sys_translated_text action="delete_multiple" query="documentkey=060253ac978011101e0835dfe153afdb"/>
+    <sys_variable_value action="delete_multiple" query="document_key=060253ac978011101e0835dfe153afdb"/>
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=060253ac978011101e0835dfe153afdb"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=060253ac978011101e0835dfe153afdb"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=060253ac978011101e0835dfe153afdb^sys_idNOT INc20253ac978011101e0835dfe153afdd"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>060253ac978011101e0835dfe153afdb</id>
+        <name>ATAT Generate Description of Work</name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:28:50</sys_created_on>
+        <sys_id>c20253ac978011101e0835dfe153afdd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:28:50</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=c20253ac978011101e0835dfe153afdd"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=060253ac978011101e0835dfe153afdb^sys_idNOT IN3592dbac978011101e0835dfe153af91"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference,uiUniqueId=0357cfbf-8fe7-44b0-a4df-134adaa63a65</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table>x_g_dis_atat_acquisition_package</choice_table>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>acquisition_package</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>Acquisition Package</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="DOCGEN: Generate Description of Work">060253ac978011101e0835dfe153afdb</model>
+        <model_id>060253ac978011101e0835dfe153afdb</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_060253ac978011101e0835dfe153afdb</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference display_value="" name="x_g_dis_atat_acquisition_package">x_g_dis_atat_acquisition_package</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:31:16</sys_created_on>
+        <sys_id>3592dbac978011101e0835dfe153af91</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 17:25:57</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_output action="delete_multiple" query="model=060253ac978011101e0835dfe153afdb"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=060253ac978011101e0835dfe153afdb"/>
+    <sys_hub_action_instance action="delete_multiple" query="flow=060253ac978011101e0835dfe153afdb^sys_idNOT IN5df3abe4970411101e0835dfe153af74,cf27976497c011101e0835dfe153afa5,effc00c9970411101e0835dfe153af2c,f4e25dc91bc49110c385ea85604bcb3e"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="DOCGEN: Gather DescriptionOfWork Data">0f57b8771b234110c385ea85604bcb95</action_type>
+        <action_type_parent/>
+        <comment/>
+        <display_text/>
+        <flow display_value="DOCGEN: Generate Description of Work">060253ac978011101e0835dfe153afdb</flow>
+        <order>1</order>
+        <parent_ui_id>07d7b044-09ae-403f-a022-67f8abe408f9</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 21:47:09</sys_created_on>
+        <sys_id>5df3abe4970411101e0835dfe153af74</sys_id>
+        <sys_mod_count>70</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-04-11 19:42:18</sys_updated_on>
+        <ui_id>6d60b8e4-8efd-442f-aadc-8d93f5799dc7</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=5df3abe4970411101e0835dfe153af74"/>
+    <sys_element_mapping action="delete_multiple" query="id=5df3abe4970411101e0835dfe153af74"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>acquisition_package</field>
+        <id>5df3abe4970411101e0835dfe153af74</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 21:47:09</sys_created_on>
+        <sys_id>99f3abe4970411101e0835dfe153af75</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 21:47:09</sys_updated_on>
+        <table>var__m_sys_hub_action_input_0f57b8771b234110c385ea85604bcb95</table>
+        <value>{{subflow.acquisition_package}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>acquisition_package</field>
+        <id>5df3abe4970411101e0835dfe153af74</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-12-16 16:24:02</sys_created_on>
+        <sys_id>bc18343197f391106fa8b4b3f153af73</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-16 16:24:02</sys_updated_on>
+        <table>var__m_sys_hub_action_input_4ed9607b1bef0110c385ea85604bcbcd</table>
+        <value>{{subflow.acquisition_package}}</value>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=5df3abe4970411101e0835dfe153af74"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=5df3abe4970411101e0835dfe153af74"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="UTIL: HOTH API POST Request">54a61b2497c011101e0835dfe153afb0</action_type>
+        <action_type_parent/>
+        <comment>/generate-document</comment>
+        <display_text/>
+        <flow display_value="DOCGEN: Generate Description of Work">060253ac978011101e0835dfe153afdb</flow>
+        <order>2</order>
+        <parent_ui_id>07d7b044-09ae-403f-a022-67f8abe408f9</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:51:17</sys_created_on>
+        <sys_id>cf27976497c011101e0835dfe153afa5</sys_id>
+        <sys_mod_count>74</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-04-11 19:42:18</sys_updated_on>
+        <ui_id>425ad7a6-1693-4807-9804-c451b599f0c5</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=cf27976497c011101e0835dfe153afa5"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>cf27976497c011101e0835dfe153afa5</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-24 20:26:33</sys_created_on>
+        <sys_id>2853bc7487bad510ec3b777acebb352d</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-16 16:23:50</sys_updated_on>
+        <value/>
+        <variable display_value="Resource Path">ca0390b3db2e1150b1227ea5f396199b</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=cf27976497c011101e0835dfe153afa5"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>acquisition_package</field>
+        <id>cf27976497c011101e0835dfe153afa5</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-10 17:41:16</sys_created_on>
+        <sys_id>0545b77097c011101e0835dfe153af4b</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-10 17:49:39</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value>{{subflow.acquisition_package}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>apigw_id</field>
+        <id>cf27976497c011101e0835dfe153afa5</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-07-26 14:23:39</sys_created_on>
+        <sys_id>8f21047b97301110986cb846f053af09</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-07-26 14:23:39</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value>{{subflow.apigw_api_id}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>aws_credential</field>
+        <id>cf27976497c011101e0835dfe153afa5</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:51:17</sys_created_on>
+        <sys_id>cf27976497c011101e0835dfe153afa7</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 21:42:19</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value>{{subflow.aws_credential}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>aws_region</field>
+        <id>cf27976497c011101e0835dfe153afa5</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:51:17</sys_created_on>
+        <sys_id>0b27976497c011101e0835dfe153afa8</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-07-26 14:23:39</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value>{{subflow.aws_region}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>base_url</field>
+        <id>cf27976497c011101e0835dfe153afa5</id>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 17:43:24</sys_created_on>
+        <sys_id>bce8330787409110bc86b889cebb356b</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-07-26 14:23:39</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value>{{subflow.base_url}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>endpoint</field>
+        <id>cf27976497c011101e0835dfe153afa5</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:51:17</sys_created_on>
+        <sys_id>4727976497c011101e0835dfe153afa8</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 17:25:58</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>request_body</field>
+        <id>cf27976497c011101e0835dfe153afa5</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:51:17</sys_created_on>
+        <sys_id>cb27976497c011101e0835dfe153afa8</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-16 16:23:50</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value>{{6d60b8e4-8efd-442f-aadc-8d93f5799dc7.dow_payload}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>request_body</field>
+        <id>cf27976497c011101e0835dfe153afa5</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-12-16 16:24:02</sys_created_on>
+        <sys_id>bc18343197f391106fa8b4b3f153af75</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-16 16:24:02</sys_updated_on>
+        <table>var__m_sys_hub_action_input_921e87a8978011101e0835dfe153afb4</table>
+        <value>{{6d60b8e4-8efd-442f-aadc-8d93f5799dc7.dow_payload}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>request_path</field>
+        <id>cf27976497c011101e0835dfe153afa5</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:51:17</sys_created_on>
+        <sys_id>8327976497c011101e0835dfe153afa8</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 17:43:24</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value>{{subflow.request_path.value}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>resource_path</field>
+        <id>cf27976497c011101e0835dfe153afa5</id>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 17:54:23</sys_created_on>
+        <sys_id>216b738787409110bc86b889cebb3590</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-24 20:26:33</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=cf27976497c011101e0835dfe153afa5^sys_idNOT INf908b03197f391106fa8b4b3f153af54"/>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <input_name>resource_path</input_name>
+        <instance>cf27976497c011101e0835dfe153afa5</instance>
+        <referenced_table>sys_hub_action_instance</referenced_table>
+        <script>{"resource_path":{"scriptActive":true,"script":"/*\n**Access Flow/Action data using the fd_data object. Script must return a value.\n**example: var shortDesc \u003d fd_data.trigger.current.short_description;\n**return shortDesc;\n*/\n\nreturn \"/generate-document\";"}}</script>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-12-16 16:23:50</sys_created_on>
+        <sys_id>f908b03197f391106fa8b4b3f153af54</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-16 16:23:50</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=cf27976497c011101e0835dfe153afa5"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="UTIL: Attach Binary File to Acquisition Package">6dcc8889970411101e0835dfe153afdb</action_type>
+        <action_type_parent/>
+        <comment>DOW generated document</comment>
+        <display_text/>
+        <flow display_value="DOCGEN: Generate Description of Work">060253ac978011101e0835dfe153afdb</flow>
+        <order>3</order>
+        <parent_ui_id>07d7b044-09ae-403f-a022-67f8abe408f9</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-10 19:24:55</sys_created_on>
+        <sys_id>effc00c9970411101e0835dfe153af2c</sys_id>
+        <sys_mod_count>62</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-04-11 19:42:18</sys_updated_on>
+        <ui_id>6001e91e-7a51-40b3-9a7a-b7aded8bb7ad</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=effc00c9970411101e0835dfe153af2c"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>effc00c9970411101e0835dfe153af2c</document_key>
+        <order>4</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-10 19:32:14</sys_created_on>
+        <sys_id>26ae044d970411101e0835dfe153afce</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2023-01-26 08:27:21</sys_updated_on>
+        <value/>
+        <variable display_value="Content Type">c89e404d970411101e0835dfe153af89</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>effc00c9970411101e0835dfe153af2c</document_key>
+        <order>3</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-12-16 16:24:02</sys_created_on>
+        <sys_id>3418343197f391106fa8b4b3f153af79</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-30 02:57:18</sys_updated_on>
+        <value/>
+        <variable display_value="File Name">423ec80d970411101e0835dfe153af49</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>effc00c9970411101e0835dfe153af2c</document_key>
+        <order>4</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-12-16 16:24:02</sys_created_on>
+        <sys_id>7c18343197f391106fa8b4b3f153af78</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-30 02:57:18</sys_updated_on>
+        <value/>
+        <variable display_value="Content Type">463ec80d970411101e0835dfe153af4f</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>effc00c9970411101e0835dfe153af2c</document_key>
+        <order>3</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-10 19:32:14</sys_created_on>
+        <sys_id>eaae044d970411101e0835dfe153afce</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2023-01-26 08:27:21</sys_updated_on>
+        <value/>
+        <variable display_value="File Name">4c9e404d970411101e0835dfe153af83</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=effc00c9970411101e0835dfe153af2c"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>acquisition_package</field>
+        <id>effc00c9970411101e0835dfe153af2c</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-10 19:24:55</sys_created_on>
+        <sys_id>6bfc00c9970411101e0835dfe153af2e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-10 19:24:55</sys_updated_on>
+        <table>var__m_sys_hub_action_input_6dcc8889970411101e0835dfe153afdb</table>
+        <value>{{subflow.acquisition_package}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>acquisition_package</field>
+        <id>effc00c9970411101e0835dfe153af2c</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-12-16 16:24:02</sys_created_on>
+        <sys_id>b018343197f391106fa8b4b3f153af78</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-16 16:24:02</sys_updated_on>
+        <table>var__m_sys_hub_action_input_92ea0409970411101e0835dfe153af2f</table>
+        <value>{{subflow.acquisition_package}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>binary_file</field>
+        <id>effc00c9970411101e0835dfe153af2c</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-10 19:26:07</sys_created_on>
+        <sys_id>cd4d48c9970411101e0835dfe153afa9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-10 19:26:07</sys_updated_on>
+        <table>var__m_sys_hub_action_input_6dcc8889970411101e0835dfe153afdb</table>
+        <value>{{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>binary_file</field>
+        <id>effc00c9970411101e0835dfe153af2c</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-12-16 16:24:02</sys_created_on>
+        <sys_id>7418343197f391106fa8b4b3f153af78</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-16 16:24:02</sys_updated_on>
+        <table>var__m_sys_hub_action_input_92ea0409970411101e0835dfe153af2f</table>
+        <value>{{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>content_type</field>
+        <id>effc00c9970411101e0835dfe153af2c</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-10 19:32:14</sys_created_on>
+        <sys_id>eeae044d970411101e0835dfe153afcd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-10 19:32:14</sys_updated_on>
+        <table>var__m_sys_hub_action_input_6dcc8889970411101e0835dfe153afdb</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>content_type</field>
+        <id>effc00c9970411101e0835dfe153af2c</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-12-16 16:24:02</sys_created_on>
+        <sys_id>3818343197f391106fa8b4b3f153af78</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-16 16:24:02</sys_updated_on>
+        <table>var__m_sys_hub_action_input_92ea0409970411101e0835dfe153af2f</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>file_name</field>
+        <id>effc00c9970411101e0835dfe153af2c</id>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-10 19:32:14</sys_created_on>
+        <sys_id>a2ae044d970411101e0835dfe153afce</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-10 19:32:14</sys_updated_on>
+        <table>var__m_sys_hub_action_input_6dcc8889970411101e0835dfe153afdb</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>file_name</field>
+        <id>effc00c9970411101e0835dfe153af2c</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-12-16 16:24:02</sys_created_on>
+        <sys_id>f818343197f391106fa8b4b3f153af78</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-16 16:24:02</sys_updated_on>
+        <table>var__m_sys_hub_action_input_92ea0409970411101e0835dfe153af2f</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=effc00c9970411101e0835dfe153af2c^sys_idNOT IN7fa5420a9708a1106fa8b4b3f153af17,f3a5420a9708a1106fa8b4b3f153af17"/>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <input_name>content_type</input_name>
+        <instance>effc00c9970411101e0835dfe153af2c</instance>
+        <referenced_table>sys_hub_action_instance</referenced_table>
+        <script>{"content_type":{"scriptActive":true,"script":"/*\n**Access Flow/Action data using the fd_data object. Script must return a value.\n**example: var shortDesc \u003d fd_data.trigger.current.short_description;\n**return shortDesc;\n*/\n\nreturn  \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\";"}}</script>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-12-30 02:57:18</sys_created_on>
+        <sys_id>7fa5420a9708a1106fa8b4b3f153af17</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-30 02:57:18</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <input_name>file_name</input_name>
+        <instance>effc00c9970411101e0835dfe153af2c</instance>
+        <referenced_table>sys_hub_action_instance</referenced_table>
+        <script>{"file_name":{"scriptActive":true,"script":"/*\n**Access Flow/Action data using the fd_data object. Script must return a value.\n**example: var shortDesc \u003d fd_data.trigger.current.short_description;\n**return shortDesc;\n*/\n\nreturn \"DescriptionOfWork.docx\";"}}</script>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-12-30 02:57:18</sys_created_on>
+        <sys_id>f3a5420a9708a1106fa8b4b3f153af17</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-30 02:57:18</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=effc00c9970411101e0835dfe153af2c"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
+        <action_type_parent/>
+        <comment/>
+        <display_text/>
+        <flow display_value="DOCGEN: Generate Description of Work">060253ac978011101e0835dfe153afdb</flow>
+        <order>5</order>
+        <parent_ui_id>85334e8e-45ac-491b-897d-2fb5bea3bf46</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-06-11 00:30:17</sys_created_on>
+        <sys_id>f4e25dc91bc49110c385ea85604bcb3e</sys_id>
+        <sys_mod_count>54</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-04-11 19:42:18</sys_updated_on>
+        <ui_id>efd37e57-8697-4189-a464-a18ae2317334</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=f4e25dc91bc49110c385ea85604bcb3e"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>f4e25dc91bc49110c385ea85604bcb3e</document_key>
+        <order>0</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-06-11 00:30:17</sys_created_on>
+        <sys_id>b4e25dc91bc49110c385ea85604bcb40</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-06-11 00:30:17</sys_updated_on>
+        <value>error</value>
+        <variable display_value="Level">5bc1bcc6531003003bf1d9109ec587d7</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>f4e25dc91bc49110c385ea85604bcb3e</document_key>
+        <order>0</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-12-16 16:24:02</sys_created_on>
+        <sys_id>f418343197f391106fa8b4b3f153af8d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-16 16:24:02</sys_updated_on>
+        <value>error</value>
+        <variable display_value="Level">8f4aa006531003003bf1d9109ec587aa</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=f4e25dc91bc49110c385ea85604bcb3e"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>log_level</field>
+        <id>f4e25dc91bc49110c385ea85604bcb3e</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-12-16 16:24:02</sys_created_on>
+        <sys_id>b018343197f391106fa8b4b3f153af8d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-16 16:24:02</sys_updated_on>
+        <table>var__m_sys_hub_action_input_0e0ae8c2531003003bf1d9109ec587c8</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>log_level</field>
+        <id>f4e25dc91bc49110c385ea85604bcb3e</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-06-11 00:30:17</sys_created_on>
+        <sys_id>70e25dc91bc49110c385ea85604bcb40</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-06-11 00:30:17</sys_updated_on>
+        <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>log_message</field>
+        <id>f4e25dc91bc49110c385ea85604bcb3e</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-12-16 16:24:02</sys_created_on>
+        <sys_id>7418343197f391106fa8b4b3f153af8d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-16 16:24:02</sys_updated_on>
+        <table>var__m_sys_hub_action_input_0e0ae8c2531003003bf1d9109ec587c8</table>
+        <value>Generating the DoW was not successful.
+Status Code: {{425ad7a6-1693-4807-9804-c451b599f0c5.__action_status__.code}}.
+Error: {{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>log_message</field>
+        <id>f4e25dc91bc49110c385ea85604bcb3e</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-06-11 00:30:17</sys_created_on>
+        <sys_id>34e25dc91bc49110c385ea85604bcb40</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-06-11 00:30:17</sys_updated_on>
+        <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
+        <value>Generating the DoW was not successful.
+Status Code: {{425ad7a6-1693-4807-9804-c451b599f0c5.__action_status__.code}}.
+Error: {{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=f4e25dc91bc49110c385ea85604bcb3e"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=f4e25dc91bc49110c385ea85604bcb3e"/>
+    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=060253ac978011101e0835dfe153afdb"/>
+    <sys_hub_flow_logic action="delete_multiple" query="flow=060253ac978011101e0835dfe153afdb^sys_idNOT IN64e25dc91bc49110c385ea85604bcb16,74e25dc91bc49110c385ea85604bcb1e"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">2d24163697202110cf3cfd9fe153afb8</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="DOCGEN: Generate Description of Work">060253ac978011101e0835dfe153afdb</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="Try">07223332de022010ec58424b73829721</logic_definition>
+        <order>0</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-06-11 00:30:16</sys_created_on>
+        <sys_id>64e25dc91bc49110c385ea85604bcb16</sys_id>
+        <sys_mod_count>32</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2023-01-26 08:27:26</sys_updated_on>
+        <ui_id>07d7b044-09ae-403f-a022-67f8abe408f9</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=64e25dc91bc49110c385ea85604bcb16"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=64e25dc91bc49110c385ea85604bcb16"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=64e25dc91bc49110c385ea85604bcb16"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">7924163697202110cf3cfd9fe153afc4</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="DOCGEN: Generate Description of Work">060253ac978011101e0835dfe153afdb</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="Top Level Catch">35d60003e6022010a5e40cdd1254dd23</logic_definition>
+        <order>4</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-06-11 00:30:16</sys_created_on>
+        <sys_id>74e25dc91bc49110c385ea85604bcb1e</sys_id>
+        <sys_mod_count>32</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2023-01-26 08:27:26</sys_updated_on>
+        <ui_id>85334e8e-45ac-491b-897d-2fb5bea3bf46</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=74e25dc91bc49110c385ea85604bcb1e"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>74e25dc91bc49110c385ea85604bcb1e</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-06-11 00:30:16</sys_created_on>
+        <sys_id>3ce25dc91bc49110c385ea85604bcb21</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-06-11 00:30:16</sys_updated_on>
+        <value>1</value>
+        <variable display_value="enabled">dd70187cc36e20105553b740ad40dddc</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>74e25dc91bc49110c385ea85604bcb1e</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-06-11 00:30:16</sys_created_on>
+        <sys_id>74e25dc91bc49110c385ea85604bcb21</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2023-01-26 08:27:21</sys_updated_on>
+        <value>{"version":"1.0","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}},"complexObjectSchema":{"FlowDesigner:FDACTIONSTATUS":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"true\",\"hint\":null,\"uiType\":\"integer\",\"default_value\":\"\",\"action_error_output\":\"true\",\"label\":\"Code\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"true\",\"hint\":null,\"uiType\":\"string\",\"default_value\":null,\"action_error_output\":\"true\",\"label\":\"Message\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FDACTIONSTATUS.$type_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FDACTIONSTATUS\",\"read_only\":\"true\",\"hint\":null,\"uiType\":\"object\",\"default_value\":\"\",\"label\":\"Action Status\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"0\",\"uiUniqueId\":\"8e3eb395-c990-4a7d-b8da-081a1acab7eb\"}"}},"serializationFormat":"JSON"}</value>
+        <variable display_value="Error Status">0f72a5a25b132010b61ea2013781c749</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_logic_input_35d60003e6022010a5e40cdd1254dd23^id=74e25dc91bc49110c385ea85604bcb1e"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=74e25dc91bc49110c385ea85604bcb1e"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=74e25dc91bc49110c385ea85604bcb1e"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=060253ac978011101e0835dfe153afdb"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=060253ac978011101e0835dfe153afdb"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_060253ac978011101e0835dfe153afdb^sys_idNOT INf592dbac978011101e0835dfe153af99"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>acquisition_package</element>
+        <help/>
+        <hint/>
+        <label>Acquisition Package</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_060253ac978011101e0835dfe153afdb</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>zach.clark-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-09 20:31:16</sys_created_on>
+        <sys_id>f592dbac978011101e0835dfe153af99</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Acquisition Package</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>zach.clark-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-09 20:31:16</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_060253ac978011101e0835dfe153afdb"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_060253ac978011101e0835dfe153afdb"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_060253ac978011101e0835dfe153afdb"/>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=060253ac978011101e0835dfe153afdb"/>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=060253ac978011101e0835dfe153afdb^sys_idNOT IN28650c1f87409110bc86b889cebb35ab"/>
+    <sys_flow_subflow_plan action="INSERT_OR_UPDATE">
+        <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_flow_subflow_plan","id":"28650c1f87409110bc86b889cebb35ab","name":"plan","plan_signature":null}}</plan>
+        <plan_id display_value="DOCGEN: Generate Description of Work">060253ac978011101e0835dfe153afdb</plan_id>
+        <snapshot>8cedf68bdbc62910b1227ea5f3961956</snapshot>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:38:00</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>28650c1f87409110bc86b889cebb35ab</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2023-01-26 08:27:26</sys_updated_on>
+    </sys_flow_subflow_plan>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description/>
+        <internal_name>atat_generate_description_of_work</internal_name>
+        <label_cache>[{"name":"subflow.request_path.value","label":"Input➛Request Path➛Value","reference":"","reference_display":"Value","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_configuration","column_name":"value"},{"name":"subflow.base_url.value","label":"Input➛Base URL➛Value","reference":"","reference_display":"Value","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_configuration","column_name":"value"},{"name":"subflow.aws_region.value","label":"Input➛AWS Region➛Value","reference":"","reference_display":"Value","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_configuration","column_name":"value"},{"name":"425ad7a6-1693-4807-9804-c451b599f0c5.__action_status__.code","label":"2➛Action Status➛Code","reference":"","reference_display":"","type":"integer","base_type":"integer","column_name":"","attributes":{}},{"name":"efd37e57-8697-4189-a464-a18ae2317334.__dont_treat_as_error__","label":"4➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiType":"boolean","visible_in_ui":"false","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"efd37e57-8697-4189-a464-a18ae2317334.__action_status__","label":"4➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiType":"object","co_type_name":"FDACTIONSTATUS","action_error_output":"true","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"85334e8e-45ac-491b-897d-2fb5bea3bf46.__status__","label":"4➛Error Status","reference_display":"Error Status","type":"object","base_type":"object","attributes":{"uiType":"object","uiTypeLabel":"Object","co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"de1452b3-6c91-4089-b625-e7d0d9add60a.__status__","label":"4➛Error Status","reference_display":"Error Status","type":"object","base_type":"object","attributes":{"uiType":"object","uiTypeLabel":"Object","co_type_name":"FDACTIONSTATUS","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"5f850fe6-8d85-4e5a-8e05-8df013d927e2.returnval","label":"4➛Return Value","reference_display":"Return Value","type":"string","base_type":"string","attributes":{"pills_draggable_inside_block":"false","pills_draggable_outside_block":"true"}},{"name":"5f850fe6-8d85-4e5a-8e05-8df013d927e2.result","label":"4➛Result","reference_display":"Result","type":"string","base_type":"string","attributes":{"pills_draggable_inside_block":"false","pills_draggable_outside_block":"true"}},{"name":"5f850fe6-8d85-4e5a-8e05-8df013d927e2.context","label":"4➛Context","reference":"wf_context","reference_display":"Workflow context","type":"reference","base_type":"reference","attributes":{"pills_draggable_inside_block":"false","pills_draggable_outside_block":"true"}},{"name":"5f850fe6-8d85-4e5a-8e05-8df013d927e2.state","label":"4➛State","reference_display":"State","type":"string","base_type":"string","attributes":{"pills_draggable_inside_block":"false","pills_draggable_outside_block":"true"}},{"name":"6001e91e-7a51-40b3-9a7a-b7aded8bb7ad.__dont_treat_as_error__","label":"3➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"8889ab6b-1e55-4042-b3ad-4e71036a78e5"}},{"name":"6001e91e-7a51-40b3-9a7a-b7aded8bb7ad.__action_status__","label":"3➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FD8c9b80491c041110ee542b8f7ad75312","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"48f3b9f4-ec5e-458a-8a09-05b20f450432"}},{"name":"425ad7a6-1693-4807-9804-c451b599f0c5.variable","label":"2➛Response Body","reference_display":"Response Body","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"70e33bde-cff3-42a0-8d5d-6a7a598be287"}},{"name":"subflow.acquisition_package.sys_id","label":"Input➛Acquisition Package➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"x_g_dis_atat_acquisition_package","column_name":"sys_id"},{"name":"6d60b8e4-8efd-442f-aadc-8d93f5799dc7.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"99c860d0-25e8-4104-bbb0-7b65310cf489"}},{"name":"6d60b8e4-8efd-442f-aadc-8d93f5799dc7.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FD7e57b877e8234110644d26e7d0b3013b","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"46232d67-15b6-42ff-bb91-06f93679d6ca"}},{"name":"6d60b8e4-8efd-442f-aadc-8d93f5799dc7.dow_document_data","label":"1➛DoW Document Data","reference_display":"DoW Document Data","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"f2194a2c-4fb2-4f4e-a144-1a1e4272066d"}},{"name":"57b5528c-2122-43a0-861b-6aa4c728b8ff.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"6391b310-5d9e-4d67-9d1e-90f421c55efc"}},{"name":"57b5528c-2122-43a0-861b-6aa4c728b8ff.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FD2ca65b24fbc01110936aaa164fae267c","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"55b2092b-ee6f-4ede-a3b9-3e6d9abf0e31"}},{"name":"subflow.aws_credential.sys_id","label":"Input➛AWS Credential➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"aws_credentials","column_name":"sys_id"},{"name":"425ad7a6-1693-4807-9804-c451b599f0c5.__dont_treat_as_error__","label":"2➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"6391b310-5d9e-4d67-9d1e-90f421c55efc"}},{"name":"425ad7a6-1693-4807-9804-c451b599f0c5.__action_status__","label":"2➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FD110f4be8e3801110f76b8e1112854b27","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"55b2092b-ee6f-4ede-a3b9-3e6d9abf0e31"}},{"name":"9a7b1317-5d48-4a2b-b519-051263426f64.__dont_treat_as_error__","label":"1➛Don\u0027t Treat as Error","reference_display":"Don\u0027t Treat as Error","type":"boolean","base_type":"boolean","attributes":{"uiTypeLabel":"True/False","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"boolean","visible_in_ui":"false","action_error_output":"true","uiUniqueId":"99c860d0-25e8-4104-bbb0-7b65310cf489"}},{"name":"9a7b1317-5d48-4a2b-b519-051263426f64.__action_status__","label":"1➛Action Status","reference_display":"Action Status","type":"object","base_type":"object","attributes":{"uiTypeLabel":"Object","co_type_name":"FD5357b877f723411026d69fd59e0e47bb","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"object","action_error_output":"true","uiUniqueId":"46232d67-15b6-42ff-bb91-06f93679d6ca"}},{"name":"9a7b1317-5d48-4a2b-b519-051263426f64.dow_document_data","label":"1➛DoW Document Data","reference_display":"DoW Document Data","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"f2194a2c-4fb2-4f4e-a144-1a1e4272066d"}},{"name":"subflow.acquisition_package","label":"Input➛Acquisition Package","reference":"x_g_dis_atat_acquisition_package","reference_display":"DAPPS:Acquisition Package","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"0357cfbf-8fe7-44b0-a4df-134adaa63a65","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.aws_credential","label":"Input➛AWS Credential","reference":"aws_credentials","reference_display":"AWS Credentials","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"1893ff1f-8a71-477f-a4ac-aeefb5a982c3","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.endpoint","label":"Input➛Endpoint","reference":"x_g_dis_atat_configuration","reference_display":"DELETE:ATAT Configuration","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"0516bf9a-e41c-43a1-bf48-a016dfb24c39","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.request_path","label":"Input➛Base URL","reference":"","reference_display":"","type":"string","base_type":"string","column_name":"","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"5be97304-a65d-431a-b414-dbfc461db58c","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.aws_region","label":"Input➛AWS Region","reference":"x_g_dis_atat_configuration","reference_display":"DELETE:ATAT Configuration","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"1b77f16b-7c50-46ff-a302-f2ecef02ec16","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.base_url","label":"Input➛Base URL","reference":"x_g_dis_atat_configuration","reference_display":"DELETE:ATAT Configuration","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"ea75d632-51d0-4938-a2b1-6d5d6b997781","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.resource_path","label":"Input➛Resource Path","reference":"x_g_dis_atat_configuration","reference_display":"DELETE:ATAT Configuration","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"868a6fa5-e63e-4621-8b34-29f962826999","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"subflow.resource_path.value","label":"Input➛Resource Path➛Value","reference":"","reference_display":"Value","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_configuration","column_name":"value"},{"name":"425ad7a6-1693-4807-9804-c451b599f0c5.error_message","label":"2➛Error Message","reference_display":"Error Message","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"28752eb6-ce9e-49f8-a7b9-e3c03173a2c4"}},{"name":"425ad7a6-1693-4807-9804-c451b599f0c5.response_status","label":"2➛Response Status","reference_display":"Response Status","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"6679b850-af9e-4018-8c37-b9cea8061597"}},{"name":"subflow.apigw_api_id","label":"Input➛API Gateway ID","reference":"x_g_dis_atat_configuration","reference_display":"DELETE:ATAT Configuration","type":"reference","base_type":"reference","attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":"","uiUniqueId":"b7c7c3c2-a8c4-45e4-bebc-1795f301bac9"}},{"name":"6d60b8e4-8efd-442f-aadc-8d93f5799dc7.dow_payload","label":"1➛DOW Payload","reference_display":"DOW Payload","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"53fecb06-4ac3-4329-b6d3-065afaaa792f"}}]</label_cache>
+        <master>true</master>
+        <name>DOCGEN: Generate Description of Work</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="DOCGEN: Generate Description of Work">060253ac978011101e0835dfe153afdb</parent_flow>
+        <remote_trigger_id/>
+        <run_as>system</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:56</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>bb55881f87409110bc86b889cebb35ad</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2023-01-26 08:27:23</sys_updated_on>
+        <type>subflow</type>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=bb55881f87409110bc86b889cebb35ad"/>
+    <sys_variable_value action="delete_multiple" query="document_key=bb55881f87409110bc86b889cebb35ad"/>
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=bb55881f87409110bc86b889cebb35ad"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=bb55881f87409110bc86b889cebb35ad"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=bb55881f87409110bc86b889cebb35ad^sys_idNOT INbf55881f87409110bc86b889cebb35ae"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>bb55881f87409110bc86b889cebb35ad</id>
+        <name>ATAT Generate Description of Work</name>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:57</sys_created_on>
+        <sys_id>bf55881f87409110bc86b889cebb35ae</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>julius.fitzhugh-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 18:37:57</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=bf55881f87409110bc86b889cebb35ae"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=bb55881f87409110bc86b889cebb35ad^sys_idNOT IN3355881f87409110bc86b889cebb35b0"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference,uiUniqueId=0357cfbf-8fe7-44b0-a4df-134adaa63a65</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table>x_g_dis_atat_acquisition_package</choice_table>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>acquisition_package</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>Acquisition Package</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="DOCGEN: Generate Description of Work">bb55881f87409110bc86b889cebb35ad</model>
+        <model_id>bb55881f87409110bc86b889cebb35ad</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_bb55881f87409110bc86b889cebb35ad</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference display_value="" name="x_g_dis_atat_acquisition_package">x_g_dis_atat_acquisition_package</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:57</sys_created_on>
+        <sys_id>3355881f87409110bc86b889cebb35b0</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>julius.fitzhugh-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 18:37:57</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_output action="delete_multiple" query="model=bb55881f87409110bc86b889cebb35ad"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=bb55881f87409110bc86b889cebb35ad"/>
+    <sys_hub_action_instance action="delete_multiple" query="flow=bb55881f87409110bc86b889cebb35ad^sys_idNOT IN8465c81f87409110bc86b889cebb3564,8865c81f87409110bc86b889cebb3538,8c65c81f87409110bc86b889cebb355c,c465c81f87409110bc86b889cebb3552"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
+        <action_type_parent display_value="Log">0e0ae8c2531003003bf1d9109ec587c8</action_type_parent>
+        <comment/>
+        <display_text/>
+        <flow display_value="DOCGEN: Generate Description of Work">bb55881f87409110bc86b889cebb35ad</flow>
+        <order>5</order>
+        <parent_ui_id>85334e8e-45ac-491b-897d-2fb5bea3bf46</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:58</sys_created_on>
+        <sys_id>8465c81f87409110bc86b889cebb3564</sys_id>
+        <sys_mod_count>30</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2023-01-26 08:27:23</sys_updated_on>
+        <ui_id>efd37e57-8697-4189-a464-a18ae2317334</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=8465c81f87409110bc86b889cebb3564"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>8465c81f87409110bc86b889cebb3564</document_key>
+        <order>0</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:58</sys_created_on>
+        <sys_id>0065c81f87409110bc86b889cebb3566</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 18:37:58</sys_updated_on>
+        <value>error</value>
+        <variable display_value="Level">5bc1bcc6531003003bf1d9109ec587d7</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>8465c81f87409110bc86b889cebb3564</document_key>
+        <order>0</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-12-16 16:24:05</sys_created_on>
+        <sys_id>2118743197f391106fa8b4b3f153affc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-16 16:24:05</sys_updated_on>
+        <value>error</value>
+        <variable display_value="Level">8f4aa006531003003bf1d9109ec587aa</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=8465c81f87409110bc86b889cebb3564"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>log_level</field>
+        <id>8465c81f87409110bc86b889cebb3564</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-12-16 16:24:05</sys_created_on>
+        <sys_id>e918743197f391106fa8b4b3f153affb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-16 16:24:05</sys_updated_on>
+        <table>var__m_sys_hub_action_input_0e0ae8c2531003003bf1d9109ec587c8</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>log_level</field>
+        <id>8465c81f87409110bc86b889cebb3564</id>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:58</sys_created_on>
+        <sys_id>c865c81f87409110bc86b889cebb3565</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 18:37:58</sys_updated_on>
+        <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>log_message</field>
+        <id>8465c81f87409110bc86b889cebb3564</id>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-12-16 16:24:05</sys_created_on>
+        <sys_id>ad18743197f391106fa8b4b3f153affb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-16 16:24:05</sys_updated_on>
+        <table>var__m_sys_hub_action_input_0e0ae8c2531003003bf1d9109ec587c8</table>
+        <value>Generating the DoW was not successful.
+Status Code: {{425ad7a6-1693-4807-9804-c451b599f0c5.__action_status__.code}}.
+Error: {{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>log_message</field>
+        <id>8465c81f87409110bc86b889cebb3564</id>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:58</sys_created_on>
+        <sys_id>8c65c81f87409110bc86b889cebb3565</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 18:37:58</sys_updated_on>
+        <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
+        <value>Generating the DoW was not successful.
+Status Code: {{425ad7a6-1693-4807-9804-c451b599f0c5.__action_status__.code}}.
+Error: {{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=8465c81f87409110bc86b889cebb3564"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=8465c81f87409110bc86b889cebb3564"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="DOCGEN: Gather DescriptionOfWork Data">0f57b8771b234110c385ea85604bcb95</action_type>
+        <action_type_parent display_value="DOCGEN: Gather DescriptionOfWork Data">4ed9607b1bef0110c385ea85604bcbcd</action_type_parent>
+        <comment/>
+        <display_text/>
+        <flow display_value="DOCGEN: Generate Description of Work">bb55881f87409110bc86b889cebb35ad</flow>
+        <order>1</order>
+        <parent_ui_id>07d7b044-09ae-403f-a022-67f8abe408f9</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:57</sys_created_on>
+        <sys_id>8865c81f87409110bc86b889cebb3538</sys_id>
+        <sys_mod_count>30</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2023-01-26 08:27:23</sys_updated_on>
+        <ui_id>6d60b8e4-8efd-442f-aadc-8d93f5799dc7</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=8865c81f87409110bc86b889cebb3538"/>
+    <sys_element_mapping action="delete_multiple" query="id=8865c81f87409110bc86b889cebb3538"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>acquisition_package</field>
+        <id>8865c81f87409110bc86b889cebb3538</id>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:57</sys_created_on>
+        <sys_id>4065c81f87409110bc86b889cebb353a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 18:37:57</sys_updated_on>
+        <table>var__m_sys_hub_action_input_0f57b8771b234110c385ea85604bcb95</table>
+        <value>{{subflow.acquisition_package}}</value>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=8865c81f87409110bc86b889cebb3538"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=8865c81f87409110bc86b889cebb3538"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="UTIL: Attach Binary File to Acquisition Package">6dcc8889970411101e0835dfe153afdb</action_type>
+        <action_type_parent display_value="UTIL: Attach Binary File to Acquisition Package">92ea0409970411101e0835dfe153af2f</action_type_parent>
+        <comment>DOW generated document</comment>
+        <display_text/>
+        <flow display_value="DOCGEN: Generate Description of Work">bb55881f87409110bc86b889cebb35ad</flow>
+        <order>3</order>
+        <parent_ui_id>07d7b044-09ae-403f-a022-67f8abe408f9</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:58</sys_created_on>
+        <sys_id>8c65c81f87409110bc86b889cebb355c</sys_id>
+        <sys_mod_count>30</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2023-01-26 08:27:23</sys_updated_on>
+        <ui_id>6001e91e-7a51-40b3-9a7a-b7aded8bb7ad</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=8c65c81f87409110bc86b889cebb355c"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>8c65c81f87409110bc86b889cebb355c</document_key>
+        <order>3</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:58</sys_created_on>
+        <sys_id>4465c81f87409110bc86b889cebb355f</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-30 02:57:46</sys_updated_on>
+        <value/>
+        <variable display_value="File Name">4c9e404d970411101e0835dfe153af83</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>8c65c81f87409110bc86b889cebb355c</document_key>
+        <order>4</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:58</sys_created_on>
+        <sys_id>8065c81f87409110bc86b889cebb355f</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-30 02:57:46</sys_updated_on>
+        <value/>
+        <variable display_value="Content Type">c89e404d970411101e0835dfe153af89</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=8c65c81f87409110bc86b889cebb355c"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>acquisition_package</field>
+        <id>8c65c81f87409110bc86b889cebb355c</id>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:58</sys_created_on>
+        <sys_id>c465c81f87409110bc86b889cebb355e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 18:37:58</sys_updated_on>
+        <table>var__m_sys_hub_action_input_6dcc8889970411101e0835dfe153afdb</table>
+        <value>{{subflow.acquisition_package}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>binary_file</field>
+        <id>8c65c81f87409110bc86b889cebb355c</id>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:58</sys_created_on>
+        <sys_id>8865c81f87409110bc86b889cebb355e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 18:37:58</sys_updated_on>
+        <table>var__m_sys_hub_action_input_6dcc8889970411101e0835dfe153afdb</table>
+        <value>{{425ad7a6-1693-4807-9804-c451b599f0c5.variable}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>content_type</field>
+        <id>8c65c81f87409110bc86b889cebb355c</id>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:58</sys_created_on>
+        <sys_id>4c65c81f87409110bc86b889cebb355e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 18:37:58</sys_updated_on>
+        <table>var__m_sys_hub_action_input_6dcc8889970411101e0835dfe153afdb</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>file_name</field>
+        <id>8c65c81f87409110bc86b889cebb355c</id>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:58</sys_created_on>
+        <sys_id>0065c81f87409110bc86b889cebb355f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 18:37:58</sys_updated_on>
+        <table>var__m_sys_hub_action_input_6dcc8889970411101e0835dfe153afdb</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=8c65c81f87409110bc86b889cebb355c^sys_idNOT IN22c5060a9708a1106fa8b4b3f153afc2,2ec5060a9708a1106fa8b4b3f153afc1"/>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <input_name>content_type</input_name>
+        <instance>8c65c81f87409110bc86b889cebb355c</instance>
+        <referenced_table>sys_hub_action_instance</referenced_table>
+        <script>{"content_type":{"scriptActive":true,"script":"/*\n**Access Flow/Action data using the fd_data object. Script must return a value.\n**example: var shortDesc \u003d fd_data.trigger.current.short_description;\n**return shortDesc;\n*/\n\nreturn  \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\";"}}</script>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-12-30 02:57:46</sys_created_on>
+        <sys_id>22c5060a9708a1106fa8b4b3f153afc2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-30 02:57:46</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <input_name>file_name</input_name>
+        <instance>8c65c81f87409110bc86b889cebb355c</instance>
+        <referenced_table>sys_hub_action_instance</referenced_table>
+        <script>{"file_name":{"scriptActive":true,"script":"/*\n**Access Flow/Action data using the fd_data object. Script must return a value.\n**example: var shortDesc \u003d fd_data.trigger.current.short_description;\n**return shortDesc;\n*/\n\nreturn \"DescriptionOfWork.docx\";"}}</script>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-12-30 02:57:46</sys_created_on>
+        <sys_id>2ec5060a9708a1106fa8b4b3f153afc1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-30 02:57:46</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=8c65c81f87409110bc86b889cebb355c"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="UTIL: HOTH API POST Request">54a61b2497c011101e0835dfe153afb0</action_type>
+        <action_type_parent display_value="UTIL: HOTH API POST Request">921e87a8978011101e0835dfe153afb4</action_type_parent>
+        <comment>/generate-document</comment>
+        <display_text/>
+        <flow display_value="DOCGEN: Generate Description of Work">bb55881f87409110bc86b889cebb35ad</flow>
+        <order>2</order>
+        <parent_ui_id>07d7b044-09ae-403f-a022-67f8abe408f9</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:58</sys_created_on>
+        <sys_id>c465c81f87409110bc86b889cebb3552</sys_id>
+        <sys_mod_count>30</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2023-01-26 08:27:23</sys_updated_on>
+        <ui_id>425ad7a6-1693-4807-9804-c451b599f0c5</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=c465c81f87409110bc86b889cebb3552"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>c465c81f87409110bc86b889cebb3552</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-10-24 20:26:41</sys_created_on>
+        <sys_id>6e5370b487bad510ec3b777acebb3541</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-16 16:24:05</sys_updated_on>
+        <value/>
+        <variable display_value="Resource Path">ca0390b3db2e1150b1227ea5f396199b</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=c465c81f87409110bc86b889cebb3552"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>acquisition_package</field>
+        <id>c465c81f87409110bc86b889cebb3552</id>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:58</sys_created_on>
+        <sys_id>8c65c81f87409110bc86b889cebb3554</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 18:37:58</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value>{{subflow.acquisition_package}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>apigw_id</field>
+        <id>c465c81f87409110bc86b889cebb3552</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-07-27 13:19:15</sys_created_on>
+        <sys_id>e10cf80097411110986cb846f053af63</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-07-27 13:19:15</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value>{{subflow.apigw_api_id}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>aws_credential</field>
+        <id>c465c81f87409110bc86b889cebb3552</id>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:58</sys_created_on>
+        <sys_id>4065c81f87409110bc86b889cebb3555</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 18:37:58</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value>{{subflow.aws_credential}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>aws_region</field>
+        <id>c465c81f87409110bc86b889cebb3552</id>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:58</sys_created_on>
+        <sys_id>8065c81f87409110bc86b889cebb3554</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-07-27 13:19:15</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value>{{subflow.aws_region}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>base_url</field>
+        <id>c465c81f87409110bc86b889cebb3552</id>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:58</sys_created_on>
+        <sys_id>c865c81f87409110bc86b889cebb3554</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-07-27 13:19:15</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value>{{subflow.base_url}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>request_body</field>
+        <id>c465c81f87409110bc86b889cebb3552</id>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:58</sys_created_on>
+        <sys_id>4465c81f87409110bc86b889cebb3554</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-16 16:24:05</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value>{{6d60b8e4-8efd-442f-aadc-8d93f5799dc7.dow_payload}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>resource_path</field>
+        <id>c465c81f87409110bc86b889cebb3552</id>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:58</sys_created_on>
+        <sys_id>0865c81f87409110bc86b889cebb3554</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-10-24 20:26:41</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=c465c81f87409110bc86b889cebb3552^sys_idNOT IN6518743197f391106fa8b4b3f153afef"/>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <input_name>resource_path</input_name>
+        <instance>c465c81f87409110bc86b889cebb3552</instance>
+        <referenced_table>sys_hub_action_instance</referenced_table>
+        <script>{"resource_path":{"scriptActive":true,"script":"/*\n**Access Flow/Action data using the fd_data object. Script must return a value.\n**example: var shortDesc \u003d fd_data.trigger.current.short_description;\n**return shortDesc;\n*/\n\nreturn \"/generate-document\";"}}</script>
+        <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
+        <sys_created_on>2022-12-16 16:24:05</sys_created_on>
+        <sys_id>6518743197f391106fa8b4b3f153afef</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
+        <sys_updated_on>2022-12-16 16:24:05</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=c465c81f87409110bc86b889cebb3552"/>
+    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=bb55881f87409110bc86b889cebb35ad"/>
+    <sys_hub_flow_logic action="delete_multiple" query="flow=bb55881f87409110bc86b889cebb35ad^sys_idNOT IN3755c81f87409110bc86b889cebb3524,7b55c81f87409110bc86b889cebb3527"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">2d24163697202110cf3cfd9fe153afb8</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="DOCGEN: Generate Description of Work">bb55881f87409110bc86b889cebb35ad</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="Try">07223332de022010ec58424b73829721</logic_definition>
+        <order>0</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:57</sys_created_on>
+        <sys_id>3755c81f87409110bc86b889cebb3524</sys_id>
+        <sys_mod_count>21</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2023-01-26 08:27:23</sys_updated_on>
+        <ui_id>07d7b044-09ae-403f-a022-67f8abe408f9</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=3755c81f87409110bc86b889cebb3524"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=3755c81f87409110bc86b889cebb3524"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=3755c81f87409110bc86b889cebb3524"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">7924163697202110cf3cfd9fe153afc4</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="DOCGEN: Generate Description of Work">bb55881f87409110bc86b889cebb35ad</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="Top Level Catch">35d60003e6022010a5e40cdd1254dd23</logic_definition>
+        <order>4</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:57</sys_created_on>
+        <sys_id>7b55c81f87409110bc86b889cebb3527</sys_id>
+        <sys_mod_count>21</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2023-01-26 08:27:23</sys_updated_on>
+        <ui_id>85334e8e-45ac-491b-897d-2fb5bea3bf46</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=7b55c81f87409110bc86b889cebb3527"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>7b55c81f87409110bc86b889cebb3527</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:57</sys_created_on>
+        <sys_id>3355c81f87409110bc86b889cebb352b</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2023-01-26 08:27:23</sys_updated_on>
+        <value>{"version":"1.0","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}},"complexObjectSchema":{"FlowDesigner:FDACTIONSTATUS":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"true\",\"hint\":null,\"uiType\":\"integer\",\"default_value\":\"\",\"action_error_output\":\"true\",\"label\":\"Code\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"true\",\"hint\":null,\"uiType\":\"string\",\"default_value\":null,\"action_error_output\":\"true\",\"label\":\"Message\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FDACTIONSTATUS.$type_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FDACTIONSTATUS\",\"read_only\":\"true\",\"hint\":null,\"uiType\":\"object\",\"default_value\":\"\",\"label\":\"Action Status\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"0\",\"uiUniqueId\":\"8e3eb395-c990-4a7d-b8da-081a1acab7eb\"}"}},"serializationFormat":"JSON"}</value>
+        <variable display_value="Error Status">0f72a5a25b132010b61ea2013781c749</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>7b55c81f87409110bc86b889cebb3527</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>julius.fitzhugh-ctr@ccpo.mil</sys_created_by>
+        <sys_created_on>2022-06-17 18:37:57</sys_created_on>
+        <sys_id>f755c81f87409110bc86b889cebb352b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>julius.fitzhugh-ctr@ccpo.mil</sys_updated_by>
+        <sys_updated_on>2022-06-17 18:37:57</sys_updated_on>
+        <value>1</value>
+        <variable display_value="enabled">dd70187cc36e20105553b740ad40dddc</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_logic_input_35d60003e6022010a5e40cdd1254dd23^id=7b55c81f87409110bc86b889cebb3527"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=7b55c81f87409110bc86b889cebb3527"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=7b55c81f87409110bc86b889cebb3527"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=bb55881f87409110bc86b889cebb35ad"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=bb55881f87409110bc86b889cebb35ad"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_bb55881f87409110bc86b889cebb35ad^sys_idNOT INe50cf80097411110986cb846f053af1a"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>acquisition_package</element>
+        <help/>
+        <hint/>
+        <label>Acquisition Package</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_bb55881f87409110bc86b889cebb35ad</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-07-27 13:19:15</sys_created_on>
+        <sys_id>e50cf80097411110986cb846f053af1a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Acquisition Package</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-07-27 13:19:15</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_bb55881f87409110bc86b889cebb35ad"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_bb55881f87409110bc86b889cebb35ad"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_bb55881f87409110bc86b889cebb35ad"/>
+    <sys_hub_flow action="UPDATE">
+        <sys_id>060253ac978011101e0835dfe153afdb</sys_id>
+        <latest_snapshot>bb55881f87409110bc86b889cebb35ad</latest_snapshot>
+        <compiler_build>glide-tokyo-07-08-2022__patch7-02-16-2023_02-28-2023_1844.zip</compiler_build>
+    </sys_hub_flow>
+</record_update>
