@@ -1,5 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Fair Opportunity" max_length="40" name="x_g_dis_atat_fair_opportunity" sizeclass="0" type="collection">
+    <element db_object_id="b5a091529751211044ecfbc71153af04" label="DAPPS:Fair Opportunity" max_length="40" name="x_g_dis_atat_fair_opportunity" type="collection">
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Barriers - Agency Pursuing Training or Certifications" max_length="40" name="barriers_agency_pursuing_training_or_certs" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Unselected" sequence="0" value="UNSELECTED"/>
+                <element inactive_on_update="false" label="Yes" sequence="1" value="YES"/>
+                <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
+            </choice>
+        </element>
+        <element label="Barriers - Follow-On Expected Date Awarded" max_length="40" name="barriers_follow_on_expected_date_awarded" type="glide_date"/>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Barriers - Agency Preparing Follow-On Requirement" max_length="40" name="barriers_follow_on_requirement" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Unselected" sequence="0" value="UNSELECTED"/>
+                <element inactive_on_update="false" label="Yes" sequence="1" value="YES"/>
+                <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
+            </choice>
+        </element>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Barriers - J&amp;A Prepared" max_length="40" name="barriers_j_a_prepared" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Unselected" sequence="0" value="UNSELECTED"/>
+                <element inactive_on_update="false" label="Yes" sequence="1" value="YES"/>
+                <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
+            </choice>
+        </element>
+        <element label="Barriers - J&amp;A Prepared - Results" max_length="4000" name="barriers_j_a_prepared_results" type="string"/>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Barriers - Planning Future Development" max_length="40" name="barriers_planning_future_development" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Unselected" sequence="0" value="UNSELECTED"/>
+                <element inactive_on_update="false" label="Yes" sequence="1" value="YES"/>
+                <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
+            </choice>
+        </element>
+        <element label="Barriers - Plans to Remove Barriers" max_length="4000" name="barriers_plans_to_remove_barriers" type="string"/>
+        <element label="Cause - Govt Engineers - Insufficient Time Reason" max_length="4000" name="cause_govt_engineers_insufficient_time_reason" type="string"/>
+        <element label="Cause - Govt Engineers - Platform Name" max_length="4000" name="cause_govt_engineers_platform_name" type="string"/>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Cause - Govt Engineers - Training Certified" max_length="40" name="cause_govt_engineers_training_certified" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Unselected" sequence="0" value="UNSELECTED"/>
+                <element inactive_on_update="false" label="Yes" sequence="1" value="YES"/>
+                <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
+            </choice>
+        </element>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Cause - Migration - Additional Time and Cost" max_length="40" name="cause_migration_addl_time_cost" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Unselected" sequence="0" value="UNSELECTED"/>
+                <element inactive_on_update="false" label="Yes" sequence="1" value="YES"/>
+                <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
+            </choice>
+        </element>
+        <element label="Cause - Migration Estimated Cost" max_length="20" name="cause_migration_estimated_cost" type="currency"/>
+        <element label="Cause - Migration Estimated Delay Amount" max_length="40" name="cause_migration_estimated_delay_amount" type="integer"/>
+        <element choice="1" label="Cause - Migration Estimated Delay Unit" max_length="40" name="cause_migration_estimated_delay_unit" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Day(s)" sequence="1" value="DAYS"/>
+                <element inactive_on_update="false" label="Week(s)" sequence="2" value="WEEKS"/>
+                <element inactive_on_update="false" label="Month(s)" sequence="3" value="MONTHS"/>
+                <element inactive_on_update="false" label="Year(s)" sequence="4" value="YEARS"/>
+            </choice>
+        </element>
+        <element label="Cause of Sole Source Situation" max_length="4000" name="cause_of_sole_source_situation" type="string"/>
+        <element label="Cause - Product/Feature - Name" max_length="4000" name="cause_product_feature_name" type="string"/>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Cause - Product/Feature - Peculiar to CSP" max_length="40" name="cause_product_feature_peculiar_to_csp" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Unselected" sequence="0" value="UNSELECTED"/>
+                <element inactive_on_update="false" label="Yes" sequence="1" value="YES"/>
+                <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
+            </choice>
+        </element>
+        <element choice="1" label="Cause - Product/Feature - Type" max_length="40" name="cause_product_feature_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Product" sequence="1" value="PRODUCT"/>
+                <element inactive_on_update="false" label="Feature" sequence="2" value="FEATURE"/>
+            </choice>
+        </element>
+        <element label="Cause - Product/Feature - Why Essential" max_length="4000" name="cause_product_feature_why_essential" type="string"/>
+        <element label="Cause - Product/Feature - Why Others Inadequate" max_length="4000" name="cause_product_feature_why_others_inadequate" type="string"/>
+        <element choice="1" label="Contract Action" max_length="40" name="contract_action" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Undefinitized contract action (UCA)" sequence="1" value="UCA"/>
+                <element inactive_on_update="false" label="Bridge contract action" sequence="2" value="BCA"/>
+                <element inactive_on_update="false" label="Option to Extend Services" sequence="3" value="OES"/>
+                <element inactive_on_update="false" label="None of these contract actions apply to this acquisition" sequence="4" value="NONE"/>
+            </choice>
+        </element>
         <element choice="1" display="true" label="Exception to Fair Opportunity" max_length="40" name="exception_to_fair_opportunity" type="choice">
             <choice>
                 <element inactive_on_update="false" label="No - None of the exceptions apply" value="NO_NONE"/>
@@ -8,5 +90,78 @@
                 <element inactive_on_update="false" label="Yes - The agency need for supplies... FAR 16.505(b)(2)(i)(A)" value="YES_FAR_16_505_B_2_I_A"/>
             </choice>
         </element>
+        <element label="Justification" max_length="4000" name="justification" type="string"/>
+        <element label="Market Research Conducted By" max_length="4000" name="market_research_conducted_by" type="string"/>
+        <element label="Market Research Details" max_length="4000" name="market_research_details" type="string"/>
+        <element label="Minimum Government Requirements" max_length="4000" name="min_govt_requirements" type="string"/>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Other Facts to Support Logical Follow-On" max_length="40" name="other_facts_to_support_logical_follow_on" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Unselected" sequence="0" value="UNSELECTED"/>
+                <element inactive_on_update="false" label="Yes" sequence="1" value="YES"/>
+                <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
+            </choice>
+        </element>
+        <element label="Other Facts to Support Logical Follow-On Details" max_length="4000" name="other_facts_to_support_logical_follow_on_details" type="string"/>
+        <element label="Procurement Discussion" max_length="4000" name="procurement_discussion" type="string"/>
+        <element choice="1" choice_field="vendor" choice_table="x_g_dis_atat_cloud_service_provider" label="Proposed CSP" max_length="40" name="proposed_csp" type="choice">
+            <choice/>
+        </element>
+        <element label="Requirements POC" max_length="32" name="requirements_poc" reference="x_g_dis_atat_contacts" type="reference"/>
+        <element choice="1" choice_field="technical_poc_type" choice_table="x_g_dis_atat_fair_opportunity" label="Requirements POC Type" max_length="40" name="requirements_poc_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Primary Contact" sequence="0" value="PRIMARY"/>
+                <element inactive_on_update="false" label="COR" sequence="1" value="COR"/>
+                <element inactive_on_update="false" label="ACOR" sequence="2" value="ACOR"/>
+                <element inactive_on_update="false" label="New Contact" sequence="3" value="NEW"/>
+            </choice>
+        </element>
+        <element label="Requirement Impact" max_length="4000" name="requirement_impact" type="string"/>
+        <element label="Research - End Date" max_length="40" name="research_end_date" type="glide_date"/>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Research - Is CSP Only Source Capable" max_length="40" name="research_is_csp_only_source_capable" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Unselected" sequence="0" value="UNSELECTED"/>
+                <element inactive_on_update="false" label="Yes" sequence="1" value="YES"/>
+                <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
+            </choice>
+        </element>
+        <element label="Research - Other Technique" max_length="4000" name="research_other_technique" type="string"/>
+        <element label="Research - Other Techniques Used" max_length="4000" name="research_other_techniques_used" reference="x_g_dis_atat_dapps_market_research_other_techniques" type="glide_list"/>
+        <element label="Research - Personal Knowledge Person/Position" max_length="4000" name="research_personal_knowledge_person_or_position" type="string"/>
+        <element label="Research - Review Catalogs - End Date" max_length="40" name="research_review_catalogs_end_date" type="glide_date"/>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Research - Review Catalogs - Reviewed?" max_length="40" name="research_review_catalogs_reviewed" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Unselected" sequence="0" value="UNSELECTED"/>
+                <element inactive_on_update="false" label="Yes" sequence="1" value="YES"/>
+                <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
+            </choice>
+        </element>
+        <element label="Research - Review Catalogs - Review Results" max_length="4000" name="research_review_catalogs_review_results" type="string"/>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Research - Review Catalogs - Same Research Date" max_length="40" name="research_review_catalogs_same_research_date" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Unselected" sequence="0" value="UNSELECTED"/>
+                <element inactive_on_update="false" label="Yes" sequence="1" value="YES"/>
+                <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
+            </choice>
+        </element>
+        <element label="Research - Review Catalogs - Start Date" max_length="40" name="research_review_catalogs_start_date" type="glide_date"/>
+        <element label="Research - Start Date" max_length="40" name="research_start_date" type="glide_date"/>
+        <element label="Research - Supporting Data" max_length="4000" name="research_supporting_data" type="string"/>
+        <element label="Research - Techniques Summary" max_length="4000" name="research_techniques_summary" type="string"/>
+        <element label="Technical POC" max_length="32" name="technical_poc" reference="x_g_dis_atat_contacts" type="reference"/>
+        <element choice="1" label="Technical POC Type" max_length="40" name="technical_poc_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Primary Contact" sequence="1" value="PRIMARY"/>
+                <element inactive_on_update="false" label="COR" sequence="2" value="COR"/>
+                <element inactive_on_update="false" label="ACOR" sequence="3" value="ACOR"/>
+                <element inactive_on_update="false" label="New Contact" sequence="4" value="NEW"/>
+            </choice>
+        </element>
+        <element label="Why CSP Is Only Capable Source" max_length="4000" name="why_csp_is_only_capable_source" type="string"/>
+        <index name="index">
+            <element name="requirements_poc"/>
+        </index>
+        <index name="index2">
+            <element name="technical_poc"/>
+        </index>
     </element>
 </database>
