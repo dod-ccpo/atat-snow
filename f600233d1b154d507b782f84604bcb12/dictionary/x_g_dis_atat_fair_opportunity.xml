@@ -103,13 +103,8 @@
         </element>
         <element label="Other Facts to Support Logical Follow-On Details" max_length="4000" name="other_facts_to_support_logical_follow_on_details" type="string"/>
         <element label="Procurement Discussion" max_length="4000" name="procurement_discussion" type="string"/>
-        <element choice="1" label="Propsed CSP" max_length="40" name="propsed_csp" type="choice">
-            <choice>
-                <element inactive_on_update="false" label="Amazon Web Services (AWS)" sequence="1" value="AWS"/>
-                <element inactive_on_update="false" label="Google Cloud" sequence="2" value="GCP"/>
-                <element inactive_on_update="false" label="Microsoft Azure" sequence="3" value="AZURE"/>
-                <element inactive_on_update="false" label="Oracle Cloud" sequence="4" value="ORACLE"/>
-            </choice>
+        <element choice="1" choice_field="vendor" choice_table="x_g_dis_atat_cloud_service_provider" label="Proposed CSP" max_length="40" name="proposed_csp" type="choice">
+            <choice/>
         </element>
         <element label="Requirements POC" max_length="32" name="requirements_poc" reference="x_g_dis_atat_contacts" type="reference"/>
         <element choice="1" choice_field="technical_poc_type" choice_table="x_g_dis_atat_fair_opportunity" label="Requirements POC Type" max_length="40" name="requirements_poc_type" type="choice">
