@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.CostEstimate</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>ATAT class for use by Cost Estimate REST API.</description>
+        <name>CostEstimate</name>
+        <script><![CDATA[var CostEstimate = Class.create();
+CostEstimate.prototype = {
+    acquisitionPackage: null,
+    errUtil: new ErrorHandler(),
+    initialize: function(acquisitionPackage) {
+        this.acquisitionPackage = acquisitionPackage;
+    },
+	foobar: function() {
+		gs.info("Inside function CostEstimate.foobar()");
+	},
+    /**
+     * Transforms IGCE docgen payload to JSON data needed to display Cost Estimate summary on UI
+     * @param string packageSysId the acquisition package sys_id
+     * @returns JSON structure organized by IDIQ clins with cost estimates per period of the PoP.
+     * Includes subtotal, contracting office fees, surge capacity fees (optional), grand total.
+     */
+    getData: function(packageSysId) {
+        function sum(entry) {
+            return Object.values(entry)
+                .filter(function(value) {
+                    return typeof value === "number";
+                })
+                .reduce(function(result, v) {
+                    return result + v;
+                }, 0);
+        }
+        try {
+            var igce = new Igce(this.acquisitionPackage);
+            var payload = JSON.parse(igce.getPayload());
+
+            // transform IGCE payload
+            var uniqueClins = payload.templatePayload.periodsEstimate
+                .flatMap(function(estimate) {
+                    return estimate.periodLineItems.map(function(lineItem) {
+                        return lineItem.idiqClin;
+                    });
+                })
+                .filter(function(lineItem, index, self) {
+                    return self.indexOf(lineItem) === index;
+                });
+
+            var uniquePeriods = [];
+            var data = uniqueClins.map(function(clin) {
+                var entry = {
+                    "CLIN Type & Classification": clin,
+                };
+                payload.templatePayload.periodsEstimate.forEach(function(
+                    estimate
+                ) {
+                    var key;
+                    if (estimate.period.periodType === "BASE") {
+                        key = "Base Period";
+                    } else if (estimate.period.periodType === "OPTION") {
+                        key = "Option " + (estimate.period.optionOrder - 1);
+                    }
+                    if (uniquePeriods.indexOf(key) === -1) {
+                        uniquePeriods.push(key);
+                    }
+                    var value = estimate.periodLineItems
+                        .filter(function(lineItem) {
+                            return lineItem.idiqClin === clin;
+                        })
+                        .reduce(function(result, lineItem) {
+                            return result + lineItem.unitPrice * lineItem.quantity;
+                        }, 0);
+                    entry[key] = value;
+                });
+
+                entry.Total = sum(entry);
+                return entry;
+            });
+
+            // Calculation of subtotals for each period
+            var subtotals = uniquePeriods.reduce(function(periodResult, period) {
+                periodResult[period] = data
+                    .filter(function(entry) {
+                        return entry[period];
+                    })
+                    .map(function(entry) {
+                        return entry[period];
+                    })
+                    .reduce(function(subtotalResult, subtotalValue) {
+                        return subtotalResult + subtotalValue;
+                    }, 0);
+                return periodResult;
+            }, {});
+
+            // Calculation for contracting agency fee whether DITCO or OTHER
+            var contractingShopName = (payload.templatePayload.contractingShop.name === 'DITCO') ? 'DITCO Fee' : 'Contracting Office Fee';
+            var fees = {
+                "CLIN Type & Classification": contractingShopName + " (" + payload.templatePayload.contractingShop.fee + "%)",
+            };
+            Object.assign(
+                fees,
+                Object.keys(subtotals).reduce(function(result, key) {
+                    result[key] = subtotals[key] * (payload.templatePayload.contractingShop.fee * 0.01);
+                    return result;
+                }, {})
+            );
+            fees.Total = sum(fees);
+            data.push(fees);
+
+            // Calculation for optional surge capability percentage
+            var surge = null;
+            if (payload.templatePayload.surgeCapabilities) {
+                surge = Object.keys(subtotals).reduce(function(result, key) {
+                    result[key] = subtotals[key] * (payload.templatePayload.surgeCapabilities * 0.01);
+                    return result;
+                }, {});
+            }
+
+            // Calculation for grand total
+            var total = Object.keys(subtotals).reduce(function(result, key) {
+                result[key] = subtotals[key] + fees[key];
+                if (surge) { //optional
+                    result[key] += surge[key];
+                }
+                return result;
+            }, {});
+            total.Total = Object.values(total).reduce(function(result, v) {
+                return result + v;
+            }, 0);
+
+            var costEstimateData = {};
+            costEstimateData.data = data;
+            costEstimateData.subtotal = subtotals;
+            if (surge) {
+                costEstimateData.surge = surge;
+            }
+            costEstimateData.total = total;
+
+            return costEstimateData;
+        } catch (error) {
+            throw this.errUtil.createError(
+                "CostEstimate --> getData(): " + error,
+                this.errUtil.METHOD_ERROR
+            );
+        }
+    },
+
+    type: 'CostEstimate'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-04-25 22:14:58</sys_created_on>
+        <sys_id>6ec667ef971a6110cf3cfd9fe153af25</sys_id>
+        <sys_mod_count>10</sys_mod_count>
+        <sys_name>CostEstimate</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_6ec667ef971a6110cf3cfd9fe153af25</sys_update_name>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-04-25 23:05:44</sys_updated_on>
+    </sys_script_include>
+</record_update>
