@@ -280,7 +280,11 @@ AtatHelper.prototype = {
 		};
 		var entry = metadata[filename];
 		if (!entry) {
-			throw this.errUtil.createError("Could not find an entry for filename " + filename, this.errUtil.METHOD_ERROR);
+			return {
+				abbreviation: "MISC",
+				description: filename.split(".").shift(),
+				edmsDocumentType: "003 - Requirements Package Documents (to include Req Checklist, Section 508, IGCE, etc)"
+			};
 		}
 		else {
 			return entry;
@@ -343,13 +347,13 @@ AtatHelper.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-02 20:49:47</sys_created_on>
         <sys_id>9027655d97a7d5106fa8b4b3f153afba</sys_id>
-        <sys_mod_count>9</sys_mod_count>
+        <sys_mod_count>13</sys_mod_count>
         <sys_name>AtatHelper</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_9027655d97a7d5106fa8b4b3f153afba</sys_update_name>
-        <sys_updated_by>julius.fitzhugh-ctr</sys_updated_by>
-        <sys_updated_on>2023-02-28 20:46:42</sys_updated_on>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-04-28 18:45:10</sys_updated_on>
     </sys_script_include>
 </record_update>

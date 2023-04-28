@@ -12,76 +12,74 @@
 	var params = request.queryParams;
 	var packageId = params.packageId.toString();
 	var documentType;
-	var fileName = params.fileName.toString();
+	var attachmentId = params.attachmentId.toString();
 	var boundary = params.boundary.toString();
+	var fileName;
 	
-	var attachments = new GlideSysAttachment().getAttachments("x_g_dis_atat_acquisition_package", packageId);
-	while (attachments.next()) {
-		if (attachments.file_name == fileName) {
-			documentType = new AtatHelper().getDocumentMetadata(fileName).edmsDocumentType;
-			break;
-		}
+	var attachmentRecord = new GlideRecord("sys_attachment");
+	attachmentRecord.get(attachmentId);
+	if (!attachmentRecord) {
+		errorMessage = "No attachment (attachment sys_id: " + attachmentId + ") was found for Package (ID: " + packageId + ")."; 
+		errUtil.errorLogger(errUtil.createError(errorMessage, errUtil.INVALID_INPUT));		
 	}
-	var multipartInfo;
-	if (attachments) {
-		multipartInfo = {
+	else {
+		fileName = attachmentRecord.file_name.toString();
+		documentType = new AtatHelper().getDocumentMetadata(fileName).edmsDocumentType;
+		
+		var multipartInfo = {
 			documentType: documentType.toString(),
-			fileName: fileName.toString(),
-			attachmentFile: attachments.sys_id,
+			fileName: fileName,
+			attachmentFile: attachmentId,
 			indexFields: JSON.parse(params.indexFields)
-		};		
-	} else {
-		errorMessage = "No attachment (fileName: " + fileName + ") was found for Package (ID: " + packageId + ")."; 
-		errUtil.errorLogger(errUtil.createError(errorMessage, errUtil.INVALID_INPUT));
+		};
+
+		// Content Type and Status Code must be set before calling writeStream
+		// or the response will fail
+		response.setContentType("text/plain");
+		response.setStatus(200);
+
+
+		// multipart generation using stream writer
+		var writer = response.getStreamWriter();
+
+		var classification = '--' + boundary + "\r\n";
+		classification += 'Content-Disposition: form-data; name="classification"\r\n\r\n';
+		// Q: will there be any other classification we use for EDMS
+		classification += 'Pre-Solicitation';
+		writer.writeString(classification);
+
+		var docType = '\r\n--' + boundary + "\r\n";
+		docType += 'Content-Disposition: form-data; name="documentType"\r\n\r\n';
+		docType += multipartInfo.documentType;
+		writer.writeString(docType);
+
+		var indexFields = '\r\n--' + boundary + "\r\n";
+		indexFields += 'Content-Disposition: form-data; name="indexFields"\r\n\r\n';
+
+		var fieldsList = [];
+		for ( var name in multipartInfo.indexFields) {
+			fieldsList.push({ name: name, value: multipartInfo.indexFields[name]});
+		}
+		indexFields += JSON.stringify(fieldsList);
+		writer.writeString(indexFields);
+
+		var fileNamePart = '\r\n--' + boundary + "\r\n";
+		fileNamePart += 'Content-Disposition: form-data; name="fileName"\r\n\r\n';
+		fileNamePart += multipartInfo.fileName;
+		writer.writeString(fileNamePart);
+
+		var file = '\r\n--' + boundary + "\r\n";
+		file += 'Content-Disposition: form-data; name="file"\r\n';
+		file += 'Content-Type: ' + 'application/octet-stream' + '\r\n\r\n';
+		writer.writeString(file);
+
+		// add file contents to multipart request
+		var attachmentContent = new GlideSysAttachment().getContentStream(multipartInfo.attachmentFile);
+		writer.writeStream(attachmentContent);
+
+		var multipartEnd = '\r\n--' + boundary + '--\r\n';
+		writer.writeString(multipartEnd);		
 	}
-
-	// Content Type and Status Code must be set before calling writeStream
-	// or the response will fail
-	response.setContentType("text/plain");
-	response.setStatus(200);
-
-
-	// multipart generation using stream writer
-	var writer = response.getStreamWriter();
-
-	var classification = '--' + boundary + "\r\n";
-	classification += 'Content-Disposition: form-data; name="classification"\r\n\r\n';
-	// Q: will there be any other classification we use for EDMS
-	classification += 'Pre-Solicitation';
-	writer.writeString(classification);
-
-	var docType = '\r\n--' + boundary + "\r\n";
-	docType += 'Content-Disposition: form-data; name="documentType"\r\n\r\n';
-	docType += multipartInfo.documentType;
-	writer.writeString(docType);
-
-	var indexFields = '\r\n--' + boundary + "\r\n";
-	indexFields += 'Content-Disposition: form-data; name="indexFields"\r\n\r\n';
-
-	var fieldsList = [];
-	for ( var name in multipartInfo.indexFields) {
-		fieldsList.push({ name: name, value: multipartInfo.indexFields[name]});
-	}
-	indexFields += JSON.stringify(fieldsList);
-	writer.writeString(indexFields);
-
-	var fileNamePart = '\r\n--' + boundary + "\r\n";
-	fileNamePart += 'Content-Disposition: form-data; name="fileName"\r\n\r\n';
-	fileNamePart += multipartInfo.fileName;
-	writer.writeString(fileNamePart);
-
-	var file = '\r\n--' + boundary + "\r\n";
-	file += 'Content-Disposition: form-data; name="file"\r\n';
-	file += 'Content-Type: ' + 'application/octet-stream' + '\r\n\r\n';
-	writer.writeString(file);
-
-	// add file contents to multipart request
-	var attachmentContent = new GlideSysAttachment().getContentStream(multipartInfo.attachmentFile);
-	writer.writeStream(attachmentContent);
-
-	var multipartEnd = '\r\n--' + boundary + '--\r\n';
-	writer.writeString(multipartEnd);
-
 
 })(request, response);
 ]]></operation_script>
@@ -98,14 +96,14 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-10-31 06:00:31</sys_created_on>
         <sys_id>95dead32977611106fa8b4b3f153af05</sys_id>
-        <sys_mod_count>54</sys_mod_count>
+        <sys_mod_count>57</sys_mod_count>
         <sys_name>edms-multipart-attachment</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_ws_operation_95dead32977611106fa8b4b3f153af05</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-01-09 21:09:18</sys_updated_on>
+        <sys_updated_on>2023-04-27 16:36:16</sys_updated_on>
         <web_service_definition display_value="EDMS">a4ae657e973611106fa8b4b3f153aff7</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
