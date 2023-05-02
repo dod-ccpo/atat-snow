@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element db_object_id="3442d9c4db47d99088887ea5f396193f" label="ATAT:Cloud Service Provider" max_length="40" name="x_g_dis_atat_cloud_service_provider" type="collection">
         <element choice="1" choice_field="classification" choice_table="x_g_dis_atat_classification_level" label="Classification Level" mandatory="true" max_length="40" name="classification_level" type="choice">
-            <choice/>
+            <choice>
+                <element inactive_on_update="false" label="Unclassified" sequence="0" value="U"/>
+                <element inactive_on_update="false" label="Secret" sequence="1" value="S"/>
+                <element inactive_on_update="false" label="Top Secret" sequence="2" value="TS"/>
+            </choice>
         </element>
         <element label="Cloud Distinguisher" max_length="5000" name="cloud_distinguisher" type="string"/>
         <element label="Name" mandatory="true" max_length="40" name="name" type="string"/>
