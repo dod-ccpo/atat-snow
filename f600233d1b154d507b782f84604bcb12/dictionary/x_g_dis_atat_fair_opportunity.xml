@@ -31,6 +31,13 @@
             </choice>
         </element>
         <element label="Barriers - Plans to Remove Barriers" max_length="4000" name="barriers_plans_to_remove_barriers" type="string"/>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Barriers - Plans to Remove Barriers Is Custom" max_length="40" name="barriers_plans_to_remove_barriers_is_custom" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Unselected" sequence="0" value="UNSELECTED"/>
+                <element inactive_on_update="false" label="Yes" sequence="1" value="YES"/>
+                <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
+            </choice>
+        </element>
         <element label="Cause - Govt Engineers - Insufficient Time Reason" max_length="4000" name="cause_govt_engineers_insufficient_time_reason" type="string"/>
         <element label="Cause - Govt Engineers - Platform Name" max_length="4000" name="cause_govt_engineers_platform_name" type="string"/>
         <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Cause - Govt Engineers - Training Certified" max_length="40" name="cause_govt_engineers_training_certified" type="choice">
@@ -58,6 +65,13 @@
             </choice>
         </element>
         <element label="Cause of Sole Source Situation" max_length="4000" name="cause_of_sole_source_situation" type="string"/>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Cause of Sole Source Situation Is Custom" max_length="40" name="cause_of_sole_source_situation_is_custom" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Unselected" sequence="0" value="UNSELECTED"/>
+                <element inactive_on_update="false" label="Yes" sequence="1" value="YES"/>
+                <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
+            </choice>
+        </element>
         <element label="Cause - Product/Feature - Name" max_length="4000" name="cause_product_feature_name" type="string"/>
         <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Cause - Product/Feature - Peculiar to CSP" max_length="40" name="cause_product_feature_peculiar_to_csp" type="choice">
             <choice>
@@ -93,6 +107,13 @@
         <element label="Justification" max_length="4000" name="justification" type="string"/>
         <element label="Market Research Conducted By" max_length="4000" name="market_research_conducted_by" type="string"/>
         <element label="Market Research Details" max_length="4000" name="market_research_details" type="string"/>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Market Research Details Is Custom" max_length="40" name="market_research_details_is_custom" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Unselected" sequence="0" value="UNSELECTED"/>
+                <element inactive_on_update="false" label="Yes" sequence="1" value="YES"/>
+                <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
+            </choice>
+        </element>
         <element label="Minimum Government Requirements" max_length="4000" name="min_govt_requirements" type="string"/>
         <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Other Facts to Support Logical Follow-On" max_length="40" name="other_facts_to_support_logical_follow_on" type="choice">
             <choice>
@@ -103,8 +124,21 @@
         </element>
         <element label="Other Facts to Support Logical Follow-On Details" max_length="4000" name="other_facts_to_support_logical_follow_on_details" type="string"/>
         <element label="Procurement Discussion" max_length="4000" name="procurement_discussion" type="string"/>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Procurement - Has Existing Environment" max_length="40" name="procurement_has_existing_environment" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Unselected" sequence="0" value="UNSELECTED"/>
+                <element inactive_on_update="false" label="Yes" sequence="1" value="YES"/>
+                <element inactive_on_update="false" label="No" sequence="2" value="NO"/>
+            </choice>
+        </element>
+        <element label="Procurement - Previous Impact" max_length="1000" name="procurement_previous_impact" type="string"/>
         <element choice="1" choice_field="vendor" choice_table="x_g_dis_atat_cloud_service_provider" label="Proposed CSP" max_length="40" name="proposed_csp" type="choice">
-            <choice/>
+            <choice>
+                <element inactive_on_update="false" label="Amazon Web Services" sequence="0" value="AWS"/>
+                <element inactive_on_update="false" label="Google Cloud Platform" sequence="1" value="GCP"/>
+                <element inactive_on_update="false" label="Microsoft Azure" sequence="2" value="AZURE"/>
+                <element inactive_on_update="false" label="Oracle Cloud" sequence="3" value="ORACLE"/>
+            </choice>
         </element>
         <element label="Requirements POC" max_length="32" name="requirements_poc" reference="x_g_dis_atat_contacts" type="reference"/>
         <element choice="1" choice_field="technical_poc_type" choice_table="x_g_dis_atat_fair_opportunity" label="Requirements POC Type" max_length="40" name="requirements_poc_type" type="choice">
