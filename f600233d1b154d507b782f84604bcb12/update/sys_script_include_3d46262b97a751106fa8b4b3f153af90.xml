@@ -480,7 +480,14 @@ Dow.prototype = {
 				Dow.prototype.CROSS_DOMAIN_SOLN_FIELDS
 			);
 
-			return crossDomainSoln.length === 1 ? crossDomainSoln[0] : null;
+			return crossDomainSoln.length === 1 ? crossDomainSoln[0] : {
+				"anticipatedNeedOrUsage": null,
+				"crossDomainSolutionRequired": false,
+				"selectedPeriods": [],
+				"needForEntireTaskOrderDuration": false,
+				"projectedFileStreamType": null,
+				"trafficPerDomainPair": []
+			};
 		} catch (error) {
 			throw this.errUtil.createError(
 				"Dow --> getCrossDomainSolution(): " + error,
@@ -1122,13 +1129,13 @@ Dow.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-10 00:50:30</sys_created_on>
         <sys_id>3d46262b97a751106fa8b4b3f153af90</sys_id>
-        <sys_mod_count>26</sys_mod_count>
+        <sys_mod_count>27</sys_mod_count>
         <sys_name>Dow</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_3d46262b97a751106fa8b4b3f153af90</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-04-07 19:29:53</sys_updated_on>
+        <sys_updated_on>2023-05-03 18:09:45</sys_updated_on>
     </sys_script_include>
 </record_update>

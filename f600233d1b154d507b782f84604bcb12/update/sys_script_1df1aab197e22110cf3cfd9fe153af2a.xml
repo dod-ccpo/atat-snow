@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_g_dis_atat_cloud_service_provider</collection>
+        <condition>current.name != ""</condition>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>CSP - Unique Name</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[// trigger: _before_ Insert and Update
+// condition: current.name != ""
+(function executeRule(current, previous) {
+    // check for unique Name
+    var gr = new GlideRecord(current.getTableName());
+    gr.addQuery("name", current.name);
+    gr.query();
+    if (gr.getRowCount()) {
+        current.setAbortAction(true);
+        gs.addErrorMessage(
+            "Found existing configuration with name '" + current.name + "'"
+        );
+    } else {
+        gs.addInfoMessage("Added configuration named '" + current.name + "'");
+        // check for similar configs (Vendor + Classification Level) and warn
+        gr = new GlideRecord(current.getTableName());
+        gr.addQuery("vendor", current.vendor);
+        gr.addQuery("classification_level", current.classification_level);
+        gr.query();
+        if (gr.getRowCount()) {
+            var similarConfigMsg =
+                "Names of similar configs with same Vendor and Classification Level: ";
+            while (gr.hasNext()) {
+                gr.next();
+                similarConfigMsg += gr.name;
+                if (gr.hasNext()) similarConfigMsg += ",";
+            }
+            gs.addInfoMessage(similarConfigMsg);
+        }
+        gs.addInfoMessage(
+            "Name is used to retrieve a CSP endpoint from AWS Secrets Manager.  Verify to ensure proper configuration."
+        );
+    }
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-02 17:00:01</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>1df1aab197e22110cf3cfd9fe153af2a</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>CSP - Unique Name</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_1df1aab197e22110cf3cfd9fe153af2a</sys_update_name>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-02 17:02:26</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=1df1aab197e22110cf3cfd9fe153af2a"/>
+</record_update>
