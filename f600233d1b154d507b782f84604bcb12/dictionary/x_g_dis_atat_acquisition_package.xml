@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element db_object_id="8ad882111bde21103f288733cc4bcb8a" label="DAPPS:Acquisition Package" max_length="40" name="x_g_dis_atat_acquisition_package" type="collection">
+    <element db_object_id="28525508db47d99088887ea5f3961941" label="DAPPS:Acquisition Package" max_length="40" name="x_g_dis_atat_acquisition_package" type="collection">
         <element label="ACOR" max_length="32" name="acor" reference="x_g_dis_atat_contacts" type="reference"/>
         <element choice="1" label="Contracting Shop" max_length="40" name="contracting_shop" type="choice">
             <choice>
@@ -60,9 +60,8 @@
         <element label="Secondary Reviewers" max_length="4000" name="secondary_reviewers" reference="sys_user" type="glide_list"/>
         <element attributes="no_sort=true,slushbucket_ref_no_expand=true" label="Selected Service Offerings" max_length="4000" name="selected_service_offerings" reference="x_g_dis_atat_selected_service_offering" type="glide_list"/>
         <element label="Sensitive Information" max_length="32" name="sensitive_information" reference="x_g_dis_atat_sensitive_information" type="reference"/>
-        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;&#13;&#10;&#9;var costEstimate = new CostEstimate(current);&#13;&#10;&#9;try {&#13;&#10;&#9;&#9;var summary = costEstimate.getData();&#9;&#9;&#13;&#10;&#9;&#9;return summary.total_price.Total;&#13;&#10;&#9;} catch(error) {&#13;&#10;&#9;&#9;gs.debug(&quot;Could not calculate Cost Estimate&quot;, error);&#13;&#10;&#9;&#9;return 0;&#13;&#10;&#9;}&#13;&#10;})(current);" label="Total Estimated Value" max_length="20" name="total_estimated_value" read_only="true" type="currency" virtual="true"/>
         <index name="index">
-            <element name="acor"/>
+            <element name="cor"/>
         </index>
         <index name="index2">
             <element name="contract_award"/>
@@ -74,46 +73,46 @@
             <element name="contract_type"/>
         </index>
         <index name="index5">
-            <element name="cor"/>
-        </index>
-        <index name="index6">
             <element name="current_environment"/>
         </index>
-        <index name="index7">
+        <index name="index6">
             <element name="ditco_ko"/>
         </index>
-        <index name="index8">
-            <element name="evaluation_plan"/>
-        </index>
-        <index name="index9">
+        <index name="index7">
             <element name="fair_opportunity"/>
         </index>
-        <index name="index10">
+        <index name="index8">
             <element name="funding_request"/>
         </index>
-        <index name="index11">
+        <index name="index9">
             <element name="gfe_overview"/>
         </index>
-        <index name="index12">
+        <index name="index10">
+            <element name="acor"/>
+        </index>
+        <index name="index11">
             <element name="organization"/>
         </index>
-        <index name="index13">
+        <index name="index12">
             <element name="period_of_performance"/>
         </index>
-        <index name="index14">
-            <element name="primary_contact"/>
-        </index>
-        <index name="index15">
+        <index name="index13">
             <element name="primary_reviewer"/>
         </index>
-        <index name="index16">
+        <index name="index14">
             <element name="project_overview"/>
         </index>
-        <index name="index17">
+        <index name="index15">
             <element name="requirements_cost_estimate"/>
         </index>
-        <index name="index18">
+        <index name="index16">
             <element name="sensitive_information"/>
+        </index>
+        <index name="index17">
+            <element name="evaluation_plan"/>
+        </index>
+        <index name="index18">
+            <element name="primary_contact"/>
         </index>
     </element>
 </database>
