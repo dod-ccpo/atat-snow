@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element db_object_id="3a80dd5e971121107b1372571153af2b" label="DAPPS:Acquisition Package" max_length="40" name="x_g_dis_atat_acquisition_package" type="collection">
+    <element db_object_id="28525508db47d99088887ea5f3961941" label="DAPPS:Acquisition Package" max_length="40" name="x_g_dis_atat_acquisition_package" type="collection">
         <element label="ACOR" max_length="32" name="acor" reference="x_g_dis_atat_contacts" type="reference"/>
         <element choice="1" label="Contracting Shop" max_length="40" name="contracting_shop" type="choice">
             <choice>
@@ -58,9 +58,10 @@
         <element label="Project Overview" max_length="32" name="project_overview" reference="x_g_dis_atat_project_overview" type="reference"/>
         <element active="false" label="Requirements Cost Estimate" max_length="32" name="requirements_cost_estimate" reference="x_g_dis_atat_requirements_cost_estimate" type="reference"/>
         <element label="Secondary Reviewers" max_length="4000" name="secondary_reviewers" reference="sys_user" type="glide_list"/>
+        <element attributes="no_sort=true,slushbucket_ref_no_expand=true" label="Selected Service Offerings" max_length="4000" name="selected_service_offerings" reference="x_g_dis_atat_selected_service_offering" type="glide_list"/>
         <element label="Sensitive Information" max_length="32" name="sensitive_information" reference="x_g_dis_atat_sensitive_information" type="reference"/>
         <index name="index">
-            <element name="acor"/>
+            <element name="cor"/>
         </index>
         <index name="index2">
             <element name="contract_award"/>
@@ -72,46 +73,46 @@
             <element name="contract_type"/>
         </index>
         <index name="index5">
-            <element name="cor"/>
-        </index>
-        <index name="index6">
             <element name="current_environment"/>
         </index>
-        <index name="index7">
+        <index name="index6">
             <element name="ditco_ko"/>
         </index>
-        <index name="index8">
-            <element name="evaluation_plan"/>
-        </index>
-        <index name="index9">
+        <index name="index7">
             <element name="fair_opportunity"/>
         </index>
-        <index name="index10">
+        <index name="index8">
             <element name="funding_request"/>
         </index>
-        <index name="index11">
+        <index name="index9">
             <element name="gfe_overview"/>
         </index>
-        <index name="index12">
+        <index name="index10">
+            <element name="acor"/>
+        </index>
+        <index name="index11">
             <element name="organization"/>
         </index>
-        <index name="index13">
+        <index name="index12">
             <element name="period_of_performance"/>
         </index>
-        <index name="index14">
-            <element name="primary_contact"/>
-        </index>
-        <index name="index15">
+        <index name="index13">
             <element name="primary_reviewer"/>
         </index>
-        <index name="index16">
+        <index name="index14">
             <element name="project_overview"/>
         </index>
-        <index name="index17">
+        <index name="index15">
             <element name="requirements_cost_estimate"/>
         </index>
-        <index name="index18">
+        <index name="index16">
             <element name="sensitive_information"/>
+        </index>
+        <index name="index17">
+            <element name="evaluation_plan"/>
+        </index>
+        <index name="index18">
+            <element name="primary_contact"/>
         </index>
     </element>
 </database>
