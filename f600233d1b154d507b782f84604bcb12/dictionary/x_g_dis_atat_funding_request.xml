@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Funding Request" max_length="40" name="x_g_dis_atat_funding_request" type="collection">
+    <element db_object_id="58b059529751211044ecfbc71153af8d" label="DAPPS:Funding Request" max_length="40" name="x_g_dis_atat_funding_request" type="collection">
+        <element label="Appropriation Fiscal Year" max_length="40" name="appropriation_fiscal_year" type="string"/>
+        <element choice="1" label="Appropriation Funds Type" max_length="40" name="appropriation_funds_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="-- New choice --" value="-- New choice --"/>
+                <element inactive_on_update="false" label="Operations &amp; Maintenance" value="O_M"/>
+                <element inactive_on_update="false" label="Procurement" value="PROCUREMENT"/>
+                <element inactive_on_update="false" label="Research, Development, Test &amp; Evaluation" value="RDT_E"/>
+            </choice>
+        </element>
         <element label="FS Form" max_length="32" name="fs_form" reference="x_g_dis_atat_funding_request_fs_form" type="reference"/>
         <element choice="1" label="Funding Request Type" max_length="40" name="funding_request_type" type="choice">
             <choice>
