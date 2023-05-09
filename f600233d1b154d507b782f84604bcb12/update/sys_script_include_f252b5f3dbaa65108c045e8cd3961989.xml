@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.JustificationAndApproval</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>JustificationAndApproval</name>
+        <script><![CDATA[var JustificationAndApproval = Class.create();
+JustificationAndApproval.prototype = {
+
+    errUtil: new ErrorHandler(),
+    acquisitionPackage: null,
+	DATA_INCOMPLETE: 4001,
+	UNEXPECTED_ERROR: 5001,
+	CONTRACT_NUMBERS: {
+		AWS: "HC105023D0005",
+		GCP: "HC105023D0002",
+		AZURE: "HC105023D0003",
+		ORACLE: "HC105023D0004",
+	},
+
+    initialize: function(acqPackage) {
+        this.acquisitionPackage = acqPackage;
+    },
+	
+	constructError: function(code, message) {
+		throw {
+			packageId: this.acquisitionPackage.sys_id,
+			code: code,
+			message: message
+		};		
+	},
+	
+	getPurchaseRequestNumber: function() {
+		var fundingRequest = new GlideRecord("x_g_dis_atat_funding_request");
+		fundingRequest.get(this.acquisitionPackage.funding_request);
+		gs.info("fr sys_id: " + fundingRequest.sys_id);
+		if (!fundingRequest.funding_request_type) {
+			throw this.constructError(this.DATA_INCOMPLETE, "No Funding Request found or missing Funding Request Type");
+		}
+		else if (fundingRequest.funding_request_type.toString() == "MIPR") {
+			gs.info(JSON.stringify(fundingRequest));
+			var mipr = new GlideRecord("x_g_dis_atat_funding_request_mipr");
+			mipr.get(fundingRequest.mipr);
+			if (!mipr) {
+				throw {
+					code: DATA_INCOMPLETE,
+					message: "Funding Request type is MIPR but no MIPR found"
+				};
+			}
+			else {				
+				if (!mipr.mipr_number) {
+					throw {
+						code: DATA_INCOMPLETE,
+						message: "Funding Request type is MIPR but no MIPR Number found"
+					};					
+				}
+				else {
+					return mipr.mipr_number.toString();
+				}
+			}
+		}
+		else if (fundingRequest.funding_request_type.toString() == "FS_FORM") {
+			var fsForm = new GlideRecord("x_g_dis_atat_funding_request_fs_form");
+			fsForm.get(fundingRequest.fs_form);
+			if (!fsForm) {
+				throw {
+					code: DATA_INCOMPLETE,
+					message: "Funding Request type is FS_FORM but no FS Form found"
+				};
+			}
+			else {				
+				if (!fsForm.order_number) {
+					throw {
+						code: DATA_INCOMPLETE,
+						message: "Funding Request type is FS_FORM but no Order Number found"
+					};					
+				}
+				else {
+					return fsForm.order_number.toString();
+				}
+			}
+		}
+		else {
+			//throw this.constructError(this.UNEXPECTED_ERROR, "Unknown Funding Request Type");
+			gs.error("Unknown Funding Request Type: " + fundingRequest.funding_request_type.toString());
+			throw {
+				code: this.UNEXPECTED_ERROR,
+				message:  "Unknown Funding Request Type: " + fundingRequest.funding_request_type.toString()
+			};	
+		}
+	},
+	
+	getPayload: function() {
+		var fairOpportunity = new GlideRecord("x_g_dis_atat_funding_request");
+		fairOpportunity.get(this.acquisitionPackage.fair_opportunity);
+		if (!fairOpportunity.sys_id) {
+			throw this.constructError(this.DATA_INCOMPLETE, "No Fair Opportunity record found");
+		}
+		
+		return {
+			purchaseRequestNumber: this.getPurchaseRequestNumber(),
+			jwccContractNumber: this.CONTRACT_NUMBERS.get(fairOpportunity.proposed_csp.toString()),
+			title: null,
+			scope: null,
+			estimatedValue: 0,
+			agencyLabel: null,
+			organizationFullAddress: null,
+			contractingShop: null,
+			otherContractingShopFullAddress: null,
+			taskOrderType: null,			
+			fundingRequestFiscalYear: null,
+			
+			fairOpportunity: {
+				proposedVendor: null, 
+				exceptionToFairOpportunity: null,
+				justification: null,
+				minimumGovernmentRequirements: null,
+				causeOfSoleSourceSituation: null,
+				whyCspIsOnlyCapableSource: null,
+				procurementDiscussion: null,
+				procurementHasExistingEnv: null,
+				procurementPreviousImpact: null,
+				requirementImpact: null,
+				marketResearchDetails: null,
+				otherFactsToSupportLogicalFollowOn: null,
+				plansToRemoveBarriers: null
+			},
+			technicalPoc: {
+				formalName: null,
+				title: null,
+				phoneAndExtension: null
+			},
+			requirementsPoc: {
+				formalName: null,
+				title: null,
+				phoneAndExtension: null
+			},
+			cor: {
+				formalName: null,
+				title: null,
+				phoneAndExtension: null
+			}
+		};
+	},
+	
+    type: 'JustificationAndApproval'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-05-08 18:48:55</sys_created_on>
+        <sys_id>f252b5f3dbaa65108c045e8cd3961989</sys_id>
+        <sys_mod_count>25</sys_mod_count>
+        <sys_name>JustificationAndApproval</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_f252b5f3dbaa65108c045e8cd3961989</sys_update_name>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-05-08 20:46:21</sys_updated_on>
+    </sys_script_include>
+</record_update>
