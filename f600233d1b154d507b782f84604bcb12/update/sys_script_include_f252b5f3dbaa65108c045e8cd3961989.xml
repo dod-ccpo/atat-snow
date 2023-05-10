@@ -11,7 +11,13 @@
 JustificationAndApproval.prototype = {
 
     errUtil: new ErrorHandler(),
+	atatHelper: new AtatHelper(),
     acquisitionPackage: null,
+	fundingRequest: new GlideRecord("x_g_dis_atat_funding_request"),
+	fairOpportunity: new GlideRecord("x_g_dis_atat_fair_opportunity"),
+	projectOverview: new GlideRecord("x_g_dis_atat_project_overview"),
+	organization: new GlideRecord("x_g_dis_atat_organization"),	
+	agency: new GlideRecord("x_g_dis_atat_agency"),	
 	DATA_INCOMPLETE: 4001,
 	UNEXPECTED_ERROR: 5001,
 	CONTRACT_NUMBERS: {
@@ -23,6 +29,36 @@ JustificationAndApproval.prototype = {
 
     initialize: function(acqPackage) {
         this.acquisitionPackage = acqPackage;
+		
+		// Look up Fair Opportunity record
+		this.fairOpportunity.get(this.acquisitionPackage.fair_opportunity);
+		if (!this.fairOpportunity.sys_id) {
+			throw this.constructError(this.DATA_INCOMPLETE, "No Fair Opportunity record found");
+		}
+		
+		// Look up Funding Request record
+		this.fundingRequest.get(this.acquisitionPackage.funding_request);
+		if (!this.fundingRequest.sys_id) {
+			throw this.constructError(this.DATA_INCOMPLETE, "No Funding Request record found");
+		}
+		
+		// Look up Project Overview record
+		this.projectOverview.get(this.acquisitionPackage.project_overview);
+		if (!this.projectOverview.sys_id) {
+			throw this.constructError(this.DATA_INCOMPLETE, "No Project Overview record found");
+		}
+		
+		// Look up Organization record
+		this.organization.get(this.acquisitionPackage.organization);
+		if (!this.organization.sys_id) {
+			throw this.constructError(this.DATA_INCOMPLETE, "No Organization record found");
+		}
+		
+		// Look up Agency record
+		this.agency.get(this.organization.agency);
+		if (!this.agency.sys_id) {
+			throw this.constructError(this.DATA_INCOMPLETE, "No Agency record found");
+		}		
     },
 	
 	constructError: function(code, message) {
@@ -34,115 +70,151 @@ JustificationAndApproval.prototype = {
 	},
 	
 	getPurchaseRequestNumber: function() {
-		var fundingRequest = new GlideRecord("x_g_dis_atat_funding_request");
-		fundingRequest.get(this.acquisitionPackage.funding_request);
-		gs.info("fr sys_id: " + fundingRequest.sys_id);
-		if (!fundingRequest.funding_request_type) {
-			throw this.constructError(this.DATA_INCOMPLETE, "No Funding Request found or missing Funding Request Type");
+		if (!this.fundingRequest.funding_request_type) {
+			throw this.constructError(this.DATA_INCOMPLETE, "No Funding Request Type");
 		}
-		else if (fundingRequest.funding_request_type.toString() == "MIPR") {
-			gs.info(JSON.stringify(fundingRequest));
+		else if (this.fundingRequest.funding_request_type.toString() == "MIPR") {
 			var mipr = new GlideRecord("x_g_dis_atat_funding_request_mipr");
 			mipr.get(fundingRequest.mipr);
-			if (!mipr) {
-				throw {
-					code: DATA_INCOMPLETE,
-					message: "Funding Request type is MIPR but no MIPR found"
-				};
+			if (!mipr.sys_id) {
+				throw this.constructError(this.DATA_INCOMPLETE, "Funding Request type is MIPR but no MIPR found");
 			}
 			else {				
 				if (!mipr.mipr_number) {
-					throw {
-						code: DATA_INCOMPLETE,
-						message: "Funding Request type is MIPR but no MIPR Number found"
-					};					
+					throw this.constructError(this.DATA_INCOMPLETE, "Funding Request type is MIPR but no MIPR Number found");				
 				}
 				else {
 					return mipr.mipr_number.toString();
 				}
 			}
 		}
-		else if (fundingRequest.funding_request_type.toString() == "FS_FORM") {
+		else if (this.fundingRequest.funding_request_type.toString() == "FS_FORM") {
 			var fsForm = new GlideRecord("x_g_dis_atat_funding_request_fs_form");
-			fsForm.get(fundingRequest.fs_form);
-			if (!fsForm) {
-				throw {
-					code: DATA_INCOMPLETE,
-					message: "Funding Request type is FS_FORM but no FS Form found"
-				};
+			fsForm.get(this.fundingRequest.fs_form);
+			if (!fsForm.sys_id) {
+				throw this.constructError(this.DATA_INCOMPLETE, "Funding Request type is FS_FORM but no FS Form found");
 			}
-			else {				
-				if (!fsForm.order_number) {
-					throw {
-						code: DATA_INCOMPLETE,
-						message: "Funding Request type is FS_FORM but no Order Number found"
-					};					
-				}
-				else {
-					return fsForm.order_number.toString();
-				}
+			else {		
+				// TODO re-enable this validation once we properly parse G-Invoicing numbers (AT-9074)
+				//if (!fsForm.order_number) {
+				//	throw this.constructError(this.DATA_INCOMPLETE, "Funding Request type is FS_FORM but no Order Number found");			
+				//}
+				//else {
+				//	return fsForm.order_number.toString();
+				//}
+				return fsForm.gt_c_number.toString() + ", " + fsForm.order_number.toString();
 			}
 		}
 		else {
-			//throw this.constructError(this.UNEXPECTED_ERROR, "Unknown Funding Request Type");
-			gs.error("Unknown Funding Request Type: " + fundingRequest.funding_request_type.toString());
-			throw {
-				code: this.UNEXPECTED_ERROR,
-				message:  "Unknown Funding Request Type: " + fundingRequest.funding_request_type.toString()
-			};	
+			throw this.constructError(this.UNEXPECTED_ERROR, "Unknown Funding Request Type: " +  fundingRequest.funding_request_type.toString());
 		}
 	},
 	
-	getPayload: function() {
-		var fairOpportunity = new GlideRecord("x_g_dis_atat_funding_request");
-		fairOpportunity.get(this.acquisitionPackage.fair_opportunity);
-		if (!fairOpportunity.sys_id) {
-			throw this.constructError(this.DATA_INCOMPLETE, "No Fair Opportunity record found");
+	getPoc: function(pocSysId) {
+		var poc = new GlideRecord("x_g_dis_atat_contacts");
+		poc.get(pocSysId);
+		if (!poc.sys_id) {
+			throw this.constructError(this.DATA_INCOMPLETE, "Could not find a Contact with the given sys_id:" + pocSysId);
 		}
+		else {
+			return {
+				formalName: this.explicitNull(poc.formal_name.toString()),
+				title: this.explicitNull(poc.title.toString()),
+				phoneAndExtension: this.explicitNull(poc.phone_and_extension.toString())
+			};
+		}
+	},
+	
+	explicitNull: function(value) {
+		return value ? value : null;
+	},
+	
+	getPayload: function() {
+		var proposedCsp = this.fairOpportunity.proposed_csp.toString();
+		var organizationFullAddress = this.organization.organization_name.toString() + "\n" + this.atatHelper.constructAddress(
+			this.organization.street_address_1.toString(),
+			this.organization.street_address_2.toString(),
+			this.organization.city.toString(),
+			this.organization.state.toString(),
+			this.organization.zip_code.toString(),
+			this.organization.country.toString(),
+		);
+		var contractingShop = this.acquisitionPackage.contracting_shop.toString();
+		var otherContractingShopFullAddress = null;
+		if (contractingShop !== "DITCO") {
+			var otherContractingShopAddress =  new GlideRecord("x_g_dis_atat_dapps_address_table");
+			otherContractingShopAddress.get(this.acquisitionPackage.contracting_shop_non_ditco_address);
+			if (!otherContractingShopAddress.sys_id) {
+				throw this.constructError(this.DATA_INCOMPLETE, "Contracting Shop is non-DITCO but no Other Contracting Shop Address found");
+			}
+
+			var country = new GlideRecord("core_country");
+			country.get(otherContractingShopAddress.country.toString());
+			otherContractingShopFullAddress	= otherContractingShopAddress.name.toString() + "\n" + this.atatHelper.constructAddress(
+				otherContractingShopAddress.street_address_1.toString(),
+				otherContractingShopAddress.street_address_2.toString(),
+				otherContractingShopAddress.city.toString(),
+				otherContractingShopAddress.state_province_state_code.toString(),
+				otherContractingShopAddress.zip_postal_code.toString(),
+				country.name.toString(),
+			);
+		}
+		var taskOrderType = {
+			"FFP": "Firm Fixed Price",
+			"T&M": "Time & Materials",
+			"TBD": "Hybrid"
+		}[this.acquisitionPackage.contract_type.getDisplayValue()];
+		var exceptionToFairOpportunity = {
+			YES_FAR_16_505_B_2_I_A: "16.505(b)(2)(i)(A)",
+			YES_FAR_16_505_B_2_I_B: "16.505(b)(2)(i)(B)",
+			YES_FAR_16_505_B_2_I_C: "16.505(b)(2)(i)(C)"
+		}[this.fairOpportunity.exception_to_fair_opportunity.toString()];
 		
+		var causeOfSoleSourceForDocGen = this.fairOpportunity.cause_of_sole_source_for_docgen.toString();
+		var causeOfSoleSource = causeOfSoleSourceForDocGen === "GENERATED" ? 
+			this.fairOpportunity.cause_of_sole_source_generated.toString() : this.fairOpportunity.cause_of_sole_source_custom.toString();
+		
+		var researchDetailsForDocGen = this.fairOpportunity.research_details_for_docgen.toString();
+		var marketResearchDetails = researchDetailsForDocGen === "GENERATED" ? 
+			this.fairOpportunity.research_details_generated.toString() : this.fairOpportunity.research_details_custom.toString();
+
+		var barriersPlansToRemoveForDocGen = this.fairOpportunity.barriers_plans_to_remove_for_docgen.toString();
+		var barriersPlansToRemove = barriersPlansToRemoveForDocGen === "GENERATED" ? 
+			this.fairOpportunity.barriers_plans_to_remove_generated.toString() : this.fairOpportunity.barriers_plans_to_remove_custom.toString();
+
+		var procurementHasExistingEnv = this.fairOpportunity.procurement_has_existing_env.toString();
+		var procurementHasExistingEnvBoolean = procurementHasExistingEnv === "YES" ? true : false;
+
 		return {
 			purchaseRequestNumber: this.getPurchaseRequestNumber(),
-			jwccContractNumber: this.CONTRACT_NUMBERS.get(fairOpportunity.proposed_csp.toString()),
-			title: null,
-			scope: null,
-			estimatedValue: 0,
-			agencyLabel: null,
-			organizationFullAddress: null,
-			contractingShop: null,
-			otherContractingShopFullAddress: null,
-			taskOrderType: null,			
-			fundingRequestFiscalYear: null,
-			
+			jwccContractNumber: this.explicitNull(this.CONTRACT_NUMBERS[proposedCsp]),
+			title: this.explicitNull(this.projectOverview.title.toString()),
+			scope: this.explicitNull(this.projectOverview.scope.toString()),
+			estimatedValue: this.explicitNull(new CostEstimate(this.acquisitionPackage).getTotalEstimate()),
+			agencyLabel:  this.explicitNull(this.agency.label.toString()),
+			organizationFullAddress: organizationFullAddress,
+			contractingShop: this.explicitNull(contractingShop),
+			otherContractingShopFullAddress: otherContractingShopFullAddress,
+			taskOrderType: taskOrderType,			
+			fundingRequestFiscalYear: this.explicitNull(this.fundingRequest.appropriation_fiscal_year.toString()),			
 			fairOpportunity: {
-				proposedVendor: null, 
-				exceptionToFairOpportunity: null,
-				justification: null,
-				minimumGovernmentRequirements: null,
-				causeOfSoleSourceSituation: null,
-				whyCspIsOnlyCapableSource: null,
-				procurementDiscussion: null,
-				procurementHasExistingEnv: null,
-				procurementPreviousImpact: null,
-				requirementImpact: null,
-				marketResearchDetails: null,
-				otherFactsToSupportLogicalFollowOn: null,
-				plansToRemoveBarriers: null
+				proposedVendor: proposedCsp, 
+				exceptionToFairOpportunity: exceptionToFairOpportunity,
+				justification: this.explicitNull(this.fairOpportunity.justification.toString()),
+				minimumGovernmentRequirements: this.explicitNull(this.fairOpportunity.min_govt_requirements.toString()),
+				causeOfSoleSourceSituation: this.explicitNull(causeOfSoleSource),
+				whyCspIsOnlyCapableSource: this.explicitNull(this.fairOpportunity.why_csp_is_only_capable_source.toString()),
+				procurementDiscussion: this.explicitNull(this.fairOpportunity.procurement_discussion.toString()),
+				procurementHasExistingEnv: procurementHasExistingEnvBoolean,
+				procurementPreviousImpact: this.explicitNull(this.fairOpportunity.procurement_previous_impact.toString()),
+				requirementImpact: this.explicitNull(this.fairOpportunity.requirement_impact.toString()),
+				marketResearchDetails: this.explicitNull(marketResearchDetails),
+				otherFactsToSupportLogicalFollowOn: this.explicitNull(this.fairOpportunity.other_facts_to_support_logical_follow_on_details.toString()),
+				plansToRemoveBarriers: this.explicitNull(barriersPlansToRemove)
 			},
-			technicalPoc: {
-				formalName: null,
-				title: null,
-				phoneAndExtension: null
-			},
-			requirementsPoc: {
-				formalName: null,
-				title: null,
-				phoneAndExtension: null
-			},
-			cor: {
-				formalName: null,
-				title: null,
-				phoneAndExtension: null
-			}
+			technicalPoc: this.getPoc(this.fairOpportunity.technical_poc.toString()),
+			requirementsPoc: this.getPoc(this.fairOpportunity.requirements_poc.toString()),
+			cor: this.getPoc(this.acquisitionPackage.cor.toString())
 		};
 	},
 	
@@ -152,13 +224,13 @@ JustificationAndApproval.prototype = {
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-05-08 18:48:55</sys_created_on>
         <sys_id>f252b5f3dbaa65108c045e8cd3961989</sys_id>
-        <sys_mod_count>25</sys_mod_count>
+        <sys_mod_count>75</sys_mod_count>
         <sys_name>JustificationAndApproval</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_f252b5f3dbaa65108c045e8cd3961989</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-08 20:46:21</sys_updated_on>
+        <sys_updated_on>2023-05-10 17:24:21</sys_updated_on>
     </sys_script_include>
 </record_update>
