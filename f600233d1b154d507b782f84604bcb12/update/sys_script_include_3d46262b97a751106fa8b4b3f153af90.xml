@@ -1007,41 +1007,6 @@ Dow.prototype = {
 		}
 
 	},
-		/**
-	 * Gather a single contract record
-	 * @param {GlideRecord} contract - a contract record
-	 * @return {object} a contract record
-	 * 
-	*/
-	getSingleContract: function(cci) {
-		var ctb = this.ctb;
-		try{
-			gs.info("contract: " + cci)
-			return {
-				// contractNumber: cci.contract_number.toString(),
-				// contractOrderExpirationDate: ctb(cci.contract_order_expiration_date.toString()),
-				// contractOrderStartDate: ctb(cci.contract_order_start_date.toString()),
-				// incumbentContractorName: cci.incumbent_contractor_name.toString(),
-				// contractExists: ctb(cci.current_contract_exists.toString()),
-				// taskDeliveryOrderNumber: cci.task_delivery_order_number.toString(),
-				// competitiveStatus: ctb(cci.competitive_status.toString()),
-				// businessSize: ctb(cci.business_size.toString()),
-				// acquisitionPackage: cci.acquisition_package.toString()
-				
-				currentContractExists: ctb(cci.current_contract_exists.toString()),
-				contractNumber: cci.contract_number.toString(),
-				contractExpirationDate: cci.contract_order_expiration_date.toString(),
-				incumbentContractorName: cci.incumbent_contractor_name.toString(),
-				previousTaskOrderNumber: cci.task_delivery_order_number.toString()
-			};
-
-		} catch (error) {
-			throw this.errUtil.createError(
-				"Dow --> getSingleContract(): " + error,
-				this.errUtil.METHOD_ERROR
-			);
-		}
-	},
 	/**
 	 * Gets a list of Contracts related to an acquisition package.
 	 * @return {array} a list of contracts
@@ -1189,13 +1154,13 @@ Dow.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-10 00:50:30</sys_created_on>
         <sys_id>3d46262b97a751106fa8b4b3f153af90</sys_id>
-        <sys_mod_count>40</sys_mod_count>
+        <sys_mod_count>41</sys_mod_count>
         <sys_name>Dow</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_3d46262b97a751106fa8b4b3f153af90</sys_update_name>
         <sys_updated_by>tom.arnold</sys_updated_by>
-        <sys_updated_on>2023-05-11 04:37:10</sys_updated_on>
+        <sys_updated_on>2023-05-11 20:33:56</sys_updated_on>
     </sys_script_include>
 </record_update>
