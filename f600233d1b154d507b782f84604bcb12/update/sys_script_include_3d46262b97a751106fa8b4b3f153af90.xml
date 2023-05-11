@@ -31,6 +31,7 @@ Dow.prototype = {
 	CROSS_DOMAIN_SOLN_TABLE: "x_g_dis_atat_cross_domain_solution",
 	TRAVEL_REQUIREMENT_TABLE: "x_g_dis_atat_travel_requirement",
 	REQUIREMENTS_COST_EST_TABLE: "x_g_dis_atat_requirements_cost_estimate",
+	CURRENT_CONTRACT_INFO_TABLE: "x_g_dis_atat_current_contract_and_recurring_information",
 
 	// base instance fields
 	ENV_INST_FIELDS: [
@@ -104,7 +105,14 @@ Dow.prototype = {
 		"PORTABILITY_PLAN", "ADVISORY_ASSISTANCE", "HELP_DESK_SERVICES", "TRAINING",
 		"DOCUMENTATION_SUPPORT", "GENERAL_CLOUD_SUPPORT"
 	],
-
+	//  CURRENT_CONTRACT_INFO_FIELDS: [
+	//  	"acquisition_package", "business_size", "competitive_status", "contract_number",
+	//  	"contract_order_expiration_date", "contract_order_start_date", "current_contract_exists",
+	//  	"incumbent_contractor_name", "task_delivery_order_number"
+	//  ],
+	CURRENT_CONTRACT_INFO_FIELDS:
+		["contract_number", "current_contract_exists", "contract_order_expiration_date", 
+		"incumbent_contractor_name", "task_delivery_order_number"],
 	atatUtil: new AtatHelper(),
 	errUtil: new ErrorHandler(),
 	arrUtil: new global.ArrayUtil(),
@@ -144,6 +152,7 @@ Dow.prototype = {
 			var computeEnvInstFields = [];
 			var databaseEnvInstFields = [];
 			var cloudSupportEnvInstFields = [];
+			var contractInfoFields = [];
 
 			Dow.prototype.ENV_INST_FIELDS.forEach(function(field) {
 				currentEnvInstFields.push(field);
@@ -164,7 +173,9 @@ Dow.prototype = {
 			Dow.prototype.CLOUD_SUP_ENV_INST_FIELDS.forEach(function(field) {
 				cloudSupportEnvInstFields.push(field);
 			});
-
+			Dow.prototype.CURRENT_CONTRACT_INFO_FIELDS.forEach(function(field) {
+				contractInfoFields.push(field);
+			});
 			switch (table) {
 				case Dow.prototype.ENV_INST_TABLE:
 				case Dow.prototype.STORAGE_ENV_INST_TABLE:
@@ -178,6 +189,8 @@ Dow.prototype = {
 					return databaseEnvInstFields;
 				case Dow.prototype.CLOUD_SUP_ENV_INST_TABLE:
 					return cloudSupportEnvInstFields;
+				case Dow.prototype.CURRENT_CONTRACT_INFO_TABLE:
+					return contractInfoFields
 				default:
 					return [];
 			}
@@ -480,14 +493,7 @@ Dow.prototype = {
 				Dow.prototype.CROSS_DOMAIN_SOLN_FIELDS
 			);
 
-			return crossDomainSoln.length === 1 ? crossDomainSoln[0] : {
-				"anticipatedNeedOrUsage": null,
-				"crossDomainSolutionRequired": false,
-				"selectedPeriods": [],
-				"needForEntireTaskOrderDuration": false,
-				"projectedFileStreamType": null,
-				"trafficPerDomainPair": []
-			};
+			return crossDomainSoln.length === 1 ? crossDomainSoln[0] : null;
 		} catch (error) {
 			throw this.errUtil.createError(
 				"Dow --> getCrossDomainSolution(): " + error,
@@ -548,6 +554,7 @@ Dow.prototype = {
 				instance["isTrafficSpikePeriodBased"] = ctb(instance.isTrafficSpikePeriodBased);
 				instance["deployedRegions"] = Dow.prototype.getRegions(instance.deployedRegions);
 				instance["usersPerRegion"] = Dow.prototype.transformUsersPerRegion(instance.usersPerRegion);
+				gs.log(instance);
 
 				return instance;
 			});
@@ -915,6 +922,7 @@ Dow.prototype = {
 		var computeEnvInstFields = Dow.prototype.getTableFields(Dow.prototype.COMP_ENV_INST_TABLE);
 		var databaseEnvInstFields = Dow.prototype.getTableFields(Dow.prototype.DB_ENV_INST_TABLE);
 		var cloudSupportEnvInstFields = Dow.prototype.getTableFields(Dow.prototype.CLOUD_SUP_ENV_INST_TABLE);
+		var contractInfoFields = Dow.prototype.getTableFields(Dow.prototype.CURRENT_CONTRACT_INFO_TABLE);
 
 		switch (table) {
 			case Dow.prototype.ENV_INST_TABLE:
@@ -987,11 +995,70 @@ Dow.prototype = {
 					.where("acquisition_package", packageId)
 					.select(Dow.prototype.TRAVEL_REQUIREMENT_FIELDS)
 					.toArray(limit);
+			case Dow.prototype.CURRENT_CONTRACT_INFO_TABLE:
+				return new global.GlideQuery(table)
+					.where("acquisition_package", packageId)
+					.orderBy("contract_order_expiration_date")
+					.select(contractInfoFields)
+					.toArray(limit);
 			default:
 				gs.warn("Table " + table + " is not known to be associated with a package.");
 				return [];
 		}
 
+	},
+		/**
+	 * Gather a single contract record
+	 * @param {GlideRecord} contract - a contract record
+	 * @return {object} a contract record
+	 * 
+	*/
+	getSingleContract: function(cci) {
+		var ctb = this.ctb;
+		try{
+			gs.info("contract: " + cci)
+			return {
+				// contractNumber: cci.contract_number.toString(),
+				// contractOrderExpirationDate: ctb(cci.contract_order_expiration_date.toString()),
+				// contractOrderStartDate: ctb(cci.contract_order_start_date.toString()),
+				// incumbentContractorName: cci.incumbent_contractor_name.toString(),
+				// contractExists: ctb(cci.current_contract_exists.toString()),
+				// taskDeliveryOrderNumber: cci.task_delivery_order_number.toString(),
+				// competitiveStatus: ctb(cci.competitive_status.toString()),
+				// businessSize: ctb(cci.business_size.toString()),
+				// acquisitionPackage: cci.acquisition_package.toString()
+				
+				currentContractExists: ctb(cci.current_contract_exists.toString()),
+				contractNumber: cci.contract_number.toString(),
+				contractExpirationDate: cci.contract_order_expiration_date.toString(),
+				incumbentContractorName: cci.incumbent_contractor_name.toString(),
+				previousTaskOrderNumber: cci.task_delivery_order_number.toString()
+			};
+
+		} catch (error) {
+			throw this.errUtil.createError(
+				"Dow --> getSingleContract(): " + error,
+				this.errUtil.METHOD_ERROR
+			);
+		}
+	},
+	/**
+	 * Gets a list of Contracts related to an acquisition package.
+	 * @return {array} a list of contracts
+	*/
+	getContractInformation: function(packageId) {
+
+		try{
+			var table = Dow.prototype.CURRENT_CONTRACT_INFO_TABLE;
+			var contracts = Dow.prototype.findPackageRecords(table, packageId)
+			
+			return Dow.prototype.atatUtil.snakeToCamelCase(contracts, Dow.prototype.CURRENT_CONTRACT_INFO_FIELDS);
+		} catch (error) {
+			throw this.errUtil.createError(
+				"Dow --> getContractInformation(): " + error,
+				this.errUtil.METHOD_ERROR
+			);
+		}
 	},
 
 	/**
@@ -1044,14 +1111,7 @@ Dow.prototype = {
 					awardHistory: awards, 
 
 					// second table at top
-					contractInformation: {
-						currentContractExists: ctb(cci.current_contract_exists.toString()),
-						contractNumber: cci.contract_number.toString(),
-						contractExpirationDate: cci.contract_order_expiration_date.toString(),
-						incumbentContractorName: cci.incumbent_contractor_name.toString(),
-						previousTaskOrderNumber: cci.task_delivery_order_number.toString()
-					},
-
+					contractInformation: this.getContractInformation(acqPackage.sys_id),
 					// project overview (sections 1 and 2)
 					toTitle: acqPackage.project_overview.title.toString(),
 					scope: acqPackage.project_overview.scope.toString(),
@@ -1129,13 +1189,13 @@ Dow.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-10 00:50:30</sys_created_on>
         <sys_id>3d46262b97a751106fa8b4b3f153af90</sys_id>
-        <sys_mod_count>27</sys_mod_count>
+        <sys_mod_count>40</sys_mod_count>
         <sys_name>Dow</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_3d46262b97a751106fa8b4b3f153af90</sys_update_name>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-03 18:09:45</sys_updated_on>
+        <sys_updated_by>tom.arnold</sys_updated_by>
+        <sys_updated_on>2023-05-11 04:37:10</sys_updated_on>
     </sys_script_include>
 </record_update>
