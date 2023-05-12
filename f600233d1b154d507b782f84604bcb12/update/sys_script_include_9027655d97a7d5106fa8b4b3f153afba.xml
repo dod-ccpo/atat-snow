@@ -294,19 +294,19 @@ AtatHelper.prototype = {
 
 	/**
    * Query a table and find records related to a package. 
-   * Only the first 50 records are returned.
+   * Only the first 100 records are returned.
    *
    * @param {string} table - table to query for related package records
    * @return {array} records found from querying a table
    */
-  	//TODO refactor Dow to use this method
+    //TODO refactor Dow to use this method
 	findPackageRecords: function(table, packageSysId) {
 		var packageId = packageSysId ? packageSysId : this.acquisitionPackage.sys_id;
-		var limit = 50; // arbitrary
+		var limit = 100; // max limit for toArray()
 
 		// composed fields to avoid unexpected side affects when using arrUtil.concat()
 		var contractInfoFields = Dow.prototype.getTableFields(Dow.prototype.CURRENT_CONTRACT_INFO_TABLE);
-		var CONTRACT_TABLE = 'x_g_dis_atat_current_contract_and_recurring_information'
+		var CONTRACT_TABLE = 'x_g_dis_atat_current_contract_and_recurring_information';
 		switch (table) {
 			// case Dow.prototype.ENV_INST_TABLE:
 			// 	return new global.GlideQuery(table)
@@ -381,7 +381,8 @@ AtatHelper.prototype = {
 			case CONTRACT_TABLE:
 				return new global.GlideQuery(table)
 					.where("acquisition_package", packageId)
-					.orderBy("contract_order_expiration_date")
+                     // most recent expired contract on top (index 0)
+					.orderByDesc("contract_order_expiration_date")
 					.select(contractInfoFields)
 					.toArray(limit);
 			default:
@@ -447,13 +448,13 @@ AtatHelper.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-02 20:49:47</sys_created_on>
         <sys_id>9027655d97a7d5106fa8b4b3f153afba</sys_id>
-        <sys_mod_count>18</sys_mod_count>
+        <sys_mod_count>20</sys_mod_count>
         <sys_name>AtatHelper</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_9027655d97a7d5106fa8b4b3f153afba</sys_update_name>
-        <sys_updated_by>tom.arnold</sys_updated_by>
-        <sys_updated_on>2023-05-11 21:54:35</sys_updated_on>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-12 23:11:52</sys_updated_on>
     </sys_script_include>
 </record_update>
