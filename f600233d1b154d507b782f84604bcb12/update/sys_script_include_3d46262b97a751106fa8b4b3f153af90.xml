@@ -105,14 +105,10 @@ Dow.prototype = {
 		"PORTABILITY_PLAN", "ADVISORY_ASSISTANCE", "HELP_DESK_SERVICES", "TRAINING",
 		"DOCUMENTATION_SUPPORT", "GENERAL_CLOUD_SUPPORT"
 	],
-	//  CURRENT_CONTRACT_INFO_FIELDS: [
-	//  	"acquisition_package", "business_size", "competitive_status", "contract_number",
-	//  	"contract_order_expiration_date", "contract_order_start_date", "current_contract_exists",
-	//  	"incumbent_contractor_name", "task_delivery_order_number"
-	//  ],
-	CURRENT_CONTRACT_INFO_FIELDS:
-		["contract_number", "current_contract_exists", "contract_order_expiration_date", 
-		"incumbent_contractor_name", "task_delivery_order_number"],
+	CURRENT_CONTRACT_INFO_FIELDS: ["contract_number", "current_contract_exists", "contract_order_expiration_date", 
+      "incumbent_contractor_name", "task_delivery_order_number", 
+      "contract_order_start_date", "business_size", "competitive_status"
+      ],
 	atatUtil: new AtatHelper(),
 	errUtil: new ErrorHandler(),
 	arrUtil: new global.ArrayUtil(),
@@ -190,7 +186,7 @@ Dow.prototype = {
 				case Dow.prototype.CLOUD_SUP_ENV_INST_TABLE:
 					return cloudSupportEnvInstFields;
 				case Dow.prototype.CURRENT_CONTRACT_INFO_TABLE:
-					return contractInfoFields
+					return contractInfoFields;
 				default:
 					return [];
 			}
@@ -1011,6 +1007,7 @@ Dow.prototype = {
 	 * Gets a list of Contracts related to an acquisition package.
 	 * @return {array} a list of contracts
 	*/
+	//TODO refactor this into ATATUtil
 	getContractInformation: function(packageId) {
 
 		try{
@@ -1154,13 +1151,13 @@ Dow.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-10 00:50:30</sys_created_on>
         <sys_id>3d46262b97a751106fa8b4b3f153af90</sys_id>
-        <sys_mod_count>41</sys_mod_count>
+        <sys_mod_count>43</sys_mod_count>
         <sys_name>Dow</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_3d46262b97a751106fa8b4b3f153af90</sys_update_name>
-        <sys_updated_by>tom.arnold</sys_updated_by>
-        <sys_updated_on>2023-05-11 20:33:56</sys_updated_on>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-12 22:37:41</sys_updated_on>
     </sys_script_include>
 </record_update>
