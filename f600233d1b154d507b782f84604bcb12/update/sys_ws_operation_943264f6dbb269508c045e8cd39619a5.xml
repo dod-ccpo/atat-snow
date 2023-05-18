@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl/>
+        <http_method>GET</http_method>
+        <name>GET Many</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+
+	var query = request.queryParams.sysparm_query;
+	var fields = request.queryParams.sysparm_fields.toString();
+	var displayValue = request.queryParams.sysparm_display_value.toString();
+	
+	var userRecords = new GlideRecord('sys_user');
+	userRecords.addEncodedQuery(query);
+	userRecords.setLimit(100);
+	userRecords.query();
+
+	var users = [];
+	if (!userRecords.hasNext()) {
+		response.setStatus(404);
+		return {
+			message: "No records found."
+		};
+	}
+	
+	while(userRecords.next()) {
+		var user = {};
+		for (let field of fields.split(",")) {
+			user[field] = userRecords.getValue(field); 
+		}
+		for (let field of displayValue.split(",")) {
+			user[field] = userRecords.getDisplayValue(field); 
+		}		
+		users.push(user);
+	}
+	return users;
+
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_g_dis_atat/user_proxy</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/</relative_path>
+        <request_example/>
+        <requires_acl_authorization>false</requires_acl_authorization>
+        <requires_authentication>false</requires_authentication>
+        <requires_snc_internal_role>false</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-05-17 20:31:22</sys_created_on>
+        <sys_id>943264f6dbb269508c045e8cd39619a5</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>GET Many</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_ws_operation_943264f6dbb269508c045e8cd39619a5</sys_update_name>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-05-17 21:32:18</sys_updated_on>
+        <web_service_definition display_value="User Proxy">2112e0f6dbb269508c045e8cd3961948</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>

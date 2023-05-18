@@ -53,8 +53,13 @@ RequirementsChecklist.prototype = {
 	getContractInformation: function(packageId) {
 
 		try{
+			var ctb = convertToBoolean;
             var table = "x_g_dis_atat_current_contract_and_recurring_information";
-			var contracts = RequirementsChecklist.prototype.atatUtil.findPackageRecords(table, packageId);
+			var contracts = RequirementsChecklist.prototype.atatUtil.findPackageRecords(table, packageId)
+			.map(function(cc) {
+				cc["current_contract_exists"] = ctb(cc.current_contract_exists);
+				return cc;
+			});
             var fields = ["contract_number", "current_contract_exists", "contract_order_expiration_date", 
       "incumbent_contractor_name", "task_delivery_order_number", 
       "contract_order_start_date", "business_size", "competitive_status"
@@ -160,13 +165,13 @@ RequirementsChecklist.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-02 20:50:47</sys_created_on>
         <sys_id>324825d997a7d5106fa8b4b3f153af7c</sys_id>
-        <sys_mod_count>49</sys_mod_count>
+        <sys_mod_count>53</sys_mod_count>
         <sys_name>RequirementsChecklist</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_324825d997a7d5106fa8b4b3f153af7c</sys_update_name>
-        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
-        <sys_updated_on>2023-05-12 22:51:57</sys_updated_on>
+        <sys_updated_by>1601189956.CTR</sys_updated_by>
+        <sys_updated_on>2023-05-18 02:48:28</sys_updated_on>
     </sys_script_include>
 </record_update>
