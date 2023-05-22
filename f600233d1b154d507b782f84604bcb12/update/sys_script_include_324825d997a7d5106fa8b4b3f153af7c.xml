@@ -69,6 +69,15 @@ RequirementsChecklist.prototype = {
 				contract.current_contract_exists = ctb(contract.current_contract_exists);
 				contract.business_size = record.getDisplayValue("business_size");
 				contract.competitive_status = record.getDisplayValue("competitive_status");
+
+				var startDate = new GlideDate();
+				startDate.setValue(contract.contract_order_start_date);
+				contract.contract_order_start_date = startDate.getByFormat("MMMM dd, yyyy");
+				
+				var endDate = new GlideDate();
+				endDate.setValue(contract.contract_order_expiration_date);
+				contract.contract_order_expiration_date = endDate.getByFormat("MMMM dd, yyyy");
+				
 				return contract;
 			});
 
@@ -174,13 +183,13 @@ RequirementsChecklist.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-12-02 20:50:47</sys_created_on>
         <sys_id>324825d997a7d5106fa8b4b3f153af7c</sys_id>
-        <sys_mod_count>65</sys_mod_count>
+        <sys_mod_count>70</sys_mod_count>
         <sys_name>RequirementsChecklist</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_324825d997a7d5106fa8b4b3f153af7c</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-19 22:04:58</sys_updated_on>
+        <sys_updated_on>2023-05-22 15:18:06</sys_updated_on>
     </sys_script_include>
 </record_update>
