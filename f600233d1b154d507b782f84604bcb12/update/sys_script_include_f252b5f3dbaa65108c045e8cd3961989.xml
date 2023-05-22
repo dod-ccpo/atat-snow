@@ -40,7 +40,7 @@ JustificationAndApproval.prototype = {
 	},	
 
     initialize: function(acqPackage) {
-        this.acquisitionPackage = acqPackage
+        this.acquisitionPackage = acqPackage;
 		this.currencyFormatter.setMaxFractionDigits(2);
 		
 		this.requirementsChecklist = new RequirementsChecklist(acqPackage);
@@ -138,8 +138,7 @@ JustificationAndApproval.prototype = {
 	},
 	
 	getPayload: function() {
-
-		var proposedCsp = this.fairOpportunity.proposed_csp.toString();
+		var proposedCsp = this.atatHelper.getVendorFullName(this.fairOpportunity.proposed_csp.toString());		
 		var organizationFullAddress = this.organization.organization_name.toString() + "\n" + this.atatHelper.constructAddress(
 			this.organization.street_address_1.toString(),
 			this.organization.street_address_2.toString(),
@@ -240,13 +239,13 @@ JustificationAndApproval.prototype = {
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-05-08 18:48:55</sys_created_on>
         <sys_id>f252b5f3dbaa65108c045e8cd3961989</sys_id>
-        <sys_mod_count>85</sys_mod_count>
+        <sys_mod_count>86</sys_mod_count>
         <sys_name>JustificationAndApproval</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_f252b5f3dbaa65108c045e8cd3961989</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-19 19:47:10</sys_updated_on>
+        <sys_updated_on>2023-05-22 13:43:03</sys_updated_on>
     </sys_script_include>
 </record_update>
