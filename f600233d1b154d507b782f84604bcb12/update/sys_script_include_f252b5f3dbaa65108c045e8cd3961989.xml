@@ -12,6 +12,8 @@ JustificationAndApproval.prototype = {
 
     errUtil: new ErrorHandler(),
 	atatHelper: new AtatHelper(),
+	currencyFormatter: new sn_currency.GlideCurrencyFormatter("%s%v"),
+	requirementsChecklist: null,
     acquisitionPackage: null,
 	fundingRequest: new GlideRecord("x_g_dis_atat_funding_request"),
 	fairOpportunity: new GlideRecord("x_g_dis_atat_fair_opportunity"),
@@ -39,6 +41,9 @@ JustificationAndApproval.prototype = {
 
     initialize: function(acqPackage) {
         this.acquisitionPackage = acqPackage;
+		this.currencyFormatter.setMaxFractionDigits(2);
+		
+		this.requirementsChecklist = new RequirementsChecklist(acqPackage);
 		
 		// Look up Fair Opportunity record
 		this.fairOpportunity.get(this.acquisitionPackage.fair_opportunity);
@@ -133,7 +138,7 @@ JustificationAndApproval.prototype = {
 	},
 	
 	getPayload: function() {
-		var proposedCsp = this.fairOpportunity.proposed_csp.toString();
+		var proposedCsp = this.atatHelper.getVendorFullName(this.fairOpportunity.proposed_csp.toString());		
 		var organizationFullAddress = this.organization.organization_name.toString() + "\n" + this.atatHelper.constructAddress(
 			this.organization.street_address_1.toString(),
 			this.organization.street_address_2.toString(),
@@ -187,53 +192,60 @@ JustificationAndApproval.prototype = {
 
 		var procurementHasExistingEnv = this.fairOpportunity.procurement_has_existing_env.toString();
 		var procurementHasExistingEnvBoolean = procurementHasExistingEnv === "YES" ? true : false;
+		
+		var reqChecklistPayload = this.requirementsChecklist.getPayload();
 
 		return {
-			purchaseRequestNumber: this.getPurchaseRequestNumber(),
-			jwccContractNumber: this.explicitNull(this.CONTRACT_NUMBERS[proposedCsp]),
-			title: this.explicitNull(this.projectOverview.title.toString()),
-			scope: this.explicitNull(this.projectOverview.scope.toString()),
-			estimatedValue: this.explicitNull(new CostEstimate(this.acquisitionPackage).getTotalEstimate()),
-			agencyLabel:  this.explicitNull(this.agency.label.toString()),
-			organizationFullAddress: organizationFullAddress,
-			contractingShop: this.explicitNull(contractingShop),
-			otherContractingShopFullAddress: otherContractingShopFullAddress,
-			taskOrderType: taskOrderType,			
-			fundingRequestFiscalYear: this.explicitNull(this.fundingRequest.appropriation_fiscal_year.toString()),			
-			fairOpportunity: {
-				proposedVendor: proposedCsp, 
-				exceptionToFairOpportunity: exceptionToFairOpportunity,
-				justification: this.explicitNull(this.fairOpportunity.justification.toString()),
-				minimumGovernmentRequirements: this.explicitNull(this.fairOpportunity.min_govt_requirements.toString()),
-				causeOfSoleSourceSituation: this.explicitNull(causeOfSoleSource),
-				whyCspIsOnlyCapableSource: this.explicitNull(this.fairOpportunity.why_csp_is_only_capable_source.toString()),
-				procurementDiscussion: this.explicitNull(this.fairOpportunity.procurement_discussion.toString()),
-				procurementHasExistingEnv: procurementHasExistingEnvBoolean,
-				procurementPreviousImpact: this.explicitNull(this.fairOpportunity.procurement_previous_impact.toString()),
-				requirementImpact: this.explicitNull(this.fairOpportunity.requirement_impact.toString()),
-				marketResearchDetails: this.explicitNull(marketResearchDetails),
-				otherFactsToSupportLogicalFollowOn: this.explicitNull(this.fairOpportunity.other_facts_to_support_logical_follow_on_details.toString()),
-				plansToRemoveBarriers: this.explicitNull(barriersPlansToRemove)
-			},
-			technicalPoc: this.getPoc(this.fairOpportunity.technical_poc.toString()),
-			requirementsPoc: this.getPoc(this.fairOpportunity.requirements_poc.toString()),
-			cor: this.getPoc(this.acquisitionPackage.cor.toString())
+			documentType: "JUSTIFICATION_AND_APPROVAL",			
+			templatePayload: {
+				purchaseRequestNumber: this.getPurchaseRequestNumber(),
+				jwccContractNumber: this.explicitNull(this.CONTRACT_NUMBERS[proposedCsp]),
+				title: this.explicitNull(this.projectOverview.title.toString()),
+				scope: this.explicitNull(this.projectOverview.scope.toString()),
+				estimatedValue: this.currencyFormatter.format(new CostEstimate(this.acquisitionPackage).getTotalEstimate(), "USD"), 
+				agencyLabel:  this.explicitNull(this.agency.label.toString()),
+				organizationFullAddress: organizationFullAddress,
+				contractingShop: this.explicitNull(contractingShop),
+				otherContractingShopFullAddress: otherContractingShopFullAddress,
+				taskOrderType: taskOrderType,			
+				fundingRequestFiscalYear: this.explicitNull(this.fundingRequest.appropriation_fiscal_year.toString()),			
+				fairOpportunity: {
+					proposedVendor: proposedCsp, 
+					exceptionToFairOpportunity: exceptionToFairOpportunity,
+					justification: this.explicitNull(this.fairOpportunity.justification.toString()),
+					minimumGovernmentRequirements: this.explicitNull(this.fairOpportunity.min_govt_requirements.toString()),
+					causeOfSoleSourceSituation: this.explicitNull(causeOfSoleSource),
+					whyCspIsOnlyCapableSource: this.explicitNull(this.fairOpportunity.why_csp_is_only_capable_source.toString()),
+					procurementDiscussion: this.explicitNull(this.fairOpportunity.procurement_discussion.toString()),
+					procurementHasExistingEnv: procurementHasExistingEnvBoolean,
+					procurementPreviousImpact: this.explicitNull(this.fairOpportunity.procurement_previous_impact.toString()),
+					requirementImpact: this.explicitNull(this.fairOpportunity.requirement_impact.toString()),
+					marketResearchDetails: this.explicitNull(marketResearchDetails),
+					otherFactsToSupportLogicalFollowOn: this.explicitNull(this.fairOpportunity.other_facts_to_support_logical_follow_on_details.toString()),
+					plansToRemoveBarriers: this.explicitNull(barriersPlansToRemove)
+				},
+				technicalPoc: this.getPoc(this.fairOpportunity.technical_poc.toString()),
+				requirementsPoc: this.getPoc(this.fairOpportunity.requirements_poc.toString()),
+				cor: this.getPoc(this.acquisitionPackage.cor.toString()),
+				periodOfPerformance: reqChecklistPayload.templatePayload.periodOfPerformance,
+				procurementHistory: reqChecklistPayload.templatePayload.currentContract
+			}
 		};
 	},
-	
-    type: 'JustificationAndApproval'
+
+	type: 'JustificationAndApproval'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-05-08 18:48:55</sys_created_on>
         <sys_id>f252b5f3dbaa65108c045e8cd3961989</sys_id>
-        <sys_mod_count>82</sys_mod_count>
+        <sys_mod_count>86</sys_mod_count>
         <sys_name>JustificationAndApproval</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_f252b5f3dbaa65108c045e8cd3961989</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-10 19:34:01</sys_updated_on>
+        <sys_updated_on>2023-05-22 13:43:03</sys_updated_on>
     </sys_script_include>
 </record_update>
