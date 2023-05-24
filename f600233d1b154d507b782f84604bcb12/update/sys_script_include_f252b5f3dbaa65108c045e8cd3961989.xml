@@ -110,7 +110,7 @@ JustificationAndApproval.prototype = {
 				//else {
 				//	return fsForm.order_number.toString();
 				//}
-				return fsForm.gt_c_number.toString() + ", " + fsForm.order_number.toString();
+				return fsForm.gt_c_number.toString() + (fsForm.order_number ? ", " + fsForm.order_number.toString() : "");
 			}
 		}
 		else {
@@ -139,6 +139,7 @@ JustificationAndApproval.prototype = {
 	
 	getPayload: function() {
 		var proposedCsp = this.explicitNull(this.fairOpportunity.proposed_csp.toString());		
+		var estimatedValue = new CostEstimate(this.acquisitionPackage).getTotalEstimate();
 		var vendorFullName = this.atatHelper.getVendorFullName(proposedCsp);		
 		var organizationFullAddress = this.organization.organization_name.toString() + "\n" + this.atatHelper.constructAddress(
 			this.organization.street_address_1.toString(),
@@ -173,6 +174,12 @@ JustificationAndApproval.prototype = {
 			"T&M": "Time & Materials",
 			"TBD": "Hybrid"
 		}[this.acquisitionPackage.contract_type.getDisplayValue()];
+		var appropriationFundsType = {
+			"O_M": "O&M",
+			"PROCUREMENT": "Procurement",
+			"RDT_E": "RDT&E"
+		}[this.fundingRequest.appropriation_funds_type.toString()];
+		
 		var exceptionToFairOpportunity = {
 			YES_FAR_16_505_B_2_I_A: "16.505(b)(2)(i)(A)",
 			YES_FAR_16_505_B_2_I_B: "16.505(b)(2)(i)(B)",
@@ -203,12 +210,14 @@ JustificationAndApproval.prototype = {
 				jwccContractNumber: this.CONTRACT_NUMBERS[proposedCsp],
 				title: this.explicitNull(this.projectOverview.title.toString()),
 				scope: this.explicitNull(this.projectOverview.scope.toString()),
-				estimatedValue: this.currencyFormatter.format(new CostEstimate(this.acquisitionPackage).getTotalEstimate(), "USD"), 
+				estimatedValue: estimatedValue,
+				estimatedValueFormatted: this.currencyFormatter.format(estimatedValue, "USD"), 
 				agencyLabel:  this.explicitNull(this.agency.label.toString()),
 				organizationFullAddress: organizationFullAddress,
 				contractingShop: this.explicitNull(contractingShop),
 				otherContractingShopFullAddress: otherContractingShopFullAddress,
-				taskOrderType: taskOrderType,			
+				taskOrderType: taskOrderType,
+				appropriationFundsType: appropriationFundsType, 
 				fundingRequestFiscalYear: this.explicitNull(this.fundingRequest.appropriation_fiscal_year.toString()),			
 				fairOpportunity: {
 					proposedVendor: vendorFullName, 
@@ -240,13 +249,13 @@ JustificationAndApproval.prototype = {
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-05-08 18:48:55</sys_created_on>
         <sys_id>f252b5f3dbaa65108c045e8cd3961989</sys_id>
-        <sys_mod_count>87</sys_mod_count>
+        <sys_mod_count>90</sys_mod_count>
         <sys_name>JustificationAndApproval</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_f252b5f3dbaa65108c045e8cd3961989</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-23 00:25:52</sys_updated_on>
+        <sys_updated_on>2023-05-24 01:29:24</sys_updated_on>
     </sys_script_include>
 </record_update>
