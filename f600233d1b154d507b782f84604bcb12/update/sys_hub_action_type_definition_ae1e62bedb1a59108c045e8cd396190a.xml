@@ -27,7 +27,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>ae1e62bedb1a59108c045e8cd396190a</sys_id>
-        <sys_mod_count>25</sys_mod_count>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name>CSS: Construct Contract Record</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -35,7 +35,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_ae1e62bedb1a59108c045e8cd396190a</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-10 14:28:05</sys_updated_on>
+        <sys_updated_on>2023-05-25 22:58:29</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -306,18 +306,6 @@
         <sys_updated_on>2023-05-05 15:35:32</sys_updated_on>
         <table>var__m_sys_hub_step_ext_input_1e31f6f2db5a59108c045e8cd39619c2</table>
         <value>{{step[3a46bcc5-b52d-4e54-b022-0e79d910554e].palt_code}}</value>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>script</field>
-        <id>1e31f6f2db5a59108c045e8cd39619c2</id>
-        <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-05-10 14:02:04</sys_created_on>
-        <sys_id>4f16c754db32a9108c045e8cd3961956</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-10 14:02:04</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>total_estimate</field>
@@ -765,7 +753,7 @@
         <sys_created_on>2022-10-06 15:03:43</sys_created_on>
         <sys_id>37ccb6f6db9a59108c045e8cd3961966</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>body</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -792,10 +780,10 @@
         <sys_created_by>jeffsegal</sys_created_by>
         <sys_created_on>2023-05-05 15:26:04</sys_created_on>
         <sys_id>24692d361be261103f288733cc4bcb9f</sys_id>
-        <sys_mod_count>11</sys_mod_count>
+        <sys_mod_count>13</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-10 14:25:32</sys_updated_on>
+        <sys_updated_on>2023-05-25 21:56:52</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=24692d361be261103f288733cc4bcb9f"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -820,63 +808,54 @@
         <sys_created_by>jeffsegal</sys_created_by>
         <sys_created_on>2023-05-05 15:26:04</sys_created_on>
         <sys_id>bc692d361be261103f288733cc4bcbb0</sys_id>
-        <sys_mod_count>9</sys_mod_count>
+        <sys_mod_count>11</sys_mod_count>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-10 14:25:32</sys_updated_on>
+        <sys_updated_on>2023-05-25 21:56:52</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   var getPalt = function() {
     var ap = new GlideRecord("x_g_dis_atat_acquisition_package");
     ap.get(inputs.acquisition_package);
     var ep = new GlideRecord("x_g_dis_atat_evaluation_plan");
-    ep.get(ap.evaluation_plan);
+    ep.get(ap.evaluation_plan.toString());
     var fo = new GlideRecord("x_g_dis_atat_fair_opportunity");
-    fo.get(ap.fair_opportunity);
+    fo.get(ap.fair_opportunity.toString());
     var totalEstimate = inputs.total_estimate;
 
-    if (!ep || !ep.source_selection) {
-      gs.error("Expected this package (" + ap.sys_id + ") to have an Eval Plan with a source_selection attribute.");
-      return -1;
-    }
     if (!fo || !fo.exception_to_fair_opportunity) {
-      gs.error("Expected this package (" + ap.sys_id + ") to have a Fair Opportunity record with an Exception to Fair Opportunity attribute");
-      return -1;
-    }  
+      throw "Expected this package (" + ap.sys_id + ") to have a Fair Opportunity record with an Exception to Fair Opportunity attribute";
+    }
 
-    var exceptionToFairOpportunity = (fo.exception_to_fair_opportunity.toString() != "NO_NONE");
     var noExceptionToFairOpportunity = (fo.exception_to_fair_opportunity.toString() == "NO_NONE");
-    var overTenMillion = (totalEstimate &gt;= 10000000);
     var underTenMillion = (totalEstimate &lt; 10000000);
-    var sourceSelection = ep.source_selection.toString();
-    var method = ep.method.toString();
 
-    if (underTenMillion) {
-      if (exceptionToFairOpportunity) {
-        return 49;
+    if (noExceptionToFairOpportunity) {
+      if (!ep || !ep.source_selection) {
+        throw "Expected this package (" + ap.sys_id + ") to have an Eval Plan with a source_selection attribute.";
       }
-      if (noExceptionToFairOpportunity) {
-        if (sourceSelection == "NO_TECH_PROPOSAL") return 39;
-        if (sourceSelection == "TECH_PROPOSAL" &amp;&amp; method == "LPTA") return 41;
-        if (sourceSelection == "TECH_PROPOSAL" &amp;&amp; method == "BVTO") return 43;
-        if (sourceSelection == "SET_LUMP_SUM") return 45;
-        if (sourceSelection == "EQUAL_SET_LUMP_SUM") return 47;
+      var sourceSelection = ep.source_selection.toString();
+      var method = ep.method.toString();
+
+      if (sourceSelection == "NO_TECH_PROPOSAL") {
+        return underTenMillion ? 39: 40;
+      }
+      if (sourceSelection == "TECH_PROPOSAL" &amp;&amp; method == "LPTA") {
+        return underTenMillion ? 41: 42;
+      }
+      if (sourceSelection == "TECH_PROPOSAL" &amp;&amp; method == "BVTO") {
+        return underTenMillion ? 43: 44;
+      }
+      if (sourceSelection == "SET_LUMP_SUM") {
+        return underTenMillion ? 45: 46;
+      }
+      if (sourceSelection == "EQUAL_SET_LUMP_SUM") {
+        return underTenMillion ? 47: 48;
       }
     }
-
-    if (overTenMillion) {
-      if (exceptionToFairOpportunity) {
-        return 50;
-      }
-      if (noExceptionToFairOpportunity) {
-        if (sourceSelection == "NO_TECH_PROPOSAL") return 40;
-        if (sourceSelection == "TECH_PROPOSAL" &amp;&amp; ep.method == "LPTA") return 42;
-        if (sourceSelection == "TECH_PROPOSAL" &amp;&amp; ep.method == "BVTO") return 44;
-        if (sourceSelection == "SET_LUMP_SUM") return 46;
-        if (sourceSelection == "EQUAL_SET_LUMP_SUM") return 48;
-      }
+    else {
+      return underTenMillion ? 49: 50;
     }
-
   }
-  
+
   outputs.palt_code = getPalt();
 })(inputs, outputs);</value>
         <variable display_value="Script">71aa7f6647032200b4fad7527c9a719b</variable>
@@ -893,18 +872,6 @@
         <sys_updated_on>2023-05-05 15:33:49</sys_updated_on>
         <table>var__m_sys_hub_step_ext_input_24692d361be261103f288733cc4bcb9f</table>
         <value>{{action.acquisition_package}}</value>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>script</field>
-        <id>24692d361be261103f288733cc4bcb9f</id>
-        <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-05-10 13:53:21</sys_created_on>
-        <sys_id>df148390db32a9108c045e8cd3961948</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-10 13:53:21</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>total_estimate</field>
@@ -1352,7 +1319,7 @@
         <sys_created_on>2023-05-05 15:36:02</sys_created_on>
         <sys_id>7eab21f61be261103f288733cc4bcb47</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>palt_code</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -1375,7 +1342,7 @@
         <sys_created_on>2023-05-10 13:53:21</sys_created_on>
         <sys_id>87148390db32a9108c045e8cd3961944</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>total_estimate</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -1398,7 +1365,7 @@
         <sys_created_on>2023-05-10 14:10:02</sys_created_on>
         <sys_id>e3e78718db32a9108c045e8cd39619e5</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>base_year_total_estimate</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -1476,30 +1443,6 @@
         <sys_updated_on>2023-05-10 14:22:47</sys_updated_on>
         <table>var__m_sys_hub_step_ext_input_5ada4f5cdb32a9108c045e8cd396193b</table>
         <value>{{action.acquisition_package}}</value>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>application</field>
-        <id>5ada4f5cdb32a9108c045e8cd396193b</id>
-        <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-05-10 14:22:47</sys_created_on>
-        <sys_id>deda4f5cdb32a9108c045e8cd396194e</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-10 14:22:47</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>script</field>
-        <id>5ada4f5cdb32a9108c045e8cd396193b</id>
-        <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-05-10 14:22:47</sys_created_on>
-        <sys_id>d6da4f5cdb32a9108c045e8cd396194f</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-10 14:22:47</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
     </sys_element_mapping>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_step_ext_output_5ada4f5cdb32a9108c045e8cd396193b^id=5ada4f5cdb32a9108c045e8cd396193b"/>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7^id=5ada4f5cdb32a9108c045e8cd396193b"/>
@@ -1769,7 +1712,7 @@
         <sys_created_on>2023-05-10 14:24:37</sys_created_on>
         <sys_id>894b8b9cdb32a9108c045e8cd3961941</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Base Year Total Estimate</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -1792,7 +1735,7 @@
         <sys_created_on>2023-05-10 14:24:36</sys_created_on>
         <sys_id>c94b8b9cdb32a9108c045e8cd396193d</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Total Estimate</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2215,7 +2158,7 @@
         <sys_created_on>2022-10-06 14:13:05</sys_created_on>
         <sys_id>9231f6f2db5a59108c045e8cd39619b3</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Acquisition Package</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2240,7 +2183,7 @@
         <sys_created_on>2022-10-13 01:25:03</sys_created_on>
         <sys_id>48948885db2e91108c045e8cd39619dc</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>request</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2263,7 +2206,7 @@
         <sys_created_on>2022-10-06 14:59:37</sys_created_on>
         <sys_id>fbdbbe76db9a59108c045e8cd3961931</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Action Status</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2286,7 +2229,7 @@
         <sys_created_on>2022-10-06 14:59:37</sys_created_on>
         <sys_id>fbdbbe76db9a59108c045e8cd396193e</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Don't Treat as Error</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2301,17 +2244,17 @@
     <sys_hub_action_plan action="INSERT_OR_UPDATE">
         <action_id display_value="CSS: Construct Contract Record">ae1e62bedb1a59108c045e8cd396190a</action_id>
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"8e11888ddbea91108c045e8cd39619f7","name":"plan","plan_signature":null}}</plan>
-        <snapshot>c01c0710db72a9108c045e8cd396198d</snapshot>
+        <snapshot>c23db519db0b69908c045e8cd3961908</snapshot>
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-10-13 01:09:53</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>8e11888ddbea91108c045e8cd39619f7</sys_id>
-        <sys_mod_count>27</sys_mod_count>
+        <sys_mod_count>28</sys_mod_count>
         <sys_overrides/>
         <sys_scope/>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-10 14:28:08</sys_updated_on>
+        <sys_updated_on>2023-05-25 21:33:17</sys_updated_on>
     </sys_hub_action_plan>
     <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
@@ -2617,18 +2560,6 @@
         <sys_updated_on>2023-05-05 15:36:58</sys_updated_on>
         <table>var__m_sys_hub_step_ext_input_2111888ddbea91108c045e8cd396192f</table>
         <value>{{step[3a46bcc5-b52d-4e54-b022-0e79d910554e].palt_code}}</value>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>script</field>
-        <id>2111888ddbea91108c045e8cd396192f</id>
-        <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-05-10 14:10:43</sys_created_on>
-        <sys_id>f5180f18db32a9108c045e8cd39619d2</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-10 14:10:43</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>total_estimate</field>
@@ -3076,7 +3007,7 @@
         <sys_created_on>2022-10-13 01:09:51</sys_created_on>
         <sys_id>a911888ddbea91108c045e8cd396194e</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>body</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -3154,30 +3085,6 @@
         <sys_updated_on>2023-05-10 14:28:04</sys_updated_on>
         <table>var__m_sys_hub_step_ext_input_3f0c0710db72a9108c045e8cd3961906</table>
         <value>{{action.acquisition_package}}</value>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>application</field>
-        <id>3f0c0710db72a9108c045e8cd3961906</id>
-        <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-05-10 14:28:04</sys_created_on>
-        <sys_id>3b0c0710db72a9108c045e8cd3961925</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-10 14:28:04</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>script</field>
-        <id>3f0c0710db72a9108c045e8cd3961906</id>
-        <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-05-10 14:28:04</sys_created_on>
-        <sys_id>fb0c0710db72a9108c045e8cd3961925</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-10 14:28:04</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
     </sys_element_mapping>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_step_ext_output_3f0c0710db72a9108c045e8cd3961906^id=3f0c0710db72a9108c045e8cd3961906"/>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7^id=3f0c0710db72a9108c045e8cd3961906"/>
@@ -3447,7 +3354,7 @@
         <sys_created_on>2023-05-10 14:28:04</sys_created_on>
         <sys_id>b70c0710db72a9108c045e8cd396191e</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Total Estimate</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -3470,7 +3377,7 @@
         <sys_created_on>2023-05-10 14:28:04</sys_created_on>
         <sys_id>ff0c0710db72a9108c045e8cd3961921</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Base Year Total Estimate</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -3497,10 +3404,10 @@
         <sys_created_by>jeffsegal</sys_created_by>
         <sys_created_on>2023-05-05 15:36:57</sys_created_on>
         <sys_id>54eb25f61be261103f288733cc4bcb83</sys_id>
-        <sys_mod_count>6</sys_mod_count>
+        <sys_mod_count>8</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-10 14:28:04</sys_updated_on>
+        <sys_updated_on>2023-05-25 21:57:01</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=54eb25f61be261103f288733cc4bcb83"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -3511,63 +3418,54 @@
         <sys_created_by>jeffsegal</sys_created_by>
         <sys_created_on>2023-05-05 15:36:58</sys_created_on>
         <sys_id>1ceb25f61be261103f288733cc4bcb92</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-10 14:28:04</sys_updated_on>
+        <sys_updated_on>2023-05-25 21:57:01</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   var getPalt = function() {
     var ap = new GlideRecord("x_g_dis_atat_acquisition_package");
     ap.get(inputs.acquisition_package);
     var ep = new GlideRecord("x_g_dis_atat_evaluation_plan");
-    ep.get(ap.evaluation_plan);
+    ep.get(ap.evaluation_plan.toString());
     var fo = new GlideRecord("x_g_dis_atat_fair_opportunity");
-    fo.get(ap.fair_opportunity);
+    fo.get(ap.fair_opportunity.toString());
     var totalEstimate = inputs.total_estimate;
 
-    if (!ep || !ep.source_selection) {
-      gs.error("Expected this package (" + ap.sys_id + ") to have an Eval Plan with a source_selection attribute.");
-      return -1;
-    }
     if (!fo || !fo.exception_to_fair_opportunity) {
-      gs.error("Expected this package (" + ap.sys_id + ") to have a Fair Opportunity record with an Exception to Fair Opportunity attribute");
-      return -1;
-    }  
+      throw "Expected this package (" + ap.sys_id + ") to have a Fair Opportunity record with an Exception to Fair Opportunity attribute";
+    }
 
-    var exceptionToFairOpportunity = (fo.exception_to_fair_opportunity.toString() != "NO_NONE");
     var noExceptionToFairOpportunity = (fo.exception_to_fair_opportunity.toString() == "NO_NONE");
-    var overTenMillion = (totalEstimate &gt;= 10000000);
     var underTenMillion = (totalEstimate &lt; 10000000);
-    var sourceSelection = ep.source_selection.toString();
-    var method = ep.method.toString();
 
-    if (underTenMillion) {
-      if (exceptionToFairOpportunity) {
-        return 49;
+    if (noExceptionToFairOpportunity) {
+      if (!ep || !ep.source_selection) {
+        throw "Expected this package (" + ap.sys_id + ") to have an Eval Plan with a source_selection attribute.";
       }
-      if (noExceptionToFairOpportunity) {
-        if (sourceSelection == "NO_TECH_PROPOSAL") return 39;
-        if (sourceSelection == "TECH_PROPOSAL" &amp;&amp; method == "LPTA") return 41;
-        if (sourceSelection == "TECH_PROPOSAL" &amp;&amp; method == "BVTO") return 43;
-        if (sourceSelection == "SET_LUMP_SUM") return 45;
-        if (sourceSelection == "EQUAL_SET_LUMP_SUM") return 47;
+      var sourceSelection = ep.source_selection.toString();
+      var method = ep.method.toString();
+
+      if (sourceSelection == "NO_TECH_PROPOSAL") {
+        return underTenMillion ? 39: 40;
+      }
+      if (sourceSelection == "TECH_PROPOSAL" &amp;&amp; method == "LPTA") {
+        return underTenMillion ? 41: 42;
+      }
+      if (sourceSelection == "TECH_PROPOSAL" &amp;&amp; method == "BVTO") {
+        return underTenMillion ? 43: 44;
+      }
+      if (sourceSelection == "SET_LUMP_SUM") {
+        return underTenMillion ? 45: 46;
+      }
+      if (sourceSelection == "EQUAL_SET_LUMP_SUM") {
+        return underTenMillion ? 47: 48;
       }
     }
-
-    if (overTenMillion) {
-      if (exceptionToFairOpportunity) {
-        return 50;
-      }
-      if (noExceptionToFairOpportunity) {
-        if (sourceSelection == "NO_TECH_PROPOSAL") return 40;
-        if (sourceSelection == "TECH_PROPOSAL" &amp;&amp; ep.method == "LPTA") return 42;
-        if (sourceSelection == "TECH_PROPOSAL" &amp;&amp; ep.method == "BVTO") return 44;
-        if (sourceSelection == "SET_LUMP_SUM") return 46;
-        if (sourceSelection == "EQUAL_SET_LUMP_SUM") return 48;
-      }
+    else {
+      return underTenMillion ? 49: 50;
     }
-
   }
-  
+
   outputs.palt_code = getPalt();
 })(inputs, outputs);</value>
         <variable display_value="Script">71aa7f6647032200b4fad7527c9a719b</variable>
@@ -3598,18 +3496,6 @@
         <sys_updated_on>2023-05-05 15:36:58</sys_updated_on>
         <table>var__m_sys_hub_step_ext_input_54eb25f61be261103f288733cc4bcb83</table>
         <value>{{action.acquisition_package}}</value>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>script</field>
-        <id>54eb25f61be261103f288733cc4bcb83</id>
-        <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-05-10 14:10:43</sys_created_on>
-        <sys_id>21180f18db32a9108c045e8cd39619c0</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-10 14:10:43</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>total_estimate</field>
@@ -4057,7 +3943,7 @@
         <sys_created_on>2023-05-05 15:36:57</sys_created_on>
         <sys_id>18eb25f61be261103f288733cc4bcb8e</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>palt_code</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -4080,7 +3966,7 @@
         <sys_created_on>2023-05-10 14:10:43</sys_created_on>
         <sys_id>65180f18db32a9108c045e8cd39619ac</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>total_estimate</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -4103,7 +3989,7 @@
         <sys_created_on>2023-05-10 14:10:43</sys_created_on>
         <sys_id>ad180f18db32a9108c045e8cd39619af</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>base_year_total_estimate</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -4526,7 +4412,7 @@
         <sys_created_on>2022-10-13 01:09:51</sys_created_on>
         <sys_id>d111888ddbea91108c045e8cd3961918</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Acquisition Package</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -4551,7 +4437,7 @@
         <sys_created_on>2022-10-13 01:09:52</sys_created_on>
         <sys_id>6511888ddbea91108c045e8cd3961982</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Don't Treat as Error</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -4574,7 +4460,7 @@
         <sys_created_on>2022-10-13 01:25:08</sys_created_on>
         <sys_id>95940c85db2e91108c045e8cd3961945</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>request</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -4597,7 +4483,7 @@
         <sys_created_on>2022-10-13 01:09:52</sys_created_on>
         <sys_id>e511888ddbea91108c045e8cd3961975</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Action Status</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
