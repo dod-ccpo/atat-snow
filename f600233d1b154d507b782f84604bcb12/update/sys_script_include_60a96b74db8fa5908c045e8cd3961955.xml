@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.GInvoicing</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Encapsulates all logic required for interacting with G-Invoicing APIs.</description>
+        <name>GInvoicing</name>
+        <script><![CDATA[var GInvoicing = Class.create();
+GInvoicing.prototype = {
+	initialize: function() {
+	},
+	
+	updatePackage: function(acquisitionPackageId, gtcNumber, orderNumber) {
+		let acquisitionPackage = new GlideRecord("x_g_dis_atat_acquisition_package");
+		acquisitionPackage.get(acquisitionPackageId);
+		if (!acquisitionPackage) {
+			throw "Could not find acquisition package with ID '" + acquisitionPackageId + "'";
+		}
+		let fundingRequest = new GlideRecord("x_g_dis_atat_funding_request");
+		fundingRequest.get(acquisitionPackage.funding_request);
+		if (!fundingRequest.sys_id) {
+			throw "No Funding Request record found";
+		}
+		var fsForm = new GlideRecord("x_g_dis_atat_funding_request_fs_form");
+		fsForm.get(fundingRequest.fs_form);
+		if (!fsForm.sys_id) {
+			"No FS Form record found";
+		}
+		fsForm.gt_c_number = gtcNumber;
+		fsForm.order_number = orderNumber;
+		fsForm.update();
+	},
+	
+	extractGtc: function(input) {
+		let payload = this.getPayload(input).body;
+		let xmlValidationErrors = GlideXMLUtil.validateXML(payload, false, false);
+		if (!xmlValidationErrors){
+			let xmlStringBody = payload.toString();
+			let xmlDoc = new XMLDocument2();
+			xmlDoc.setNamespaceAware(false);
+			xmlDoc.parseXML(xmlStringBody);
+			// Using xpath's local-name() function here in case the namespace prefixes change
+			return xmlDoc.getNodeText("//*[local-name()='GTC_Number']");			
+		}
+		else {
+			throw "XML invalid: " + xmlValidationErrors;
+		}
+	},		
+
+	getPayload: function(input) {
+		var http_payload;
+		// Outbound REST message
+		var request = new sn_ws.RESTMessageV2();
+
+		// Request set-up
+		var gInvoicingEndpoint = input.endpoint + "/" + input.order_number;
+		request.setEndpoint(gInvoicingEndpoint);
+		request.setHttpMethod("get");
+		request.setLogLevel("all");
+		request.setMutualAuth("g-invoicing-mauth");
+		request.setRequestHeader("SystemID", input.atat_system_id);
+
+		// Make request
+		var response = request.execute();
+		// Check for errors
+		if(response.getStatusCode() != "200"){
+			gs.error(response.getStatusCode());
+			gs.error(response.getBody());
+			throw {
+				body: response.getBody(),
+				status_code: response.getStatusCode(),
+				headers: response.getAllHeaders(),
+				valid: false,
+			};
+		}
+		http_payload = {
+			body: response.getBody(),
+			status_code: response.getStatusCode(),
+			headers: response.getAllHeaders()
+		};
+		return http_payload;
+	},
+
+	type: 'GInvoicing'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>1370228783.CTR</sys_created_by>
+        <sys_created_on>2023-05-24 16:22:32</sys_created_on>
+        <sys_id>60a96b74db8fa5908c045e8cd3961955</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_name>GInvoicing</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_60a96b74db8fa5908c045e8cd3961955</sys_update_name>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-05-25 14:54:10</sys_updated_on>
+    </sys_script_include>
+</record_update>
