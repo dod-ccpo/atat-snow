@@ -12,28 +12,38 @@
 	var gInvoicingEndpoint = gs.getProperty("x_g_dis_atat.gInvoicing.baseUrl") + "/ginv/services/v2_0/order";
 	var atatSystemId = gs.getProperty("x_g_dis_atat.gInvoicing.systemId");
 	var queryParams = request.queryParams;
+	var orderNumber = queryParams.orderNumber;
+	var acquisitionPackageId = queryParams.acquisitionPackageId;
+	
+	if (!orderNumber) {
+		throw "orderNumber required";
+	}
+	if (!acquisitionPackageId) {
+		throw "acquisitionPackageId required";
+	}	
 	
 	// Payload to send to gInvoicingRequest
 	var payload = {
 		atat_system_id: atatSystemId,
 		endpoint: gInvoicingEndpoint,
-		order_number: queryParams.orderNumber.toString()
-		
+		order_number: orderNumber.toString()		
 	};
-	var gInvoicingOrder = gInvoicingRequest(payload);
-	if (gInvoicingOrder.valid){
-		return {
-			valid: true,
-			message: "Order number exists in the G-Invoicing System of Record"
-		};
+	
+	try {
+		let ginv = new GInvoicing();
+		let gtcNumber = ginv.extractGtc(payload);
+		if (!gtcNumber || gtcNumber.trim().length == 0) {
+			throw "Could not find GT&C Number";
+		}
+		else {
+			ginv.updatePackage(acquisitionPackageId.toString(), gtcNumber, orderNumber.toString());
+			return gtcNumber;
+		}			
+	} catch (error) {
+		response.setStatus(error.statusCode);
+		return error.message;
 	}
-	else{
-		response.setStatus(404);
-		return {
-			valid: false,
-			message: "Order number doesn't exist in the G-Invoicing System of Record"
-		};
-	}
+	
 })(request, response);]]></operation_script>
         <operation_uri>/api/x_g_dis_atat/g_invoicing/order_validation</operation_uri>
         <produces>application/json,application/xml,text/xml</produces>
@@ -42,20 +52,20 @@
         <request_example/>
         <requires_acl_authorization>true</requires_acl_authorization>
         <requires_authentication>false</requires_authentication>
-        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <requires_snc_internal_role>false</requires_snc_internal_role>
         <short_description/>
         <sys_class_name>sys_ws_operation</sys_class_name>
         <sys_created_by>zach.clark</sys_created_by>
         <sys_created_on>2022-07-14 17:11:33</sys_created_on>
         <sys_id>af147e7f1b6091107c458623604bcb3f</sys_id>
-        <sys_mod_count>15</sys_mod_count>
+        <sys_mod_count>26</sys_mod_count>
         <sys_name>Order Validation</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_ws_operation_af147e7f1b6091107c458623604bcb3f</sys_update_name>
-        <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-10-29 19:55:04</sys_updated_on>
+        <sys_updated_by>1370228783.CTR</sys_updated_by>
+        <sys_updated_on>2023-05-25 15:40:08</sys_updated_on>
         <web_service_definition display_value="G-Invoicing">c6c3fe7f1b6091107c458623604bcb39</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
