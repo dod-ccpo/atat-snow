@@ -35,7 +35,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_152ffbd0dbf6a9108c045e8cd3961948</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-22 13:55:33</sys_updated_on>
+        <sys_updated_on>2023-05-25 22:58:28</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -49,9 +49,9 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-05-10 18:14:07</sys_created_on>
         <sys_id>8fcf3754dbf6a9108c045e8cd3961972</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-12 18:00:18</sys_updated_on>
+        <sys_updated_on>2023-05-25 18:03:28</sys_updated_on>
         <value>{"version":"1.0","complexObjectSchema":{"FlowDesigner:FDACTIONSTATUS":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"integer\",\"mapped\":\"{}\",\"default_value\":\"\",\"label\":\"Code\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"mapped\":\"{}\",\"default_value\":\"\",\"label\":\"Message\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FDACTIONSTATUS.$type_facets":{"SimpleMapFacet":"{\"default_value\":\"\",\"label\":\"Action Status\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"uiUniqueId\":\"74300154-c54d-4e92-bc8c-f5b34cfc72e1\",\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FDACTIONSTATUS\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"object\",\"order\":\"1\",\"max_length\":\"65000\"}"}},"complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}},"serializationFormat":"JSON"}</value>
         <variable display_value="Action Status">c3cf3754dbf6a9108c045e8cd3961965</variable>
     </sys_variable_value>
@@ -124,10 +124,10 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-05-10 18:13:19</sys_created_on>
         <sys_id>df9f7f14dbf6a9108c045e8cd3961982</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-12 18:00:18</sys_updated_on>
+        <sys_updated_on>2023-05-25 18:03:03</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=df9f7f14dbf6a9108c045e8cd3961982"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -152,12 +152,12 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-05-10 18:13:19</sys_created_on>
         <sys_id>9f9f7f14dbf6a9108c045e8cd39619b0</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-12 18:00:18</sys_updated_on>
+        <sys_updated_on>2023-05-25 18:03:03</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   try {
-    outputs.payload =  new JustificationAndApproval(inputs.acquisition_package).getPayload();
+    outputs.payload =  JSON.stringify(new JustificationAndApproval(inputs.acquisition_package).getPayload());
   } catch (error) {
     outputs.error_code = error.code;
     outputs.error_message = error.message;
@@ -1194,10 +1194,10 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-05-10 19:05:53</sys_created_on>
         <sys_id>d9abc8e8db3aa9108c045e8cd396198b</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-22 13:46:50</sys_updated_on>
+        <sys_updated_on>2023-05-25 18:03:30</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=d9abc8e8db3aa9108c045e8cd396198b"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -1208,12 +1208,12 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-05-10 19:05:53</sys_created_on>
         <sys_id>e1abc8e8db3aa9108c045e8cd39619db</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-22 13:46:50</sys_updated_on>
+        <sys_updated_on>2023-05-25 18:03:30</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   try {
-    outputs.payload =  new JustificationAndApproval(inputs.acquisition_package).getPayload();
+    outputs.payload =  JSON.stringify(new JustificationAndApproval(inputs.acquisition_package).getPayload());
   } catch (error) {
     outputs.error_code = error.code;
     outputs.error_message = error.message;
@@ -1628,7 +1628,7 @@
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name>sys_documentation_var__m_sys_hub_step_ext_output_d9abc8e8db3aa9108c045e8cd396198b_error_code_en</sys_update_name>
+        <sys_update_name/>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
         <sys_updated_on>2023-05-22 13:46:50</sys_updated_on>
         <url/>
@@ -1651,7 +1651,7 @@
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name>sys_documentation_var__m_sys_hub_step_ext_output_d9abc8e8db3aa9108c045e8cd396198b_error_message_en</sys_update_name>
+        <sys_update_name/>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
         <sys_updated_on>2023-05-22 13:46:50</sys_updated_on>
         <url/>
@@ -2015,7 +2015,7 @@
         <sys_updated_by>1370228783.CTR</sys_updated_by>
         <sys_updated_on>2023-05-10 19:05:54</sys_updated_on>
     </sys_hub_action_status_metadata>
-    <sys_hub_status_condition action="delete_multiple" query="action_status_metadata_id=21ab0ce8db3aa9108c045e8cd3961918^sys_idNOT INf9277490dbcba1908c045e8cd3961995"/>
+    <sys_hub_status_condition action="delete_multiple" query="action_status_metadata_id=21ab0ce8db3aa9108c045e8cd3961918^sys_idNOT INbd3d019ddbc369908c045e8cd39619a7"/>
     <sys_hub_status_condition action="INSERT_OR_UPDATE">
         <action_status_metadata_id display_value="Created 05/10/2023 15:05:54">21ab0ce8db3aa9108c045e8cd3961918</action_status_metadata_id>
         <condition>{{step[b41c3110-9586-473c-ad38-65d4495b44ca].__step_status__.code}}!=0</condition>
@@ -2024,11 +2024,11 @@
         <order>1</order>
         <status>{"version":"1.0","complexObjectSchema":{"FlowDesigner:FDACTIONSTATUS":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"integer\",\"mapped\":\"{\\\"code\\\":\\\"{{step[b41c3110-9586-473c-ad38-65d4495b44ca].__step_status__.code}}\\\"}\",\"default_value\":\"\",\"label\":\"Code\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"mapped\":\"{\\\"message\\\":\\\"{{step[b41c3110-9586-473c-ad38-65d4495b44ca].__step_status__.message}}\\\"}\",\"default_value\":\"\",\"label\":\"Message\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FDACTIONSTATUS.$type_facets":{"SimpleMapFacet":"{\"default_value\":\"\",\"label\":\"Action Status\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"uiUniqueId\":\"74300154-c54d-4e92-bc8c-f5b34cfc72e1\",\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FDACTIONSTATUS\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"object\",\"order\":\"1\",\"max_length\":\"65000\"}"}},"complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}},"serializationFormat":"JSON"}</status>
         <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-05-22 13:53:11</sys_created_on>
-        <sys_id>f9277490dbcba1908c045e8cd3961995</sys_id>
+        <sys_created_on>2023-05-25 18:03:30</sys_created_on>
+        <sys_id>bd3d019ddbc369908c045e8cd39619a7</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-22 13:53:11</sys_updated_on>
+        <sys_updated_on>2023-05-25 18:03:30</sys_updated_on>
     </sys_hub_status_condition>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_input_9dabc8e8db3aa9108c045e8cd396197f^sys_idNOT IN59abc8e8db3aa9108c045e8cd3961989"/>
     <sys_documentation action="INSERT_OR_UPDATE">
