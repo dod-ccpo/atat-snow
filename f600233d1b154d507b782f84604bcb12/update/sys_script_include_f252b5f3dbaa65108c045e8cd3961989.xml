@@ -103,15 +103,14 @@ JustificationAndApproval.prototype = {
 				throw this.constructError(this.DATA_INCOMPLETE, "Funding Request type is FS_FORM but no FS Form found");
 			}
 			else {		
-				if (!fsForm.gt_c_number) {
-					throw this.constructError(this.DATA_INCOMPLETE, "Funding Request type is FS_FORM but no GT&C Number found");			
-				}
-				else if (!fsForm.order_number) {
-					throw this.constructError(this.DATA_INCOMPLETE, "Funding Request type is FS_FORM but no Order Number found");			
-				}
-				else {
-					return fsForm.gt_c_number.toString() + ", " + fsForm.order_number.toString();
-				}
+				// TODO re-enable this validation once we properly parse G-Invoicing numbers (AT-9074)
+				//if (!fsForm.order_number) {
+				//	throw this.constructError(this.DATA_INCOMPLETE, "Funding Request type is FS_FORM but no Order Number found");			
+				//}
+				//else {
+				//	return fsForm.order_number.toString();
+				//}
+				return fsForm.gt_c_number.toString() + (fsForm.order_number ? ", " + fsForm.order_number.toString() : "");
 			}
 		}
 		else {
@@ -246,13 +245,13 @@ JustificationAndApproval.prototype = {
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-05-08 18:48:55</sys_created_on>
         <sys_id>f252b5f3dbaa65108c045e8cd3961989</sys_id>
-        <sys_mod_count>94</sys_mod_count>
+        <sys_mod_count>95</sys_mod_count>
         <sys_name>JustificationAndApproval</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_f252b5f3dbaa65108c045e8cd3961989</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-25 14:21:02</sys_updated_on>
+        <sys_updated_on>2023-05-26 15:18:29</sys_updated_on>
     </sys_script_include>
 </record_update>
