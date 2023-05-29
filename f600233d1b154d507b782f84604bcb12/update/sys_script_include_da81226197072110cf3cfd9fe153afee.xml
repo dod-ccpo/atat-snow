@@ -9,35 +9,63 @@
         <name>MarketResearchReport</name>
         <script><![CDATA[var MarketResearchReport = Class.create();
 MarketResearchReport.prototype = {
-	
-	acquisitionPackage: null,
-	janda: null,
-	DATA_INCOMPLETE: 4001,
-	UNEXPECTED_ERROR: 5001,	
-	
+
+    acquisitionPackage: null,
+    janda: null,
+    DATA_INCOMPLETE: 4001,
+    UNEXPECTED_ERROR: 5001,
+
     initialize: function(acqPackage) {
         this.acquisitionPackage = acqPackage;
-		this.janda = new JustificationAndApproval(acqPackage);
-		this.constructError = this.janda.constructError;
-		this.explicitNull = this.janda.explicitNull;
-		
-		this.requirementsChecklist = new RequirementsChecklist(acqPackage);
-			
+        this.janda = new JustificationAndApproval(acqPackage);
+        this.constructError = this.janda.constructError;
+        this.explicitNull = this.janda.explicitNull;
+
+        this.requirementsChecklist = new RequirementsChecklist(acqPackage);
+
     },
-	
-	getPayload: function() {
-		let payload = this.janda.getPayload();
-		payload.documentType = "MARKET_RESEARCH_REPORT";
-		
-		// Remaining fields to be extracted:
-		// techniquesUsed
-		// techniqueOther
-		// researchers: []
-		// primaryPoc
-		// researchPersonalKnowledgePersonOrPosition
-		// summaryOfMarketResearch
-		return payload;
-	},
+
+    getPayload: function() {
+        let payload = this.janda.getPayload();
+        payload.documentType = "MARKET_RESEARCH_REPORT";
+
+        // Remaining fields to be extracted:
+
+        // The research techniques used is stored in in Fair Opportunity.research_other_techniques_used; a List that references table x_g_dis_atat_dapps_market_research_other_techniques
+        // When value OTHER is included in the above list use Fair Opportunity.research_other_technique
+        // When value PERSONAL_KNOWLEDGE is included in the above list that's when Fair Opportunity.research_personal_knowledge_person_or_position is needed
+
+        // Static impl from sample data to start
+
+        payload.techniquesUsed = [{
+            type: "PERSONAL_KNOWLEDGE"
+        }, {
+            type: "CONTACT_WITH_KNOWLEDGEABLE_PERSON"
+        }, {
+            type: "OTHER"
+        }];
+        payload.techniqueOther = "Used an experimental cutting-edge technique for estimation.";
+        payload.researchers = [{
+                name: "Jane Researcher",
+                title: "Head researcher",
+                organization: "FEMA",
+            },
+            {
+                name: "John Researcher",
+                title: "Assistant researcher",
+                organization: "FEMA",
+            },
+        ];
+        payload.primaryPoc = {
+            formalName: "Maria Missionowner",
+            phoneAndExtension: "+1 (555) 123-4567",
+            title: "Project Lead",
+        };
+        payload.researchPersonalKnowledgePersonOrPosition = "Nelly Knowledgeable/Researcher Extraordinaire";
+        payload.summaryOfMarketResearch = "My research details incredible findings from speaking to two leading experts.";
+
+        return payload;
+    },
 
     type: 'MarketResearchReport'
 };]]></script>
@@ -45,13 +73,13 @@ MarketResearchReport.prototype = {
         <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
         <sys_created_on>2023-05-26 18:50:51</sys_created_on>
         <sys_id>da81226197072110cf3cfd9fe153afee</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_name>MarketResearchReport</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_da81226197072110cf3cfd9fe153afee</sys_update_name>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-29 17:56:19</sys_updated_on>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-29 19:30:52</sys_updated_on>
     </sys_script_include>
 </record_update>
