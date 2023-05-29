@@ -12,6 +12,7 @@ MarketResearchReport.prototype = {
 
     acquisitionPackage: null,
     janda: null,
+	fairOpportunity: new GlideRecord("x_g_dis_atat_fair_opportunity"),
     DATA_INCOMPLETE: 4001,
     UNEXPECTED_ERROR: 5001,
 
@@ -23,7 +24,17 @@ MarketResearchReport.prototype = {
 
         this.requirementsChecklist = new RequirementsChecklist(acqPackage);
 
+		// Look up Fair Opportunity record
+		this.fairOpportunity.get(this.acquisitionPackage.fair_opportunity);
+		if (!this.fairOpportunity.sys_id) {
+			throw this.constructError(this.DATA_INCOMPLETE, "No Fair Opportunity record found");
+		}
+
     },
+
+	explicitNull: function(value) {
+		return value ? value : null;
+	},
 
     getPayload: function() {
 
@@ -71,11 +82,8 @@ MarketResearchReport.prototype = {
             title: "Contracting Officer",
         };
 
-        var researchPersonalKnowledgePersonOrPosition = "Nelly Knowledgeable/Researcher Extraordinaire";
-
         var jandaPayload = this.janda.getPayload();
 
-        // TODO title: this.explicitNull(this.projectOverview.title.toString()),
         return {
             documentType: "MARKET_RESEARCH_REPORT",
             templatePayload: {
@@ -91,7 +99,7 @@ MarketResearchReport.prototype = {
                 primaryPoc: primaryPoc,
                 corPoc: corPoc,
                 agencyLabel: jandaPayload.templatePayload.agencyLabel,
-                researchPersonalKnowledgePersonOrPosition: researchPersonalKnowledgePersonOrPosition,
+                researchPersonalKnowledgePersonOrPosition: this.explicitNull(this.fairOpportunity.research_personal_knowledge_person_or_position.toString()),
             }
         };
     },
@@ -102,13 +110,13 @@ MarketResearchReport.prototype = {
         <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
         <sys_created_on>2023-05-26 18:50:51</sys_created_on>
         <sys_id>da81226197072110cf3cfd9fe153afee</sys_id>
-        <sys_mod_count>7</sys_mod_count>
+        <sys_mod_count>15</sys_mod_count>
         <sys_name>MarketResearchReport</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_da81226197072110cf3cfd9fe153afee</sys_update_name>
         <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
-        <sys_updated_on>2023-05-29 20:06:36</sys_updated_on>
+        <sys_updated_on>2023-05-29 21:38:06</sys_updated_on>
     </sys_script_include>
 </record_update>
