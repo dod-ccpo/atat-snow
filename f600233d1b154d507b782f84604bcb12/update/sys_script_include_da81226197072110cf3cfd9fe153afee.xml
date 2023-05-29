@@ -65,21 +65,6 @@ MarketResearchReport.prototype = {
             type: "OTHER"
         }];
 
-        var summaryOfMarketResearch = "My research details incredible findings from speaking to two leading experts.";
-
-        // TODO this.janda.getPoc(some poc in schema.toString())
-        var primaryPoc = {
-            formalName: "Maria Missionowner",
-            phoneAndExtension: "+1 (555) 123-4567",
-            title: "Project Lead",
-        };
-
-        var corPoc = {
-            formalName: "Cary Conofficer",
-            phoneAndExtension: "+1 (555) 987-6543",
-            title: "Contracting Officer",
-        };
-
         var jandaPayload = this.janda.getPayload();
 
         return {
@@ -92,10 +77,10 @@ MarketResearchReport.prototype = {
                 title: jandaPayload.templatePayload.title,
                 estimatedValue: jandaPayload.templatePayload.estimatedValue,
                 estimatedValueFormatted: jandaPayload.templatePayload.estimatedValueFormatted,
-                summaryOfMarketResearch: summaryOfMarketResearch,
+                summaryOfMarketResearch: this.explicitNull(this.fairOpportunity.research_techniques_summary.toString()),
                 procurementHistory: jandaPayload.templatePayload.procurementHistory,
-                primaryPoc: primaryPoc,
-                corPoc: corPoc,
+                primaryPoc: this.janda.getPoc(this.acquisitionPackage.primary_contact.toString()),
+                corPoc: this.janda.getPoc(this.acquisitionPackage.cor.toString()),
                 agencyLabel: jandaPayload.templatePayload.agencyLabel,
                 researchPersonalKnowledgePersonOrPosition: this.explicitNull(this.fairOpportunity.research_personal_knowledge_person_or_position.toString()),
             }
@@ -108,13 +93,13 @@ MarketResearchReport.prototype = {
         <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
         <sys_created_on>2023-05-26 18:50:51</sys_created_on>
         <sys_id>da81226197072110cf3cfd9fe153afee</sys_id>
-        <sys_mod_count>17</sys_mod_count>
+        <sys_mod_count>18</sys_mod_count>
         <sys_name>MarketResearchReport</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_da81226197072110cf3cfd9fe153afee</sys_update_name>
         <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
-        <sys_updated_on>2023-05-29 21:45:53</sys_updated_on>
+        <sys_updated_on>2023-05-29 22:02:02</sys_updated_on>
     </sys_script_include>
 </record_update>
