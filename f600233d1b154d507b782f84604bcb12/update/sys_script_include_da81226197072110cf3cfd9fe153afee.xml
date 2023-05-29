@@ -26,26 +26,11 @@ MarketResearchReport.prototype = {
     },
 
     getPayload: function() {
-        let payload = this.janda.getPayload();
-        payload.documentType = "MARKET_RESEARCH_REPORT";
-
-        // Remaining fields to be extracted:
-
-        // The research techniques used is stored in in Fair Opportunity.research_other_techniques_used; a List that references table x_g_dis_atat_dapps_market_research_other_techniques
-        // When value OTHER is included in the above list use Fair Opportunity.research_other_technique
-        // When value PERSONAL_KNOWLEDGE is included in the above list that's when Fair Opportunity.research_personal_knowledge_person_or_position is needed
 
         // Static impl from sample data to start
+        // TODO make dynamic
 
-        payload.techniquesUsed = [{
-            type: "PERSONAL_KNOWLEDGE"
-        }, {
-            type: "CONTACT_WITH_KNOWLEDGEABLE_PERSON"
-        }, {
-            type: "OTHER"
-        }];
-        payload.techniqueOther = "Used an experimental cutting-edge technique for estimation.";
-        payload.researchers = [{
+        var researchers = [{
                 name: "Jane Researcher",
                 title: "Head researcher",
                 organization: "FEMA",
@@ -56,15 +41,59 @@ MarketResearchReport.prototype = {
                 organization: "FEMA",
             },
         ];
-        payload.primaryPoc = {
+
+        // The research techniques used is stored in in Fair Opportunity.research_other_techniques_used; a List that references table x_g_dis_atat_dapps_market_research_other_techniques
+        // When value OTHER is included in the above list use Fair Opportunity.research_other_technique
+        // When value PERSONAL_KNOWLEDGE is included in the above list that's when Fair Opportunity.research_personal_knowledge_person_or_position is needed
+
+        var techniquesUsed = [{
+            type: "PERSONAL_KNOWLEDGE"
+        }, {
+            type: "CONTACT_WITH_KNOWLEDGEABLE_PERSON"
+        }, {
+            type: "OTHER"
+        }];
+
+        var techniqueOther = "Used an experimental cutting-edge technique for estimation.";
+
+        var summaryOfMarketResearch = "My research details incredible findings from speaking to two leading experts.";
+
+        // TODO this.janda.getPoc(some poc in schema.toString())
+        var primaryPoc = {
             formalName: "Maria Missionowner",
             phoneAndExtension: "+1 (555) 123-4567",
             title: "Project Lead",
         };
-        payload.researchPersonalKnowledgePersonOrPosition = "Nelly Knowledgeable/Researcher Extraordinaire";
-        payload.summaryOfMarketResearch = "My research details incredible findings from speaking to two leading experts.";
 
-        return payload;
+        var corPoc = {
+            formalName: "Cary Conofficer",
+            phoneAndExtension: "+1 (555) 987-6543",
+            title: "Contracting Officer",
+        };
+
+        var researchPersonalKnowledgePersonOrPosition = "Nelly Knowledgeable/Researcher Extraordinaire";
+
+        var jandaPayload = this.janda.getPayload();
+
+        // TODO title: this.explicitNull(this.projectOverview.title.toString()),
+        return {
+            documentType: "MARKET_RESEARCH_REPORT",
+            templatePayload: {
+                researchers: researchers,
+                fairOpportunity: jandaPayload.templatePayload.fairOpportunity,
+                techniquesUsed: techniquesUsed,
+                techniqueOther: techniqueOther,
+                title: jandaPayload.templatePayload.title,
+                estimatedValue: jandaPayload.templatePayload.estimatedValue,
+                estimatedValueFormatted: jandaPayload.templatePayload.estimatedValueFormatted,
+                summaryOfMarketResearch: summaryOfMarketResearch,
+                procurementHistory: jandaPayload.templatePayload.procurementHistory,
+                primaryPoc: primaryPoc,
+                corPoc: corPoc,
+                agencyLabel: jandaPayload.templatePayload.agencyLabel,
+                researchPersonalKnowledgePersonOrPosition: researchPersonalKnowledgePersonOrPosition,
+            }
+        };
     },
 
     type: 'MarketResearchReport'
@@ -73,13 +102,13 @@ MarketResearchReport.prototype = {
         <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
         <sys_created_on>2023-05-26 18:50:51</sys_created_on>
         <sys_id>da81226197072110cf3cfd9fe153afee</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>7</sys_mod_count>
         <sys_name>MarketResearchReport</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_da81226197072110cf3cfd9fe153afee</sys_update_name>
         <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
-        <sys_updated_on>2023-05-29 19:30:52</sys_updated_on>
+        <sys_updated_on>2023-05-29 20:06:36</sys_updated_on>
     </sys_script_include>
 </record_update>
