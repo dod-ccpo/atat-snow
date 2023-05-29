@@ -12,7 +12,7 @@ MarketResearchReport.prototype = {
 
     acquisitionPackage: null,
     janda: null,
-	fairOpportunity: new GlideRecord("x_g_dis_atat_fair_opportunity"),
+    fairOpportunity: new GlideRecord("x_g_dis_atat_fair_opportunity"),
     DATA_INCOMPLETE: 4001,
     UNEXPECTED_ERROR: 5001,
 
@@ -24,17 +24,17 @@ MarketResearchReport.prototype = {
 
         this.requirementsChecklist = new RequirementsChecklist(acqPackage);
 
-		// Look up Fair Opportunity record
-		this.fairOpportunity.get(this.acquisitionPackage.fair_opportunity);
-		if (!this.fairOpportunity.sys_id) {
-			throw this.constructError(this.DATA_INCOMPLETE, "No Fair Opportunity record found");
-		}
+        // Look up Fair Opportunity record
+        this.fairOpportunity.get(this.acquisitionPackage.fair_opportunity);
+        if (!this.fairOpportunity.sys_id) {
+            throw this.constructError(this.DATA_INCOMPLETE, "No Fair Opportunity record found");
+        }
 
     },
 
-	explicitNull: function(value) {
-		return value ? value : null;
-	},
+    explicitNull: function(value) {
+        return value ? value : null;
+    },
 
     getPayload: function() {
 
@@ -65,8 +65,6 @@ MarketResearchReport.prototype = {
             type: "OTHER"
         }];
 
-        var techniqueOther = "Used an experimental cutting-edge technique for estimation.";
-
         var summaryOfMarketResearch = "My research details incredible findings from speaking to two leading experts.";
 
         // TODO this.janda.getPoc(some poc in schema.toString())
@@ -90,7 +88,7 @@ MarketResearchReport.prototype = {
                 researchers: researchers,
                 fairOpportunity: jandaPayload.templatePayload.fairOpportunity,
                 techniquesUsed: techniquesUsed,
-                techniqueOther: techniqueOther,
+                techniqueOther: this.explicitNull(this.fairOpportunity.research_other_technique.toString()),
                 title: jandaPayload.templatePayload.title,
                 estimatedValue: jandaPayload.templatePayload.estimatedValue,
                 estimatedValueFormatted: jandaPayload.templatePayload.estimatedValueFormatted,
@@ -110,13 +108,13 @@ MarketResearchReport.prototype = {
         <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
         <sys_created_on>2023-05-26 18:50:51</sys_created_on>
         <sys_id>da81226197072110cf3cfd9fe153afee</sys_id>
-        <sys_mod_count>15</sys_mod_count>
+        <sys_mod_count>17</sys_mod_count>
         <sys_name>MarketResearchReport</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_da81226197072110cf3cfd9fe153afee</sys_update_name>
         <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
-        <sys_updated_on>2023-05-29 21:38:06</sys_updated_on>
+        <sys_updated_on>2023-05-29 21:45:53</sys_updated_on>
     </sys_script_include>
 </record_update>
