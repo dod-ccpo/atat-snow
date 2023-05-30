@@ -38,9 +38,9 @@ MarketResearchReport.prototype = {
     },
 
     /**
-     * Gather the research techniques used.
-     * @param {string} techniqueSysIds - csv list of technique sys_ids defined in the reference table
-     * @return {array} technique records with specified property names
+     * Gather the research techniques used by researchers.
+     * @param {string} techniqueSysIds CSV list of technique sys_ids defined in the reference table
+     * @return {array} technique objects with technique_value/sequence properties
      */
     getTechniquesUsed: function(techniqueSysIds) {
         const PROPERTY_NAMES = ['technique_value', 'sequence'];
@@ -65,29 +65,32 @@ MarketResearchReport.prototype = {
         }
     },
 
+    /**
+     * These researchers have contributed to this report.
+     * @param {string} input column data containing stringified JSON containing objects with name/title/org properties
+     * @return {array} researcher objects with name/title/org properties
+     */
+    getResearchers: function(input) {
+        if (!input) {
+            return [];
+        }
+        try {
+            // Expected input: [{"name":"Jane Smith","title":"Project Manager","org":"DISA"}]
+            return this.explicitNull(JSON.parse(input));
+        } catch (error) {
+            throw this.errUtil.createError(
+                "MarketResearchReport --> getResearchers(): " + error,
+                this.errUtil.METHOD_ERROR
+            );
+        }
+    },
+
     getPayload: function() {
-
-        // Static impl from sample data to start
-        // TODO make dynamic
-
-        var researchers = [{
-                name: "Jane Researcher",
-                title: "Head researcher",
-                organization: "FEMA",
-            },
-            {
-                name: "John Researcher",
-                title: "Assistant researcher",
-                organization: "FEMA",
-            },
-        ];
-
         var jandaPayload = this.janda.getPayload();
-
         return {
             documentType: "MARKET_RESEARCH_REPORT",
             templatePayload: {
-                researchers: researchers,
+                researchers: this.getResearchers(this.fairOpportunity.market_research_conducted_by.toString()),
                 fairOpportunity: jandaPayload.templatePayload.fairOpportunity,
                 techniquesUsed: this.getTechniquesUsed(this.fairOpportunity.research_other_techniques_used.toString()),
                 techniqueOther: this.explicitNull(this.fairOpportunity.research_other_technique.toString()),
@@ -110,13 +113,13 @@ MarketResearchReport.prototype = {
         <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
         <sys_created_on>2023-05-26 18:50:51</sys_created_on>
         <sys_id>da81226197072110cf3cfd9fe153afee</sys_id>
-        <sys_mod_count>27</sys_mod_count>
+        <sys_mod_count>33</sys_mod_count>
         <sys_name>MarketResearchReport</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_da81226197072110cf3cfd9fe153afee</sys_update_name>
         <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
-        <sys_updated_on>2023-05-29 23:21:28</sys_updated_on>
+        <sys_updated_on>2023-05-30 04:47:52</sys_updated_on>
     </sys_script_include>
 </record_update>
