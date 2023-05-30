@@ -1,0 +1,1946 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Generates Sole Source Market Research Report document</description>
+        <internal_name>docgen_generate_mrr</internal_name>
+        <label_cache>[{"name":"33c743b0-0eca-407b-a623-cd30d61ba9f9.payload","label":"4 - DOCGEN: Gather MRR Data➛payload","reference_display":"payload","type":"string","base_type":"string","attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiType":"string","uiUniqueId":"5bccbfdf-05c5-412a-8e7a-41ba6bd50465"}},{"name":"075350f2-f6cd-4405-b2cc-f6cdee514ab9.response_status","label":"5 - UTIL: HOTH API POST Request➛Response Status","reference_display":"Response Status","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"6679b850-af9e-4018-8c37-b9cea8061597"}},{"name":"subflow.acquisition_package.fair_opportunity.contract_action","label":"Input➛Acquisition Package➛Fair Opportunity➛Contract Action","reference":"","reference_display":"Contract Action","type":"choice","base_type":"choice","parent_table_name":"x_g_dis_atat_fair_opportunity","column_name":"contract_action","choices":[{"label":"-- None --","image":"","used":false,"rawLabel":"-- None --","selected":false,"missing":false,"reference":false,"value":""},{"image":"","label":"Undefinitized contract action (UCA)","used":false,"rawLabel":"Undefinitized contract action (UCA)","selected":false,"missing":false,"reference":false,"value":"UCA","parameters":{"name":"x_g_dis_atat_fair_opportunity"}},{"image":"","label":"Bridge contract action","used":false,"rawLabel":"Bridge contract action","selected":false,"missing":false,"reference":false,"value":"BCA","parameters":{"name":"x_g_dis_atat_fair_opportunity"}},{"image":"","label":"Option to Extend Services","used":false,"rawLabel":"Option to Extend Services","selected":false,"missing":false,"reference":false,"value":"OES","parameters":{"name":"x_g_dis_atat_fair_opportunity"}},{"image":"","label":"None of these contract actions apply to this acquisition","used":false,"rawLabel":"None of these contract actions apply to this acquisition","selected":false,"missing":false,"reference":false,"value":"NONE","parameters":{"name":"x_g_dis_atat_fair_opportunity"}}]},{"name":"flow_variable.enabled","label":"Flow Variables➛enabled","reference":"","reference_display":"","type":"boolean","base_type":"boolean","column_name":"","choices":[],"attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":"","uiUniqueId":"5ddacb87-bfae-49a2-a936-55f0b0c0c143"}},{"name":"subflow.acquisition_package","label":"Input➛Acquisition Package","reference":"x_g_dis_atat_acquisition_package","reference_display":"DAPPS:Acquisition Package","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"81cb738b-9024-4839-a21c-3949b34974a1","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"075350f2-f6cd-4405-b2cc-f6cdee514ab9.variable","label":"5 - UTIL: HOTH API POST Request➛Response Body","reference_display":"Response Body","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"70e33bde-cff3-42a0-8d5d-6a7a598be287"}}]</label_cache>
+        <master_snapshot>092598b297cb2110cf3cfd9fe153af0b</master_snapshot>
+        <name>DOCGEN: Generate MRR</name>
+        <natlang/>
+        <outputs/>
+        <pre_compiled>false</pre_compiled>
+        <remote_trigger_id/>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:25:57</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>c12543a197872110cf3cfd9fe153afb3</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>DOCGEN: Generate MRR</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_hub_flow_c12543a197872110cf3cfd9fe153afb3</sys_update_name>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:28</sys_updated_on>
+        <type>subflow</type>
+    </sys_hub_flow>
+    <sys_translated_text action="delete_multiple" query="documentkey=c12543a197872110cf3cfd9fe153afb3"/>
+    <sys_variable_value action="delete_multiple" query="document_key=c12543a197872110cf3cfd9fe153afb3"/>
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=c12543a197872110cf3cfd9fe153afb3"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=c12543a197872110cf3cfd9fe153afb3"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=c12543a197872110cf3cfd9fe153afb3^sys_idNOT INcd2543a197872110cf3cfd9fe153afb5"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>c12543a197872110cf3cfd9fe153afb3</id>
+        <name>DOCGEN: Generate MRR</name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:25:57</sys_created_on>
+        <sys_id>cd2543a197872110cf3cfd9fe153afb5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-26 21:25:57</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=cd2543a197872110cf3cfd9fe153afb5"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=c12543a197872110cf3cfd9fe153afb3^sys_idNOT IN42b7cfe197872110cf3cfd9fe153af90"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference,uiUniqueId=81cb738b-9024-4839-a21c-3949b34974a1</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table>x_g_dis_atat_acquisition_package</choice_table>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>acquisition_package</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>Acquisition Package</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="DOCGEN: Generate MRR">c12543a197872110cf3cfd9fe153afb3</model>
+        <model_id>c12543a197872110cf3cfd9fe153afb3</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_c12543a197872110cf3cfd9fe153afb3</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference display_value="" name="x_g_dis_atat_acquisition_package">x_g_dis_atat_acquisition_package</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:37:12</sys_created_on>
+        <sys_id>42b7cfe197872110cf3cfd9fe153af90</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-26 21:37:12</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_output action="delete_multiple" query="model=c12543a197872110cf3cfd9fe153afb3"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=c12543a197872110cf3cfd9fe153afb3"/>
+    <sys_hub_action_instance action="delete_multiple" query="flow=c12543a197872110cf3cfd9fe153afb3^sys_idNOT IN20ca4fe597872110cf3cfd9fe153af21,60ca4fe597872110cf3cfd9fe153af36,9cca4fe597872110cf3cfd9fe153af15,a4ca4fe597872110cf3cfd9fe153af2b,fa15d4b297cb2110cf3cfd9fe153af4a"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="UTIL: Attach Binary File to Acquisition Package">6dcc8889970411101e0835dfe153afdb</action_type>
+        <action_type_parent/>
+        <comment/>
+        <display_text/>
+        <flow display_value="DOCGEN: Generate MRR">c12543a197872110cf3cfd9fe153afb3</flow>
+        <order>7</order>
+        <parent_ui_id>f4242622-cf2f-4037-935b-ac4b8653bb2d</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:50:29</sys_created_on>
+        <sys_id>20ca4fe597872110cf3cfd9fe153af21</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:28</sys_updated_on>
+        <ui_id>9cca25bd-5c79-4ad6-a7a0-437736351b8c</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=20ca4fe597872110cf3cfd9fe153af21"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>20ca4fe597872110cf3cfd9fe153af21</document_key>
+        <order>4</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:58:34</sys_created_on>
+        <sys_id>369ccb6997872110cf3cfd9fe153afd0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-26 21:58:34</sys_updated_on>
+        <value>application/vnd.openxmlformats-officedocument.wordprocessingml.document</value>
+        <variable display_value="Content Type">c89e404d970411101e0835dfe153af89</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>20ca4fe597872110cf3cfd9fe153af21</document_key>
+        <order>3</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:58:34</sys_created_on>
+        <sys_id>f69ccb6997872110cf3cfd9fe153afd0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-26 21:58:34</sys_updated_on>
+        <value>Market Research Report.docx</value>
+        <variable display_value="File Name">4c9e404d970411101e0835dfe153af83</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=20ca4fe597872110cf3cfd9fe153af21"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>acquisition_package</field>
+        <id>20ca4fe597872110cf3cfd9fe153af21</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:58:34</sys_created_on>
+        <sys_id>7a9ccb6997872110cf3cfd9fe153afcf</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-26 21:58:34</sys_updated_on>
+        <table>var__m_sys_hub_action_input_6dcc8889970411101e0835dfe153afdb</table>
+        <value>{{subflow.acquisition_package}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>binary_file</field>
+        <id>20ca4fe597872110cf3cfd9fe153af21</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:58:34</sys_created_on>
+        <sys_id>3e9ccb6997872110cf3cfd9fe153afcf</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-26 21:58:34</sys_updated_on>
+        <table>var__m_sys_hub_action_input_6dcc8889970411101e0835dfe153afdb</table>
+        <value>{{075350f2-f6cd-4405-b2cc-f6cdee514ab9.variable}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>content_type</field>
+        <id>20ca4fe597872110cf3cfd9fe153af21</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:58:34</sys_created_on>
+        <sys_id>fe9ccb6997872110cf3cfd9fe153afcf</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-26 21:58:34</sys_updated_on>
+        <table>var__m_sys_hub_action_input_6dcc8889970411101e0835dfe153afdb</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>file_name</field>
+        <id>20ca4fe597872110cf3cfd9fe153af21</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:58:34</sys_created_on>
+        <sys_id>b29ccb6997872110cf3cfd9fe153afd0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-26 21:58:34</sys_updated_on>
+        <table>var__m_sys_hub_action_input_6dcc8889970411101e0835dfe153afdb</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=20ca4fe597872110cf3cfd9fe153af21"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=20ca4fe597872110cf3cfd9fe153af21"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
+        <action_type_parent/>
+        <comment>INFO generation disabled</comment>
+        <display_text/>
+        <flow display_value="DOCGEN: Generate MRR">c12543a197872110cf3cfd9fe153afb3</flow>
+        <order>13</order>
+        <parent_ui_id>07f1914d-72a6-477b-8b17-f0cec4f6fa60</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:50:29</sys_created_on>
+        <sys_id>60ca4fe597872110cf3cfd9fe153af36</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:28</sys_updated_on>
+        <ui_id>d8d89f51-82ef-4e3a-9dea-b07f7cad8288</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=60ca4fe597872110cf3cfd9fe153af36"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>60ca4fe597872110cf3cfd9fe153af36</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:50:29</sys_created_on>
+        <sys_id>a0ca4fe597872110cf3cfd9fe153af37</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-26 21:50:29</sys_updated_on>
+        <value>MRR generation disabled</value>
+        <variable display_value="Message">23c1bcc6531003003bf1d9109ec587e5</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4^id=60ca4fe597872110cf3cfd9fe153af36"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=60ca4fe597872110cf3cfd9fe153af36"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=60ca4fe597872110cf3cfd9fe153af36"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="UTIL: HOTH API POST Request">54a61b2497c011101e0835dfe153afb0</action_type>
+        <action_type_parent/>
+        <comment/>
+        <display_text/>
+        <flow display_value="DOCGEN: Generate MRR">c12543a197872110cf3cfd9fe153afb3</flow>
+        <order>5</order>
+        <parent_ui_id>76c50536-2acb-4a75-94a9-d50272f6aba1</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:50:29</sys_created_on>
+        <sys_id>9cca4fe597872110cf3cfd9fe153af15</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:28</sys_updated_on>
+        <ui_id>075350f2-f6cd-4405-b2cc-f6cdee514ab9</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=9cca4fe597872110cf3cfd9fe153af15"/>
+    <sys_element_mapping action="delete_multiple" query="id=9cca4fe597872110cf3cfd9fe153af15"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>request_body</field>
+        <id>9cca4fe597872110cf3cfd9fe153af15</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:14</sys_created_on>
+        <sys_id>b615d4b297cb2110cf3cfd9fe153af4e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:14</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value>{{33c743b0-0eca-407b-a623-cd30d61ba9f9.payload}}</value>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=9cca4fe597872110cf3cfd9fe153af15^sys_idNOT INba9ccb6997872110cf3cfd9fe153afc7"/>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <input_name>resource_path</input_name>
+        <instance>9cca4fe597872110cf3cfd9fe153af15</instance>
+        <referenced_table>sys_hub_action_instance</referenced_table>
+        <script>{"resource_path":{"scriptActive":true,"script":"return \"/generate-document\";"}}</script>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:58:34</sys_created_on>
+        <sys_id>ba9ccb6997872110cf3cfd9fe153afc7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-26 21:58:34</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=9cca4fe597872110cf3cfd9fe153af15"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
+        <action_type_parent/>
+        <comment>WARN generation failed</comment>
+        <display_text/>
+        <flow display_value="DOCGEN: Generate MRR">c12543a197872110cf3cfd9fe153afb3</flow>
+        <order>10</order>
+        <parent_ui_id>18c893fe-5efe-4d85-b456-bf4234b9c4c0</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:50:29</sys_created_on>
+        <sys_id>a4ca4fe597872110cf3cfd9fe153af2b</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:28</sys_updated_on>
+        <ui_id>d76a96ae-bc55-491c-a85e-770d04328f58</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=a4ca4fe597872110cf3cfd9fe153af2b"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>a4ca4fe597872110cf3cfd9fe153af2b</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:50:29</sys_created_on>
+        <sys_id>6cca4fe597872110cf3cfd9fe153af2c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-26 21:50:29</sys_updated_on>
+        <value>MRR generation failed</value>
+        <variable display_value="Message">23c1bcc6531003003bf1d9109ec587e5</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>a4ca4fe597872110cf3cfd9fe153af2b</document_key>
+        <order>0</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:50:29</sys_created_on>
+        <sys_id>a8ca4fe597872110cf3cfd9fe153af2c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-26 21:50:29</sys_updated_on>
+        <value>warn</value>
+        <variable display_value="Level">5bc1bcc6531003003bf1d9109ec587d7</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4^id=a4ca4fe597872110cf3cfd9fe153af2b"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=a4ca4fe597872110cf3cfd9fe153af2b"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=a4ca4fe597872110cf3cfd9fe153af2b"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="DOCGEN: Gather MRR Data">d123103297cb2110cf3cfd9fe153afe6</action_type>
+        <action_type_parent/>
+        <comment/>
+        <display_text/>
+        <flow display_value="DOCGEN: Generate MRR">c12543a197872110cf3cfd9fe153afb3</flow>
+        <order>4</order>
+        <parent_ui_id>76c50536-2acb-4a75-94a9-d50272f6aba1</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:14</sys_created_on>
+        <sys_id>fa15d4b297cb2110cf3cfd9fe153af4a</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:28</sys_updated_on>
+        <ui_id>33c743b0-0eca-407b-a623-cd30d61ba9f9</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=fa15d4b297cb2110cf3cfd9fe153af4a"/>
+    <sys_element_mapping action="delete_multiple" query="id=fa15d4b297cb2110cf3cfd9fe153af4a"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>acquisition_package</field>
+        <id>fa15d4b297cb2110cf3cfd9fe153af4a</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:14</sys_created_on>
+        <sys_id>3a15d4b297cb2110cf3cfd9fe153af4c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:14</sys_updated_on>
+        <table>var__m_sys_hub_action_input_d123103297cb2110cf3cfd9fe153afe6</table>
+        <value>{{subflow.acquisition_package}}</value>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=fa15d4b297cb2110cf3cfd9fe153af4a"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=fa15d4b297cb2110cf3cfd9fe153af4a"/>
+    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=c12543a197872110cf3cfd9fe153afb3"/>
+    <sys_hub_flow_logic action="delete_multiple" query="flow=c12543a197872110cf3cfd9fe153afb3^sys_idNOT IN02b74f2597872110cf3cfd9fe153af98,14ca4fe597872110cf3cfd9fe153af17,2cca4fe597872110cf3cfd9fe153af37,60ca4fe597872110cf3cfd9fe153af30,64ca4fe597872110cf3cfd9fe153af25,a8ca4fe597872110cf3cfd9fe153af22,c2b74f2597872110cf3cfd9fe153af94,d8ca0fe597872110cf3cfd9fe153aff8,e4ca4fe597872110cf3cfd9fe153af2d"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">4ab74f2597872110cf3cfd9fe153af97</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="DOCGEN: Generate MRR">c12543a197872110cf3cfd9fe153afb3</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <inputs/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>2</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:37:13</sys_created_on>
+        <sys_id>02b74f2597872110cf3cfd9fe153af98</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:28</sys_updated_on>
+        <ui_id>a7e337a5-555e-4fb1-b5d8-46720326b736</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=02b74f2597872110cf3cfd9fe153af98"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>02b74f2597872110cf3cfd9fe153af98</document_key>
+        <order>10</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:37:13</sys_created_on>
+        <sys_id>4ab74f2597872110cf3cfd9fe153af9b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-26 21:37:13</sys_updated_on>
+        <value>enabled</value>
+        <variable display_value="Condition Label">f0af19c1c32632002841b63b12d3aea3</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_c12543a197872110cf3cfd9fe153afb3^id=02b74f2597872110cf3cfd9fe153af98"/>
+    <sys_element_mapping action="delete_multiple" query="id=02b74f2597872110cf3cfd9fe153af98"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>condition</field>
+        <id>02b74f2597872110cf3cfd9fe153af98</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:37:13</sys_created_on>
+        <sys_id>c6b74f2597872110cf3cfd9fe153af9b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-26 21:37:13</sys_updated_on>
+        <table>var__m_sys_hub_flow_logic_input_af4e1945c3e232002841b63b12d3ae3e</table>
+        <value>{{flow_variable.enabled}}=true</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>condition_name</field>
+        <id>02b74f2597872110cf3cfd9fe153af98</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:37:13</sys_created_on>
+        <sys_id>02b74f2597872110cf3cfd9fe153af9b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-26 21:37:13</sys_updated_on>
+        <table>var__m_sys_hub_flow_logic_input_af4e1945c3e232002841b63b12d3ae3e</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=02b74f2597872110cf3cfd9fe153af98"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=02b74f2597872110cf3cfd9fe153af98"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">9cca4fe597872110cf3cfd9fe153af16</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="DOCGEN: Generate MRR">c12543a197872110cf3cfd9fe153afb3</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <inputs/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>6</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>76c50536-2acb-4a75-94a9-d50272f6aba1</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:50:29</sys_created_on>
+        <sys_id>14ca4fe597872110cf3cfd9fe153af17</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:28</sys_updated_on>
+        <ui_id>f4242622-cf2f-4037-935b-ac4b8653bb2d</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=14ca4fe597872110cf3cfd9fe153af17"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>14ca4fe597872110cf3cfd9fe153af17</document_key>
+        <order>10</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:50:29</sys_created_on>
+        <sys_id>e0ca4fe597872110cf3cfd9fe153af1a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-26 21:50:29</sys_updated_on>
+        <value>successful</value>
+        <variable display_value="Condition Label">f0af19c1c32632002841b63b12d3aea3</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_c12543a197872110cf3cfd9fe153afb3^id=14ca4fe597872110cf3cfd9fe153af17"/>
+    <sys_element_mapping action="delete_multiple" query="id=14ca4fe597872110cf3cfd9fe153af17"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>condition</field>
+        <id>14ca4fe597872110cf3cfd9fe153af17</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:50:29</sys_created_on>
+        <sys_id>60ca4fe597872110cf3cfd9fe153af1a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-26 21:50:29</sys_updated_on>
+        <table>var__m_sys_hub_flow_logic_input_af4e1945c3e232002841b63b12d3ae3e</table>
+        <value>{{075350f2-f6cd-4405-b2cc-f6cdee514ab9.response_status}}=200</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>condition_name</field>
+        <id>14ca4fe597872110cf3cfd9fe153af17</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:50:29</sys_created_on>
+        <sys_id>9cca4fe597872110cf3cfd9fe153af19</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-26 21:50:29</sys_updated_on>
+        <table>var__m_sys_hub_flow_logic_input_af4e1945c3e232002841b63b12d3ae3e</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=14ca4fe597872110cf3cfd9fe153af17"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=14ca4fe597872110cf3cfd9fe153af17"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">a4ca4fe597872110cf3cfd9fe153af37</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="DOCGEN: Generate MRR">c12543a197872110cf3cfd9fe153afb3</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="End">d176605ea76103004f27b0d2187901c7</logic_definition>
+        <order>14</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>07f1914d-72a6-477b-8b17-f0cec4f6fa60</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:50:29</sys_created_on>
+        <sys_id>2cca4fe597872110cf3cfd9fe153af37</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:28</sys_updated_on>
+        <ui_id>65238d49-b0e6-4d96-85df-23f5fc0a186e</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=2cca4fe597872110cf3cfd9fe153af37"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_c12543a197872110cf3cfd9fe153afb3^id=2cca4fe597872110cf3cfd9fe153af37"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=2cca4fe597872110cf3cfd9fe153af37"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=2cca4fe597872110cf3cfd9fe153af37"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">e8ca4fe597872110cf3cfd9fe153af2f</block>
+        <comment/>
+        <connected_to>a7e337a5-555e-4fb1-b5d8-46720326b736</connected_to>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="DOCGEN: Generate MRR">c12543a197872110cf3cfd9fe153afb3</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="Else">1f781bf3c32232002841b63b12d3aee6</logic_definition>
+        <order>12</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:50:29</sys_created_on>
+        <sys_id>60ca4fe597872110cf3cfd9fe153af30</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:28</sys_updated_on>
+        <ui_id>07f1914d-72a6-477b-8b17-f0cec4f6fa60</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=60ca4fe597872110cf3cfd9fe153af30"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_c12543a197872110cf3cfd9fe153afb3^id=60ca4fe597872110cf3cfd9fe153af30"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=60ca4fe597872110cf3cfd9fe153af30"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=60ca4fe597872110cf3cfd9fe153af30"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">ecca4fe597872110cf3cfd9fe153af24</block>
+        <comment/>
+        <connected_to>f4242622-cf2f-4037-935b-ac4b8653bb2d</connected_to>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="DOCGEN: Generate MRR">c12543a197872110cf3cfd9fe153afb3</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="Else">1f781bf3c32232002841b63b12d3aee6</logic_definition>
+        <order>9</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>76c50536-2acb-4a75-94a9-d50272f6aba1</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:50:29</sys_created_on>
+        <sys_id>64ca4fe597872110cf3cfd9fe153af25</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:28</sys_updated_on>
+        <ui_id>18c893fe-5efe-4d85-b456-bf4234b9c4c0</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=64ca4fe597872110cf3cfd9fe153af25"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_c12543a197872110cf3cfd9fe153afb3^id=64ca4fe597872110cf3cfd9fe153af25"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=64ca4fe597872110cf3cfd9fe153af25"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=64ca4fe597872110cf3cfd9fe153af25"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">24ca4fe597872110cf3cfd9fe153af22</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="DOCGEN: Generate MRR">c12543a197872110cf3cfd9fe153afb3</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="End">d176605ea76103004f27b0d2187901c7</logic_definition>
+        <order>8</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>f4242622-cf2f-4037-935b-ac4b8653bb2d</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:50:29</sys_created_on>
+        <sys_id>a8ca4fe597872110cf3cfd9fe153af22</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:28</sys_updated_on>
+        <ui_id>a39f1089-2179-4136-b85b-7ab725b01550</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=a8ca4fe597872110cf3cfd9fe153af22"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_c12543a197872110cf3cfd9fe153afb3^id=a8ca4fe597872110cf3cfd9fe153af22"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=a8ca4fe597872110cf3cfd9fe153af22"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=a8ca4fe597872110cf3cfd9fe153af22"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">c6b74f2597872110cf3cfd9fe153af93</block>
+        <comment>system property docgen.mrr.enable</comment>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="DOCGEN: Generate MRR">c12543a197872110cf3cfd9fe153afb3</flow>
+        <flow_variable/>
+        <flow_variables_assigned>enabled</flow_variables_assigned>
+        <inputs/>
+        <logic_definition display_value="Set Flow Variables">4f787d1e0f9b0010ecf0cc52ff767ea0</logic_definition>
+        <order>1</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:37:13</sys_created_on>
+        <sys_id>c2b74f2597872110cf3cfd9fe153af94</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:28</sys_updated_on>
+        <ui_id>7aecf7ab-6d29-48c5-ac32-5394ef8644bd</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=c2b74f2597872110cf3cfd9fe153af94"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_c12543a197872110cf3cfd9fe153afb3^id=c2b74f2597872110cf3cfd9fe153af94"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=c2b74f2597872110cf3cfd9fe153af94"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=c2b74f2597872110cf3cfd9fe153af94^sys_idNOT IN06b74f2597872110cf3cfd9fe153af95"/>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <input_name>enabled</input_name>
+        <instance>c2b74f2597872110cf3cfd9fe153af94</instance>
+        <referenced_table>sys_hub_flow_logic</referenced_table>
+        <script>{"enabled":{"scriptActive":true,"script":"return gs.getProperty(\"x_g_dis_atat.docgen.mrr.enable\");"}}</script>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:37:13</sys_created_on>
+        <sys_id>06b74f2597872110cf3cfd9fe153af95</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-26 21:37:13</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">50ca0fe597872110cf3cfd9fe153aff8</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="DOCGEN: Generate MRR">c12543a197872110cf3cfd9fe153afb3</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <inputs/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>3</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>a7e337a5-555e-4fb1-b5d8-46720326b736</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:50:28</sys_created_on>
+        <sys_id>d8ca0fe597872110cf3cfd9fe153aff8</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:28</sys_updated_on>
+        <ui_id>76c50536-2acb-4a75-94a9-d50272f6aba1</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=d8ca0fe597872110cf3cfd9fe153aff8"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>d8ca0fe597872110cf3cfd9fe153aff8</document_key>
+        <order>10</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:50:28</sys_created_on>
+        <sys_id>90ca0fe597872110cf3cfd9fe153affc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-26 21:50:28</sys_updated_on>
+        <value>None of the contract actions apply</value>
+        <variable display_value="Condition Label">f0af19c1c32632002841b63b12d3aea3</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_c12543a197872110cf3cfd9fe153afb3^id=d8ca0fe597872110cf3cfd9fe153aff8"/>
+    <sys_element_mapping action="delete_multiple" query="id=d8ca0fe597872110cf3cfd9fe153aff8"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>condition</field>
+        <id>d8ca0fe597872110cf3cfd9fe153aff8</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:50:28</sys_created_on>
+        <sys_id>10ca0fe597872110cf3cfd9fe153affc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-26 21:50:28</sys_updated_on>
+        <table>var__m_sys_hub_flow_logic_input_af4e1945c3e232002841b63b12d3ae3e</table>
+        <value>{{subflow.acquisition_package.fair_opportunity.contract_action}}=NONE</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>condition_name</field>
+        <id>d8ca0fe597872110cf3cfd9fe153aff8</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:50:28</sys_created_on>
+        <sys_id>58ca0fe597872110cf3cfd9fe153affb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-26 21:50:28</sys_updated_on>
+        <table>var__m_sys_hub_flow_logic_input_af4e1945c3e232002841b63b12d3ae3e</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=d8ca0fe597872110cf3cfd9fe153aff8"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=d8ca0fe597872110cf3cfd9fe153aff8"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">60ca4fe597872110cf3cfd9fe153af2d</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="DOCGEN: Generate MRR">c12543a197872110cf3cfd9fe153afb3</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="End">d176605ea76103004f27b0d2187901c7</logic_definition>
+        <order>11</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>18c893fe-5efe-4d85-b456-bf4234b9c4c0</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:50:29</sys_created_on>
+        <sys_id>e4ca4fe597872110cf3cfd9fe153af2d</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:28</sys_updated_on>
+        <ui_id>68429f62-3f2d-48cc-b81e-853fc03769a7</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=e4ca4fe597872110cf3cfd9fe153af2d"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_c12543a197872110cf3cfd9fe153afb3^id=e4ca4fe597872110cf3cfd9fe153af2d"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=e4ca4fe597872110cf3cfd9fe153af2d"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=e4ca4fe597872110cf3cfd9fe153af2d"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=c12543a197872110cf3cfd9fe153afb3"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=c12543a197872110cf3cfd9fe153afb3^sys_idNOT IN82b74f2597872110cf3cfd9fe153af80"/>
+    <sys_hub_flow_variable action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=boolean,uiTypeLabel=True/False,uiUniqueId=5ddacb87-bfae-49a2-a936-55f0b0c0c143</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>enabled</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">boolean</internal_type>
+        <label>enabled</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="DOCGEN: Generate MRR">c12543a197872110cf3cfd9fe153afb3</model>
+        <model_id>c12543a197872110cf3cfd9fe153afb3</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_variable_c12543a197872110cf3cfd9fe153afb3</name>
+        <next_element/>
+        <order>0</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_variable</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:37:12</sys_created_on>
+        <sys_id>82b74f2597872110cf3cfd9fe153af80</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:24</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_variable>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_c12543a197872110cf3cfd9fe153afb3^sys_idNOT IN8eb74f2597872110cf3cfd9fe153af7b"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>acquisition_package</element>
+        <help/>
+        <hint/>
+        <label>Acquisition Package</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_c12543a197872110cf3cfd9fe153afb3</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-26 21:37:12</sys_created_on>
+        <sys_id>8eb74f2597872110cf3cfd9fe153af7b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-26 21:37:12</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_c12543a197872110cf3cfd9fe153afb3"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_c12543a197872110cf3cfd9fe153afb3"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_c12543a197872110cf3cfd9fe153afb3"/>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=c12543a197872110cf3cfd9fe153afb3"/>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=c12543a197872110cf3cfd9fe153afb3^sys_idNOT IN3925d8b297cb2110cf3cfd9fe153afee"/>
+    <sys_flow_subflow_plan action="INSERT_OR_UPDATE">
+        <plan>com.snc.process_flow.engine.ProcessPlan@1d4d9db</plan>
+        <plan_id display_value="DOCGEN: Generate MRR">c12543a197872110cf3cfd9fe153afb3</plan_id>
+        <snapshot>092598b297cb2110cf3cfd9fe153af0b</snapshot>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:28</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>3925d8b297cb2110cf3cfd9fe153afee</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:28</sys_updated_on>
+    </sys_flow_subflow_plan>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Generates Sole Source Market Research Report document</description>
+        <internal_name>docgen_generate_mrr</internal_name>
+        <label_cache>[{"name":"33c743b0-0eca-407b-a623-cd30d61ba9f9.payload","label":"4 - DOCGEN: Gather MRR Data➛payload","reference_display":"payload","type":"string","base_type":"string","attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiType":"string","uiUniqueId":"5bccbfdf-05c5-412a-8e7a-41ba6bd50465"}},{"name":"075350f2-f6cd-4405-b2cc-f6cdee514ab9.response_status","label":"5 - UTIL: HOTH API POST Request➛Response Status","reference_display":"Response Status","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"6679b850-af9e-4018-8c37-b9cea8061597"}},{"name":"subflow.acquisition_package.fair_opportunity.contract_action","label":"Input➛Acquisition Package➛Fair Opportunity➛Contract Action","reference":"","reference_display":"Contract Action","type":"choice","base_type":"choice","parent_table_name":"x_g_dis_atat_fair_opportunity","column_name":"contract_action","choices":[{"label":"-- None --","image":"","used":false,"rawLabel":"-- None --","selected":false,"missing":false,"reference":false,"value":""},{"image":"","label":"Undefinitized contract action (UCA)","used":false,"rawLabel":"Undefinitized contract action (UCA)","selected":false,"missing":false,"reference":false,"value":"UCA","parameters":{"name":"x_g_dis_atat_fair_opportunity"}},{"image":"","label":"Bridge contract action","used":false,"rawLabel":"Bridge contract action","selected":false,"missing":false,"reference":false,"value":"BCA","parameters":{"name":"x_g_dis_atat_fair_opportunity"}},{"image":"","label":"Option to Extend Services","used":false,"rawLabel":"Option to Extend Services","selected":false,"missing":false,"reference":false,"value":"OES","parameters":{"name":"x_g_dis_atat_fair_opportunity"}},{"image":"","label":"None of these contract actions apply to this acquisition","used":false,"rawLabel":"None of these contract actions apply to this acquisition","selected":false,"missing":false,"reference":false,"value":"NONE","parameters":{"name":"x_g_dis_atat_fair_opportunity"}}]},{"name":"flow_variable.enabled","label":"Flow Variables➛enabled","reference":"","reference_display":"","type":"boolean","base_type":"boolean","column_name":"","choices":[],"attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":"","uiUniqueId":"5ddacb87-bfae-49a2-a936-55f0b0c0c143"}},{"name":"subflow.acquisition_package","label":"Input➛Acquisition Package","reference":"x_g_dis_atat_acquisition_package","reference_display":"DAPPS:Acquisition Package","type":"reference","base_type":"reference","column_name":"","attributes":{"uiType":"reference","uiTypeLabel":"Reference","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"81cb738b-9024-4839-a21c-3949b34974a1","sourceUiUniqueId":"","sourceType":"","sourceId":""}},{"name":"075350f2-f6cd-4405-b2cc-f6cdee514ab9.variable","label":"5 - UTIL: HOTH API POST Request➛Response Body","reference_display":"Response Body","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"70e33bde-cff3-42a0-8d5d-6a7a598be287"}}]</label_cache>
+        <master>true</master>
+        <name>DOCGEN: Generate MRR</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="DOCGEN: Generate MRR">c12543a197872110cf3cfd9fe153afb3</parent_flow>
+        <remote_trigger_id/>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:24</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>092598b297cb2110cf3cfd9fe153af0b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:24</sys_updated_on>
+        <type>subflow</type>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=092598b297cb2110cf3cfd9fe153af0b"/>
+    <sys_variable_value action="delete_multiple" query="document_key=092598b297cb2110cf3cfd9fe153af0b"/>
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=092598b297cb2110cf3cfd9fe153af0b"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=092598b297cb2110cf3cfd9fe153af0b"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=092598b297cb2110cf3cfd9fe153af0b^sys_idNOT IN052598b297cb2110cf3cfd9fe153af0c"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>092598b297cb2110cf3cfd9fe153af0b</id>
+        <name>DOCGEN: Generate MRR</name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:24</sys_created_on>
+        <sys_id>052598b297cb2110cf3cfd9fe153af0c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:24</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=052598b297cb2110cf3cfd9fe153af0c"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=092598b297cb2110cf3cfd9fe153af0b^sys_idNOT IN892598b297cb2110cf3cfd9fe153af0d"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference,uiUniqueId=81cb738b-9024-4839-a21c-3949b34974a1</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table>x_g_dis_atat_acquisition_package</choice_table>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>acquisition_package</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>Acquisition Package</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="DOCGEN: Generate MRR">092598b297cb2110cf3cfd9fe153af0b</model>
+        <model_id>092598b297cb2110cf3cfd9fe153af0b</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_092598b297cb2110cf3cfd9fe153af0b</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference display_value="" name="x_g_dis_atat_acquisition_package">x_g_dis_atat_acquisition_package</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:24</sys_created_on>
+        <sys_id>892598b297cb2110cf3cfd9fe153af0d</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:24</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_output action="delete_multiple" query="model=092598b297cb2110cf3cfd9fe153af0b"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=092598b297cb2110cf3cfd9fe153af0b"/>
+    <sys_hub_action_instance action="delete_multiple" query="flow=092598b297cb2110cf3cfd9fe153af0b^sys_idNOT IN152598b297cb2110cf3cfd9fe153af99,152598b297cb2110cf3cfd9fe153aff7,192598b297cb2110cf3cfd9fe153afd9,592598b297cb2110cf3cfd9fe153afef,6925d8b297cb2110cf3cfd9fe153af22"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="DOCGEN: Gather MRR Data">d123103297cb2110cf3cfd9fe153afe6</action_type>
+        <action_type_parent display_value="DOCGEN: Gather MRR Data">bbe1de2197c32110cf3cfd9fe153af71</action_type_parent>
+        <comment/>
+        <display_text/>
+        <flow display_value="DOCGEN: Generate MRR">092598b297cb2110cf3cfd9fe153af0b</flow>
+        <order>4</order>
+        <parent_ui_id>76c50536-2acb-4a75-94a9-d50272f6aba1</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>152598b297cb2110cf3cfd9fe153af99</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+        <ui_id>33c743b0-0eca-407b-a623-cd30d61ba9f9</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=152598b297cb2110cf3cfd9fe153af99"/>
+    <sys_element_mapping action="delete_multiple" query="id=152598b297cb2110cf3cfd9fe153af99"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>acquisition_package</field>
+        <id>152598b297cb2110cf3cfd9fe153af99</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>512598b297cb2110cf3cfd9fe153af9a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+        <table>var__m_sys_hub_action_input_d123103297cb2110cf3cfd9fe153afe6</table>
+        <value>{{subflow.acquisition_package}}</value>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=152598b297cb2110cf3cfd9fe153af99"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=152598b297cb2110cf3cfd9fe153af99"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
+        <action_type_parent display_value="Log">0e0ae8c2531003003bf1d9109ec587c8</action_type_parent>
+        <comment>WARN generation failed</comment>
+        <display_text/>
+        <flow display_value="DOCGEN: Generate MRR">092598b297cb2110cf3cfd9fe153af0b</flow>
+        <order>10</order>
+        <parent_ui_id>18c893fe-5efe-4d85-b456-bf4234b9c4c0</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:26</sys_created_on>
+        <sys_id>152598b297cb2110cf3cfd9fe153aff7</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:26</sys_updated_on>
+        <ui_id>d76a96ae-bc55-491c-a85e-770d04328f58</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=152598b297cb2110cf3cfd9fe153aff7"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>152598b297cb2110cf3cfd9fe153aff7</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:26</sys_created_on>
+        <sys_id>112598b297cb2110cf3cfd9fe153aff9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:26</sys_updated_on>
+        <value>MRR generation failed</value>
+        <variable display_value="Message">23c1bcc6531003003bf1d9109ec587e5</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>152598b297cb2110cf3cfd9fe153aff7</document_key>
+        <order>0</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:26</sys_created_on>
+        <sys_id>5d2598b297cb2110cf3cfd9fe153aff8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:26</sys_updated_on>
+        <value>warn</value>
+        <variable display_value="Level">5bc1bcc6531003003bf1d9109ec587d7</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4^id=152598b297cb2110cf3cfd9fe153aff7"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=152598b297cb2110cf3cfd9fe153aff7"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=152598b297cb2110cf3cfd9fe153aff7"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="UTIL: HOTH API POST Request">54a61b2497c011101e0835dfe153afb0</action_type>
+        <action_type_parent display_value="UTIL: HOTH API POST Request">921e87a8978011101e0835dfe153afb4</action_type_parent>
+        <comment/>
+        <display_text/>
+        <flow display_value="DOCGEN: Generate MRR">092598b297cb2110cf3cfd9fe153af0b</flow>
+        <order>5</order>
+        <parent_ui_id>76c50536-2acb-4a75-94a9-d50272f6aba1</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>192598b297cb2110cf3cfd9fe153afd9</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+        <ui_id>075350f2-f6cd-4405-b2cc-f6cdee514ab9</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=192598b297cb2110cf3cfd9fe153afd9"/>
+    <sys_element_mapping action="delete_multiple" query="id=192598b297cb2110cf3cfd9fe153afd9"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>request_body</field>
+        <id>192598b297cb2110cf3cfd9fe153afd9</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>992598b297cb2110cf3cfd9fe153afda</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+        <table>var__m_sys_hub_action_input_54a61b2497c011101e0835dfe153afb0</table>
+        <value>{{33c743b0-0eca-407b-a623-cd30d61ba9f9.payload}}</value>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=192598b297cb2110cf3cfd9fe153afd9^sys_idNOT IN552598b297cb2110cf3cfd9fe153afda"/>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <input_name>resource_path</input_name>
+        <instance>192598b297cb2110cf3cfd9fe153afd9</instance>
+        <referenced_table>sys_hub_action_instance</referenced_table>
+        <script>{"resource_path":{"scriptActive":true,"script":"return \"/generate-document\";"}}</script>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>552598b297cb2110cf3cfd9fe153afda</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=192598b297cb2110cf3cfd9fe153afd9"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="UTIL: Attach Binary File to Acquisition Package">6dcc8889970411101e0835dfe153afdb</action_type>
+        <action_type_parent display_value="UTIL: Attach Binary File to Acquisition Package">92ea0409970411101e0835dfe153af2f</action_type_parent>
+        <comment/>
+        <display_text/>
+        <flow display_value="DOCGEN: Generate MRR">092598b297cb2110cf3cfd9fe153af0b</flow>
+        <order>7</order>
+        <parent_ui_id>f4242622-cf2f-4037-935b-ac4b8653bb2d</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:26</sys_created_on>
+        <sys_id>592598b297cb2110cf3cfd9fe153afef</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:26</sys_updated_on>
+        <ui_id>9cca25bd-5c79-4ad6-a7a0-437736351b8c</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=592598b297cb2110cf3cfd9fe153afef"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>592598b297cb2110cf3cfd9fe153afef</document_key>
+        <order>4</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:26</sys_created_on>
+        <sys_id>1d2598b297cb2110cf3cfd9fe153aff1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:26</sys_updated_on>
+        <value>application/vnd.openxmlformats-officedocument.wordprocessingml.document</value>
+        <variable display_value="Content Type">c89e404d970411101e0835dfe153af89</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>592598b297cb2110cf3cfd9fe153afef</document_key>
+        <order>3</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:26</sys_created_on>
+        <sys_id>dd2598b297cb2110cf3cfd9fe153aff1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:26</sys_updated_on>
+        <value>Market Research Report.docx</value>
+        <variable display_value="File Name">4c9e404d970411101e0835dfe153af83</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=592598b297cb2110cf3cfd9fe153afef"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>acquisition_package</field>
+        <id>592598b297cb2110cf3cfd9fe153afef</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:26</sys_created_on>
+        <sys_id>512598b297cb2110cf3cfd9fe153aff1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:26</sys_updated_on>
+        <table>var__m_sys_hub_action_input_6dcc8889970411101e0835dfe153afdb</table>
+        <value>{{subflow.acquisition_package}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>binary_file</field>
+        <id>592598b297cb2110cf3cfd9fe153afef</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:26</sys_created_on>
+        <sys_id>152598b297cb2110cf3cfd9fe153aff1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:26</sys_updated_on>
+        <table>var__m_sys_hub_action_input_6dcc8889970411101e0835dfe153afdb</table>
+        <value>{{075350f2-f6cd-4405-b2cc-f6cdee514ab9.variable}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>content_type</field>
+        <id>592598b297cb2110cf3cfd9fe153afef</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:26</sys_created_on>
+        <sys_id>d52598b297cb2110cf3cfd9fe153aff1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:26</sys_updated_on>
+        <table>var__m_sys_hub_action_input_6dcc8889970411101e0835dfe153afdb</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>file_name</field>
+        <id>592598b297cb2110cf3cfd9fe153afef</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:26</sys_created_on>
+        <sys_id>992598b297cb2110cf3cfd9fe153aff1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:26</sys_updated_on>
+        <table>var__m_sys_hub_action_input_6dcc8889970411101e0835dfe153afdb</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=592598b297cb2110cf3cfd9fe153afef"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=592598b297cb2110cf3cfd9fe153afef"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
+        <action_type_parent display_value="Log">0e0ae8c2531003003bf1d9109ec587c8</action_type_parent>
+        <comment>INFO generation disabled</comment>
+        <display_text/>
+        <flow display_value="DOCGEN: Generate MRR">092598b297cb2110cf3cfd9fe153af0b</flow>
+        <order>13</order>
+        <parent_ui_id>07f1914d-72a6-477b-8b17-f0cec4f6fa60</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:26</sys_created_on>
+        <sys_id>6925d8b297cb2110cf3cfd9fe153af22</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:26</sys_updated_on>
+        <ui_id>d8d89f51-82ef-4e3a-9dea-b07f7cad8288</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=6925d8b297cb2110cf3cfd9fe153af22"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>6925d8b297cb2110cf3cfd9fe153af22</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:26</sys_created_on>
+        <sys_id>a925d8b297cb2110cf3cfd9fe153af23</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:26</sys_updated_on>
+        <value>MRR generation disabled</value>
+        <variable display_value="Message">23c1bcc6531003003bf1d9109ec587e5</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4^id=6925d8b297cb2110cf3cfd9fe153af22"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=6925d8b297cb2110cf3cfd9fe153af22"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=6925d8b297cb2110cf3cfd9fe153af22"/>
+    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=092598b297cb2110cf3cfd9fe153af0b"/>
+    <sys_hub_flow_logic action="delete_multiple" query="flow=092598b297cb2110cf3cfd9fe153af0b^sys_idNOT IN112598b297cb2110cf3cfd9fe153af73,192598b297cb2110cf3cfd9fe153af79,192598b297cb2110cf3cfd9fe153af8b,552598b297cb2110cf3cfd9fe153af5e,892598b297cb2110cf3cfd9fe153af5a,952598b297cb2110cf3cfd9fe153af7c,992598b297cb2110cf3cfd9fe153af76,d12598b297cb2110cf3cfd9fe153af8e,dd2598b297cb2110cf3cfd9fe153af62"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">9cca4fe597872110cf3cfd9fe153af16</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="DOCGEN: Generate MRR">092598b297cb2110cf3cfd9fe153af0b</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <inputs/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>6</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>76c50536-2acb-4a75-94a9-d50272f6aba1</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>112598b297cb2110cf3cfd9fe153af73</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+        <ui_id>f4242622-cf2f-4037-935b-ac4b8653bb2d</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=112598b297cb2110cf3cfd9fe153af73"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>112598b297cb2110cf3cfd9fe153af73</document_key>
+        <order>10</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>dd2598b297cb2110cf3cfd9fe153af75</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+        <value>successful</value>
+        <variable display_value="Condition Label">f0af19c1c32632002841b63b12d3aea3</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_092598b297cb2110cf3cfd9fe153af0b^id=112598b297cb2110cf3cfd9fe153af73"/>
+    <sys_element_mapping action="delete_multiple" query="id=112598b297cb2110cf3cfd9fe153af73"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>condition</field>
+        <id>112598b297cb2110cf3cfd9fe153af73</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>5d2598b297cb2110cf3cfd9fe153af75</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+        <table>var__m_sys_hub_flow_logic_input_af4e1945c3e232002841b63b12d3ae3e</table>
+        <value>{{075350f2-f6cd-4405-b2cc-f6cdee514ab9.response_status}}=200</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>condition_name</field>
+        <id>112598b297cb2110cf3cfd9fe153af73</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>992598b297cb2110cf3cfd9fe153af75</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+        <table>var__m_sys_hub_flow_logic_input_af4e1945c3e232002841b63b12d3ae3e</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=112598b297cb2110cf3cfd9fe153af73"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=112598b297cb2110cf3cfd9fe153af73"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">ecca4fe597872110cf3cfd9fe153af24</block>
+        <comment/>
+        <connected_to>f4242622-cf2f-4037-935b-ac4b8653bb2d</connected_to>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="DOCGEN: Generate MRR">092598b297cb2110cf3cfd9fe153af0b</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="Else">1f781bf3c32232002841b63b12d3aee6</logic_definition>
+        <order>9</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>76c50536-2acb-4a75-94a9-d50272f6aba1</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>192598b297cb2110cf3cfd9fe153af79</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+        <ui_id>18c893fe-5efe-4d85-b456-bf4234b9c4c0</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=192598b297cb2110cf3cfd9fe153af79"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_092598b297cb2110cf3cfd9fe153af0b^id=192598b297cb2110cf3cfd9fe153af79"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=192598b297cb2110cf3cfd9fe153af79"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=192598b297cb2110cf3cfd9fe153af79"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">e8ca4fe597872110cf3cfd9fe153af2f</block>
+        <comment/>
+        <connected_to>a7e337a5-555e-4fb1-b5d8-46720326b736</connected_to>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="DOCGEN: Generate MRR">092598b297cb2110cf3cfd9fe153af0b</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="Else">1f781bf3c32232002841b63b12d3aee6</logic_definition>
+        <order>12</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>192598b297cb2110cf3cfd9fe153af8b</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+        <ui_id>07f1914d-72a6-477b-8b17-f0cec4f6fa60</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=192598b297cb2110cf3cfd9fe153af8b"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_092598b297cb2110cf3cfd9fe153af0b^id=192598b297cb2110cf3cfd9fe153af8b"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=192598b297cb2110cf3cfd9fe153af8b"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=192598b297cb2110cf3cfd9fe153af8b"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">4ab74f2597872110cf3cfd9fe153af97</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="DOCGEN: Generate MRR">092598b297cb2110cf3cfd9fe153af0b</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <inputs/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>2</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>552598b297cb2110cf3cfd9fe153af5e</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+        <ui_id>a7e337a5-555e-4fb1-b5d8-46720326b736</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=552598b297cb2110cf3cfd9fe153af5e"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>552598b297cb2110cf3cfd9fe153af5e</document_key>
+        <order>10</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>9d2598b297cb2110cf3cfd9fe153af61</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+        <value>enabled</value>
+        <variable display_value="Condition Label">f0af19c1c32632002841b63b12d3aea3</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_092598b297cb2110cf3cfd9fe153af0b^id=552598b297cb2110cf3cfd9fe153af5e"/>
+    <sys_element_mapping action="delete_multiple" query="id=552598b297cb2110cf3cfd9fe153af5e"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>condition</field>
+        <id>552598b297cb2110cf3cfd9fe153af5e</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>1d2598b297cb2110cf3cfd9fe153af61</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+        <table>var__m_sys_hub_flow_logic_input_af4e1945c3e232002841b63b12d3ae3e</table>
+        <value>{{flow_variable.enabled}}=true</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>condition_name</field>
+        <id>552598b297cb2110cf3cfd9fe153af5e</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>592598b297cb2110cf3cfd9fe153af61</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+        <table>var__m_sys_hub_flow_logic_input_af4e1945c3e232002841b63b12d3ae3e</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=552598b297cb2110cf3cfd9fe153af5e"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=552598b297cb2110cf3cfd9fe153af5e"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">c6b74f2597872110cf3cfd9fe153af93</block>
+        <comment>system property docgen.mrr.enable</comment>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="DOCGEN: Generate MRR">092598b297cb2110cf3cfd9fe153af0b</flow>
+        <flow_variable/>
+        <flow_variables_assigned>enabled</flow_variables_assigned>
+        <inputs/>
+        <logic_definition display_value="Set Flow Variables">4f787d1e0f9b0010ecf0cc52ff767ea0</logic_definition>
+        <order>1</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>892598b297cb2110cf3cfd9fe153af5a</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+        <ui_id>7aecf7ab-6d29-48c5-ac32-5394ef8644bd</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=892598b297cb2110cf3cfd9fe153af5a"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_092598b297cb2110cf3cfd9fe153af0b^id=892598b297cb2110cf3cfd9fe153af5a"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=892598b297cb2110cf3cfd9fe153af5a"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=892598b297cb2110cf3cfd9fe153af5a^sys_idNOT IN4d2598b297cb2110cf3cfd9fe153af5b"/>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <input_name>enabled</input_name>
+        <instance>892598b297cb2110cf3cfd9fe153af5a</instance>
+        <referenced_table>sys_hub_flow_logic</referenced_table>
+        <script>{"enabled":{"scriptActive":true,"script":"return gs.getProperty(\"x_g_dis_atat.docgen.mrr.enable\");"}}</script>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>4d2598b297cb2110cf3cfd9fe153af5b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">60ca4fe597872110cf3cfd9fe153af2d</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="DOCGEN: Generate MRR">092598b297cb2110cf3cfd9fe153af0b</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="End">d176605ea76103004f27b0d2187901c7</logic_definition>
+        <order>11</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>18c893fe-5efe-4d85-b456-bf4234b9c4c0</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>952598b297cb2110cf3cfd9fe153af7c</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+        <ui_id>68429f62-3f2d-48cc-b81e-853fc03769a7</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=952598b297cb2110cf3cfd9fe153af7c"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_092598b297cb2110cf3cfd9fe153af0b^id=952598b297cb2110cf3cfd9fe153af7c"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=952598b297cb2110cf3cfd9fe153af7c"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=952598b297cb2110cf3cfd9fe153af7c"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">24ca4fe597872110cf3cfd9fe153af22</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="DOCGEN: Generate MRR">092598b297cb2110cf3cfd9fe153af0b</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="End">d176605ea76103004f27b0d2187901c7</logic_definition>
+        <order>8</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>f4242622-cf2f-4037-935b-ac4b8653bb2d</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>992598b297cb2110cf3cfd9fe153af76</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+        <ui_id>a39f1089-2179-4136-b85b-7ab725b01550</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=992598b297cb2110cf3cfd9fe153af76"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_092598b297cb2110cf3cfd9fe153af0b^id=992598b297cb2110cf3cfd9fe153af76"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=992598b297cb2110cf3cfd9fe153af76"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=992598b297cb2110cf3cfd9fe153af76"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">a4ca4fe597872110cf3cfd9fe153af37</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="DOCGEN: Generate MRR">092598b297cb2110cf3cfd9fe153af0b</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="End">d176605ea76103004f27b0d2187901c7</logic_definition>
+        <order>14</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>07f1914d-72a6-477b-8b17-f0cec4f6fa60</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>d12598b297cb2110cf3cfd9fe153af8e</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+        <ui_id>65238d49-b0e6-4d96-85df-23f5fc0a186e</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=d12598b297cb2110cf3cfd9fe153af8e"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_092598b297cb2110cf3cfd9fe153af0b^id=d12598b297cb2110cf3cfd9fe153af8e"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=d12598b297cb2110cf3cfd9fe153af8e"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=d12598b297cb2110cf3cfd9fe153af8e"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">50ca0fe597872110cf3cfd9fe153aff8</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="DOCGEN: Generate MRR">092598b297cb2110cf3cfd9fe153af0b</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <inputs/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>3</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>a7e337a5-555e-4fb1-b5d8-46720326b736</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>dd2598b297cb2110cf3cfd9fe153af62</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+        <ui_id>76c50536-2acb-4a75-94a9-d50272f6aba1</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=dd2598b297cb2110cf3cfd9fe153af62"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>dd2598b297cb2110cf3cfd9fe153af62</document_key>
+        <order>10</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>552598b297cb2110cf3cfd9fe153af72</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+        <value>None of the contract actions apply</value>
+        <variable display_value="Condition Label">f0af19c1c32632002841b63b12d3aea3</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_092598b297cb2110cf3cfd9fe153af0b^id=dd2598b297cb2110cf3cfd9fe153af62"/>
+    <sys_element_mapping action="delete_multiple" query="id=dd2598b297cb2110cf3cfd9fe153af62"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>condition</field>
+        <id>dd2598b297cb2110cf3cfd9fe153af62</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>d12598b297cb2110cf3cfd9fe153af72</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+        <table>var__m_sys_hub_flow_logic_input_af4e1945c3e232002841b63b12d3ae3e</table>
+        <value>{{subflow.acquisition_package.fair_opportunity.contract_action}}=NONE</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>condition_name</field>
+        <id>dd2598b297cb2110cf3cfd9fe153af62</id>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>112598b297cb2110cf3cfd9fe153af72</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+        <table>var__m_sys_hub_flow_logic_input_af4e1945c3e232002841b63b12d3ae3e</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=dd2598b297cb2110cf3cfd9fe153af62"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=dd2598b297cb2110cf3cfd9fe153af62"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=092598b297cb2110cf3cfd9fe153af0b"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=092598b297cb2110cf3cfd9fe153af0b^sys_idNOT INc52598b297cb2110cf3cfd9fe153af55"/>
+    <sys_hub_flow_variable action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=boolean,uiTypeLabel=True/False,uiUniqueId=5ddacb87-bfae-49a2-a936-55f0b0c0c143</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>enabled</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">boolean</internal_type>
+        <label>enabled</label>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <model display_value="DOCGEN: Generate MRR">092598b297cb2110cf3cfd9fe153af0b</model>
+        <model_id>092598b297cb2110cf3cfd9fe153af0b</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_variable_092598b297cb2110cf3cfd9fe153af0b</name>
+        <next_element/>
+        <order>0</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_variable</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:25</sys_created_on>
+        <sys_id>c52598b297cb2110cf3cfd9fe153af55</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:25</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_variable>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_092598b297cb2110cf3cfd9fe153af0b^sys_idNOT INcd2598b297cb2110cf3cfd9fe153af4b"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>acquisition_package</element>
+        <help/>
+        <hint/>
+        <label>Acquisition Package</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_092598b297cb2110cf3cfd9fe153af0b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
+        <sys_created_on>2023-05-30 05:49:24</sys_created_on>
+        <sys_id>cd2598b297cb2110cf3cfd9fe153af4b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-05-30 05:49:24</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_092598b297cb2110cf3cfd9fe153af0b"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_092598b297cb2110cf3cfd9fe153af0b"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_092598b297cb2110cf3cfd9fe153af0b"/>
+    <sys_hub_flow action="UPDATE">
+        <sys_id>c12543a197872110cf3cfd9fe153afb3</sys_id>
+        <latest_snapshot>092598b297cb2110cf3cfd9fe153af0b</latest_snapshot>
+        <compiler_build/>
+    </sys_hub_flow>
+</record_update>
