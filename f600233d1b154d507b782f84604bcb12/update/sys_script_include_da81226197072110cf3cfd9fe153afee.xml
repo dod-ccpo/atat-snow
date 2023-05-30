@@ -33,10 +33,6 @@ MarketResearchReport.prototype = {
 
     },
 
-    explicitNull: function(value) {
-        return value ? value : null;
-    },
-
     /**
      * Gather the research techniques used by researchers.
      * @param {string} techniqueSysIds CSV list of technique sys_ids defined in the reference table
@@ -49,20 +45,12 @@ MarketResearchReport.prototype = {
         if (!techniqueSysIds) {
             return [];
         }
-        try {
-            return getListRecords(techniqueSysIds, PROPERTY_NAMES, REFERENCE_TABLE)
-                .filter(Dow.prototype.atatUtil.recordNotNull)
-                .sort((a, b) => { // OTHER must present last; has sequence 99
-                    return a.sequence - b.sequence;
-                })
-                .map(removeSysId);
-
-        } catch (error) {
-            throw this.errUtil.createError(
-                "MarketResearchReport --> getTechniquesUsed(): " + error,
-                this.errUtil.METHOD_ERROR
-            );
-        }
+        return getListRecords(techniqueSysIds, PROPERTY_NAMES, REFERENCE_TABLE)
+            .filter(Dow.prototype.atatUtil.recordNotNull)
+            .sort((a, b) => { // OTHER must present last; has sequence 99
+                return a.sequence - b.sequence;
+            })
+            .map(removeSysId);
     },
 
     /**
@@ -74,15 +62,8 @@ MarketResearchReport.prototype = {
         if (!input) {
             return [];
         }
-        try {
-            // Expected input: [{"name":"Jane Smith","title":"Project Manager","org":"DISA"}]
-            return this.explicitNull(JSON.parse(input));
-        } catch (error) {
-            throw this.errUtil.createError(
-                "MarketResearchReport --> getResearchers(): " + error,
-                this.errUtil.METHOD_ERROR
-            );
-        }
+        // Expected input: [{"name":"Jane Smith","title":"Project Manager","org":"DISA"}]
+        return this.explicitNull(JSON.parse(input));
     },
 
     getPayload: function() {
@@ -113,13 +94,13 @@ MarketResearchReport.prototype = {
         <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
         <sys_created_on>2023-05-26 18:50:51</sys_created_on>
         <sys_id>da81226197072110cf3cfd9fe153afee</sys_id>
-        <sys_mod_count>33</sys_mod_count>
+        <sys_mod_count>34</sys_mod_count>
         <sys_name>MarketResearchReport</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_da81226197072110cf3cfd9fe153afee</sys_update_name>
         <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
-        <sys_updated_on>2023-05-30 04:47:52</sys_updated_on>
+        <sys_updated_on>2023-05-30 17:23:33</sys_updated_on>
     </sys_script_include>
 </record_update>
