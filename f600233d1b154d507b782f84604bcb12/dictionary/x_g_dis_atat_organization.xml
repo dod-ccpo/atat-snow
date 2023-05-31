@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Organization" max_length="40" name="x_g_dis_atat_organization" sizeclass="1" type="collection">
+    <element db_object_id="25d842111bde21103f288733cc4bcb99" label="DAPPS:Organization" max_length="40" name="x_g_dis_atat_organization" type="collection">
         <element choice="1" label="Address Type" max_length="10" name="address_type" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Foreign" value="FOREIGN"/>
@@ -67,6 +67,7 @@
                 <element inactive_on_update="false" label="Workforce Services and Development Directorate (WSD)" value="WORKFORCE_SERVICES_AND_DEVELOPMENT_DIRECTORATE"/>
             </choice>
         </element>
+        <element label="DISA Organization Reference" max_length="32" name="disa_organization_reference" reference="x_g_dis_atat_disa_organization" type="reference"/>
         <element label="DoDAAC" max_length="6" name="dodaac" type="string"/>
         <element label="Organization Name" max_length="80" name="organization_name" type="string"/>
         <element label="State" max_length="50" name="state" type="string"/>
@@ -75,6 +76,9 @@
         <element label="Zip Code" max_length="10" name="zip_code" type="string"/>
         <index name="index">
             <element name="agency"/>
+        </index>
+        <index name="index2">
+            <element name="disa_organization_reference"/>
         </index>
     </element>
 </database>
