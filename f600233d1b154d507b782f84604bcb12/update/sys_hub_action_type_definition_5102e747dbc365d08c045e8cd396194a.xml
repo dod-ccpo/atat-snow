@@ -26,7 +26,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>5102e747dbc365d08c045e8cd396194a</sys_id>
-        <sys_mod_count>35</sys_mod_count>
+        <sys_mod_count>16</sys_mod_count>
         <sys_name>CSS: Insert DISA Organizations</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -34,7 +34,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_5102e747dbc365d08c045e8cd396194a</sys_update_name>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-31 19:04:17</sys_updated_on>
+        <sys_updated_on>2023-05-31 22:30:58</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -87,10 +87,10 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-05-31 17:45:01</sys_created_on>
         <sys_id>2182cc57db8765d08c045e8cd396190a</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>9</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-31 19:04:10</sys_updated_on>
+        <sys_updated_on>2023-05-31 22:30:49</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=2182cc57db8765d08c045e8cd396190a"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -115,9 +115,9 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-05-31 17:45:01</sys_created_on>
         <sys_id>6982cc57db8765d08c045e8cd396193a</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>7</sys_mod_count>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-31 19:04:10</sys_updated_on>
+        <sys_updated_on>2023-05-31 22:30:49</sys_updated_on>
         <value>(function execute(inputs, outputs) {
 
   const TABLE = "x_g_dis_atat_disa_organization";
@@ -127,30 +127,25 @@
 
   const disaOrgs = JSON.parse(inputs.formatted_disa_orgs).forEach(function(org) {
     const query = new global.GlideQuery(TABLE);
+    gs.info("handling " + org.orgId);
     const foundRecords = query 
-    .where("full_name", org.title)
+    .where("css_id", org.orgId)
     .count();
 
-    // log error for duplicate agency
-    if (foundRecords &gt; 1) {
+    if (foundRecords &gt; 0) {
       numDuplicates++;
     }
-
-    // insert new agency record
-    if (foundRecords === 0) {
+    else {
       try {
-        /*
-        var insertedRec = query.insert({
+        query.insert({
           full_name: org.title,
           abbreviation: org.orgSynonym,
           css_id: org.orgId,
-        })
-        .get();
-        */
+        });     
 
         numAdded++        
       } catch (error) {
-        gs.error("Error adding DISA Organization '" + org.title + "'");
+        gs.error("Error adding DISA Organization '" + org.title + "': " + error);
         numErrors++;
       }
 
@@ -167,18 +162,6 @@
     </sys_variable_value>
     <sys_element_mapping action="delete_multiple" query="id=2182cc57db8765d08c045e8cd396190a"/>
     <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>application</field>
-        <id>2182cc57db8765d08c045e8cd396190a</id>
-        <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-05-31 17:45:01</sys_created_on>
-        <sys_id>e582cc57db8765d08c045e8cd3961939</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-31 17:45:01</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>formatted_disa_orgs</field>
         <id>2182cc57db8765d08c045e8cd396190a</id>
         <sys_created_by>1370228783.CTR</sys_created_by>
@@ -194,11 +177,11 @@
         <field>script</field>
         <id>2182cc57db8765d08c045e8cd396190a</id>
         <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-05-31 17:45:01</sys_created_on>
-        <sys_id>ad82cc57db8765d08c045e8cd3961939</sys_id>
+        <sys_created_on>2023-05-31 22:01:08</sys_created_on>
+        <sys_id>592d7c9fdb0f65d08c045e8cd39619e7</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-31 17:45:01</sys_updated_on>
+        <sys_updated_on>2023-05-31 22:01:08</sys_updated_on>
         <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
         <value/>
     </sys_element_mapping>
@@ -701,18 +684,6 @@
     </sys_variable_value>
     <sys_element_mapping action="delete_multiple" query="id=c162a747dbc365d08c045e8cd3961980"/>
     <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>application</field>
-        <id>c162a747dbc365d08c045e8cd3961980</id>
-        <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-05-31 15:24:38</sys_created_on>
-        <sys_id>d962e787dbc365d08c045e8cd39619a2</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-31 15:24:38</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>disa_orgs</field>
         <id>c162a747dbc365d08c045e8cd3961980</id>
         <sys_created_by>1370228783.CTR</sys_created_by>
@@ -723,18 +694,6 @@
         <sys_updated_on>2023-05-31 15:24:38</sys_updated_on>
         <table>var__m_sys_hub_step_ext_input_c162a747dbc365d08c045e8cd3961980</table>
         <value>{{action.disa_organizations}}</value>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>script</field>
-        <id>c162a747dbc365d08c045e8cd3961980</id>
-        <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-05-31 15:24:38</sys_created_on>
-        <sys_id>9162e787dbc365d08c045e8cd39619a3</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-31 15:24:38</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
     </sys_element_mapping>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_step_ext_output_c162a747dbc365d08c045e8cd3961980^id=c162a747dbc365d08c045e8cd3961980"/>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7^id=c162a747dbc365d08c045e8cd3961980"/>
@@ -1280,17 +1239,17 @@
     <sys_hub_action_plan action="INSERT_OR_UPDATE">
         <action_id display_value="CSS: Insert DISA Organizations">5102e747dbc365d08c045e8cd396194a</action_id>
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"04d5e30fdbc365d08c045e8cd396191a","name":"plan","plan_signature":null}}</plan>
-        <snapshot>f2a41893db0b65d08c045e8cd396198b</snapshot>
+        <snapshot>42f3c9dbdb4f65d08c045e8cd39619db</snapshot>
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-05-31 15:39:34</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>04d5e30fdbc365d08c045e8cd396191a</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>8</sys_mod_count>
         <sys_overrides/>
         <sys_scope/>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-31 19:04:18</sys_updated_on>
+        <sys_updated_on>2023-05-31 22:30:59</sys_updated_on>
     </sys_hub_action_plan>
     <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
@@ -1377,10 +1336,10 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-05-31 17:45:07</sys_created_on>
         <sys_id>07824097db8765d08c045e8cd396190a</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>8</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-31 19:04:17</sys_updated_on>
+        <sys_updated_on>2023-05-31 22:30:57</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=07824097db8765d08c045e8cd396190a"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -1405,9 +1364,9 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-05-31 17:45:07</sys_created_on>
         <sys_id>cb824097db8765d08c045e8cd3961928</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-31 19:04:17</sys_updated_on>
+        <sys_updated_on>2023-05-31 22:30:57</sys_updated_on>
         <value>(function execute(inputs, outputs) {
 
   const TABLE = "x_g_dis_atat_disa_organization";
@@ -1417,30 +1376,25 @@
 
   const disaOrgs = JSON.parse(inputs.formatted_disa_orgs).forEach(function(org) {
     const query = new global.GlideQuery(TABLE);
+    gs.info("handling " + org.orgId);
     const foundRecords = query 
-    .where("full_name", org.title)
+    .where("css_id", org.orgId)
     .count();
 
-    // log error for duplicate agency
-    if (foundRecords &gt; 1) {
+    if (foundRecords &gt; 0) {
       numDuplicates++;
     }
-
-    // insert new agency record
-    if (foundRecords === 0) {
+    else {
       try {
-        /*
-        var insertedRec = query.insert({
+        query.insert({
           full_name: org.title,
           abbreviation: org.orgSynonym,
           css_id: org.orgId,
-        })
-        .get();
-        */
+        });     
 
         numAdded++        
       } catch (error) {
-        gs.error("Error adding DISA Organization '" + org.title + "'");
+        gs.error("Error adding DISA Organization '" + org.title + "': " + error);
         numErrors++;
       }
 
@@ -1457,18 +1411,6 @@
     </sys_variable_value>
     <sys_element_mapping action="delete_multiple" query="id=07824097db8765d08c045e8cd396190a"/>
     <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>application</field>
-        <id>07824097db8765d08c045e8cd396190a</id>
-        <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-05-31 17:45:07</sys_created_on>
-        <sys_id>c3824097db8765d08c045e8cd3961928</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-31 17:45:07</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>formatted_disa_orgs</field>
         <id>07824097db8765d08c045e8cd396190a</id>
         <sys_created_by>1370228783.CTR</sys_created_by>
@@ -1484,11 +1426,11 @@
         <field>script</field>
         <id>07824097db8765d08c045e8cd396190a</id>
         <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-05-31 17:45:07</sys_created_on>
-        <sys_id>87824097db8765d08c045e8cd3961928</sys_id>
+        <sys_created_on>2023-05-31 22:02:25</sys_created_on>
+        <sys_id>c47d78dfdb0f65d08c045e8cd3961976</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-31 17:45:07</sys_updated_on>
+        <sys_updated_on>2023-05-31 22:02:25</sys_updated_on>
         <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
         <value/>
     </sys_element_mapping>
@@ -1991,18 +1933,6 @@
     </sys_variable_value>
     <sys_element_mapping action="delete_multiple" query="id=ebc5a30fdbc365d08c045e8cd3961993"/>
     <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>application</field>
-        <id>ebc5a30fdbc365d08c045e8cd3961993</id>
-        <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-05-31 15:39:33</sys_created_on>
-        <sys_id>73c5a30fdbc365d08c045e8cd39619b0</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-31 15:39:33</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>disa_orgs</field>
         <id>ebc5a30fdbc365d08c045e8cd3961993</id>
         <sys_created_by>1370228783.CTR</sys_created_by>
@@ -2013,18 +1943,6 @@
         <sys_updated_on>2023-05-31 15:39:33</sys_updated_on>
         <table>var__m_sys_hub_step_ext_input_ebc5a30fdbc365d08c045e8cd3961993</table>
         <value>{{action.disa_organizations}}</value>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>script</field>
-        <id>ebc5a30fdbc365d08c045e8cd3961993</id>
-        <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-05-31 15:39:33</sys_created_on>
-        <sys_id>3bc5a30fdbc365d08c045e8cd39619b0</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-31 15:39:33</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
     </sys_element_mapping>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_step_ext_output_ebc5a30fdbc365d08c045e8cd3961993^id=ebc5a30fdbc365d08c045e8cd3961993"/>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7^id=ebc5a30fdbc365d08c045e8cd3961993"/>
