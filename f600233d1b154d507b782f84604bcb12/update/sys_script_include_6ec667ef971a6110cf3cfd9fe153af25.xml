@@ -21,10 +21,11 @@ CostEstimate.prototype = {
      *   "data":[],
      *   "subtotal":{},
      *   "surge":{},
-     *   "external_ordering_agency_fee":{},
      *   "total_price":{},
-     *   "contracting_office_fee":"number",
      *   "ditco_fee":"number",
+     *   "external_ordering_agency_fee":{},
+     *   "other_contracting_office_fee":"number",
+     *   "surge_and_fees":{},
      *   "grand_total_with_fee":"number"
      * }
      * The array and objects properties above should contain the following keys:
@@ -33,29 +34,29 @@ CostEstimate.prototype = {
      *  - "Option [1..x]"
      *  - "Total"
      */
-	
-	getGrandTotal: function() {
-		return this.getData().grand_total_with_fee;
-	},
-	
-	getTotalEstimate: function() {
-		return this.getSummaryRecord("Total");
-	},
-	
-	getBaseYearTotalEstimate: function() {
-		return this.getSummaryRecord("Base Period");
-	},
-	
-	getSummaryRecord: function(key) {
-		try {
-			var summary = this.getData();		
-			return summary.total_price[key];
-		} catch(error) {
-			gs.debug("Could not calculate Cost Estimate", error);
-			return 0;
-		}		
-	},
-	
+
+    getGrandTotal: function() {
+        return this.getData().grand_total_with_fee;
+    },
+
+    getTotalEstimate: function() {
+        return this.getSummaryRecord("Total");
+    },
+
+    getBaseYearTotalEstimate: function() {
+        return this.getSummaryRecord("Base Period");
+    },
+
+    getSummaryRecord: function(key) {
+        try {
+            var summary = this.getData();
+            return summary.total_price[key];
+        } catch (error) {
+            gs.debug("Could not calculate Cost Estimate", error);
+            return 0;
+        }
+    },
+
     getData: function() {
         if (!this.acquisitionPackage) {
             throw this.errUtil.createError(
@@ -155,10 +156,9 @@ CostEstimate.prototype = {
                     return result + v;
                 },
                 0);
+            subtotalObject.Description = "subtotal of all clin data";
 
             // Assemble object for the 'surge' property
-            // _Calculation_: Surge = Subtotal of all CLINs * variable surge %
-            // Compare to 'Surge' row of IGCE
             var surgeObject = null;
             const surgeIncluded = igcePayload.templatePayload.surgeCapabilities;
             if (surgeIncluded) {
@@ -167,11 +167,10 @@ CostEstimate.prototype = {
                     result[key] = subtotalObject[key] * surgeFeePct;
                     return result;
                 }, {});
+                surgeObject.Description = "subtotal * variable surge percentage";
             }
 
             // Assemble object for the 'total_price' property
-            // _Calculation_: Total Price = Subtotal of all CLINs + Surge
-            // Compare to 'Total Price' row of IGCE
             var totalPriceObject = Object.keys(subtotalObject).reduce(function(
                 result,
                 key
@@ -182,11 +181,11 @@ CostEstimate.prototype = {
                 }
                 return result;
             }, {});
+            totalPriceObject.Description = "subtotal + surge";
 
             const DITCO = igcePayload.templatePayload.contractingShop.name === "DITCO";
 
             // Assemble object for the 'external_ordering_agency_fee' property - For non-DITCO only!
-            // _Calculation_: External Ordering Agency Fee = Total Price * 1%
             /* REVISIT FOR AT-9007
             var externalOrderingAgencyFeeObject = {
               "CLIN Type & Classification": "External ordering agency fee (1%)",
@@ -203,6 +202,7 @@ CostEstimate.prototype = {
               externalOrderingAgencyFeeObject.Total = sumValues(
                 externalOrderingAgencyFeeObject
               );
+              externalOrderingAgencyFeeObject.Description = "non-DITCO only; total_price * external ordering agency fee percentage 1% fixed";
             }
             */
 
@@ -211,31 +211,32 @@ CostEstimate.prototype = {
                 igcePayload.templatePayload.contractingShop.fee * 0.01;
 
             // Calculate value for the 'contracting_office_fee' property
-            // _Calculation_: Other Contracting Fee = (Total Price + External Ordering Agency Fee) * variable contracting office fee %
             // If non-DITCO, the contracting office may have their own variable fee.
             /* REVISIT FOR AT-9007
             var contractingOfficeFee = (totalPriceObject.Total + externalOrderingAgencyFeeObject.Total) * contractingShopFeePct;
             */
             var contractingOfficeFee = totalPriceObject.Total * contractingShopFeePct;
+            //TODO contractingOfficeFeeObject.Description = "non-DITCO only; (total_price + external_ordering_agency_fee) * variable contracting office fee percentage";
 
             // Calculate value for the 'ditco_fee' property
-            // _Calculation_: DITCO Fee = Total Price * 2.25%
             const ditcoFee = totalPriceObject.Total * contractingShopFeePct;
+            //TODO ditcoFeeObject.Description = "DITCO only; total_price * ditco fee percentage 2.25% fixed";
+
+            var surgeAndFeesObject = {}; //TODO
+            surgeAndFeesObject.Description = DITCO ? "DITCO only; surge + ditco_fee" : "non-DITCO only; surge + external_ordering_agency_fee + other_contracting_office_fee";
 
             // Calculate value for the 'grand_total_with_fee' property
-            // _Calculation_:
-            // If DITCO, Grand Total with Fees = Total Price + DITCO Fee
-            // If non-DITCO, Grand Total with Fees = Total Price + Other Contracting Fee
-            // Compare to 'Grand Total with Fee' cell of IGCE
             var grandTotalWithFee = totalPriceObject.Total;
             if (DITCO) {
                 grandTotalWithFee += ditcoFee;
             } else {
                 grandTotalWithFee += contractingOfficeFee;
             }
+            // TODO grandTotalWithFeeObject.Description = "DITCO only; total_price + ditco_fee";
+            // TODO grandTotalWithFeeObject.Description = "non-DITCO only; total_price + other_contracting_office_fee";
 
             var costEstimateData = {};
-            costEstimateData.data = dataArray;
+            costEstimateData.data = dataArray; //all CLIN data
             costEstimateData.subtotal = subtotalObject;
             costEstimateData.surge = surgeIncluded ? surgeObject : null;
             /* REVISIT FOR AT-9007
@@ -248,6 +249,7 @@ CostEstimate.prototype = {
                 contractingOfficeFee :
                 null;
             costEstimateData.ditco_fee = DITCO ? ditcoFee : null;
+            costEstimateData.surge_and_fees = surgeAndFeesObject;
             costEstimateData.grand_total_with_fee = grandTotalWithFee;
             return costEstimateData;
         } catch (error) {
@@ -264,13 +266,13 @@ CostEstimate.prototype = {
         <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
         <sys_created_on>2023-04-25 22:14:58</sys_created_on>
         <sys_id>6ec667ef971a6110cf3cfd9fe153af25</sys_id>
-        <sys_mod_count>19</sys_mod_count>
+        <sys_mod_count>22</sys_mod_count>
         <sys_name>CostEstimate</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_6ec667ef971a6110cf3cfd9fe153af25</sys_update_name>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-12 17:35:35</sys_updated_on>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-06-07 21:28:34</sys_updated_on>
     </sys_script_include>
 </record_update>
