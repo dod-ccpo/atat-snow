@@ -17,11 +17,6 @@
 		var summary = eda.extractPdsSummary(taskOrderNumber, pdsResponse);
 		var acquisitionPackageRecord = new GlideRecord("x_g_dis_atat_acquisition_package");
 		var acquisitionPackageRecordFound = false;
-		var classificationLabelMap = {
-			"Unclassified" : "U",
-			"Secret" : "S",
-			"Top Secret" : "TS"
-		};
 
 		// If we get an acquisition package sys_id, look it up
 		if (acquisitionPackageSysId) {
@@ -33,8 +28,14 @@
 					message: "Could not find an acquisition package with sysid " + acquisitionPackageSysId
 				};					
 			}
-		}		
-
+		}
+		if (!requestBody.environments || requestBody.environments.length === 0) {
+			throw {
+				code: "0400",
+				message: "No environments in request body"
+			};				
+		}
+		
 		// Validate the XML before converting it to a string
 		// validateXML will return null if it passes validation
 		var xmlValid = GlideXMLUtil.validateXML(pdsResponse, false, false);
@@ -50,26 +51,26 @@
 				portfolio.setValue("acquisition_package", acquisitionPackageRecord.sys_id);
 			}
 			portfolio.insert();
-
-			Object.keys(requestBody.environments).forEach(function (key) {
-
+			
+			requestBody.environments.forEach(function (environment) {
 				// Find corresponding CSP
-				var cspRecord = new GlideRecord("x_g_dis_atat_cloud_service_provider");
-				cspRecord.addQuery("vendor", summary.csp.toUpperCase());
-				cspRecord.addQuery("classification_level", classificationLabelMap[key]);
-				cspRecord.query();
-				cspRecord.next();
-				if (!cspRecord) {
+				var cspRecord = new global.GlideQuery('x_g_dis_atat_cloud_service_provider')
+				.where('name', environment.cspName)
+				.selectOne('classification_level', 'classification_level$DISPLAY', 'vendor');				
+				if (cspRecord.isEmpty()) {
 					throw {
 						code: "0504",
-						message: "Could not find a CSP with Vendor " + summary.csp.toUpperCase() + " and classification level " + classificationLabelMap[key]
+						message: "Could not find a CSP with name " + environment.cspName
 					};						
 				}
+				else {
+					cspRecord = cspRecord.get();
+				}				
 
 				// Create Environment Record
 				var environmentRecord = new GlideRecord("x_g_dis_atat_environment");
 				environmentRecord.initialize();
-				environmentRecord.setValue("name", requestBody.portfolioName + " - " + key);
+				environmentRecord.setValue("name", requestBody.portfolioName + " - " + cspRecord.classification_level$DISPLAY.toString());
 				environmentRecord.setValue("portfolio", portfolio.sys_id);
 				environmentRecord.setValue("csp", cspRecord.sys_id);
 				environmentRecord.setValue("classification_level", cspRecord.classification_level);
@@ -81,8 +82,7 @@
 
 				// Create Operators
 				var pendingOperators = [];
-				var env = requestBody.environments[key];
-				env.operators.forEach(function(operator) {
+				environment.operators.forEach(function(operator) {
 					var operatorRecord = new GlideRecord("x_g_dis_atat_operator");
 					operatorRecord.initialize();
 					operatorRecord.setValue("dod_id", operator.dodId);
@@ -221,14 +221,14 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-02-07 15:04:14</sys_created_on>
         <sys_id>38812576dbb86dd8b1227ea5f3961959</sys_id>
-        <sys_mod_count>39</sys_mod_count>
+        <sys_mod_count>72</sys_mod_count>
         <sys_name>Start Provisioning</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_ws_operation_38812576dbb86dd8b1227ea5f3961959</sys_update_name>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-03-21 21:38:30</sys_updated_on>
+        <sys_updated_by>jeffsegal</sys_updated_by>
+        <sys_updated_on>2023-06-15 22:01:13</sys_updated_on>
         <web_service_definition display_value="Provisioning">4ba165cadb6c6918b1227ea5f39619e4</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
