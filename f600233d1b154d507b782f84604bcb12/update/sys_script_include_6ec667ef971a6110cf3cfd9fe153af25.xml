@@ -45,6 +45,26 @@ CostEstimate.prototype = {
         const DITCO = igceTemplatePayload.contractingShop.name === "DITCO";
         const CONTRACTING_SHOP_FEE_PCT = igceTemplatePayload.contractingShop.fee; // different fees in same location for both DITCO and non-DITCO
         const SURGE_INCLUDED = igceTemplatePayload.surgeCapabilities;
+        if (!DITCO) {
+            throw this.errUtil.createError(
+                "CostEstimate --> getData(): " + "Can't determine whether contracting office is DITCO/non-DITCO from IGCE payload.",
+                this.errUtil.METHOD_ERROR
+            );
+        }
+
+        if (!CONTRACTING_SHOP_FEE_PCT) {
+            throw this.errUtil.createError(
+                "CostEstimate --> getData(): " + "Can't determine contracting shop fee from IGCE payload.",
+                this.errUtil.METHOD_ERROR
+            );
+        }
+
+        if (!SURGE_INCLUDED) {
+            throw this.errUtil.createError(
+                "CostEstimate --> getData(): " + "Can't determine whether Surge is included from IGCE payload.",
+                this.errUtil.METHOD_ERROR
+            );
+        }
 
         /**
          * Returns the sum of all values of type 'number' in the specified object
@@ -339,13 +359,13 @@ CostEstimate.prototype = {
         <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
         <sys_created_on>2023-04-25 22:14:58</sys_created_on>
         <sys_id>6ec667ef971a6110cf3cfd9fe153af25</sys_id>
-        <sys_mod_count>21</sys_mod_count>
+        <sys_mod_count>22</sys_mod_count>
         <sys_name>CostEstimate</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_6ec667ef971a6110cf3cfd9fe153af25</sys_update_name>
         <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
-        <sys_updated_on>2023-06-15 19:32:37</sys_updated_on>
+        <sys_updated_on>2023-06-16 17:22:32</sys_updated_on>
     </sys_script_include>
 </record_update>
