@@ -65,12 +65,21 @@
 				}
 				else {
 					cspRecord = cspRecord.get();
-				}				
+				}
+				
+				// Make sure that the TO has this classification level
+				const classificationLevelDisplay = cspRecord.classification_level$DISPLAY.toString();
+				if (summary.classificationLevels.indexOf(classificationLevelDisplay) === -1) {
+					throw {
+						code: "0403",
+						message: "Task Order does not contain classification level " + classificationLevelDisplay
+					};						
+				}
 
 				// Create Environment Record
 				var environmentRecord = new GlideRecord("x_g_dis_atat_environment");
 				environmentRecord.initialize();
-				environmentRecord.setValue("name", requestBody.portfolioName + " - " + cspRecord.classification_level$DISPLAY.toString());
+				environmentRecord.setValue("name", requestBody.portfolioName + " - " + classificationLevelDisplay);
 				environmentRecord.setValue("portfolio", portfolio.sys_id);
 				environmentRecord.setValue("csp", cspRecord.sys_id);
 				environmentRecord.setValue("classification_level", cspRecord.classification_level);
@@ -221,14 +230,14 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-02-07 15:04:14</sys_created_on>
         <sys_id>38812576dbb86dd8b1227ea5f3961959</sys_id>
-        <sys_mod_count>72</sys_mod_count>
+        <sys_mod_count>76</sys_mod_count>
         <sys_name>Start Provisioning</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_ws_operation_38812576dbb86dd8b1227ea5f3961959</sys_update_name>
         <sys_updated_by>jeffsegal</sys_updated_by>
-        <sys_updated_on>2023-06-15 22:01:13</sys_updated_on>
+        <sys_updated_on>2023-06-16 16:39:01</sys_updated_on>
         <web_service_definition display_value="Provisioning">4ba165cadb6c6918b1227ea5f39619e4</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
