@@ -40,28 +40,32 @@ CostEstimate.prototype = {
      *  - "Total"
      */
     getData: function() {
+        gs.info("Assembling cost estimate for acquisition package " + this.acquisitionPackage.number + " (" + this.acquisitionPackage.sys_id.toString() + ")");
         let igce = new Igce(this.acquisitionPackage);
         const igceTemplatePayload = JSON.parse(igce.getPayload()).templatePayload;
         const DITCO = igceTemplatePayload.contractingShop.name === "DITCO";
         const CONTRACTING_SHOP_FEE_PCT = igceTemplatePayload.contractingShop.fee; // different fees in same location for both DITCO and non-DITCO
-        const SURGE_INCLUDED = igceTemplatePayload.surgeCapabilities;
-        if (!DITCO) {
+        const SURGE_INCLUDED = igceTemplatePayload.surgeCapabilities != null;
+
+        gs.info((DITCO ? "DITCO" : "non-DITCO") + " / Contracting office fee: " + CONTRACTING_SHOP_FEE_PCT + "% / Surge: " + (SURGE_INCLUDED ? igceTemplatePayload.surgeCapabilities + "%" : "n/a"));
+
+        if (DITCO == null) {
             throw this.errUtil.createError(
-                "CostEstimate --> getData(): " + "Can't determine whether contracting office is DITCO/non-DITCO from IGCE payload.",
+                "CostEstimate --> getData(): Can't determine whether Contracting Office is DITCO/non-DITCO from IGCE payload.",
                 this.errUtil.METHOD_ERROR
             );
         }
 
-        if (!CONTRACTING_SHOP_FEE_PCT) {
+        if (CONTRACTING_SHOP_FEE_PCT == null) {
             throw this.errUtil.createError(
-                "CostEstimate --> getData(): " + "Can't determine contracting shop fee from IGCE payload.",
+                "CostEstimate --> getData(): Can't determine Contracting Office Fee from IGCE payload.",
                 this.errUtil.METHOD_ERROR
             );
         }
 
-        if (!SURGE_INCLUDED) {
+        if (SURGE_INCLUDED == null) {
             throw this.errUtil.createError(
-                "CostEstimate --> getData(): " + "Can't determine whether Surge is included from IGCE payload.",
+                "CostEstimate --> getData(): Can't determine whether Surge is included from IGCE payload.",
                 this.errUtil.METHOD_ERROR
             );
         }
@@ -260,32 +264,15 @@ CostEstimate.prototype = {
         // Assemble object for the 'surge_and_fees' property
         let surgeAndFeesObject = function() {
             let obj = null;
-            if (DITCO && SURGE_INCLUDED) {
-                obj = Object.keys(ditcoFeeObject()).reduce(function(result, key) {
-                    result[key] = surgeObject()[key] + ditcoFeeObject()[key];
-                    return result;
-                }, {});
-                obj.Description = "surge + ditco_fee";
-            }
-            if (DITCO && !SURGE_INCLUDED) {
-                obj = ditcoFeeObject;
-                obj.Description = "surge (none) + ditco_fee";
-            }
-            if (!DITCO && SURGE_INCLUDED) {
-                obj = Object.keys(externalOrderingAgencyFeeObject()).reduce(function(result, key) {
-                    result[key] = surgeObject()[key] + externalOrderingAgencyFeeObject()[key] + otherContractingOfficeFeeObject()[key];
-                    return result;
-                }, {});
-                delete obj["CLIN Type & Classification"]; //remove unique snowflake key introduced by ext ord agency
-                obj.Description = "surge + external_ordering_agency_fee + other_contracting_office_fee";
-            }
-            if (!DITCO && !SURGE_INCLUDED) {
-                obj = Object.keys(externalOrderingAgencyFeeObject()).reduce(function(result, key) {
-                    result[key] = externalOrderingAgencyFeeObject()[key] + otherContractingOfficeFeeObject()[key];
-                    return result;
-                }, {});
-                obj.Description = "surge (none) + external_ordering_agency_fee + other_contracting_office_fee";
-            }
+            obj = Object.keys(subtotalObject()).reduce(function(result, key) {
+                let fees = DITCO ? ditcoFeeObject()[key] : externalOrderingAgencyFeeObject()[key] + otherContractingOfficeFeeObject()[key];
+                result[key] = SURGE_INCLUDED ? fees + surgeObject()[key] : fees;
+                return result;
+            }, {});
+            delete obj["CLIN Type & Classification"]; //remove unique snowflake key introduced by ext ord agency
+            let surgeDesc = "surge " + (SURGE_INCLUDED ? "" : "(none)");
+            let feesDesc = DITCO ? " + ditco_fee" : " + external_ordering_agency_fee + other_contracting_office_fee";
+            obj.Description = surgeDesc + feesDesc;
             return obj;
         };
 
@@ -322,6 +309,7 @@ CostEstimate.prototype = {
                 surge_and_fees: surgeAndFeesObject(),
                 grand_total_with_fee: grandTotalWithFeeObject(),
             };
+            gs.info("Finished assembling cost estimate for acquisition package " + this.acquisitionPackage.number + " (" + this.acquisitionPackage.sys_id + ")");
             return costEstimateData;
         } catch (error) {
             throw this.errUtil.createError(
@@ -359,13 +347,13 @@ CostEstimate.prototype = {
         <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
         <sys_created_on>2023-04-25 22:14:58</sys_created_on>
         <sys_id>6ec667ef971a6110cf3cfd9fe153af25</sys_id>
-        <sys_mod_count>22</sys_mod_count>
+        <sys_mod_count>40</sys_mod_count>
         <sys_name>CostEstimate</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_6ec667ef971a6110cf3cfd9fe153af25</sys_update_name>
         <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
-        <sys_updated_on>2023-06-16 17:22:32</sys_updated_on>
+        <sys_updated_on>2023-06-17 04:01:13</sys_updated_on>
     </sys_script_include>
 </record_update>
