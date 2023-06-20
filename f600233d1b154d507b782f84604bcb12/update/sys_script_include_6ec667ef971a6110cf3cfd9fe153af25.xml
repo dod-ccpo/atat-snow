@@ -7,60 +7,66 @@
         <client_callable>false</client_callable>
         <description>ATAT class for use by Cost Estimate REST API.</description>
         <name>CostEstimate</name>
-        <script><![CDATA[var CostEstimate = Class.create();
+        <script><![CDATA[let CostEstimate = Class.create();
 CostEstimate.prototype = {
+
     acquisitionPackage: null,
     errUtil: new ErrorHandler(),
+
     initialize: function(acquisitionPackage) {
         this.acquisitionPackage = acquisitionPackage;
     },
+
     /**
+     * Supports Cost Estimate REST API
      * Transforms IGCE docgen payload to JSON data needed to display Cost Estimate summary on UI
      * @returns JSON structure organized by IDIQ clins with cost estimates per period of the PoP.
      * {
      *   "data":[],
      *   "subtotal":{},
      *   "surge":{},
-     *   "external_ordering_agency_fee":{},
      *   "total_price":{},
-     *   "contracting_office_fee":"number",
-     *   "ditco_fee":"number",
-     *   "grand_total_with_fee":"number"
+     *   "ditco_fee":{},
+     *   "external_ordering_agency_fee":{},
+     *   "total_with_surge_and_ordering_fee":{},
+     *   "other_contracting_office_fee":{},
+     *   "surge_and_fees":{},
+     *   "grand_total_with_fee":{}
      * }
-     * The array and objects properties above should contain the following keys:
+     * The array and objects properties above should contain JSON objects with the following keys:
      *  - "CLIN Type & Classification"
      *  - "Base Period"
      *  - "Option [1..x]"
      *  - "Total"
      */
-	
-	getGrandTotal: function() {
-		return this.getData().grand_total_with_fee;
-	},
-	
-	getTotalEstimate: function() {
-		return this.getSummaryRecord("Total");
-	},
-	
-	getBaseYearTotalEstimate: function() {
-		return this.getSummaryRecord("Base Period");
-	},
-	
-	getSummaryRecord: function(key) {
-		try {
-			var summary = this.getData();		
-			return summary.total_price[key];
-		} catch(error) {
-			gs.debug("Could not calculate Cost Estimate", error);
-			return 0;
-		}		
-	},
-	
     getData: function() {
-        if (!this.acquisitionPackage) {
+        gs.info("Assembling cost estimate for acquisition package " + this.acquisitionPackage.number + " (" + this.acquisitionPackage.sys_id.toString() + ")");
+        let igce = new Igce(this.acquisitionPackage);
+        const igceTemplatePayload = JSON.parse(igce.getPayload()).templatePayload;
+        const DITCO = igceTemplatePayload.contractingShop.name === "DITCO";
+        const CONTRACTING_SHOP_FEE_PCT = igceTemplatePayload.contractingShop.fee; // different fees in same location for both DITCO and non-DITCO
+        const SURGE_INCLUDED = igceTemplatePayload.surgeCapabilities != null;
+
+        gs.info((DITCO ? "DITCO" : "non-DITCO") + " / Contracting office fee: " + CONTRACTING_SHOP_FEE_PCT + "% / Surge: " + (SURGE_INCLUDED ? igceTemplatePayload.surgeCapabilities + "%" : "n/a"));
+
+        if (DITCO == null) {
             throw this.errUtil.createError(
-                "CostEstimate --> Please provide an acquisition package",
-                this.errUtil.INVALID_INPUT
+                "CostEstimate --> getData(): Can't determine whether Contracting Office is DITCO/non-DITCO from IGCE payload.",
+                this.errUtil.METHOD_ERROR
+            );
+        }
+
+        if (CONTRACTING_SHOP_FEE_PCT == null) {
+            throw this.errUtil.createError(
+                "CostEstimate --> getData(): Can't determine Contracting Office Fee from IGCE payload.",
+                this.errUtil.METHOD_ERROR
+            );
+        }
+
+        if (SURGE_INCLUDED == null) {
+            throw this.errUtil.createError(
+                "CostEstimate --> getData(): Can't determine whether Surge is included from IGCE payload.",
+                this.errUtil.METHOD_ERROR
             );
         }
 
@@ -69,7 +75,7 @@ CostEstimate.prototype = {
          * @param obj object containing number values
          * @returns the sum of all number values
          */
-        function sumValues(obj) {
+        let sumValues = function(obj) {
             return Object.values(obj)
                 .filter(function(value) {
                     return typeof value === "number";
@@ -77,39 +83,40 @@ CostEstimate.prototype = {
                 .reduce(function(result, v) {
                     return result + v;
                 }, 0);
-        }
-        try {
-            var igce = new Igce(this.acquisitionPackage);
-            var igcePayload = JSON.parse(igce.getPayload());
+        };
 
-            var uniqueClins = igcePayload.templatePayload.periodsEstimate
-                .flatMap(function(estimate) {
-                    return estimate.periodLineItems.map(function(lineItem) {
-                        return lineItem.idiqClin;
-                    });
-                })
-                .filter(function(lineItem, index, self) {
-                    return self.indexOf(lineItem) === index;
+        // Assemble array of unique CLINs
+        let uniqueClins = igceTemplatePayload.periodsEstimate
+            .flatMap(function(estimate) {
+                return estimate.periodLineItems.map(function(lineItem) {
+                    return lineItem.idiqClin;
                 });
+            })
+            .filter(function(lineItem, index, self) {
+                return self.indexOf(lineItem) === index;
+            });
 
-            // Assemble array for the 'data' property
-            var uniquePeriods = [];
-            var dataArray = uniqueClins
+
+        // Assemble array of CLIN data for the 'data' property
+        let uniquePeriods = []; // array of unique BASE and OPTION periods
+        let dataArray = function() {
+            let clinArray = uniqueClins
                 .map(function(clin) {
-                    var entry = {
+                    let entry = {
                         "CLIN Type & Classification": clin,
                     };
-                    igcePayload.templatePayload.periodsEstimate.forEach(function(estimate) {
-                        var key;
+                    igceTemplatePayload.periodsEstimate.forEach(function(estimate) {
+                        let key;
                         if (estimate.period.periodType === "BASE") {
                             key = "Base Period";
                         } else if (estimate.period.periodType === "OPTION") {
+                            // BASE period is always optionOrder 1, and first OPTION is 2, etc.
                             key = "Option " + (estimate.period.optionOrder - 1);
                         }
                         if (uniquePeriods.indexOf(key) === -1) {
                             uniquePeriods.push(key);
                         }
-                        var value = estimate.periodLineItems
+                        let value = estimate.periodLineItems
                             .filter(function(lineItem) {
                                 return lineItem.idiqClin === clin;
                             })
@@ -131,12 +138,13 @@ CostEstimate.prototype = {
                     }
                     return 0;
                 });
+            return clinArray;
+        };
 
-            // Assemble object for the 'subtotal' property
-            // Subtotal of all CLINs
-            // Compare to 'Subtotal' row of IGCE
-            var subtotalObject = uniquePeriods.reduce(function(periodResult, period) {
-                periodResult[period] = dataArray
+        // Assemble object for the 'subtotal' property
+        let subtotalObject = function() {
+            let obj = uniquePeriods.reduce(function(periodResult, period) {
+                periodResult[period] = dataArray()
                     .filter(function(entry) {
                         return entry[period];
                     })
@@ -148,107 +156,160 @@ CostEstimate.prototype = {
                     }, 0);
                 return periodResult;
             }, {});
-            subtotalObject.Total = Object.values(subtotalObject).reduce(function(
+            obj.Total = Object.values(obj).reduce(function(
                     result,
                     v
                 ) {
                     return result + v;
                 },
                 0);
+            obj.Description = "subtotal of all clin data";
+            return obj;
+        };
 
-            // Assemble object for the 'surge' property
-            // _Calculation_: Surge = Subtotal of all CLINs * variable surge %
-            // Compare to 'Surge' row of IGCE
-            var surgeObject = null;
-            const surgeIncluded = igcePayload.templatePayload.surgeCapabilities;
-            if (surgeIncluded) {
-                const surgeFeePct = igcePayload.templatePayload.surgeCapabilities * 0.01;
-                surgeObject = Object.keys(subtotalObject).reduce(function(result, key) {
-                    result[key] = subtotalObject[key] * surgeFeePct;
+        // Assemble object for the 'surge' property
+        let surgeObject = function() {
+            let obj = null;
+            if (SURGE_INCLUDED) {
+                obj = Object.keys(subtotalObject()).reduce(function(result, key) {
+                    result[key] = subtotalObject()[key] * (igceTemplatePayload.surgeCapabilities * 0.01);
                     return result;
                 }, {});
+                obj.Description = "subtotal * surge percentage (" + igceTemplatePayload.surgeCapabilities + "%)";
             }
+            return obj;
+        };
 
-            // Assemble object for the 'total_price' property
-            // _Calculation_: Total Price = Subtotal of all CLINs + Surge
-            // Compare to 'Total Price' row of IGCE
-            var totalPriceObject = Object.keys(subtotalObject).reduce(function(
+        // Assemble object for the 'total_price' property
+        let totalPriceObject = function() {
+            let obj = Object.keys(subtotalObject()).reduce(function(
                 result,
                 key
             ) {
-                result[key] = subtotalObject[key];
-                if (surgeIncluded) {
-                    result[key] += surgeObject[key];
+                result[key] = subtotalObject()[key];
+                if (SURGE_INCLUDED) {
+                    result[key] += surgeObject()[key];
                 }
                 return result;
             }, {});
+            obj.Description = SURGE_INCLUDED ? "subtotal + surge" : "subtotal + surge (none)";
+            return obj;
+        };
 
-            const DITCO = igcePayload.templatePayload.contractingShop.name === "DITCO";
-
-            // Assemble object for the 'external_ordering_agency_fee' property - For non-DITCO only!
-            // _Calculation_: External Ordering Agency Fee = Total Price * 1%
-            /* REVISIT FOR AT-9007
-            var externalOrderingAgencyFeeObject = {
-              "CLIN Type & Classification": "External ordering agency fee (1%)",
-            };
-            if (!DITCO) {
-              const extOrdAgencyFeePct = 1 * 0.01;
-              Object.assign(
-                externalOrderingAgencyFeeObject,
-                Object.keys(totalPriceObject).reduce(function (result, key) {
-                  result[key] = totalPriceObject[key] * extOrdAgencyFeePct;
-                  return result;
-                }, {})
-              );
-              externalOrderingAgencyFeeObject.Total = sumValues(
-                externalOrderingAgencyFeeObject
-              );
-            }
-            */
-
-            // fee is at same JSON location for DITCO/non-DITCO; applies to both below
-            const contractingShopFeePct =
-                igcePayload.templatePayload.contractingShop.fee * 0.01;
-
-            // Calculate value for the 'contracting_office_fee' property
-            // _Calculation_: Other Contracting Fee = (Total Price + External Ordering Agency Fee) * variable contracting office fee %
-            // If non-DITCO, the contracting office may have their own variable fee.
-            /* REVISIT FOR AT-9007
-            var contractingOfficeFee = (totalPriceObject.Total + externalOrderingAgencyFeeObject.Total) * contractingShopFeePct;
-            */
-            var contractingOfficeFee = totalPriceObject.Total * contractingShopFeePct;
-
-            // Calculate value for the 'ditco_fee' property
-            // _Calculation_: DITCO Fee = Total Price * 2.25%
-            const ditcoFee = totalPriceObject.Total * contractingShopFeePct;
-
-            // Calculate value for the 'grand_total_with_fee' property
-            // _Calculation_:
-            // If DITCO, Grand Total with Fees = Total Price + DITCO Fee
-            // If non-DITCO, Grand Total with Fees = Total Price + Other Contracting Fee
-            // Compare to 'Grand Total with Fee' cell of IGCE
-            var grandTotalWithFee = totalPriceObject.Total;
+        // Assemble object for the 'ditco_fee' property
+        // When DITCO, they have their own fixed fee.
+        let ditcoFeeObject = function() {
+            let obj = null;
             if (DITCO) {
-                grandTotalWithFee += ditcoFee;
-            } else {
-                grandTotalWithFee += contractingOfficeFee;
+                obj = Object.keys(totalPriceObject()).reduce(function(result, key) {
+                    result[key] = totalPriceObject()[key] * (CONTRACTING_SHOP_FEE_PCT * 0.01);
+                    return result;
+                }, {});
+                obj.Description = "total_price * ditco fee percentage (" + CONTRACTING_SHOP_FEE_PCT + "%)";
             }
+            return obj;
+        };
 
-            var costEstimateData = {};
-            costEstimateData.data = dataArray;
-            costEstimateData.subtotal = subtotalObject;
-            costEstimateData.surge = surgeIncluded ? surgeObject : null;
-            /* REVISIT FOR AT-9007
-            costEstimateData.external_ordering_agency_fee = !DITCO
-              ? externalOrderingAgencyFeeObject
-              : {};
-            */
-            costEstimateData.total_price = totalPriceObject;
-            costEstimateData.contracting_office_fee = !DITCO ?
-                contractingOfficeFee :
-                null;
-            costEstimateData.ditco_fee = DITCO ? ditcoFee : null;
-            costEstimateData.grand_total_with_fee = grandTotalWithFee;
+        // Assemble object for the 'external_ordering_agency_fee' property
+        // When non-DITCO, a mandatory fixed fee is charged.
+        let externalOrderingAgencyFeeObject = function() {
+            let obj = null;
+            if (!DITCO) {
+                const EXTERNAL_ORDERING_AGENCY_FEE_PCT = 1;
+                obj = {
+                    // This unique snowflake is needed because this fee is presented on IGCE 
+                    // spreadsheet among the CLIN rows above the Subtotal row (currently #22);
+                    // all other calculated figures are included at or below the Subtotal row.
+                    "CLIN Type & Classification": "External ordering agency fee (" + EXTERNAL_ORDERING_AGENCY_FEE_PCT + "%)",
+                };
+                Object.assign(
+                    obj,
+                    Object.keys(totalPriceObject()).reduce(function(result, key) {
+                        result[key] = totalPriceObject()[key] * (EXTERNAL_ORDERING_AGENCY_FEE_PCT * 0.01);
+                        return result;
+                    }, {})
+                );
+                obj.Description = "total_price * external ordering agency fee percentage (" + EXTERNAL_ORDERING_AGENCY_FEE_PCT + "%)";
+            }
+            return obj;
+        };
+
+        // Assemble object for the 'total_with_surge_and_ordering_fee' property
+        let totalWithSurgeAndOrderingFeeObject = function() {
+            let obj = null;
+            if (!DITCO) {
+                obj = Object.keys(totalPriceObject()).reduce(function(result, key) {
+                    result[key] = totalPriceObject()[key] + externalOrderingAgencyFeeObject()[key];
+                    return result;
+                }, {});
+                obj.Description = "total_price + external_ordering_agency_fee";
+            }
+            return obj;
+        };
+
+        // Assemble object for the 'other_contracting_office_fee' property
+        // When non-DITCO, the contracting office may have their own variable fee.
+        let otherContractingOfficeFeeObject = function() {
+            let obj = null;
+            if (!DITCO) {
+                obj = Object.keys(totalWithSurgeAndOrderingFeeObject()).reduce(function(result, key) {
+                    result[key] = totalWithSurgeAndOrderingFeeObject()[key] * (CONTRACTING_SHOP_FEE_PCT * 0.01);
+                    return result;
+                }, {});
+                obj.Description = "total_with_surge_and_ordering_fee * other contracting office fee percentage (" + CONTRACTING_SHOP_FEE_PCT + "%)";
+            }
+            return obj;
+        };
+
+        // Assemble object for the 'surge_and_fees' property
+        let surgeAndFeesObject = function() {
+            let obj = null;
+            obj = Object.keys(subtotalObject()).reduce(function(result, key) {
+                let fees = DITCO ? ditcoFeeObject()[key] : externalOrderingAgencyFeeObject()[key] + otherContractingOfficeFeeObject()[key];
+                result[key] = SURGE_INCLUDED ? fees + surgeObject()[key] : fees;
+                return result;
+            }, {});
+            delete obj["CLIN Type & Classification"]; //remove unique snowflake key introduced by ext ord agency
+            let surgeDesc = "surge " + (SURGE_INCLUDED ? "" : "(none)");
+            let feesDesc = DITCO ? " + ditco_fee" : " + external_ordering_agency_fee + other_contracting_office_fee";
+            obj.Description = surgeDesc + feesDesc;
+            return obj;
+        };
+
+        // Assemble object for the 'grand_total_with_fee' property
+        let grandTotalWithFeeObject = function() {
+            let obj = null;
+            if (DITCO) {
+                obj = Object.keys(totalPriceObject()).reduce(function(result, key) {
+                    result[key] = totalPriceObject()[key] + ditcoFeeObject()[key];
+                    return result;
+                }, {});
+                obj.Description = "total_price + ditco_fee";
+            }
+            if (!DITCO) {
+                obj = Object.keys(totalWithSurgeAndOrderingFeeObject()).reduce(function(result, key) {
+                    result[key] = totalWithSurgeAndOrderingFeeObject()[key] + otherContractingOfficeFeeObject()[key];
+                    return result;
+                }, {});
+                obj.Description = "total_with_surge_and_ordering_fee + other_contracting_office_fee";
+            }
+            return obj;
+        };
+
+        try {
+            let costEstimateData = {
+                data: dataArray(),
+                subtotal: subtotalObject(),
+                surge: surgeObject(),
+                total_price: totalPriceObject(),
+                ditco_fee: ditcoFeeObject(),
+                external_ordering_agency_fee: externalOrderingAgencyFeeObject(),
+                total_with_surge_and_ordering_fee: totalWithSurgeAndOrderingFeeObject(),
+                other_contracting_office_fee: otherContractingOfficeFeeObject(),
+                surge_and_fees: surgeAndFeesObject(),
+                grand_total_with_fee: grandTotalWithFeeObject(),
+            };
+            gs.info("Finished assembling cost estimate for acquisition package " + this.acquisitionPackage.number + " (" + this.acquisitionPackage.sys_id + ")");
             return costEstimateData;
         } catch (error) {
             throw this.errUtil.createError(
@@ -258,19 +319,41 @@ CostEstimate.prototype = {
         }
     },
 
+    getGrandTotal: function() {
+        return this.getData().grand_total_with_fee;
+    },
+
+    getSummaryRecord: function(key) {
+        try {
+            let summary = this.getData();
+            return summary.total_price[key];
+        } catch (error) {
+            gs.debug("Could not calculate Cost Estimate", error);
+            return 0;
+        }
+    },
+
+    getTotalEstimate: function() {
+        return this.getSummaryRecord("Total");
+    },
+
+    getBaseYearTotalEstimate: function() {
+        return this.getSummaryRecord("Base Period");
+    },
+
     type: 'CostEstimate'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
         <sys_created_on>2023-04-25 22:14:58</sys_created_on>
         <sys_id>6ec667ef971a6110cf3cfd9fe153af25</sys_id>
-        <sys_mod_count>19</sys_mod_count>
+        <sys_mod_count>40</sys_mod_count>
         <sys_name>CostEstimate</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_6ec667ef971a6110cf3cfd9fe153af25</sys_update_name>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-05-12 17:35:35</sys_updated_on>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-06-17 04:01:13</sys_updated_on>
     </sys_script_include>
 </record_update>
