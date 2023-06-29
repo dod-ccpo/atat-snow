@@ -9,93 +9,93 @@
         <name>EvalMemo</name>
         <script><![CDATA[var EvalMemo = Class.create();
 EvalMemo.prototype = {
-	acquisitionPackage: null,
-	evalPlan: null,
-	atatHelper: new AtatHelper(),
-	currencyFormatter: new sn_currency.GlideCurrencyFormatter("%s%v"),	
-	fairOpportunity: new GlideRecord("x_g_dis_atat_fair_opportunity"),
-	projectOverview: new GlideRecord("x_g_dis_atat_project_overview"),
+    acquisitionPackage: null,
+    evalPlan: null,
+    atatHelper: new AtatHelper(),
+    currencyFormatter: new sn_currency.GlideCurrencyFormatter("%s%v"),
+    fairOpportunity: new GlideRecord("x_g_dis_atat_fair_opportunity"),
+    projectOverview: new GlideRecord("x_g_dis_atat_project_overview"),
 
-	constructError: function(code, message) {
-		throw {
-			packageId: this.acquisitionPackage.sys_id,
-			code: code,
-			message: message
-		};		
-	},	
-	
-	explicitNull: function(value) {
-		return value ? value : null;
-	},
-	
-	initialize: function(acqPackage) {
+    constructError: function(code, message) {
+        throw {
+            packageId: this.acquisitionPackage.sys_id,
+            code: code,
+            message: message
+        };
+    },
+
+    explicitNull: function(value) {
+        return value ? value : null;
+    },
+
+    initialize: function(acqPackage) {
         this.acquisitionPackage = acqPackage;
-		this.evalPlan = new EvalPlan(acqPackage);
-		
-		// Look up Project Overview record
-		this.projectOverview.get(this.acquisitionPackage.project_overview);
-		if (!this.projectOverview.sys_id) {
-			throw this.constructError(this.DATA_INCOMPLETE, "No Project Overview record found");
-		}
-		
-		// Look up Fair Opportunity record
-		this.fairOpportunity.get(this.acquisitionPackage.fair_opportunity);
-		if (!this.fairOpportunity.sys_id) {
-			throw this.constructError(this.DATA_INCOMPLETE, "No Fair Opportunity record found");
-		}		
-	},
-	
-	getPayload: function() {
-		const proposedCsp = this.explicitNull(this.fairOpportunity.proposed_csp.toString());
-		const vendorFullName = this.atatHelper.getVendorFullName(proposedCsp);
-		const estimatedValue = new CostEstimate(this.acquisitionPackage).getTotalEstimate();
-		const exceptionToFairOpportunity = {
-			YES_FAR_16_505_B_2_I_A: "16.505(b)(2)(i)(A)",
-			YES_FAR_16_505_B_2_I_B: "16.505(b)(2)(i)(B)",
-			YES_FAR_16_505_B_2_I_C: "16.505(b)(2)(i)(C)"
-		}[this.fairOpportunity.exception_to_fair_opportunity.toString()];
-		
-		let evalPlanPayload;
-		try {
-			evalPlanPayload = this.evalPlan.getPayload();
-		} catch (error) {
-			// If we can't generate an Eval Plan, this is most likely because the package doesn't need one, so just generate empty attributes
-			evalPlanPayload = {
-				taskOrderTitle: null,
-				sourceSelection: null,
-				method: null,
-				standardSpecifications: [],
-				customSpecifications: [],
-				standardDifferentiators: [],
-				customDifferentiators: []				
-			};
-		}
+        this.evalPlan = new EvalPlan(acqPackage);
 
-		return {
-			documentType: "EVALUATION_MEMO",			
-			templatePayload: {
-				title: this.explicitNull(this.projectOverview.title.toString()),
-				estimatedValueFormatted: this.currencyFormatter.format(estimatedValue, "USD"), 
-				exceptionToFairOpportunity: exceptionToFairOpportunity,
-				proposedVendor: vendorFullName,
-				...evalPlanPayload.templatePayload
-			}
-		};
-	},
+        // Look up Project Overview record
+        this.projectOverview.get(this.acquisitionPackage.project_overview);
+        if (!this.projectOverview.sys_id) {
+            throw this.constructError(this.DATA_INCOMPLETE, "No Project Overview record found");
+        }
 
-	type: 'EvalMemo'
+        // Look up Fair Opportunity record
+        this.fairOpportunity.get(this.acquisitionPackage.fair_opportunity);
+        if (!this.fairOpportunity.sys_id) {
+            throw this.constructError(this.DATA_INCOMPLETE, "No Fair Opportunity record found");
+        }
+    },
+
+    getPayload: function() {
+        const proposedCsp = this.explicitNull(this.fairOpportunity.proposed_csp.toString());
+        const vendorFullName = this.atatHelper.getVendorFullName(proposedCsp);
+        const estimatedValue = new CostEstimate(this.acquisitionPackage).getTotalEstimate();
+        const exceptionToFairOpportunity = {
+            YES_FAR_16_505_B_2_I_A: "16.505(b)(2)(i)(A)",
+            YES_FAR_16_505_B_2_I_B: "16.505(b)(2)(i)(B)",
+            YES_FAR_16_505_B_2_I_C: "16.505(b)(2)(i)(C)"
+        } [this.fairOpportunity.exception_to_fair_opportunity.toString()];
+
+        let evalPlanPayload;
+        try {
+            evalPlanPayload = this.evalPlan.getPayload();
+        } catch (error) {
+            // If we can't generate an Eval Plan, this is most likely because the package doesn't need one, so just generate empty attributes
+            evalPlanPayload = {
+                taskOrderTitle: null,
+                sourceSelection: null,
+                method: null,
+                standardSpecifications: [],
+                customSpecifications: [],
+                standardDifferentiators: [],
+                customDifferentiators: []
+            };
+        }
+
+        return {
+            documentType: "EVALUATION_MEMO",
+            templatePayload: {
+                title: this.explicitNull(this.projectOverview.title.toString()),
+                estimatedValueFormatted: this.currencyFormatter.format(estimatedValue, "USD"),
+                exceptionToFairOpportunity: exceptionToFairOpportunity,
+                proposedVendor: vendorFullName,
+                ...evalPlanPayload.templatePayload
+            }
+        };
+    },
+
+    type: 'EvalMemo'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-06-21 20:28:55</sys_created_on>
         <sys_id>73517c0adb2fed108c045e8cd396195d</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_name>EvalMemo</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_73517c0adb2fed108c045e8cd396195d</sys_update_name>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-06-23 17:14:25</sys_updated_on>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-06-29 05:34:51</sys_updated_on>
     </sys_script_include>
 </record_update>
