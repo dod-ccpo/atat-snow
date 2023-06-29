@@ -6,7 +6,6 @@
         <annotation/>
         <callable_by_client_api>false</callable_by_client_api>
         <category/>
-        <compiler_build/>
         <copied_from/>
         <copied_from_name/>
         <description>Takes a given CLIN and determines if a "Time Remaining" new Alert should be created or if an existing one should be updated.</description>
@@ -16,6 +15,7 @@
         <name>ALERTS: Evaluate Time Remaining for CLIN</name>
         <natlang/>
         <outputs/>
+        <pre_compiled>false</pre_compiled>
         <remote_trigger_id/>
         <run_as>user</run_as>
         <run_with_roles/>
@@ -29,15 +29,15 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>a2c491cd2f211110e58359a72799b665</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name>ALERTS: Evaluate Time Remaining for CLIN</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_flow_a2c491cd2f211110e58359a72799b665</sys_update_name>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2022-11-03 18:49:08</sys_updated_on>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-06-26 14:57:28</sys_updated_on>
         <type>subflow</type>
     </sys_hub_flow>
     <sys_translated_text action="delete_multiple" query="documentkey=a2c491cd2f211110e58359a72799b665"/>
@@ -89,6 +89,7 @@
         <element>clin</element>
         <element_reference>false</element_reference>
         <foreign_database/>
+        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -135,6 +136,7 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
+        <virtual_type/>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
@@ -148,7 +150,6 @@
         <action_type display_value="UTIL: Get Effective Follow-on CLIN">95e9cac52fe11110e58359a72799b6dd</action_type>
         <action_type_parent/>
         <comment/>
-        <compiled_snapshot/>
         <display_text/>
         <flow display_value="ALERTS: Evaluate Time Remaining for CLIN">a2c491cd2f211110e58359a72799b665</flow>
         <order>2</order>
@@ -185,7 +186,6 @@
         <action_type display_value="Look Up Records">43400a1587003300663ca1bb36cb0b4b</action_type>
         <action_type_parent/>
         <comment/>
-        <compiled_snapshot/>
         <display_text/>
         <flow display_value="ALERTS: Evaluate Time Remaining for CLIN">a2c491cd2f211110e58359a72799b665</flow>
         <order>3</order>
@@ -274,7 +274,6 @@
         <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
         <action_type_parent/>
         <comment>Mark existing Alert as no longer Active</comment>
-        <compiled_snapshot/>
         <display_text/>
         <flow display_value="ALERTS: Evaluate Time Remaining for CLIN">a2c491cd2f211110e58359a72799b665</flow>
         <order>14</order>
@@ -349,7 +348,6 @@
         <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
         <action_type_parent/>
         <comment/>
-        <compiled_snapshot/>
         <display_text/>
         <flow display_value="ALERTS: Evaluate Time Remaining for CLIN">a2c491cd2f211110e58359a72799b665</flow>
         <order>16</order>
@@ -412,7 +410,6 @@
         <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
         <action_type_parent/>
         <comment>Update Threshold Violation Amount</comment>
-        <compiled_snapshot/>
         <display_text/>
         <flow display_value="ALERTS: Evaluate Time Remaining for CLIN">a2c491cd2f211110e58359a72799b665</flow>
         <order>11</order>
@@ -487,7 +484,6 @@
         <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
         <action_type_parent/>
         <comment/>
-        <compiled_snapshot/>
         <display_text/>
         <flow display_value="ALERTS: Evaluate Time Remaining for CLIN">a2c491cd2f211110e58359a72799b665</flow>
         <order>9</order>
@@ -549,7 +545,6 @@
         <action_type display_value="UTIL: Get Current Date">6a4951c12f611110e58359a72799b674</action_type>
         <action_type_parent/>
         <comment/>
-        <compiled_snapshot/>
         <display_text/>
         <flow display_value="ALERTS: Evaluate Time Remaining for CLIN">a2c491cd2f211110e58359a72799b665</flow>
         <order>1</order>
@@ -1135,6 +1130,7 @@
         <element>days_remaining</element>
         <element_reference>false</element_reference>
         <foreign_database/>
+        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -1181,6 +1177,7 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
+        <virtual_type/>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
@@ -1216,6 +1213,7 @@
         <element>existing_alert</element>
         <element_reference>false</element_reference>
         <foreign_database/>
+        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -1262,6 +1260,7 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
+        <virtual_type/>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
@@ -1280,11 +1279,11 @@
         <sys_created_on>2022-08-24 14:31:48</sys_created_on>
         <sys_id>11295d812f611110e58359a72799b6c4</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>CLIN</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_flow_input_a2c491cd2f211110e58359a72799b665_clin_en</sys_update_name>
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-08-24 14:31:48</sys_updated_on>
         <url/>
@@ -1398,6 +1397,7 @@
         <element>clin</element>
         <element_reference>false</element_reference>
         <foreign_database/>
+        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -1444,6 +1444,7 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
+        <virtual_type/>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
@@ -1457,7 +1458,6 @@
         <action_type display_value="UTIL: Get Effective Follow-on CLIN">95e9cac52fe11110e58359a72799b6dd</action_type>
         <action_type_parent display_value="UTIL: Get Effective Follow-on CLIN">17594a852fa11110e58359a72799b670</action_type_parent>
         <comment/>
-        <compiled_snapshot>95e9cac52fe11110e58359a72799b6dd</compiled_snapshot>
         <display_text/>
         <flow display_value="ALERTS: Evaluate Time Remaining for CLIN">e40332bd97311110cf3cfd9fe153af40</flow>
         <order>2</order>
@@ -1494,7 +1494,6 @@
         <action_type display_value="Look Up Records">43400a1587003300663ca1bb36cb0b4b</action_type>
         <action_type_parent display_value="Look Up Records">d1c56ec50b30030085c083eb37673a50</action_type_parent>
         <comment/>
-        <compiled_snapshot>43400a1587003300663ca1bb36cb0b4b</compiled_snapshot>
         <display_text/>
         <flow display_value="ALERTS: Evaluate Time Remaining for CLIN">e40332bd97311110cf3cfd9fe153af40</flow>
         <order>3</order>
@@ -1583,7 +1582,6 @@
         <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
         <action_type_parent display_value="Create Record">02f0b88cc3c632002841b63b12d3aeff</action_type_parent>
         <comment/>
-        <compiled_snapshot>2de05916c31332002841b63b12d3aee1</compiled_snapshot>
         <display_text/>
         <flow display_value="ALERTS: Evaluate Time Remaining for CLIN">e40332bd97311110cf3cfd9fe153af40</flow>
         <order>9</order>
@@ -1646,7 +1644,6 @@
         <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
         <action_type_parent display_value="Update Record">baf174c8c3c232002841b63b12d3aee4</action_type_parent>
         <comment>Update Threshold Violation Amount</comment>
-        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
         <display_text/>
         <flow display_value="ALERTS: Evaluate Time Remaining for CLIN">e40332bd97311110cf3cfd9fe153af40</flow>
         <order>11</order>
@@ -1721,7 +1718,6 @@
         <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
         <action_type_parent display_value="Log">0e0ae8c2531003003bf1d9109ec587c8</action_type_parent>
         <comment/>
-        <compiled_snapshot>5bc1bcc6531003003bf1d9109ec587d4</compiled_snapshot>
         <display_text/>
         <flow display_value="ALERTS: Evaluate Time Remaining for CLIN">e40332bd97311110cf3cfd9fe153af40</flow>
         <order>16</order>
@@ -1783,7 +1779,6 @@
         <action_type display_value="UTIL: Get Current Date">6a4951c12f611110e58359a72799b674</action_type>
         <action_type_parent display_value="UTIL: Get Current Date">fb481d412f611110e58359a72799b634</action_type_parent>
         <comment/>
-        <compiled_snapshot>6a4951c12f611110e58359a72799b674</compiled_snapshot>
         <display_text/>
         <flow display_value="ALERTS: Evaluate Time Remaining for CLIN">e40332bd97311110cf3cfd9fe153af40</flow>
         <order>1</order>
@@ -1807,7 +1802,6 @@
         <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
         <action_type_parent display_value="Update Record">baf174c8c3c232002841b63b12d3aee4</action_type_parent>
         <comment>Mark existing Alert as no longer Active</comment>
-        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
         <display_text/>
         <flow display_value="ALERTS: Evaluate Time Remaining for CLIN">e40332bd97311110cf3cfd9fe153af40</flow>
         <order>14</order>
@@ -2444,6 +2438,7 @@
         <element>days_remaining</element>
         <element_reference>false</element_reference>
         <foreign_database/>
+        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -2490,6 +2485,7 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
+        <virtual_type/>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
@@ -2525,6 +2521,7 @@
         <element>existing_alert</element>
         <element_reference>false</element_reference>
         <foreign_database/>
+        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -2571,6 +2568,7 @@
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
+        <virtual_type/>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
@@ -2589,11 +2587,11 @@
         <sys_created_on>2022-09-08 15:15:34</sys_created_on>
         <sys_id>640332bd97311110cf3cfd9fe153af64</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>CLIN</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name/>
+        <sys_update_name>sys_documentation_var__m_sys_hub_flow_input_e40332bd97311110cf3cfd9fe153af40_clin_en</sys_update_name>
         <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-09-08 15:15:34</sys_updated_on>
         <url/>
@@ -2602,8 +2600,9 @@
     <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_e40332bd97311110cf3cfd9fe153af40"/>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_e40332bd97311110cf3cfd9fe153af40"/>
     <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_e40332bd97311110cf3cfd9fe153af40"/>
-    <sys_hub_flow action="update">
+    <sys_hub_flow action="UPDATE">
         <sys_id>a2c491cd2f211110e58359a72799b665</sys_id>
         <latest_snapshot>e40332bd97311110cf3cfd9fe153af40</latest_snapshot>
+        <compiler_build/>
     </sys_hub_flow>
 </record_update>
