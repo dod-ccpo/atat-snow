@@ -6,7 +6,6 @@
         <annotation/>
         <callable_by_client_api>false</callable_by_client_api>
         <category/>
-        <compiler_build>glide-rome-06-23-2021__patch10-hotfix2-08-24-2022_08-31-2022_1215.zip</compiler_build>
         <copied_from/>
         <copied_from_name/>
         <description>Invokes ATAT Consume Cost Responses on a scheduled basis</description>
@@ -16,6 +15,7 @@
         <name>COST: Response Orchestrator</name>
         <natlang/>
         <outputs/>
+        <pre_compiled>false</pre_compiled>
         <remote_trigger_id>3180f3322f241110e58359a72799b629</remote_trigger_id>
         <run_as>user</run_as>
         <run_with_roles/>
@@ -29,15 +29,15 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>168d67fa2fe01110e58359a72799b65a</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name>COST: Response Orchestrator</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_flow_168d67fa2fe01110e58359a72799b65a</sys_update_name>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2022-11-03 15:15:10</sys_updated_on>
+        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
+        <sys_updated_on>2023-07-03 14:28:23</sys_updated_on>
         <type>flow</type>
     </sys_hub_flow>
     <sys_translated_text action="delete_multiple" query="documentkey=168d67fa2fe01110e58359a72799b65a"/>
@@ -70,10 +70,11 @@
         <condition/>
         <conditional>false</conditional>
         <entered_time/>
+        <max_drift/>
         <name>Trigger:3180f3322f241110e58359a72799b629</name>
         <offset/>
         <offset_type>0</offset_type>
-        <run_as display_value="Jeffrey Segal">fb5d4a0fdbbe64d088887ea5f3961959</run_as>
+        <run_as display_value="">fb5d4a0fdbbe64d088887ea5f3961959</run_as>
         <run_as_tz/>
         <run_dayofmonth>1</run_dayofmonth>
         <run_dayofweek/>
@@ -133,6 +134,7 @@
         <value>1970-01-01 00:30:00</value>
         <variable display_value="Repeat">1c5f4d94c32222002841b63b12d3aeb3</variable>
     </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_trigger_input_f63f0d94c32222002841b63b12d3aeed^id=b0fd677e2fe01110e58359a72799b6b7"/>
     <sys_hub_flow_stage action="delete_multiple" query="flow=168d67fa2fe01110e58359a72799b65a"/>
     <sys_flow_cat_variable_model action="delete_multiple" query="id=168d67fa2fe01110e58359a72799b65a^sys_idNOT INd68d67fa2fe01110e58359a72799b65b"/>
     <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
@@ -157,7 +159,6 @@
         <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
         <action_type_parent/>
         <comment/>
-        <compiled_snapshot>5bc1bcc6531003003bf1d9109ec587d4</compiled_snapshot>
         <display_text/>
         <flow display_value="COST: Response Orchestrator">168d67fa2fe01110e58359a72799b65a</flow>
         <order>2</order>
@@ -166,10 +167,10 @@
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-07-11 20:27:27</sys_created_on>
         <sys_id>c29440432f641110e58359a72799b69f</sys_id>
-        <sys_mod_count>24</sys_mod_count>
+        <sys_mod_count>26</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2022-11-03 15:45:16</sys_updated_on>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-07-03 14:45:15</sys_updated_on>
         <ui_id>f789e84c-51b9-4741-b9a9-509ea02cb25e</ui_id>
     </sys_hub_action_instance>
     <sys_variable_value action="delete_multiple" query="document_key=c29440432f641110e58359a72799b69f"/>
@@ -272,6 +273,7 @@ Updated {{d0979fbe-7499-4719-bb51-95c337b326ea.total_updated_cost_records}} exis
         <element>wait_for_completion</element>
         <element_reference>false</element_reference>
         <foreign_database/>
+        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -318,6 +320,7 @@ Updated {{d0979fbe-7499-4719-bb51-95c337b326ea.total_updated_cost_records}} exis
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
@@ -348,7 +351,7 @@ Updated {{d0979fbe-7499-4719-bb51-95c337b326ea.total_updated_cost_records}} exis
         <binding_strategy>com.snc.process_flow.engine.binding.RunAlways</binding_strategy>
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_flow_trigger_plan","id":"7d80f3322f241110e58359a72799b62b","name":"plan","plan_signature":null}}</plan>
         <plan_id>168d67fa2fe01110e58359a72799b65a</plan_id>
-        <snapshot>d1d29fffdb7219d0b1227ea5f3961909</snapshot>
+        <snapshot>71d5953597b32110cf3cfd9fe153af66</snapshot>
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-07-11 18:59:47</sys_created_on>
         <sys_domain>global</sys_domain>
@@ -437,6 +440,7 @@ Updated {{d0979fbe-7499-4719-bb51-95c337b326ea.total_updated_cost_records}} exis
         <value>1970-01-01 00:30:00</value>
         <variable display_value="Repeat">1c5f4d94c32222002841b63b12d3aeb3</variable>
     </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_trigger_input_f63f0d94c32222002841b63b12d3aeed^id=8180b3322f241110e58359a72799b6a4"/>
     <sys_hub_flow_stage action="delete_multiple" query="flow=c980b3322f241110e58359a72799b6a0"/>
     <sys_flow_cat_variable_model action="delete_multiple" query="id=c980b3322f241110e58359a72799b6a0^sys_idNOT IN4580b3322f241110e58359a72799b6a1"/>
     <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
@@ -461,7 +465,6 @@ Updated {{d0979fbe-7499-4719-bb51-95c337b326ea.total_updated_cost_records}} exis
         <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
         <action_type_parent display_value="Log">0e0ae8c2531003003bf1d9109ec587c8</action_type_parent>
         <comment/>
-        <compiled_snapshot>5bc1bcc6531003003bf1d9109ec587d4</compiled_snapshot>
         <display_text/>
         <flow display_value="COST: Response Orchestrator">c980b3322f241110e58359a72799b6a0</flow>
         <order>2</order>
@@ -562,6 +565,7 @@ Updated {{d0979fbe-7499-4719-bb51-95c337b326ea.total_updated_cost_records}} exis
         <element>wait_for_completion</element>
         <element_reference>false</element_reference>
         <foreign_database/>
+        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <help/>
@@ -608,6 +612,7 @@ Updated {{d0979fbe-7499-4719-bb51-95c337b326ea.total_updated_cost_records}} exis
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
@@ -633,8 +638,9 @@ Updated {{d0979fbe-7499-4719-bb51-95c337b326ea.total_updated_cost_records}} exis
     <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_c980b3322f241110e58359a72799b6a0"/>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_c980b3322f241110e58359a72799b6a0"/>
     <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_c980b3322f241110e58359a72799b6a0"/>
-    <sys_hub_flow action="update">
+    <sys_hub_flow action="UPDATE">
         <sys_id>168d67fa2fe01110e58359a72799b65a</sys_id>
         <latest_snapshot>c980b3322f241110e58359a72799b6a0</latest_snapshot>
+        <compiler_build>glide-utah-12-21-2022__patch1-03-01-2023_03-13-2023_1716.zip</compiler_build>
     </sys_hub_flow>
 </record_update>
