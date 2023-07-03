@@ -35,7 +35,12 @@
         <element active="false" label="Provisioning Failure Cause" max_length="100" name="provisioning_failure_cause" type="string"/>
         <element label="Provisioning Request Date" max_length="40" name="provisioning_request_date" type="glide_date_time"/>
         <element choice="1" choice_field="vendor" choice_table="x_g_dis_atat_cloud_service_provider" label="Vendor" max_length="40" name="vendor" type="choice">
-            <choice/>
+            <choice>
+                <element inactive_on_update="false" label="Amazon Web Services" sequence="0" value="AWS"/>
+                <element inactive_on_update="false" label="Google Cloud Platform" sequence="1" value="GCP"/>
+                <element inactive_on_update="false" label="Microsoft Azure" sequence="2" value="AZURE"/>
+                <element inactive_on_update="false" label="Oracle Cloud" sequence="3" value="ORACLE"/>
+            </choice>
         </element>
         <index name="index">
             <element name="acquisition_package"/>
