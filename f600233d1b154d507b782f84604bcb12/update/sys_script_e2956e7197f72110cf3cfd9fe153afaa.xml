@@ -34,19 +34,17 @@
 
     // Owner changed
     if (current.portfolio_owner.changes()) {
-        // if managers contains new owner then halt the update
         if (current.portfolio_managers) {
             const managers = current.portfolio_managers.toString().split(',');
             if (managers.includes(current.portfolio_owner.toString())) {
-                gs.addErrorMessage("Portfolio Managers contains new Portfolio Owner. Cancelling update.");
+                gs.addErrorMessage(current.portfolio_owner.name + " is already a Portfolio Manager. Update cancelled.");
                 current.setAbortAction(true);
             }
         }
-        // if viewers contains new owner then halt the update
         if (current.portfolio_viewers) {
             const viewers = current.portfolio_viewers.toString().split(',');
             if (viewers.includes(current.portfolio_owner.toString())) {
-                gs.addErrorMessage("Portfolio Viewers contains new Portfolio Owner. Cancelling update.");
+                gs.addErrorMessage(current.portfolio_owner.name + " is already a Portfolio Viewer. Update cancelled.");
                 current.setAbortAction(true);
             }
         }
@@ -70,7 +68,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>e2956e7197f72110cf3cfd9fe153afaa</sys_id>
-        <sys_mod_count>15</sys_mod_count>
+        <sys_mod_count>18</sys_mod_count>
         <sys_name>Portfolio - One role only</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -78,7 +76,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_e2956e7197f72110cf3cfd9fe153afaa</sys_update_name>
         <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
-        <sys_updated_on>2023-07-03 22:30:46</sys_updated_on>
+        <sys_updated_on>2023-07-05 15:34:48</sys_updated_on>
         <template/>
         <when>before</when>
     </sys_script>
