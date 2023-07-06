@@ -9,10 +9,23 @@
         <name>ClinService</name>
         <script><![CDATA[var ClinService = Class.create();
 ClinService.prototype = {
-	hasStarted: false,
-	hasExpired: false,
-	expiringSoon: false,
+	// time-based flags
+	hasStarted: false, // now is after PoP start date
+	hasExpired: false, // now is before PoP end date
+	isExpiringSoon: false, // now is within 60 days of PoP end date
+
+	// funding-based flags
+	isFundsDelinquent: false, // total of CLIN costs at or exceeds 100%
+	isLowFunds: false, // total of CLIN costs at 75% or more
+	
     initialize: function(clinRec) {
+		this.setTimeFlags(clinRec);	
+		this.setFundingFlags(clinRec);
+	},
+	
+    // Compares current date with PoP start and end dates to set time-based flags
+    // @param {GlideRecord} - a CLIN record
+	setTimeFlags: function(clinRec) {
 		const now = new GlideDateTime();
 		// compareTo returns: 
 		//  0 = Dates are equal
@@ -34,16 +47,23 @@ ClinService.prototype = {
 		const endMS = end.getNumericValue();
 		const sixtyDaysMS = 1000 * 60 * 60 * 24 * 60;
 		const msRemaining = endMS - nowMS;
-		this.expiringSoon = msRemaining < sixtyDaysMS;
+		this.isExpiringSoon = msRemaining < sixtyDaysMS;			
 	},
 	
-    // Determine percent of CLIN funds spent
+    // Compares funds spent vs funds obligated funding-based flags 
     // @param {GlideRecord} - a CLIN record
-    // @returns {number} - percentage of funds spent
-    getFundsSpentPercent: function(clinRec) {
+    setFundingFlags: function(clinRec) {
+		const spent = this.getActualFundsSpent(clinRec);
+		const fundsObligated = clinRec.funds_obligated;			
+		const spentPercent = spent/fundsObligated * 100;
+		this.isFundsDelinquent = spentPercent >= 100;
+		this.isLowFunds = spentPercent >= 75 && spentPercent < 100;
+    },
+	
+    // Aggregates all costs associated with a CLIN 
+    // @param {GlideRecord} - a CLIN record	
+	getActualFundsSpent: function(clinRec) {
 		const costsGA = new GlideAggregate('x_g_dis_atat_costs');
-		const fundsObligated = clinRec.funds_obligated;	
-		gs.info("fundsObligated: " + fundsObligated);
 		costsGA.addAggregate('SUM', 'value');
 		costsGA.addQuery('clin', '=', clinRec.sys_id);
 		costsGA.addQuery('is_actual', '=', true);
@@ -53,53 +73,33 @@ ClinService.prototype = {
 		while (costsGA.next()) {
 			spent = costsGA.getAggregate('SUM', 'value');
 		}
-		return spent/fundsObligated * 100;
-    },
+		return spent;
+	},
+	
 
     // Determine which status applies to the specified CLIN
     // @param {GlideRecord} - a CLIN record
     // @returns {string or enum} - the status of the CLIN
-    determineStatus: function(clinRec) {
+    determineStatus: function(clinRec) {	
 		if (this.hasStarted) {
-			// expired when now is after CLIN pop end date
-			if (this.hasExpired) {
-				return "EXPIRED";
-			}
-			
+			if (this.hasExpired) return "EXPIRED";
 			// if has started but no funds obligated
-			if (clinRec.funds_obligated === 0) {
-				return "OPTION_PENDING";
-			}			
-			
-			const percentSpent = this.getFundsSpentPercent(clinRec);
-
-			// delinquent when spent all or more than funds obligated
-			if (percentSpent >= 100) {
-				return "DELINQUENT";
-			}
-			
-			const areFundsLow = percentSpent >= 75;
-			
-			if (areFundsLow) {
-				// if both low funds and expiring soon, CLIN is At-Risk
-				if (this.expiringSoon) {
-					return "AT_RISK";
-				}
+			if (clinRec.funds_obligated === 0) return "OPTION_PENDING";
+			if (this.isFundsDelinquent) return "DELINQUENT";
+			if (this.isLowFunds) {
+				// if both low funds and expiring soon, CLIN is at risk
+				if (this.isExpiringSoon) return "AT_RISK";
+				// otherwise, only funding at risk
 				return "FUNDING_AT_RISK";
 			}
-						
-			if (this.expiringSoon) {
-				return "EXPIRING_POP";
-			}
-			
+			if (this.isExpiringSoon) return "EXPIRING_POP";
+			// if none of the above conditions, CLIN time and funding is on track
 			return "ON_TRACK";
 		}
 		// if period hasn't started, check for Option Exercised and Option Pending
-		if (clinRec.funds_obligated > 0) {
-			return "OPTION_EXERCISED";
-		}
-		return "OPTION_PENDING";
-		
+		// Option Exercised is a CLIN with future start date with funds obligated
+		if (clinRec.funds_obligated > 0) return "OPTION_EXERCISED";
+		return "OPTION_PENDING";		
     },
 
     type: 'ClinService'
@@ -108,13 +108,13 @@ ClinService.prototype = {
         <sys_created_by>eric.youngquist</sys_created_by>
         <sys_created_on>2023-07-03 15:48:25</sys_created_on>
         <sys_id>a03f5d3d97f3a11044ecfbc71153afa2</sys_id>
-        <sys_mod_count>84</sys_mod_count>
+        <sys_mod_count>101</sys_mod_count>
         <sys_name>ClinService</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_a03f5d3d97f3a11044ecfbc71153afa2</sys_update_name>
         <sys_updated_by>eric.youngquist</sys_updated_by>
-        <sys_updated_on>2023-07-06 17:03:08</sys_updated_on>
+        <sys_updated_on>2023-07-06 18:25:31</sys_updated_on>
     </sys_script_include>
 </record_update>
