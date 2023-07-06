@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.ClinService</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>ClinService</name>
+        <script><![CDATA[var ClinService = Class.create();
+ClinService.prototype = {
+	hasStarted: false,
+	hasExpired: false,
+	expiringSoon: false,
+    initialize: function(clinRec) {
+		const now = new GlideDateTime();
+		// compareTo returns: 
+		//  0 = Dates are equal
+		//  1 = The object's date is after the date specified in the parameter
+		// -1 = The object's date is before the date specified in the parameter
+		
+		// set if has started
+		const start = new GlideDateTime(clinRec.pop_start_date);
+		const startDaysDiff = now.compareTo(start); // if negative, hasn't started yet
+		this.hasStarted = startDaysDiff >= 0;
+
+		// set if has expired
+		const end = new GlideDateTime(clinRec.pop_end_date);
+		const endDaysDiff = now.compareTo(end); // if negative, has not expired
+        this.hasExpired = endDaysDiff > 0;	
+		
+		// check if expiring within 60 days
+		const nowMS = now.getNumericValue();
+		const endMS = end.getNumericValue();
+		const sixtyDaysMS = 1000 * 60 * 60 * 24 * 60;
+		const msRemaining = endMS - nowMS;
+		this.expiringSoon = msRemaining < sixtyDaysMS;
+	},
+	
+    // Determine percent of CLIN funds spent
+    // @param {GlideRecord} - a CLIN record
+    // @returns {number} - percentage of funds spent
+    getFundsSpentPercent: function(clinRec) {
+		const costsGA = new GlideAggregate('x_g_dis_atat_costs');
+		const fundsObligated = clinRec.funds_obligated;	
+		gs.info("fundsObligated: " + fundsObligated);
+		costsGA.addAggregate('SUM', 'value');
+		costsGA.addQuery('clin', '=', clinRec.sys_id);
+		costsGA.addQuery('is_actual', '=', true);
+		costsGA.setGroup(false);
+		costsGA.query();
+		let spent = 0;
+		while (costsGA.next()) {
+			spent = costsGA.getAggregate('SUM', 'value');
+		}
+		return spent/fundsObligated * 100;
+    },
+
+    // Determine which status applies to the specified CLIN
+    // @param {GlideRecord} - a CLIN record
+    // @returns {string or enum} - the status of the CLIN
+    determineStatus: function(clinRec) {
+		if (this.hasStarted) {
+			// expired when now is after CLIN pop end date
+			if (this.hasExpired) {
+				return "EXPIRED";
+			}
+			
+			// if has started but no funds obligated
+			if (clinRec.funds_obligated === 0) {
+				return "OPTION_PENDING";
+			}			
+			
+			const percentSpent = this.getFundsSpentPercent(clinRec);
+
+			// delinquent when spent all or more than funds obligated
+			if (percentSpent >= 100) {
+				return "DELINQUENT";
+			}
+			
+			const areFundsLow = percentSpent >= 75;
+			
+			if (areFundsLow) {
+				// if both low funds and expiring soon, CLIN is At-Risk
+				if (this.expiringSoon) {
+					return "AT_RISK";
+				}
+				return "FUNDING_AT_RISK";
+			}
+						
+			if (this.expiringSoon) {
+				return "EXPIRING_POP";
+			}
+			
+			return "ON_TRACK";
+		}
+		// if period hasn't started, check for Option Exercised and Option Pending
+		if (clinRec.funds_obligated > 0) {
+			return "OPTION_EXERCISED";
+		}
+		return "OPTION_PENDING";
+		
+    },
+
+    type: 'ClinService'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>eric.youngquist</sys_created_by>
+        <sys_created_on>2023-07-03 15:48:25</sys_created_on>
+        <sys_id>a03f5d3d97f3a11044ecfbc71153afa2</sys_id>
+        <sys_mod_count>84</sys_mod_count>
+        <sys_name>ClinService</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_a03f5d3d97f3a11044ecfbc71153afa2</sys_update_name>
+        <sys_updated_by>eric.youngquist</sys_updated_by>
+        <sys_updated_on>2023-07-06 17:03:08</sys_updated_on>
+    </sys_script_include>
+</record_update>
