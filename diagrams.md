@@ -54,6 +54,7 @@ erDiagram
         GUID sys_id PK
         Reference acquisition_package FK "to Acquisition Package"
         Reference active_task_order FK "to Task Order"
+        Reference portfolio_owner FK "to sys_user"
         List portfolio_managers FK "to sys_user"
         List portfolio_viewers FK "to sys_user"
         String name
@@ -154,7 +155,8 @@ erDiagram
     TASK-ORDER ||--|{ CLIN : "has (from EDA)"
     CLIN }|--|| TASK-ORDER : "part of"
     PORTFOLIO ||--|{ COSTS : "has (from CSPs)"
-    PORTFOLIO ||--|{ SYS_USER : "portfolio managers"
+    PORTFOLIO ||--|| SYS_USER : "portfolio owner"
+    PORTFOLIO ||--o{ SYS_USER : "portfolio managers"
     PORTFOLIO ||--o{ SYS_USER : "portfolio viewers"
     ENVIRONMENT ||--|{ OPERATOR : "pending"
     OPERATOR ||--|| ENVIRONMENT : "administers"
