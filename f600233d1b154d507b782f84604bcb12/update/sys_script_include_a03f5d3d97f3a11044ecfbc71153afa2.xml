@@ -54,10 +54,12 @@ ClinService.prototype = {
     // @param {GlideRecord} - a CLIN record
     setFundingFlags: function(clinRec) {
 		const spent = this.getActualFundsSpent(clinRec);
-		const fundsObligated = clinRec.funds_obligated;			
-		const spentPercent = spent/fundsObligated * 100;
-		this.isFundsDelinquent = spentPercent >= 100;
-		this.isLowFunds = spentPercent >= 75 && spentPercent < 100;
+		const fundsObligated = clinRec.funds_obligated;
+		if (fundsObligated > 0) {
+			const spentPercent = spent/fundsObligated * 100;
+			this.isFundsDelinquent = spentPercent >= 100;
+			this.isLowFunds = spentPercent >= 75 && spentPercent < 100;			
+		}
     },
 	
     // Aggregates all costs associated with a CLIN 
@@ -75,7 +77,6 @@ ClinService.prototype = {
 		}
 		return spent;
 	},
-	
 
     // Determine which status applies to the specified CLIN
     // @param {GlideRecord} - a CLIN record
@@ -84,7 +85,7 @@ ClinService.prototype = {
 		if (this.hasStarted) {
 			if (this.hasExpired) return "EXPIRED";
 			// if has started but no funds obligated
-			if (clinRec.funds_obligated === 0) return "OPTION_PENDING";
+			if (clinRec.funds_obligated == 0) return "OPTION_PENDING";
 			if (this.isFundsDelinquent) return "DELINQUENT";
 			if (this.isLowFunds) {
 				// if both low funds and expiring soon, CLIN is at risk
@@ -108,13 +109,13 @@ ClinService.prototype = {
         <sys_created_by>eric.youngquist</sys_created_by>
         <sys_created_on>2023-07-03 15:48:25</sys_created_on>
         <sys_id>a03f5d3d97f3a11044ecfbc71153afa2</sys_id>
-        <sys_mod_count>101</sys_mod_count>
+        <sys_mod_count>116</sys_mod_count>
         <sys_name>ClinService</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_a03f5d3d97f3a11044ecfbc71153afa2</sys_update_name>
         <sys_updated_by>eric.youngquist</sys_updated_by>
-        <sys_updated_on>2023-07-06 18:25:31</sys_updated_on>
+        <sys_updated_on>2023-07-07 13:43:21</sys_updated_on>
     </sys_script_include>
 </record_update>
