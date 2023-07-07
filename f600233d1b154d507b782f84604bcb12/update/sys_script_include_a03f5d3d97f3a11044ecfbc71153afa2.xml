@@ -5,7 +5,7 @@
         <api_name>x_g_dis_atat.ClinService</api_name>
         <caller_access/>
         <client_callable>false</client_callable>
-        <description/>
+        <description>Grouped CLIN functionality used within ATAT.</description>
         <name>ClinService</name>
         <script><![CDATA[var ClinService = Class.create();
 ClinService.prototype = {
@@ -28,28 +28,18 @@ ClinService.prototype = {
     // Compares current date with PoP start and end dates to set time-based flags
     // @param {GlideRecord} - a CLIN record
 	setTimeFlags: function(clinRec) {
-		const now = new GlideDateTime();
-		// compareTo returns: 
-		//  0 = Dates are equal
-		//  1 = The object's date is after the date specified in the parameter
-		// -1 = The object's date is before the date specified in the parameter
-		
+		const now = new GlideDateTime();		
 		// set if has started
 		const start = new GlideDateTime(clinRec.pop_start_date);
-		const startDaysDiff = now.compareTo(start); // if negative, hasn't started yet
-		this.hasStarted = startDaysDiff >= 0;
-
+		this.hasStarted = now.after(start);
+		
 		// set if has expired
 		const end = new GlideDateTime(clinRec.pop_end_date);
-		const endDaysDiff = now.compareTo(end); // if negative, has not expired
-        this.hasExpired = endDaysDiff > 0;	
+		this.hasExpired = now.after(end);
 		
-		// check if expiring within 60 days
-		const nowMS = now.getNumericValue();
-		const endMS = end.getNumericValue();
-		const sixtyDaysMS = 1000 * 60 * 60 * 24 * 60;
-		const msRemaining = endMS - nowMS;
-		this.isExpiringSoon = msRemaining < sixtyDaysMS;			
+		// check if is expiring within 60 days
+		now.addDaysLocalTime(60);
+		this.isExpiringSoon = now.after(end);		
 	},
 	
     // Compares funds spent vs funds obligated funding-based flags 
@@ -112,13 +102,13 @@ ClinService.prototype = {
         <sys_created_by>eric.youngquist</sys_created_by>
         <sys_created_on>2023-07-03 15:48:25</sys_created_on>
         <sys_id>a03f5d3d97f3a11044ecfbc71153afa2</sys_id>
-        <sys_mod_count>118</sys_mod_count>
+        <sys_mod_count>137</sys_mod_count>
         <sys_name>ClinService</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_a03f5d3d97f3a11044ecfbc71153afa2</sys_update_name>
         <sys_updated_by>eric.youngquist</sys_updated_by>
-        <sys_updated_on>2023-07-07 13:53:10</sys_updated_on>
+        <sys_updated_on>2023-07-07 16:05:22</sys_updated_on>
     </sys_script_include>
 </record_update>
