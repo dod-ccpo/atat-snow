@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.ClinService</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Grouped CLIN functionality used within ATAT.</description>
+        <name>ClinService</name>
+        <script><![CDATA[var ClinService = Class.create();
+ClinService.prototype = {
+	hasObligatedFunds: false,
+	
+	// time-based flags
+	hasStarted: false, // now is after PoP start date
+	hasExpired: false, // now is before PoP end date
+	isExpiringSoon: false, // now is within 60 days of PoP end date
+
+	// funding-based flags
+	isFundsDelinquent: false, // total of CLIN costs at or exceeds 100%
+	isLowFunds: false, // total of CLIN costs at 75% or more
+	
+    initialize: function(clinRec) {
+		this.setTimeFlags(clinRec);	
+		this.setFundingFlags(clinRec);
+	},
+	
+    // Compares current date with PoP start and end dates to set time-based flags
+    // @param {GlideRecord} - a CLIN record
+	setTimeFlags: function(clinRec) {
+		const now = new GlideDateTime();		
+		// set if has started
+		const start = new GlideDateTime(clinRec.pop_start_date);
+		this.hasStarted = now.after(start);
+		
+		// set if has expired
+		const end = new GlideDateTime(clinRec.pop_end_date);
+		this.hasExpired = now.after(end);
+		
+		// check if is expiring within 60 days
+		now.addDaysLocalTime(60);
+		this.isExpiringSoon = now.after(end);		
+	},
+	
+    // Compares funds spent vs funds obligated funding-based flags 
+    // @param {GlideRecord} - a CLIN record
+    setFundingFlags: function(clinRec) {
+		const spent = this.getActualFundsSpent(clinRec);
+		const fundsObligated = clinRec.funds_obligated;
+		if (fundsObligated > 0) {
+			this.hasObligatedFunds = true;
+			const spentPercent = spent/fundsObligated * 100;
+			this.isFundsDelinquent = spentPercent >= 100;
+			this.isLowFunds = spentPercent >= 75 && spentPercent < 100;			
+		}
+    },
+	
+    // Aggregates all costs associated with a CLIN 
+    // @param {GlideRecord} - a CLIN record	
+	getActualFundsSpent: function(clinRec) {
+		const costsGA = new GlideAggregate('x_g_dis_atat_costs');
+		costsGA.addAggregate('SUM', 'value');
+		costsGA.addQuery('clin', '=', clinRec.sys_id);
+		costsGA.addQuery('is_actual', '=', true);
+		costsGA.setGroup(false);
+		costsGA.query();
+		let spent = 0;
+		while (costsGA.next()) {
+			spent = costsGA.getAggregate('SUM', 'value');
+		}
+		return spent;
+	},
+
+    // Determine which status applies to the specified CLIN
+    // @param {GlideRecord} - a CLIN record
+    // @returns {string or enum} - the status of the CLIN
+    determineStatus: function(clinRec) {	
+		if (this.hasStarted) {
+			if (this.hasExpired) return "EXPIRED";
+			// if has started but NO funds obligated yet
+			if (!this.hasObligatedFunds) return "OPTION_PENDING";
+			if (this.isFundsDelinquent) return "DELINQUENT";
+			if (this.isLowFunds) {
+				// if both low funds and expiring soon, CLIN is at risk
+				if (this.isExpiringSoon) return "AT_RISK";
+				// otherwise, only funding at risk
+				return "FUNDING_AT_RISK";
+			}
+			if (this.isExpiringSoon) return "EXPIRING_POP";
+			// if none of the above conditions, CLIN time and funding is on track
+			return "ON_TRACK";
+		}
+		// if period hasn't started, check for Option Exercised and Option Pending
+		// Option Exercised is a CLIN with future start date with funds obligated
+		if (this.hasObligatedFunds) return "OPTION_EXERCISED";
+		return "OPTION_PENDING";		
+    },
+
+    type: 'ClinService'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>eric.youngquist</sys_created_by>
+        <sys_created_on>2023-07-03 15:48:25</sys_created_on>
+        <sys_id>a03f5d3d97f3a11044ecfbc71153afa2</sys_id>
+        <sys_mod_count>137</sys_mod_count>
+        <sys_name>ClinService</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_a03f5d3d97f3a11044ecfbc71153afa2</sys_update_name>
+        <sys_updated_by>eric.youngquist</sys_updated_by>
+        <sys_updated_on>2023-07-07 16:05:22</sys_updated_on>
+    </sys_script_include>
+</record_update>
