@@ -17,28 +17,11 @@ Ifp.prototype = {
 	errUtil: new ErrorHandler(),
 	atatHelper: new AtatHelper(),
 	acquisitionPackage: null,
-	ce: null,
-	ceData: null,
-	constructError: function(code, message) {
-		gs.info(code, JSON.stringify(message));
-		gs.info("error code: " + code + ", message: " + message);
-		throw {
-			packageId: this.acquisitionPackage.sys_id,
-			code: code,
-			message: message
-		};		
-	},	
 	
 
 	initialize: function(acqPackage) {
 		this.acquisitionPackage = acqPackage;
-		if (!this.acquisitionPackage){
-			throw this.constructError(this.DATA_INCOMPLETE, "No Acquisition Package record found");
-		}
-		this.ce = new CostEstimate(this.acquisitionPackage);
-		this.ceData = this.ce.getData();
 	},
-	
 
 	/**
      * Look up a funding request type inside of a Funding Requirement
@@ -166,7 +149,7 @@ Ifp.prototype = {
 					agency: acqPackage.organization.agency.label.toString().split("(")[0].trim(),
 					organization: acqPackage.organization.computed_name.toString(),
 					financialPoc: financialPoc.formal_name.toString(),
-					estimatedTaskOrderValue: this.ceData.subtotal["Base Period"],
+					estimatedTaskOrderValue: parseFloat(fundingPlan.estimated_task_order_value.toString()),
 					initialAmount: parseFloat(fundingPlan.initial_amount.toString()),
 					remainingAmount: parseFloat(fundingPlan.remaining_amount.toString()),
 					fundingDocument: this.getFundingDocument(fundingRequest),
