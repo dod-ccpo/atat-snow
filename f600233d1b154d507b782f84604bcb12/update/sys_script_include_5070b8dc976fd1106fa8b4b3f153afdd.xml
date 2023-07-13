@@ -17,10 +17,28 @@ Ifp.prototype = {
 	errUtil: new ErrorHandler(),
 	atatHelper: new AtatHelper(),
 	acquisitionPackage: null,
+	ce: null,
+	ceData: null,
+	constructError: function(code, message) {
+		gs.info(code, JSON.stringify(message));
+		gs.info("error code: " + code + ", message: " + message);
+		throw {
+			packageId: this.acquisitionPackage.sys_id,
+			code: code,
+			message: message
+		};		
+	},	
+	
 
 	initialize: function(acqPackage) {
 		this.acquisitionPackage = acqPackage;
+		if (!this.acquisitionPackage){
+			throw this.constructError(this.DATA_INCOMPLETE, "No Acquisition Package record found");
+		}
+		this.ce = new CostEstimate(this.acquisitionPackage);
+		this.ceData = this.ce.getData();
 	},
+	
 
 	/**
      * Look up a funding request type inside of a Funding Requirement
@@ -138,17 +156,25 @@ Ifp.prototype = {
 			if (!financialPoc) {
 				throw this.errUtil.createError("No Financial POC found for " + pkgInfo.allInfo + ". ", this.errUtil.INVALID_INPUT);
 			}
-						
+			var baseYearEstimate  = parseFloat(this.ceData.subtotal["Base Period"]);
+			if (this.ceData.external_ordering_agency_fee)
+			{
+				//Checking if it's a non-Ditco package, if so adding the 1% fee
+				baseYearEstimate = (baseYearEstimate * .01) + baseYearEstimate;
+			}
+			
 			return {
 				documentType: "INCREMENTAL_FUNDING_PLAN",
 				templatePayload: {
 					requirementsTitle: acqPackage.project_overview.title.toString(),
 					missionOwner: this.atatHelper.getFirstMissionOwner(acqPackage).name.toString(),
 					primaryContact: acqPackage.primary_contact.formal_name.toString(),
+					agency: acqPackage.organization.agency.label.toString().split("(")[0].trim(),
+					organization: acqPackage.organization.computed_name.toString(),
 					financialPoc: financialPoc.formal_name.toString(),
-					estimatedTaskOrderValue: parseFloat(fundingPlan.estimated_task_order_value.toString()),
+					estimatedTaskOrderValue: baseYearEstimate,
 					initialAmount: parseFloat(fundingPlan.initial_amount.toString()),
-					remainingAmount: parseFloat(fundingPlan.remaining_amount.toString()),
+					remainingAmount: (baseYearEstimate - parseFloat(fundingPlan.initial_amount.toString())),
 					fundingDocument: this.getFundingDocument(fundingRequest),
 					fundingIncrements: this.getFundingIncrements(fundingPlan),
 					scheduleText: fundingPlan.schedule_text.toString(),
@@ -170,13 +196,13 @@ Ifp.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-11-29 14:21:01</sys_created_on>
         <sys_id>5070b8dc976fd1106fa8b4b3f153afdd</sys_id>
-        <sys_mod_count>36</sys_mod_count>
+        <sys_mod_count>60</sys_mod_count>
         <sys_name>Ifp</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_5070b8dc976fd1106fa8b4b3f153afdd</sys_update_name>
         <sys_updated_by>torin.harthcock</sys_updated_by>
-        <sys_updated_on>2023-06-26 15:49:02</sys_updated_on>
+        <sys_updated_on>2023-07-13 14:40:51</sys_updated_on>
     </sys_script_include>
 </record_update>
