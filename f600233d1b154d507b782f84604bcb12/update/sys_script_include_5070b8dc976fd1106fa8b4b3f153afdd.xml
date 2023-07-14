@@ -162,6 +162,8 @@ Ifp.prototype = {
 				//Checking if it's a non-Ditco package, if so adding the 1% fee
 				baseYearEstimate = (baseYearEstimate * .01) + baseYearEstimate;
 			}
+			var storedAgency = acqPackage.organization.agency.label.toString().split("(")[0].trim();
+			var storedOrganization = storedAgency == "Defense Information Systems Agency" ? acqPackage.organization.disa_organization.getDisplayValue() : acqPackage.organization.computed_name.toString();
 			
 			return {
 				documentType: "INCREMENTAL_FUNDING_PLAN",
@@ -169,8 +171,8 @@ Ifp.prototype = {
 					requirementsTitle: acqPackage.project_overview.title.toString(),
 					missionOwner: this.atatHelper.getFirstMissionOwner(acqPackage).name.toString(),
 					primaryContact: acqPackage.primary_contact.formal_name.toString(),
-					agency: acqPackage.organization.agency.label.toString().split("(")[0].trim(),
-					organization: acqPackage.organization.computed_name.toString(),
+					agency: storedAgency,
+					organization: storedOrganization,
 					financialPoc: financialPoc.formal_name.toString(),
 					estimatedTaskOrderValue: baseYearEstimate,
 					initialAmount: parseFloat(fundingPlan.initial_amount.toString()),
@@ -196,13 +198,13 @@ Ifp.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-11-29 14:21:01</sys_created_on>
         <sys_id>5070b8dc976fd1106fa8b4b3f153afdd</sys_id>
-        <sys_mod_count>60</sys_mod_count>
+        <sys_mod_count>62</sys_mod_count>
         <sys_name>Ifp</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_5070b8dc976fd1106fa8b4b3f153afdd</sys_update_name>
         <sys_updated_by>torin.harthcock</sys_updated_by>
-        <sys_updated_on>2023-07-13 14:40:51</sys_updated_on>
+        <sys_updated_on>2023-07-14 13:43:41</sys_updated_on>
     </sys_script_include>
 </record_update>
