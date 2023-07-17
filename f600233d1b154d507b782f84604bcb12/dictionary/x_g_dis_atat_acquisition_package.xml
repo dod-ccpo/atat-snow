@@ -17,6 +17,9 @@
         <element label="CSS Pre-Award ID" max_length="10" name="css_pre_award_id" type="string"/>
         <element label="CSS Tracking Number" max_length="100" name="css_tracking_number" type="string"/>
         <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Current Contract Information" max_length="32" name="current_contract_and_recurring_information" reference="x_g_dis_atat_current_contract_and_recurring_information" type="reference"/>
+        <element choice="1" choice_field="can_access_package" choice_table="x_g_dis_atat_contacts" label="Current Contract Exists" max_length="40" name="current_contract_exists" type="choice">
+            <choice/>
+        </element>
         <element label="Current Environment" max_length="32" name="current_environment" reference="x_g_dis_atat_current_environment" type="reference"/>
         <element label="DITCO KO" max_length="32" name="ditco_ko" reference="x_g_dis_atat_ditco_contract_specialist" type="reference"/>
         <element choice="3" choice_field="status" choice_table="x_g_dis_atat_provisioning_job" default="NOT_STARTED" label="DOCGEN Job Status" max_length="40" name="docgen_job_status" type="choice">
