@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.CSVUtils</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>creates a csv file from an array of JSON objects</description>
+        <name>CSVUtils</name>
+        <script><![CDATA[var CSVUtils = Class.create();
+
+CSVUtils.prototype = {
+    initialize: function() {
+
+    },
+    convertToCSV: function(jsonArray) {
+		gs.info("converttocsv is firing!");
+        if(jsonArray.length === 0){
+            return '';
+        }
+        var csvContent = '';
+        var headers = Object.keys(jsonArray[0]);
+        csvContent += headers.join(',') + '\n';
+
+        jsonArray.forEach(function(record){
+            var row = headers.map(function(header){
+                return record[header];
+            });
+            csvContent += row.join(',') + '\n';
+        });
+		gs.info(csvContent);
+        return csvContent;
+    },
+    writeCSVToDocument: function(content, fileName){
+        var attachment = new GlideSysAttachment();
+        var rec = new GlideRecord('sys_attachment');
+        rec.insert();
+        attachment.write(rec, fileName, 'text/csv', content);
+        
+    },
+
+    type: 'CSVUtils'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>torin.harthcock</sys_created_by>
+        <sys_created_on>2023-07-18 16:27:17</sys_created_on>
+        <sys_id>bdccfee6970471103394f5b0f053af92</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>CSVUtils</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_bdccfee6970471103394f5b0f053af92</sys_update_name>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-18 16:42:29</sys_updated_on>
+    </sys_script_include>
+</record_update>
