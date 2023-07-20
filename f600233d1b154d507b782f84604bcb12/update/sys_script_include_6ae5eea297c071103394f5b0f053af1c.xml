@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.DappsReportGen</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>DappsReportGen</name>
+        <script><![CDATA[var DappsReportGen = Class.create();
+DappsReportGen.prototype = {
+    USER_TABLE: "sys_user",
+    atatHelper: new AtatHelper(),
+    acquisitionPackage: null,
+    CLASS_TABLE: "x_g_dis_atat_selected_classification_level",
+	classInstance: new GlideRecord("x_g_dis_atat_classification_level"),
+	projectOverview: new GlideRecord("x_g_dis_atat_project_overview"),
+    organization: new GlideRecord("x_g_dis_atat_organization"),
+    evalPlan: new GlideRecord("x_g_dis_atat_evaluation_plan"),
+    contractType: new GlideRecord("x_g_dis_atat_contract_type"),
+    fundingRequest: new GlideRecord("x_g_dis_atat_funding_request"),
+    fsForm: new GlideRecord("x_g_dis_atat_funding_request_fs_form"),
+    mipr: new GlideRecord("x_g_dis_atat_funding_request_mipr"),
+    contractConsiderations: new GlideRecord("x_g_dis_atat_contract_considerations"),
+    fairOpportunity: new GlideRecord("x_g_dis_atat_fair_opportunity"),
+    contactInfo: new GlideRecord("x_g_dis_atat_contacts"),
+
+    initialize: function(acqPkg) {
+		this.acquisitionPackage = acqPkg;
+	},
+
+    /**
+     * 
+     * @return {string} title
+     */
+    getProjectOverview: function() {
+        this.projectOverview.get(this.acquisitionPackage.project_overview); 
+        if(!this.projectOverview.title){
+            return "";
+        }
+        else {
+            return this.projectOverview.title.toString();
+        }
+    },
+
+    getOrganization: function() {
+        this.organization.get(this.acquisitionPackage.organization);
+        if(!this.organization.organization_name){
+            return "";
+        }
+        else {
+            return this.organization.organization_name.toString();
+        }
+    },
+
+    /**
+     * @returns {object} for source_selection, method as strings
+     */
+    getEvalPlan: function() {
+        var sourceSelection;
+        var method;
+        this.evalPlan.get(this.acquisitionPackage.evaluation_plan);
+        if(!this.evalPlan.source_selection){
+            sourceSelection = "";
+        }
+        else {
+            sourceSelection = this.acquisitionPackage.evaluation_plan.source_selection.getDisplayValue().toString();
+        }
+        if(!this.evalPlan.method){
+            method = "";
+        }
+        else {
+            method = this.acquisitionPackage.evaluation_plan.method.getDisplayValue().toString();
+        }
+
+        return {
+            sourceSelection: sourceSelection,
+            method: method
+        };
+    },
+    /**
+     * 
+     * @returns {object} for firm fixed price and time and materials as booleans
+     */
+    getContractType: function() {
+        var ffp = "FALSE";
+        var tAndM = "FALSE";
+        this.contractType.get(this.acquisitionPackage.contract_type);
+        if(!this.contractType){
+            return "";
+        }
+        else{
+            if(this.contractType.firm_fixed_price){
+                ffp = "TRUE";
+            }
+            else {
+                tAndM = "TRUE";
+            }
+        }
+        return {
+            ffp: ffp,
+            tAndM: tAndM
+        };
+    },
+    /**
+     * 
+     * @returns {obj} containing requestType, mipr, and orderNumber
+     */
+    getFundingRequest: function() {
+        this.fundingRequest.get(this.acquisitionPackage.funding_request);
+        if(!this.fundingRequest){
+            return "";
+        }
+        else {
+            var miprNumber = this.getMiprNumber(this.fundingRequest.mipr);
+            var orderNumber = this.getFSOrderNumber(this.fundingRequest.fs_form);
+            return {
+                requestType: this.fundingRequest.funding_request_type.toString(),
+                mipr: miprNumber,
+                orderNumber: orderNumber
+            };
+        }
+        
+    },
+    getMiprNumber: function(miprSysId) {
+        this.mipr.get(miprSysId);
+        if(!this.mipr.mipr_number){
+            return "";
+        }
+        else{
+        return this.mipr.mipr_number.toString();
+        }
+    },
+    getFSOrderNumber: function(fsOrderSysId) {
+        this.fsForm.get(fsOrderSysId);
+        if(!this.fsForm.order_number){
+            return "";
+        }
+        else{
+        return this.fsForm.order_number.toString();
+    }
+    },
+    /**
+     * 
+     * @returns {string} for potential COI
+     */
+    getContractConsiderations: function() {
+        
+        if(!this.acquisitionPackage.contract_considerations){
+            return "";
+        }
+        else {
+            this.contractConsiderations.get(this.acquisitionPackage.contract_considerations);
+            return this.contractConsiderations.potential_conflict_of_interest.getDisplayValue().toString();
+        }
+    },
+
+    getClassificationInstances: function(){
+       try { 
+        var list = new global.GlideQuery(this.CLASS_TABLE)
+            .where("acquisition_package", this.acquisitionPackage.sys_id)
+            .select("classification_level")
+            .toArray(10)
+            .map(removeSysId);
+            if(list.length > 0){
+                var classLevels = [];
+
+            list.forEach(function(classLevel) {
+                var tmp = new global.GlideQuery("x_g_dis_atat_classification_level")
+                    .where("sys_id",classLevel.classification_level)
+                    .select("display")
+                    .toArray(1);
+
+                classLevels.push(tmp[0].display);
+            });
+			
+            return classLevels.toString().replaceAll(",", ";");
+            }
+        } catch (error) {
+            return "";
+        }
+    },
+    getContact: function(role){
+
+    },
+
+    getIndividuals: function(users) {
+        var missionOwners;
+        if(users == "mission_owners"){
+            missionOwners = this.acquisitionPackage.mission_owners;
+        }
+        else {
+            missionOwners = this.acquisitionPackage.contributors;
+        }
+
+		if(missionOwners){
+			var array = missionOwners.split(",");
+            var names = [];
+			if (array.length > 0) {
+                array.forEach(function(item){
+                    names.push(DappsReportGen.prototype.getUser(item).name.toString());
+                 });
+                 return names.join().replaceAll(",", ";");
+            }			
+        }
+		else {
+            return "";
+        }			
+	},
+    /**
+     * 
+     * @param {string} str as user name/sysid 
+     * @returns 
+     */
+    getUser: function(str){
+        var user = new GlideRecord(this.USER_TABLE);
+        user.get(str);
+        return user;
+    },
+
+    convertDateTime: function(date){
+        var month = date.getMonthLocalTime();
+        var day = date.getDayOfMonthLocalTime();
+        var year = date.getYearLocalTime();
+        var time = date.getLocalTime().getByFormat('hh:mm:ss') + '.000Z'; //Better way to do this?
+
+        var createdFormatted = month + '/' + day + '/' + year + 'T' + time;
+      
+        return createdFormatted;
+    },
+
+    convertDocGen: function() {
+        var status = this.acquisitionPackage.docgen_job_status.getDisplayValue().toString();
+        if(status == "Success"){
+            status = "COMPLETE";
+        }
+        return status;
+    },
+
+    getFairOpportunity: function(){
+        var fairOpp = this.acquisitionPackage.fair_opportunity;
+         if(!fairOpp){
+             return "";
+         }
+        else {
+            this.fairOpportunity.get(fairOpp);
+            return this.fairOpportunity.exception_to_fair_opportunity.toString();
+        }
+    },
+
+    getReportRecord: function() {
+        var evalPlan = this.getEvalPlan();
+        var contractType = this.getContractType();
+        var fundingRequest = this.getFundingRequest();
+        return {
+            Number: this.acquisitionPackage.number.toString(),
+            Status: this.acquisitionPackage.package_status.getDisplayValue().toString(),
+            Title: this.getProjectOverview(),
+            "Mission Owners": this.getIndividuals("mission_owners"),
+            Contributors: this.getIndividuals("contributors"),
+            // COR: this.getContact("COR"),
+            // ACOR: this.getContact("ACOR"),
+            Created: this.convertDateTime(new GlideDateTime(this.acquisitionPackage.sys_created_on.toString())), 
+            Updated: this.convertDateTime(new GlideDateTime(this.acquisitionPackage.sys_updated_on.toString())), 
+            "Organization Name": this.getOrganization(),
+            "Classification Levels": this.getClassificationInstances(),
+            "Contracting Shop": this.acquisitionPackage.contracting_shop.toString(),
+            "DOCGEN Job Status": this.convertDocGen(),
+            "Fair Opportunity": this.getFairOpportunity(),
+            "Source Selection": evalPlan.sourceSelection,
+            Method: evalPlan.method,
+            "Firm Fixed Price": contractType.ffp,
+            "Time And Materials": contractType.tAndM,
+            "Funding Request Type": fundingRequest.requestType,
+            "MIPR Number": fundingRequest.mipr,
+            "Order Number": fundingRequest.orderNumber,
+            "Potential Conflict of Interest": this.getContractConsiderations()
+
+        };
+    },
+
+    type: 'DappsReportGen'
+};
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>torin.harthcock</sys_created_by>
+        <sys_created_on>2023-07-18 14:53:08</sys_created_on>
+        <sys_id>6ae5eea297c071103394f5b0f053af1c</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>DappsReportGen</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_6ae5eea297c071103394f5b0f053af1c</sys_update_name>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-19 18:36:01</sys_updated_on>
+    </sys_script_include>
+</record_update>
