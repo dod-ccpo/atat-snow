@@ -24,10 +24,30 @@ DappsReportGen.prototype = {
     contractConsiderations: new GlideRecord("x_g_dis_atat_contract_considerations"),
     fairOpportunity: new GlideRecord("x_g_dis_atat_fair_opportunity"),
     contactInfo: new GlideRecord("x_g_dis_atat_contacts"),
+    ce: null,
+	ceData: null,
 
     initialize: function(acqPkg) {
 		this.acquisitionPackage = acqPkg;
+        this.ce = new CostEstimate(this.acquisitionPackage);
+		try{
+            this.ceData = this.ce.getData();
+        }
+        catch(err){
+            this.ceData = 0;
+        }
+       
 	},
+
+    getEstimatedCost: function() {
+        if (this.ceData == 0){
+            return 0;
+        }
+        else
+        {
+            return this.ceData.grand_total_with_fee.Total;
+        }
+    },
 
     /**
      * 
@@ -274,7 +294,8 @@ DappsReportGen.prototype = {
             "Funding Request Type": fundingRequest.requestType,
             "MIPR Number": fundingRequest.mipr,
             "Order Number": fundingRequest.orderNumber,
-            "Potential Conflict of Interest": this.getContractConsiderations()
+            "Potential Conflict of Interest": this.getContractConsiderations(),
+			"Estimated Total Value": this.getEstimatedCost(),
 
         };
     },
@@ -286,13 +307,13 @@ DappsReportGen.prototype = {
         <sys_created_by>torin.harthcock</sys_created_by>
         <sys_created_on>2023-07-18 14:53:08</sys_created_on>
         <sys_id>6ae5eea297c071103394f5b0f053af1c</sys_id>
-        <sys_mod_count>6</sys_mod_count>
+        <sys_mod_count>15</sys_mod_count>
         <sys_name>DappsReportGen</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_6ae5eea297c071103394f5b0f053af1c</sys_update_name>
         <sys_updated_by>torin.harthcock</sys_updated_by>
-        <sys_updated_on>2023-07-19 18:36:01</sys_updated_on>
+        <sys_updated_on>2023-07-20 20:54:05</sys_updated_on>
     </sys_script_include>
 </record_update>
