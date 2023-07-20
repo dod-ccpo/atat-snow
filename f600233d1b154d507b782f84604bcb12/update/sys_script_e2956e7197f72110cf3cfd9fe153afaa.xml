@@ -28,12 +28,10 @@
         <rest_variables/>
         <role_conditions/>
         <script><![CDATA[(function executeRule(current, previous) {
-    if (current.portfolio_owner) gs.info("owner: " + current.portfolio_owner);
-    if (current.portfolio_managers) gs.info("managers: " + current.portfolio_managers);
-    if (current.portfolio_viewers) gs.info("viewers: " + current.portfolio_viewers);
 
     // Owner changed
     if (current.portfolio_owner.changes()) {
+		gs.info("owner change");
         if (current.portfolio_managers) {
             const managers = current.portfolio_managers.toString().split(',');
             if (managers.includes(current.portfolio_owner.toString())) {
@@ -52,12 +50,19 @@
 
     // Managers changed
     if (current.portfolio_managers.changes()) {
+		gs.info("manager change");
         // TODO if owner contains any of the new managers then halt the update
         // TODO if viewers contains any of the new managers then halt the update
     }
 
     // Viewers changed
     if (current.portfolio_viewers.changes()) {
+		const previousViewers = previous.portfolio_viewers;
+		const currentViewers = current.portfolio_viewers;
+		const changes = `Changes: ${current.portfolio_viewers.changes()}`;
+		gs.info(`Previous: ${previousViewers}`);
+		gs.info(`Current: ${currentViewers}`);
+		gs.info(`Changes: ${changes}`);
         // TODO if owner contains any of the new viewers then halt the update
         // TODO if managers contains any of the new viewers then halt the update
     }
@@ -68,15 +73,15 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>e2956e7197f72110cf3cfd9fe153afaa</sys_id>
-        <sys_mod_count>18</sys_mod_count>
+        <sys_mod_count>22</sys_mod_count>
         <sys_name>Portfolio - One role only</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_e2956e7197f72110cf3cfd9fe153afaa</sys_update_name>
-        <sys_updated_by>jason.d.burkert.ctr@mail.mil</sys_updated_by>
-        <sys_updated_on>2023-07-05 15:34:48</sys_updated_on>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-20 18:21:30</sys_updated_on>
         <template/>
         <when>before</when>
     </sys_script>
