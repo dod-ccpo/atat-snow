@@ -1,0 +1,1312 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Sends an email to all package owners when a package is ready and has been finished by a contributor</description>
+        <internal_name>alerts__package_is_ready_to_be_submitted</internal_name>
+        <label_cache>[{"name":"Created or Updated_1.current.acquisition_package.mission_owners","label":"Trigger - Record Created or Updated➛DAPPS:Package Documents Signed Record➛Acquisition Package➛Mission Owners","reference":"sys_user","reference_display":"User","type":"glide_list","base_type":"glide_list","parent_table_name":"x_g_dis_atat_acquisition_package","column_name":"mission_owners"},{"name":"Created or Updated_1.current.sys_updated_by","label":"Trigger - Record Created or Updated➛DAPPS:Package Documents Signed Record➛Updated by","reference":"","reference_display":"Updated by","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_package_documents_signed","column_name":"sys_updated_by"},{"name":"Created or Updated_1.current.acquisition_package.contributors","label":"Trigger - Record Created or Updated➛DAPPS:Package Documents Signed Record➛Acquisition Package➛Contributors","reference":"sys_user","reference_display":"User","type":"glide_list","base_type":"glide_list","parent_table_name":"x_g_dis_atat_acquisition_package","column_name":"contributors"},{"name":"Created or Updated_1.current.sys_created_by","label":"Trigger - Record Created or Updated➛DAPPS:Package Documents Signed Record➛Created by","reference":"","reference_display":"Created by","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_package_documents_signed","column_name":"sys_created_by"},{"name":"Created or Updated_1.current.acquisition_package","label":"Trigger - Record Created or Updated➛DAPPS:Package Documents Signed Record➛Acquisition Package","reference":"x_g_dis_atat_acquisition_package","reference_display":"DAPPS:Acquisition Package","type":"reference","base_type":"reference","parent_table_name":"x_g_dis_atat_package_documents_signed","column_name":"acquisition_package"},{"name":"9fa2e94e-97e8-4ea3-9bc2-78ace4caf46a.item.email","label":"2 - For Each➛Mission Owners Record➛Email","reference":"","reference_display":"Email","type":"email","base_type":"email","parent_table_name":"sys_user","column_name":"email"}]</label_cache>
+        <master_snapshot>6186647a973321103394f5b0f053afc9</master_snapshot>
+
+        <name>CONTRIB: Package is Ready to Be Submitted</name>
+        <natlang/>
+        <outputs/>
+        <pre_compiled>false</pre_compiled>
+        <remote_trigger_id>630e70c997c071103394f5b0f053af43</remote_trigger_id>
+
+        <run_as>system</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>torin.harthcock</sys_created_by>
+        <sys_created_on>2023-07-03 19:09:00</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>2d32def1977b61103394f5b0f053af39</sys_id>
+
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>CONTRIB: Package is Ready to Be Submitted</sys_name>
+
+        <sys_overrides/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_hub_flow_2d32def1977b61103394f5b0f053af39</sys_update_name>
+
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-13 15:21:35</sys_updated_on>
+
+        <type>flow</type>
+    </sys_hub_flow>
+    <sys_translated_text action="delete_multiple" query="documentkey=2d32def1977b61103394f5b0f053af39"/>
+    <sys_variable_value action="delete_multiple" query="document_key=2d32def1977b61103394f5b0f053af39"/>
+    <sys_flow_record_trigger action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <condition table="x_g_dis_atat_package_documents_signed">^EQ<item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </condition>
+        <name/>
+        <on_delete>false</on_delete>
+        <on_insert>true</on_insert>
+        <on_update>true</on_update>
+        <run_flow_in>background</run_flow_in>
+        <run_on_extended>false</run_on_extended>
+        <run_when_setting>both</run_when_setting>
+        <run_when_user_list/>
+        <run_when_user_setting>any</run_when_user_setting>
+        <sys_class_name>sys_flow_record_trigger</sys_class_name>
+
+        <sys_created_by>torin.harthcock</sys_created_by>
+        <sys_created_on>2023-07-13 15:21:35</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>630e70c997c071103394f5b0f053af43</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-13 15:21:35</sys_updated_on>
+
+        <table>x_g_dis_atat_package_documents_signed</table>
+    </sys_flow_record_trigger>
+    <sys_trigger_runner_mapping action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <data>{"run_flow_in":"background","run_when_user_list":[],"run_when_setting":"both","run_when_user_setting":"any","run_on_extended":"false"}</data>
+        <identifier>2d32def1977b61103394f5b0f053af39</identifier>
+        <runner>FDTriggerRunner</runner>
+
+        <sys_created_by>torin.harthcock</sys_created_by>
+        <sys_created_on>2023-07-13 15:21:35</sys_created_on>
+        <sys_id>eb0e70c997c071103394f5b0f053af43</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-13 15:21:35</sys_updated_on>
+        <trigger display_value="">630e70c997c071103394f5b0f053af43</trigger>
+    </sys_trigger_runner_mapping>
+    <sys_trigger_runner_mapping action="delete_multiple" query="identifier=2d32def1977b61103394f5b0f053af39^sys_idNOT INeb0e70c997c071103394f5b0f053af43"/>
+
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=2d32def1977b61103394f5b0f053af39^sys_idNOT INf7e77fd6973321103394f5b0f053af6f"/>
+    <sys_hub_trigger_instance action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+
+        <flow display_value="CONTRIB: Package is Ready to Be Submitted">2d32def1977b61103394f5b0f053af39</flow>
+
+        <name>Created or Updated</name>
+        <remote_sys_id/>
+        <sys_created_by>torin.harthcock</sys_created_by>
+        <sys_created_on>2023-07-05 15:50:24</sys_created_on>
+        <sys_id>f7e77fd6973321103394f5b0f053af6f</sys_id>
+
+        <sys_mod_count>12</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-13 15:21:35</sys_updated_on>
+
+        <trigger_definition display_value="Created or Updated">a45d9180c32222002841b63b12d3aea7</trigger_definition>
+        <trigger_inputs/>
+        <trigger_outputs/>
+        <trigger_type>record_create_or_update</trigger_type>
+    </sys_hub_trigger_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=f7e77fd6973321103394f5b0f053af6f"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_trigger_instance</document>
+        <document_key>f7e77fd6973321103394f5b0f053af6f</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>torin.harthcock</sys_created_by>
+        <sys_created_on>2023-07-05 15:50:24</sys_created_on>
+        <sys_id>3be77fd6973321103394f5b0f053af70</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-05 15:50:24</sys_updated_on>
+        <value>^EQ</value>
+        <variable display_value="Condition">707dd180c32222002841b63b12d3aecb</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_trigger_instance</document>
+        <document_key>f7e77fd6973321103394f5b0f053af6f</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>torin.harthcock</sys_created_by>
+        <sys_created_on>2023-07-05 15:50:24</sys_created_on>
+        <sys_id>73e77fd6973321103394f5b0f053af71</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-05 15:50:24</sys_updated_on>
+        <value>x_g_dis_atat_package_documents_signed</value>
+        <variable display_value="Table">cf1e1980c32222002841b63b12d3aea0</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_trigger_output_a45d9180c32222002841b63b12d3aea7^id=f7e77fd6973321103394f5b0f053af6f"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=2d32def1977b61103394f5b0f053af39"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=2d32def1977b61103394f5b0f053af39^sys_idNOT IN2532def1977b61103394f5b0f053af3a"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>2d32def1977b61103394f5b0f053af39</id>
+        <name>ALERTS - Package is Ready to Be Submitted</name>
+        <sys_created_by>torin.harthcock</sys_created_by>
+        <sys_created_on>2023-07-03 19:09:00</sys_created_on>
+        <sys_id>2532def1977b61103394f5b0f053af3a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-03 19:09:00</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=2532def1977b61103394f5b0f053af3a"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=2d32def1977b61103394f5b0f053af39^sys_idNOT IN73e73f16973321103394f5b0f053af50,b7e77fd6973321103394f5b0f053af6a,ffe77fd6973321103394f5b0f053af66"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=document_id</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent>table_name</dependent>
+        <dependent_on_field>table_name</dependent_on_field>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">document_id</internal_type>
+        <label>Record</label>
+        <mandatory>true</mandatory>
+        <max_length>200</max_length>
+
+        <model display_value="CONTRIB: Package is Ready to Be Submitted">2d32def1977b61103394f5b0f053af39</model>
+
+        <model_id>2d32def1977b61103394f5b0f053af39</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_2d32def1977b61103394f5b0f053af39</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>torin.harthcock</sys_created_by>
+        <sys_created_on>2023-07-05 15:50:24</sys_created_on>
+        <sys_id>73e73f16973321103394f5b0f053af50</sys_id>
+
+        <sys_mod_count>3</sys_mod_count>
+
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-13 15:21:35</sys_updated_on>
+
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>true</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>200</max_length>
+
+        <model display_value="CONTRIB: Package is Ready to Be Submitted">2d32def1977b61103394f5b0f053af39</model>
+
+        <model_id>2d32def1977b61103394f5b0f053af39</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_2d32def1977b61103394f5b0f053af39</name>
+        <next_element/>
+        <order>101</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>torin.harthcock</sys_created_by>
+        <sys_created_on>2023-07-05 15:50:24</sys_created_on>
+        <sys_id>b7e77fd6973321103394f5b0f053af6a</sys_id>
+
+        <sys_mod_count>3</sys_mod_count>
+
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-13 15:21:35</sys_updated_on>
+
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>child_label=FDChangeDetails,child_name=FDChangeDetails,child_type=object,child_type_label=Object,co_type_name=FDCollection,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,pwd2droppable=true,uiType=array.object,uiTypeLabel=Array.Object</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>changed_fields</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Changed Fields</label>
+        <mandatory>false</mandatory>
+        <max_length>4000</max_length>
+
+        <model display_value="CONTRIB: Package is Ready to Be Submitted">2d32def1977b61103394f5b0f053af39</model>
+
+        <model_id>2d32def1977b61103394f5b0f053af39</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_2d32def1977b61103394f5b0f053af39</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>torin.harthcock</sys_created_by>
+        <sys_created_on>2023-07-05 15:50:24</sys_created_on>
+        <sys_id>ffe77fd6973321103394f5b0f053af66</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-05 15:50:24</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_output action="delete_multiple" query="model=2d32def1977b61103394f5b0f053af39"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=2d32def1977b61103394f5b0f053af39"/>
+    <sys_hub_action_instance action="delete_multiple" query="flow=2d32def1977b61103394f5b0f053af39^sys_idNOT INc793a0b6973321103394f5b0f053af10"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="CONTRIB: Send Mission Owner Email - Package Ready To Be Signed">61a7e23997bb61103394f5b0f053af4c</action_type>
+        <action_type_parent/>
+        <comment/>
+        <display_text/>
+
+        <flow display_value="CONTRIB: Package is Ready to Be Submitted">2d32def1977b61103394f5b0f053af39</flow>
+
+        <order>3</order>
+        <parent_ui_id>9fa2e94e-97e8-4ea3-9bc2-78ace4caf46a</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:39:43</sys_created_on>
+        <sys_id>c793a0b6973321103394f5b0f053af10</sys_id>
+
+        <sys_mod_count>24</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-13 15:21:35</sys_updated_on>
+
+        <ui_id>7b1f7245-75bf-4186-bc7d-6cd8c728260b</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=c793a0b6973321103394f5b0f053af10"/>
+    <sys_element_mapping action="delete_multiple" query="id=c793a0b6973321103394f5b0f053af10"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>acquisition_package</field>
+        <id>c793a0b6973321103394f5b0f053af10</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:39:43</sys_created_on>
+        <sys_id>8b93a0b6973321103394f5b0f053af12</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-07-06 13:39:43</sys_updated_on>
+        <table>var__m_sys_hub_action_input_61a7e23997bb61103394f5b0f053af4c</table>
+        <value>{{Created or Updated_1.current.acquisition_package}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>mission_owner_email</field>
+        <id>c793a0b6973321103394f5b0f053af10</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:39:43</sys_created_on>
+        <sys_id>c793a0b6973321103394f5b0f053af12</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-07-06 13:39:43</sys_updated_on>
+        <table>var__m_sys_hub_action_input_61a7e23997bb61103394f5b0f053af4c</table>
+        <value>{{9fa2e94e-97e8-4ea3-9bc2-78ace4caf46a.item.email}}</value>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=c793a0b6973321103394f5b0f053af10"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=c793a0b6973321103394f5b0f053af10"/>
+    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=2d32def1977b61103394f5b0f053af39"/>
+    <sys_hub_flow_logic action="delete_multiple" query="flow=2d32def1977b61103394f5b0f053af39^sys_idNOT IN4793a0b6973321103394f5b0f053af08,b3e77fd6973321103394f5b0f053af73"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">cb93a0b6973321103394f5b0f053af07</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+
+        <flow display_value="CONTRIB: Package is Ready to Be Submitted">2d32def1977b61103394f5b0f053af39</flow>
+
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <inputs/>
+        <logic_definition display_value="For Each">098e1dc5c3e232002841b63b12d3ae33</logic_definition>
+        <order>2</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>6f038590-7ab7-45d0-b18a-4da76a061b99</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:39:43</sys_created_on>
+        <sys_id>4793a0b6973321103394f5b0f053af08</sys_id>
+
+        <sys_mod_count>11</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-13 15:21:35</sys_updated_on>
+
+        <ui_id>9fa2e94e-97e8-4ea3-9bc2-78ace4caf46a</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=4793a0b6973321103394f5b0f053af08"/>
+    <sys_element_mapping action="delete_multiple" query="id=4793a0b6973321103394f5b0f053af08"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>items</field>
+        <id>4793a0b6973321103394f5b0f053af08</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:39:43</sys_created_on>
+        <sys_id>0393a0b6973321103394f5b0f053af0b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-07-06 13:39:43</sys_updated_on>
+        <table>var__m_sys_hub_flow_logic_input_098e1dc5c3e232002841b63b12d3ae33</table>
+        <value>{{Created or Updated_1.current.acquisition_package.mission_owners}}</value>
+    </sys_element_mapping>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=4793a0b6973321103394f5b0f053af08"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=4793a0b6973321103394f5b0f053af08"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">77e77fd6973321103394f5b0f053af72</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+
+        <flow display_value="CONTRIB: Package is Ready to Be Submitted">2d32def1977b61103394f5b0f053af39</flow>
+
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <inputs/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>1</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>torin.harthcock</sys_created_by>
+        <sys_created_on>2023-07-05 15:50:24</sys_created_on>
+        <sys_id>b3e77fd6973321103394f5b0f053af73</sys_id>
+
+        <sys_mod_count>12</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-13 15:21:35</sys_updated_on>
+
+        <ui_id>6f038590-7ab7-45d0-b18a-4da76a061b99</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=b3e77fd6973321103394f5b0f053af73"/>
+    <sys_element_mapping action="delete_multiple" query="id=b3e77fd6973321103394f5b0f053af73"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>condition</field>
+        <id>b3e77fd6973321103394f5b0f053af73</id>
+        <sys_created_by>torin.harthcock</sys_created_by>
+        <sys_created_on>2023-07-05 15:50:24</sys_created_on>
+        <sys_id>80f77fd6973321103394f5b0f053af77</sys_id>
+
+        <sys_mod_count>5</sys_mod_count>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-11 13:49:29</sys_updated_on>
+        <table>var__m_sys_hub_flow_logic_input_af4e1945c3e232002841b63b12d3ae3e</table>
+        <value>{{Created or Updated_1.current.acquisition_package.contributors}}LIKE{{Created or Updated_1.current.sys_updated_by}}^{{Created or Updated_1.current.acquisition_package.mission_owners}}NOT LIKE{{Created or Updated_1.current.sys_updated_by}}^OR{{Created or Updated_1.current.acquisition_package.contributors}}LIKE{{Created or Updated_1.current.sys_created_by}}^{{Created or Updated_1.current.acquisition_package.mission_owners}}NOT LIKE{{Created or Updated_1.current.sys_created_by}}</value>
+
+    </sys_element_mapping>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=b3e77fd6973321103394f5b0f053af73"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=b3e77fd6973321103394f5b0f053af73"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=2d32def1977b61103394f5b0f053af39"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=2d32def1977b61103394f5b0f053af39"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_2d32def1977b61103394f5b0f053af39^sys_idNOT IN3be77fd6973321103394f5b0f053af69,3fe77fd6973321103394f5b0f053af65,bbe77fd6973321103394f5b0f053af6c"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>changed_fields</element>
+        <help/>
+        <hint/>
+        <label>Changed Fields</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_2d32def1977b61103394f5b0f053af39</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>torin.harthcock</sys_created_by>
+        <sys_created_on>2023-07-05 15:50:24</sys_created_on>
+        <sys_id>3be77fd6973321103394f5b0f053af69</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-05 15:50:24</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>Record</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_2d32def1977b61103394f5b0f053af39</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>torin.harthcock</sys_created_by>
+        <sys_created_on>2023-07-05 15:50:24</sys_created_on>
+        <sys_id>3fe77fd6973321103394f5b0f053af65</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-05 15:50:24</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_2d32def1977b61103394f5b0f053af39</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>torin.harthcock</sys_created_by>
+        <sys_created_on>2023-07-05 15:50:24</sys_created_on>
+        <sys_id>bbe77fd6973321103394f5b0f053af6c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-05 15:50:24</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_2d32def1977b61103394f5b0f053af39"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_2d32def1977b61103394f5b0f053af39"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_2d32def1977b61103394f5b0f053af39"/>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=2d32def1977b61103394f5b0f053af39^sys_idNOT INa586a47a973321103394f5b0f053af2d"/>
+    <sys_flow_trigger_plan action="INSERT_OR_UPDATE">
+        <binding_strategy>com.snc.process_flow.engine.binding.OncePerRecord</binding_strategy>
+
+        <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_flow_trigger_plan","id":"a586a47a973321103394f5b0f053af2d","name":"plan","plan_signature":null}}</plan>
+
+        <plan_id>2d32def1977b61103394f5b0f053af39</plan_id>
+        <snapshot>6186647a973321103394f5b0f053afc9</snapshot>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:52:27</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>a586a47a973321103394f5b0f053af2d</sys_id>
+
+        <sys_mod_count>1</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-13 15:21:35</sys_updated_on>
+        <trigger display_value="">630e70c997c071103394f5b0f053af43</trigger>
+
+    </sys_flow_trigger_plan>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=2d32def1977b61103394f5b0f053af39"/>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Sends an email to all package owners when a package is ready and has been finished by a contributor</description>
+        <internal_name>alerts_package_is_ready_to_be_submitted</internal_name>
+        <label_cache>[{"name":"Created or Updated_1.current.acquisition_package.mission_owners","label":"Trigger - Record Created or Updated➛DAPPS:Package Documents Signed Record➛Acquisition Package➛Mission Owners","reference":"sys_user","reference_display":"User","type":"glide_list","base_type":"glide_list","parent_table_name":"x_g_dis_atat_acquisition_package","column_name":"mission_owners"},{"name":"Created or Updated_1.current.sys_updated_by","label":"Trigger - Record Created or Updated➛DAPPS:Package Documents Signed Record➛Updated by","reference":"","reference_display":"Updated by","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_package_documents_signed","column_name":"sys_updated_by"},{"name":"Created or Updated_1.current.acquisition_package.contributors","label":"Trigger - Record Created or Updated➛DAPPS:Package Documents Signed Record➛Acquisition Package➛Contributors","reference":"sys_user","reference_display":"User","type":"glide_list","base_type":"glide_list","parent_table_name":"x_g_dis_atat_acquisition_package","column_name":"contributors"},{"name":"Created or Updated_1.current.sys_created_by","label":"Trigger - Record Created or Updated➛DAPPS:Package Documents Signed Record➛Created by","reference":"","reference_display":"Created by","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_package_documents_signed","column_name":"sys_created_by"},{"name":"Created or Updated_1.current.acquisition_package","label":"Trigger - Record Created or Updated➛DAPPS:Package Documents Signed Record➛Acquisition Package","reference":"x_g_dis_atat_acquisition_package","reference_display":"DAPPS:Acquisition Package","type":"reference","base_type":"reference","parent_table_name":"x_g_dis_atat_package_documents_signed","column_name":"acquisition_package"},{"name":"9fa2e94e-97e8-4ea3-9bc2-78ace4caf46a.item.email","label":"2 - For Each➛Mission Owners Record➛Email","reference":"","reference_display":"Email","type":"email","base_type":"email","parent_table_name":"sys_user","column_name":"email"}]</label_cache>
+        <master>true</master>
+
+        <name>CONTRIB: Package is Ready to Be Submitted</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="CONTRIB: Package is Ready to Be Submitted">2d32def1977b61103394f5b0f053af39</parent_flow>
+
+        <remote_trigger_id/>
+        <run_as>system</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:52:26</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>6186647a973321103394f5b0f053afc9</sys_id>
+
+        <sys_mod_count>1</sys_mod_count>
+
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-13 15:21:34</sys_updated_on>
+
+        <type>flow</type>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=6186647a973321103394f5b0f053afc9"/>
+    <sys_variable_value action="delete_multiple" query="document_key=6186647a973321103394f5b0f053afc9"/>
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=6186647a973321103394f5b0f053afc9^sys_idNOT INa586a47a973321103394f5b0f053af0e"/>
+    <sys_hub_trigger_instance action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+
+        <flow display_value="CONTRIB: Package is Ready to Be Submitted">6186647a973321103394f5b0f053afc9</flow>
+
+        <name>Created or Updated</name>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:52:26</sys_created_on>
+        <sys_id>a586a47a973321103394f5b0f053af0e</sys_id>
+
+        <sys_mod_count>5</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-13 15:21:35</sys_updated_on>
+
+        <trigger_definition display_value="Created or Updated">a45d9180c32222002841b63b12d3aea7</trigger_definition>
+        <trigger_inputs/>
+        <trigger_outputs/>
+        <trigger_type>record_create_or_update</trigger_type>
+    </sys_hub_trigger_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=a586a47a973321103394f5b0f053af0e"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_trigger_instance</document>
+        <document_key>a586a47a973321103394f5b0f053af0e</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:52:26</sys_created_on>
+        <sys_id>2d86a47a973321103394f5b0f053af0f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-07-06 13:52:26</sys_updated_on>
+        <value>^EQ</value>
+        <variable display_value="Condition">707dd180c32222002841b63b12d3aecb</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_trigger_instance</document>
+        <document_key>a586a47a973321103394f5b0f053af0e</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:52:26</sys_created_on>
+        <sys_id>ed86a47a973321103394f5b0f053af0f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-07-06 13:52:26</sys_updated_on>
+        <value>x_g_dis_atat_package_documents_signed</value>
+        <variable display_value="Table">cf1e1980c32222002841b63b12d3aea0</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_trigger_output_a45d9180c32222002841b63b12d3aea7^id=a586a47a973321103394f5b0f053af0e"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=6186647a973321103394f5b0f053afc9"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=6186647a973321103394f5b0f053afc9^sys_idNOT INa986647a973321103394f5b0f053afc9"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>6186647a973321103394f5b0f053afc9</id>
+        <name>ALERTS: Package is Ready to Be Submitted</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:52:26</sys_created_on>
+        <sys_id>a986647a973321103394f5b0f053afc9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-07-06 13:52:26</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=a986647a973321103394f5b0f053afc9"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=6186647a973321103394f5b0f053afc9^sys_idNOT IN2586647a973321103394f5b0f053afe7,ad86647a973321103394f5b0f053afca,e186647a973321103394f5b0f053afdf"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name</attributes>
+
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>200</max_length>
+
+        <model display_value="CONTRIB: Package is Ready to Be Submitted">6186647a973321103394f5b0f053afc9</model>
+
+        <model_id>6186647a973321103394f5b0f053afc9</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_6186647a973321103394f5b0f053afc9</name>
+        <next_element/>
+        <order>101</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:52:26</sys_created_on>
+        <sys_id>2586647a973321103394f5b0f053afe7</sys_id>
+
+        <sys_mod_count>1</sys_mod_count>
+
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-13 15:21:34</sys_updated_on>
+
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=document_id</attributes>
+
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent>table_name</dependent>
+        <dependent_on_field>table_name</dependent_on_field>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">document_id</internal_type>
+        <label>Record</label>
+        <mandatory>true</mandatory>
+        <max_length>200</max_length>
+
+        <model display_value="CONTRIB: Package is Ready to Be Submitted">6186647a973321103394f5b0f053afc9</model>
+
+        <model_id>6186647a973321103394f5b0f053afc9</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_6186647a973321103394f5b0f053afc9</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:52:26</sys_created_on>
+        <sys_id>ad86647a973321103394f5b0f053afca</sys_id>
+
+        <sys_mod_count>1</sys_mod_count>
+
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-13 15:21:34</sys_updated_on>
+
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>true</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+
+        <attributes>child_label=FDChangeDetails,child_name=FDChangeDetails,child_type=object,child_type_label=Object,co_type_name=FDCollection,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,pwd2droppable=true,uiType=array.object,uiTypeLabel=Array.Object</attributes>
+
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>changed_fields</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Changed Fields</label>
+        <mandatory>false</mandatory>
+        <max_length>4000</max_length>
+
+        <model display_value="CONTRIB: Package is Ready to Be Submitted">6186647a973321103394f5b0f053afc9</model>
+
+        <model_id>6186647a973321103394f5b0f053afc9</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_6186647a973321103394f5b0f053afc9</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:52:26</sys_created_on>
+        <sys_id>e186647a973321103394f5b0f053afdf</sys_id>
+
+        <sys_mod_count>1</sys_mod_count>
+
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-13 15:21:34</sys_updated_on>
+
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_output action="delete_multiple" query="model=6186647a973321103394f5b0f053afc9"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=6186647a973321103394f5b0f053afc9"/>
+    <sys_hub_action_instance action="delete_multiple" query="flow=6186647a973321103394f5b0f053afc9^sys_idNOT IN6186a47a973321103394f5b0f053af0d"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="CONTRIB: Send Mission Owner Email - Package Ready To Be Signed">61a7e23997bb61103394f5b0f053af4c</action_type>
+        <action_type_parent display_value="CONTRIB: Send Mission Owner Email - Package Ready To Be Signed">caf2daf1977b61103394f5b0f053af85</action_type_parent>
+        <comment/>
+        <display_text/>
+
+        <flow display_value="CONTRIB: Package is Ready to Be Submitted">6186647a973321103394f5b0f053afc9</flow>
+
+        <order>3</order>
+        <parent_ui_id>9fa2e94e-97e8-4ea3-9bc2-78ace4caf46a</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:52:26</sys_created_on>
+        <sys_id>6186a47a973321103394f5b0f053af0d</sys_id>
+
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-13 15:21:34</sys_updated_on>
+
+        <ui_id>7b1f7245-75bf-4186-bc7d-6cd8c728260b</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=6186a47a973321103394f5b0f053af0d"/>
+    <sys_element_mapping action="delete_multiple" query="id=6186a47a973321103394f5b0f053af0d"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>acquisition_package</field>
+        <id>6186a47a973321103394f5b0f053af0d</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:52:26</sys_created_on>
+        <sys_id>e186a47a973321103394f5b0f053af0e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-07-06 13:52:26</sys_updated_on>
+        <table>var__m_sys_hub_action_input_61a7e23997bb61103394f5b0f053af4c</table>
+        <value>{{Created or Updated_1.current.acquisition_package}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>mission_owner_email</field>
+        <id>6186a47a973321103394f5b0f053af0d</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:52:26</sys_created_on>
+        <sys_id>2186a47a973321103394f5b0f053af0e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-07-06 13:52:26</sys_updated_on>
+        <table>var__m_sys_hub_action_input_61a7e23997bb61103394f5b0f053af4c</table>
+        <value>{{9fa2e94e-97e8-4ea3-9bc2-78ace4caf46a.item.email}}</value>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=6186a47a973321103394f5b0f053af0d"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=6186a47a973321103394f5b0f053af0d"/>
+    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=6186647a973321103394f5b0f053afc9"/>
+    <sys_hub_flow_logic action="delete_multiple" query="flow=6186647a973321103394f5b0f053afc9^sys_idNOT INa186a47a973321103394f5b0f053af03,e186647a973321103394f5b0f053afff"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">cb93a0b6973321103394f5b0f053af07</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+
+        <flow display_value="CONTRIB: Package is Ready to Be Submitted">6186647a973321103394f5b0f053afc9</flow>
+
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <inputs/>
+        <logic_definition display_value="For Each">098e1dc5c3e232002841b63b12d3ae33</logic_definition>
+        <order>2</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id>6f038590-7ab7-45d0-b18a-4da76a061b99</parent_ui_id>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:52:26</sys_created_on>
+        <sys_id>a186a47a973321103394f5b0f053af03</sys_id>
+
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-13 15:21:34</sys_updated_on>
+
+        <ui_id>9fa2e94e-97e8-4ea3-9bc2-78ace4caf46a</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=a186a47a973321103394f5b0f053af03"/>
+    <sys_element_mapping action="delete_multiple" query="id=a186a47a973321103394f5b0f053af03"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>items</field>
+        <id>a186a47a973321103394f5b0f053af03</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:52:26</sys_created_on>
+        <sys_id>6d86a47a973321103394f5b0f053af05</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-07-06 13:52:26</sys_updated_on>
+        <table>var__m_sys_hub_flow_logic_input_098e1dc5c3e232002841b63b12d3ae33</table>
+        <value>{{Created or Updated_1.current.acquisition_package.mission_owners}}</value>
+    </sys_element_mapping>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=a186a47a973321103394f5b0f053af03"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=a186a47a973321103394f5b0f053af03"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">77e77fd6973321103394f5b0f053af72</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+
+        <flow display_value="CONTRIB: Package is Ready to Be Submitted">6186647a973321103394f5b0f053afc9</flow>
+
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <inputs/>
+        <logic_definition display_value="If">af4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>1</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:52:26</sys_created_on>
+        <sys_id>e186647a973321103394f5b0f053afff</sys_id>
+
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-13 15:21:34</sys_updated_on>
+
+        <ui_id>6f038590-7ab7-45d0-b18a-4da76a061b99</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=e186647a973321103394f5b0f053afff"/>
+    <sys_element_mapping action="delete_multiple" query="id=e186647a973321103394f5b0f053afff"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>condition</field>
+        <id>e186647a973321103394f5b0f053afff</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:52:26</sys_created_on>
+        <sys_id>2986a47a973321103394f5b0f053af02</sys_id>
+
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-07-13 15:21:34</sys_updated_on>
+        <table>var__m_sys_hub_flow_logic_input_af4e1945c3e232002841b63b12d3ae3e</table>
+        <value>{{Created or Updated_1.current.acquisition_package.contributors}}LIKE{{Created or Updated_1.current.sys_updated_by}}^{{Created or Updated_1.current.acquisition_package.mission_owners}}NOT LIKE{{Created or Updated_1.current.sys_updated_by}}^OR{{Created or Updated_1.current.acquisition_package.contributors}}LIKE{{Created or Updated_1.current.sys_created_by}}^{{Created or Updated_1.current.acquisition_package.mission_owners}}NOT LIKE{{Created or Updated_1.current.sys_created_by}}</value>
+
+    </sys_element_mapping>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=e186647a973321103394f5b0f053afff"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=e186647a973321103394f5b0f053afff"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=6186647a973321103394f5b0f053afc9"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=6186647a973321103394f5b0f053afc9"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_6186647a973321103394f5b0f053afc9^sys_idNOT IN2d86647a973321103394f5b0f053afe3,e986647a973321103394f5b0f053afdb,e986647a973321103394f5b0f053afeb"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>changed_fields</element>
+        <help/>
+        <hint/>
+        <label>Changed Fields</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_6186647a973321103394f5b0f053afc9</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:52:26</sys_created_on>
+        <sys_id>2d86647a973321103394f5b0f053afe3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-07-06 13:52:26</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>Record</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_6186647a973321103394f5b0f053afc9</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:52:26</sys_created_on>
+        <sys_id>e986647a973321103394f5b0f053afdb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-07-06 13:52:26</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_6186647a973321103394f5b0f053afc9</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-06 13:52:26</sys_created_on>
+        <sys_id>e986647a973321103394f5b0f053afeb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-07-06 13:52:26</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_6186647a973321103394f5b0f053afc9"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_6186647a973321103394f5b0f053afc9"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_6186647a973321103394f5b0f053afc9"/>
+    <sys_hub_flow action="UPDATE">
+        <sys_id>2d32def1977b61103394f5b0f053af39</sys_id>
+        <latest_snapshot>6186647a973321103394f5b0f053afc9</latest_snapshot>
+
+        <compiler_build>glide-tokyo-07-08-2022__patch9-hotfix2-06-07-2023_06-23-2023_1740.zip</compiler_build>
+
+    </sys_hub_flow>
+</record_update>
