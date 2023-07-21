@@ -12,7 +12,7 @@
         <change_fields>false</change_fields>
         <client_callable>false</client_callable>
         <collection>x_g_dis_atat_portfolio</collection>
-        <condition>current.portfolio_owner.changes() || current.portfolio_managers.changes() || current.portfolio_viewers.changes()</condition>
+        <condition>current.portfolio_managers.changes() || current.portfolio_viewers.changes()</condition>
         <description/>
         <execute_function>false</execute_function>
         <filter_condition/>
@@ -28,52 +28,48 @@
         <rest_variables/>
         <role_conditions/>
         <script><![CDATA[(function executeRule(current, previous) {
+	if(current.portfolio_viewers.changes()) {
+		const changes = getChangeBetweenTwoLists(previous.portfolio_viewers, current.portfolio_viewers);
+		updateDb(changes, 'portfolio_managers');
+	}
+	
+	if(current.portfolio_managers.changes()) {
+		const changes = getChangeBetweenTwoLists(previous.portfolio_managers, current.portfolio_managers);
+		updateDb(changes, 'portfolio_viewers');
+	}
+})(current, previous);
 
-    // Owner changed
-    if (current.portfolio_owner.changes()) {
-		gs.info("owner change");
-        if (current.portfolio_managers) {
-            const managers = current.portfolio_managers.toString().split(',');
-            if (managers.includes(current.portfolio_owner.toString())) {
-                gs.addErrorMessage(current.portfolio_owner.name + " is already a Portfolio Manager. Update cancelled.");
-                current.setAbortAction(true);
-            }
-        }
-        if (current.portfolio_viewers) {
-            const viewers = current.portfolio_viewers.toString().split(',');
-            if (viewers.includes(current.portfolio_owner.toString())) {
-                gs.addErrorMessage(current.portfolio_owner.name + " is already a Portfolio Viewer. Update cancelled.");
-                current.setAbortAction(true);
-            }
-        }
-    }
+function getChangeBetweenTwoLists(l1, l2) {
+	const l1Split = l1.toString().split(',');
+	const l2Split = l2.toString().split(',');
+	return l2Split.filter(function(item) {
+		return !l1Split.includes(item); 
+	});
+}
 
-    // Managers changed
-    if (current.portfolio_managers.changes()) {
-		gs.info("manager change");
-        // TODO if owner contains any of the new managers then halt the update
-        // TODO if viewers contains any of the new managers then halt the update
-    }
-
-    // Viewers changed
-    if (current.portfolio_viewers.changes()) {
-		const previousViewers = previous.portfolio_viewers;
-		const currentViewers = current.portfolio_viewers;
-		const changes = `Changes: ${current.portfolio_viewers.changes()}`;
-		gs.info(`Previous: ${previousViewers}`);
-		gs.info(`Current: ${currentViewers}`);
-		gs.info(`Changes: ${changes}`);
-        // TODO if owner contains any of the new viewers then halt the update
-        // TODO if managers contains any of the new viewers then halt the update
-    }
-})(current, previous);]]></script>
+function updateDb(diff, type) {
+		diff.forEach(function(user) {
+		const gr = new GlideRecord('x_g_dis_atat_portfolio');
+		gr.addQuery(type, 'CONTAINS', user);
+		gr.query();
+		while(gr.next()) {
+            const splitList = gr.getValue(type).split(',');
+            const index = splitList.indexOf(user);
+            if (index > -1) {
+                splitList.splice(index, 1);
+                gr.setValue(type, splitList.join(','));
+                gr.update();
+			}
+		}
+    });
+}]]></script>
         <sys_class_name>sys_script</sys_class_name>
         <sys_created_by>jason.d.burkert.ctr@mail.mil</sys_created_by>
         <sys_created_on>2023-07-03 21:09:12</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>e2956e7197f72110cf3cfd9fe153afaa</sys_id>
-        <sys_mod_count>22</sys_mod_count>
+        <sys_mod_count>70</sys_mod_count>
         <sys_name>Portfolio - One role only</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -81,9 +77,9 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_e2956e7197f72110cf3cfd9fe153afaa</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-20 18:21:30</sys_updated_on>
-        <template/>
-        <when>before</when>
+        <sys_updated_on>2023-07-21 16:04:00</sys_updated_on>
+        <template>portfolio_owner=^EQ</template>
+        <when>after</when>
     </sys_script>
     <sys_translated_text action="delete_multiple" query="documentkey=e2956e7197f72110cf3cfd9fe153afaa"/>
 </record_update>
