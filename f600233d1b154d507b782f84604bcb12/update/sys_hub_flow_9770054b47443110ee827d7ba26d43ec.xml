@@ -6,17 +6,17 @@
         <annotation/>
         <callable_by_client_api>false</callable_by_client_api>
         <category/>
-        <copied_from/>
-        <copied_from_name/>
+        <copied_from>5c50a31047447110ee827d7ba26d4352</copied_from>
+        <copied_from_name>PROV: Send Email To New Portfoli</copied_from_name>
         <description>This flow notifies portfolio viewers when they are added to a portfolio.</description>
-        <internal_name>prov</internal_name>
+        <internal_name>prov_send_email_to_new_portfolio_viewer</internal_name>
         <label_cache>[{"name":"Created or Updated_1.current","label":"Trigger - Record Created or Updated➛x_g_dis_atat_portfolio Record","reference":"x_g_dis_atat_portfolio","reference_display":"x_g_dis_atat_portfolio","type":"reference","base_type":"reference","attributes":{}},{"name":"Created or Updated_1.table_name","label":"Trigger - Record Created or Updated➛x_g_dis_atat_portfolio Table","reference":"x_g_dis_atat_portfolio","reference_display":"x_g_dis_atat_portfolio","type":"table_name","base_type":"table_name","attributes":{"test_input_hidden":"true"}},{"name":"Created or Updated_1.current.name","label":"Trigger - Record Created or Updated➛x_g_dis_atat_portfolio Record➛Name","reference":"","reference_display":"Name","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_portfolio","column_name":"name"},{"name":"96821d90-66f9-4d5c-93c1-aed9081540ff.__status__.message","label":"1 - Top Level Catch➛Error Status➛Message","reference":"","reference_display":"","type":"string","base_type":"string","column_name":"","attributes":{}}]</label_cache>
-        <master_snapshot>57b1e39447447110ee827d7ba26d437c</master_snapshot>
-        <name>PROV: Send Email To New Portfolio Manager</name>
+        <master_snapshot>c731c58b47443110ee827d7ba26d435f</master_snapshot>
+        <name>PROV: Send Email To New Portfolio Viewer</name>
         <natlang/>
         <outputs/>
         <pre_compiled>false</pre_compiled>
-        <remote_trigger_id>6ef0418b47443110ee827d7ba26d4364</remote_trigger_id>
+        <remote_trigger_id>db31c58b47443110ee827d7ba26d43c7</remote_trigger_id>
         <run_as>system</run_as>
         <run_with_roles/>
         <sc_callable>false</sc_callable>
@@ -25,26 +25,26 @@
         <status>published</status>
         <sys_class_name>sys_hub_flow</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:15:04</sys_created_on>
+        <sys_created_on>2023-07-19 20:40:03</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
-        <sys_id>5c50a31047447110ee827d7ba26d4352</sys_id>
+        <sys_id>9770054b47443110ee827d7ba26d43ec</sys_id>
         <sys_mod_count>4</sys_mod_count>
-        <sys_name>PROV: Send Email To New Portfolio Manager</sys_name>
+        <sys_name>PROV: Send Email To New Portfolio Viewer</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name>sys_hub_flow_5c50a31047447110ee827d7ba26d4352</sys_update_name>
+        <sys_update_name>sys_hub_flow_9770054b47443110ee827d7ba26d43ec</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:42:12</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:43:20</sys_updated_on>
         <type>flow</type>
     </sys_hub_flow>
-    <sys_translated_text action="delete_multiple" query="documentkey=5c50a31047447110ee827d7ba26d4352"/>
-    <sys_variable_value action="delete_multiple" query="document_key=5c50a31047447110ee827d7ba26d4352"/>
+    <sys_translated_text action="delete_multiple" query="documentkey=9770054b47443110ee827d7ba26d43ec"/>
+    <sys_variable_value action="delete_multiple" query="document_key=9770054b47443110ee827d7ba26d43ec"/>
     <sys_flow_record_trigger action="INSERT_OR_UPDATE">
         <active>true</active>
-        <condition table="x_g_dis_atat_portfolio">portfolio_managersVALCHANGES<item endquery="false" field="portfolio_managers" goto="false" newquery="false" operator="VALCHANGES" or="false" value=""/>
+        <condition table="x_g_dis_atat_portfolio">portfolio_viewersVALCHANGES<item endquery="false" field="portfolio_viewers" goto="false" newquery="false" operator="VALCHANGES" or="false" value=""/>
         </condition>
         <name/>
         <on_delete>false</on_delete>
@@ -57,192 +57,109 @@
         <run_when_user_setting>any</run_when_user_setting>
         <sys_class_name>sys_flow_record_trigger</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-19 20:42:12</sys_created_on>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
-        <sys_id>6ef0418b47443110ee827d7ba26d4364</sys_id>
+        <sys_id>db31c58b47443110ee827d7ba26d43c7</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_overrides/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:42:12</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
         <table>x_g_dis_atat_portfolio</table>
     </sys_flow_record_trigger>
     <sys_trigger_runner_mapping action="INSERT_OR_UPDATE">
         <active>true</active>
         <data>{"run_flow_in":"background","run_when_user_list":[],"run_when_setting":"both","run_when_user_setting":"any","run_on_extended":"false"}</data>
-        <identifier>5c50a31047447110ee827d7ba26d4352</identifier>
+        <identifier>9770054b47443110ee827d7ba26d43ec</identifier>
         <runner>FDTriggerRunner</runner>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-19 20:42:12</sys_created_on>
-        <sys_id>e6f0418b47443110ee827d7ba26d4365</sys_id>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>5331c58b47443110ee827d7ba26d43c8</sys_id>
         <sys_mod_count>1</sys_mod_count>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:42:12</sys_updated_on>
-        <trigger display_value="">6ef0418b47443110ee827d7ba26d4364</trigger>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+        <trigger display_value="">db31c58b47443110ee827d7ba26d43c7</trigger>
     </sys_trigger_runner_mapping>
-    <sys_trigger_runner_mapping action="delete_multiple" query="identifier=5c50a31047447110ee827d7ba26d4352^sys_idNOT INe6f0418b47443110ee827d7ba26d4365"/>
-    <sys_hub_trigger_instance action="delete_multiple" query="flow=5c50a31047447110ee827d7ba26d4352^sys_idNOT INadb1a39447447110ee827d7ba26d434b"/>
+    <sys_trigger_runner_mapping action="delete_multiple" query="identifier=9770054b47443110ee827d7ba26d43ec^sys_idNOT IN5331c58b47443110ee827d7ba26d43c8"/>
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=9770054b47443110ee827d7ba26d43ec^sys_idNOT IN6770454b47443110ee827d7ba26d4324"/>
     <sys_hub_trigger_instance action="INSERT_OR_UPDATE">
         <comment/>
         <display_text/>
-        <flow display_value="PROV: Send Email To New Portfolio Manager">5c50a31047447110ee827d7ba26d4352</flow>
+        <flow display_value="PROV: Send Email To New Portfolio Viewer">9770054b47443110ee827d7ba26d43ec</flow>
         <name>Created or Updated</name>
         <remote_sys_id/>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>adb1a39447447110ee827d7ba26d434b</sys_id>
-        <sys_mod_count>167</sys_mod_count>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>6770454b47443110ee827d7ba26d4324</sys_id>
+        <sys_mod_count>4</sys_mod_count>
         <sys_scope/>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:42:12</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:43:20</sys_updated_on>
         <trigger_definition display_value="Created or Updated">a45d9180c32222002841b63b12d3aea7</trigger_definition>
         <trigger_inputs/>
         <trigger_outputs/>
         <trigger_type>record_create_or_update</trigger_type>
     </sys_hub_trigger_instance>
-    <sys_variable_value action="delete_multiple" query="document_key=adb1a39447447110ee827d7ba26d434b"/>
+    <sys_variable_value action="delete_multiple" query="document_key=6770454b47443110ee827d7ba26d4324"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>sys_hub_trigger_instance</document>
-        <document_key>adb1a39447447110ee827d7ba26d434b</document_key>
+        <document_key>6770454b47443110ee827d7ba26d4324</document_key>
+        <order>200</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>2370454b47443110ee827d7ba26d4325</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:40:04</sys_updated_on>
+        <value>every</value>
+        <variable display_value="Run Trigger">2b9def50c31132002841b63b12d3ae5b</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_trigger_instance</document>
+        <document_key>6770454b47443110ee827d7ba26d4324</document_key>
         <order>1</order>
         <sys_class_name>sys_variable_value</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>29b1a39447447110ee827d7ba26d434d</sys_id>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>a770454b47443110ee827d7ba26d4325</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:10</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:40:04</sys_updated_on>
         <value>x_g_dis_atat_portfolio</value>
         <variable display_value="Table">cf1e1980c32222002841b63b12d3aea0</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>sys_hub_trigger_instance</document>
-        <document_key>adb1a39447447110ee827d7ba26d434b</document_key>
+        <document_key>6770454b47443110ee827d7ba26d4324</document_key>
         <order>100</order>
         <sys_class_name>sys_variable_value</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>65b1a39447447110ee827d7ba26d434d</sys_id>
-        <sys_mod_count>2</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:42:04</sys_updated_on>
-        <value>portfolio_managersVALCHANGES</value>
-        <variable display_value="Condition">707dd180c32222002841b63b12d3aecb</variable>
-    </sys_variable_value>
-    <sys_variable_value action="INSERT_OR_UPDATE">
-        <document>sys_hub_trigger_instance</document>
-        <document_key>adb1a39447447110ee827d7ba26d434b</document_key>
-        <order>200</order>
-        <sys_class_name>sys_variable_value</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>6db1a39447447110ee827d7ba26d434c</sys_id>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>e370454b47443110ee827d7ba26d4325</sys_id>
         <sys_mod_count>1</sys_mod_count>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-12 17:57:47</sys_updated_on>
-        <value>every</value>
-        <variable display_value="Run Trigger">2b9def50c31132002841b63b12d3ae5b</variable>
+        <sys_updated_on>2023-07-19 20:43:15</sys_updated_on>
+        <value>portfolio_viewersVALCHANGES</value>
+        <variable display_value="Condition">707dd180c32222002841b63b12d3aecb</variable>
     </sys_variable_value>
-    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_trigger_output_a45d9180c32222002841b63b12d3aea7^id=adb1a39447447110ee827d7ba26d434b"/>
-    <sys_hub_flow_stage action="delete_multiple" query="flow=5c50a31047447110ee827d7ba26d4352"/>
-    <sys_flow_cat_variable_model action="delete_multiple" query="id=5c50a31047447110ee827d7ba26d4352^sys_idNOT IN1850a31047447110ee827d7ba26d4353"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_trigger_output_a45d9180c32222002841b63b12d3aea7^id=6770454b47443110ee827d7ba26d4324"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=9770054b47443110ee827d7ba26d43ec"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=9770054b47443110ee827d7ba26d43ec^sys_idNOT IN5370054b47443110ee827d7ba26d43ed"/>
     <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
-        <id>5c50a31047447110ee827d7ba26d4352</id>
-        <name>PROV:</name>
+        <id>9770054b47443110ee827d7ba26d43ec</id>
+        <name>PROV: Send Email To New Portfolio Viewer</name>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:15:04</sys_created_on>
-        <sys_id>1850a31047447110ee827d7ba26d4353</sys_id>
+        <sys_created_on>2023-07-19 20:40:03</sys_created_on>
+        <sys_id>5370054b47443110ee827d7ba26d43ed</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_scope/>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:15:04</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:40:03</sys_updated_on>
     </sys_flow_cat_variable_model>
-    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=1850a31047447110ee827d7ba26d4353"/>
-    <sys_hub_flow_input action="delete_multiple" query="model=5c50a31047447110ee827d7ba26d4352^sys_idNOT IN25b1a39447447110ee827d7ba26d4343,61b1a39447447110ee827d7ba26d433f,6db1a39447447110ee827d7ba26d4346"/>
-    <sys_hub_flow_input action="INSERT_OR_UPDATE">
-        <active>true</active>
-        <array>false</array>
-        <array_denormalized>false</array_denormalized>
-        <attributes>child_label=FDChangeDetails,child_name=FDChangeDetails,child_type=object,child_type_label=Object,co_type_name=FDCollection,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,pwd2droppable=true,uiType=array.object,uiTypeLabel=Array.Object</attributes>
-        <audit>false</audit>
-        <calculation><![CDATA[(function calculatedFieldValue(current) {
-
-	// Add your code here
-	return '';  // return the calculated value
-
-})(current);]]></calculation>
-        <choice/>
-        <choice_field/>
-        <choice_table/>
-        <column_label/>
-        <comments/>
-        <create_roles/>
-        <default_value/>
-        <defaultsort/>
-        <delete_roles/>
-        <dependent/>
-        <dependent_on_field/>
-        <display>false</display>
-        <dynamic_creation>false</dynamic_creation>
-        <dynamic_creation_script/>
-        <dynamic_default_value/>
-        <dynamic_ref_qual/>
-        <element>changed_fields</element>
-        <element_reference>false</element_reference>
-        <foreign_database/>
-        <formula/>
-        <function_definition/>
-        <function_field>false</function_field>
-        <help/>
-        <hint/>
-        <internal_type display_value="String">string</internal_type>
-        <label>Changed Fields</label>
-        <mandatory>false</mandatory>
-        <max_length>4000</max_length>
-        <model display_value="PROV: Send Email To New Portfolio Manager">5c50a31047447110ee827d7ba26d4352</model>
-        <model_id>5c50a31047447110ee827d7ba26d4352</model_id>
-        <model_table>sys_hub_flow</model_table>
-        <name>var__m_sys_hub_flow_input_5c50a31047447110ee827d7ba26d4352</name>
-        <next_element/>
-        <order>100</order>
-        <primary>false</primary>
-        <read_only>false</read_only>
-        <read_roles/>
-        <reference/>
-        <reference_cascade_rule/>
-        <reference_floats>false</reference_floats>
-        <reference_key/>
-        <reference_qual/>
-        <reference_qual_condition/>
-        <reference_type/>
-        <sizeclass/>
-        <spell_check>false</spell_check>
-        <staged>false</staged>
-        <sys_class_name>sys_hub_flow_input</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>25b1a39447447110ee827d7ba26d4343</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
-        <sys_package/>
-        <sys_policy/>
-        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name/>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:10</sys_updated_on>
-        <table_reference>false</table_reference>
-        <text_index>false</text_index>
-        <unique>false</unique>
-        <use_dependent_field>false</use_dependent_field>
-        <use_dynamic_default>false</use_dynamic_default>
-        <use_reference_qualifier>simple</use_reference_qualifier>
-        <virtual>false</virtual>
-        <virtual_type>script</virtual_type>
-        <widget/>
-        <write_roles/>
-        <xml_view>false</xml_view>
-    </sys_hub_flow_input>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=5370054b47443110ee827d7ba26d43ed"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=9770054b47443110ee827d7ba26d43ec^sys_idNOT IN1370054b47443110ee827d7ba26d43f8,1370054b47443110ee827d7ba26d43fb,5f70054b47443110ee827d7ba26d43f3"/>
     <sys_hub_flow_input action="INSERT_OR_UPDATE">
         <active>true</active>
         <array>false</array>
@@ -283,10 +200,10 @@
         <label>Record</label>
         <mandatory>true</mandatory>
         <max_length>200</max_length>
-        <model display_value="PROV: Send Email To New Portfolio Manager">5c50a31047447110ee827d7ba26d4352</model>
-        <model_id>5c50a31047447110ee827d7ba26d4352</model_id>
+        <model display_value="PROV: Send Email To New Portfolio Viewer">9770054b47443110ee827d7ba26d43ec</model>
+        <model_id>9770054b47443110ee827d7ba26d43ec</model_id>
         <model_table>sys_hub_flow</model_table>
-        <name>var__m_sys_hub_flow_input_5c50a31047447110ee827d7ba26d4352</name>
+        <name>var__m_sys_hub_flow_input_9770054b47443110ee827d7ba26d43ec</name>
         <next_element/>
         <order>100</order>
         <primary>false</primary>
@@ -304,737 +221,20 @@
         <staged>false</staged>
         <sys_class_name>sys_hub_flow_input</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:09</sys_created_on>
-        <sys_id>61b1a39447447110ee827d7ba26d433f</sys_id>
-        <sys_mod_count>107</sys_mod_count>
+        <sys_created_on>2023-07-19 20:40:03</sys_created_on>
+        <sys_id>1370054b47443110ee827d7ba26d43f8</sys_id>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name/>
         <sys_package/>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name/>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:42:12</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
         <use_dependent_field>true</use_dependent_field>
-        <use_dynamic_default>false</use_dynamic_default>
-        <use_reference_qualifier>simple</use_reference_qualifier>
-        <virtual>false</virtual>
-        <virtual_type>script</virtual_type>
-        <widget/>
-        <write_roles/>
-        <xml_view>false</xml_view>
-    </sys_hub_flow_input>
-    <sys_hub_flow_input action="INSERT_OR_UPDATE">
-        <active>true</active>
-        <array>false</array>
-        <array_denormalized>false</array_denormalized>
-        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name</attributes>
-        <audit>false</audit>
-        <calculation><![CDATA[(function calculatedFieldValue(current) {
-
-	// Add your code here
-	return '';  // return the calculated value
-
-})(current);]]></calculation>
-        <choice/>
-        <choice_field/>
-        <choice_table/>
-        <column_label/>
-        <comments/>
-        <create_roles/>
-        <default_value/>
-        <defaultsort/>
-        <delete_roles/>
-        <dependent/>
-        <dependent_on_field/>
-        <display>false</display>
-        <dynamic_creation>false</dynamic_creation>
-        <dynamic_creation_script/>
-        <dynamic_default_value/>
-        <dynamic_ref_qual/>
-        <element>table_name</element>
-        <element_reference>false</element_reference>
-        <foreign_database/>
-        <formula/>
-        <function_definition/>
-        <function_field>false</function_field>
-        <help/>
-        <hint/>
-        <internal_type display_value="">table_name</internal_type>
-        <label>Table Name</label>
-        <mandatory>false</mandatory>
-        <max_length>200</max_length>
-        <model display_value="PROV: Send Email To New Portfolio Manager">5c50a31047447110ee827d7ba26d4352</model>
-        <model_id>5c50a31047447110ee827d7ba26d4352</model_id>
-        <model_table>sys_hub_flow</model_table>
-        <name>var__m_sys_hub_flow_input_5c50a31047447110ee827d7ba26d4352</name>
-        <next_element/>
-        <order>101</order>
-        <primary>false</primary>
-        <read_only>false</read_only>
-        <read_roles/>
-        <reference/>
-        <reference_cascade_rule/>
-        <reference_floats>false</reference_floats>
-        <reference_key/>
-        <reference_qual/>
-        <reference_qual_condition/>
-        <reference_type/>
-        <sizeclass/>
-        <spell_check>false</spell_check>
-        <staged>false</staged>
-        <sys_class_name>sys_hub_flow_input</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>6db1a39447447110ee827d7ba26d4346</sys_id>
-        <sys_mod_count>107</sys_mod_count>
-        <sys_name/>
-        <sys_package/>
-        <sys_policy/>
-        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name/>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:42:12</sys_updated_on>
-        <table_reference>false</table_reference>
-        <text_index>false</text_index>
-        <unique>false</unique>
-        <use_dependent_field>false</use_dependent_field>
-        <use_dynamic_default>false</use_dynamic_default>
-        <use_reference_qualifier>simple</use_reference_qualifier>
-        <virtual>false</virtual>
-        <virtual_type>script</virtual_type>
-        <widget/>
-        <write_roles/>
-        <xml_view>false</xml_view>
-    </sys_hub_flow_input>
-    <sys_hub_flow_output action="delete_multiple" query="model=5c50a31047447110ee827d7ba26d4352"/>
-    <sys_hub_alias_mapping action="delete_multiple" query="source_id=5c50a31047447110ee827d7ba26d4352"/>
-    <sys_hub_action_instance action="delete_multiple" query="flow=5c50a31047447110ee827d7ba26d4352^sys_idNOT IN29b1a39447447110ee827d7ba26d4358,e9b1a39447447110ee827d7ba26d4364"/>
-    <sys_hub_action_instance action="INSERT_OR_UPDATE">
-        <action_inputs/>
-        <action_inputs/>
-        <action_type display_value="Send Email">c1806bf4a70323008299b39f087901cb</action_type>
-        <action_type_parent/>
-        <comment/>
-        <display_text/>
-        <flow display_value="PROV: Send Email To New Portfolio Manager">5c50a31047447110ee827d7ba26d4352</flow>
-        <order>1</order>
-        <parent_ui_id>bcce84aa-26ca-4be9-b3dd-6267823badd3</parent_ui_id>
-        <sys_class_name>sys_hub_action_instance</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>29b1a39447447110ee827d7ba26d4358</sys_id>
-        <sys_mod_count>436</sys_mod_count>
-        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>system</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:43:51</sys_updated_on>
-        <ui_id>01ad6a44-9320-4843-86fd-c01641b6ee4f</ui_id>
-    </sys_hub_action_instance>
-    <sys_variable_value action="delete_multiple" query="document_key=29b1a39447447110ee827d7ba26d4358"/>
-    <sys_variable_value action="INSERT_OR_UPDATE">
-        <document>sys_hub_action_instance</document>
-        <document_key>29b1a39447447110ee827d7ba26d4358</document_key>
-        <order>1</order>
-        <sys_class_name>sys_variable_value</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>2db1a39447447110ee827d7ba26d435c</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:10</sys_updated_on>
-        <value>x_g_dis_atat_portfolio</value>
-        <variable display_value="Table">19806bf4a70323008299b39f087901d4</variable>
-    </sys_variable_value>
-    <sys_variable_value action="INSERT_OR_UPDATE">
-        <document>sys_hub_action_instance</document>
-        <document_key>29b1a39447447110ee827d7ba26d4358</document_key>
-        <order>7</order>
-        <sys_class_name>sys_variable_value</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>69b1a39447447110ee827d7ba26d435c</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:10</sys_updated_on>
-        <value>&lt;p&gt;Test&lt;/p&gt;</value>
-        <variable display_value="Body">ad806bf4a70323008299b39f087901f2</variable>
-    </sys_variable_value>
-    <sys_variable_value action="INSERT_OR_UPDATE">
-        <document>sys_hub_action_instance</document>
-        <document_key>29b1a39447447110ee827d7ba26d4358</document_key>
-        <order>2</order>
-        <sys_class_name>sys_variable_value</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 20:07:26</sys_created_on>
-        <sys_id>a34ca31447847110ee827d7ba26d43c2</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 20:07:26</sys_updated_on>
-        <value>0</value>
-        <variable display_value="Include Watermark">066bb6b57303230082999cfd7bf6a7c3</variable>
-    </sys_variable_value>
-    <sys_element_mapping action="delete_multiple" query="id=29b1a39447447110ee827d7ba26d4358"/>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>ah_body</field>
-        <id>29b1a39447447110ee827d7ba26d4358</id>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>a9b1a39447447110ee827d7ba26d435b</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:10</sys_updated_on>
-        <table>var__m_sys_hub_action_input_c1806bf4a70323008299b39f087901cb</table>
-        <value/>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>ah_subject</field>
-        <id>29b1a39447447110ee827d7ba26d4358</id>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>e5b1a39447447110ee827d7ba26d435c</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:10</sys_updated_on>
-        <table>var__m_sys_hub_action_input_c1806bf4a70323008299b39f087901cb</table>
-        <value>JWCC Portfolio shared with you "{{Created or Updated_1.current.name}}"</value>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>record</field>
-        <id>29b1a39447447110ee827d7ba26d4358</id>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>61b1a39447447110ee827d7ba26d435c</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:10</sys_updated_on>
-        <table>var__m_sys_hub_action_input_c1806bf4a70323008299b39f087901cb</table>
-        <value>{{Created or Updated_1.current}}</value>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>table_name</field>
-        <id>29b1a39447447110ee827d7ba26d4358</id>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>25b1a39447447110ee827d7ba26d435c</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:10</sys_updated_on>
-        <table>var__m_sys_hub_action_input_c1806bf4a70323008299b39f087901cb</table>
-        <value/>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>watermark_email</field>
-        <id>29b1a39447447110ee827d7ba26d4358</id>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 20:07:26</sys_created_on>
-        <sys_id>2f4ca31447847110ee827d7ba26d43c1</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 20:07:26</sys_updated_on>
-        <table>var__m_sys_hub_action_input_c1806bf4a70323008299b39f087901cb</table>
-        <value/>
-    </sys_element_mapping>
-    <sys_hub_input_scripts action="delete_multiple" query="instance=29b1a39447447110ee827d7ba26d4358^sys_idNOT IN30126f9447447110ee827d7ba26d433c,a9b1a39447447110ee827d7ba26d435a,d6abe3d047847110ee827d7ba26d43b0,deabe3d047847110ee827d7ba26d43af"/>
-    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
-        <active>true</active>
-        <input_name>ah_body</input_name>
-        <instance>29b1a39447447110ee827d7ba26d4358</instance>
-        <referenced_table>sys_hub_action_instance</referenced_table>
-        <script>{"ah_body":{"scriptActive":true,"script":"const updatedByUserId \u003d fd_data.trigger.current.sys_updated_by;\r\nconst portfolioName \u003d fd_data.trigger.current.name;\r\nlet updatedByUserName;\r\nconst gr \u003d new GlideRecord(\u0027sys_user\u0027);\r\ngr.addQuery(\u0027user_name\u0027, updatedByUserId);\r\ngr.query();\r\nif (gr.next()) {\r\n    updatedByUserName \u003d gr.name;\r\n} else {\r\n    throw new Error(`User with ID ${updatedByUserId} not found.`);\r\n}\r\n\r\nconst managerPrivileges \u003d `\r\n* Track cloud usage and funds spent on portfolio task order(s)\r\n* Request to modify task orders\r\n* Grant administrator access to the CSP console\r\n* Manage portfolio members within ATAT`;\r\n\r\nreturn `\r\n${updatedByUserName} invited you to manage the \"${portfolioName}\" portfolio within the Account Tracking Automation Tool (ATAT). \r\n\r\nYou can now:\r\n${managerPrivileges}\r\n\r\nAccess the portfolio from your dashboard: https://services.disa.mil/atat-dapps \r\n\r\nThis was sent from an unmonitored email address. Please do not reply to this email. If you have questions about JWCC or DAPPS, please contact our Customer Support Team at HaCC Community.`"}}</script>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:22:45</sys_created_on>
-        <sys_id>30126f9447447110ee827d7ba26d433c</sys_id>
-        <sys_mod_count>35</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:42:04</sys_updated_on>
-    </sys_hub_input_scripts>
-    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
-        <active>true</active>
-        <input_name>ah_to</input_name>
-        <instance>29b1a39447447110ee827d7ba26d4358</instance>
-        <referenced_table>sys_hub_action_instance</referenced_table>
-        <script>{"ah_to":{"scriptActive":true,"script":"const changedFields \u003d fd_data.trigger.changed_fields;\r\nlet newUsers \u003d [];\r\nfor(let i\u003d0; i\u003cchangedFields.length; ++i) {\r\n\tconst changedField \u003d changedFields[i][\"field_name\"];\r\n\tif(changedField \u003d\u003d\u003d `portfolio_managers`) {\r\n\t\tconst previousUsers \u003d changedFields[i][\"previous_value\"].split(\u0027,\u0027);\r\n\t\tconst currentUsers \u003d changedFields[i][\"current_value\"].split(\u0027,\u0027);\r\n\t    newUsers \u003d currentUsers.filter(function(item) {\r\n\t\t\t\treturn !previousUsers.includes(item); \r\n\t\t\t\t});\t\t\r\n\t\tbreak;\r\n\t}\r\n}\r\n\r\nlet emails \u003d [];\r\nfor(let i\u003d0; i\u003cnewUsers.length; ++i) {\r\n\tconst newUser \u003d newUsers[i];\r\n\tconst gr \u003d new GlideRecord(\u0027sys_user\u0027);\r\n\tgr.addQuery(\u0027sys_id\u0027, newUser);\r\n\tgr.query();\r\n\twhile (gr.next()) {\r\n\t\temails.push(gr.email);\r\n\t}\r\n}\r\nif(emails.length \u003d\u003d\u003d 0) {\r\n\tgs.error(`Error; failed to find a new portfolio manager.`);\r\n\tthrow `Error; failed to find a new portfolio manager.`; \r\n}\r\n\r\nreturn emails.toString();\r\n\r\n"}}</script>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>a9b1a39447447110ee827d7ba26d435a</sys_id>
-        <sys_mod_count>23</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:42:04</sys_updated_on>
-    </sys_hub_input_scripts>
-    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
-        <active>false</active>
-        <input_name>ah_subject</input_name>
-        <instance>29b1a39447447110ee827d7ba26d4358</instance>
-        <referenced_table>sys_hub_action_instance</referenced_table>
-        <script>{"ah_subject":{"scriptActive":false}}</script>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 20:04:38</sys_created_on>
-        <sys_id>d6abe3d047847110ee827d7ba26d43b0</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 20:04:38</sys_updated_on>
-    </sys_hub_input_scripts>
-    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
-        <active>false</active>
-        <input_name>ah_bcc</input_name>
-        <instance>29b1a39447447110ee827d7ba26d4358</instance>
-        <referenced_table>sys_hub_action_instance</referenced_table>
-        <script>{"ah_bcc":{"scriptActive":false}}</script>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 20:04:38</sys_created_on>
-        <sys_id>deabe3d047847110ee827d7ba26d43af</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 20:04:38</sys_updated_on>
-    </sys_hub_input_scripts>
-    <sys_hub_alias_mapping action="delete_multiple" query="source_id=29b1a39447447110ee827d7ba26d4358"/>
-    <sys_hub_action_instance action="INSERT_OR_UPDATE">
-        <action_inputs/>
-        <action_inputs/>
-        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
-        <action_type_parent/>
-        <comment/>
-        <display_text/>
-        <flow display_value="PROV: Send Email To New Portfolio Manager">5c50a31047447110ee827d7ba26d4352</flow>
-        <order>3</order>
-        <parent_ui_id>96821d90-66f9-4d5c-93c1-aed9081540ff</parent_ui_id>
-        <sys_class_name>sys_hub_action_instance</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>e9b1a39447447110ee827d7ba26d4364</sys_id>
-        <sys_mod_count>436</sys_mod_count>
-        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>system</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:43:51</sys_updated_on>
-        <ui_id>b444bf5c-772c-4a8d-83c8-4ce06ed9ac40</ui_id>
-    </sys_hub_action_instance>
-    <sys_variable_value action="delete_multiple" query="document_key=e9b1a39447447110ee827d7ba26d4364"/>
-    <sys_variable_value action="INSERT_OR_UPDATE">
-        <document>sys_hub_action_instance</document>
-        <document_key>e9b1a39447447110ee827d7ba26d4364</document_key>
-        <order>0</order>
-        <sys_class_name>sys_variable_value</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>35b1a39447447110ee827d7ba26d4366</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:10</sys_updated_on>
-        <value>error</value>
-        <variable display_value="Level">5bc1bcc6531003003bf1d9109ec587d7</variable>
-    </sys_variable_value>
-    <sys_element_mapping action="delete_multiple" query="id=e9b1a39447447110ee827d7ba26d4364"/>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>log_level</field>
-        <id>e9b1a39447447110ee827d7ba26d4364</id>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>fdb1a39447447110ee827d7ba26d4365</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:10</sys_updated_on>
-        <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
-        <value/>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>log_message</field>
-        <id>e9b1a39447447110ee827d7ba26d4364</id>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>b1b1a39447447110ee827d7ba26d4366</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:10</sys_updated_on>
-        <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
-        <value>{{96821d90-66f9-4d5c-93c1-aed9081540ff.__status__.message}}</value>
-    </sys_element_mapping>
-    <sys_hub_input_scripts action="delete_multiple" query="instance=e9b1a39447447110ee827d7ba26d4364"/>
-    <sys_hub_alias_mapping action="delete_multiple" query="source_id=e9b1a39447447110ee827d7ba26d4364"/>
-    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=5c50a31047447110ee827d7ba26d4352"/>
-    <sys_hub_flow_logic action="delete_multiple" query="flow=5c50a31047447110ee827d7ba26d4352^sys_idNOT IN69b1a39447447110ee827d7ba26d435d,e5b1a39447447110ee827d7ba26d434f"/>
-    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
-        <block display_value="">a1b1a39447447110ee827d7ba26d435d</block>
-        <comment/>
-        <connected_to/>
-        <decision_table/>
-        <decision_table_inputs/>
-        <display_text/>
-        <extended_inputs/>
-        <flow display_value="PROV: Send Email To New Portfolio Manager">5c50a31047447110ee827d7ba26d4352</flow>
-        <flow_variable/>
-        <flow_variables_assigned/>
-        <inputs/>
-        <logic_definition display_value="Top Level Catch">35d60003e6022010a5e40cdd1254dd23</logic_definition>
-        <order>2</order>
-        <outputs_assigned/>
-        <outputs_to_assign/>
-        <parent_ui_id/>
-        <sys_class_name>sys_hub_flow_logic</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>69b1a39447447110ee827d7ba26d435d</sys_id>
-        <sys_mod_count>167</sys_mod_count>
-        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:42:12</sys_updated_on>
-        <ui_id>96821d90-66f9-4d5c-93c1-aed9081540ff</ui_id>
-        <workflow_inputs/>
-        <workflow_reference/>
-    </sys_hub_flow_logic>
-    <sys_variable_value action="delete_multiple" query="document_key=69b1a39447447110ee827d7ba26d435d"/>
-    <sys_variable_value action="INSERT_OR_UPDATE">
-        <document>sys_hub_flow_logic</document>
-        <document_key>69b1a39447447110ee827d7ba26d435d</document_key>
-        <order>100</order>
-        <sys_class_name>sys_variable_value</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>2db1a39447447110ee827d7ba26d4360</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:10</sys_updated_on>
-        <value>{"version":"1.0","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}},"complexObjectSchema":{"FlowDesigner:FDACTIONSTATUS":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"integer\",\"default_value\":\"\",\"label\":\"Code\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"Message\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FDACTIONSTATUS.$type_facets":{"SimpleMapFacet":"{\"default_value\":\"\",\"label\":\"Action Status\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"uiUniqueId\":\"4adfb7bc-9d67-498d-88d0-8d6c3d584fed\",\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FDACTIONSTATUS\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"object\",\"order\":\"1\",\"max_length\":\"65000\"}"}},"serializationFormat":"JSON"}</value>
-        <variable display_value="Error Status">0f72a5a25b132010b61ea2013781c749</variable>
-    </sys_variable_value>
-    <sys_variable_value action="INSERT_OR_UPDATE">
-        <document>sys_hub_flow_logic</document>
-        <document_key>69b1a39447447110ee827d7ba26d435d</document_key>
-        <order>100</order>
-        <sys_class_name>sys_variable_value</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>edb1a39447447110ee827d7ba26d4360</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:10</sys_updated_on>
-        <value>1</value>
-        <variable display_value="enabled">dd70187cc36e20105553b740ad40dddc</variable>
-    </sys_variable_value>
-    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_logic_input_35d60003e6022010a5e40cdd1254dd23^id=69b1a39447447110ee827d7ba26d435d"/>
-    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=69b1a39447447110ee827d7ba26d435d"/>
-    <sys_hub_input_scripts action="delete_multiple" query="instance=69b1a39447447110ee827d7ba26d435d"/>
-    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
-        <block display_value="">2db1a39447447110ee827d7ba26d434e</block>
-        <comment/>
-        <connected_to/>
-        <decision_table/>
-        <decision_table_inputs/>
-        <display_text/>
-        <extended_inputs/>
-        <flow display_value="PROV: Send Email To New Portfolio Manager">5c50a31047447110ee827d7ba26d4352</flow>
-        <flow_variable/>
-        <flow_variables_assigned/>
-        <inputs/>
-        <logic_definition display_value="Top Level Try">e9060aa2c3013010ace8b740ad40dd51</logic_definition>
-        <order>0</order>
-        <outputs_assigned/>
-        <outputs_to_assign/>
-        <parent_ui_id/>
-        <sys_class_name>sys_hub_flow_logic</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>e5b1a39447447110ee827d7ba26d434f</sys_id>
-        <sys_mod_count>167</sys_mod_count>
-        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:42:12</sys_updated_on>
-        <ui_id>bcce84aa-26ca-4be9-b3dd-6267823badd3</ui_id>
-        <workflow_inputs/>
-        <workflow_reference/>
-    </sys_hub_flow_logic>
-    <sys_variable_value action="delete_multiple" query="document_key=e5b1a39447447110ee827d7ba26d434f"/>
-    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=e5b1a39447447110ee827d7ba26d434f"/>
-    <sys_hub_input_scripts action="delete_multiple" query="instance=e5b1a39447447110ee827d7ba26d434f"/>
-    <sys_hub_pill_compound action="delete_multiple" query="attached_to=5c50a31047447110ee827d7ba26d4352"/>
-    <sys_hub_flow_variable action="delete_multiple" query="model=5c50a31047447110ee827d7ba26d4352"/>
-    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_5c50a31047447110ee827d7ba26d4352^sys_idNOT IN65b1a39447447110ee827d7ba26d4342,a1b1a39447447110ee827d7ba26d4349,adb1a39447447110ee827d7ba26d4345"/>
-    <sys_documentation action="INSERT_OR_UPDATE">
-        <element>current</element>
-        <help/>
-        <hint/>
-        <label>Record</label>
-        <language>en</language>
-        <name>var__m_sys_hub_flow_input_5c50a31047447110ee827d7ba26d4352</name>
-        <plural/>
-        <sys_class_name>sys_documentation</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>65b1a39447447110ee827d7ba26d4342</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
-        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
-        <sys_policy/>
-        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name/>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:10</sys_updated_on>
-        <url/>
-        <url_target/>
-    </sys_documentation>
-    <sys_documentation action="INSERT_OR_UPDATE">
-        <element>table_name</element>
-        <help/>
-        <hint/>
-        <label>Table Name</label>
-        <language>en</language>
-        <name>var__m_sys_hub_flow_input_5c50a31047447110ee827d7ba26d4352</name>
-        <plural/>
-        <sys_class_name>sys_documentation</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>a1b1a39447447110ee827d7ba26d4349</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
-        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
-        <sys_policy/>
-        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name/>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:10</sys_updated_on>
-        <url/>
-        <url_target/>
-    </sys_documentation>
-    <sys_documentation action="INSERT_OR_UPDATE">
-        <element>changed_fields</element>
-        <help/>
-        <hint/>
-        <label>Changed Fields</label>
-        <language>en</language>
-        <name>var__m_sys_hub_flow_input_5c50a31047447110ee827d7ba26d4352</name>
-        <plural/>
-        <sys_class_name>sys_documentation</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:10</sys_created_on>
-        <sys_id>adb1a39447447110ee827d7ba26d4345</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
-        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
-        <sys_policy/>
-        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name/>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:10</sys_updated_on>
-        <url/>
-        <url_target/>
-    </sys_documentation>
-    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_5c50a31047447110ee827d7ba26d4352"/>
-    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_5c50a31047447110ee827d7ba26d4352"/>
-    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_5c50a31047447110ee827d7ba26d4352"/>
-    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=5c50a31047447110ee827d7ba26d4352^sys_idNOT IN73b1279447447110ee827d7ba26d4303"/>
-    <sys_flow_trigger_plan action="INSERT_OR_UPDATE">
-        <binding_strategy>com.snc.process_flow.engine.binding.Every</binding_strategy>
-        <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_flow_trigger_plan","id":"73b1279447447110ee827d7ba26d4303","name":"plan","plan_signature":null}}</plan>
-        <plan_id>5c50a31047447110ee827d7ba26d4352</plan_id>
-        <snapshot>8b510d8b47443110ee827d7ba26d43bf</snapshot>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:18</sys_created_on>
-        <sys_domain>global</sys_domain>
-        <sys_domain_path>/</sys_domain_path>
-        <sys_id>73b1279447447110ee827d7ba26d4303</sys_id>
-        <sys_mod_count>53</sys_mod_count>
-        <sys_overrides/>
-        <sys_scope/>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:42:12</sys_updated_on>
-        <trigger display_value="">6ef0418b47443110ee827d7ba26d4364</trigger>
-    </sys_flow_trigger_plan>
-    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=5c50a31047447110ee827d7ba26d4352"/>
-    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
-        <access>public</access>
-        <acls/>
-        <active>true</active>
-        <annotation/>
-        <callable_by_client_api>false</callable_by_client_api>
-        <category/>
-        <copied_from/>
-        <copied_from_name/>
-        <description>This flow notifies portfolio viewers when they are added to a portfolio.</description>
-        <internal_name>prov</internal_name>
-        <label_cache>[{"name":"Created or Updated_1.current","label":"Trigger - Record Created or Updated➛x_g_dis_atat_portfolio Record","reference":"x_g_dis_atat_portfolio","reference_display":"x_g_dis_atat_portfolio","type":"reference","base_type":"reference","attributes":{}},{"name":"Created or Updated_1.table_name","label":"Trigger - Record Created or Updated➛x_g_dis_atat_portfolio Table","reference":"x_g_dis_atat_portfolio","reference_display":"x_g_dis_atat_portfolio","type":"table_name","base_type":"table_name","attributes":{"test_input_hidden":"true"}},{"name":"Created or Updated_1.current.name","label":"Trigger - Record Created or Updated➛x_g_dis_atat_portfolio Record➛Name","reference":"","reference_display":"Name","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_portfolio","column_name":"name"},{"name":"96821d90-66f9-4d5c-93c1-aed9081540ff.__status__.message","label":"1 - Top Level Catch➛Error Status➛Message","reference":"","reference_display":"","type":"string","base_type":"string","column_name":"","attributes":{}}]</label_cache>
-        <master>true</master>
-        <name>PROV: Send Email To New Portfolio Manager</name>
-        <natlang/>
-        <outputs/>
-        <parent_flow display_value="PROV: Send Email To New Portfolio Manager">5c50a31047447110ee827d7ba26d4352</parent_flow>
-        <remote_trigger_id/>
-        <run_as>system</run_as>
-        <run_with_roles/>
-        <sc_callable>false</sc_callable>
-        <status>published</status>
-        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:17</sys_created_on>
-        <sys_domain>global</sys_domain>
-        <sys_domain_path>/</sys_domain_path>
-        <sys_id>57b1e39447447110ee827d7ba26d437c</sys_id>
-        <sys_mod_count>53</sys_mod_count>
-        <sys_name/>
-        <sys_overrides/>
-        <sys_package/>
-        <sys_policy/>
-        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name/>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:42:11</sys_updated_on>
-        <type>flow</type>
-    </sys_hub_flow_snapshot>
-    <sys_translated_text action="delete_multiple" query="documentkey=57b1e39447447110ee827d7ba26d437c"/>
-    <sys_variable_value action="delete_multiple" query="document_key=57b1e39447447110ee827d7ba26d437c"/>
-    <sys_hub_trigger_instance action="delete_multiple" query="flow=57b1e39447447110ee827d7ba26d437c^sys_idNOT IN6fb1e39447447110ee827d7ba26d43da"/>
-    <sys_hub_trigger_instance action="INSERT_OR_UPDATE">
-        <comment/>
-        <display_text/>
-        <flow display_value="PROV: Send Email To New Portfolio Manager">57b1e39447447110ee827d7ba26d437c</flow>
-        <name>Created or Updated</name>
-        <remote_sys_id/>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:18</sys_created_on>
-        <sys_id>6fb1e39447447110ee827d7ba26d43da</sys_id>
-        <sys_mod_count>161</sys_mod_count>
-        <sys_scope/>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:42:12</sys_updated_on>
-        <trigger_definition display_value="Created or Updated">a45d9180c32222002841b63b12d3aea7</trigger_definition>
-        <trigger_inputs/>
-        <trigger_outputs/>
-        <trigger_type>record_create_or_update</trigger_type>
-    </sys_hub_trigger_instance>
-    <sys_variable_value action="delete_multiple" query="document_key=6fb1e39447447110ee827d7ba26d43da"/>
-    <sys_variable_value action="INSERT_OR_UPDATE">
-        <document>sys_hub_trigger_instance</document>
-        <document_key>6fb1e39447447110ee827d7ba26d43da</document_key>
-        <order>1</order>
-        <sys_class_name>sys_variable_value</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:18</sys_created_on>
-        <sys_id>6bb1e39447447110ee827d7ba26d43dc</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:18</sys_updated_on>
-        <value>x_g_dis_atat_portfolio</value>
-        <variable display_value="Table">cf1e1980c32222002841b63b12d3aea0</variable>
-    </sys_variable_value>
-    <sys_variable_value action="INSERT_OR_UPDATE">
-        <document>sys_hub_trigger_instance</document>
-        <document_key>6fb1e39447447110ee827d7ba26d43da</document_key>
-        <order>100</order>
-        <sys_class_name>sys_variable_value</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:18</sys_created_on>
-        <sys_id>a7b1e39447447110ee827d7ba26d43dc</sys_id>
-        <sys_mod_count>2</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:42:10</sys_updated_on>
-        <value>portfolio_managersVALCHANGES</value>
-        <variable display_value="Condition">707dd180c32222002841b63b12d3aecb</variable>
-    </sys_variable_value>
-    <sys_variable_value action="INSERT_OR_UPDATE">
-        <document>sys_hub_trigger_instance</document>
-        <document_key>6fb1e39447447110ee827d7ba26d43da</document_key>
-        <order>200</order>
-        <sys_class_name>sys_variable_value</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:18</sys_created_on>
-        <sys_id>e3b1e39447447110ee827d7ba26d43dc</sys_id>
-        <sys_mod_count>1</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-12 17:57:51</sys_updated_on>
-        <value>every</value>
-        <variable display_value="Run Trigger">2b9def50c31132002841b63b12d3ae5b</variable>
-    </sys_variable_value>
-    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_trigger_output_a45d9180c32222002841b63b12d3aea7^id=6fb1e39447447110ee827d7ba26d43da"/>
-    <sys_hub_flow_stage action="delete_multiple" query="flow=57b1e39447447110ee827d7ba26d437c"/>
-    <sys_flow_cat_variable_model action="delete_multiple" query="id=57b1e39447447110ee827d7ba26d437c^sys_idNOT IN93b1e39447447110ee827d7ba26d437d"/>
-    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
-        <id>57b1e39447447110ee827d7ba26d437c</id>
-        <name>PROV:</name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:17</sys_created_on>
-        <sys_id>93b1e39447447110ee827d7ba26d437d</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_scope/>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:17</sys_updated_on>
-    </sys_flow_cat_variable_model>
-    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=93b1e39447447110ee827d7ba26d437d"/>
-    <sys_hub_flow_input action="delete_multiple" query="model=57b1e39447447110ee827d7ba26d437c^sys_idNOT IN2fb1e39447447110ee827d7ba26d43a9,6bb1e39447447110ee827d7ba26d43a1,d7b1e39447447110ee827d7ba26d437e"/>
-    <sys_hub_flow_input action="INSERT_OR_UPDATE">
-        <active>true</active>
-        <array>false</array>
-        <array_denormalized>false</array_denormalized>
-        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name</attributes>
-        <audit>false</audit>
-        <calculation><![CDATA[(function calculatedFieldValue(current) {
-
-	// Add your code here
-	return '';  // return the calculated value
-
-})(current);]]></calculation>
-        <choice/>
-        <choice_field/>
-        <choice_table/>
-        <column_label/>
-        <comments/>
-        <create_roles/>
-        <default_value/>
-        <defaultsort/>
-        <delete_roles/>
-        <dependent/>
-        <dependent_on_field/>
-        <display>false</display>
-        <dynamic_creation>false</dynamic_creation>
-        <dynamic_creation_script/>
-        <dynamic_default_value/>
-        <dynamic_ref_qual/>
-        <element>table_name</element>
-        <element_reference>false</element_reference>
-        <foreign_database/>
-        <formula/>
-        <function_definition/>
-        <function_field>false</function_field>
-        <help/>
-        <hint/>
-        <internal_type display_value="">table_name</internal_type>
-        <label>Table Name</label>
-        <mandatory>false</mandatory>
-        <max_length>200</max_length>
-        <model display_value="PROV: Send Email To New Portfolio Manager">57b1e39447447110ee827d7ba26d437c</model>
-        <model_id>57b1e39447447110ee827d7ba26d437c</model_id>
-        <model_table>sys_hub_flow_snapshot</model_table>
-        <name>var__m_sys_hub_flow_input_57b1e39447447110ee827d7ba26d437c</name>
-        <next_element/>
-        <order>101</order>
-        <primary>false</primary>
-        <read_only>false</read_only>
-        <read_roles/>
-        <reference/>
-        <reference_cascade_rule/>
-        <reference_floats>false</reference_floats>
-        <reference_key/>
-        <reference_qual/>
-        <reference_qual_condition/>
-        <reference_type/>
-        <sizeclass/>
-        <spell_check>false</spell_check>
-        <staged>false</staged>
-        <sys_class_name>sys_hub_flow_input</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:17</sys_created_on>
-        <sys_id>2fb1e39447447110ee827d7ba26d43a9</sys_id>
-        <sys_mod_count>105</sys_mod_count>
-        <sys_name/>
-        <sys_package/>
-        <sys_policy/>
-        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name/>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:42:10</sys_updated_on>
-        <table_reference>false</table_reference>
-        <text_index>false</text_index>
-        <unique>false</unique>
-        <use_dependent_field>false</use_dependent_field>
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
@@ -1083,10 +283,10 @@
         <label>Changed Fields</label>
         <mandatory>false</mandatory>
         <max_length>4000</max_length>
-        <model display_value="PROV: Send Email To New Portfolio Manager">57b1e39447447110ee827d7ba26d437c</model>
-        <model_id>57b1e39447447110ee827d7ba26d437c</model_id>
-        <model_table>sys_hub_flow_snapshot</model_table>
-        <name>var__m_sys_hub_flow_input_57b1e39447447110ee827d7ba26d437c</name>
+        <model display_value="PROV: Send Email To New Portfolio Viewer">9770054b47443110ee827d7ba26d43ec</model>
+        <model_id>9770054b47443110ee827d7ba26d43ec</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_9770054b47443110ee827d7ba26d43ec</name>
         <next_element/>
         <order>100</order>
         <primary>false</primary>
@@ -1104,16 +304,16 @@
         <staged>false</staged>
         <sys_class_name>sys_hub_flow_input</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:17</sys_created_on>
-        <sys_id>6bb1e39447447110ee827d7ba26d43a1</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_created_on>2023-07-19 20:40:03</sys_created_on>
+        <sys_id>1370054b47443110ee827d7ba26d43fb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name/>
         <sys_package/>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name/>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:22:50</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:40:03</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
@@ -1130,7 +330,7 @@
         <active>true</active>
         <array>false</array>
         <array_denormalized>false</array_denormalized>
-        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=document_id</attributes>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name</attributes>
         <audit>false</audit>
         <calculation><![CDATA[(function calculatedFieldValue(current) {
 
@@ -1147,14 +347,14 @@
         <default_value/>
         <defaultsort/>
         <delete_roles/>
-        <dependent>table_name</dependent>
-        <dependent_on_field>table_name</dependent_on_field>
+        <dependent/>
+        <dependent_on_field/>
         <display>false</display>
         <dynamic_creation>false</dynamic_creation>
         <dynamic_creation_script/>
         <dynamic_default_value/>
         <dynamic_ref_qual/>
-        <element>current</element>
+        <element>table_name</element>
         <element_reference>false</element_reference>
         <foreign_database/>
         <formula/>
@@ -1162,16 +362,16 @@
         <function_field>false</function_field>
         <help/>
         <hint/>
-        <internal_type display_value="">document_id</internal_type>
-        <label>Record</label>
-        <mandatory>true</mandatory>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
         <max_length>200</max_length>
-        <model display_value="PROV: Send Email To New Portfolio Manager">57b1e39447447110ee827d7ba26d437c</model>
-        <model_id>57b1e39447447110ee827d7ba26d437c</model_id>
-        <model_table>sys_hub_flow_snapshot</model_table>
-        <name>var__m_sys_hub_flow_input_57b1e39447447110ee827d7ba26d437c</name>
+        <model display_value="PROV: Send Email To New Portfolio Viewer">9770054b47443110ee827d7ba26d43ec</model>
+        <model_id>9770054b47443110ee827d7ba26d43ec</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_9770054b47443110ee827d7ba26d43ec</name>
         <next_element/>
-        <order>100</order>
+        <order>101</order>
         <primary>false</primary>
         <read_only>false</read_only>
         <read_roles/>
@@ -1187,20 +387,20 @@
         <staged>false</staged>
         <sys_class_name>sys_hub_flow_input</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:17</sys_created_on>
-        <sys_id>d7b1e39447447110ee827d7ba26d437e</sys_id>
-        <sys_mod_count>105</sys_mod_count>
+        <sys_created_on>2023-07-19 20:40:03</sys_created_on>
+        <sys_id>5f70054b47443110ee827d7ba26d43f3</sys_id>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name/>
         <sys_package/>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name/>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:42:10</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
-        <use_dependent_field>true</use_dependent_field>
+        <use_dependent_field>false</use_dependent_field>
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>
@@ -1209,71 +409,9 @@
         <write_roles/>
         <xml_view>false</xml_view>
     </sys_hub_flow_input>
-    <sys_hub_flow_output action="delete_multiple" query="model=57b1e39447447110ee827d7ba26d437c"/>
-    <sys_hub_alias_mapping action="delete_multiple" query="source_id=57b1e39447447110ee827d7ba26d437c"/>
-    <sys_hub_action_instance action="delete_multiple" query="flow=57b1e39447447110ee827d7ba26d437c^sys_idNOT IN67b1e39447447110ee827d7ba26d43d9,a7b1e39447447110ee827d7ba26d43d1"/>
-    <sys_hub_action_instance action="INSERT_OR_UPDATE">
-        <action_inputs/>
-        <action_inputs/>
-        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
-        <action_type_parent display_value="Log">0e0ae8c2531003003bf1d9109ec587c8</action_type_parent>
-        <comment/>
-        <display_text/>
-        <flow display_value="PROV: Send Email To New Portfolio Manager">57b1e39447447110ee827d7ba26d437c</flow>
-        <order>3</order>
-        <parent_ui_id>96821d90-66f9-4d5c-93c1-aed9081540ff</parent_ui_id>
-        <sys_class_name>sys_hub_action_instance</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:18</sys_created_on>
-        <sys_id>67b1e39447447110ee827d7ba26d43d9</sys_id>
-        <sys_mod_count>214</sys_mod_count>
-        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:42:11</sys_updated_on>
-        <ui_id>b444bf5c-772c-4a8d-83c8-4ce06ed9ac40</ui_id>
-    </sys_hub_action_instance>
-    <sys_variable_value action="delete_multiple" query="document_key=67b1e39447447110ee827d7ba26d43d9"/>
-    <sys_variable_value action="INSERT_OR_UPDATE">
-        <document>sys_hub_action_instance</document>
-        <document_key>67b1e39447447110ee827d7ba26d43d9</document_key>
-        <order>0</order>
-        <sys_class_name>sys_variable_value</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:18</sys_created_on>
-        <sys_id>6bb1e39447447110ee827d7ba26d43da</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:18</sys_updated_on>
-        <value>error</value>
-        <variable display_value="Level">5bc1bcc6531003003bf1d9109ec587d7</variable>
-    </sys_variable_value>
-    <sys_element_mapping action="delete_multiple" query="id=67b1e39447447110ee827d7ba26d43d9"/>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>log_level</field>
-        <id>67b1e39447447110ee827d7ba26d43d9</id>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:18</sys_created_on>
-        <sys_id>27b1e39447447110ee827d7ba26d43da</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:18</sys_updated_on>
-        <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
-        <value/>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>log_message</field>
-        <id>67b1e39447447110ee827d7ba26d43d9</id>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:18</sys_created_on>
-        <sys_id>e7b1e39447447110ee827d7ba26d43da</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:18</sys_updated_on>
-        <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
-        <value>{{96821d90-66f9-4d5c-93c1-aed9081540ff.__status__.message}}</value>
-    </sys_element_mapping>
-    <sys_hub_input_scripts action="delete_multiple" query="instance=67b1e39447447110ee827d7ba26d43d9"/>
-    <sys_hub_alias_mapping action="delete_multiple" query="source_id=67b1e39447447110ee827d7ba26d43d9"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=9770054b47443110ee827d7ba26d43ec"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=9770054b47443110ee827d7ba26d43ec"/>
+    <sys_hub_action_instance action="delete_multiple" query="flow=9770054b47443110ee827d7ba26d43ec^sys_idNOT IN2370454b47443110ee827d7ba26d431a,a770454b47443110ee827d7ba26d4322"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
@@ -1281,179 +419,241 @@
         <action_type_parent display_value="Send Email">98c181d20b100300d97d8bf637673ab5</action_type_parent>
         <comment/>
         <display_text/>
-        <flow display_value="PROV: Send Email To New Portfolio Manager">57b1e39447447110ee827d7ba26d437c</flow>
+        <flow display_value="PROV: Send Email To New Portfolio Viewer">9770054b47443110ee827d7ba26d43ec</flow>
         <order>1</order>
         <parent_ui_id>bcce84aa-26ca-4be9-b3dd-6267823badd3</parent_ui_id>
         <sys_class_name>sys_hub_action_instance</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:18</sys_created_on>
-        <sys_id>a7b1e39447447110ee827d7ba26d43d1</sys_id>
-        <sys_mod_count>214</sys_mod_count>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>2370454b47443110ee827d7ba26d431a</sys_id>
+        <sys_mod_count>10</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:42:11</sys_updated_on>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:51</sys_updated_on>
         <ui_id>01ad6a44-9320-4843-86fd-c01641b6ee4f</ui_id>
     </sys_hub_action_instance>
-    <sys_variable_value action="delete_multiple" query="document_key=a7b1e39447447110ee827d7ba26d43d1"/>
+    <sys_variable_value action="delete_multiple" query="document_key=2370454b47443110ee827d7ba26d431a"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>sys_hub_action_instance</document>
-        <document_key>a7b1e39447447110ee827d7ba26d43d1</document_key>
+        <document_key>2370454b47443110ee827d7ba26d431a</document_key>
         <order>1</order>
         <sys_class_name>sys_variable_value</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:18</sys_created_on>
-        <sys_id>a3b1e39447447110ee827d7ba26d43d4</sys_id>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>2b70454b47443110ee827d7ba26d431e</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:18</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:40:04</sys_updated_on>
         <value>x_g_dis_atat_portfolio</value>
         <variable display_value="Table">19806bf4a70323008299b39f087901d4</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>sys_hub_action_instance</document>
-        <document_key>a7b1e39447447110ee827d7ba26d43d1</document_key>
-        <order>2</order>
-        <sys_class_name>sys_variable_value</sys_class_name>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 20:07:31</sys_created_on>
-        <sys_id>a85c271447847110ee827d7ba26d4322</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 20:07:31</sys_updated_on>
-        <value>0</value>
-        <variable display_value="Include Watermark">066bb6b57303230082999cfd7bf6a7c3</variable>
-    </sys_variable_value>
-    <sys_variable_value action="INSERT_OR_UPDATE">
-        <document>sys_hub_action_instance</document>
-        <document_key>a7b1e39447447110ee827d7ba26d43d1</document_key>
+        <document_key>2370454b47443110ee827d7ba26d431a</document_key>
         <order>7</order>
         <sys_class_name>sys_variable_value</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:18</sys_created_on>
-        <sys_id>efb1e39447447110ee827d7ba26d43d3</sys_id>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>6770454b47443110ee827d7ba26d431e</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:18</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:40:04</sys_updated_on>
         <value>&lt;p&gt;Test&lt;/p&gt;</value>
         <variable display_value="Body">ad806bf4a70323008299b39f087901f2</variable>
     </sys_variable_value>
-    <sys_element_mapping action="delete_multiple" query="id=a7b1e39447447110ee827d7ba26d43d1"/>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>ah_body</field>
-        <id>a7b1e39447447110ee827d7ba26d43d1</id>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>2370454b47443110ee827d7ba26d431a</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:18</sys_created_on>
-        <sys_id>27b1e39447447110ee827d7ba26d43d3</sys_id>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>a370454b47443110ee827d7ba26d431e</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:18</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:40:04</sys_updated_on>
+        <value>0</value>
+        <variable display_value="Include Watermark">066bb6b57303230082999cfd7bf6a7c3</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=2370454b47443110ee827d7ba26d431a"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>ah_body</field>
+        <id>2370454b47443110ee827d7ba26d431a</id>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>e770454b47443110ee827d7ba26d431d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:40:04</sys_updated_on>
         <table>var__m_sys_hub_action_input_c1806bf4a70323008299b39f087901cb</table>
         <value/>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>ah_subject</field>
-        <id>a7b1e39447447110ee827d7ba26d43d1</id>
+        <id>2370454b47443110ee827d7ba26d431a</id>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:18</sys_created_on>
-        <sys_id>6fb1e39447447110ee827d7ba26d43d3</sys_id>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>2370454b47443110ee827d7ba26d431e</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:18</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:40:04</sys_updated_on>
         <table>var__m_sys_hub_action_input_c1806bf4a70323008299b39f087901cb</table>
         <value>JWCC Portfolio shared with you "{{Created or Updated_1.current.name}}"</value>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>record</field>
-        <id>a7b1e39447447110ee827d7ba26d43d1</id>
+        <id>2370454b47443110ee827d7ba26d431a</id>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:18</sys_created_on>
-        <sys_id>e7b1e39447447110ee827d7ba26d43d3</sys_id>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>ab70454b47443110ee827d7ba26d431d</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:18</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:40:04</sys_updated_on>
         <table>var__m_sys_hub_action_input_c1806bf4a70323008299b39f087901cb</table>
         <value>{{Created or Updated_1.current}}</value>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>table_name</field>
-        <id>a7b1e39447447110ee827d7ba26d43d1</id>
+        <id>2370454b47443110ee827d7ba26d431a</id>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:18</sys_created_on>
-        <sys_id>abb1e39447447110ee827d7ba26d43d3</sys_id>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>6f70454b47443110ee827d7ba26d431d</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:18</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:40:04</sys_updated_on>
         <table>var__m_sys_hub_action_input_c1806bf4a70323008299b39f087901cb</table>
         <value/>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>watermark_email</field>
-        <id>a7b1e39447447110ee827d7ba26d43d1</id>
+        <id>2370454b47443110ee827d7ba26d431a</id>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 20:07:31</sys_created_on>
-        <sys_id>285c271447847110ee827d7ba26d4322</sys_id>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>2770454b47443110ee827d7ba26d431d</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 20:07:31</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:40:04</sys_updated_on>
         <table>var__m_sys_hub_action_input_c1806bf4a70323008299b39f087901cb</table>
         <value/>
     </sys_element_mapping>
-    <sys_hub_input_scripts action="delete_multiple" query="instance=a7b1e39447447110ee827d7ba26d43d1^sys_idNOT IN2fb1e39447447110ee827d7ba26d43d2,4612af9447447110ee827d7ba26d4389,67ab67d047847110ee827d7ba26d4330,6bab67d047847110ee827d7ba26d4330"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=2370454b47443110ee827d7ba26d431a^sys_idNOT INab70454b47443110ee827d7ba26d431b,e370454b47443110ee827d7ba26d431c,e770454b47443110ee827d7ba26d431c,eb70454b47443110ee827d7ba26d431c"/>
     <sys_hub_input_scripts action="INSERT_OR_UPDATE">
         <active>true</active>
         <input_name>ah_to</input_name>
-        <instance>a7b1e39447447110ee827d7ba26d43d1</instance>
+        <instance>2370454b47443110ee827d7ba26d431a</instance>
         <referenced_table>sys_hub_action_instance</referenced_table>
-        <script>{"ah_to":{"scriptActive":true,"script":"const changedFields \u003d fd_data.trigger.changed_fields;\r\nlet newUsers \u003d [];\r\nfor(let i\u003d0; i\u003cchangedFields.length; ++i) {\r\n\tconst changedField \u003d changedFields[i][\"field_name\"];\r\n\tif(changedField \u003d\u003d\u003d `portfolio_managers`) {\r\n\t\tconst previousUsers \u003d changedFields[i][\"previous_value\"].split(\u0027,\u0027);\r\n\t\tconst currentUsers \u003d changedFields[i][\"current_value\"].split(\u0027,\u0027);\r\n\t    newUsers \u003d currentUsers.filter(function(item) {\r\n\t\t\t\treturn !previousUsers.includes(item); \r\n\t\t\t\t});\t\t\r\n\t\tbreak;\r\n\t}\r\n}\r\n\r\nlet emails \u003d [];\r\nfor(let i\u003d0; i\u003cnewUsers.length; ++i) {\r\n\tconst newUser \u003d newUsers[i];\r\n\tconst gr \u003d new GlideRecord(\u0027sys_user\u0027);\r\n\tgr.addQuery(\u0027sys_id\u0027, newUser);\r\n\tgr.query();\r\n\twhile (gr.next()) {\r\n\t\temails.push(gr.email);\r\n\t}\r\n}\r\nif(emails.length \u003d\u003d\u003d 0) {\r\n\tgs.error(`Error; failed to find a new portfolio manager.`);\r\n\tthrow `Error; failed to find a new portfolio manager.`; \r\n}\r\n\r\nreturn emails.toString();\r\n\r\n"}}</script>
+        <script>{"ah_to":{"scriptActive":true,"script":"const changedFields \u003d fd_data.trigger.changed_fields;\r\nlet newUsers \u003d [];\r\nfor(let i\u003d0; i\u003cchangedFields.length; ++i) {\r\n\tconst changedField \u003d changedFields[i][\"field_name\"];\r\n\tif(changedField \u003d\u003d\u003d `portfolio_viewers`) {\r\n\t\tconst previousUsers \u003d changedFields[i][\"previous_value\"].split(\u0027,\u0027);\r\n\t\tconst currentUsers \u003d changedFields[i][\"current_value\"].split(\u0027,\u0027);\r\n\t    newUsers \u003d currentUsers.filter(function(item) {\r\n\t\t\t\treturn !previousUsers.includes(item); \r\n\t\t\t\t});\t\t\r\n\t\tbreak;\r\n\t}\r\n}\r\n\r\nlet emails \u003d [];\r\nfor(let i\u003d0; i\u003cnewUsers.length; ++i) {\r\n\tconst newUser \u003d newUsers[i];\r\n\tconst gr \u003d new GlideRecord(\u0027sys_user\u0027);\r\n\tgr.addQuery(\u0027sys_id\u0027, newUser);\r\n\tgr.query();\r\n\twhile (gr.next()) {\r\n\t\temails.push(gr.email);\r\n\t}\r\n}\r\nif(emails.length \u003d\u003d\u003d 0) {\r\n\tgs.error(`Error; failed to find a new portfolio viewer.`);\r\n\tthrow `Error; failed to find a new portfolio viewer.`; \r\n}\r\n\r\nreturn emails.toString();\r\n\r\n"}}</script>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:18</sys_created_on>
-        <sys_id>2fb1e39447447110ee827d7ba26d43d2</sys_id>
-        <sys_mod_count>22</sys_mod_count>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>ab70454b47443110ee827d7ba26d431b</sys_id>
+        <sys_mod_count>1</sys_mod_count>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:42:10</sys_updated_on>
-    </sys_hub_input_scripts>
-    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
-        <active>true</active>
-        <input_name>ah_body</input_name>
-        <instance>a7b1e39447447110ee827d7ba26d43d1</instance>
-        <referenced_table>sys_hub_action_instance</referenced_table>
-        <script>{"ah_body":{"scriptActive":true,"script":"const updatedByUserId \u003d fd_data.trigger.current.sys_updated_by;\r\nconst portfolioName \u003d fd_data.trigger.current.name;\r\nlet updatedByUserName;\r\nconst gr \u003d new GlideRecord(\u0027sys_user\u0027);\r\ngr.addQuery(\u0027user_name\u0027, updatedByUserId);\r\ngr.query();\r\nif (gr.next()) {\r\n    updatedByUserName \u003d gr.name;\r\n} else {\r\n    throw new Error(`User with ID ${updatedByUserId} not found.`);\r\n}\r\n\r\nconst managerPrivileges \u003d `\r\n* Track cloud usage and funds spent on portfolio task order(s)\r\n* Request to modify task orders\r\n* Grant administrator access to the CSP console\r\n* Manage portfolio members within ATAT`;\r\n\r\nreturn `\r\n${updatedByUserName} invited you to manage the \"${portfolioName}\" portfolio within the Account Tracking Automation Tool (ATAT). \r\n\r\nYou can now:\r\n${managerPrivileges}\r\n\r\nAccess the portfolio from your dashboard: https://services.disa.mil/atat-dapps \r\n\r\nThis was sent from an unmonitored email address. Please do not reply to this email. If you have questions about JWCC or DAPPS, please contact our Customer Support Team at HaCC Community.`"}}</script>
-        <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:22:50</sys_created_on>
-        <sys_id>4612af9447447110ee827d7ba26d4389</sys_id>
-        <sys_mod_count>32</sys_mod_count>
-        <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:42:10</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:43:15</sys_updated_on>
     </sys_hub_input_scripts>
     <sys_hub_input_scripts action="INSERT_OR_UPDATE">
         <active>false</active>
         <input_name>ah_bcc</input_name>
-        <instance>a7b1e39447447110ee827d7ba26d43d1</instance>
+        <instance>2370454b47443110ee827d7ba26d431a</instance>
         <referenced_table>sys_hub_action_instance</referenced_table>
         <script>{"ah_bcc":{"scriptActive":false}}</script>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 20:04:43</sys_created_on>
-        <sys_id>67ab67d047847110ee827d7ba26d4330</sys_id>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>e370454b47443110ee827d7ba26d431c</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 20:04:43</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:40:04</sys_updated_on>
     </sys_hub_input_scripts>
     <sys_hub_input_scripts action="INSERT_OR_UPDATE">
         <active>false</active>
         <input_name>ah_subject</input_name>
-        <instance>a7b1e39447447110ee827d7ba26d43d1</instance>
+        <instance>2370454b47443110ee827d7ba26d431a</instance>
         <referenced_table>sys_hub_action_instance</referenced_table>
         <script>{"ah_subject":{"scriptActive":false}}</script>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 20:04:43</sys_created_on>
-        <sys_id>6bab67d047847110ee827d7ba26d4330</sys_id>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>e770454b47443110ee827d7ba26d431c</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 20:04:43</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:40:04</sys_updated_on>
     </sys_hub_input_scripts>
-    <sys_hub_alias_mapping action="delete_multiple" query="source_id=a7b1e39447447110ee827d7ba26d43d1"/>
-    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=57b1e39447447110ee827d7ba26d437c"/>
-    <sys_hub_flow_logic action="delete_multiple" query="flow=57b1e39447447110ee827d7ba26d437c^sys_idNOT INa3b1e39447447110ee827d7ba26d43c5,efb1e39447447110ee827d7ba26d43c1"/>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <input_name>ah_body</input_name>
+        <instance>2370454b47443110ee827d7ba26d431a</instance>
+        <referenced_table>sys_hub_action_instance</referenced_table>
+        <script>{"ah_body":{"scriptActive":true,"script":"const updatedByUserId \u003d fd_data.trigger.current.sys_updated_by;\r\nconst portfolioName \u003d fd_data.trigger.current.name;\r\nlet updatedByUserName;\r\nconst gr \u003d new GlideRecord(\u0027sys_user\u0027);\r\ngr.addQuery(\u0027user_name\u0027, updatedByUserId);\r\ngr.query();\r\nif (gr.next()) {\r\n    updatedByUserName \u003d gr.name;\r\n} else {\r\n    throw new Error(`User with ID ${updatedByUserId} not found.`);\r\n}\r\n\r\nconst viewerPrivileges \u003d `\r\n* Track cloud usage and funds spent on portfolio task order(s)\r\n* View task order status and spend details`;\r\n\r\nreturn `\r\n${updatedByUserName} invited you to view the \"${portfolioName}\" portfolio within the Account Tracking Automation Tool (ATAT). \r\n\r\nYou can now:\r\n${viewerPrivileges}\r\n\r\nAccess the portfolio from your dashboard: https://services.disa.mil/atat-dapps \r\n\r\nThis was sent from an unmonitored email address. Please do not reply to this email. If you have questions about JWCC or DAPPS, please contact our Customer Support Team at HaCC Community.`"}}</script>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>eb70454b47443110ee827d7ba26d431c</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:15</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=2370454b47443110ee827d7ba26d431a"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
+        <action_type_parent display_value="Log">0e0ae8c2531003003bf1d9109ec587c8</action_type_parent>
+        <comment/>
+        <display_text/>
+        <flow display_value="PROV: Send Email To New Portfolio Viewer">9770054b47443110ee827d7ba26d43ec</flow>
+        <order>3</order>
+        <parent_ui_id>96821d90-66f9-4d5c-93c1-aed9081540ff</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>a770454b47443110ee827d7ba26d4322</sys_id>
+        <sys_mod_count>10</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:51</sys_updated_on>
+        <ui_id>b444bf5c-772c-4a8d-83c8-4ce06ed9ac40</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=a770454b47443110ee827d7ba26d4322"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>a770454b47443110ee827d7ba26d4322</document_key>
+        <order>0</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>ef70454b47443110ee827d7ba26d4323</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:40:04</sys_updated_on>
+        <value>error</value>
+        <variable display_value="Level">5bc1bcc6531003003bf1d9109ec587d7</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=a770454b47443110ee827d7ba26d4322"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>log_level</field>
+        <id>a770454b47443110ee827d7ba26d4322</id>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>ab70454b47443110ee827d7ba26d4323</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:40:04</sys_updated_on>
+        <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>log_message</field>
+        <id>a770454b47443110ee827d7ba26d4322</id>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>6f70454b47443110ee827d7ba26d4323</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:40:04</sys_updated_on>
+        <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
+        <value>{{96821d90-66f9-4d5c-93c1-aed9081540ff.__status__.message}}</value>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=a770454b47443110ee827d7ba26d4322"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=a770454b47443110ee827d7ba26d4322"/>
+    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=9770054b47443110ee827d7ba26d43ec"/>
+    <sys_hub_flow_logic action="delete_multiple" query="flow=9770054b47443110ee827d7ba26d43ec^sys_idNOT IN2f70454b47443110ee827d7ba26d430f,5370454b47443110ee827d7ba26d430d"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">a1b1a39447447110ee827d7ba26d435d</block>
         <comment/>
@@ -1462,7 +662,7 @@
         <decision_table_inputs/>
         <display_text/>
         <extended_inputs/>
-        <flow display_value="PROV: Send Email To New Portfolio Manager">57b1e39447447110ee827d7ba26d437c</flow>
+        <flow display_value="PROV: Send Email To New Portfolio Viewer">9770054b47443110ee827d7ba26d43ec</flow>
         <flow_variable/>
         <flow_variables_assigned/>
         <inputs/>
@@ -1473,48 +673,48 @@
         <parent_ui_id/>
         <sys_class_name>sys_hub_flow_logic</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:18</sys_created_on>
-        <sys_id>a3b1e39447447110ee827d7ba26d43c5</sys_id>
-        <sys_mod_count>108</sys_mod_count>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>2f70454b47443110ee827d7ba26d430f</sys_id>
+        <sys_mod_count>5</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:42:11</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:43:20</sys_updated_on>
         <ui_id>96821d90-66f9-4d5c-93c1-aed9081540ff</ui_id>
         <workflow_inputs/>
         <workflow_reference/>
     </sys_hub_flow_logic>
-    <sys_variable_value action="delete_multiple" query="document_key=a3b1e39447447110ee827d7ba26d43c5"/>
+    <sys_variable_value action="delete_multiple" query="document_key=2f70454b47443110ee827d7ba26d430f"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>sys_hub_flow_logic</document>
-        <document_key>a3b1e39447447110ee827d7ba26d43c5</document_key>
+        <document_key>2f70454b47443110ee827d7ba26d430f</document_key>
         <order>100</order>
         <sys_class_name>sys_variable_value</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:18</sys_created_on>
-        <sys_id>6bb1e39447447110ee827d7ba26d43c8</sys_id>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>ab70454b47443110ee827d7ba26d4313</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:18</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:40:04</sys_updated_on>
         <value>1</value>
         <variable display_value="enabled">dd70187cc36e20105553b740ad40dddc</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>sys_hub_flow_logic</document>
-        <document_key>a3b1e39447447110ee827d7ba26d43c5</document_key>
+        <document_key>2f70454b47443110ee827d7ba26d430f</document_key>
         <order>100</order>
         <sys_class_name>sys_variable_value</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:18</sys_created_on>
-        <sys_id>a7b1e39447447110ee827d7ba26d43c8</sys_id>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>e370454b47443110ee827d7ba26d4313</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:18</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:40:04</sys_updated_on>
         <value>{"version":"1.0","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}},"complexObjectSchema":{"FlowDesigner:FDACTIONSTATUS":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"integer\",\"default_value\":\"\",\"label\":\"Code\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"Message\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FDACTIONSTATUS.$type_facets":{"SimpleMapFacet":"{\"default_value\":\"\",\"label\":\"Action Status\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"uiUniqueId\":\"4adfb7bc-9d67-498d-88d0-8d6c3d584fed\",\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FDACTIONSTATUS\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"object\",\"order\":\"1\",\"max_length\":\"65000\"}"}},"serializationFormat":"JSON"}</value>
         <variable display_value="Error Status">0f72a5a25b132010b61ea2013781c749</variable>
     </sys_variable_value>
-    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_logic_input_35d60003e6022010a5e40cdd1254dd23^id=a3b1e39447447110ee827d7ba26d43c5"/>
-    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=a3b1e39447447110ee827d7ba26d43c5"/>
-    <sys_hub_input_scripts action="delete_multiple" query="instance=a3b1e39447447110ee827d7ba26d43c5"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_logic_input_35d60003e6022010a5e40cdd1254dd23^id=2f70454b47443110ee827d7ba26d430f"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=2f70454b47443110ee827d7ba26d430f"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=2f70454b47443110ee827d7ba26d430f"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
         <block display_value="">2db1a39447447110ee827d7ba26d434e</block>
         <comment/>
@@ -1523,7 +723,7 @@
         <decision_table_inputs/>
         <display_text/>
         <extended_inputs/>
-        <flow display_value="PROV: Send Email To New Portfolio Manager">57b1e39447447110ee827d7ba26d437c</flow>
+        <flow display_value="PROV: Send Email To New Portfolio Viewer">9770054b47443110ee827d7ba26d43ec</flow>
         <flow_variable/>
         <flow_variables_assigned/>
         <inputs/>
@@ -1534,34 +734,34 @@
         <parent_ui_id/>
         <sys_class_name>sys_hub_flow_logic</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:18</sys_created_on>
-        <sys_id>efb1e39447447110ee827d7ba26d43c1</sys_id>
-        <sys_mod_count>108</sys_mod_count>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>5370454b47443110ee827d7ba26d430d</sys_id>
+        <sys_mod_count>5</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-19 20:42:10</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:43:20</sys_updated_on>
         <ui_id>bcce84aa-26ca-4be9-b3dd-6267823badd3</ui_id>
         <workflow_inputs/>
         <workflow_reference/>
     </sys_hub_flow_logic>
-    <sys_variable_value action="delete_multiple" query="document_key=efb1e39447447110ee827d7ba26d43c1"/>
-    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=efb1e39447447110ee827d7ba26d43c1"/>
-    <sys_hub_input_scripts action="delete_multiple" query="instance=efb1e39447447110ee827d7ba26d43c1"/>
-    <sys_hub_pill_compound action="delete_multiple" query="attached_to=57b1e39447447110ee827d7ba26d437c"/>
-    <sys_hub_flow_variable action="delete_multiple" query="model=57b1e39447447110ee827d7ba26d437c"/>
-    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_57b1e39447447110ee827d7ba26d437c^sys_idNOT IN23b1e39447447110ee827d7ba26d439e,27b1e39447447110ee827d7ba26d43ae,e3b1e39447447110ee827d7ba26d43a6"/>
+    <sys_variable_value action="delete_multiple" query="document_key=5370454b47443110ee827d7ba26d430d"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=5370454b47443110ee827d7ba26d430d"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=5370454b47443110ee827d7ba26d430d"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=9770054b47443110ee827d7ba26d43ec"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=9770054b47443110ee827d7ba26d43ec"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_9770054b47443110ee827d7ba26d43ec^sys_idNOT IN5b70054b47443110ee827d7ba26d43fd,5f70054b47443110ee827d7ba26d43f6,9370054b47443110ee827d7ba26d43fa"/>
     <sys_documentation action="INSERT_OR_UPDATE">
-        <element>current</element>
+        <element>changed_fields</element>
         <help/>
         <hint/>
-        <label>Record</label>
+        <label>Changed Fields</label>
         <language>en</language>
-        <name>var__m_sys_hub_flow_input_57b1e39447447110ee827d7ba26d437c</name>
+        <name>var__m_sys_hub_flow_input_9770054b47443110ee827d7ba26d43ec</name>
         <plural/>
         <sys_class_name>sys_documentation</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:17</sys_created_on>
-        <sys_id>23b1e39447447110ee827d7ba26d439e</sys_id>
+        <sys_created_on>2023-07-19 20:40:04</sys_created_on>
+        <sys_id>5b70054b47443110ee827d7ba26d43fd</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -1569,7 +769,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name/>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:17</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:40:04</sys_updated_on>
         <url/>
         <url_target/>
     </sys_documentation>
@@ -1579,12 +779,12 @@
         <hint/>
         <label>Table Name</label>
         <language>en</language>
-        <name>var__m_sys_hub_flow_input_57b1e39447447110ee827d7ba26d437c</name>
+        <name>var__m_sys_hub_flow_input_9770054b47443110ee827d7ba26d43ec</name>
         <plural/>
         <sys_class_name>sys_documentation</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:17</sys_created_on>
-        <sys_id>27b1e39447447110ee827d7ba26d43ae</sys_id>
+        <sys_created_on>2023-07-19 20:40:03</sys_created_on>
+        <sys_id>5f70054b47443110ee827d7ba26d43f6</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -1592,7 +792,807 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name/>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:17</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:40:03</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>Record</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_9770054b47443110ee827d7ba26d43ec</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:40:03</sys_created_on>
+        <sys_id>9370054b47443110ee827d7ba26d43fa</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:40:03</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_9770054b47443110ee827d7ba26d43ec"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_9770054b47443110ee827d7ba26d43ec"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_9770054b47443110ee827d7ba26d43ec"/>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=9770054b47443110ee827d7ba26d43ec^sys_idNOT IN9b31c58b47443110ee827d7ba26d43c8"/>
+    <sys_flow_trigger_plan action="INSERT_OR_UPDATE">
+        <binding_strategy>com.snc.process_flow.engine.binding.Every</binding_strategy>
+        <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_flow_trigger_plan","id":"9b31c58b47443110ee827d7ba26d43c8","name":"plan","plan_signature":null}}</plan>
+        <plan_id>9770054b47443110ee827d7ba26d43ec</plan_id>
+        <snapshot>47510d8b47443110ee827d7ba26d43c9</snapshot>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>9b31c58b47443110ee827d7ba26d43c8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+        <trigger display_value="">db31c58b47443110ee827d7ba26d43c7</trigger>
+    </sys_flow_trigger_plan>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=9770054b47443110ee827d7ba26d43ec"/>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from>5c50a31047447110ee827d7ba26d4352</copied_from>
+        <copied_from_name/>
+        <description>This flow notifies portfolio viewers when they are added to a portfolio.</description>
+        <internal_name>prov_send_email_to_new_portfolio_viewer</internal_name>
+        <label_cache>[{"name":"Created or Updated_1.current","label":"Trigger - Record Created or Updated➛x_g_dis_atat_portfolio Record","reference":"x_g_dis_atat_portfolio","reference_display":"x_g_dis_atat_portfolio","type":"reference","base_type":"reference","attributes":{}},{"name":"Created or Updated_1.table_name","label":"Trigger - Record Created or Updated➛x_g_dis_atat_portfolio Table","reference":"x_g_dis_atat_portfolio","reference_display":"x_g_dis_atat_portfolio","type":"table_name","base_type":"table_name","attributes":{"test_input_hidden":"true"}},{"name":"Created or Updated_1.current.name","label":"Trigger - Record Created or Updated➛x_g_dis_atat_portfolio Record➛Name","reference":"","reference_display":"Name","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_portfolio","column_name":"name"},{"name":"96821d90-66f9-4d5c-93c1-aed9081540ff.__status__.message","label":"1 - Top Level Catch➛Error Status➛Message","reference":"","reference_display":"","type":"string","base_type":"string","column_name":"","attributes":{}}]</label_cache>
+        <master>true</master>
+        <name>PROV: Send Email To New Portfolio Viewer</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="PROV: Send Email To New Portfolio Viewer">9770054b47443110ee827d7ba26d43ec</parent_flow>
+        <remote_trigger_id/>
+        <run_as>system</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:18</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>c731c58b47443110ee827d7ba26d435f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:18</sys_updated_on>
+        <type>flow</type>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=c731c58b47443110ee827d7ba26d435f"/>
+    <sys_variable_value action="delete_multiple" query="document_key=c731c58b47443110ee827d7ba26d435f"/>
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=c731c58b47443110ee827d7ba26d435f^sys_idNOT INc331c58b47443110ee827d7ba26d43a1"/>
+    <sys_hub_trigger_instance action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="PROV: Send Email To New Portfolio Viewer">c731c58b47443110ee827d7ba26d435f</flow>
+        <name>Created or Updated</name>
+        <remote_sys_id/>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>c331c58b47443110ee827d7ba26d43a1</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+        <trigger_definition display_value="Created or Updated">a45d9180c32222002841b63b12d3aea7</trigger_definition>
+        <trigger_inputs/>
+        <trigger_outputs/>
+        <trigger_type>record_create_or_update</trigger_type>
+    </sys_hub_trigger_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=c331c58b47443110ee827d7ba26d43a1"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_trigger_instance</document>
+        <document_key>c331c58b47443110ee827d7ba26d43a1</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>0f31c58b47443110ee827d7ba26d43a2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+        <value>portfolio_viewersVALCHANGES</value>
+        <variable display_value="Condition">707dd180c32222002841b63b12d3aecb</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_trigger_instance</document>
+        <document_key>c331c58b47443110ee827d7ba26d43a1</document_key>
+        <order>200</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>4b31c58b47443110ee827d7ba26d43a2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+        <value>every</value>
+        <variable display_value="Run Trigger">2b9def50c31132002841b63b12d3ae5b</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_trigger_instance</document>
+        <document_key>c331c58b47443110ee827d7ba26d43a1</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>cf31c58b47443110ee827d7ba26d43a2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+        <value>x_g_dis_atat_portfolio</value>
+        <variable display_value="Table">cf1e1980c32222002841b63b12d3aea0</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_trigger_output_a45d9180c32222002841b63b12d3aea7^id=c331c58b47443110ee827d7ba26d43a1"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=c731c58b47443110ee827d7ba26d435f"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=c731c58b47443110ee827d7ba26d435f^sys_idNOT INc331c58b47443110ee827d7ba26d4360"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>c731c58b47443110ee827d7ba26d435f</id>
+        <name>PROV: Send Email To New Portfolio Viewer</name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:18</sys_created_on>
+        <sys_id>c331c58b47443110ee827d7ba26d4360</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:18</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=c331c58b47443110ee827d7ba26d4360"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=c731c58b47443110ee827d7ba26d435f^sys_idNOT IN0731c58b47443110ee827d7ba26d4372,4731c58b47443110ee827d7ba26d437a,4b31c58b47443110ee827d7ba26d4361"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>child_label=FDChangeDetails,child_name=FDChangeDetails,child_type=object,child_type_label=Object,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,pwd2droppable=true,uiType=array.object,uiTypeLabel=Array.Object</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>changed_fields</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Changed Fields</label>
+        <mandatory>false</mandatory>
+        <max_length>4000</max_length>
+        <model display_value="PROV: Send Email To New Portfolio Viewer">c731c58b47443110ee827d7ba26d435f</model>
+        <model_id>c731c58b47443110ee827d7ba26d435f</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_c731c58b47443110ee827d7ba26d435f</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:18</sys_created_on>
+        <sys_id>0731c58b47443110ee827d7ba26d4372</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:18</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name,uiTypeLabel=Table Name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>200</max_length>
+        <model display_value="PROV: Send Email To New Portfolio Viewer">c731c58b47443110ee827d7ba26d435f</model>
+        <model_id>c731c58b47443110ee827d7ba26d435f</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_c731c58b47443110ee827d7ba26d435f</name>
+        <next_element/>
+        <order>101</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:18</sys_created_on>
+        <sys_id>4731c58b47443110ee827d7ba26d437a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:18</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=document_id,uiTypeLabel=Document ID</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent>table_name</dependent>
+        <dependent_on_field>table_name</dependent_on_field>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">document_id</internal_type>
+        <label>Record</label>
+        <mandatory>true</mandatory>
+        <max_length>200</max_length>
+        <model display_value="PROV: Send Email To New Portfolio Viewer">c731c58b47443110ee827d7ba26d435f</model>
+        <model_id>c731c58b47443110ee827d7ba26d435f</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_c731c58b47443110ee827d7ba26d435f</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:18</sys_created_on>
+        <sys_id>4b31c58b47443110ee827d7ba26d4361</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:18</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>true</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_output action="delete_multiple" query="model=c731c58b47443110ee827d7ba26d435f"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=c731c58b47443110ee827d7ba26d435f"/>
+    <sys_hub_action_instance action="delete_multiple" query="flow=c731c58b47443110ee827d7ba26d435f^sys_idNOT IN4731c58b47443110ee827d7ba26d439f,4b31c58b47443110ee827d7ba26d4395"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
+        <action_type_parent display_value="Log">0e0ae8c2531003003bf1d9109ec587c8</action_type_parent>
+        <comment/>
+        <display_text/>
+        <flow display_value="PROV: Send Email To New Portfolio Viewer">c731c58b47443110ee827d7ba26d435f</flow>
+        <order>3</order>
+        <parent_ui_id>96821d90-66f9-4d5c-93c1-aed9081540ff</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>4731c58b47443110ee827d7ba26d439f</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+        <ui_id>b444bf5c-772c-4a8d-83c8-4ce06ed9ac40</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=4731c58b47443110ee827d7ba26d439f"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>4731c58b47443110ee827d7ba26d439f</document_key>
+        <order>0</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>4f31c58b47443110ee827d7ba26d43a0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+        <value>error</value>
+        <variable display_value="Level">5bc1bcc6531003003bf1d9109ec587d7</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=4731c58b47443110ee827d7ba26d439f"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>log_level</field>
+        <id>4731c58b47443110ee827d7ba26d439f</id>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>0b31c58b47443110ee827d7ba26d43a0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+        <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>log_message</field>
+        <id>4731c58b47443110ee827d7ba26d439f</id>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>cb31c58b47443110ee827d7ba26d43a0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+        <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
+        <value>{{96821d90-66f9-4d5c-93c1-aed9081540ff.__status__.message}}</value>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=4731c58b47443110ee827d7ba26d439f"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=4731c58b47443110ee827d7ba26d439f"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Send Email">c1806bf4a70323008299b39f087901cb</action_type>
+        <action_type_parent display_value="Send Email">98c181d20b100300d97d8bf637673ab5</action_type_parent>
+        <comment/>
+        <display_text/>
+        <flow display_value="PROV: Send Email To New Portfolio Viewer">c731c58b47443110ee827d7ba26d435f</flow>
+        <order>1</order>
+        <parent_ui_id>bcce84aa-26ca-4be9-b3dd-6267823badd3</parent_ui_id>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>4b31c58b47443110ee827d7ba26d4395</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+        <ui_id>01ad6a44-9320-4843-86fd-c01641b6ee4f</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=4b31c58b47443110ee827d7ba26d4395"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>4b31c58b47443110ee827d7ba26d4395</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>0331c58b47443110ee827d7ba26d439a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+        <value>x_g_dis_atat_portfolio</value>
+        <variable display_value="Table">19806bf4a70323008299b39f087901d4</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>4b31c58b47443110ee827d7ba26d4395</document_key>
+        <order>7</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>4f31c58b47443110ee827d7ba26d4399</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+        <value>&lt;p&gt;Test&lt;/p&gt;</value>
+        <variable display_value="Body">ad806bf4a70323008299b39f087901f2</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>4b31c58b47443110ee827d7ba26d4395</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>8b31c58b47443110ee827d7ba26d4399</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+        <value>0</value>
+        <variable display_value="Include Watermark">066bb6b57303230082999cfd7bf6a7c3</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=4b31c58b47443110ee827d7ba26d4395"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>ah_body</field>
+        <id>4b31c58b47443110ee827d7ba26d4395</id>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>cf31c58b47443110ee827d7ba26d4398</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+        <table>var__m_sys_hub_action_input_c1806bf4a70323008299b39f087901cb</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>ah_subject</field>
+        <id>4b31c58b47443110ee827d7ba26d4395</id>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>0b31c58b47443110ee827d7ba26d4399</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+        <table>var__m_sys_hub_action_input_c1806bf4a70323008299b39f087901cb</table>
+        <value>JWCC Portfolio shared with you "{{Created or Updated_1.current.name}}"</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>record</field>
+        <id>4b31c58b47443110ee827d7ba26d4395</id>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>8331c58b47443110ee827d7ba26d4399</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+        <table>var__m_sys_hub_action_input_c1806bf4a70323008299b39f087901cb</table>
+        <value>{{Created or Updated_1.current}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>table_name</field>
+        <id>4b31c58b47443110ee827d7ba26d4395</id>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>4731c58b47443110ee827d7ba26d4399</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+        <table>var__m_sys_hub_action_input_c1806bf4a70323008299b39f087901cb</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>watermark_email</field>
+        <id>4b31c58b47443110ee827d7ba26d4395</id>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>0f31c58b47443110ee827d7ba26d4398</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+        <table>var__m_sys_hub_action_input_c1806bf4a70323008299b39f087901cb</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=4b31c58b47443110ee827d7ba26d4395^sys_idNOT IN0331c58b47443110ee827d7ba26d4398,0731c58b47443110ee827d7ba26d4398,0f31c58b47443110ee827d7ba26d4397,c331c58b47443110ee827d7ba26d4397"/>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>false</active>
+        <input_name>ah_subject</input_name>
+        <instance>4b31c58b47443110ee827d7ba26d4395</instance>
+        <referenced_table>sys_hub_action_instance</referenced_table>
+        <script>{"ah_subject":{"scriptActive":false}}</script>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>0331c58b47443110ee827d7ba26d4398</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <input_name>ah_body</input_name>
+        <instance>4b31c58b47443110ee827d7ba26d4395</instance>
+        <referenced_table>sys_hub_action_instance</referenced_table>
+        <script>{"ah_body":{"scriptActive":true,"script":"const updatedByUserId \u003d fd_data.trigger.current.sys_updated_by;\r\nconst portfolioName \u003d fd_data.trigger.current.name;\r\nlet updatedByUserName;\r\nconst gr \u003d new GlideRecord(\u0027sys_user\u0027);\r\ngr.addQuery(\u0027user_name\u0027, updatedByUserId);\r\ngr.query();\r\nif (gr.next()) {\r\n    updatedByUserName \u003d gr.name;\r\n} else {\r\n    throw new Error(`User with ID ${updatedByUserId} not found.`);\r\n}\r\n\r\nconst viewerPrivileges \u003d `\r\n* Track cloud usage and funds spent on portfolio task order(s)\r\n* View task order status and spend details`;\r\n\r\nreturn `\r\n${updatedByUserName} invited you to view the \"${portfolioName}\" portfolio within the Account Tracking Automation Tool (ATAT). \r\n\r\nYou can now:\r\n${viewerPrivileges}\r\n\r\nAccess the portfolio from your dashboard: https://services.disa.mil/atat-dapps \r\n\r\nThis was sent from an unmonitored email address. Please do not reply to this email. If you have questions about JWCC or DAPPS, please contact our Customer Support Team at HaCC Community.`"}}</script>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>0731c58b47443110ee827d7ba26d4398</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>false</active>
+        <input_name>ah_bcc</input_name>
+        <instance>4b31c58b47443110ee827d7ba26d4395</instance>
+        <referenced_table>sys_hub_action_instance</referenced_table>
+        <script>{"ah_bcc":{"scriptActive":false}}</script>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>0f31c58b47443110ee827d7ba26d4397</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <input_name>ah_to</input_name>
+        <instance>4b31c58b47443110ee827d7ba26d4395</instance>
+        <referenced_table>sys_hub_action_instance</referenced_table>
+        <script>{"ah_to":{"scriptActive":true,"script":"const changedFields \u003d fd_data.trigger.changed_fields;\r\nlet newUsers \u003d [];\r\nfor(let i\u003d0; i\u003cchangedFields.length; ++i) {\r\n\tconst changedField \u003d changedFields[i][\"field_name\"];\r\n\tif(changedField \u003d\u003d\u003d `portfolio_viewers`) {\r\n\t\tconst previousUsers \u003d changedFields[i][\"previous_value\"].split(\u0027,\u0027);\r\n\t\tconst currentUsers \u003d changedFields[i][\"current_value\"].split(\u0027,\u0027);\r\n\t    newUsers \u003d currentUsers.filter(function(item) {\r\n\t\t\t\treturn !previousUsers.includes(item); \r\n\t\t\t\t});\t\t\r\n\t\tbreak;\r\n\t}\r\n}\r\n\r\nlet emails \u003d [];\r\nfor(let i\u003d0; i\u003cnewUsers.length; ++i) {\r\n\tconst newUser \u003d newUsers[i];\r\n\tconst gr \u003d new GlideRecord(\u0027sys_user\u0027);\r\n\tgr.addQuery(\u0027sys_id\u0027, newUser);\r\n\tgr.query();\r\n\twhile (gr.next()) {\r\n\t\temails.push(gr.email);\r\n\t}\r\n}\r\nif(emails.length \u003d\u003d\u003d 0) {\r\n\tgs.error(`Error; failed to find a new portfolio viewer.`);\r\n\tthrow `Error; failed to find a new portfolio viewer.`; \r\n}\r\n\r\nreturn emails.toString();\r\n\r\n"}}</script>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>c331c58b47443110ee827d7ba26d4397</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=4b31c58b47443110ee827d7ba26d4395"/>
+    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=c731c58b47443110ee827d7ba26d435f"/>
+    <sys_hub_flow_logic action="delete_multiple" query="flow=c731c58b47443110ee827d7ba26d435f^sys_idNOT IN4f31c58b47443110ee827d7ba26d4385,cf31c58b47443110ee827d7ba26d4388"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">2db1a39447447110ee827d7ba26d434e</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="PROV: Send Email To New Portfolio Viewer">c731c58b47443110ee827d7ba26d435f</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="Top Level Try">e9060aa2c3013010ace8b740ad40dd51</logic_definition>
+        <order>0</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>4f31c58b47443110ee827d7ba26d4385</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+        <ui_id>bcce84aa-26ca-4be9-b3dd-6267823badd3</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=4f31c58b47443110ee827d7ba26d4385"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=4f31c58b47443110ee827d7ba26d4385"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=4f31c58b47443110ee827d7ba26d4385"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">a1b1a39447447110ee827d7ba26d435d</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="PROV: Send Email To New Portfolio Viewer">c731c58b47443110ee827d7ba26d435f</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="Top Level Catch">35d60003e6022010a5e40cdd1254dd23</logic_definition>
+        <order>2</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>cf31c58b47443110ee827d7ba26d4388</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+        <ui_id>96821d90-66f9-4d5c-93c1-aed9081540ff</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=cf31c58b47443110ee827d7ba26d4388"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>cf31c58b47443110ee827d7ba26d4388</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>8b31c58b47443110ee827d7ba26d438c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+        <value>1</value>
+        <variable display_value="enabled">dd70187cc36e20105553b740ad40dddc</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_flow_logic</document>
+        <document_key>cf31c58b47443110ee827d7ba26d4388</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:19</sys_created_on>
+        <sys_id>c731c58b47443110ee827d7ba26d438c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:19</sys_updated_on>
+        <value>{"version":"1.0","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}},"complexObjectSchema":{"FlowDesigner:FDACTIONSTATUS":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"integer\",\"default_value\":\"\",\"label\":\"Code\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"Message\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FDACTIONSTATUS.$type_facets":{"SimpleMapFacet":"{\"default_value\":\"\",\"label\":\"Action Status\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"uiUniqueId\":\"4adfb7bc-9d67-498d-88d0-8d6c3d584fed\",\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FDACTIONSTATUS\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"object\",\"order\":\"1\",\"max_length\":\"65000\"}"}},"serializationFormat":"JSON"}</value>
+        <variable display_value="Error Status">0f72a5a25b132010b61ea2013781c749</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_logic_input_35d60003e6022010a5e40cdd1254dd23^id=cf31c58b47443110ee827d7ba26d4388"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=cf31c58b47443110ee827d7ba26d4388"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=cf31c58b47443110ee827d7ba26d4388"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=c731c58b47443110ee827d7ba26d435f"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=c731c58b47443110ee827d7ba26d435f"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_c731c58b47443110ee827d7ba26d435f^sys_idNOT IN0f31c58b47443110ee827d7ba26d436e,0f31c58b47443110ee827d7ba26d437e,4f31c58b47443110ee827d7ba26d4376"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>Record</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_c731c58b47443110ee827d7ba26d435f</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:18</sys_created_on>
+        <sys_id>0f31c58b47443110ee827d7ba26d436e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:18</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_c731c58b47443110ee827d7ba26d435f</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-07-19 20:43:18</sys_created_on>
+        <sys_id>0f31c58b47443110ee827d7ba26d437e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-07-19 20:43:18</sys_updated_on>
         <url/>
         <url_target/>
     </sys_documentation>
@@ -1602,12 +1602,12 @@
         <hint/>
         <label>Changed Fields</label>
         <language>en</language>
-        <name>var__m_sys_hub_flow_input_57b1e39447447110ee827d7ba26d437c</name>
+        <name>var__m_sys_hub_flow_input_c731c58b47443110ee827d7ba26d435f</name>
         <plural/>
         <sys_class_name>sys_documentation</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
-        <sys_created_on>2023-07-11 19:21:17</sys_created_on>
-        <sys_id>e3b1e39447447110ee827d7ba26d43a6</sys_id>
+        <sys_created_on>2023-07-19 20:43:18</sys_created_on>
+        <sys_id>4f31c58b47443110ee827d7ba26d4376</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -1615,16 +1615,16 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name/>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-11 19:21:17</sys_updated_on>
+        <sys_updated_on>2023-07-19 20:43:18</sys_updated_on>
         <url/>
         <url_target/>
     </sys_documentation>
-    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_57b1e39447447110ee827d7ba26d437c"/>
-    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_57b1e39447447110ee827d7ba26d437c"/>
-    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_57b1e39447447110ee827d7ba26d437c"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_c731c58b47443110ee827d7ba26d435f"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_c731c58b47443110ee827d7ba26d435f"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_c731c58b47443110ee827d7ba26d435f"/>
     <sys_hub_flow action="UPDATE">
-        <sys_id>5c50a31047447110ee827d7ba26d4352</sys_id>
-        <latest_snapshot>57b1e39447447110ee827d7ba26d437c</latest_snapshot>
+        <sys_id>9770054b47443110ee827d7ba26d43ec</sys_id>
+        <latest_snapshot>c731c58b47443110ee827d7ba26d435f</latest_snapshot>
         <compiler_build>glide-tokyo-07-08-2022__patch9-hotfix2-06-07-2023_06-23-2023_1740.zip</compiler_build>
     </sys_hub_flow>
 </record_update>
