@@ -14,6 +14,7 @@ CSVUtils.prototype = {
 
     },
     convertToCSV: function(jsonArray) {
+		gs.info("converttocsv is firing!");
         if(jsonArray.length === 0){
             return '';
         }
@@ -27,14 +28,14 @@ CSVUtils.prototype = {
             });
             csvContent += row.join(',') + '\n';
         });
+		gs.info(csvContent);
         return csvContent;
     },
     writeCSVToDocument: function(content, fileName){
         var attachment = new GlideSysAttachment();
         var rec = new GlideRecord('sys_attachment');
         rec.insert();
-        attachment.write(rec, fileName, 'text/csv', content);
-        
+        return attachment.write(rec, fileName, 'text/csv', content);
     },
 
     type: 'CSVUtils'
@@ -49,7 +50,7 @@ CSVUtils.prototype = {
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_bdccfee6970471103394f5b0f053af92</sys_update_name>
-        <sys_updated_by>torin.harthcock</sys_updated_by>
-        <sys_updated_on>2023-07-20 20:55:53</sys_updated_on>
+        <sys_updated_by>andrew.nickerl</sys_updated_by>
+        <sys_updated_on>2023-07-21 15:34:46</sys_updated_on>
     </sys_script_include>
 </record_update>
