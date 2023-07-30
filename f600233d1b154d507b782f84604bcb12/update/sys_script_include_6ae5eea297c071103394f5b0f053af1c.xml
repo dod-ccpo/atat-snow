@@ -62,6 +62,34 @@ DappsReportGen.prototype = {
             return this.projectOverview.title.toString();
         }
     },
+	getCJADC2: function() {
+		let cjadc2Initiative = "";
+		let cjadc2Percentage = "";
+		
+		this.projectOverview.get(this.acquisitionPackage.project_overview);
+		if(!this.projectOverview.cjadc2){
+				return {
+					cjadc2Initiative: "",
+					cjadc2Percentage: "",
+				};
+		}
+		else {
+			if(this.projectOverview.cjadc2){
+			if(!this.projectOverview.cjadc2_percentage){
+				return {
+					cjadc2Initiative: this.projectOverview.cjadc2.getDisplayValue().toString(),
+					cjadc2Percentage: ""
+				};
+			}
+				if(this.projectOverview.cjadc2_percentage > 0){
+					return {
+						cjadc2Initiative: this.projectOverview.cjadc2.getDisplayValue().toString(),
+						cjadc2Percentage: this.projectOverview.cjadc2_percentage.toString()
+					};
+				}
+			}
+		}
+	},
 
     getOrganization: function() {
         this.organization.get(this.acquisitionPackage.organization);
@@ -272,6 +300,7 @@ DappsReportGen.prototype = {
         var evalPlan = this.getEvalPlan();
         var contractType = this.getContractType();
         var fundingRequest = this.getFundingRequest();
+		let cjadc2 = this.getCJADC2();
         return {
             Number: this.acquisitionPackage.number.toString(),
             Status: this.acquisitionPackage.package_status.getDisplayValue().toString(),
@@ -296,6 +325,8 @@ DappsReportGen.prototype = {
             "Order Number": fundingRequest.orderNumber,
             "Potential Conflict of Interest": this.getContractConsiderations(),
 			"Estimated Total Value": this.getEstimatedCost(),
+			"CJADC2 Initiative": cjadc2.cjadc2Initiative,
+			"CJADC2 Percentage": cjadc2.cjadc2Percentage,
 
         };
     },
@@ -307,13 +338,13 @@ DappsReportGen.prototype = {
         <sys_created_by>torin.harthcock</sys_created_by>
         <sys_created_on>2023-07-18 14:53:08</sys_created_on>
         <sys_id>6ae5eea297c071103394f5b0f053af1c</sys_id>
-        <sys_mod_count>15</sys_mod_count>
+        <sys_mod_count>20</sys_mod_count>
         <sys_name>DappsReportGen</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_6ae5eea297c071103394f5b0f053af1c</sys_update_name>
-        <sys_updated_by>torin.harthcock</sys_updated_by>
-        <sys_updated_on>2023-07-20 20:54:05</sys_updated_on>
+        <sys_updated_by>tom.arnold</sys_updated_by>
+        <sys_updated_on>2023-07-30 01:40:20</sys_updated_on>
     </sys_script_include>
 </record_update>
