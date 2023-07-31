@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="aebef5fe9758f110cbe7be9fe153afe5" label="DAPPS:Feedback " max_length="40" name="x_g_dis_atat_dapps_feedback" type="collection">
+        <element label="Acquisition package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
+        <element label="Dapps experience" max_length="40" name="dapps_experience" type="integer"/>
+        <element label="Feedback items" max_length="4000" name="feedback_items" reference="x_g_dis_atat_dapps_feedback_options_table" type="glide_list"/>
+        <element label="Feedback items other" max_length="400" name="feedback_items_other" type="string"/>
+        <element label="Is complete" max_length="40" name="is_complete" type="boolean"/>
+        <index name="index">
+            <element name="acquisition_package"/>
+        </index>
+    </element>
+</database>
