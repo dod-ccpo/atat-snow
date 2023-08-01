@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.TaskOrderService</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Grouped Task Order functionality used within ATAT.</description>
+        <name>TaskOrderService</name>
+        <script><![CDATA[var TaskOrderService = Class.create();
+TaskOrderService.prototype = {
+	
+	clinStatusList: [],
+	// time-based flags
+	hasStarted: false, // now is after PoP start date
+	hasExpired: false, // now is before PoP end date
+	
+    initialize: function(toRec) {
+		this.setTimeFlags(toRec);
+		this.setClinStatusList(toRec);
+    },
+	// Compares current date with PoP start and end dates to set time-based flags
+    // @param {GlideRecord} - a Task order record
+	setTimeFlags: function(toRec) {
+		const now = new GlideDateTime();		
+		// set if has started
+		const start = new GlideDateTime(toRec.pop_start_date);
+		this.hasStarted = now.after(start);
+		
+		// set if has expired
+		const end = new GlideDateTime(toRec.pop_end_date);
+		this.hasExpired = now.after(end);	
+	},
+	// sets ClinStatusList for use in determining task order status
+	// @param {GlideRecord} - a Task order record
+	setClinStatusList: function(toRec){
+		const clinIds = toRec.clins.toString().split(',');
+		const CLIN_TABLE = "x_g_dis_atat_clin";
+		this.clinStatusList = clinIds.map((clinId) => {
+			var clinGr = new GlideRecord(CLIN_TABLE);
+			clinGr.get(clinId);
+			if (clinGr.isValidRecord()) {
+				const cs = new ClinService(gr);
+				const payload = cs.determineStatus(gr);
+				return payload;
+			}
+		});
+	},
+	// Determine which status applies to the specified Task Order
+    // @param {GlideRecord} - a Task order record
+    // @returns {string or enum} - the status of the Task Order
+    determineStatus: function(toRec) {	
+		if (this.hasExpired) return "EXPIRED";
+		if(this.clinStatusList.includes("AT_RISK") || !this.clinStatusList.includes('OPTION_EXERCISED')) return "AT_RISK";
+		if(!this.hasStarted) return "UPCOMING";
+		return "ON_TRACK";		
+    },
+
+    type: 'TaskOrderService'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-31 16:20:16</sys_created_on>
+        <sys_id>dfd779fe9750311084aaf8a6f053afeb</sys_id>
+        <sys_mod_count>22</sys_mod_count>
+        <sys_name>TaskOrderService</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_dfd779fe9750311084aaf8a6f053afeb</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-07-31 21:02:57</sys_updated_on>
+    </sys_script_include>
+</record_update>
