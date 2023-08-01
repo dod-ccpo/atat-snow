@@ -50,11 +50,16 @@ TaskOrderService.prototype = {
     // @param {GlideRecord} - a Task order record
     // @returns {string or enum} - the status of the Task Order
     determineStatus: function(toRec) {	
+		// Task order has expired
 		if (this.hasExpired) return "EXPIRED";
+		// Task order has NOT started
 		if(!this.hasStarted) return "UPCOMING";
+		// Array of CLIN risk statuses to look for, add more here if requirments expand
 		const atRiskStatus = ["AT_RISK", "EXPIRING_POP", "FUNDING_AT_RISK"];
+		// checks to see if any of the clinStatusList includes an 'At risk' CLIN
 		const isAtRisk = atRiskStatus.some(status => this.clinStatusList.includes(status));
 		if(isAtRisk && !this.clinStatusList.includes("OPTION_EXERCISED")) return "AT_RISK";
+		// if nothing matches, task order is on track
 		return "ON_TRACK";		
     },
 
@@ -64,13 +69,13 @@ TaskOrderService.prototype = {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-07-31 16:20:16</sys_created_on>
         <sys_id>dfd779fe9750311084aaf8a6f053afeb</sys_id>
-        <sys_mod_count>25</sys_mod_count>
+        <sys_mod_count>26</sys_mod_count>
         <sys_name>TaskOrderService</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_dfd779fe9750311084aaf8a6f053afeb</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-08-01 17:13:13</sys_updated_on>
+        <sys_updated_on>2023-08-01 18:12:25</sys_updated_on>
     </sys_script_include>
 </record_update>
