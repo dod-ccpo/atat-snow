@@ -27,15 +27,15 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>738c03a4979211106fa8b4b3f153af63</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name>UTIL: Make A Request</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_738c03a4979211106fa8b4b3f153af63</sys_update_name>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-08-01 18:30:45</sys_updated_on>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-08-02 14:18:03</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -136,10 +136,10 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-09-29 17:09:20</sys_created_on>
         <sys_id>ff6693ac979211106fa8b4b3f153aff8</sys_id>
-        <sys_mod_count>36</sys_mod_count>
+        <sys_mod_count>37</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-08-01 18:30:45</sys_updated_on>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-08-02 14:15:34</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=ff6693ac979211106fa8b4b3f153aff8"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -150,9 +150,9 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-09-29 17:09:21</sys_created_on>
         <sys_id>0076d3ac979211106fa8b4b3f153af25</sys_id>
-        <sys_mod_count>32</sys_mod_count>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-08-01 18:30:45</sys_updated_on>
+        <sys_mod_count>33</sys_mod_count>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-08-02 14:15:34</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   var reqUtil = new Request()
   var errUtil = new ErrorHandler()
@@ -165,6 +165,8 @@
       var credential = provider.getCredentialByID("x_g_dis_atat.credentials." + inputs.credential_id);
       if (credential) {
 	      token = credential.getAttribute("password")
+      } else {
+        errUtil.warn("Could not get credential 'x_g_dis_atat.credentials." + inputs.credential_id + "'")
       }
     } catch (error) {
       errUtil.errorLogger(error);  
@@ -320,18 +322,6 @@
         <sys_updated_on>2022-10-04 15:03:19</sys_updated_on>
         <table>var__m_sys_hub_step_ext_input_ff6693ac979211106fa8b4b3f153aff8</table>
         <value>{{action.resource_path}}</value>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>script</field>
-        <id>ff6693ac979211106fa8b4b3f153aff8</id>
-        <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2023-08-01 18:30:45</sys_created_on>
-        <sys_id>809f974f9750311000989fa00153afa4</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-08-01 18:30:45</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
     </sys_element_mapping>
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>token</field>
@@ -1277,7 +1267,7 @@
         <sys_created_on>2022-09-29 17:09:21</sys_created_on>
         <sys_id>c076d3ac979211106fa8b4b3f153af20</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Response Body</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -1300,7 +1290,7 @@
         <sys_created_on>2022-09-29 17:09:20</sys_created_on>
         <sys_id>fb66d3ac979211106fa8b4b3f153af1a</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Response Status</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2442,7 +2432,7 @@
         <sys_created_on>2023-08-01 18:30:45</sys_created_on>
         <sys_id>009f974f9750311000989fa00153af88</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Credential Id</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2465,7 +2455,7 @@
         <sys_created_on>2022-10-03 01:07:00</sys_created_on>
         <sys_id>0e80643ddb9615908c045e8cd39619f2</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Content-Type</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2488,7 +2478,7 @@
         <sys_created_on>2022-10-04 15:02:36</sys_created_on>
         <sys_id>5469e892db1215108c045e8cd3961992</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>HTTP Method</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2511,7 +2501,7 @@
         <sys_created_on>2022-10-29 18:15:01</sys_created_on>
         <sys_id>6e25461287321d10ec3b777acebb3552</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Mutual Auth</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2534,7 +2524,7 @@
         <sys_created_on>2022-09-30 17:06:12</sys_created_on>
         <sys_id>734f148197d211106fa8b4b3f153af18</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Bearer Token</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2557,7 +2547,7 @@
         <sys_created_on>2022-10-04 15:00:45</sys_created_on>
         <sys_id>85f82852db1215108c045e8cd3961937</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Resource Path</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2580,7 +2570,7 @@
         <sys_created_on>2022-10-05 16:24:50</sys_created_on>
         <sys_id>aec58ea2dbd25510b1227ea5f3961900</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Extra Headers</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2603,7 +2593,7 @@
         <sys_created_on>2022-10-29 18:15:01</sys_created_on>
         <sys_id>e225461287321d10ec3b777acebb352e</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Base URL</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2626,7 +2616,7 @@
         <sys_created_on>2022-09-29 17:09:20</sys_created_on>
         <sys_id>fb6693ac979211106fa8b4b3f153afe9</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Request Body</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2651,7 +2641,7 @@
         <sys_created_on>2022-09-29 17:09:21</sys_created_on>
         <sys_id>0076d3ac979211106fa8b4b3f153af34</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Status Code</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2674,7 +2664,7 @@
         <sys_created_on>2022-09-29 20:42:36</sys_created_on>
         <sys_id>73370c70975611106fa8b4b3f153afb3</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Don't Treat as Error</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2697,7 +2687,7 @@
         <sys_created_on>2022-09-29 17:09:21</sys_created_on>
         <sys_id>8476d3ac979211106fa8b4b3f153af2e</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Response Body</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
@@ -2720,7 +2710,7 @@
         <sys_created_on>2022-09-29 20:42:36</sys_created_on>
         <sys_id>b7370c70975611106fa8b4b3f153afaa</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name/>
+        <sys_name>Action Status</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
