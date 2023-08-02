@@ -33,7 +33,7 @@ Request.prototype = {
 		request.setHttpMethod(req.method);
 		request.setLogLevel("all");
 		if (req.mutualAuth !== "None") {
-			request.setMutualAuth(req.mutualAuth);
+			request.setMutualAuth(req.mutualAuth || this.JKS_443);
 		}
 		if (req.body) {
 			request.setRequestBody(req.body);
