@@ -18,12 +18,12 @@
         <element label="PoP Start Date" max_length="40" name="pop_start_date" type="glide_date"/>
         <element label="Portfolio" max_length="32" name="portfolio" reference="x_g_dis_atat_portfolio" type="reference"/>
         <element display="true" label="Task Order Number" mandatory="true" max_length="40" name="task_order_number" type="string"/>
-        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;&#9;const sysId = current.sys_id;&#13;&#10;    const TO_TABLE = &quot;x_g_dis_atat_task_order&quot;;&#13;&#10;    const gr = new GlideRecord(TO_TABLE);&#13;&#10;    gr.get(sysId);&#13;&#10;&#9;if(gr.isValidRecord()){ &#13;&#10;        const tos = new TaskOrderService(gr);&#13;&#10;&#9;&#9;const payload = tos.determineStatus(gr);&#13;&#10;        return payload;&#13;&#10;&#9;}&#13;&#10;})(current);" choice="1" label="Task Order Status" max_length="40" name="task_order_status" type="choice" virtual="true">
+        <element calculation="(function calculatedFieldValue(current) {&#10;&#9;const sysId = current.sys_id;&#10;    const TO_TABLE = &quot;x_g_dis_atat_task_order&quot;;&#10;    const gr = new GlideRecord(TO_TABLE);&#10;    gr.get(sysId);&#10;&#9;if(gr.isValidRecord()){ &#10;        const tos = new TaskOrderService(gr);&#10;&#9;&#9;const payload = tos.determineStatus(gr);&#10;        return payload;&#10;&#9;}&#10;})(current);" choice="1" label="Task Order Status" max_length="40" name="task_order_status" type="choice" virtual="true">
             <choice>
                 <element inactive_on_update="false" label="At-Risk" value="AT_RISK"/>
                 <element inactive_on_update="false" label="Delinquent" value="DELINQUENT"/>
                 <element inactive_on_update="false" label="Expired" value="EXPIRED"/>
-                <element inactive_on_update="false" label="On-Track" value="ON_TRACK"/>
+                <element inactive_on_update="false" label="On Track" value="ON_TRACK"/>
                 <element inactive_on_update="false" label="Upcoming" value="UPCOMING"/>
             </choice>
         </element>
