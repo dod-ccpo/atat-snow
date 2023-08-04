@@ -35,7 +35,7 @@ ClinService.prototype = {
 		
 		// set if has expired
 		const end = new GlideDateTime(clinRec.pop_end_date);
-		this.hasExpired = now.after(end);
+		this.hasExpired = now.getDate().after(end.getDate());
 		
 		// check if is expiring within 60 days
 		now.addDaysLocalTime(60);
@@ -50,8 +50,8 @@ ClinService.prototype = {
 		if (fundsObligated > 0) {
 			this.hasObligatedFunds = true;
 			const spentPercent = spent/fundsObligated * 100;
-			this.isFundsDelinquent = spentPercent >= 100;
-			this.isLowFunds = spentPercent >= 75 && spentPercent < 100;			
+			this.isFundsDelinquent = spentPercent > 100;
+			this.isLowFunds = spentPercent >= 75 && spentPercent <= 100;			
 		}
     },
 	
@@ -102,13 +102,13 @@ ClinService.prototype = {
         <sys_created_by>eric.youngquist</sys_created_by>
         <sys_created_on>2023-07-03 15:48:25</sys_created_on>
         <sys_id>a03f5d3d97f3a11044ecfbc71153afa2</sys_id>
-        <sys_mod_count>137</sys_mod_count>
+        <sys_mod_count>139</sys_mod_count>
         <sys_name>ClinService</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_a03f5d3d97f3a11044ecfbc71153afa2</sys_update_name>
-        <sys_updated_by>eric.youngquist</sys_updated_by>
-        <sys_updated_on>2023-07-07 16:05:22</sys_updated_on>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-03 15:59:45</sys_updated_on>
     </sys_script_include>
 </record_update>
