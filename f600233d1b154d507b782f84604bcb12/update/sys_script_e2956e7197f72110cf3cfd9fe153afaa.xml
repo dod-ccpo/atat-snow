@@ -3,7 +3,7 @@
         <abort_action>false</abort_action>
         <access>package_private</access>
         <action_delete>false</action_delete>
-        <action_insert>true</action_insert>
+        <action_insert>false</action_insert>
         <action_query>false</action_query>
         <action_update>true</action_update>
         <active>true</active>
@@ -12,7 +12,7 @@
         <change_fields>false</change_fields>
         <client_callable>false</client_callable>
         <collection>x_g_dis_atat_portfolio</collection>
-        <condition>current.portfolio_managers.changes() || current.portfolio_viewers.changes()</condition>
+        <condition/>
         <description/>
         <execute_function>false</execute_function>
         <filter_condition/>
@@ -27,49 +27,68 @@
         <rest_service_text/>
         <rest_variables/>
         <role_conditions/>
-        <script><![CDATA[// this business rule ensures 
-// - if a user is added to portfolio_manager, they are removed from portfolio_viewer
-// - if a user is added to portfolio_viewer, they are removed from portfolio_manager
-// 
-// this business rule does not handle portfolio_owner; portfolio_owner is a reference not a list.
-// other business logic will explicitly ensure that portfolio_owner state is always valid.
-(function executeRule(current, previous) {
-    const portfolioSysId = current.sys_id;
-    if (current.portfolio_viewers.changes()) {
-        const changes = getChangeBetweenTwoLists(previous.portfolio_viewers, current.portfolio_viewers);
-        updateDb(portfolioSysId, changes, 'portfolio_managers');
-    }
+        <script><![CDATA[(function executeRule(current, previous) {
+    // Run the rule when any of the specified fields changes
+    if (current.portfolio_managers.changes() || current.portfolio_viewers.changes() || current.portfolio_owner.changes()) {
 
-    if (current.portfolio_managers.changes()) {
-        const changes = getChangeBetweenTwoLists(previous.portfolio_managers, current.portfolio_managers);
-        updateDb(portfolioSysId, changes, 'portfolio_viewers');
+        var newOwner = current.portfolio_owner.toString();
+
+        // If portfolio_manager is changed, remove new managers from portfolio_viewer.
+        if (current.portfolio_managers.changes()) {
+            var addedManagers = getChanges(previous.portfolio_managers.toString(), current.portfolio_managers.toString());
+            if (addedManagers.includes(newOwner)) {
+                gs.addErrorMessage('Current portfolio owner cannot be assigned as portfolio manager.');
+                current.setAbortAction(true);
+                return;
+            }
+            addedManagers.forEach(function(manager) {
+                if (current.portfolio_viewers.toString().split(',').includes(manager)) {
+                    current.portfolio_viewers = removeUserFromList(current.portfolio_viewers.toString(), manager);
+                }
+            });
+        }
+
+        // If portfolio_viewer is changed, remove new viewers from portfolio_manager.
+        if (current.portfolio_viewers.changes()) {
+            var addedViewers = getChanges(previous.portfolio_viewers.toString(), current.portfolio_viewers.toString());
+            if (addedViewers.includes(newOwner)) {
+                gs.addErrorMessage('Current portfolio owner cannot be assigned as portfolio viewer.');
+                current.setAbortAction(true);
+                return;
+            }
+            addedViewers.forEach(function(viewer) {
+                if (current.portfolio_managers.toString().split(',').includes(viewer)) {
+                    current.portfolio_managers = removeUserFromList(current.portfolio_managers.toString(), viewer);
+                }
+            });
+        }
+
+        // If portfolio_owner is changed, remove them from portfolio_manager and portfolio_viewer.
+        if (current.portfolio_owner.changes()) {
+            if (current.portfolio_managers.toString().split(',').includes(newOwner)) {
+                current.portfolio_managers = removeUserFromList(current.portfolio_managers.toString(), newOwner);
+            }
+            if (current.portfolio_viewers.toString().split(',').includes(newOwner)) {
+                current.portfolio_viewers = removeUserFromList(current.portfolio_viewers.toString(), newOwner);
+            }
+        }
     }
 })(current, previous);
 
-// utility method to get the diff between two lists
-function getChangeBetweenTwoLists(l1, l2) {
-    const l1Split = l1.toString().split(',');
-    const l2Split = l2.toString().split(',');
-    return l2Split.filter(function(item) {
-        return !l1Split.includes(item);
-    });
+function removeUserFromList(list, user) {
+    var array = list.split(',');
+    var index = array.indexOf(user);
+    if (index !== -1) {
+        array.splice(index, 1);
+    }
+    return array.join(',');
 }
 
-function updateDb(portfolioSysId, diff, type) {
-    diff.forEach(function(user) {
-        const gr = new GlideRecord('x_g_dis_atat_portfolio');
-        gr.addQuery('sys_id', portfolioSysId);
-        gr.addQuery(type, 'CONTAINS', user);
-        gr.query();
-        while (gr.next()) {
-            const splitList = gr.getValue(type).split(',');
-            const index = splitList.indexOf(user);
-            if (index > -1) {
-                splitList.splice(index, 1);
-                gr.setValue(type, splitList.join(','));
-                gr.update();
-            }
-        }
+function getChanges(oldList, newList) {
+    var oldArray = oldList.split(',');
+    var newArray = newList.split(',');
+    return newArray.filter(function(item) {
+        return !oldArray.includes(item);
     });
 }]]></script>
         <sys_class_name>sys_script</sys_class_name>
@@ -78,7 +97,7 @@ function updateDb(portfolioSysId, diff, type) {
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>e2956e7197f72110cf3cfd9fe153afaa</sys_id>
-        <sys_mod_count>80</sys_mod_count>
+        <sys_mod_count>131</sys_mod_count>
         <sys_name>Portfolio - One role only</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -86,9 +105,9 @@ function updateDb(portfolioSysId, diff, type) {
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_e2956e7197f72110cf3cfd9fe153afaa</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-07-26 14:05:01</sys_updated_on>
-        <template>portfolio_owner=^EQ</template>
-        <when>after</when>
+        <sys_updated_on>2023-08-04 12:03:39</sys_updated_on>
+        <template/>
+        <when>before</when>
     </sys_script>
     <sys_translated_text action="delete_multiple" query="documentkey=e2956e7197f72110cf3cfd9fe153afaa"/>
 </record_update>
