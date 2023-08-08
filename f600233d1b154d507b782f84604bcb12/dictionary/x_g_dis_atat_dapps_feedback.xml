@@ -5,9 +5,12 @@
         <element label="Feedback Items" max_length="4000" name="feedback_items" reference="x_g_dis_atat_dapps_feedback_options_table" type="glide_list"/>
         <element label="Feedback Items Other" max_length="400" name="feedback_items_other" type="string"/>
         <element label="Is Complete" max_length="40" name="is_complete" type="boolean"/>
-        <element label="User Sys ID" max_length="32" name="user_sys_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="User Sys ID" max_length="32" name="user_sys_id" reference="sys_user" type="reference"/>
         <index name="index">
             <element name="acquisition_package"/>
+        </index>
+        <index name="index2">
+            <element name="user_sys_id"/>
         </index>
     </element>
 </database>
