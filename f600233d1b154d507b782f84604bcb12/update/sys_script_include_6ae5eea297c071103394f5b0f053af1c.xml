@@ -24,6 +24,7 @@ DappsReportGen.prototype = {
 	contractConsiderations: new GlideRecord("x_g_dis_atat_contract_considerations"),
 	fairOpportunity: new GlideRecord("x_g_dis_atat_fair_opportunity"),
 	contactInfo: new GlideRecord("x_g_dis_atat_contacts"),
+	feedback: new GlideRecord("x_g_dis_atat_dapps_feedback"),
 	ce: null,
 	ceData: null,
 
@@ -40,6 +41,7 @@ DappsReportGen.prototype = {
 		}
 
 	},
+	
 
 	getEstimatedCost: function() {
 		if (this.ceData == 0){
@@ -51,6 +53,40 @@ DappsReportGen.prototype = {
 		}
 	},
 
+	getFeedback : function(){
+		this.feedback.get(this.acquisitionPackage.customer_feedback);
+		
+		if(!this.feedback.dapps_experience)
+		{
+			return {
+				dappsExperience: "",
+				feedbackItems: "",
+				feedbackItemsOther: ""
+			};
+		}
+		else{
+			
+			var sysIdArray =  this.feedback.feedback_items.getDisplayValue().toString().split(",");
+			var feedbackOptionsString = "";
+			sysIdArray.forEach(function(sysId) {
+				var feedbackChoice = new GlideRecord("x_g_dis_atat_dapps_feedback_options_table");
+				feedbackChoice.get(sysId);
+				feedbackOptionsString += feedbackChoice.option;
+				feedbackOptionsString += ";";
+			});
+			gs.info(`here are the options! ${feedbackOptionsString}`);
+			
+			var feedbackObject = {
+				dappsExperience: this.feedback.dapps_experience.getDisplayValue().toString(),
+				feedbackItems: feedbackOptionsString,
+				feedbackItemsOther: this.feedback.feedback_items_other.toString()
+			};
+			gs.info("here's the feedbackObject");
+			gs.info(JSON.stringify(feedbackObject));
+			return feedbackObject;
+    }
+},
+	
 	/**
      * 
      * @return {string} title
@@ -276,6 +312,8 @@ DappsReportGen.prototype = {
 		var contractType = this.getContractType();
 		var fundingRequest = this.getFundingRequest();
 		let cjadc2 = this.getCJADC2();
+		var customerFeedback =  this.getFeedback();
+		
 		return {
 			Number: this.acquisitionPackage.number.toString(),
 			Status: this.acquisitionPackage.package_status.getDisplayValue().toString(),
@@ -302,6 +340,8 @@ DappsReportGen.prototype = {
 			"Estimated Total Value": this.getEstimatedCost(),
 			"CJADC2 Initiative": cjadc2.cjadc2Initiative,
 			"CJADC2 Percentage": cjadc2.cjadc2Percentage,
+			"Customer Experience": customerFeedback.dappsExperience,
+			"Other Feedback": customerFeedback.feedbackItemsOther,
 
 		};
 	},
@@ -313,13 +353,13 @@ DappsReportGen.prototype = {
         <sys_created_by>torin.harthcock</sys_created_by>
         <sys_created_on>2023-07-18 14:53:08</sys_created_on>
         <sys_id>6ae5eea297c071103394f5b0f053af1c</sys_id>
-        <sys_mod_count>21</sys_mod_count>
+        <sys_mod_count>46</sys_mod_count>
         <sys_name>DappsReportGen</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_6ae5eea297c071103394f5b0f053af1c</sys_update_name>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-07-31 22:10:42</sys_updated_on>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-08-08 12:15:43</sys_updated_on>
     </sys_script_include>
 </record_update>
