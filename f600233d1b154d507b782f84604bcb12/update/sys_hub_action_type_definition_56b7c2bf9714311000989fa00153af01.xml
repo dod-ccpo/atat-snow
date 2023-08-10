@@ -26,15 +26,15 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>56b7c2bf9714311000989fa00153af01</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_name>CD: Update UI Files</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_56b7c2bf9714311000989fa00153af01</sys_update_name>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-08 19:34:17</sys_updated_on>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 03:00:10</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -69,7 +69,79 @@
         <variable display_value="Don't Treat as Error">626fee4c97a0311000989fa00153af44</variable>
     </sys_variable_value>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_action_output_56b7c2bf9714311000989fa00153af01^id=56b7c2bf9714311000989fa00153af01"/>
-    <sys_hub_step_instance action="delete_multiple" query="action=56b7c2bf9714311000989fa00153af01^sys_idNOT IN0c22bb8c4720f950f6b8f0bd436d43f3,1887ef8847ecb950f6b8f0bd436d43db,abd1a2f79794311000989fa00153af8c,b9543dc94764f19093e530ed436d43d2,e6ab570447acb950f6b8f0bd436d4382,f80d6d8d4724f19093e530ed436d431b"/>
+    <sys_hub_step_instance action="delete_multiple" query="action=56b7c2bf9714311000989fa00153af01^sys_idNOT IN08df16bd4768f11093e530ed436d43a1,0c22bb8c4720f950f6b8f0bd436d43f3,1887ef8847ecb950f6b8f0bd436d43db,abd1a2f79794311000989fa00153af8c,b9543dc94764f19093e530ed436d43d2,e6ab570447acb950f6b8f0bd436d4382,f80d6d8d4724f19093e530ed436d431b"/>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="CD: Update UI Files">56b7c2bf9714311000989fa00153af01</action>
+        <cid>fdbf0163-d017-4184-aee9-a946949598d4</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <label>Delete Existing Files</label>
+        <order>5</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Script">106afb6647032200b4fad7527c9a71e7</step_type>
+        <sys_created_by>1609291318.CTR</sys_created_by>
+        <sys_created_on>2023-08-10 02:55:31</sys_created_on>
+        <sys_id>08df16bd4768f11093e530ed436d43a1</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 02:59:56</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=08df16bd4768f11093e530ed436d43a1"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>08df16bd4768f11093e530ed436d43a1</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>1609291318.CTR</sys_created_by>
+        <sys_created_on>2023-08-10 02:55:32</sys_created_on>
+        <sys_id>90df16bd4768f11093e530ed436d43a9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 02:55:32</sys_updated_on>
+        <value>35aa573fd7802200bdbaee5b5e610375</value>
+        <variable display_value="MID Application">f5e56d79b3101300176b051a16a8dce4</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>08df16bd4768f11093e530ed436d43a1</document_key>
+        <order>600</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>1609291318.CTR</sys_created_by>
+        <sys_created_on>2023-08-10 02:55:32</sys_created_on>
+        <sys_id>98df16bd4768f11093e530ed436d43a9</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 02:59:56</sys_updated_on>
+        <value>(function execute(inputs, outputs) {
+  var del_record = new GlideSysAttachment();
+  var att = del_record.getAttachments('sys_ws_operation','608ff756db7055d08c045e8cd396197f');
+  while(att.next()) {
+    del_record.deleteAttachment(att.sys_id);
+  }
+  
+  att = del_record.getAttachments('sys_ws_operation','c65f7756db7055d08c045e8cd39619bf');
+  while(att.next()) {
+    del_record.deleteAttachment(att.sys_id);
+  }
+  
+  att = del_record.getAttachments('sys_ws_operation','042fbf9edb7055d08c045e8cd39619d0');
+  while(att.next()) {
+    del_record.deleteAttachment(att.sys_id);
+  }
+})(inputs, outputs);
+</value>
+        <variable display_value="Script">71aa7f6647032200b4fad7527c9a719b</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7^id=08df16bd4768f11093e530ed436d43a1"/>
+    <sys_hub_step_ext_input action="delete_multiple" query="model=08df16bd4768f11093e530ed436d43a1"/>
+    <sys_hub_step_ext_output action="delete_multiple" query="model=08df16bd4768f11093e530ed436d43a1"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=08df16bd4768f11093e530ed436d43a1"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_step_ext_output_08df16bd4768f11093e530ed436d43a1"/>
     <sys_hub_step_instance action="INSERT_OR_UPDATE">
         <action display_value="CD: Update UI Files">56b7c2bf9714311000989fa00153af01</action>
         <cid>20d76043-0e10-404f-b29e-1a5b67f5a1a7</cid>
@@ -612,17 +684,17 @@
         <icon/>
         <inputs/>
         <label>Cleanup</label>
-        <order>6</order>
+        <order>7</order>
         <outputs/>
         <section/>
         <step_type display_value="Script">106afb6647032200b4fad7527c9a71e7</step_type>
         <sys_created_by>1609291318.CTR</sys_created_by>
         <sys_created_on>2023-08-07 15:50:09</sys_created_on>
         <sys_id>b9543dc94764f19093e530ed436d43d2</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>7</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1609291318.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-07 17:15:51</sys_updated_on>
+        <sys_updated_on>2023-08-10 02:55:32</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=b9543dc94764f19093e530ed436d43d2"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -633,19 +705,25 @@
         <sys_created_by>1609291318.CTR</sys_created_by>
         <sys_created_on>2023-08-07 15:50:09</sys_created_on>
         <sys_id>75543dc94764f19093e530ed436d43da</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_updated_by>1609291318.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-07 17:15:51</sys_updated_on>
+        <sys_updated_on>2023-08-10 02:55:32</sys_updated_on>
         <value>(function execute(inputs, outputs) {
 // remove all records from x_g_dis_atat_cd_artifacts
+  var record = new GlideRecord('sys_attachment');
+  record.addQuery('table_name','x_g_dis_atat_cd_artifacts');
+  record.query();
+  
+  while (record.next()) {
+    record.deleteRecord();
+  }
+  
   var artifact_record = new GlideRecord('x_g_dis_atat_cd_artifacts');
   artifact_record.query();
   
   while (artifact_record.next()) {
     artifact_record.deleteRecord();
   }
-  
-  gs.info('Cleaned up artifact records.');
 })(inputs, outputs);
 </value>
         <variable display_value="Script">71aa7f6647032200b4fad7527c9a719b</variable>
@@ -1061,17 +1139,17 @@
         <icon/>
         <inputs/>
         <label>Move Files</label>
-        <order>5</order>
+        <order>6</order>
         <outputs/>
         <section/>
         <step_type display_value="Script">106afb6647032200b4fad7527c9a71e7</step_type>
         <sys_created_by>1609291318.CTR</sys_created_by>
         <sys_created_on>2023-08-07 15:18:07</sys_created_on>
         <sys_id>f80d6d8d4724f19093e530ed436d431b</sys_id>
-        <sys_mod_count>14</sys_mod_count>
+        <sys_mod_count>22</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-08 19:29:27</sys_updated_on>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 02:55:32</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=f80d6d8d4724f19093e530ed436d431b"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -1096,45 +1174,23 @@
         <sys_created_by>1609291318.CTR</sys_created_by>
         <sys_created_on>2023-08-07 15:18:07</sys_created_on>
         <sys_id>b80d6d8d4724f19093e530ed436d4323</sys_id>
-        <sys_mod_count>13</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-08 19:29:27</sys_updated_on>
+        <sys_mod_count>20</sys_mod_count>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 02:55:32</sys_updated_on>
         <value>(function execute(inputs, outputs) {
-  function move_file(source_table, source_sys_id, dest_table, dest_sys_id, filename, folder) {
-    var record = new GlideRecord('sys_attachment');
-    record.addQuery('table_name',dest_table);
-    record.addQuery('table_sys_id',dest_sys_id);
-    record.addQuery('file_name',filename);
-    record.query();
-
-    while (record.next()) {
-      record.deleteRecord();
-    }
-
-    record = new GlideRecord('sys_attachment');
-    record.addQuery('table_name',source_table);
-    record.addQuery('table_sys_id',source_sys_id);
-    record.addQuery('file_name',filename);
-    record.query();
-
-    if (record.next()) {
-      record.table_name = dest_table;
-      record.table_sys_id = dest_sys_id;
-
-      record.update();
+  var sbom;
+  var att_root = new GlideSysAttachment();
+  var att = att_root.getAttachments('x_g_dis_atat_cd_artifacts', inputs.artifact_record_sys_id);
+  while (att.next()) {
+    if (att.file_name == 'sbom.txt') {
+      sbom = att_root.getContent(att);
+      break;
     }
   }
   
-  var root_record = new GlideSysAttachment();
-  var attachments = root_record.getAttachments('x_g_dis_atat_cd_artifacts', inputs.artifact_record_sys_id);
-  var sbom;
-  while (attachments.next()) {
-    if (attachments.getValue('file_name') == 'sbom.txt') {
-	  // Load sbom.txt to determine destinations for all files
-      sbom = root_record.getContent(attachments);
-    }
-  }
   var file_paths = sbom.split(/\r?\n/);
+  var file_lookup = {};
+  
   for (var i = 0; i &lt; file_paths.length; i++) {
     var path_parts = file_paths[i].split('/');
     if (path_parts.length &lt; 3) {
@@ -1147,18 +1203,28 @@
     // JS = sys_ws_operation/608ff756db7055d08c045e8cd396197f
     // IMG = sys_ws_operation/c65f7756db7055d08c045e8cd39619bf
     // other assets = sys_ws_operation/042fbf9edb7055d08c045e8cd39619d0
-
     if (folder.toLowerCase() === "js") {
-      move_file('x_g_dis_atat_cd_artifacts',inputs.artifact_record_sys_id,'sys_ws_operation','608ff756db7055d08c045e8cd396197f',filename, 'js');
-      gs.debug('Moved ' + filename + ' into /js.');
+      file_lookup[filename] = '608ff756db7055d08c045e8cd396197f';
     } else if ( folder.toLowerCase() == "img") {
-      move_file('x_g_dis_atat_cd_artifacts',inputs.artifact_record_sys_id,'sys_ws_operation','c65f7756db7055d08c045e8cd39619bf',filename, 'img');
-      gs.debug('Moved ' + filename + ' into /img.');
+      file_lookup[filename] = 'c65f7756db7055d08c045e8cd39619bf';
     } else if ( folder.toLowerCase() == "other_assets") {
-      move_file('x_g_dis_atat_cd_artifacts',inputs.artifact_record_sys_id,'sys_ws_operation','042fbf9edb7055d08c045e8cd39619d0',filename, 'other_assets');
-      gs.debug('Moved ' + filename + ' into /other_assets.');
+      file_lookup[filename] = '042fbf9edb7055d08c045e8cd39619d0';
     } else {
       gs.warn("Not moving " + folder + "/" + filename);
+    }
+  }
+  
+  var attachment_root = new GlideSysAttachment();
+  var attachment = attachment_root.getAttachments('x_g_dis_atat_cd_artifacts', inputs.artifact_record_sys_id);
+  while (attachment.next()) {
+    // get the attatchment filename and look it up in 'folders'
+    var target = new GlideRecord('sys_ws_operation');
+    var filename = attachment.file_name;
+    if (file_lookup[filename]) { 
+      target.get(file_lookup[filename])
+      var contentType = attachment.content_type;
+      var new_att = new GlideSysAttachment();
+      var content = new_att.writeContentStream(target, filename, contentType, new_att.getContentStream(attachment.sys_id));
     }
   }
 })(inputs, outputs);
@@ -1181,12 +1247,12 @@
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>script</field>
         <id>f80d6d8d4724f19093e530ed436d431b</id>
-        <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-08-08 19:29:27</sys_created_on>
-        <sys_id>0020ff5947243590f6b8f0bd436d435f</sys_id>
+        <sys_created_by>1609291318.CTR</sys_created_by>
+        <sys_created_on>2023-08-10 00:07:11</sys_created_on>
+        <sys_id>5e4939bd4724f11093e530ed436d4387</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-08 19:29:27</sys_updated_on>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 00:07:11</sys_updated_on>
         <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
         <value/>
     </sys_element_mapping>
@@ -1627,17 +1693,17 @@
     <sys_hub_action_plan action="INSERT_OR_UPDATE">
         <action_id display_value="CD: Update UI Files">56b7c2bf9714311000989fa00153af01</action_id>
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"5b1adf049764311000989fa00153af20","name":"plan","plan_signature":null}}</plan>
-        <snapshot>ae31f71d47243590f6b8f0bd436d4329</snapshot>
+        <snapshot>14e0267147a8f11093e530ed436d4393</snapshot>
         <sys_created_by>xander.keele</sys_created_by>
         <sys_created_on>2023-08-04 20:40:52</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>5b1adf049764311000989fa00153af20</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_overrides/>
         <sys_scope/>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-08 19:34:18</sys_updated_on>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 03:00:12</sys_updated_on>
     </sys_hub_action_plan>
     <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
@@ -1706,7 +1772,7 @@
         <variable display_value="Don't Treat as Error">431a9f049764311000989fa00153afb4</variable>
     </sys_variable_value>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_action_output_fe1a9f049764311000989fa00153af92^id=fe1a9f049764311000989fa00153af92"/>
-    <sys_hub_step_instance action="delete_multiple" query="action=fe1a9f049764311000989fa00153af92^sys_idNOT IN031a9f049764311000989fa00153af9c,32c52a41476cf19093e530ed436d43c5,3ac52a41476cf19093e530ed436d4395,76c52a41476cf19093e530ed436d43b6,b2c52a41476cf19093e530ed436d43a3,f2c52a41476cf19093e530ed436d439d"/>
+    <sys_hub_step_instance action="delete_multiple" query="action=fe1a9f049764311000989fa00153af92^sys_idNOT IN031a9f049764311000989fa00153af9c,32c52a41476cf19093e530ed436d43c5,3ac52a41476cf19093e530ed436d4395,40e0267147a8f11093e530ed436d4372,76c52a41476cf19093e530ed436d43b6,b2c52a41476cf19093e530ed436d43a3,f2c52a41476cf19093e530ed436d439d"/>
     <sys_hub_step_instance action="INSERT_OR_UPDATE">
         <action display_value="CD: Update UI Files">fe1a9f049764311000989fa00153af92</action>
         <cid>5e3f7118-05f1-4c87-a6ee-b9a0e7518ccd</cid>
@@ -2142,17 +2208,17 @@
         <icon/>
         <inputs/>
         <label>Cleanup</label>
-        <order>6</order>
+        <order>7</order>
         <outputs/>
         <section/>
         <step_type display_value="Script">106afb6647032200b4fad7527c9a71e7</step_type>
         <sys_created_by>1609291318.CTR</sys_created_by>
         <sys_created_on>2023-08-07 19:26:12</sys_created_on>
         <sys_id>32c52a41476cf19093e530ed436d43c5</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>1609291318.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-07 19:26:12</sys_updated_on>
+        <sys_updated_on>2023-08-10 03:00:10</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=32c52a41476cf19093e530ed436d43c5"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -2177,19 +2243,25 @@
         <sys_created_by>1609291318.CTR</sys_created_by>
         <sys_created_on>2023-08-07 19:26:12</sys_created_on>
         <sys_id>fac52a41476cf19093e530ed436d43cb</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_updated_by>1609291318.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-07 19:26:12</sys_updated_on>
+        <sys_updated_on>2023-08-10 03:00:10</sys_updated_on>
         <value>(function execute(inputs, outputs) {
 // remove all records from x_g_dis_atat_cd_artifacts
+  var record = new GlideRecord('sys_attachment');
+  record.addQuery('table_name','x_g_dis_atat_cd_artifacts');
+  record.query();
+  
+  while (record.next()) {
+    record.deleteRecord();
+  }
+  
   var artifact_record = new GlideRecord('x_g_dis_atat_cd_artifacts');
   artifact_record.query();
   
   while (artifact_record.next()) {
     artifact_record.deleteRecord();
   }
-  
-  gs.info('Cleaned up artifact records.');
 })(inputs, outputs);
 </value>
         <variable display_value="Script">71aa7f6647032200b4fad7527c9a719b</variable>
@@ -2267,6 +2339,78 @@
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_step_ext_output_3ac52a41476cf19093e530ed436d4395"/>
     <sys_hub_step_instance action="INSERT_OR_UPDATE">
         <action display_value="CD: Update UI Files">fe1a9f049764311000989fa00153af92</action>
+        <cid>fdbf0163-d017-4184-aee9-a946949598d4</cid>
+        <error_handling_type>1</error_handling_type>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <label>Delete Existing Files</label>
+        <order>5</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Script">106afb6647032200b4fad7527c9a71e7</step_type>
+        <sys_created_by>1609291318.CTR</sys_created_by>
+        <sys_created_on>2023-08-10 03:00:10</sys_created_on>
+        <sys_id>40e0267147a8f11093e530ed436d4372</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 03:00:10</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=40e0267147a8f11093e530ed436d4372"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>40e0267147a8f11093e530ed436d4372</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>1609291318.CTR</sys_created_by>
+        <sys_created_on>2023-08-10 03:00:10</sys_created_on>
+        <sys_id>80e0267147a8f11093e530ed436d4379</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 03:00:10</sys_updated_on>
+        <value>35aa573fd7802200bdbaee5b5e610375</value>
+        <variable display_value="MID Application">f5e56d79b3101300176b051a16a8dce4</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>40e0267147a8f11093e530ed436d4372</document_key>
+        <order>600</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>1609291318.CTR</sys_created_by>
+        <sys_created_on>2023-08-10 03:00:10</sys_created_on>
+        <sys_id>88e0267147a8f11093e530ed436d4379</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 03:00:10</sys_updated_on>
+        <value>(function execute(inputs, outputs) {
+  var del_record = new GlideSysAttachment();
+  var att = del_record.getAttachments('sys_ws_operation','608ff756db7055d08c045e8cd396197f');
+  while(att.next()) {
+    del_record.deleteAttachment(att.sys_id);
+  }
+  
+  att = del_record.getAttachments('sys_ws_operation','c65f7756db7055d08c045e8cd39619bf');
+  while(att.next()) {
+    del_record.deleteAttachment(att.sys_id);
+  }
+  
+  att = del_record.getAttachments('sys_ws_operation','042fbf9edb7055d08c045e8cd39619d0');
+  while(att.next()) {
+    del_record.deleteAttachment(att.sys_id);
+  }
+})(inputs, outputs);
+</value>
+        <variable display_value="Script">71aa7f6647032200b4fad7527c9a719b</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7^id=40e0267147a8f11093e530ed436d4372"/>
+    <sys_hub_step_ext_input action="delete_multiple" query="model=40e0267147a8f11093e530ed436d4372"/>
+    <sys_hub_step_ext_output action="delete_multiple" query="model=40e0267147a8f11093e530ed436d4372"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=40e0267147a8f11093e530ed436d4372"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_step_ext_output_40e0267147a8f11093e530ed436d4372"/>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="CD: Update UI Files">fe1a9f049764311000989fa00153af92</action>
         <cid>2389df73-ce73-4b53-951d-404506781f47</cid>
         <error_handling_type>1</error_handling_type>
         <extended_inputs/>
@@ -2275,17 +2419,17 @@
         <icon/>
         <inputs/>
         <label>Move Files</label>
-        <order>5</order>
+        <order>6</order>
         <outputs/>
         <section/>
         <step_type display_value="Script">106afb6647032200b4fad7527c9a71e7</step_type>
         <sys_created_by>1609291318.CTR</sys_created_by>
         <sys_created_on>2023-08-07 19:26:12</sys_created_on>
         <sys_id>76c52a41476cf19093e530ed436d43b6</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-08 19:34:16</sys_updated_on>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 03:00:10</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=76c52a41476cf19093e530ed436d43b6"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -2296,45 +2440,23 @@
         <sys_created_by>1609291318.CTR</sys_created_by>
         <sys_created_on>2023-08-07 19:26:12</sys_created_on>
         <sys_id>32c52a41476cf19093e530ed436d43c2</sys_id>
-        <sys_mod_count>1</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-08 19:34:16</sys_updated_on>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 03:00:10</sys_updated_on>
         <value>(function execute(inputs, outputs) {
-  function move_file(source_table, source_sys_id, dest_table, dest_sys_id, filename, folder) {
-    var record = new GlideRecord('sys_attachment');
-    record.addQuery('table_name',dest_table);
-    record.addQuery('table_sys_id',dest_sys_id);
-    record.addQuery('file_name',filename);
-    record.query();
-
-    while (record.next()) {
-      record.deleteRecord();
-    }
-
-    record = new GlideRecord('sys_attachment');
-    record.addQuery('table_name',source_table);
-    record.addQuery('table_sys_id',source_sys_id);
-    record.addQuery('file_name',filename);
-    record.query();
-
-    if (record.next()) {
-      record.table_name = dest_table;
-      record.table_sys_id = dest_sys_id;
-
-      record.update();
+  var sbom;
+  var att_root = new GlideSysAttachment();
+  var att = att_root.getAttachments('x_g_dis_atat_cd_artifacts', inputs.artifact_record_sys_id);
+  while (att.next()) {
+    if (att.file_name == 'sbom.txt') {
+      sbom = att_root.getContent(att);
+      break;
     }
   }
   
-  var root_record = new GlideSysAttachment();
-  var attachments = root_record.getAttachments('x_g_dis_atat_cd_artifacts', inputs.artifact_record_sys_id);
-  var sbom;
-  while (attachments.next()) {
-    if (attachments.getValue('file_name') == 'sbom.txt') {
-	  // Load sbom.txt to determine destinations for all files
-      sbom = root_record.getContent(attachments);
-    }
-  }
   var file_paths = sbom.split(/\r?\n/);
+  var file_lookup = {};
+  
   for (var i = 0; i &lt; file_paths.length; i++) {
     var path_parts = file_paths[i].split('/');
     if (path_parts.length &lt; 3) {
@@ -2347,18 +2469,28 @@
     // JS = sys_ws_operation/608ff756db7055d08c045e8cd396197f
     // IMG = sys_ws_operation/c65f7756db7055d08c045e8cd39619bf
     // other assets = sys_ws_operation/042fbf9edb7055d08c045e8cd39619d0
-
     if (folder.toLowerCase() === "js") {
-      move_file('x_g_dis_atat_cd_artifacts',inputs.artifact_record_sys_id,'sys_ws_operation','608ff756db7055d08c045e8cd396197f',filename, 'js');
-      gs.debug('Moved ' + filename + ' into /js.');
+      file_lookup[filename] = '608ff756db7055d08c045e8cd396197f';
     } else if ( folder.toLowerCase() == "img") {
-      move_file('x_g_dis_atat_cd_artifacts',inputs.artifact_record_sys_id,'sys_ws_operation','c65f7756db7055d08c045e8cd39619bf',filename, 'img');
-      gs.debug('Moved ' + filename + ' into /img.');
+      file_lookup[filename] = 'c65f7756db7055d08c045e8cd39619bf';
     } else if ( folder.toLowerCase() == "other_assets") {
-      move_file('x_g_dis_atat_cd_artifacts',inputs.artifact_record_sys_id,'sys_ws_operation','042fbf9edb7055d08c045e8cd39619d0',filename, 'other_assets');
-      gs.debug('Moved ' + filename + ' into /other_assets.');
+      file_lookup[filename] = '042fbf9edb7055d08c045e8cd39619d0';
     } else {
       gs.warn("Not moving " + folder + "/" + filename);
+    }
+  }
+  
+  var attachment_root = new GlideSysAttachment();
+  var attachment = attachment_root.getAttachments('x_g_dis_atat_cd_artifacts', inputs.artifact_record_sys_id);
+  while (attachment.next()) {
+    // get the attatchment filename and look it up in 'folders'
+    var target = new GlideRecord('sys_ws_operation');
+    var filename = attachment.file_name;
+    if (file_lookup[filename]) { 
+      target.get(file_lookup[filename])
+      var contentType = attachment.content_type;
+      var new_att = new GlideSysAttachment();
+      var content = new_att.writeContentStream(target, filename, contentType, new_att.getContentStream(attachment.sys_id));
     }
   }
 })(inputs, outputs);
@@ -2395,12 +2527,12 @@
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>script</field>
         <id>76c52a41476cf19093e530ed436d43b6</id>
-        <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-08-08 19:34:16</sys_created_on>
-        <sys_id>a231f71d47243590f6b8f0bd436d4319</sys_id>
+        <sys_created_by>1609291318.CTR</sys_created_by>
+        <sys_created_on>2023-08-10 03:00:10</sys_created_on>
+        <sys_id>0ce0267147a8f11093e530ed436d4383</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-08 19:34:16</sys_updated_on>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 03:00:10</sys_updated_on>
         <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
         <value/>
     </sys_element_mapping>
