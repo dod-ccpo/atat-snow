@@ -58,13 +58,13 @@ Ifp.prototype = {
 			}
 			var fundingType = fundingRequest.funding_request_type.toString();
 			if (!fundingType) {
-				var pkgInfo = this.errUtil.getRecordLogInfo(this.acquisitionPackage, "number");
-				var errorMessage = "No fundingType found for " + pkgInfo.allInfo + ". ";
-				errorMessage += "Please provide Funding Request." ;
-				throw this.errUtil.createError(errorMessage, this.errUtil.RECORD_NOT_FOUND);
+				return {
+					fundingType: "FS_FORM",
+					orderNumber: "TBD"
+				};
 			}
 
-			if (fundingType === "MIPR") {
+			if (fundingType == "MIPR") {
 				return {
 					fundingType: fundingType,
 					miprNumber: fundingRequest.mipr.mipr_number ? fundingRequest.mipr.mipr_number.toString() : "",
@@ -73,7 +73,7 @@ Ifp.prototype = {
 
 			return {
 				fundingType: fundingType, // FS_FORM
-				orderNumber: fundingRequest.fs_form.order_number.toString(),
+				orderNumber: fundingRequest.fs_form ? fundingRequest.fs_form.order_number.toString() : 'TBD',
 			};
 
 		} catch (err) {
@@ -198,13 +198,13 @@ Ifp.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-11-29 14:21:01</sys_created_on>
         <sys_id>5070b8dc976fd1106fa8b4b3f153afdd</sys_id>
-        <sys_mod_count>65</sys_mod_count>
+        <sys_mod_count>66</sys_mod_count>
         <sys_name>Ifp</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_5070b8dc976fd1106fa8b4b3f153afdd</sys_update_name>
         <sys_updated_by>torin.harthcock</sys_updated_by>
-        <sys_updated_on>2023-08-01 13:53:47</sys_updated_on>
+        <sys_updated_on>2023-08-04 21:22:11</sys_updated_on>
     </sys_script_include>
 </record_update>

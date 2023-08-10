@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.ParseUri</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Parses a provided Uri and returns the parts of it broken out.</description>
+        <name>ParseUri</name>
+        <script><![CDATA[var ParseUri = Class.create();
+ParseUri.prototype = {
+    initialize: function() {
+    },
+
+	parse: function(uri) {
+		var outputs = [];
+		var urlRegex = /^(https?):\/\/([^/]+)(\/[^?]*)(\?.+)?$/;
+		var matches = inputs.uri.match(urlRegex);
+
+		if(matches && matches.length > 1) {
+			// set the output array to match the components of the Uri
+			outputs[0] = matches[1];
+			outputs[1] = matches[2];
+			outputs[2] = matches[3];
+
+			var queryParameters = {};
+
+			if(matches[4]) {
+				var queryParams = matches[4].slice(1).split("&");
+
+				for(var i = 0; i < queryParams.length; i++) {
+					var keyValue = queryParams[i].split("=");
+
+					if(keyValue.length == 2) {
+						queryParameters[decodeURIComponent(keyValue[0])] = decodeURIComponent(keyValue[1]);
+					}
+				}
+			}
+
+			outputs[3] = new global.JSON().encode(queryParameters);
+
+		} 
+	},
+
+    type: 'ParseUri'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-03 20:14:05</sys_created_on>
+        <sys_id>8a7806339754311000989fa00153af1a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>ParseUri</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_8a7806339754311000989fa00153af1a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-03 20:14:05</sys_updated_on>
+    </sys_script_include>
+</record_update>
