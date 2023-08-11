@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <annotation>Update UI Files from a given version number.</annotation>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Deploy UI files based on a release version. </description>
+        <internal_name>cd_deploy_from_release</internal_name>
+        <label_cache>[{"name":"cedc8960-49c0-4318-be8d-72ea3da4a5c1.full_url","label":"1 - CD: Generate Release URL➛Full URL","reference_display":"Full URL","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"33b18663-135a-44d0-9b9e-a2a85022f937"}},{"name":"subflow.version","label":"Input➛Version","type":"string","base_type":"string","attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":"","uiUniqueId":"0ebdeabe-3918-4b7e-b763-abdd47ae5f2a"}}]</label_cache>
+        <master_snapshot>c0e7364e4768b51093e530ed436d43f6</master_snapshot>
+        <name>CD: Deploy From Release</name>
+        <natlang/>
+        <outputs/>
+        <pre_compiled>false</pre_compiled>
+        <remote_trigger_id/>
+        <run_as>system</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-08-10 14:33:17</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>058f3cce9720b11000989fa00153af17</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>CD: Deploy From Release</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_hub_flow_058f3cce9720b11000989fa00153af17</sys_update_name>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 23:19:09</sys_updated_on>
+        <type>subflow</type>
+    </sys_hub_flow>
+    <sys_translated_text action="delete_multiple" query="documentkey=058f3cce9720b11000989fa00153af17"/>
+    <sys_variable_value action="delete_multiple" query="document_key=058f3cce9720b11000989fa00153af17"/>
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=058f3cce9720b11000989fa00153af17"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=058f3cce9720b11000989fa00153af17"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=058f3cce9720b11000989fa00153af17^sys_idNOT IN458f3cce9720b11000989fa00153af19"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>058f3cce9720b11000989fa00153af17</id>
+        <name>CD: Deploy From Release</name>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-08-10 14:33:17</sys_created_on>
+        <sys_id>458f3cce9720b11000989fa00153af19</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-08-10 14:33:17</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=458f3cce9720b11000989fa00153af19"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=058f3cce9720b11000989fa00153af17^sys_idNOT INd3c341069760b11000989fa00153afc8"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=0ebdeabe-3918-4b7e-b763-abdd47ae5f2a</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>version</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Version</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="CD: Deploy From Release">058f3cce9720b11000989fa00153af17</model>
+        <model_id>058f3cce9720b11000989fa00153af17</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_058f3cce9720b11000989fa00153af17</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-08-10 14:52:00</sys_created_on>
+        <sys_id>d3c341069760b11000989fa00153afc8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-08-10 14:52:00</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_output action="delete_multiple" query="model=058f3cce9720b11000989fa00153af17"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=058f3cce9720b11000989fa00153af17"/>
+    <sys_hub_action_instance action="delete_multiple" query="flow=058f3cce9720b11000989fa00153af17^sys_idNOT IN6301f2ce4728b51093e530ed436d43f3,ebc341069760b11000989fa00153afd4"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="CD: Update UI Files">fe1a9f049764311000989fa00153af92</action_type>
+        <action_type_parent/>
+        <comment/>
+        <display_text/>
+        <flow display_value="CD: Deploy From Release">058f3cce9720b11000989fa00153af17</flow>
+        <order>2</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>1609291318.CTR</sys_created_by>
+        <sys_created_on>2023-08-10 22:49:20</sys_created_on>
+        <sys_id>6301f2ce4728b51093e530ed436d43f3</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 23:19:09</sys_updated_on>
+        <ui_id>4c0052a5-19f8-4ed2-94cf-e15368f4fbd5</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=6301f2ce4728b51093e530ed436d43f3"/>
+    <sys_element_mapping action="delete_multiple" query="id=6301f2ce4728b51093e530ed436d43f3"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>uri</field>
+        <id>6301f2ce4728b51093e530ed436d43f3</id>
+        <sys_created_by>1609291318.CTR</sys_created_by>
+        <sys_created_on>2023-08-10 22:49:20</sys_created_on>
+        <sys_id>ab01f2ce4728b51093e530ed436d43f4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 22:49:20</sys_updated_on>
+        <table>var__m_sys_hub_action_input_fe1a9f049764311000989fa00153af92</table>
+        <value>{{cedc8960-49c0-4318-be8d-72ea3da4a5c1.full_url}}</value>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=6301f2ce4728b51093e530ed436d43f3"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=6301f2ce4728b51093e530ed436d43f3"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="CD: Generate Release URL">560305c29760b11000989fa00153af0e</action_type>
+        <action_type_parent/>
+        <comment/>
+        <display_text/>
+        <flow display_value="CD: Deploy From Release">058f3cce9720b11000989fa00153af17</flow>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-08-10 14:52:01</sys_created_on>
+        <sys_id>ebc341069760b11000989fa00153afd4</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 23:19:09</sys_updated_on>
+        <ui_id>cedc8960-49c0-4318-be8d-72ea3da4a5c1</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=ebc341069760b11000989fa00153afd4"/>
+    <sys_element_mapping action="delete_multiple" query="id=ebc341069760b11000989fa00153afd4"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>version</field>
+        <id>ebc341069760b11000989fa00153afd4</id>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-08-10 14:52:01</sys_created_on>
+        <sys_id>2bc341069760b11000989fa00153afd6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-08-10 14:52:01</sys_updated_on>
+        <table>var__m_sys_hub_action_input_560305c29760b11000989fa00153af0e</table>
+        <value>{{subflow.version}}</value>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=ebc341069760b11000989fa00153afd4"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=ebc341069760b11000989fa00153afd4"/>
+    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=058f3cce9720b11000989fa00153af17"/>
+    <sys_hub_flow_logic action="delete_multiple" query="flow=058f3cce9720b11000989fa00153af17"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=058f3cce9720b11000989fa00153af17"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=058f3cce9720b11000989fa00153af17"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_058f3cce9720b11000989fa00153af17^sys_idNOT INd7c341069760b11000989fa00153afcb"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>version</element>
+        <help/>
+        <hint>The version string used in the repository tags. (i.e. v1.23.2)</hint>
+        <label>Version</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_058f3cce9720b11000989fa00153af17</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-08-10 14:52:00</sys_created_on>
+        <sys_id>d7c341069760b11000989fa00153afcb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-08-10 14:52:00</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_058f3cce9720b11000989fa00153af17"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_058f3cce9720b11000989fa00153af17"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_058f3cce9720b11000989fa00153af17"/>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=058f3cce9720b11000989fa00153af17"/>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=058f3cce9720b11000989fa00153af17^sys_idNOT IN10e7764e4768b51093e530ed436d43c1"/>
+    <sys_flow_subflow_plan action="INSERT_OR_UPDATE">
+        <plan>com.snc.process_flow.engine.ProcessPlan@12c8410</plan>
+        <plan_id display_value="CD: Deploy From Release">058f3cce9720b11000989fa00153af17</plan_id>
+        <snapshot>c0e7364e4768b51093e530ed436d43f6</snapshot>
+        <sys_created_by>1609291318.CTR</sys_created_by>
+        <sys_created_on>2023-08-10 23:19:09</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>10e7764e4768b51093e530ed436d43c1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 23:19:09</sys_updated_on>
+    </sys_flow_subflow_plan>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <annotation>Update UI Files from a given version number.</annotation>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Deploy UI files based on a release version. </description>
+        <internal_name>cd_deploy_from_release</internal_name>
+        <label_cache>[{"name":"cedc8960-49c0-4318-be8d-72ea3da4a5c1.full_url","label":"1 - CD: Generate Release URL➛Full URL","reference_display":"Full URL","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"33b18663-135a-44d0-9b9e-a2a85022f937"}},{"name":"subflow.version","label":"Input➛Version","type":"string","base_type":"string","attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":"","uiUniqueId":"0ebdeabe-3918-4b7e-b763-abdd47ae5f2a"}}]</label_cache>
+        <master>true</master>
+        <name>CD: Deploy From Release</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="CD: Deploy From Release">058f3cce9720b11000989fa00153af17</parent_flow>
+        <remote_trigger_id/>
+        <run_as>system</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>1609291318.CTR</sys_created_by>
+        <sys_created_on>2023-08-10 23:19:08</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>c0e7364e4768b51093e530ed436d43f6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 23:19:08</sys_updated_on>
+        <type>subflow</type>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=c0e7364e4768b51093e530ed436d43f6"/>
+    <sys_variable_value action="delete_multiple" query="document_key=c0e7364e4768b51093e530ed436d43f6"/>
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=c0e7364e4768b51093e530ed436d43f6"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=c0e7364e4768b51093e530ed436d43f6"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=c0e7364e4768b51093e530ed436d43f6^sys_idNOT INc0e7364e4768b51093e530ed436d43f7"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>c0e7364e4768b51093e530ed436d43f6</id>
+        <name>CD: Deploy From Release</name>
+        <sys_created_by>1609291318.CTR</sys_created_by>
+        <sys_created_on>2023-08-10 23:19:08</sys_created_on>
+        <sys_id>c0e7364e4768b51093e530ed436d43f7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 23:19:08</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=c0e7364e4768b51093e530ed436d43f7"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=c0e7364e4768b51093e530ed436d43f6^sys_idNOT IN08e7364e4768b51093e530ed436d43f8"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=0ebdeabe-3918-4b7e-b763-abdd47ae5f2a</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>version</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Version</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="CD: Deploy From Release">c0e7364e4768b51093e530ed436d43f6</model>
+        <model_id>c0e7364e4768b51093e530ed436d43f6</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_c0e7364e4768b51093e530ed436d43f6</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>1609291318.CTR</sys_created_by>
+        <sys_created_on>2023-08-10 23:19:08</sys_created_on>
+        <sys_id>08e7364e4768b51093e530ed436d43f8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 23:19:08</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_output action="delete_multiple" query="model=c0e7364e4768b51093e530ed436d43f6"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=c0e7364e4768b51093e530ed436d43f6"/>
+    <sys_hub_action_instance action="delete_multiple" query="flow=c0e7364e4768b51093e530ed436d43f6^sys_idNOT IN00e7764e4768b51093e530ed436d4348,88e7764e4768b51093e530ed436d432a"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="CD: Update UI Files">fe1a9f049764311000989fa00153af92</action_type>
+        <action_type_parent display_value="CD: Update UI Files">56b7c2bf9714311000989fa00153af01</action_type_parent>
+        <comment/>
+        <display_text/>
+        <flow display_value="CD: Deploy From Release">c0e7364e4768b51093e530ed436d43f6</flow>
+        <order>2</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>1609291318.CTR</sys_created_by>
+        <sys_created_on>2023-08-10 23:19:08</sys_created_on>
+        <sys_id>00e7764e4768b51093e530ed436d4348</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 23:19:08</sys_updated_on>
+        <ui_id>4c0052a5-19f8-4ed2-94cf-e15368f4fbd5</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=00e7764e4768b51093e530ed436d4348"/>
+    <sys_element_mapping action="delete_multiple" query="id=00e7764e4768b51093e530ed436d4348"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>uri</field>
+        <id>00e7764e4768b51093e530ed436d4348</id>
+        <sys_created_by>1609291318.CTR</sys_created_by>
+        <sys_created_on>2023-08-10 23:19:08</sys_created_on>
+        <sys_id>40e7764e4768b51093e530ed436d4349</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 23:19:08</sys_updated_on>
+        <table>var__m_sys_hub_action_input_fe1a9f049764311000989fa00153af92</table>
+        <value>{{cedc8960-49c0-4318-be8d-72ea3da4a5c1.full_url}}</value>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=00e7764e4768b51093e530ed436d4348"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=00e7764e4768b51093e530ed436d4348"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="CD: Generate Release URL">560305c29760b11000989fa00153af0e</action_type>
+        <action_type_parent display_value="CD: Generate Release URL">4ca2c1829760b11000989fa00153afa5</action_type_parent>
+        <comment/>
+        <display_text/>
+        <flow display_value="CD: Deploy From Release">c0e7364e4768b51093e530ed436d43f6</flow>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>1609291318.CTR</sys_created_by>
+        <sys_created_on>2023-08-10 23:19:08</sys_created_on>
+        <sys_id>88e7764e4768b51093e530ed436d432a</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 23:19:08</sys_updated_on>
+        <ui_id>cedc8960-49c0-4318-be8d-72ea3da4a5c1</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=88e7764e4768b51093e530ed436d432a"/>
+    <sys_element_mapping action="delete_multiple" query="id=88e7764e4768b51093e530ed436d432a"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>version</field>
+        <id>88e7764e4768b51093e530ed436d432a</id>
+        <sys_created_by>1609291318.CTR</sys_created_by>
+        <sys_created_on>2023-08-10 23:19:08</sys_created_on>
+        <sys_id>00e7764e4768b51093e530ed436d432c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 23:19:08</sys_updated_on>
+        <table>var__m_sys_hub_action_input_560305c29760b11000989fa00153af0e</table>
+        <value>{{subflow.version}}</value>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=88e7764e4768b51093e530ed436d432a"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=88e7764e4768b51093e530ed436d432a"/>
+    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=c0e7364e4768b51093e530ed436d43f6"/>
+    <sys_hub_flow_logic action="delete_multiple" query="flow=c0e7364e4768b51093e530ed436d43f6"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=c0e7364e4768b51093e530ed436d43f6"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=c0e7364e4768b51093e530ed436d43f6"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_c0e7364e4768b51093e530ed436d43f6^sys_idNOT IN40e7764e4768b51093e530ed436d431c"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>version</element>
+        <help/>
+        <hint/>
+        <label>Version</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_c0e7364e4768b51093e530ed436d43f6</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>1609291318.CTR</sys_created_by>
+        <sys_created_on>2023-08-10 23:19:08</sys_created_on>
+        <sys_id>40e7764e4768b51093e530ed436d431c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-10 23:19:08</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_c0e7364e4768b51093e530ed436d43f6"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_c0e7364e4768b51093e530ed436d43f6"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_c0e7364e4768b51093e530ed436d43f6"/>
+    <sys_hub_flow action="UPDATE">
+        <sys_id>058f3cce9720b11000989fa00153af17</sys_id>
+        <latest_snapshot>c0e7364e4768b51093e530ed436d43f6</latest_snapshot>
+        <compiler_build/>
+    </sys_hub_flow>
+</record_update>
