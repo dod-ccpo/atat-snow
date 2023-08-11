@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.DappsReportFeedbackGen</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>paired with DappsReportGen, gets the information from the feedback table for generating a csv file</description>
+        <name>DappsReportFeedbackGen</name>
+        <script><![CDATA[var DappsReportFeedbackGen = Class.create();
+DappsReportFeedbackGen.prototype = {
+	feedbackRecord: null,
+	acquisitionPackage: new GlideRecord("x_g_dis_atat_acquisition_package"),
+	user: new GlideRecord("sys_user"),
+	
+    initialize: function(feedbackRecord) {
+		this.feedbackRecord = feedbackRecord;
+		this.acquisitionPackage.get(this.feedbackRecord.acquisition_package);
+		this.user.get(this.feedbackRecord.user_sys_id);
+	},
+	
+	getFeedbackOptions: function(){
+
+			var sysIdArray =  this.feedbackRecord.feedback_items.getDisplayValue().toString().split(",");
+			var feedbackOptionsString = "";
+			sysIdArray.forEach(function(sysId) {
+				var feedbackChoice = new GlideRecord("x_g_dis_atat_dapps_feedback_options_table");
+				feedbackChoice.get(sysId);
+				feedbackOptionsString += feedbackChoice.option;
+				feedbackOptionsString += ";";
+			});
+		return feedbackOptionsString;
+	},
+		
+	getReportRecord: function() {
+		return{
+			Number: this.acquisitionPackage.number.toString(),
+			User: this.user.name.toString(),
+			"Dapps Experience Rating": this.feedbackRecord.dapps_experience.toString(),
+			"Feedback Options": this.getFeedbackOptions().toString(),
+			"Other Feedback": this.feedbackRecord.feedback_items_other ? ('"' + this.feedbackRecord.feedback_items_other.toString() + '"') : ""
+			
+		};
+	},
+
+    type: 'DappsReportFeedbackGen'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>torin.harthcock</sys_created_by>
+        <sys_created_on>2023-08-09 17:16:26</sys_created_on>
+        <sys_id>441b5c7597a8b1103394f5b0f053af10</sys_id>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_name>DappsReportFeedbackGen</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_441b5c7597a8b1103394f5b0f053af10</sys_update_name>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-08-10 12:57:21</sys_updated_on>
+    </sys_script_include>
+</record_update>
