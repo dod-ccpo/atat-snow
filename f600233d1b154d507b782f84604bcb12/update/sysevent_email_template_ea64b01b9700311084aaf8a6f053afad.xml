@@ -3,22 +3,74 @@
         <collection>x_g_dis_atat_portfolio</collection>
         <email_layout/>
         <message/>
-        <message_html><![CDATA[<div style="max-width: 780px;">
-<div style="border: solid #959A9D 1px; padding: 32px; border-radius: 8px;">
-<p><span style="font-family: helvetica; line-height: 31px; font-weight: 400; font-size: 24px;">${mail_script:get_updated_by_name} transferred ownership of an ATAT portfolio to you</span></p>
-<div style="font-weight: 400; line-height: 24px; font-size: 16px;">
-<p><span style="font-family: helvetica;">${mail_script:get_updated_by_name} made you the owner of<strong> &ldquo;${name}&rdquo;</strong> within the Account Tracking and Automation Tool (ATAT). As the owner, you can now:</span></p>
-<ul style="margin: 24px 0px 24px 0px;">
-<li style="margin-top: 5px;"><span style="font-family: helvetica;">Track cloud usage and manage spending throughout the duration of the JWCC task order</span></li>
-<li style="margin-top: 5px;"><span style="font-family: helvetica;">Edit all portfolio details, to include adding CSP administrators, requesting to modify task orders, and adding new task orders</span></li>
-<li style="margin-top: 5px;"><span style="font-family: helvetica;">Manage portfolio member access</span></li>
-<li style="margin-top: 5px;"><span style="font-family: helvetica;">Archive this portfolio</span></li>
+        <message_html><![CDATA[<!-- Link to Roboto Font -->
+<p><link href="https://fonts.googleapis.com/css2?family=Roboto&amp;display=swap" rel="stylesheet" /><link href="https://fonts.googleapis.com/css2?family=Roboto Condensed&amp;display=swap" rel="stylesheet" /></p>
+<style>
+    .container {
+        max-width: 760px;
+    }
+
+    .border-box {
+        border: solid #959A9D 1px;
+        border-radius: 8px;
+        padding: 16px 32px 32px 32px;
+    }
+
+    .title-text {
+        font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
+        line-height: 31px;
+        font-weight: 400;
+        letter-spacing: 0.25px;
+        font-size: 24px;
+    }
+
+    .body-text {
+        font-weight: 400;
+        line-height: 24px;
+        font-size: 16px;
+        letter-spacing: 0.25px;
+        font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    }
+
+    .list-item {
+        margin-top: 5px;
+    }
+
+    .link {
+        color: #544496;
+    }
+
+    .footer-container {
+        width: 696px;
+        justify-content: center;
+        padding: 0px 32px;
+    }
+
+    .footer-text {
+        font-family: 'Roboto', Helvetica, Arial, sans-serif;
+        width: 696px;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 16px;
+        letter-spacing: 0.25px;
+    }
+</style>
+<div class="container">
+<div class="border-box">
+<p class="title-text">${mail_script:get_updated_by_name} transferred ownership of an ATAT portfolio to you</p>
+<div class="body-text">
+<p>${mail_script:get_updated_by_name} made you the owner of <strong>&ldquo;${name}&rdquo;</strong> portfolio within the Account Tracking and Automation Tool (ATAT). As the owner, you can now:</p>
+<ul style="margin: 24px 0;">
+<li class="list-item">Track cloud usage and manage spending throughout the duration of the JWCC task order</li>
+<li class="list-item">Edit all portfolio details and add new task orders</li>
+<li class="list-item">Manage portfolio member access</li>
+<li class="list-item">Archive this portfolio</li>
 </ul>
 </div>
-<p><span style="font-family: helvetica; font-size: 16px; font-weight: bold;"><strong>View portfolio: <a style="color: #544496;" href="https://services.disa.mil/dapps-atat">Link to ATAT</a></strong></span></p>
+<p class="body-text"><strong>View portfolio:</strong> <a class="link" href="https://services.disa.mil/atat-dapps">https://services.disa.mil/atat-dapps</a></p>
 </div>
-<div style="width: 780px; display: flex; justify-content: center;">
-<p style="width: 716px;">This was sent from an unmonitored email address. Please do not reply to this email. If you have questions about JWCC or ATAT, please contact our Customer Support Team at <a style="color: #544496;" href="https://community.hacc.mil/s/contact?&amp;RoleType=Customer">https://community.hacc.mil/s/contact?&amp;RoleType=Customer</a></p>
+<div class="footer-container">
+<p class="footer-text">This was sent from an unmonitored email address. Please do not reply to this email. If you have questions about JWCC or ATAT, please contact our Customer Support Team at <a class="link" href="https://community.hacc.mil/s/contact?&amp;RoleType=Customer">https://community.hacc.mil/s/contact?&amp;RoleType=Customer</a></p>
 </div>
 </div>]]></message_html>
         <message_list/>
@@ -32,19 +84,19 @@ Manage portfolio member access
 Archive this portfolio]]></message_text>
         <name>Portfolio Ownership Change</name>
         <sms_alternate/>
-        <subject>ATAT portfolio transfered to you:  “${portfolio_owner.name}”</subject>
+        <subject>ATAT portfolio transferred to you:  “${name}”</subject>
         <sys_class_name>sysevent_email_template</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-07-20 14:51:14</sys_created_on>
         <sys_id>ea64b01b9700311084aaf8a6f053afad</sys_id>
-        <sys_mod_count>21</sys_mod_count>
+        <sys_mod_count>25</sys_mod_count>
         <sys_name>Portfolio Ownership Change</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sysevent_email_template_ea64b01b9700311084aaf8a6f053afad</sys_update_name>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-07-25 17:26:01</sys_updated_on>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-08-14 20:32:53</sys_updated_on>
         <sys_version>2</sys_version>
     </sysevent_email_template>
 </record_update>
