@@ -66,17 +66,16 @@
 </style>
 <div class="container">
 <div class="border-box">
-<p class="title-text">${mail_script:get_updated_by_name} shared a JWCC Portfolio with you</p>
+<p class="title-text">${mail_script:get_updated_by_name} granted you administrator access to a new environment within ${csp.vendor}</p>
 <div class="body-text">
-<p>${mail_script:get_updated_by_name} invited you to manage the <strong>&ldquo;${name}&rdquo;</strong> portfolio within the Account Tracking and Automation Tool (ATAT). You can now:</p>
+<p>${mail_script:get_updated_by_name} started provisioning the <strong>"${name}"</strong> portfolio using the Account Tracking Automation Tool (ATAT). You have been added as an administrator for the ${csp.classification_level} / ${csp.cloud_distinguisher.display_name} within the <strong>${csp.vendor} Console</strong>. As an administrator, you will have full access to cloud resources, enabling you to:</p>
 <ul style="margin: 24px 0;">
-<li class="list-item">Track cloud usage and funds spent on portfolio task order(s)</li>
-<li class="list-item">Request to modify task orders</li>
-<li class="list-item">Grant administrator access to the CSP console</li>
-<li class="list-item">Manage portfolio members within ATAT</li>
+<li class="list-item">Manage user accounts and permissions</li>
+<li class="list-item">Configure workspace settings</li>
+<li class="list-item">Administer applications and environments</li>
 </ul>
 </div>
-<p class="body-text"><strong>View portfolio:</strong> <a class="link" href="https://services.disa.mil/atat-dapps">https://services.disa.mil/atat-dapps</a></p>
+<p class="body-text">ATAT submitted your account information to ${csp.vendor} to create a new user account or connect an existing account to this portfolio. This process could take up to two hours. Once provisioning is complete, you will receive an email from ${csp.vendor} with login credentials. If you do not receive an email within 2 hours, please contact TBD.</p>
 </div>
 <div class="footer-container">
 <p class="footer-text">This was sent from an unmonitored email address. Please do not reply to this email. If you have questions about JWCC or ATAT, please contact our Customer Support Team at <a class="link" href="https://community.hacc.mil/s/contact?&amp;RoleType=Customer">https://community.hacc.mil/s/contact?&amp;RoleType=Customer</a></p>
@@ -86,19 +85,19 @@
         <message_text/>
         <name>Email Admins Upon Provisioning</name>
         <sms_alternate/>
-        <subject>Active</subject>
+        <subject>Administrator access request submitted for "${name}"</subject>
         <sys_class_name>sysevent_email_template</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
         <sys_created_on>2023-08-16 02:18:36</sys_created_on>
         <sys_id>b5c095b747a87110ee827d7ba26d437f</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>14</sys_mod_count>
         <sys_name>Email Admins Upon Provisioning</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sysevent_email_template_b5c095b747a87110ee827d7ba26d437f</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-08-16 02:41:07</sys_updated_on>
+        <sys_updated_on>2023-08-16 17:03:49</sys_updated_on>
         <sys_version>2</sys_version>
     </sysevent_email_template>
 </record_update>
