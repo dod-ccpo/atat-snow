@@ -34,8 +34,8 @@
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_c5c9be2997e01110ef86d200f153afd3</sys_update_name>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-04 14:08:51</sys_updated_on>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-08-16 18:07:21</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -190,10 +190,10 @@
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-07-07 17:50:33</sys_created_on>
         <sys_id>e05af6e597e01110ef86d200f153afcc</sys_id>
-        <sys_mod_count>25</sys_mod_count>
+        <sys_mod_count>26</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-04 14:05:55</sys_updated_on>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-08-16 18:06:24</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=e05af6e597e01110ef86d200f153afcc"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -218,9 +218,9 @@
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-07-07 17:50:33</sys_created_on>
         <sys_id>ec5af66997e01110ef86d200f153af6a</sys_id>
-        <sys_mod_count>23</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-04 14:05:55</sys_updated_on>
+        <sys_mod_count>24</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-08-16 18:06:24</sys_updated_on>
         <value>function addCostRecord(outputs, result, csp, organization, portfolio, taskOrder, clinRecord, isActual) {
   var gdt = new GlideDateTime();
   gdt.setDisplayValue(result.month, "yyyy-MM");    
@@ -262,7 +262,19 @@
     cost.insert();
     outputs.num_creates++;
   }
+  
+  updatePortfolioLastCostDataSync(portfolio.sys_id);
+}
 
+function updatePortfolioLastCostDataSync(portfolioSysId) {
+  const portfolioGR = new GlideRecord('x_g_dis_atat_portfolio');
+  portfolioGR.addQuery('sys_id', portfolioSysId);
+  if(portfolioGR.next()) {
+    const dateTime = new GlideDateTime()
+    gs.info(`Updating Last Cost Data Sync to ${JSON.stringify(dateTime)}`);
+    portfolioGR.setValue('last_cost_data_sync', dateTime);
+    portfolioGR.update();
+  }
 }
 
 function handleCostObject(costObject, outputs) {
@@ -285,7 +297,7 @@ function handleCostObject(costObject, outputs) {
   if (!taskOrders) {
     throw "No 'taskOrders' array found in response";
   }
-
+  
   taskOrders.forEach(function (taskOrder) {
     // Look up Task Order object
     var taskOrderRecord = new GlideRecord('x_g_dis_atat_task_order');
@@ -376,12 +388,12 @@ function handleCostObject(costObject, outputs) {
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>script</field>
         <id>e05af6e597e01110ef86d200f153afcc</id>
-        <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-08-04 14:05:55</sys_created_on>
-        <sys_id>edbf354c472c3950f6b8f0bd436d4303</sys_id>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-08-16 18:06:24</sys_created_on>
+        <sys_id>a5d9a44047f4b110ee827d7ba26d4304</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-04 14:05:55</sys_updated_on>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-08-16 18:06:24</sys_updated_on>
         <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
         <value/>
     </sys_element_mapping>
@@ -1326,18 +1338,18 @@ function handleCostObject(costObject, outputs) {
     </sys_hub_action_status_metadata>
     <sys_hub_status_condition action="delete_multiple" query="action_status_metadata_id=aed9726997e01110ef86d200f153afda^sys_idNOT IN4ad203a12fa09110e58359a72799b66e"/>
     <sys_hub_status_condition action="INSERT_OR_UPDATE">
-        <action_status_metadata_id display_value="Created 07/07/2022 13:48:29">aed9726997e01110ef86d200f153afda</action_status_metadata_id>
+        <action_status_metadata_id display_value="Created 2022-07-07 10:48:29">aed9726997e01110ef86d200f153afda</action_status_metadata_id>
         <condition>{{step[858c980e-50bd-448c-a1f7-7af6adc2f0c1].__step_status__.message}}=Error: Cannot convert null to an object.,Detail: Cannot convert null to an object.^NQ{{step[858c980e-50bd-448c-a1f7-7af6adc2f0c1].__step_status__.message}}=Error: Empty JSON string,Detail: Empty JSON string</condition>
         <dont_treat_as_error>true</dont_treat_as_error>
         <label>empty array</label>
         <order>1</order>
-        <status>{"version":"1.0","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":"200"}},"message":{"$cv":{"$c":"java.lang.String","$v":"No Cost Responses were consumed."}}},"complexObjectSchema":{"FlowDesigner:FDACTIONSTATUS":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"integer\",\"default_value\":\"\",\"label\":\"Code\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"Message\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FDACTIONSTATUS.$type_facets":{"SimpleMapFacet":"{\"default_value\":\"\",\"label\":\"Action Status\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"uiUniqueId\":\"7b5524a5-32ae-4f96-b641-560110173141\",\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FDACTIONSTATUS\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"object\",\"order\":\"1\",\"max_length\":\"65000\"}"}},"serializationFormat":"JSON"}</status>
+        <status>{"version":"1.0","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":"200"}},"message":{"$cv":{"$c":"java.lang.String","$v":"No Cost Responses were consumed."}}},"complexObjectSchema":{"FlowDesigner:FDACTIONSTATUS":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"integer\",\"default_value\":\"\",\"label\":\"Code\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"Message\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FDACTIONSTATUS.$type_facets":{"SimpleMapFacet":"{\"default_value\":\"\",\"label\":\"Action Status\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"uiUniqueId\":\"4adfb7bc-9d67-498d-88d0-8d6c3d584fed\",\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FDACTIONSTATUS\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"object\",\"order\":\"1\",\"max_length\":\"65000\"}"}},"serializationFormat":"JSON"}</status>
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-07-07 18:27:47</sys_created_on>
         <sys_id>4ad203a12fa09110e58359a72799b66e</sys_id>
-        <sys_mod_count>8</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-04 14:05:55</sys_updated_on>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-08-16 18:06:24</sys_updated_on>
     </sys_hub_status_condition>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_input_c5c9be2997e01110ef86d200f153afd3^sys_idNOT INaed9726997e01110ef86d200f153afd6"/>
     <sys_documentation action="INSERT_OR_UPDATE">
@@ -1485,17 +1497,17 @@ function handleCostObject(costObject, outputs) {
     <sys_hub_action_plan action="INSERT_OR_UPDATE">
         <action_id display_value="COSTS: Persist Payload">c5c9be2997e01110ef86d200f153afd3</action_id>
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"7dda72a997e01110ef86d200f153af47","name":"plan","plan_signature":null}}</plan>
-        <snapshot>64600ac4476c3950f6b8f0bd436d431a</snapshot>
+        <snapshot>530a2c4047f4b110ee827d7ba26d4306</snapshot>
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-07-07 17:52:49</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>7dda72a997e01110ef86d200f153af47</sys_id>
-        <sys_mod_count>16</sys_mod_count>
+        <sys_mod_count>17</sys_mod_count>
         <sys_overrides/>
         <sys_scope/>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-04 14:08:52</sys_updated_on>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-08-16 18:07:22</sys_updated_on>
     </sys_hub_action_plan>
     <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
@@ -1685,10 +1697,10 @@ function handleCostObject(costObject, outputs) {
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-07-07 17:52:48</sys_created_on>
         <sys_id>25da32a997e01110ef86d200f153afee</sys_id>
-        <sys_mod_count>12</sys_mod_count>
+        <sys_mod_count>13</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-04 14:08:50</sys_updated_on>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-08-16 18:07:20</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=25da32a997e01110ef86d200f153afee"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -1713,9 +1725,9 @@ function handleCostObject(costObject, outputs) {
         <sys_created_by>jeff.segal-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-07-07 17:52:48</sys_created_on>
         <sys_id>e9da32a997e01110ef86d200f153aff4</sys_id>
-        <sys_mod_count>11</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-04 14:08:50</sys_updated_on>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-08-16 18:07:20</sys_updated_on>
         <value>function addCostRecord(outputs, result, csp, organization, portfolio, taskOrder, clinRecord, isActual) {
   var gdt = new GlideDateTime();
   gdt.setDisplayValue(result.month, "yyyy-MM");    
@@ -1757,7 +1769,19 @@ function handleCostObject(costObject, outputs) {
     cost.insert();
     outputs.num_creates++;
   }
+  
+  updatePortfolioLastCostDataSync(portfolio.sys_id);
+}
 
+function updatePortfolioLastCostDataSync(portfolioSysId) {
+  const portfolioGR = new GlideRecord('x_g_dis_atat_portfolio');
+  portfolioGR.addQuery('sys_id', portfolioSysId);
+  if(portfolioGR.next()) {
+    const dateTime = new GlideDateTime()
+    gs.info(`Updating Last Cost Data Sync to ${JSON.stringify(dateTime)}`);
+    portfolioGR.setValue('last_cost_data_sync', dateTime);
+    portfolioGR.update();
+  }
 }
 
 function handleCostObject(costObject, outputs) {
@@ -1780,7 +1804,7 @@ function handleCostObject(costObject, outputs) {
   if (!taskOrders) {
     throw "No 'taskOrders' array found in response";
   }
-
+  
   taskOrders.forEach(function (taskOrder) {
     // Look up Task Order object
     var taskOrderRecord = new GlideRecord('x_g_dis_atat_task_order');
@@ -1871,12 +1895,12 @@ function handleCostObject(costObject, outputs) {
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>script</field>
         <id>25da32a997e01110ef86d200f153afee</id>
-        <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-08-04 14:08:50</sys_created_on>
-        <sys_id>2860c6c4476c3950f6b8f0bd436d43f0</sys_id>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-08-16 18:07:20</sys_created_on>
+        <sys_id>1f0ae84047f4b110ee827d7ba26d43f7</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-04 14:08:50</sys_updated_on>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-08-16 18:07:20</sys_updated_on>
         <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
         <value/>
     </sys_element_mapping>
@@ -2819,20 +2843,20 @@ function handleCostObject(costObject, outputs) {
         <sys_updated_by>jeff.segal-ctr@ccpo.mil</sys_updated_by>
         <sys_updated_on>2022-07-07 17:52:48</sys_updated_on>
     </sys_hub_action_status_metadata>
-    <sys_hub_status_condition action="delete_multiple" query="action_status_metadata_id=f9da72a997e01110ef86d200f153af18^sys_idNOT IN24600ac4476c3950f6b8f0bd436d4319"/>
+    <sys_hub_status_condition action="delete_multiple" query="action_status_metadata_id=f9da72a997e01110ef86d200f153af18^sys_idNOT IN1b0a2c4047f4b110ee827d7ba26d4305"/>
     <sys_hub_status_condition action="INSERT_OR_UPDATE">
-        <action_status_metadata_id display_value="Created 07/07/2022 13:52:48">f9da72a997e01110ef86d200f153af18</action_status_metadata_id>
+        <action_status_metadata_id display_value="Created 2022-07-07 10:52:48">f9da72a997e01110ef86d200f153af18</action_status_metadata_id>
         <condition>{{step[858c980e-50bd-448c-a1f7-7af6adc2f0c1].__step_status__.message}}=Error: Cannot convert null to an object.,Detail: Cannot convert null to an object.^NQ{{step[858c980e-50bd-448c-a1f7-7af6adc2f0c1].__step_status__.message}}=Error: Empty JSON string,Detail: Empty JSON string</condition>
         <dont_treat_as_error>true</dont_treat_as_error>
         <label>empty array</label>
         <order>1</order>
-        <status>{"version":"1.0","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":"200"}},"message":{"$cv":{"$c":"java.lang.String","$v":"No Cost Responses were consumed."}}},"complexObjectSchema":{"FlowDesigner:FDACTIONSTATUS":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"integer\",\"default_value\":\"\",\"label\":\"Code\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"Message\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FDACTIONSTATUS.$type_facets":{"SimpleMapFacet":"{\"default_value\":\"\",\"label\":\"Action Status\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"uiUniqueId\":\"7b5524a5-32ae-4f96-b641-560110173141\",\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FDACTIONSTATUS\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"object\",\"order\":\"1\",\"max_length\":\"65000\"}"}},"serializationFormat":"JSON"}</status>
-        <sys_created_by>1370228783.CTR</sys_created_by>
-        <sys_created_on>2023-08-04 14:08:51</sys_created_on>
-        <sys_id>24600ac4476c3950f6b8f0bd436d4319</sys_id>
+        <status>{"version":"1.0","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":"200"}},"message":{"$cv":{"$c":"java.lang.String","$v":"No Cost Responses were consumed."}}},"complexObjectSchema":{"FlowDesigner:FDACTIONSTATUS":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"integer\",\"default_value\":\"\",\"label\":\"Code\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"Message\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FDACTIONSTATUS.$type_facets":{"SimpleMapFacet":"{\"default_value\":\"\",\"label\":\"Action Status\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"uiUniqueId\":\"4adfb7bc-9d67-498d-88d0-8d6c3d584fed\",\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FDACTIONSTATUS\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"object\",\"order\":\"1\",\"max_length\":\"65000\"}"}},"serializationFormat":"JSON"}</status>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-08-16 18:07:21</sys_created_on>
+        <sys_id>1b0a2c4047f4b110ee827d7ba26d4305</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-04 14:08:51</sys_updated_on>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-08-16 18:07:21</sys_updated_on>
     </sys_hub_status_condition>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_input_edda32a997e01110ef86d200f153afe3^sys_idNOT IN21da32a997e01110ef86d200f153afec"/>
     <sys_documentation action="INSERT_OR_UPDATE">
