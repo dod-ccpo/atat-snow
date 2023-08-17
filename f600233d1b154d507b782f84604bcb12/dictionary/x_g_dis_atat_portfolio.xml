@@ -22,7 +22,7 @@
         </element>
         <element label="Portfolio Managers" max_length="4000" name="portfolio_managers" reference="sys_user" type="glide_list"/>
         <element label="Portfolio Owner" max_length="32" name="portfolio_owner" reference="sys_user" type="reference"/>
-        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;&#9;const sysId = current.sys_id;&#13;&#10;    const PORTFOLIO_TABLE = &quot;x_g_dis_atat_portfolio&quot;;&#13;&#10;    var gr = new GlideRecord(PORTFOLIO_TABLE);&#13;&#10;    gr.get(sysId);&#13;&#10;    if (gr.isValidRecord()) {&#13;&#10;//         var cs = new ClinService(gr);&#13;&#10;//         const payload = cs.determineStatus(gr);&#13;&#10;//         return payload;&#13;&#10;&#9;&#9;return 'ACTIVE';&#13;&#10;    }&#13;&#10;&#13;&#10;})(current);" choice="1" label="Portfolio Status" max_length="40" name="portfolio_status" type="choice" virtual="true">
+        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;&#9;const sysId = current.sys_id;&#13;&#10;    const PORTFOLIO_TABLE = &quot;x_g_dis_atat_portfolio&quot;;&#13;&#10;    var gr = new GlideRecord(PORTFOLIO_TABLE);&#13;&#10;    gr.get(sysId);&#13;&#10;    if (gr.isValidRecord()) {&#13;&#10;&#9;&#9;var ps = new PortfolioService(gr);&#13;&#10;        const status = ps.determineStatus(gr);&#13;&#10;        return status;&#13;&#10;    }&#13;&#10;&#13;&#10;})(current);" choice="1" label="Portfolio Status" max_length="40" name="portfolio_status" type="choice" virtual="true">
             <choice>
                 <element inactive_on_update="false" label="Processing" sequence="1" value="PROCESSING"/>
                 <element inactive_on_update="false" label="Provisioning Issue" sequence="2" value="PROVISIONING_ISSUE"/>
