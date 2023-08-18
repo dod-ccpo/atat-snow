@@ -34,8 +34,8 @@
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_738c03a4979211106fa8b4b3f153af63</sys_update_name>
-        <sys_updated_by>1601189956.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-11 02:21:32</sys_updated_on>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-16 17:21:11</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -136,10 +136,10 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-09-29 17:09:20</sys_created_on>
         <sys_id>ff6693ac979211106fa8b4b3f153aff8</sys_id>
-        <sys_mod_count>37</sys_mod_count>
+        <sys_mod_count>38</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>1601189956.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-11 02:21:18</sys_updated_on>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-16 17:21:03</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=ff6693ac979211106fa8b4b3f153aff8"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -150,9 +150,9 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-09-29 17:09:21</sys_created_on>
         <sys_id>0076d3ac979211106fa8b4b3f153af25</sys_id>
-        <sys_mod_count>33</sys_mod_count>
-        <sys_updated_by>1601189956.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-11 02:21:18</sys_updated_on>
+        <sys_mod_count>34</sys_mod_count>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-16 17:21:03</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   var reqUtil = new Request()
   var errUtil = new ErrorHandler()
@@ -162,12 +162,12 @@
   if (inputs.credential_id) {
     try {
       var provider = new sn_cc.StandardCredentialsProvider();
-      var sys_id = gs.getProperty("x_g_dis_atat.credentials." + inputs.credential_id);
+      var sys_id = gs.getProperty(inputs.credential_id);
       var credential = provider.getAuthCredentialByID(sys_id)
       if (credential) {
 	      token = credential.getAttribute("api_key")
       } else {
-        gs.warn("Could not get credential 'x_g_dis_atat.credentials." + inputs.credential_id + "'")
+        gs.warn("Could not get credential '" + inputs.credential_id + "'")
       }
     } catch (error) {
       errUtil.errorLogger(error);  
@@ -315,12 +315,12 @@
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>script</field>
         <id>ff6693ac979211106fa8b4b3f153aff8</id>
-        <sys_created_by>1601189956.CTR</sys_created_by>
-        <sys_created_on>2023-08-11 02:21:18</sys_created_on>
-        <sys_id>a89167c647e43510f6b8f0bd436d434d</sys_id>
+        <sys_created_by>1609291318.CTR</sys_created_by>
+        <sys_created_on>2023-08-16 17:21:03</sys_created_on>
+        <sys_id>c97f940047787d1093e530ed436d439c</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>1601189956.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-11 02:21:18</sys_updated_on>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-16 17:21:03</sys_updated_on>
         <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
         <value/>
     </sys_element_mapping>
@@ -2643,17 +2643,17 @@
     <sys_hub_action_plan action="INSERT_OR_UPDATE">
         <action_id display_value="UTIL: Make A Request">738c03a4979211106fa8b4b3f153af63</action_id>
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"fab704b0975611106fa8b4b3f153af4b","name":"plan","plan_signature":null}}</plan>
-        <snapshot>f3912bc647e43510f6b8f0bd436d4300</snapshot>
+        <snapshot>077f904047787d1093e530ed436d433d</snapshot>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-09-29 20:44:43</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>fab704b0975611106fa8b4b3f153af4b</sys_id>
-        <sys_mod_count>35</sys_mod_count>
+        <sys_mod_count>36</sys_mod_count>
         <sys_overrides/>
         <sys_scope/>
-        <sys_updated_by>1601189956.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-11 02:21:33</sys_updated_on>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-16 17:21:13</sys_updated_on>
     </sys_hub_action_plan>
     <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
@@ -2789,10 +2789,10 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-09-29 20:44:41</sys_created_on>
         <sys_id>52b7c0b0975611106fa8b4b3f153af5c</sys_id>
-        <sys_mod_count>34</sys_mod_count>
+        <sys_mod_count>35</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>1601189956.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-11 02:21:32</sys_updated_on>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-16 17:21:11</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=52b7c0b0975611106fa8b4b3f153af5c"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -2803,9 +2803,9 @@
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2022-09-29 20:44:41</sys_created_on>
         <sys_id>9eb7c0b0975611106fa8b4b3f153afbc</sys_id>
-        <sys_mod_count>31</sys_mod_count>
-        <sys_updated_by>1601189956.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-11 02:21:32</sys_updated_on>
+        <sys_mod_count>32</sys_mod_count>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-16 17:21:11</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   var reqUtil = new Request()
   var errUtil = new ErrorHandler()
@@ -2815,12 +2815,12 @@
   if (inputs.credential_id) {
     try {
       var provider = new sn_cc.StandardCredentialsProvider();
-      var sys_id = gs.getProperty("x_g_dis_atat.credentials." + inputs.credential_id);
+      var sys_id = gs.getProperty(inputs.credential_id);
       var credential = provider.getAuthCredentialByID(sys_id)
       if (credential) {
 	      token = credential.getAttribute("api_key")
       } else {
-        gs.warn("Could not get credential 'x_g_dis_atat.credentials." + inputs.credential_id + "'")
+        gs.warn("Could not get credential '" + inputs.credential_id + "'")
       }
     } catch (error) {
       errUtil.errorLogger(error);  
@@ -2968,12 +2968,12 @@
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>script</field>
         <id>52b7c0b0975611106fa8b4b3f153af5c</id>
-        <sys_created_by>1601189956.CTR</sys_created_by>
-        <sys_created_on>2023-08-11 02:21:32</sys_created_on>
-        <sys_id>7b91e7c647e43510f6b8f0bd436d43e6</sys_id>
+        <sys_created_by>1609291318.CTR</sys_created_by>
+        <sys_created_on>2023-08-16 17:21:11</sys_created_on>
+        <sys_id>0f7f904047787d1093e530ed436d430a</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>1601189956.CTR</sys_updated_by>
-        <sys_updated_on>2023-08-11 02:21:32</sys_updated_on>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-08-16 17:21:11</sys_updated_on>
         <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
         <value/>
     </sys_element_mapping>
@@ -5295,6 +5295,6 @@
     <sys_hub_action_type_definition action="UPDATE">
         <sys_id>738c03a4979211106fa8b4b3f153af63</sys_id>
         <latest_snapshot>46b7c0b0975611106fa8b4b3f153af22</latest_snapshot>
-        <compiler_build>glide-tokyo-07-08-2022__patch9-hotfix2-06-07-2023_06-23-2023_1740.zip</compiler_build>
+        <compiler_build>glide-tokyo-07-08-2022__patch9-hotfix2a-06-26-2023_07-05-2023_1648.zip</compiler_build>
     </sys_hub_action_type_definition>
 </record_update>
