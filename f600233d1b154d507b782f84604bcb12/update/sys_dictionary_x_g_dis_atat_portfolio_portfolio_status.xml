@@ -7,10 +7,10 @@
         <calculation><![CDATA[(function calculatedFieldValue(current) {
 	const sysId = current.sys_id;
     const PORTFOLIO_TABLE = "x_g_dis_atat_portfolio";
-    var gr = new GlideRecord(PORTFOLIO_TABLE);
+    let gr = new GlideRecord(PORTFOLIO_TABLE);
     gr.get(sysId);
     if (gr.isValidRecord()) {
-		var ps = new PortfolioService(gr);
+		const ps = new PortfolioService(gr);
         const status = ps.determineStatus(gr);
         return status;
     }
@@ -64,7 +64,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_dictionary_x_g_dis_atat_portfolio_portfolio_status</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-08-17 21:23:41</sys_updated_on>
+        <sys_updated_on>2023-08-18 14:55:43</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
