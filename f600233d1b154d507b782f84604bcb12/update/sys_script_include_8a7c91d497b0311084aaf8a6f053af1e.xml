@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.PortfolioService</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>PortfolioService</name>
+        <script><![CDATA[var PortfolioService = Class.create();
+PortfolioService.prototype = {
+	// flags for portfolio status
+	isArchived: false,
+    initialize: function(portfolioRec) {
+		this.setArchived(portfolioRec);
+    },
+	setArchived: function(portfolioRec){
+		this.isArchived = portfolioRec.is_archived;
+	},
+	determineStatus: function(portfolioRec){
+		if(this.isArchived){
+			return "ARCHIVED";
+		}
+		let env = new GlideRecord("x_g_dis_atat_environment");
+		env.addQuery("portfolio", portfolioRec.sys_id);
+		env.query();
+		const envStatuses = [];
+		while(env.next()){
+			envStatuses.push(env.getValue('environment_status'));
+		}
+		if(envStatuses.length > 0){
+			if(envStatuses.includes("PROVISIONING_ISSUE")){
+				return "PROVISIONING_ISSUE";
+			}
+			if(envStatuses.includes("PROCESSING")){
+				return "PROCESSING";
+			}
+		}
+		return "ACTIVE";
+	},
+    type: 'PortfolioService'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-17 16:33:08</sys_created_on>
+        <sys_id>8a7c91d497b0311084aaf8a6f053af1e</sys_id>
+        <sys_mod_count>65</sys_mod_count>
+        <sys_name>PortfolioService</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_8a7c91d497b0311084aaf8a6f053af1e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-18 14:58:08</sys_updated_on>
+    </sys_script_include>
+</record_update>
