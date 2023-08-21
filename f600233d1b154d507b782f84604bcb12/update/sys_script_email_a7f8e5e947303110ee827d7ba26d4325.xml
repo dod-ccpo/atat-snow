@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_email">
+    <sys_script_email action="INSERT_OR_UPDATE">
+        <name>get_portal_or_console</name>
+        <new_lines_to_html>false</new_lines_to_html>
+        <script><![CDATA[(function runMailScript(current, template, email, email_action, event) {
+    const vendor = current.csp.vendor.getDisplayValue();
+	const verbiage = (vendor === 'Microsoft Azure') ? 'Portal' : 'Console';
+    template.print(verbiage);
+})(current, template, email, email_action, event);]]></script>
+        <sys_class_name>sys_script_email</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-08-21 14:36:58</sys_created_on>
+        <sys_id>a7f8e5e947303110ee827d7ba26d4325</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>get_portal_or_console</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_email_a7f8e5e947303110ee827d7ba26d4325</sys_update_name>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-08-21 14:46:33</sys_updated_on>
+    </sys_script_email>
+</record_update>
