@@ -2,14 +2,73 @@
     <sys_dictionary action="INSERT_OR_UPDATE" element="portfolio_funding_status" table="x_g_dis_atat_portfolio">
         <active>true</active>
         <array>false</array>
-        <array_denormalized>false</array_denormalized>
         <attributes/>
         <audit>false</audit>
         <calculation><![CDATA[(function calculatedFieldValue(current) {
+	const sysId = current.sys_id;
+	const toTable = "x_g_dis_atat_task_order";
+	const clinTable = "x_g_dis_atat_clin";
+	const toGr = new GlideRecord(toTable);
+	const clinGr = new GlideRecord(clinTable);
 
-	// Add your code here
-	return '';  // return the calculated value
-
+	toGr.get(current.active_task_order);
+	if(toGr.isValidRecord()){
+		const clinStatuses = [];
+		const toClins = toGr.clins.split(',');
+		toClins.forEach((clin) => {
+          const isValidClin = clinGr.get(clin);
+          if(isValidClin){
+            const cs = new ClinService(clinGr);
+            if(cs.hasStarted && !cs.hasExpired){
+				const status = cs.determineStatus();
+				const clinNumber = clinGr.clin_number;
+				const hasObligatedFunds = cs.hasObligatedFunds;
+				const clinData = {
+					status: status,
+					clinNumber: clinNumber,
+					hasFunds: hasObligatedFunds
+				};
+				gs.info(clinData)
+				clinStatuses.push(clinData);
+            }
+          }
+      });
+		if(clinStatuses.length > 0){
+		if(clinStatuses.every((clin) => clin.status === "EXPIRED")){
+			return "EXPIRED";
+		}
+		if(clinStatuses.some((clin) => clin.status === "DELINQUENT")){
+			return "DELINQUENT";
+		}
+		if(clinStatuses.some((clin) => clin.status === "FUNDING_AT_RISK") || clinStatuses.some((clin) => clin.status === "AT_RISK")){
+			return "AT_RISK";
+		}
+		if(clinStatuses.every((clin) => clin.status === "EXPIRING_POP")){
+			const expectedClins = clinStatuses.map((clin) => {
+				let firstTwo = clin.clinNumber.split(0,2);
+				const lastTwo = clin.clinNumber.slice(2, clin.clinNumber.length);
+				// if 2nd number in firstTwo is less than 9, increment the number and pad a 0
+				if(parseInt(firstTwo) < 10){
+				firstTwo = (parseInt(firstTwo) + 1).toString();
+				expectedClin = firstTwo.padStart(2, '0') + lastTwo;
+				} else {
+				// else just increment the number, string it and add them together
+				firstTwo = (parseInt(firstTwo) + 1).toString();
+				expectedClin = firstTwo + lastTwo;
+				}
+				return expectedClins;
+			});
+			const hasFollowOns = clinStatuses.some((clin) => {
+				if(expectClins.some((expected) => clin.clinNumber === expected && clin.hasFunds)){
+					return true;
+				}
+			});
+			if(!hasFollowOns){
+				return "EXPIRING_SOON";
+			}
+		}}
+		return 'ON_TRACK';
+	}
 })(current);]]></calculation>
         <choice>1</choice>
         <choice_field/>
@@ -30,6 +89,7 @@
         <element>portfolio_funding_status</element>
         <element_reference>false</element_reference>
         <foreign_database/>
+        <formula/>
         <function_definition/>
         <function_field>false</function_field>
         <internal_type display_value="Choice">choice</internal_type>
@@ -47,28 +107,26 @@
         <reference_qual/>
         <reference_qual_condition/>
         <reference_type/>
-        <sizeclass/>
         <spell_check>false</spell_check>
         <staged>false</staged>
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>jason.burkert-ctr@ccpo.mil</sys_created_by>
         <sys_created_on>2022-10-24 16:27:05</sys_created_on>
-        <sys_id>a86cf32497b21110cf3cfd9fe153af3e</sys_id>
-        <sys_mod_count>1</sys_mod_count>
         <sys_name>Funding Status</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_dictionary_x_g_dis_atat_portfolio_portfolio_funding_status</sys_update_name>
-        <sys_updated_by>jason.burkert-ctr@ccpo.mil</sys_updated_by>
-        <sys_updated_on>2022-10-24 16:27:22</sys_updated_on>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-21 22:09:57</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
         <use_dependent_field>false</use_dependent_field>
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
-        <virtual>false</virtual>
+        <virtual>true</virtual>
+        <virtual_type>script</virtual_type>
         <widget/>
         <write_roles/>
         <xml_view>false</xml_view>
