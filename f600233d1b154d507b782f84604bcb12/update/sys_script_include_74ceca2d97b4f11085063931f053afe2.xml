@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.PortfolioAclService</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Extends AclService for Portfolio-specific queries</description>
+        <name>PortfolioAclService</name>
+        <script><![CDATA[var PortfolioAclService = Class.create();
+PortfolioAclService.prototype = Object.extendsObject(AclService, {
+	// Note: we don't include CREATE or DELETE because we don't need custom code for those operations (see the Portfolio ACLs themselves for more)
+	OPERATIONS: {
+		READ: "read",
+		WRITE: "write",
+	},
+	
+    initialize: function() {
+    },
+	
+	constructAclObject: function(operation) {		
+		let owner = current.portfolio_owner ? current.portfolio_owner.toString() : null;
+		let managers = current.portfolio_managers ? current.portfolio_managers.toString() : null;
+		let viewers = current.portfolio_viewers ? current.portfolio_viewers.toString() : null;
+
+		const aclService = new AclService();
+		let accessList;
+		
+		if (operation === this.OPERATIONS.READ) {
+			accessList = this.constructAccessList([owner, managers, viewers]);			
+		}
+		else if (operation === this.OPERATIONS.WRITE) {
+			accessList = this.constructAccessList([owner, managers]);
+		}
+		else throw "Unsupported operation: " + operation;
+
+		return {
+			userSysId: gs.getUserID(),
+			userRoles: gs.getUser().getRoles().toString().split(","), 
+			accessList: accessList,
+			allowedRoles: ["x_g_dis_atat.hacc_admin"]
+		};
+
+	},
+
+    type: 'PortfolioAclService'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>jeffsegal</sys_created_by>
+        <sys_created_on>2023-08-21 17:20:12</sys_created_on>
+        <sys_id>74ceca2d97b4f11085063931f053afe2</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>PortfolioAclService</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_74ceca2d97b4f11085063931f053afe2</sys_update_name>
+        <sys_updated_by>jeffsegal</sys_updated_by>
+        <sys_updated_on>2023-08-21 17:47:35</sys_updated_on>
+    </sys_script_include>
+</record_update>
