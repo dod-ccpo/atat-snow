@@ -13,7 +13,8 @@
 
 	toGr.get(current.active_task_order);
 	if(toGr.isValidRecord()){
-		const clinStatuses = [];
+		const clinInPeriod = [];
+		const allClins = [];
 		const toClins = toGr.clins.split(',');
 		toClins.forEach((clin) => {
           const isValidClin = clinGr.get(clin);
@@ -23,30 +24,46 @@
 				const status = cs.determineStatus();
 				const clinNumber = clinGr.clin_number;
 				const hasObligatedFunds = cs.hasObligatedFunds;
+				gs.info("THIS IS THE CLIN " + clinNumber)
 				const clinData = {
 					status: status,
 					clinNumber: clinNumber,
 					hasFunds: hasObligatedFunds
 				};
-				gs.info(clinData)
-				clinStatuses.push(clinData);
-            }
+				gs.info("THIS IS THE CLIND DATA " + clinData.clinNumber)
+				clinInPeriod.push(clinData);
+				allClins.push(clinData);
+            } else {
+				const status = cs.determineStatus();
+				const clinNumber = clinGr.clin_number;
+				const hasObligatedFunds = cs.hasObligatedFunds;
+				const clinData = {
+					status: status,
+					clinNumber: clinNumber,
+					hasFunds: hasObligatedFunds
+				};
+				allClins.push(clinData);
+			}	
           }
       });
-		if(clinStatuses.length > 0){
-		if(clinStatuses.every((clin) => clin.status === "EXPIRED")){
+		if(allClins.length > 0) {
+		
+		if(allClins.every((clin) => clin.status === "EXPIRED")){
 			return "EXPIRED";
 		}
-		if(clinStatuses.some((clin) => clin.status === "DELINQUENT")){
+		if(clinInPeriod.some((clin) => clin.status === "DELINQUENT")){
 			return "DELINQUENT";
 		}
-		if(clinStatuses.some((clin) => clin.status === "FUNDING_AT_RISK") || clinStatuses.some((clin) => clin.status === "AT_RISK")){
+		if(clinInPeriod.some((clin) => clin.status === "FUNDING_AT_RISK") || clinInPeriod.some((clin) => clin.status === "AT_RISK")){
 			return "AT_RISK";
 		}
-		if(clinStatuses.every((clin) => clin.status === "EXPIRING_POP")){
-			const expectedClins = clinStatuses.map((clin) => {
+		gs.info("HOW MANY CLINS IN PERIOD " + clinInPeriod.length);
+		gs.info("THE CLIN IN PERIOD IS " + clinInPeriod[0].clinNumber);
+		if(clinInPeriod.every((clin) => clin.status === "EXPIRING_POP")){
+			const expectedClins = clinInPeriod.map((clin) => {
 				let firstTwo = clin.clinNumber.split(0,2);
 				const lastTwo = clin.clinNumber.slice(2, clin.clinNumber.length);
+				let expectedClin = "";
 				// if 2nd number in firstTwo is less than 9, increment the number and pad a 0
 				if(parseInt(firstTwo) < 10){
 				firstTwo = (parseInt(firstTwo) + 1).toString();
@@ -56,9 +73,9 @@
 				firstTwo = (parseInt(firstTwo) + 1).toString();
 				expectedClin = firstTwo + lastTwo;
 				}
-				return expectedClins;
+				return expectedClin;
 			});
-			const hasFollowOns = clinStatuses.some((clin) => {
+			const hasFollowOns = clinInPeriod.some((clin) => {
 				if(expectClins.some((expected) => clin.clinNumber === expected && clin.hasFunds)){
 					return true;
 				}
@@ -118,7 +135,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_dictionary_x_g_dis_atat_portfolio_portfolio_funding_status</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-08-21 22:09:57</sys_updated_on>
+        <sys_updated_on>2023-08-22 16:46:19</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
