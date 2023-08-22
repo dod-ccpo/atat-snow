@@ -2,7 +2,7 @@
     <sys_dictionary action="INSERT_OR_UPDATE" element="portfolio_funding_status" table="x_g_dis_atat_portfolio">
         <active>true</active>
         <array>false</array>
-        <attributes/>
+        <attributes>edge_encryption_enabled=true</attributes>
         <audit>false</audit>
         <calculation><![CDATA[(function calculatedFieldValue(current) {
     const sysId = current.sys_id;
@@ -15,9 +15,9 @@
     if (toGr.isValidRecord()) {
         const clinsInPeriod = [];
         const allClins = [];
-		// split clins into array
+        // split clins into array
         const toClins = toGr.clins.split(',');
-		// loop through array, validate valid clin and structure data
+        // loop through array, validate valid clin and structure data
         toClins.forEach((clin) => {
             const isValidClin = clinGr.get(clin);
             if (isValidClin) {
@@ -48,11 +48,11 @@
         });
 
         if (allClins.length > 0) {
-			// cache the metrics of both allClins and clinsInPeriod.
-			// This helps avoid multiple loops through each array of clins
+            // cache the metrics of both allClins and clinsInPeriod.
+            // This helps avoid multiple loops through each array of clins
             const allClinsBreakdown = {};
             const clinsInPeriodBreakdown = {};
-			// collect the number of each status in allClins
+            // collect the number of each status in allClins
             allClins.forEach((clin) => {
                 if (allClinsBreakdown[clin.status]) {
                     allClinsBreakdown[clin.status]++;
@@ -61,7 +61,7 @@
                 }
             });
             allClinsBreakdown.length = allClins.length;
-			// collect the number of each status in clinsInPeriod
+            // collect the number of each status in clinsInPeriod
             clinsInPeriod.forEach((clin) => {
                 if (clinsInPeriodBreakdown[clin.status]) {
                     clinsInPeriodBreakdown[clin.status]++;
@@ -71,16 +71,20 @@
             });
             clinsInPeriodBreakdown.length = clinsInPeriod.length;
 
+            //  if all CLINs in all periods have status Expired
             if (allClinsBreakdown.EXPIRED && allClinsBreakdown.EXPIRED === allClinsBreakdown.length) {
                 return "EXPIRED";
             }
+            //  if any CLIN in current period has status Delinquent
             if (clinsInPeriodBreakdown.DELINQUENT && clinsInPeriodBreakdown.DELINQUENT > 0) {
                 return "DELINQUENT";
             }
+            //  if any CLIN in current period has status At-Risk OR if FUNDING_AT_RISK
             if (clinsInPeriodBreakdown.FUNDING_AT_RISK && clinsInPeriodBreakdown.FUNDING_AT_RISK > 0 ||
                 clinsInPeriodBreakdown.AT_RISK && clinsInPeriodBreakdown.AT_RISK > 0) {
                 return "AT_RISK";
             }
+            // All CLINs in current period  are Expiring PoP and no follow-on CLIN with obligated funds. If there are follow-on CLIN(s) with obligated               funds, status is On-Track and don’t display an Expiring Soon badge.
             if (clinsInPeriodBreakdown.EXPIRING_POP && clinsInPeriodBreakdown.EXPIRING_POP === clinsInPeriodBreakdown.length) {
                 const expectedClins = clinsInPeriod.map((clin) => {
                     let firstTwo = clin.clinNumber.slice(0, 2);
@@ -158,7 +162,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_dictionary_x_g_dis_atat_portfolio_portfolio_funding_status</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-08-22 20:05:15</sys_updated_on>
+        <sys_updated_on>2023-08-22 20:18:21</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
