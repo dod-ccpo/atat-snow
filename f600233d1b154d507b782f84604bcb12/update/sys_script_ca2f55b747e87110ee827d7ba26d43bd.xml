@@ -30,18 +30,31 @@
         <rest_variables/>
         <role_conditions/>
         <script><![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+	
+	// query portfolio for operators
     const operatorGR = new GlideRecord('x_g_dis_atat_operator');
     operatorGR.addQuery('portfolio', current.sys_id);
     operatorGR.query();
+
+    let emails = [];
 	
-	let emails = [];
-	while(operatorGR.next()) {
-		emails.push(operatorGR.email);
-	}
-	gs.info(`Emails: ${emails.toString()}.`);
-	const uniqueEmails = emails.filter((email, index) => emails.indexOf(email) === index);
-	gs.info(`Unique Emails: ${uniqueEmails.toString()}.`);
-	
+    while (operatorGR.next()) {
+        const operatorEnv = operatorGR.environment.sys_id;
+		
+		// retrieve operator's environment
+        const environmentGR = new GlideRecord('x_g_dis_atat_environment');
+        environmentGR.get(operatorEnv);
+		
+		// if environment; check classification level, add email to array if unclassified.
+        if (environmentGR) {
+            const classificationLevel = environmentGR.classification_level.getDisplayValue();
+			if(classificationLevel === 'Unclassified') {
+				emails.push(operatorGR.email);
+			}
+        }
+    }
+
+    const uniqueEmails = emails.filter((email, index) => emails.indexOf(email) === index);
     return gs.eventQueue('x_g_dis_atat.csp_provisioning', current, uniqueEmails.join(','));
 })(current, previous);]]></script>
         <sys_class_name>sys_script</sys_class_name>
@@ -50,7 +63,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>ca2f55b747e87110ee827d7ba26d43bd</sys_id>
-        <sys_mod_count>19</sys_mod_count>
+        <sys_mod_count>49</sys_mod_count>
         <sys_name>Email Admins Upon Provisioning</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -58,7 +71,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_ca2f55b747e87110ee827d7ba26d43bd</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-08-16 16:08:17</sys_updated_on>
+        <sys_updated_on>2023-08-24 14:55:07</sys_updated_on>
         <template/>
         <when>after</when>
     </sys_script>
