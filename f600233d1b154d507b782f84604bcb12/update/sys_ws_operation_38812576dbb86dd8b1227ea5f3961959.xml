@@ -8,235 +8,18 @@
         <http_method>POST</http_method>
         <name>Start Provisioning</name>
         <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
-	var provision = function(request, pdsResponse) {
-		var result;
-		var taskOrderNumber = request.queryParams.taskOrderNumber;
-		var acquisitionPackageSysId = request.queryParams.acquisitionPackageSysId;
-		var requestBody = request.body.data;
-		var eda = new Eda();
-		var summary = eda.extractPdsSummary(taskOrderNumber, pdsResponse);
-		var acquisitionPackageRecord = new GlideRecord("x_g_dis_atat_acquisition_package");
-		var acquisitionPackageRecordFound = false;
-
-		// If we get an acquisition package sys_id, look it up
-		if (acquisitionPackageSysId) {
-			acquisitionPackageRecordFound = acquisitionPackageRecord.get(acquisitionPackageSysId.toString());
-			// If we don't actually find the package, return an error
-			if (!acquisitionPackageRecordFound) {
-				throw {
-					code: "0404",
-					message: "Could not find an acquisition package with sysid " + acquisitionPackageSysId
-				};					
-			}
-		}
-		if (!requestBody.environments || requestBody.environments.length === 0) {
-			throw {
-				code: "0400",
-				message: "No environments in request body"
-			};				
-		}
-		
-		// Validate the XML before converting it to a string
-		// validateXML will return null if it passes validation
-		var xmlValid = GlideXMLUtil.validateXML(pdsResponse, false, false);
-		if (xmlValid == null){							
-			// Create Portfolio
-			var portfolio = new GlideRecord("x_g_dis_atat_portfolio");
-			portfolio.initialize();
-			portfolio.setValue("name", requestBody.portfolioName);
-			portfolio.setValue("portfolio_owner", gs.getUserID());
-			
-			// TODO: remove line below adding requesting user also as manager
-			// after servicenow issue on PROD (and ONLY on PROD) fixed where 
-			// users when only owners can't see portfolio
-			portfolio.setValue("portfolio_managers", gs.getUserID());		
-			
-			portfolio.setValue("portfolio_status", "PROCESSING");
-			portfolio.setValue("agency", requestBody.portfolioAgency);
-			
-			// set CSP column with first (?) environment name from POST body
-			const cspName = requestBody.environments?.[0]?.cspName;
-				
-			const optRecord = new global.GlideQuery('x_g_dis_atat_cloud_service_provider')
-				.where('name', cspName)
-				.selectOne('sys_id');	
-			
-			if(!optRecord.isEmpty()) {
-				const cspRecord = optRecord.get();
-				gs.info(`CSP Record: ${JSON.stringify(cspRecord)}`);
-				portfolio.setValue("csp", cspRecord.sys_id);
-			}
-
-			if (acquisitionPackageRecord.sys_id) {
-				portfolio.setValue("acquisition_package", acquisitionPackageRecord.sys_id);
-			}
-			portfolio.insert();
-			
-			requestBody.environments.forEach(function (environment) {
-				// Find corresponding CSP
-				var cspRecord = new global.GlideQuery('x_g_dis_atat_cloud_service_provider')
-				.where('name', environment.cspName)
-				.selectOne('classification_level', 'classification_level$DISPLAY', 'vendor');				
-				if (cspRecord.isEmpty()) {
-					throw {
-						code: "0504",
-						message: "Could not find a CSP with name " + environment.cspName
-					};						
-				}
-				else {
-					cspRecord = cspRecord.get();
-				}
-				
-				// Make sure that the TO has this classification level
-				const classificationLevelDisplay = cspRecord.classification_level$DISPLAY.toString();
-				if (summary.classificationLevels.indexOf(classificationLevelDisplay) === -1) {
-					throw {
-						code: "0403",
-						message: "Task Order does not contain classification level " + classificationLevelDisplay
-					};						
-				}
-
-				// Create Environment Record
-				var environmentRecord = new GlideRecord("x_g_dis_atat_environment");
-				environmentRecord.initialize();
-				environmentRecord.setValue("name", requestBody.portfolioName + " - " + classificationLevelDisplay);
-				environmentRecord.setValue("portfolio", portfolio.sys_id);
-				environmentRecord.setValue("csp", cspRecord.sys_id);
-				environmentRecord.setValue("classification_level", cspRecord.classification_level);
-				environmentRecord.setValue("environment_status", "PROCESSING");
-				environmentRecord.insert();
-
-				// Update Portfolio Vendor
-				portfolio.setValue("vendor", cspRecord.vendor);
-				portfolio.update();
-
-				// Create Operators
-				var pendingOperators = [];
-				environment.operators.forEach(function(operator) {
-					var operatorRecord = new GlideRecord("x_g_dis_atat_operator");
-					operatorRecord.initialize();
-					operatorRecord.setValue("dod_id", operator.dodId);
-					operatorRecord.setValue("email", operator.email);
-					operatorRecord.setValue("portfolio", portfolio.sys_id);
-					operatorRecord.setValue("environment", environmentRecord.sys_id);
-					pendingOperators.push(operatorRecord.insert());		
-				});
-
-				// Add Operators back to Environment
-				environmentRecord.setValue("pending_operators", pendingOperators);
-				environmentRecord.update();	
-			});
-
-			// Parse the XML string as an XMLDocument2()
-			// This is required to use gs.xmlToJSON() without errors
-			// For more information please see: https://support.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0784264
-			var xmlStringBody = pdsResponse.toString();
-			var xmlDoc = new XMLDocument2();
-			xmlDoc.setNamespaceAware(true);
-			xmlDoc.parseXML(xmlStringBody);
-			var jsonObject = gs.xmlToJSON(xmlDoc);
-
-			// Extract startDate and endDate for the new Task Order record
-			var startDate = jsonObject.ProcurementDocument.AwardInstrument.ProcurementInstrumentHeader.ProcurementInstrumentDates.ProcurementInstrumentPeriods.StartDate;
-			var endDate = jsonObject.ProcurementDocument.AwardInstrument.ProcurementInstrumentHeader.ProcurementInstrumentDates.ProcurementInstrumentPeriods.EndDate;
-			// Create new Task Order parent record
-			var taskOrderRecord = new GlideRecord("x_g_dis_atat_task_order");
-			taskOrderRecord.initialize();
-			taskOrderRecord.setValue("task_order_number", taskOrderNumber.toString());
-			taskOrderRecord.setValue("pop_start_date", startDate);
-			taskOrderRecord.setValue("pop_end_date", endDate);
-			taskOrderRecord.setValue("portfolio", portfolio.sys_id);
-			var newTaskOrderSysID = taskOrderRecord.insert();	
-
-			// Parse CLIN data
-			var lineItems = jsonObject.ProcurementDocument.AwardInstrument.ContractLineItems.LineItems;
-			var clins = {};
-			if (Array.isArray(lineItems)){									
-				// Gather CLINs + PoP Dates from "CLIN" entries. Do not create CLINs if we don't have PoP dates.
-				lineItems.filter(function(lineItem) {
-					return lineItem.LineItemIdentifier.DFARS.LineItem.LineItemType == "CLIN";
-				}).filter(function(lineItem) {
-					return lineItem.LineItemDates;
-				}).forEach(function(lineItem) {
-					clins[lineItem.LineItemIdentifier.DFARS.LineItem.LineItemBase] = {
-						popStartDate: lineItem.LineItemDates.LineItemPeriod.PeriodStart.DateElement,
-						popEndDate: lineItem.LineItemDates.LineItemPeriod.PeriodEnd.DateElement
-					};
-				});
-				// Next, gather Obligated Amount from "INFOSLIN" entries
-				lineItems.filter(function(lineItem) {
-					return lineItem.LineItemIdentifier.DFARS.LineItem.LineItemType == "INFOSLIN";
-				}).filter(function(lineItem) {
-					return lineItem.LineItemAmounts;
-				}).forEach(function(lineItem) {
-					clins[lineItem.LineItemIdentifier.DFARS.LineItem.LineItemBase].obligatedAmount = lineItem.LineItemAmounts.ItemObligatedAmount.ObligatedAmount;
-				});						
-			}
-
-			// Create CLIN entries
-			var clinSysIds = Object.keys(clins).map(function(number) {
-				var entry = clins[number];
-				var grClin = new GlideRecord("x_g_dis_atat_clin");
-				grClin.initialize();
-				grClin.setValue("clin_number", number);
-				grClin.setValue("task_order", newTaskOrderSysID);
-				if (entry.obligatedAmount) {
-					grClin.setValue("funds_obligated", entry.obligatedAmount);
-				}
-				grClin.setValue("pop_start_date", entry.popStartDate);
-				grClin.setValue("pop_end_date", entry.popEndDate);
-				return grClin.insert();
-			});
-			
-			// Update Task Order to add newly created CLIN children
-			taskOrderRecord.setValue("clins", clinSysIds.toString());
-			taskOrderRecord.update();
-
-			// Check for created CLIN(s)
-			if (clinSysIds.length > 0){
-				// Return response
-				var responseMessage = "Success: created " + clinSysIds.length + " CLIN(s)";
-				result = {
-					success: responseMessage
-				};
-
-				// Update Active Task Order
-				portfolio.setValue("active_task_order", newTaskOrderSysID);							
-				portfolio.update();
-
-				// Update Acquisition Package Status (if we have one)
-				if (acquisitionPackageRecordFound) {					
-					acquisitionPackageRecord.package_status = "TASK_ORDER_AWARDED";
-					acquisitionPackageRecord.update();
-				}					
-
-				return result;
-			}
-			else {
-				throw {
-					code: "0503",
-					message: "No CLINs created"
-				};				
-			}	
-		}
-		else{
-			throw {
-				code: "0501",
-				message: "Invalid XML"
-			};
-		}
-	};
-
 	try {
 		var eda = new Eda();
-		var payload = eda.getPayload(request, response);
-		return provision(request, payload);	
+		return eda.provision(request.queryParameters.taskOrderNumber, 
+            request.queryParameters.acquisitionPackageSysId,
+            request.body.data.environments, 
+            request.body.data.porfolioName,
+            request.body.data.portfolioAgency);	
 	} catch (e) {
 		gs.error(JSON.stringify(e));		
 		response.setStatus(400);
 		response.setBody(e);
 	}	
-
 })(request, response);]]></operation_script>
         <operation_uri>/api/x_g_dis_atat/provisioning</operation_uri>
         <produces>application/json,application/xml,text/xml</produces>
@@ -251,14 +34,14 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-02-07 15:04:14</sys_created_on>
         <sys_id>38812576dbb86dd8b1227ea5f3961959</sys_id>
-        <sys_mod_count>100</sys_mod_count>
+        <sys_mod_count>101</sys_mod_count>
         <sys_name>Start Provisioning</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_ws_operation_38812576dbb86dd8b1227ea5f3961959</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-08-24 14:06:07</sys_updated_on>
+        <sys_updated_on>2023-08-28 21:10:47</sys_updated_on>
         <web_service_definition display_value="Provisioning">4ba165cadb6c6918b1227ea5f39619e4</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
