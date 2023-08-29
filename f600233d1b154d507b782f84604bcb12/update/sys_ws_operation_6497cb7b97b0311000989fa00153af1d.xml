@@ -15,9 +15,9 @@
 		
 		return eda.updatePortfolio(portfolioId, taskOrderNumber);
 	} catch (err) {
-		gs.error(JSON.stringify(e));		
+		gs.error(e);		
 		response.setStatus(400);
-		response.setBody(e);
+		response.setBody(JSON.parse(e));
 	}
 })(request, response);]]></operation_script>
         <operation_uri>/api/x_g_dis_atat/provisioning</operation_uri>
@@ -33,14 +33,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-08-28 21:14:40</sys_created_on>
         <sys_id>6497cb7b97b0311000989fa00153af1d</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name>Update Portfolio</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_ws_operation_6497cb7b97b0311000989fa00153af1d</sys_update_name>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-08-28 21:19:00</sys_updated_on>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-08-29 17:18:51</sys_updated_on>
         <web_service_definition display_value="Provisioning">4ba165cadb6c6918b1227ea5f39619e4</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>

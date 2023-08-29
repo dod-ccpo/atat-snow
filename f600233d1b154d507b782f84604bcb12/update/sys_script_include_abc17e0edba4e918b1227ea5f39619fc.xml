@@ -7,44 +7,41 @@
         <client_callable>false</client_callable>
         <description/>
         <name>Eda</name>
-        <script><![CDATA[var Eda = Class.create();
+        <script><![CDATA[let Eda = Class.create();
 Eda.prototype = {
 	edaBaseUrl: null,
 	taskOrder: null,
 	procurementDocument: null,
-
-	initialize: function() {
+	
+    initialize: function() {
 		this.edaBaseUrl = gs.getProperty("x_g_dis_atat.eda.baseUrl");
 		if (!this.edaBaseUrl) {
-			throw {
-				code: "0500",
-				message: "eda.baseUrl is required for EDA integration"
-			};			
+			throw new Error(JSON.stringify({code: '0500', message: 'eda.baseUrl is required for EDA integration'}));			
 		}
-	},
-
+    },
+	
 	getPayload: function(taskOrderNumber) {
 		// Ensure TO not already in use
-		const toRecord = new GlideRecord("x_g_dis_atat_task_order");
+        const toRecord = new GlideRecord("x_g_dis_atat_task_order");
 		toRecord.addQuery("task_order_number", taskOrderNumber);
 		toRecord.query();
 		if (toRecord.next()) {
-			var message = "The given Task Order is already in use in a Portfolio";
+			let message = "The given Task Order is already in use in a Portfolio";
 			if (toRecord.portfolio) {
 				message += " named " + toRecord.portfolio.name;			
 			}
-			throw {
+			throw new Error(JSON.stringify({
 				code: "0001",
 				message: message
-			};
+			}));
 		}
 
 		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		// CODE BELOW for testing only - remove when JWCC TOs are available in EDA GT environment
 		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-		var dummyRegex = /\d000000000000/;
-		var dummyMap = {
+		const dummyRegex = /\d000000000000/;
+		const dummyMap = {
 			"1000000000000": "AWS",
 			"2000000000000": "Azure",
 			"3000000000000": "GCP",
@@ -52,7 +49,7 @@ Eda.prototype = {
 			"5000000000000": "Non-JWCC",
 		};
 		if (dummyRegex.test(taskOrderNumber)) {
-			var dummyRecord = new GlideRecord("x_g_dis_atat_dapps_dummy_data");
+			const dummyRecord = new GlideRecord("x_g_dis_atat_dapps_dummy_data");
 			dummyRecord.addQuery("name", dummyMap[taskOrderNumber]);
 			dummyRecord.query();
 			dummyRecord.next();
@@ -61,77 +58,77 @@ Eda.prototype = {
 		// END EDA HARD-CODING
 
 		// Make GET request to endpoint
-		var my_procurement_doc = this.pdsRequest(taskOrderNumber);
+		const my_procurement_doc = this.pdsRequest(taskOrderNumber);
 		if (my_procurement_doc.error){
 			if (my_procurement_doc.status_code == "204") {
-				throw {
+				throw new Error(JSON.stringify({
 					code: "0002",
 					message: "Could not find given Task Order."
-				};
+				}));
 			}
 			else if (my_procurement_doc.error.includes("Invalid Delivery Order Number")) {
-				throw {
+				throw new Error(JSON.stringify({
 					code: "0004",
 					message: "Invalid Task Order format."
-				};
+				}));
 			}
 			else {		
-				throw {
+				throw new Error(JSON.stringify({
 					code: "0500",
 					message: my_procurement_doc.error
-				};
+				}));
 			}
 
 		}
-
+		
 		// Parse the XML string as an XMLDocument2()
 		// This is required to use gs.xmlToJSON() without errors
 		// For more information please see: https://support.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0784264
-		var xmlStringBody = my_procurement_doc.body.toString();
-		var xmlDoc = new XMLDocument2();
+		const xmlStringBody = my_procurement_doc.body.toString();
+		const xmlDoc = new XMLDocument2();
 		xmlDoc.setNamespaceAware(true);
 		xmlDoc.parseXML(xmlStringBody);
-		var jsonObject = gs.xmlToJSON(xmlDoc);
+		const jsonObject = gs.xmlToJSON(xmlDoc);
 		this.procurementDocument = jsonObject.ProcurementDocument;
 
 		return this.procurementDocument;
 	},
-
+	
 	getTaskOrderData: function(taskOrderNumber) {
-		this.getPayload(taskOrderNumber);
+        this.getPayload(taskOrderNumber);
 
 		// Validate the XML before converting it to a string
 		// validateXML will return null if it passes validation
-		var xmlValid = GlideXMLUtil.validateXML(payload, false, false);
+		const xmlValid = GlideXMLUtil.validateXML(payload, false, false);
 
 		if (xmlValid){
-			throw {
+			throw new Error(JSON.stringify({
 				code: "0501",
 				message: "Invalid XML"
-			};
+			}));
 		}
 
-		var awardInstrument = this.procurementDocument.AwardInstrument;
-		var instrumentHeader = awardInstrument.ProcurementInstrumentHeader;
+		const awardInstrument = this.procurementDocument.AwardInstrument;
+		const instrumentHeader = awardInstrument.ProcurementInstrumentHeader;
 
 		// Find Contractor
-		var contractors = this.findAddresses(instrumentHeader, "Contractor");
+		const contractors = this.findAddresses(instrumentHeader, "Contractor");
 		if (contractors.length == 0) {
-			throw {
+			throw new Error(JSON.stringify({
 				code: "1000",
 				message: "Did not find any Contractors."
-			};
+			}));
 		}
 		else if (contractors.length > 1) {
-			throw {
+			throw new Error(JSON.stringify({
 				code: "1001",
 				message: "Found more than one Contractor."
-			};
+			}));
 		}
-		var contractor = contractors.toString();
+		const contractor = contractors.toString();
 
 		// Infer CSP
-		var csp = null;				
+		let csp = null;				
 		if (contractor.toUpperCase().includes("AMAZON WEB SERVICES")) {
 			csp = "AWS";
 		}
@@ -145,55 +142,55 @@ Eda.prototype = {
 			csp = "Oracle";
 		}			
 		else {
-			throw {
+			throw new Error(JSON.stringify({
 				code: "0003",
 				message: "Task Order not awarded under JWCC Contract (Contractor: " + contractor + ")"
-			};
+			}));
 		}
 
 		// Find Contract Issuing Office
-		var contractIssuingOffices = this.findAddresses(instrumentHeader, "Contract Issuing Office");
+		const contractIssuingOffices = this.findAddresses(instrumentHeader, "Contract Issuing Office");
 		if (contractIssuingOffices.length == 0) {
-			throw {
+			throw new Error(JSON.stringify({
 				code: "1100",
 				message: "Did not find any Contract Issuing Offices."
-			};
+			}));
 		}
 		else if (contractIssuingOffices.length > 1) {
-			throw {
+			throw new Error(JSON.stringify({
 				code: "1101",
 				message: "Found more than one Contract Issuing Office."
-			};
+			}));
 		}
-		var contractIssuingOffice = contractIssuingOffices.toString();
+		const contractIssuingOffice = contractIssuingOffices.toString();
 
 		// Infer Classification Levels
-		var classificationLevels = this.getClassificationLevels(awardInstrument);
+		const classificationLevels = this.getClassificationLevels(awardInstrument);
 
 		// Find Total Task Order Amount
-		var otherAmounts = instrumentHeader.ProcurementInstrumentAmounts.OtherAmounts;
-		var otherAmountsArray = [];
+		const otherAmounts = instrumentHeader.ProcurementInstrumentAmounts.OtherAmounts;
+		let otherAmountsArray = [];
 		if (!Array.isArray(otherAmounts)) {
 			otherAmountsArray.push(otherAmounts);
 		}
 		else {
 			otherAmountsArray = otherAmounts;
 		}
-		var totalAmount = otherAmountsArray.filter(function(otherAmount) {
+		const totalAmount = otherAmountsArray.filter(function(otherAmount) {
 			return otherAmount.AmountDescription.includes("Total Contract Value");
 		}).map(function(otherAmount) {
 			return otherAmount.Amount;
 		});
 
 		// Find Funded Amount
-		var fundedAmount = otherAmountsArray.filter(function(otherAmount) {
+		const fundedAmount = otherAmountsArray.filter(function(otherAmount) {
 			return otherAmount.AmountDescription.includes("Funded Amount");
 		}).map(function(otherAmount) {
 			return otherAmount.Amount;
 		});
 
 		// Parse CLIN data
-		var clinData = getClinData(awardInstrument);
+		const clinData = getClinData(awardInstrument);
 
 		this.taskOrder = {
 			taskOrderNumber: taskOrderNumber.toString(),
@@ -213,198 +210,203 @@ Eda.prototype = {
 	},
 
 	provision: function(taskOrderNumber, acquisitionPackageSysId, environments, porfolioName, portfolioAgency) {
-		var result;
-		var taskOrder = this.getTaskOrderData(taskOrderNumber);
+		let result;
+		const taskOrder = this.getTaskOrderData(taskOrderNumber);
 
-		var acquisitionPackageRecord = new GlideRecord("x_g_dis_atat_acquisition_package");
-		var acquisitionPackageRecordFound = false;
+		const acquisitionPackageRecord = new GlideRecord("x_g_dis_atat_acquisition_package");
+		let acquisitionPackageRecordFound = false;
 
 		// If we get an acquisition package sys_id, look it up
 		if (acquisitionPackageSysId) {
 			acquisitionPackageRecordFound = acquisitionPackageRecord.get(acquisitionPackageSysId.toString());
 			// If we don't actually find the package, return an error
 			if (!acquisitionPackageRecordFound) {
-				throw {
+				throw new Error(JSON.stringify({
 					code: "0404",
 					message: "Could not find an acquisition package with sysid " + acquisitionPackageSysId
-				};					
+				}));					
 			}
 		}
 		if (!environments || environments.length === 0) {
-			throw {
+			throw new Error(JSON.stringify({
 				code: "0400",
 				message: "No environments in request body"
-			};				
+			}));				
 		}
+		
+        // Create Portfolio
+        const portfolio = new GlideRecord("x_g_dis_atat_portfolio");
+        portfolio.initialize();
+        portfolio.setValue("name", portfolioName);
+        portfolio.setValue("portfolio_owner", gs.getUserID());
+        
+        // TODO: remove line below adding requesting user also as manager
+        // after servicenow issue on PROD (and ONLY on PROD) fixed where 
+        // users when only owners can't see portfolio
+        portfolio.setValue("portfolio_managers", gs.getUserID());		
+        
+        portfolio.setValue("portfolio_status", "PROCESSING");
+        portfolio.setValue("agency", portfolioAgency);
+        
+        // set CSP column with first (?) environment name from POST body
+        const cspName = environments?.[0]?.cspName;
+            
+        const optRecord = new global.GlideQuery('x_g_dis_atat_cloud_service_provider')
+            .where('name', cspName)
+            .selectOne('sys_id');	
+        
+        if(!optRecord.isEmpty()) {
+            const cspRecord = optRecord.get();
+            gs.info(`CSP Record: ${JSON.stringify(cspRecord)}`);
+            portfolio.setValue("csp", cspRecord.sys_id);
+        }
 
-		// Create Portfolio
-		var portfolio = new GlideRecord("x_g_dis_atat_portfolio");
-		portfolio.initialize();
-		portfolio.setValue("name", portfolioName);
-		portfolio.setValue("portfolio_owner", gs.getUserID());
+        if (acquisitionPackageRecord.sys_id) {
+            portfolio.setValue("acquisition_package", acquisitionPackageRecord.sys_id);
+        }
+        portfolio.insert();
+        
+        environments.forEach((env) => this.createEnvironment(env));
 
-		// TODO: remove line below adding requesting user also as manager
-		// after servicenow issue on PROD (and ONLY on PROD) fixed where 
-		// users when only owners can't see portfolio
-		portfolio.setValue("portfolio_managers", gs.getUserID());		
+        // Create new Task Order parent record
+        const taskOrderRecord = new GlideRecord("x_g_dis_atat_task_order");
+        taskOrderRecord.initialize();
+        taskOrderRecord.setValue("task_order_number", taskOrder.taskOrderNumber);
+        taskOrderRecord.setValue("pop_start_date", taskOrder.popStartDate);
+        taskOrderRecord.setValue("pop_end_date", taskOrder.popEndDate);
+        taskOrderRecord.setValue("portfolio", portfolio.sys_id);
+        const newTaskOrderSysID = taskOrderRecord.insert();	
 
-		portfolio.setValue("portfolio_status", "PROCESSING");
-		portfolio.setValue("agency", portfolioAgency);
+        // Create CLIN entries
+        let clinSysIds = Object.keys(taskOrder.clinData).map(function(number) {
+            const entry = taskOrder.clinData[number];
+            const grClin = new GlideRecord("x_g_dis_atat_clin");
+            grClin.initialize();
+            grClin.setValue("clin_number", number);
+            grClin.setValue("task_order", newTaskOrderSysID);
+            if (entry.obligatedAmount) {
+                grClin.setValue("funds_obligated", entry.obligatedAmount);
+            }
+            grClin.setValue("pop_start_date", entry.popStartDate);
+            grClin.setValue("pop_end_date", entry.popEndDate);
+            return grClin.insert();
+        });
+        
+        // Update Task Order to add newly created CLIN children
+        taskOrderRecord.setValue("clins", clinSysIds.toString());
+        taskOrderRecord.update();
 
-		// set CSP column with first (?) environment name from POST body
-		const cspName = environments?.[0]?.cspName;
+        // Check for created CLIN(s)
+        if (clinSysIds.length > 0){
+            // Return response
+            const responseMessage = "Success: created " + clinSysIds.length + " CLIN(s)";
+            result = {
+                success: responseMessage
+            };
 
-		const optRecord = new global.GlideQuery('x_g_dis_atat_cloud_service_provider')
-		.where('name', cspName)
-		.selectOne('sys_id');	
+            // Update Active Task Order
+            portfolio.setValue("active_task_order", newTaskOrderSysID);							
+            portfolio.update();
 
-		if(!optRecord.isEmpty()) {
-			const cspRecord = optRecord.get();
-			gs.info(`CSP Record: ${JSON.stringify(cspRecord)}`);
-			portfolio.setValue("csp", cspRecord.sys_id);
-		}
+            // Update Acquisition Package Status (if we have one)
+            if (acquisitionPackageRecordFound) {					
+                acquisitionPackageRecord.package_status = "TASK_ORDER_AWARDED";
+                acquisitionPackageRecord.update();
+            }					
 
-		if (acquisitionPackageRecord.sys_id) {
-			portfolio.setValue("acquisition_package", acquisitionPackageRecord.sys_id);
-		}
-		portfolio.insert();
-
-		environments.forEach((env) => this.createEnvironment(env));
-
-		// Create new Task Order parent record
-		var taskOrderRecord = new GlideRecord("x_g_dis_atat_task_order");
-		taskOrderRecord.initialize();
-		taskOrderRecord.setValue("task_order_number", taskOrder.taskOrderNumber);
-		taskOrderRecord.setValue("pop_start_date", taskOrder.popStartDate);
-		taskOrderRecord.setValue("pop_end_date", taskOrder.popEndDate);
-		taskOrderRecord.setValue("portfolio", portfolio.sys_id);
-		var newTaskOrderSysID = taskOrderRecord.insert();	
-
-		// Create CLIN entries
-		var clinSysIds = Object.keys(taskOrder.clinData).map(function(number) {
-			var entry = taskOrder.clinData[number];
-			var grClin = new GlideRecord("x_g_dis_atat_clin");
-			grClin.initialize();
-			grClin.setValue("clin_number", number);
-			grClin.setValue("task_order", newTaskOrderSysID);
-			if (entry.obligatedAmount) {
-				grClin.setValue("funds_obligated", entry.obligatedAmount);
-			}
-			grClin.setValue("pop_start_date", entry.popStartDate);
-			grClin.setValue("pop_end_date", entry.popEndDate);
-			return grClin.insert();
-		});
-
-		// Update Task Order to add newly created CLIN children
-		taskOrderRecord.setValue("clins", clinSysIds.toString());
-		taskOrderRecord.update();
-
-		// Check for created CLIN(s)
-		if (clinSysIds.length > 0){
-			// Return response
-			var responseMessage = "Success: created " + clinSysIds.length + " CLIN(s)";
-			result = {
-				success: responseMessage
-			};
-
-			// Update Active Task Order
-			portfolio.setValue("active_task_order", newTaskOrderSysID);							
-			portfolio.update();
-
-			// Update Acquisition Package Status (if we have one)
-			if (acquisitionPackageRecordFound) {					
-				acquisitionPackageRecord.package_status = "TASK_ORDER_AWARDED";
-				acquisitionPackageRecord.update();
-			}					
-
-			return result;
-		}
-		else {
-			throw {
-				code: "0503",
-				message: "No CLINs created"
-			};				
-		}	
+            return result;
+        }
+        else {
+            throw new Error(JSON.stringify({
+                code: "0503",
+                message: "No CLINs created"
+            }));				
+        }	
 	},
-
+	
 	updatePortfolio: function(portfolioId, taskOrderNumber) {
 		let taskOrder = this.getTaskOrderData(taskOrderNumber);
 		const portfolio = new GlideRecord("x_g_dis_atat_portfolio");
 		portfolio.get(portfolioId);
-
+		
 		if (!portfolio) {
-			throw {
+			throw new Error(JSON.stringify({
 				code: "0404",
 				message: "No portfolio found"
-			};
+			}));
 		}
-
+		
 		const taskOrderRecord = new GlideRecord("x_g_dis_atat_task_order");
-		taskOrderRecord.addQuery("task_order_number", taskOrder.taskOrderNumber);
+        taskOrderRecord.addQuery("task_order_number", taskOrder.taskOrderNumber);
 		taskOrderRecord.query();
-
+		
 		if (!taskOrderRecord.isValid()){
-			throw {
+			throw new Error(JSON.stringify({
 				code: "0404",
 				message: "No existing task order found"
-			};
+			}));
 		}
 
 		// Update taskOrder information
 		taskOrderRecord.setValue("pop_start_date", taskOrder.popStartDate);
-		taskOrderRecord.setValue("pop_end_date", taskOrder.popEndDate);
+        taskOrderRecord.setValue("pop_end_date", taskOrder.popEndDate);
 
 		// Array of new CLIN record sys_ids to associate with the taskOrderRecord
-		var clinSysIds = [];
+		let clinSysIds = [];
 
 		// get all existing CLIN Glide Records related to the taskOrderRecord
 		const existingClinsForTO = this.getCLINGlideRecordByTO(taskOrderRecord.sys_id);
-
-		// Loop through the CLINs already assigned 
-		// Delete the ones no longer in the TO
-		// Update the ones that are in the TO 
 		if (existingClinsForTO != null) {
-			while (existingClinsForTO.next()) {
-				const existingClinGr = this.getCLINGlideRecord(clinSysId);
-				if (existingClinGr === null) {
-					continue;
-				}
-
-				const clin = existingClinGr.getValue("clin_number");
-
-				if (!taskOrder.clinData.keys.includes(clin)){
-					existingClinGr.deleteRecord();
-				} else {
-					clinSysIds.push(existingClinGr.sys_id);
-					const clinData = taskOrder.clinData[clin];
-					existingClinGr.setValue("clin_number", clin);
-					existingClinGr.setValue("task_order", taskOrderRecord.sys_id);
-					if (clinData.obligatedAmount) {
-						existingClinGr.setValue("funds_obligated", clinData.obligatedAmount);
-					}
-					existingClinGr.setValue("pop_start_date", clinData.popStartDate);
-					existingClinGr.setValue("pop_end_date", clinData.popEndDate);
-					newClin.update();
-				}
-			}
+			clinSysIds = this.resolveCLINData(existingClinsForTO);
 		}
 
 		// Identify new CLINs in the TO details and create them.
-		var newClins = taskOrder.clinData.keys.filter((clin) => !clin_numbers.includes(clin));
+		const newClins = taskOrder.clinData.keys.filter((clin) => !clin_numbers.includes(clin));
 		if (Array.isArray(newClins)) {
 			newClins.forEach((clin) => {
-				clinSysIds.push(
-					this.createCLINGlideRecord(clin, taskOrder.clinData[clin], taskOrderRecord.sys_id)
-				);
+				const newCLINSysId = this.createCLINGlideRecord(clin, taskOrder.clinData[clin], taskOrderRecord.sys_id)
+				clinSysIds.push(newCLINSysId);
 			});
 		}
 		taskOrderRecord.setValue("clins", clinSysIds.toString());
 		taskOrderRecord.update();	
 
 	},
+	
+	// Function to loop through existing Glide Records for CLINs associated with the 
+	// given task order and delete records for CLINs that no longer exist in the task 
+	// order and update records for CLINs that do.
+	resolveCLINData: function(clinGlidRecords,taskOrder) {
+		let clinSysIds = [];
+		while (clinGlidRecords.next()) {
+			const existingClinGr = this.getCLINGlideRecord(clinSysId);
+			if (existingClinGr === null) {
+				continue;
+			}
 
+			const clin = existingClinGr.getValue("clin_number");
+			
+			if (!taskOrder.clinData.keys.includes(clin)){
+				existingClinGr.deleteRecord();
+			} else {
+				clinSysIds.push(existingClinGr.sys_id);
+				const clinData = taskOrder.clinData[clin];
+				existingClinGr.setValue("clin_number", clin);
+				existingClinGr.setValue("task_order", taskOrderRecord.sys_id);
+				if (clinData.obligatedAmount) {
+					existingClinGr.setValue("funds_obligated", clinData.obligatedAmount);
+				}
+				existingClinGr.setValue("pop_start_date", clinData.popStartDate);
+				existingClinGr.setValue("pop_end_date", clinData.popEndDate);
+				existingClinGr.update();
+			}
+		}
+
+		return clinSysIds;
+	},
+	
 	createCLINGlideRecord: function(clin, clinData, taskOrderSysId) {
-		var grClin = new GlideRecord("x_g_dis_atat_clin");
+		const grClin = new GlideRecord("x_g_dis_atat_clin");
 		grClin.initialize();
 		grClin.setValue("clin_number", clin);
 		grClin.setValue("task_order", taskOrderSysID);
@@ -415,34 +417,34 @@ Eda.prototype = {
 		grClin.setValue("pop_end_date", clinData.popEndDate);
 		return grClin.insert();
 	},
-
+	
 	getCLINGlideRecordByCLIN_Number: function(clin,taskOrderSysId) {
 		const clinRecord = new GlideRecord("x_g_dis_atat_clin");
 		clinRecord.addQuery("clin",clin);
 		clinRecord.addQuery("task_order",taskOrderSysId);
 		clinRecord.query();
-
+		
 		if (clinRecord.isValid()) {
 			return clinRecord;
 		}
 		return null;
 	},
-
+	
 	getCLINGlideRecordByTO: function(taskOrderSysId) {
 		const clinRecords = new GlideRecord("x_g_dis_atat_clin");
 		clinRecords.addQuery("task_order",taskOrderSysId);
 		clinRecords.query();
-
+		
 		if (clinRecords.hasNext()) {
 			return clinRecords;
 		}
 		return null;
 	},
-
+		
 	getCLINGlideRecord: function(clinSysId) {
 		const clinRecord = new GlideRecord("x_g_dis_atat_clin");
 		clinRecord.get(clinSysId);
-
+		
 		if (clinRecord.isValid()) {
 			return clinRecord;
 		}
@@ -450,7 +452,7 @@ Eda.prototype = {
 	},
 
 	getCLINData: function(instrument) {
-		var clinData = {};
+		let clinData = {};
 
 		if (!Array.isArray(instrument.ContractLineItems.LineItems)){	
 			return null;
@@ -475,14 +477,14 @@ Eda.prototype = {
 		}).forEach(function(lineItem) {
 			clins[lineItem.LineItemIdentifier.DFARS.LineItem.LineItemBase].obligatedAmount = lineItem.LineItemAmounts.ItemObligatedAmount.ObligatedAmount;
 		});	
-
+		
 		return clinData;
 	},
 
 	getClassificationLevels: function(instrument) {
-		var classificationLevels = null;
-		var lineItems = instrument.ContractLineItems.LineItems;
-		var lineItemsArray = [];
+		let classificationLevels = null;
+		const lineItems = instrument.ContractLineItems.LineItems;
+		let lineItemsArray = [];
 		if (!Array.isArray(lineItems)) {
 			lineItemsArray.push(lineItems);
 		}
@@ -521,30 +523,30 @@ Eda.prototype = {
 
 	createEnvironment: function(environment) {
 		// Find corresponding CSP
-		var cspRecord = new global.GlideQuery('x_g_dis_atat_cloud_service_provider')
+		let cspRecord = new global.GlideQuery('x_g_dis_atat_cloud_service_provider')
 		.where('name', environment.cspName)
 		.selectOne('classification_level', 'classification_level$DISPLAY', 'vendor');				
 		if (cspRecord.isEmpty()) {
-			throw {
+			throw new Error(JSON.stringify({
 				code: "0504",
 				message: "Could not find a CSP with name " + environment.cspName
-			};						
+			}));						
 		}
 		else {
 			cspRecord = cspRecord.get();
 		}
-
+		
 		// Make sure that the TO has this classification level
 		const classificationLevelDisplay = cspRecord.classification_level$DISPLAY.toString();
 		if (taskOrder.classificationLevels.indexOf(classificationLevelDisplay) === -1) {
-			throw {
+			throw new Error(JSON.stringify({
 				code: "0403",
 				message: "Task Order does not contain classification level " + classificationLevelDisplay
-			};						
+			}));						
 		}
 
 		// Create Environment Record
-		var environmentRecord = new GlideRecord("x_g_dis_atat_environment");
+		const environmentRecord = new GlideRecord("x_g_dis_atat_environment");
 		environmentRecord.initialize();
 		environmentRecord.setValue("name", portfolioName + " - " + classificationLevelDisplay);
 		environmentRecord.setValue("portfolio", portfolio.sys_id);
@@ -558,9 +560,9 @@ Eda.prototype = {
 		portfolio.update();
 
 		// Create Operators
-		var pendingOperators = [];
+		let pendingOperators = [];
 		environment.operators.forEach(function(operator) {
-			var operatorRecord = new GlideRecord("x_g_dis_atat_operator");
+			const operatorRecord = new GlideRecord("x_g_dis_atat_operator");
 			operatorRecord.initialize();
 			operatorRecord.setValue("dod_id", operator.dodId);
 			operatorRecord.setValue("email", operator.email);
@@ -575,23 +577,23 @@ Eda.prototype = {
 	},
 
 	findAddresses: function(header, addressDescription) {
-		var addresses = header.ProcurementInstrumentAddresses;
+		const addresses = header.ProcurementInstrumentAddresses;
 		return addresses.filter(function(address) {
 			return address.AddressDescription == addressDescription;
 		}).map(function(address) {
 			return address.Address.OrganizationNameAddress.OrganizationName;
 		});
 	},	
-
+	
 	pdsRequest: function(deliveryOrderNumber) {
-		var payload = {
+		const payload = {
 			endpoint: this.edaBaseUrl + "/eda-api/documents/pds",
 			delivery_order_number: deliveryOrderNumber
 		};
-		var http_payload;
+		let http_payload;
 		try{
 			// Outbound REST message
-			var request = new sn_ws.RESTMessageV2();
+			const request = new sn_ws.RESTMessageV2();
 
 			// Request set-up
 			request.setEndpoint(payload.endpoint);
@@ -608,12 +610,12 @@ Eda.prototype = {
 			}
 
 			// Make request
-			var response = request.execute();
+			const response = request.execute();
 			// Check for errors
 			if(response.getStatusCode() != "200"){
 				gs.error(response.getStatusCode());
 				gs.error(response.getBody());
-				var errorMessage = "Error: " + response.getStatusCode() + " " + response.getBody() + " response, no XML retrieved";
+				const errorMessage = "Error: " + response.getStatusCode() + " " + response.getBody() + " response, no XML retrieved";
 				http_payload = {
 					body: response.getBody(),
 					status_code: response.getStatusCode(),
@@ -636,19 +638,19 @@ Eda.prototype = {
 		}		
 	},
 
-	type: 'Eda'
+    type: 'Eda'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-01-24 02:42:04</sys_created_on>
         <sys_id>abc17e0edba4e918b1227ea5f39619fc</sys_id>
-        <sys_mod_count>56</sys_mod_count>
+        <sys_mod_count>57</sys_mod_count>
         <sys_name>Eda</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_abc17e0edba4e918b1227ea5f39619fc</sys_update_name>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-08-28 23:04:32</sys_updated_on>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-08-29 17:17:40</sys_updated_on>
     </sys_script_include>
 </record_update>
