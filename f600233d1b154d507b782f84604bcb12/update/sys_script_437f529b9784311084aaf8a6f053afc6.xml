@@ -29,13 +29,16 @@
         <rest_service_text/>
         <rest_variables/>
         <role_conditions/>
-        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
-
-	// Add your code here
-	var currentOwnerId = current.portfolio_owner;
-	var grUser = new GlideRecord('sys_user');
-	grUser.get(currentOwnerId);
-	return gs.eventQueue('x_g_dis_atat.portfolio.ownership.change', current, grUser.email);
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {	
+	// for newly provisioned portfolios, current and previous will have same data
+	// do not send transfer ownership email when newly provisioned portfolio
+	const sendEmail = current.portfolio_owner.toString() !== previous.portfolio_owner.toString();
+	if (sendEmail) {
+		var currentOwnerId = current.portfolio_owner;
+		var grUser = new GlideRecord('sys_user');
+		grUser.get(currentOwnerId);
+		return gs.eventQueue('x_g_dis_atat.portfolio.ownership.change', current, grUser.email);		
+	}
 })(current, previous);]]></script>
         <sys_class_name>sys_script</sys_class_name>
         <sys_created_by>admin</sys_created_by>
@@ -43,7 +46,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>437f529b9784311084aaf8a6f053afc6</sys_id>
-        <sys_mod_count>8</sys_mod_count>
+        <sys_mod_count>19</sys_mod_count>
         <sys_name>Portfolio Ownership Change</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -51,7 +54,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_437f529b9784311084aaf8a6f053afc6</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-07-21 16:12:34</sys_updated_on>
+        <sys_updated_on>2023-08-30 16:18:20</sys_updated_on>
         <template/>
         <when>before</when>
     </sys_script>
