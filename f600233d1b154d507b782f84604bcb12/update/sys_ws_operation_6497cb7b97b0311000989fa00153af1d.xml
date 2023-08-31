@@ -10,14 +10,20 @@
         <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
 	try {
 		const eda = new Eda();
-		const portfolioId = request.queryParams.portfolioId;
-		const taskOrderNumber = request.queryParams.taskOrderNumber;
-		
-		return eda.updatePortfolio(portfolioId, taskOrderNumber);
-	} catch (err) {
+		if (request.queryParams.portfolioSysId === undefined) {
+			throw new Error(JSON.stringify({code: "0400", message:"Required parameter 'portfolioSysId' missing."}));
+		}
+		return eda.updatePortfolio(request.queryParams.portfolioSysId, request.queryParams.taskOrderNumber);
+	} catch (e) {
 		gs.error(e);		
 		response.setStatus(400);
-		response.setBody(JSON.parse(e));
+		let message = "";
+		try {
+			message = JSON.parse(e.message);
+		} catch (e2) {
+			message = e.message;
+		}
+		response.setBody(message);
 	}
 })(request, response);]]></operation_script>
         <operation_uri>/api/x_g_dis_atat/provisioning</operation_uri>
@@ -33,14 +39,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-08-28 21:14:40</sys_created_on>
         <sys_id>6497cb7b97b0311000989fa00153af1d</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>10</sys_mod_count>
         <sys_name>Update Portfolio</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_ws_operation_6497cb7b97b0311000989fa00153af1d</sys_update_name>
         <sys_updated_by>xander.keele</sys_updated_by>
-        <sys_updated_on>2023-08-29 17:18:51</sys_updated_on>
+        <sys_updated_on>2023-08-30 23:19:17</sys_updated_on>
         <web_service_definition display_value="Provisioning">4ba165cadb6c6918b1227ea5f39619e4</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
