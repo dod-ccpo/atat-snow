@@ -236,7 +236,25 @@ Eda.prototype = {
 			}));				
 		}
 		
-        // Create Portfolio
+        // Create new Task Order parent record
+        const taskOrderRecord = new GlideRecord("x_g_dis_atat_task_order");
+        taskOrderRecord.initialize();
+        taskOrderRecord.setValue("task_order_number", taskOrder.taskOrderNumber);
+        taskOrderRecord.setValue("pop_start_date", taskOrder.popStartDate);
+        taskOrderRecord.setValue("pop_end_date", taskOrder.popEndDate);
+        const newTaskOrderSysId = taskOrderRecord.insert();	
+
+        // Create CLIN entries
+        let clinSysIds = [];
+		Object.keys(taskOrder.clinData).forEach(number => {
+            clinSysIds.push(this.createCLINGlideRecord(number, taskOrder.clinData[number], newTaskOrderSysId));
+        });
+        
+        // Update Task Order to add newly created CLIN children
+        taskOrderRecord.setValue("clins", clinSysIds.toString());
+        taskOrderRecord.update();
+
+		// Create Portfolio
         const portfolio = new GlideRecord("x_g_dis_atat_portfolio");
         portfolio.initialize();
         portfolio.setValue("name", portfolioName);
@@ -245,9 +263,7 @@ Eda.prototype = {
         // TODO: remove line below adding requesting user also as manager
         // after servicenow issue on PROD (and ONLY on PROD) fixed where 
         // users when only owners can't see portfolio
-        portfolio.setValue("portfolio_managers", gs.getUserID());		
-        
-        portfolio.setValue("portfolio_status", "PROCESSING");
+        portfolio.setValue("portfolio_managers", gs.getUserID());
         portfolio.setValue("agency", portfolioAgency);
         
         // set CSP column with first (?) environment name from POST body
@@ -267,27 +283,13 @@ Eda.prototype = {
             portfolio.setValue("acquisition_package", acquisitionPackageRecord.sys_id);
         }
         portfolio.insert();
-        
-        environments.forEach((env) => this.createEnvironment(env,portfolioName,portfolio));
 
-        // Create new Task Order parent record
-        const taskOrderRecord = new GlideRecord("x_g_dis_atat_task_order");
-        taskOrderRecord.initialize();
-        taskOrderRecord.setValue("task_order_number", taskOrder.taskOrderNumber);
-        taskOrderRecord.setValue("pop_start_date", taskOrder.popStartDate);
-        taskOrderRecord.setValue("pop_end_date", taskOrder.popEndDate);
-        taskOrderRecord.setValue("portfolio", portfolio.sys_id);
-        const newTaskOrderSysId = taskOrderRecord.insert();	
+		const taskOrderRecord2 = new GlideRecord("x_g_dis_atat_task_order");
+		taskOrderRecord2.get(newTaskOrderSysId);
+		taskOrderRecord2.setValue("portfolio", portfolio.sys_id);
+		taskOrderRecord2.update();
 
-        // Create CLIN entries
-        let clinSysIds = [];
-		Object.keys(taskOrder.clinData).forEach(number => {
-            clinSysIds.push(this.createCLINGlideRecord(number, taskOrder.clinData[number], newTaskOrderSysId));
-        });
-        
-        // Update Task Order to add newly created CLIN children
-        taskOrderRecord.setValue("clins", clinSysIds.toString());
-        taskOrderRecord.update();
+		environments.forEach((env) => this.createEnvironment(env,portfolioName,portfolio));
 
         // Check for created CLIN(s)
         if (clinSysIds.length > 0){
@@ -633,13 +635,13 @@ Eda.prototype = {
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-01-24 02:42:04</sys_created_on>
         <sys_id>abc17e0edba4e918b1227ea5f39619fc</sys_id>
-        <sys_mod_count>95</sys_mod_count>
+        <sys_mod_count>97</sys_mod_count>
         <sys_name>Eda</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_abc17e0edba4e918b1227ea5f39619fc</sys_update_name>
         <sys_updated_by>xander.keele</sys_updated_by>
-        <sys_updated_on>2023-08-30 23:54:17</sys_updated_on>
+        <sys_updated_on>2023-08-31 17:14:41</sys_updated_on>
     </sys_script_include>
 </record_update>
