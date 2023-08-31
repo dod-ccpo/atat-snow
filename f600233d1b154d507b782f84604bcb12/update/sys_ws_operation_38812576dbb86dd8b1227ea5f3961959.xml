@@ -39,7 +39,27 @@
 		// Validate the XML before converting it to a string
 		// validateXML will return null if it passes validation
 		var xmlValid = GlideXMLUtil.validateXML(pdsResponse, false, false);
-		if (xmlValid == null){							
+		if (xmlValid == null){			
+			// Parse the XML string as an XMLDocument2()
+			// This is required to use gs.xmlToJSON() without errors
+			// For more information please see: https://support.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0784264
+			var xmlStringBody = pdsResponse.toString();
+			var xmlDoc = new XMLDocument2();
+			xmlDoc.setNamespaceAware(true);
+			xmlDoc.parseXML(xmlStringBody);
+			var jsonObject = gs.xmlToJSON(xmlDoc);
+
+			// Extract startDate and endDate for the new Task Order record
+			var startDate = jsonObject.ProcurementDocument.AwardInstrument.ProcurementInstrumentHeader.ProcurementInstrumentDates.ProcurementInstrumentPeriods.StartDate;
+			var endDate = jsonObject.ProcurementDocument.AwardInstrument.ProcurementInstrumentHeader.ProcurementInstrumentDates.ProcurementInstrumentPeriods.EndDate;
+			// Create new Task Order parent record
+			var taskOrderRecord = new GlideRecord("x_g_dis_atat_task_order");
+			taskOrderRecord.initialize();
+			taskOrderRecord.setValue("task_order_number", taskOrderNumber.toString());
+			taskOrderRecord.setValue("pop_start_date", startDate);
+			taskOrderRecord.setValue("pop_end_date", endDate);
+			var newTaskOrderSysID = taskOrderRecord.insert();	
+
 			// Create Portfolio
 			var portfolio = new GlideRecord("x_g_dis_atat_portfolio");
 			portfolio.initialize();
@@ -51,7 +71,7 @@
 			// users when only owners can't see portfolio
 			portfolio.setValue("portfolio_managers", gs.getUserID());		
 			
-			portfolio.setValue("portfolio_status", "PROCESSING");
+			//portfolio.setValue("portfolio_status", "PROCESSING");
 			portfolio.setValue("agency", requestBody.portfolioAgency);
 			
 			// set CSP column with first (?) environment name from POST body
@@ -71,6 +91,11 @@
 				portfolio.setValue("acquisition_package", acquisitionPackageRecord.sys_id);
 			}
 			portfolio.insert();
+
+			var taskOrderRecord2 = new GlideRecord('x_g_dis_atat_task_order');
+			taskOrderRecord2.get(newTaskOrderSysID);
+			taskOrderRecord2.setValue("portfolio", portfolio.sys_id);
+			taskOrderRecord2.update();
 			
 			requestBody.environments.forEach(function (environment) {
 				// Find corresponding CSP
@@ -127,26 +152,7 @@
 				environmentRecord.update();	
 			});
 
-			// Parse the XML string as an XMLDocument2()
-			// This is required to use gs.xmlToJSON() without errors
-			// For more information please see: https://support.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0784264
-			var xmlStringBody = pdsResponse.toString();
-			var xmlDoc = new XMLDocument2();
-			xmlDoc.setNamespaceAware(true);
-			xmlDoc.parseXML(xmlStringBody);
-			var jsonObject = gs.xmlToJSON(xmlDoc);
 
-			// Extract startDate and endDate for the new Task Order record
-			var startDate = jsonObject.ProcurementDocument.AwardInstrument.ProcurementInstrumentHeader.ProcurementInstrumentDates.ProcurementInstrumentPeriods.StartDate;
-			var endDate = jsonObject.ProcurementDocument.AwardInstrument.ProcurementInstrumentHeader.ProcurementInstrumentDates.ProcurementInstrumentPeriods.EndDate;
-			// Create new Task Order parent record
-			var taskOrderRecord = new GlideRecord("x_g_dis_atat_task_order");
-			taskOrderRecord.initialize();
-			taskOrderRecord.setValue("task_order_number", taskOrderNumber.toString());
-			taskOrderRecord.setValue("pop_start_date", startDate);
-			taskOrderRecord.setValue("pop_end_date", endDate);
-			taskOrderRecord.setValue("portfolio", portfolio.sys_id);
-			var newTaskOrderSysID = taskOrderRecord.insert();	
 
 			// Parse CLIN data
 			var lineItems = jsonObject.ProcurementDocument.AwardInstrument.ContractLineItems.LineItems;
@@ -251,14 +257,14 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-02-07 15:04:14</sys_created_on>
         <sys_id>38812576dbb86dd8b1227ea5f3961959</sys_id>
-        <sys_mod_count>100</sys_mod_count>
+        <sys_mod_count>101</sys_mod_count>
         <sys_name>Start Provisioning</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_ws_operation_38812576dbb86dd8b1227ea5f3961959</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-08-24 14:06:07</sys_updated_on>
+        <sys_updated_on>2023-08-31 17:29:54</sys_updated_on>
         <web_service_definition display_value="Provisioning">4ba165cadb6c6918b1227ea5f39619e4</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
