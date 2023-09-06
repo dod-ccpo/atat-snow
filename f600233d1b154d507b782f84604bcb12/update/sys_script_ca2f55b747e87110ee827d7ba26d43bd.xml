@@ -15,7 +15,7 @@
         <condition/>
         <description/>
         <execute_function>false</execute_function>
-        <filter_condition table="x_g_dis_atat_portfolio">portfolio_statusCHANGESTOACTIVE^EQ<item display_value="Active" endquery="false" field="portfolio_status" goto="false" newquery="false" operator="CHANGESTO" or="false" value="ACTIVE"/>
+        <filter_condition table="x_g_dis_atat_portfolio">portfolio_statusCHANGESTOPROCESSING^EQ<item display_value="Processing" endquery="false" field="portfolio_status" goto="false" newquery="false" operator="CHANGESTO" or="false" value="PROCESSING"/>
             <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
         </filter_condition>
         <is_rest>false</is_rest>
@@ -33,7 +33,7 @@
 
     // portfolio is 'current'; get portfolio sys_id
     const portfolioSysId = current.sys_id;
-
+    gs.info(`portfolioSysId: ${portfolioSysId}`);
     // use portfolio sys_id; retrieve environments for portfolio (using sys_id) that are unclassified
     const environmentGR = new GlideRecord('x_g_dis_atat_environment');
     environmentGR.addQuery('portfolio', portfolioSysId);
@@ -44,15 +44,20 @@
 
     // iterate through environments; extract operator email
     while (environmentGR.next()) {
-        const pendingOperators = environmentGR.pending_operators;
+        const pendingOperators = environmentGR.getValue('pending_operators');
+		gs.info(`pendingOperators: ${pendingOperators}`);
         const operatorGR = new GlideRecord('x_g_dis_atat_operator');
-        operatorGR.get(pendingOperators);
-        operatorEmails.push(operatorGR.email);
+		operatorGR.get(pendingOperators);
+		const email = operatorGR.email;
+		gs.info(`Operator Email: ${email}`);
+		operatorEmails.push(email);
     }
 
-	// remove duplicated emails
-
+    // remove duplicated emails
+    gs.info(`operatorEmails: ${operatorEmails.toString()}`);
     const uniqueEmails = operatorEmails.filter((email, index) => operatorEmails.indexOf(email) === index);
+    gs.info(`uniqueEmails: ${uniqueEmails.toString()}`);
+
     return gs.eventQueue('x_g_dis_atat.csp_provisioning', current, uniqueEmails.join(','));
 })(current, previous);]]></script>
         <sys_class_name>sys_script</sys_class_name>
@@ -61,7 +66,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>ca2f55b747e87110ee827d7ba26d43bd</sys_id>
-        <sys_mod_count>67</sys_mod_count>
+        <sys_mod_count>94</sys_mod_count>
         <sys_name>Email Admins Upon Provisioning</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -69,9 +74,9 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_ca2f55b747e87110ee827d7ba26d43bd</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-08-28 21:58:56</sys_updated_on>
+        <sys_updated_on>2023-09-06 12:52:31</sys_updated_on>
         <template/>
-        <when>after</when>
+        <when>async_always</when>
     </sys_script>
     <sys_translated_text action="delete_multiple" query="documentkey=ca2f55b747e87110ee827d7ba26d43bd"/>
 </record_update>
