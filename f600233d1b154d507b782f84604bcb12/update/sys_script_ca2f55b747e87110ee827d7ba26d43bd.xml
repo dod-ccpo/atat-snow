@@ -44,15 +44,15 @@
 
     // iterate through environments
     while (environmentGR.next()) {
-		// extract pending operators
+        // extract pending operators
         const pendingOperators = environmentGR.getValue('pending_operators');
-		
-		// query operator table for all operators in pending operators
+
+        // query operator table for all operators in pending operators
         const operatorGR = new GlideRecord('x_g_dis_atat_operator');
         operatorGR.addQuery('sys_id', 'IN', pendingOperators);
-		operatorGR.query();
-		
-		// iterate and extract operator email
+        operatorGR.query();
+
+        // iterate and extract operator email
         while (operatorGR.next()) {
             const operatorEmail = operatorGR.getValue('email');
             operatorEmails.push(operatorEmail);
@@ -62,8 +62,10 @@
     // remove duplicated emails
     const uniqueEmails = operatorEmails.filter((email, index) => operatorEmails.indexOf(email) === index);
 
-	// dispatch to queue
-    return gs.eventQueue('x_g_dis_atat.csp_provisioning', current, uniqueEmails.join(','));
+    // dispatch to queue
+    uniqueEmails.forEach((email) => {
+        gs.eventQueue('x_g_dis_atat.csp_provisioning', current, email);
+    });
 })(current, previous);]]></script>
         <sys_class_name>sys_script</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
@@ -71,7 +73,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>ca2f55b747e87110ee827d7ba26d43bd</sys_id>
-        <sys_mod_count>103</sys_mod_count>
+        <sys_mod_count>104</sys_mod_count>
         <sys_name>Email Admins Upon Provisioning</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -79,7 +81,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_ca2f55b747e87110ee827d7ba26d43bd</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-09-06 17:18:56</sys_updated_on>
+        <sys_updated_on>2023-09-07 18:13:50</sys_updated_on>
         <template/>
         <when>async_always</when>
     </sys_script>
