@@ -277,7 +277,6 @@ HothProvisioning.prototype = {
   * @param {string} hothId - a GUID generated within ServiceNow for the provisioning job
   * @param {string} targetCsp - the CSP being targeted for this provision request
   * @param {string} taskOrderSysId - the sys_id of the task order record within ServiceNow
-  * @param {string} taskOrderCSPId - the id of the task order in the CSP system
   * @return {Object} an object for updating a task order
   * 
   */
@@ -292,12 +291,12 @@ HothProvisioning.prototype = {
 
 			const taskOrder = this.getTaskOrder(taskOrderSysId.toString());
 			gs.info("createUpdateTaskOrderPayload => " + JSON.stringify(taskOrder));
-// 			if (!taskOrder.csp_id) {
-// 				throw this.errUtil.createError(
-// 					"taskOrder must have a valid CSP ID to update.",
-// 					this.errUtil.INVALID_INPUT
-// 				);
-// 			}
+			if (!taskOrder.csp_id) {
+				throw this.errUtil.createError(
+					"taskOrder must have a valid CSP ID to update.",
+					this.errUtil.INVALID_INPUT
+				);
+			}
 
 			return {
 				jobId: hothId,
@@ -326,13 +325,13 @@ HothProvisioning.prototype = {
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-28 20:22:38</sys_created_on>
         <sys_id>f563b62d47152110f39f7601e36d43de</sys_id>
-        <sys_mod_count>62</sys_mod_count>
+        <sys_mod_count>63</sys_mod_count>
         <sys_name>HothProvisioning</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_f563b62d47152110f39f7601e36d43de</sys_update_name>
         <sys_updated_by>xander.keele</sys_updated_by>
-        <sys_updated_on>2023-09-07 22:36:40</sys_updated_on>
+        <sys_updated_on>2023-09-07 22:52:24</sys_updated_on>
     </sys_script_include>
 </record_update>
