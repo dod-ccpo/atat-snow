@@ -2,48 +2,86 @@
     <sys_hub_flow action="INSERT_OR_UPDATE">
         <access>public</access>
         <acls/>
-        <active>false</active>
+        <active>true</active>
         <annotation/>
         <callable_by_client_api>false</callable_by_client_api>
         <category/>
-        <compiler_build/>
         <copied_from/>
         <copied_from_name/>
         <description>Updates task order information with the CSP upon update to the ATAT: Task Order table</description>
         <internal_name>prov_update_task_order</internal_name>
-        <label_cache>[{"name":"flow_variable.hoth_job_id","label":"Flow Variables➛HOTH Job ID","reference":"","reference_display":"","type":"string","base_type":"string","attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":"","uiUniqueId":"e0157fa6-7031-4bc4-9501-9e5953fefdb8"}},{"name":"Updated_1.current","label":"Trigger - Record Updated➛ATAT:Task Order Record","reference":"x_g_dis_atat_task_order","reference_display":"ATAT:Task Order","type":"reference","base_type":"reference","attributes":{}},{"name":"Updated_1.current.task_order_number","label":"Trigger - Record Updated➛ATAT:Task Order Record➛Task Order Number","reference":"","reference_display":"Task Order Number","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_task_order","column_name":"task_order_number"}]</label_cache>
-        <latest_snapshot/>
-        <master_snapshot/>
+        <label_cache>[{"name":"Updated_1.current.task_order_number","label":"Trigger - Record Updated➛ATAT:Task Order Record➛Task Order Number","reference":"","reference_display":"Task Order Number","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_task_order","column_name":"task_order_number"},{"name":"Updated_1.current","label":"Trigger - Record Updated➛ATAT:Task Order Record","reference":"x_g_dis_atat_task_order","reference_display":"ATAT:Task Order","type":"reference","base_type":"reference","attributes":{}},{"name":"flow_variable.hoth_job_id","label":"Flow Variables➛HOTH Job ID","reference":"","reference_display":"","type":"string","base_type":"string","attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":"","uiUniqueId":"e0157fa6-7031-4bc4-9501-9e5953fefdb8"}},{"name":"bdf041c8-de2e-4884-838a-00dbeed44fd9.record.sys_id","label":"2 - Create Record➛ATAT:Provisioning Job Record➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"x_g_dis_atat_provisioning_job","column_name":"sys_id"},{"name":"bdf041c8-de2e-4884-838a-00dbeed44fd9.record.job_type","label":"2 - Create Record➛ATAT:Provisioning Job Record➛Job Type","reference":"","reference_display":"Job Type","type":"choice","base_type":"choice","parent_table_name":"x_g_dis_atat_provisioning_job","column_name":"job_type","choices":[{"label":"Add Administrator to Environment","used":false,"image":"","rawLabel":"Add Administrator to Environment","selected":false,"missing":false,"reference":false,"value":"ADD_ADMINISTRATOR","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"label":"Add New Environment","used":false,"image":"","rawLabel":"Add New Environment","selected":false,"missing":false,"reference":false,"value":"ADD_ENVIRONMENT","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"label":"Add New Portfolio","used":false,"image":"","rawLabel":"Add New Portfolio","selected":false,"missing":false,"reference":false,"value":"ADD_PORTFOLIO","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"label":"Add Task Order to Portfolio","used":false,"image":"","rawLabel":"Add Task Order to Portfolio","selected":false,"missing":false,"reference":false,"value":"ADD_TASK_ORDER","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"label":"Update Task Order in Portfolio","used":false,"image":"","rawLabel":"Update Task Order in Portfolio","selected":false,"missing":false,"reference":false,"value":"UPDATE_TASK_ORDER","parameters":{"name":"x_g_dis_atat_provisioning_job"}}]},{"name":"Updated_1.current.sys_id","label":"Trigger - Record Updated➛ATAT:Task Order Record➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"x_g_dis_atat_task_order","column_name":"sys_id"},{"name":"bdf041c8-de2e-4884-838a-00dbeed44fd9.record","label":"2 - Create Record➛ATAT:Provisioning Job Record","reference":"x_g_dis_atat_provisioning_job","reference_display":"ATAT:Provisioning Job","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}}]</label_cache>
+        <master_snapshot>9780ae879741311000989fa00153af02</master_snapshot>
         <name>PROV: Update Task Order</name>
         <natlang/>
         <outputs/>
         <pre_compiled>false</pre_compiled>
-        <remote_trigger_id/>
+        <remote_trigger_id>bf80ae879741311000989fa00153af7f</remote_trigger_id>
         <run_as>system</run_as>
         <run_with_roles/>
         <sc_callable>false</sc_callable>
         <show_draft_actions>false</show_draft_actions>
         <show_triggered_flows>false</show_triggered_flows>
-        <status>draft</status>
+        <status>published</status>
         <sys_class_name>sys_hub_flow</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-09-06 16:58:37</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>e9b36c329741311000989fa00153afb1</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_name>PROV: Update Task Order</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_flow_e9b36c329741311000989fa00153afb1</sys_update_name>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-09-06 19:28:13</sys_updated_on>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:35</sys_updated_on>
         <type>flow</type>
     </sys_hub_flow>
     <sys_translated_text action="delete_multiple" query="documentkey=e9b36c329741311000989fa00153afb1"/>
     <sys_variable_value action="delete_multiple" query="document_key=e9b36c329741311000989fa00153afb1"/>
+    <sys_flow_record_trigger action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <condition table="x_g_dis_atat_task_order">^EQ<item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </condition>
+        <name/>
+        <on_delete>false</on_delete>
+        <on_insert>false</on_insert>
+        <on_update>true</on_update>
+        <run_flow_in>background</run_flow_in>
+        <run_on_extended>false</run_on_extended>
+        <run_when_setting>both</run_when_setting>
+        <run_when_user_list/>
+        <run_when_user_setting>any</run_when_user_setting>
+        <sys_class_name>sys_flow_record_trigger</sys_class_name>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:35</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>bf80ae879741311000989fa00153af7f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:35</sys_updated_on>
+        <table>x_g_dis_atat_task_order</table>
+    </sys_flow_record_trigger>
+    <sys_trigger_runner_mapping action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <data>{"run_flow_in":"background","run_when_user_list":[],"run_when_setting":"both","run_when_user_setting":"any","run_on_extended":"false"}</data>
+        <identifier>e9b36c329741311000989fa00153afb1</identifier>
+        <runner>FDTriggerRunner</runner>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:35</sys_created_on>
+        <sys_id>7b80ae879741311000989fa00153af80</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:35</sys_updated_on>
+        <trigger display_value="">bf80ae879741311000989fa00153af7f</trigger>
+    </sys_trigger_runner_mapping>
+    <sys_trigger_runner_mapping action="delete_multiple" query="identifier=e9b36c329741311000989fa00153afb1^sys_idNOT IN7b80ae879741311000989fa00153af80"/>
     <sys_hub_trigger_instance action="delete_multiple" query="flow=e9b36c329741311000989fa00153afb1^sys_idNOT INf12524b29741311000989fa00153affb"/>
     <sys_hub_trigger_instance action="INSERT_OR_UPDATE">
         <comment/>
@@ -54,10 +92,10 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-09-06 17:04:55</sys_created_on>
         <sys_id>f12524b29741311000989fa00153affb</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_scope/>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-09-06 19:28:13</sys_updated_on>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:35</sys_updated_on>
         <trigger_definition display_value="Updated">bb695e60c31322002841b63b12d3aea5</trigger_definition>
         <trigger_inputs/>
         <trigger_outputs/>
@@ -112,7 +150,7 @@
         <active>true</active>
         <array>false</array>
         <array_denormalized>false</array_denormalized>
-        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=document_id,uiTypeLabel=Document ID</attributes>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=document_id</attributes>
         <audit>false</audit>
         <calculation><![CDATA[(function calculatedFieldValue(current) {
 
@@ -171,14 +209,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-09-06 17:04:55</sys_created_on>
         <sys_id>292524b29741311000989fa00153afee</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_name/>
         <sys_package/>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name/>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-09-06 17:04:55</sys_updated_on>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:35</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
@@ -278,7 +316,7 @@
         <active>true</active>
         <array>false</array>
         <array_denormalized>false</array_denormalized>
-        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name,uiTypeLabel=Table Name</attributes>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name</attributes>
         <audit>false</audit>
         <calculation><![CDATA[(function calculatedFieldValue(current) {
 
@@ -337,14 +375,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-09-06 17:04:55</sys_created_on>
         <sys_id>f12524b29741311000989fa00153aff6</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_name/>
         <sys_package/>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name/>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-09-06 17:04:55</sys_updated_on>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:35</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
@@ -359,14 +397,13 @@
     </sys_hub_flow_input>
     <sys_hub_flow_output action="delete_multiple" query="model=e9b36c329741311000989fa00153afb1"/>
     <sys_hub_alias_mapping action="delete_multiple" query="source_id=e9b36c329741311000989fa00153afb1"/>
-    <sys_hub_action_instance action="delete_multiple" query="flow=e9b36c329741311000989fa00153afb1^sys_idNOT INbd2564b29741311000989fa00153af12"/>
+    <sys_hub_action_instance action="delete_multiple" query="flow=e9b36c329741311000989fa00153afb1^sys_idNOT INbd2564b29741311000989fa00153af12,cc05160f9701311000989fa00153afea"/>
     <sys_hub_action_instance action="INSERT_OR_UPDATE">
         <action_inputs/>
         <action_inputs/>
         <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
         <action_type_parent/>
         <comment/>
-        <compiled_snapshot/>
         <display_text/>
         <flow display_value="PROV: Update Task Order">e9b36c329741311000989fa00153afb1</flow>
         <order>2</order>
@@ -375,10 +412,10 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-09-06 17:04:55</sys_created_on>
         <sys_id>bd2564b29741311000989fa00153af12</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>12</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-09-06 19:28:13</sys_updated_on>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:35</sys_updated_on>
         <ui_id>bdf041c8-de2e-4884-838a-00dbeed44fd9</ui_id>
     </sys_hub_action_instance>
     <sys_variable_value action="delete_multiple" query="document_key=bd2564b29741311000989fa00153af12"/>
@@ -427,15 +464,77 @@
         <input_name>values</input_name>
         <instance>bd2564b29741311000989fa00153af12</instance>
         <referenced_table>sys_hub_action_instance</referenced_table>
-        <script>{"payload":{"scriptActive":true,"script":"/*\n**Access Flow/Action data using the fd_data object. Script must return a value.\n**example: var shortDesc \u003d fd_data.trigger.current.short_description;\n**return shortDesc;\n*/\nvar taskOrder \u003d fd_data.trigger.current;\nvar targetCspName \u003d fd_data.trigger.current.portfolio.csp.name;\nvar hoth \u003d new HothProvisioning(portfolio);\nreturn hoth.createAddPortfolioPayload(fd_data.flow_var.hoth_job_id, targetCspName, \"ADD_PORTFOLIO\");","savedValue":""}}</script>
+        <script>{"payload":{"scriptActive":true,"script":"/*\n**Access Flow/Action data using the fd_data object. Script must return a value.\n**example: var shortDesc \u003d fd_data.trigger.current.short_description;\n**return shortDesc;\n*/\nvar taskOrder \u003d fd_data.trigger.current;\nvar targetCspName \u003d fd_data.trigger.current.portfolio.csp.name;\nvar hoth \u003d new HothProvisioning(portfolio);\nreturn hoth.createUpdateTaskOrderPayload(fd_data.flow_var.hoth_job_id, targetCspName, taskOrder.sys_id);","savedValue":""}}</script>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-09-06 19:28:13</sys_created_on>
         <sys_id>f0f5c9fe9781311000989fa00153afb1</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-09-06 19:28:13</sys_updated_on>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:22</sys_updated_on>
     </sys_hub_input_scripts>
     <sys_hub_alias_mapping action="delete_multiple" query="source_id=bd2564b29741311000989fa00153af12"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
+        <action_type_parent/>
+        <comment/>
+        <display_text/>
+        <flow display_value="PROV: Update Task Order">e9b36c329741311000989fa00153afb1</flow>
+        <order>3</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 19:52:05</sys_created_on>
+        <sys_id>cc05160f9701311000989fa00153afea</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:35</sys_updated_on>
+        <ui_id>5a2348c8-81ae-42d0-9e68-b63c67ce0870</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=cc05160f9701311000989fa00153afea"/>
+    <sys_element_mapping action="delete_multiple" query="id=cc05160f9701311000989fa00153afea"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>log_message</field>
+        <id>cc05160f9701311000989fa00153afea</id>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 19:52:05</sys_created_on>
+        <sys_id>8005160f9701311000989fa00153afed</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 19:52:05</sys_updated_on>
+        <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
+        <value>{{bdf041c8-de2e-4884-838a-00dbeed44fd9.record.sys_id}}{{bdf041c8-de2e-4884-838a-00dbeed44fd9.record.job_type}}{{Updated_1.current.task_order_number}}{{Updated_1.current.sys_id}}</value>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=cc05160f9701311000989fa00153afea^sys_idNOT IN0005160f9701311000989fa00153afec,4805160f9701311000989fa00153afec"/>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>false</active>
+        <input_name>log_level</input_name>
+        <instance>cc05160f9701311000989fa00153afea</instance>
+        <referenced_table>sys_hub_action_instance</referenced_table>
+        <script>{"log_level":{"scriptActive":false}}</script>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 19:52:05</sys_created_on>
+        <sys_id>0005160f9701311000989fa00153afec</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 19:52:05</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>false</active>
+        <input_name>log_message</input_name>
+        <instance>cc05160f9701311000989fa00153afea</instance>
+        <referenced_table>sys_hub_action_instance</referenced_table>
+        <script>{"log_message":{"scriptActive":false}}</script>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 19:52:05</sys_created_on>
+        <sys_id>4805160f9701311000989fa00153afec</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 19:52:05</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=cc05160f9701311000989fa00153afea"/>
     <sys_hub_sub_flow_instance action="delete_multiple" query="flow=e9b36c329741311000989fa00153afb1"/>
     <sys_hub_flow_logic action="delete_multiple" query="flow=e9b36c329741311000989fa00153afb1^sys_idNOT INb0f5c9fe9781311000989fa00153afac"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
@@ -459,10 +558,10 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-09-06 19:28:13</sys_created_on>
         <sys_id>b0f5c9fe9781311000989fa00153afac</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-09-06 19:28:13</sys_updated_on>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:35</sys_updated_on>
         <ui_id>4f599d84-a1bd-4b5c-8ae0-1ef5b971d1a6</ui_id>
         <workflow_inputs/>
         <workflow_reference/>
@@ -642,6 +741,728 @@
     <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_e9b36c329741311000989fa00153afb1"/>
     <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_e9b36c329741311000989fa00153afb1"/>
     <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_e9b36c329741311000989fa00153afb1"/>
-    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=e9b36c329741311000989fa00153afb1"/>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=e9b36c329741311000989fa00153afb1^sys_idNOT INff80ae879741311000989fa00153af81"/>
+    <sys_flow_trigger_plan action="INSERT_OR_UPDATE">
+        <binding_strategy>com.snc.process_flow.engine.binding.OncePerRecord</binding_strategy>
+        <plan/>
+        <plan_id>e9b36c329741311000989fa00153afb1</plan_id>
+        <snapshot>9780ae879741311000989fa00153af02</snapshot>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:35</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>ff80ae879741311000989fa00153af81</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:35</sys_updated_on>
+        <trigger display_value="">bf80ae879741311000989fa00153af7f</trigger>
+    </sys_flow_trigger_plan>
     <sys_flow_subflow_plan action="delete_multiple" query="plan_id=e9b36c329741311000989fa00153afb1"/>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Updates task order information with the CSP upon update to the ATAT: Task Order table</description>
+        <internal_name>prov_update_task_order</internal_name>
+        <label_cache>[{"name":"Updated_1.current.task_order_number","label":"Trigger - Record Updated➛ATAT:Task Order Record➛Task Order Number","reference":"","reference_display":"Task Order Number","type":"string","base_type":"string","parent_table_name":"x_g_dis_atat_task_order","column_name":"task_order_number"},{"name":"Updated_1.current","label":"Trigger - Record Updated➛ATAT:Task Order Record","reference":"x_g_dis_atat_task_order","reference_display":"ATAT:Task Order","type":"reference","base_type":"reference","attributes":{}},{"name":"flow_variable.hoth_job_id","label":"Flow Variables➛HOTH Job ID","reference":"","reference_display":"","type":"string","base_type":"string","attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":"","uiUniqueId":"e0157fa6-7031-4bc4-9501-9e5953fefdb8"}},{"name":"bdf041c8-de2e-4884-838a-00dbeed44fd9.record.sys_id","label":"2 - Create Record➛ATAT:Provisioning Job Record➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"x_g_dis_atat_provisioning_job","column_name":"sys_id"},{"name":"bdf041c8-de2e-4884-838a-00dbeed44fd9.record.job_type","label":"2 - Create Record➛ATAT:Provisioning Job Record➛Job Type","reference":"","reference_display":"Job Type","type":"choice","base_type":"choice","parent_table_name":"x_g_dis_atat_provisioning_job","column_name":"job_type","choices":[{"label":"Add Administrator to Environment","used":false,"image":"","rawLabel":"Add Administrator to Environment","selected":false,"missing":false,"reference":false,"value":"ADD_ADMINISTRATOR","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"label":"Add New Environment","used":false,"image":"","rawLabel":"Add New Environment","selected":false,"missing":false,"reference":false,"value":"ADD_ENVIRONMENT","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"label":"Add New Portfolio","used":false,"image":"","rawLabel":"Add New Portfolio","selected":false,"missing":false,"reference":false,"value":"ADD_PORTFOLIO","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"label":"Add Task Order to Portfolio","used":false,"image":"","rawLabel":"Add Task Order to Portfolio","selected":false,"missing":false,"reference":false,"value":"ADD_TASK_ORDER","parameters":{"name":"x_g_dis_atat_provisioning_job"}},{"label":"Update Task Order in Portfolio","used":false,"image":"","rawLabel":"Update Task Order in Portfolio","selected":false,"missing":false,"reference":false,"value":"UPDATE_TASK_ORDER","parameters":{"name":"x_g_dis_atat_provisioning_job"}}]},{"name":"Updated_1.current.sys_id","label":"Trigger - Record Updated➛ATAT:Task Order Record➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"x_g_dis_atat_task_order","column_name":"sys_id"},{"name":"bdf041c8-de2e-4884-838a-00dbeed44fd9.record","label":"2 - Create Record➛ATAT:Provisioning Job Record","reference":"x_g_dis_atat_provisioning_job","reference_display":"ATAT:Provisioning Job","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}}]</label_cache>
+        <master>true</master>
+        <name>PROV: Update Task Order</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="PROV: Update Task Order">e9b36c329741311000989fa00153afb1</parent_flow>
+        <remote_trigger_id/>
+        <run_as>system</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:33</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>9780ae879741311000989fa00153af02</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:33</sys_updated_on>
+        <type>flow</type>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=9780ae879741311000989fa00153af02"/>
+    <sys_variable_value action="delete_multiple" query="document_key=9780ae879741311000989fa00153af02"/>
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=9780ae879741311000989fa00153af02^sys_idNOT IN6780ae879741311000989fa00153af5c"/>
+    <sys_hub_trigger_instance action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="PROV: Update Task Order">9780ae879741311000989fa00153af02</flow>
+        <name>Updated</name>
+        <remote_sys_id/>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:34</sys_created_on>
+        <sys_id>6780ae879741311000989fa00153af5c</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:35</sys_updated_on>
+        <trigger_definition display_value="Updated">bb695e60c31322002841b63b12d3aea5</trigger_definition>
+        <trigger_inputs/>
+        <trigger_outputs/>
+        <trigger_type>record_update</trigger_type>
+    </sys_hub_trigger_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=6780ae879741311000989fa00153af5c"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_trigger_instance</document>
+        <document_key>6780ae879741311000989fa00153af5c</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:34</sys_created_on>
+        <sys_id>2380ae879741311000989fa00153af5e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:34</sys_updated_on>
+        <value>^EQ</value>
+        <variable display_value="Condition">bb9adea0c31322002841b63b12d3ae67</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_trigger_instance</document>
+        <document_key>6780ae879741311000989fa00153af5c</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:34</sys_created_on>
+        <sys_id>e380ae879741311000989fa00153af5e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:34</sys_updated_on>
+        <value>x_g_dis_atat_task_order</value>
+        <variable display_value="Table">1dda12e0c31322002841b63b12d3aea8</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_trigger_output_bb695e60c31322002841b63b12d3aea5^id=6780ae879741311000989fa00153af5c"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=9780ae879741311000989fa00153af02"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=9780ae879741311000989fa00153af02^sys_idNOT IN1b80ae879741311000989fa00153af03"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>9780ae879741311000989fa00153af02</id>
+        <name>PROV: Update Task Order</name>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:33</sys_created_on>
+        <sys_id>1b80ae879741311000989fa00153af03</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:33</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=1b80ae879741311000989fa00153af03"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=9780ae879741311000989fa00153af02^sys_idNOT IN2b80ae879741311000989fa00153af36,5780ae879741311000989fa00153af2e,df80ae879741311000989fa00153af04"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name,uiTypeLabel=Table Name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>200</max_length>
+        <model display_value="PROV: Update Task Order">9780ae879741311000989fa00153af02</model>
+        <model_id>9780ae879741311000989fa00153af02</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_9780ae879741311000989fa00153af02</name>
+        <next_element/>
+        <order>101</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:34</sys_created_on>
+        <sys_id>2b80ae879741311000989fa00153af36</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:34</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>child_label=FDChangeDetails,child_name=FDChangeDetails,child_type=object,child_type_label=Object,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,pwd2droppable=true,uiType=array.object,uiTypeLabel=Array.Object</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>changed_fields</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Changed Fields</label>
+        <mandatory>false</mandatory>
+        <max_length>4000</max_length>
+        <model display_value="PROV: Update Task Order">9780ae879741311000989fa00153af02</model>
+        <model_id>9780ae879741311000989fa00153af02</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_9780ae879741311000989fa00153af02</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:34</sys_created_on>
+        <sys_id>5780ae879741311000989fa00153af2e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:34</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=document_id,uiTypeLabel=Document ID</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent>table_name</dependent>
+        <dependent_on_field>table_name</dependent_on_field>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">document_id</internal_type>
+        <label>Record</label>
+        <mandatory>true</mandatory>
+        <max_length>200</max_length>
+        <model display_value="PROV: Update Task Order">9780ae879741311000989fa00153af02</model>
+        <model_id>9780ae879741311000989fa00153af02</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_9780ae879741311000989fa00153af02</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:33</sys_created_on>
+        <sys_id>df80ae879741311000989fa00153af04</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:33</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>true</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_output action="delete_multiple" query="model=9780ae879741311000989fa00153af02"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=9780ae879741311000989fa00153af02"/>
+    <sys_hub_action_instance action="delete_multiple" query="flow=9780ae879741311000989fa00153af02^sys_idNOT IN6b80ae879741311000989fa00153af52,e780ae879741311000989fa00153af5a"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Create Record">2de05916c31332002841b63b12d3aee1</action_type>
+        <action_type_parent display_value="Create Record">02f0b88cc3c632002841b63b12d3aeff</action_type_parent>
+        <comment/>
+        <display_text/>
+        <flow display_value="PROV: Update Task Order">9780ae879741311000989fa00153af02</flow>
+        <order>2</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:34</sys_created_on>
+        <sys_id>6b80ae879741311000989fa00153af52</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:34</sys_updated_on>
+        <ui_id>bdf041c8-de2e-4884-838a-00dbeed44fd9</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=6b80ae879741311000989fa00153af52"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>6b80ae879741311000989fa00153af52</document_key>
+        <order>0</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:34</sys_created_on>
+        <sys_id>6f80ae879741311000989fa00153af54</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:34</sys_updated_on>
+        <value>x_g_dis_atat_provisioning_job</value>
+        <variable display_value="Table">61e05916c31332002841b63b12d3aee4</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=6b80ae879741311000989fa00153af52"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>table_name</field>
+        <id>6b80ae879741311000989fa00153af52</id>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:34</sys_created_on>
+        <sys_id>2780ae879741311000989fa00153af54</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:34</sys_updated_on>
+        <table>var__m_sys_hub_action_input_2de05916c31332002841b63b12d3aee1</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>values</field>
+        <id>6b80ae879741311000989fa00153af52</id>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:34</sys_created_on>
+        <sys_id>eb80ae879741311000989fa00153af54</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:34</sys_updated_on>
+        <table>var__m_sys_hub_action_input_2de05916c31332002841b63b12d3aee1</table>
+        <value>status=NOT_STARTED^hoth_job_id={{flow_variable.hoth_job_id}}^task_order={{Updated_1.current}}^title={{Updated_1.current.task_order_number}}^payload=fd-scripted</value>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=6b80ae879741311000989fa00153af52^sys_idNOT INeb80ae879741311000989fa00153af53"/>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <input_name>values</input_name>
+        <instance>6b80ae879741311000989fa00153af52</instance>
+        <referenced_table>sys_hub_action_instance</referenced_table>
+        <script>{"payload":{"scriptActive":true,"script":"/*\n**Access Flow/Action data using the fd_data object. Script must return a value.\n**example: var shortDesc \u003d fd_data.trigger.current.short_description;\n**return shortDesc;\n*/\nvar taskOrder \u003d fd_data.trigger.current;\nvar targetCspName \u003d fd_data.trigger.current.portfolio.csp.name;\nvar hoth \u003d new HothProvisioning(portfolio);\nreturn hoth.createUpdateTaskOrderPayload(fd_data.flow_var.hoth_job_id, targetCspName, taskOrder.sys_id);","savedValue":""}}</script>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:34</sys_created_on>
+        <sys_id>eb80ae879741311000989fa00153af53</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:34</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=6b80ae879741311000989fa00153af52"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Log">5bc1bcc6531003003bf1d9109ec587d4</action_type>
+        <action_type_parent display_value="Log">0e0ae8c2531003003bf1d9109ec587c8</action_type_parent>
+        <comment/>
+        <display_text/>
+        <flow display_value="PROV: Update Task Order">9780ae879741311000989fa00153af02</flow>
+        <order>3</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:34</sys_created_on>
+        <sys_id>e780ae879741311000989fa00153af5a</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:34</sys_updated_on>
+        <ui_id>5a2348c8-81ae-42d0-9e68-b63c67ce0870</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=e780ae879741311000989fa00153af5a"/>
+    <sys_element_mapping action="delete_multiple" query="id=e780ae879741311000989fa00153af5a"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>log_message</field>
+        <id>e780ae879741311000989fa00153af5a</id>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:34</sys_created_on>
+        <sys_id>2380ae879741311000989fa00153af5c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:34</sys_updated_on>
+        <table>var__m_sys_hub_action_input_5bc1bcc6531003003bf1d9109ec587d4</table>
+        <value>{{bdf041c8-de2e-4884-838a-00dbeed44fd9.record.sys_id}}{{bdf041c8-de2e-4884-838a-00dbeed44fd9.record.job_type}}{{Updated_1.current.task_order_number}}{{Updated_1.current.sys_id}}</value>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=e780ae879741311000989fa00153af5a^sys_idNOT IN2780ae879741311000989fa00153af5b,2b80ae879741311000989fa00153af5b"/>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>false</active>
+        <input_name>log_level</input_name>
+        <instance>e780ae879741311000989fa00153af5a</instance>
+        <referenced_table>sys_hub_action_instance</referenced_table>
+        <script>{"log_level":{"scriptActive":false}}</script>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:34</sys_created_on>
+        <sys_id>2780ae879741311000989fa00153af5b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:34</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>false</active>
+        <input_name>log_message</input_name>
+        <instance>e780ae879741311000989fa00153af5a</instance>
+        <referenced_table>sys_hub_action_instance</referenced_table>
+        <script>{"log_message":{"scriptActive":false}}</script>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:34</sys_created_on>
+        <sys_id>2b80ae879741311000989fa00153af5b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:34</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=e780ae879741311000989fa00153af5a"/>
+    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=9780ae879741311000989fa00153af02"/>
+    <sys_hub_flow_logic action="delete_multiple" query="flow=9780ae879741311000989fa00153af02^sys_idNOT INab80ae879741311000989fa00153af49"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">b4f5c9fe9781311000989fa00153afaa</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="PROV: Update Task Order">9780ae879741311000989fa00153af02</flow>
+        <flow_variable/>
+        <flow_variables_assigned>hoth_job_id</flow_variables_assigned>
+        <inputs/>
+        <logic_definition display_value="Set Flow Variables">4f787d1e0f9b0010ecf0cc52ff767ea0</logic_definition>
+        <order>1</order>
+        <outputs_assigned/>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:34</sys_created_on>
+        <sys_id>ab80ae879741311000989fa00153af49</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:34</sys_updated_on>
+        <ui_id>4f599d84-a1bd-4b5c-8ae0-1ef5b971d1a6</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=ab80ae879741311000989fa00153af49"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_variable_9780ae879741311000989fa00153af02^id=ab80ae879741311000989fa00153af49"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=ab80ae879741311000989fa00153af49"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=ab80ae879741311000989fa00153af49^sys_idNOT IN6f80ae879741311000989fa00153af4a"/>
+    <sys_hub_input_scripts action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <input_name>hoth_job_id</input_name>
+        <instance>ab80ae879741311000989fa00153af49</instance>
+        <referenced_table>sys_hub_flow_logic</referenced_table>
+        <script>{"hoth_job_id":{"scriptActive":true,"script":"return gs.generateGUID();"}}</script>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:34</sys_created_on>
+        <sys_id>6f80ae879741311000989fa00153af4a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:34</sys_updated_on>
+    </sys_hub_input_scripts>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=9780ae879741311000989fa00153af02"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=9780ae879741311000989fa00153af02^sys_idNOT IN6380ae879741311000989fa00153af44"/>
+    <sys_hub_flow_variable action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=e0157fa6-7031-4bc4-9501-9e5953fefdb8</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>hoth_job_id</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>HOTH Job ID</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="PROV: Update Task Order">9780ae879741311000989fa00153af02</model>
+        <model_id>9780ae879741311000989fa00153af02</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_variable_9780ae879741311000989fa00153af02</name>
+        <next_element/>
+        <order>0</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_variable</sys_class_name>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:34</sys_created_on>
+        <sys_id>6380ae879741311000989fa00153af44</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>HOTH Job ID</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_hub_flow_variable_6380ae879741311000989fa00153af44</sys_update_name>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:34</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_variable>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_9780ae879741311000989fa00153af02^sys_idNOT IN2380ae879741311000989fa00153af3b,9780ae879741311000989fa00153af2a,ef80ae879741311000989fa00153af32"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_9780ae879741311000989fa00153af02</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:34</sys_created_on>
+        <sys_id>2380ae879741311000989fa00153af3b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:34</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>Record</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_9780ae879741311000989fa00153af02</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:34</sys_created_on>
+        <sys_id>9780ae879741311000989fa00153af2a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:34</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>changed_fields</element>
+        <help/>
+        <hint/>
+        <label>Changed Fields</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_9780ae879741311000989fa00153af02</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>xander.keele</sys_created_by>
+        <sys_created_on>2023-09-07 20:42:34</sys_created_on>
+        <sys_id>ef80ae879741311000989fa00153af32</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 20:42:34</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_9780ae879741311000989fa00153af02"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_9780ae879741311000989fa00153af02"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_9780ae879741311000989fa00153af02"/>
+    <sys_hub_flow action="UPDATE">
+        <sys_id>e9b36c329741311000989fa00153afb1</sys_id>
+        <latest_snapshot>9780ae879741311000989fa00153af02</latest_snapshot>
+        <compiler_build/>
+    </sys_hub_flow>
 </record_update>
