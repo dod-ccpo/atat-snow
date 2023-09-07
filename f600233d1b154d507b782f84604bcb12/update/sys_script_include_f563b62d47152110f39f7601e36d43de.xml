@@ -13,7 +13,7 @@ following locations:&#13;
 - PROV: Queue Initial Portfolio Provisioning Job (action)&#13;
 </description>
         <name>HothProvisioning</name>
-        <script><![CDATA[var HothProvisioning = Class.create();
+        <script><![CDATA[const HothProvisioning = Class.create();
 HothProvisioning.prototype = {
 	PORTFOLIO_TABLE: "x_g_dis_atat_portfolio",
 	TASK_ORDER_TABLE: "x_g_dis_atat_task_order",
@@ -34,7 +34,7 @@ HothProvisioning.prototype = {
 			this.portfolio = portfolioRecord;
 		}
 	},
-	
+
 	/**
    * Truncates the days from Date Strings. Temporarily needed because of a mistaken change in the ATAT 1.1.0 specification.
    *
@@ -57,7 +57,7 @@ HothProvisioning.prototype = {
    * @return {string} HOTH-formatted Date
    */
 	convertClassificationToHothFormat: function(snowClassification) {
-		var classificationMap = {
+		const classificationMap = {
 			U: "UNCLASSIFIED",
 			S: "SECRET",
 			TS: "TOP_SECRET"
@@ -72,7 +72,7 @@ HothProvisioning.prototype = {
    * @return {string} SNOW-formatted Date
    */	
 	convertClassificationToSnowFormat: function(hothClassification) {
-		var classificationMap = {
+		const classificationMap = {
 			"UNCLASSIFIED" : "U",
 			"SECRET": "S",
 			"TOP_SECRET": "TS"
@@ -88,14 +88,10 @@ HothProvisioning.prototype = {
    */
 	getClins: function(taskOrderSysId) {
 		try {
-			var clinTableFields = [
-				"clin_number", "pop_start_date", "pop_end_date", "classification_level", "type", 
-			];
-			
-			var scope = this;
-			
-			var clins = [];
-			var clinRecord = new GlideRecord(this.CLIN_TABLE);
+			const scope = this;
+
+			let clins = [];
+			const clinRecord = new GlideRecord(this.CLIN_TABLE);
 			clinRecord.addQuery("task_order", taskOrderSysId);
 			clinRecord.query();
 			while (clinRecord.hasNext()) {
@@ -133,14 +129,14 @@ HothProvisioning.prototype = {
    */
 	getTaskOrders: function() {
 		try {
-			var taskOrders = [];
-			var taskOrderRecords = new GlideRecord(this.TASK_ORDER_TABLE);
+			let taskOrders = [];
+			const taskOrderRecords = new GlideRecord(this.TASK_ORDER_TABLE);
 			taskOrderRecords.addQuery("portfolio", this.portfolio.sys_id.toString());
 			taskOrderRecords.query();
-			
+
 			while (taskOrderRecords.next()) {
 				// Get Task Order CLINs
-				var taskOrderClins = this.getClins(taskOrderRecords.sys_id.toString());		
+				const taskOrderClins = this.getClins(taskOrderRecords.sys_id.toString());		
 
 				// Gather Task Orders for a given Portfolio
 				taskOrders.push({
@@ -159,14 +155,45 @@ HothProvisioning.prototype = {
 			);
 		}
 	},
+
 	/**
-   * Construct a request to provision a Portfolio using the HOTH API.
+   * Get Task Order with a provided TaskOrderNumber
    *
-   * @param {string} hothId - a GUID generated within ServiceNow for the provisioning job
-   * @param {string} targetCsp - a GUID generated within ServiceNow
-   * @param {string} operation - the provisioning operation (e.g., ADD_ENVIRONMENT)
-   * @return {Object} an object for provisioning a portfolio
+   * @param {string} taskOrderSysId
+   * @return {Object[]} an array of task orders 
    */
+	getTaskOrder: function(taskOrderSysId) {
+		try {
+			const taskOrderRecord = new GlideRecord(this.TASK_ORDER_TABLE);
+			taskOrderRecord.get(taskOrderSysId);
+			if (taskOrderRecord !== undefined) {
+				// Get Task Order CLINs
+				const taskOrderClins = this.getClins(taskOrderSysId);		
+
+				// Gather Task Orders for a given Portfolio
+				return {
+					taskOrderNumber: taskOrderRecord.task_order_number.toString(),
+					popStartDate: this.truncateDayFromDate(taskOrderRecord.pop_start_date.toString()),
+					popEndDate: this.truncateDayFromDate(taskOrderRecord.pop_end_date.toString()),
+					clins: taskOrderClins,
+				};
+			}
+		} catch (error) {
+			throw this.errUtil.createError(
+				"HothProvisioning --> getTaskOrder(): " + error,
+				this.errUtil.METHOD_ERROR
+			);
+		}
+	},
+
+	/**
+  * Construct a request to provision a Portfolio using the HOTH API.
+  *
+  * @param {string} hothId - a GUID generated within ServiceNow for the provisioning job
+  * @param {string} targetCsp - the CSP being targeted for this provision request
+  * @return {Object} an object for provisioning a portfolio
+  * 
+  */
 	createAddPortfolioPayload: function(hothId, targetCsp) {
 		try {
 			if (!hothId || !targetCsp) {
@@ -175,8 +202,8 @@ HothProvisioning.prototype = {
 					this.errUtil.INVALID_INPUT
 				);
 			}
-		
-			var taskOrders = this.getTaskOrders(this.portfolio.sys_id.toString());
+
+			const taskOrders = this.getTaskOrders(this.portfolio.sys_id.toString());
 
 			return {
 				jobId: hothId,
@@ -190,7 +217,7 @@ HothProvisioning.prototype = {
 			};
 
 		} catch (error) {
-			var errorMessage = "Error creating an Add Portfolio payload. " + error;
+			const errorMessage = "Error creating an Add Portfolio payload. " + error;
 			this.errUtil.createError(
 				errorMessage,
 				this.errUtil.INVALID_INPUT
@@ -203,6 +230,7 @@ HothProvisioning.prototype = {
    *
    * @param {string} environmentRecord - the Environment being provisioned
    * @return {Object} a valid ADD_ENVIRONMENT Provisioning Job Payload
+   * 
    */
 	createAddEnvironmentPayload: function(environmentRecord) {
 		if (!environmentRecord) {
@@ -212,9 +240,9 @@ HothProvisioning.prototype = {
 			);
 		}
 
-		var scope = this;
-		var hothClassificationLevel = this.convertClassificationToHothFormat(environmentRecord.classification_level.toString());
-		var jobPayload = {
+		const scope = this;
+		const hothClassificationLevel = this.convertClassificationToHothFormat(environmentRecord.classification_level.toString());
+		const jobPayload = {
 			jobId: gs.generateGUID(),
 			userId: this.portfolio.portfolio_managers ? this.portfolio.portfolio_managers.split(",")[0] : "",
 			operationType: "ADD_ENVIRONMENT",
@@ -227,7 +255,7 @@ HothProvisioning.prototype = {
 				administrators: environmentRecord.pending_operators ? 
 				environmentRecord.pending_operators.toString().split(",")
 				.map(function (operatorSysId) {
-					var record = new GlideRecord(scope.OPERATOR_TABLE);
+					const record = new GlideRecord(scope.OPERATOR_TABLE);
 					record.get(operatorSysId);
 					return {
 						email: record.email.toString(),
@@ -243,19 +271,68 @@ HothProvisioning.prototype = {
 		return jobPayload;
 	},	
 
+	/**
+  * Construct a request to update a TaskOrder using the HOTH API.
+  *
+  * @param {string} hothId - a GUID generated within ServiceNow for the provisioning job
+  * @param {string} targetCsp - the CSP being targeted for this provision request
+  * @param {string} taskOrderSysId - the sys_id of the task order record within ServiceNow
+  * @param {string} taskOrderCSPId - the id of the task order in the CSP system
+  * @return {Object} an object for updating a task order
+  * 
+  */
+	createUpdateTaskOrderPayload: function(hothId, targetCsp, taskOrderSysId) {
+		try {
+			if (!hothId || !targetCsp) {
+				throw this.errUtil.createError(
+					"hothId and targetCsp must be provided.",
+					this.errUtil.INVALID_INPUT
+				);
+			}
+
+			const taskOrder = this.getTaskOrder(taskOrderSysId.toString());
+			gs.info("createUpdateTaskOrderPayload => " + JSON.stringify(taskOrder));
+// 			if (!taskOrder.csp_id) {
+// 				throw this.errUtil.createError(
+// 					"taskOrder must have a valid CSP ID to update.",
+// 					this.errUtil.INVALID_INPUT
+// 				);
+// 			}
+
+			return {
+				jobId: hothId,
+				userId: this.portfolio.portfolio_managers ? this.portfolio.portfolio_managers.split(",")[0] : "",
+				operationType: "UPDATE_TASK_ORDER",
+				targetCspName: targetCsp.toString(), 
+				payload: {
+					portfolioId: this.portfolio.csp_id ? this.portfolio.csp_id.toString() : "",
+					taskOrderId: taskOrder.csp_id ? taskOrder.csp_id.toString() : "",
+					taskOrder: taskOrder,
+				},
+			};
+
+		} catch (error) {
+			const errorMessage = "Error creating an Update TaskOrder payload. " + error;
+			this.errUtil.createError(
+				errorMessage,
+				this.errUtil.INVALID_INPUT
+			);
+		}
+	},
+
 	type: 'HothProvisioning'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-28 20:22:38</sys_created_on>
         <sys_id>f563b62d47152110f39f7601e36d43de</sys_id>
-        <sys_mod_count>48</sys_mod_count>
+        <sys_mod_count>62</sys_mod_count>
         <sys_name>HothProvisioning</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_f563b62d47152110f39f7601e36d43de</sys_update_name>
-        <sys_updated_by>1370228783.CTR</sys_updated_by>
-        <sys_updated_on>2023-04-05 15:42:39</sys_updated_on>
+        <sys_updated_by>xander.keele</sys_updated_by>
+        <sys_updated_on>2023-09-07 22:36:40</sys_updated_on>
     </sys_script_include>
 </record_update>
