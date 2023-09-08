@@ -15,323 +15,321 @@ following locations:&#13;
         <name>HothProvisioning</name>
         <script><![CDATA[const HothProvisioning = Class.create();
 HothProvisioning.prototype = {
-	PORTFOLIO_TABLE: "x_g_dis_atat_portfolio",
-	TASK_ORDER_TABLE: "x_g_dis_atat_task_order",
-	OPERATOR_TABLE: "x_g_dis_atat_operator",
-	CLIN_TABLE: "x_g_dis_atat_clin",
+    PORTFOLIO_TABLE: "x_g_dis_atat_portfolio",
+    TASK_ORDER_TABLE: "x_g_dis_atat_task_order",
+    OPERATOR_TABLE: "x_g_dis_atat_operator",
+    CLIN_TABLE: "x_g_dis_atat_clin",
 
-	portfolio: null,
-	errUtil: new ErrorHandler(),
+    portfolio: null,
+    errUtil: new ErrorHandler(),
 
-	initialize: function(portfolioRecord) {
-		if (!portfolioRecord) {
-			throw this.errUtil.createError(
-				"Portfolio must not be null.",
-				this.errUtil.INVALID_INPUT
-			);
-		}
-		else {
-			this.portfolio = portfolioRecord;
-		}
-	},
+    initialize: function(portfolioRecord) {
+        if (!portfolioRecord) {
+            throw this.errUtil.createError(
+                "Portfolio must not be null.",
+                this.errUtil.INVALID_INPUT
+            );
+        } else {
+            this.portfolio = portfolioRecord;
+        }
+    },
 
-	/**
-   * Truncates the days from Date Strings. Temporarily needed because of a mistaken change in the ATAT 1.1.0 specification.
-   *
-   * @param {string} YYYY-MM-DD formatted Date String
-   * @return {string} YYYY-MM formatted Date String
-   */	
-	truncateDayFromDate: function(date) {
-		if (date && date.length >= 7) {
-			return date.substring(0,7);
-		}
-		else {
-			return date;
-		}
-	},
+    /**
+     * Truncates the days from Date Strings. Temporarily needed because of a mistaken change in the ATAT 1.1.0 specification.
+     *
+     * @param {string} YYYY-MM-DD formatted Date String
+     * @return {string} YYYY-MM formatted Date String
+     */
+    truncateDayFromDate: function(date) {
+        if (date && date.length >= 7) {
+            return date.substring(0, 7);
+        } else {
+            return date;
+        }
+    },
 
-	/**
-   * Converts a SNOW-formatted Date into a HOTH-formatted Date
-   *
-   * @param {string} snowClassification
-   * @return {string} HOTH-formatted Date
-   */
-	convertClassificationToHothFormat: function(snowClassification) {
-		const classificationMap = {
-			U: "UNCLASSIFIED",
-			S: "SECRET",
-			TS: "TOP_SECRET"
-		};
-		return classificationMap[snowClassification];		
-	},
+    /**
+     * Converts a SNOW-formatted Date into a HOTH-formatted Date
+     *
+     * @param {string} snowClassification
+     * @return {string} HOTH-formatted Date
+     */
+    convertClassificationToHothFormat: function(snowClassification) {
+        const classificationMap = {
+            U: "UNCLASSIFIED",
+            S: "SECRET",
+            TS: "TOP_SECRET"
+        };
+        return classificationMap[snowClassification];
+    },
 
-	/**
-   * Converts a HOTH-formatted Date into a SNOW-formatted Date
-   *
-   * @param {string} hothClassification
-   * @return {string} SNOW-formatted Date
-   */	
-	convertClassificationToSnowFormat: function(hothClassification) {
-		const classificationMap = {
-			"UNCLASSIFIED" : "U",
-			"SECRET": "S",
-			"TOP_SECRET": "TS"
-		};
-		return classificationMap[hothClassification];
-	},	
+    /**
+     * Converts a HOTH-formatted Date into a SNOW-formatted Date
+     *
+     * @param {string} hothClassification
+     * @return {string} SNOW-formatted Date
+     */
+    convertClassificationToSnowFormat: function(hothClassification) {
+        const classificationMap = {
+            "UNCLASSIFIED": "U",
+            "SECRET": "S",
+            "TOP_SECRET": "TS"
+        };
+        return classificationMap[hothClassification];
+    },
 
-	/**
-   * Get all CLINs associated with a Task Order
-   *
-   * @param {string} taskOrderSysId
-   * @return {Object[]} an array of CLINs
-   */
-	getClins: function(taskOrderSysId) {
-		try {
-			const scope = this;
+    /**
+     * Get all CLINs associated with a Task Order
+     *
+     * @param {string} taskOrderSysId
+     * @return {Object[]} an array of CLINs
+     */
+    getClins: function(taskOrderSysId) {
+        try {
+            const scope = this;
 
-			let clins = [];
-			const clinRecord = new GlideRecord(this.CLIN_TABLE);
-			clinRecord.addQuery("task_order", taskOrderSysId);
-			clinRecord.query();
-			while (clinRecord.hasNext()) {
-				clinRecord.next();
-				clins.push({
-					clin_number: clinRecord.clin_number.toString(),
-					pop_start_date: clinRecord.pop_start_date.toString(),
-					pop_end_date: clinRecord.pop_end_date.toString(),
-					classification_level: clinRecord.classification_level.toString(),
-					type: clinRecord.type.toString()
-				});
-			}
-			return clins.map(removeSysId)
-				.map(function(clin) {				
-				clin.classification_level = scope.convertClassificationToHothFormat(clin.classification_level);
-				// START DATE FIX
-				// REMOVE THIS (once we add days back to the CLIN date format in the ATAT spec)
-				clin.pop_start_date = scope.truncateDayFromDate(clin.pop_start_date);				
-				clin.pop_end_date = scope.truncateDayFromDate(clin.pop_end_date);
-				// END DATE FIX
-				return clin;
-			});
-		} catch (error) {
-			throw this.errUtil.createError(
-				"HothProvisioning --> getClins(): " + error,
-				this.errUtil.METHOD_ERROR
-			);
-		}
-	},
+            let clins = [];
+            const clinRecord = new GlideRecord(this.CLIN_TABLE);
+            clinRecord.addQuery("task_order", taskOrderSysId);
+            clinRecord.query();
+            while (clinRecord.hasNext()) {
+                clinRecord.next();
+                clins.push({
+                    clin_number: clinRecord.clin_number.toString(),
+                    pop_start_date: clinRecord.pop_start_date.toString(),
+                    pop_end_date: clinRecord.pop_end_date.toString(),
+                    classification_level: clinRecord.classification_level.toString(),
+                    type: clinRecord.type.toString()
+                });
+            }
+            return clins.map(removeSysId)
+                .map(function(clin) {
+                    clin.classification_level = scope.convertClassificationToHothFormat(clin.classification_level);
+                    // START DATE FIX
+                    // REMOVE THIS (once we add days back to the CLIN date format in the ATAT spec)
+                    clin.pop_start_date = scope.truncateDayFromDate(clin.pop_start_date);
+                    clin.pop_end_date = scope.truncateDayFromDate(clin.pop_end_date);
+                    // END DATE FIX
+                    return clin;
+                });
+        } catch (error) {
+            throw this.errUtil.createError(
+                "HothProvisioning --> getClins(): " + error,
+                this.errUtil.METHOD_ERROR
+            );
+        }
+    },
 
-	/**
-   * Get all Task Orders associated with a Portfolio
-   *
-   * @return {Object[]} an array of task orders 
-   */
-	getTaskOrders: function() {
-		try {
-			let taskOrders = [];
-			const taskOrderRecords = new GlideRecord(this.TASK_ORDER_TABLE);
-			taskOrderRecords.addQuery("portfolio", this.portfolio.sys_id.toString());
-			taskOrderRecords.query();
+    /**
+     * Get all Task Orders associated with a Portfolio
+     *
+     * @return {Object[]} an array of task orders 
+     */
+    getTaskOrders: function() {
+        try {
+            let taskOrders = [];
+            const taskOrderRecords = new GlideRecord(this.TASK_ORDER_TABLE);
+            taskOrderRecords.addQuery("portfolio", this.portfolio.sys_id.toString());
+            taskOrderRecords.query();
 
-			while (taskOrderRecords.next()) {
-				// Get Task Order CLINs
-				const taskOrderClins = this.getClins(taskOrderRecords.sys_id.toString());		
+            while (taskOrderRecords.next()) {
+                // Get Task Order CLINs
+                const taskOrderClins = this.getClins(taskOrderRecords.sys_id.toString());
 
-				// Gather Task Orders for a given Portfolio
-				taskOrders.push({
-					taskOrderNumber: taskOrderRecords.task_order_number.toString(),
-					popStartDate: this.truncateDayFromDate(taskOrderRecords.pop_start_date.toString()),
-					popEndDate: this.truncateDayFromDate(taskOrderRecords.pop_end_date.toString()),
-					clins: taskOrderClins,
-				});
-			}		
+                // Gather Task Orders for a given Portfolio
+                taskOrders.push({
+                    taskOrderNumber: taskOrderRecords.task_order_number.toString(),
+                    popStartDate: this.truncateDayFromDate(taskOrderRecords.pop_start_date.toString()),
+                    popEndDate: this.truncateDayFromDate(taskOrderRecords.pop_end_date.toString()),
+                    clins: taskOrderClins,
+                });
+            }
 
-			return taskOrders;
-		} catch (error) {
-			throw this.errUtil.createError(
-				"HothProvisioning --> getTaskOrders(): " + error,
-				this.errUtil.METHOD_ERROR
-			);
-		}
-	},
+            return taskOrders;
+        } catch (error) {
+            throw this.errUtil.createError(
+                "HothProvisioning --> getTaskOrders(): " + error,
+                this.errUtil.METHOD_ERROR
+            );
+        }
+    },
 
-	/**
-   * Get Task Order with a provided TaskOrderNumber
-   *
-   * @param {string} taskOrderSysId
-   * @return {Object[]} an array of task orders 
-   */
-	getTaskOrder: function(taskOrderSysId) {
-		try {
-			const taskOrderRecord = new GlideRecord(this.TASK_ORDER_TABLE);
-			taskOrderRecord.get(taskOrderSysId);
-			if (taskOrderRecord !== undefined) {
-				// Get Task Order CLINs
-				const taskOrderClins = this.getClins(taskOrderSysId);		
+    /**
+     * Get Task Order with a provided TaskOrderNumber
+     *
+     * @param {string} taskOrderSysId
+     * @return {Object[]} an array of task orders 
+     */
+    getTaskOrder: function(taskOrderSysId) {
+        try {
+            const taskOrderRecord = new GlideRecord(this.TASK_ORDER_TABLE);
+            taskOrderRecord.get(taskOrderSysId);
+            if (taskOrderRecord !== undefined) {
+                // Get Task Order CLINs
+                const taskOrderClins = this.getClins(taskOrderSysId);
 
-				// Gather Task Orders for a given Portfolio
-				return {
-					taskOrderNumber: taskOrderRecord.task_order_number.toString(),
-					popStartDate: this.truncateDayFromDate(taskOrderRecord.pop_start_date.toString()),
-					popEndDate: this.truncateDayFromDate(taskOrderRecord.pop_end_date.toString()),
-					clins: taskOrderClins,
-				};
-			}
-		} catch (error) {
-			throw this.errUtil.createError(
-				"HothProvisioning --> getTaskOrder(): " + error,
-				this.errUtil.METHOD_ERROR
-			);
-		}
-	},
+                // Gather Task Orders for a given Portfolio
+                return {
+                    taskOrderNumber: taskOrderRecord.task_order_number.toString(),
+                    popStartDate: this.truncateDayFromDate(taskOrderRecord.pop_start_date.toString()),
+                    popEndDate: this.truncateDayFromDate(taskOrderRecord.pop_end_date.toString()),
+                    clins: taskOrderClins,
+                    csp_id: taskOrderRecord.csp_id ? taskOrderRecord.csp_id.toString() : ""
+                };
+            }
+        } catch (error) {
+            throw this.errUtil.createError(
+                "HothProvisioning --> getTaskOrder(): " + error,
+                this.errUtil.METHOD_ERROR
+            );
+        }
+    },
 
-	/**
-  * Construct a request to provision a Portfolio using the HOTH API.
-  *
-  * @param {string} hothId - a GUID generated within ServiceNow for the provisioning job
-  * @param {string} targetCsp - the CSP being targeted for this provision request
-  * @return {Object} an object for provisioning a portfolio
-  * 
-  */
-	createAddPortfolioPayload: function(hothId, targetCsp) {
-		try {
-			if (!hothId || !targetCsp) {
-				throw this.errUtil.createError(
-					"hothId and targetCsp must be provided.",
-					this.errUtil.INVALID_INPUT
-				);
-			}
+    /**
+     * Construct a request to provision a Portfolio using the HOTH API.
+     *
+     * @param {string} hothId - a GUID generated within ServiceNow for the provisioning job
+     * @param {string} targetCsp - the CSP being targeted for this provision request
+     * @return {Object} an object for provisioning a portfolio
+     * 
+     */
+    createAddPortfolioPayload: function(hothId, targetCsp) {
+        try {
+            if (!hothId || !targetCsp) {
+                throw this.errUtil.createError(
+                    "hothId and targetCsp must be provided.",
+                    this.errUtil.INVALID_INPUT
+                );
+            }
 
-			const taskOrders = this.getTaskOrders(this.portfolio.sys_id.toString());
+            const taskOrders = this.getTaskOrders(this.portfolio.sys_id.toString());
 
-			return {
-				jobId: hothId,
-				userId: this.portfolio.portfolio_managers ? this.portfolio.portfolio_managers.split(",")[0] : "",
-				operationType: "ADD_PORTFOLIO",
-				targetCspName: targetCsp, 
-				payload: {
-					name: this.portfolio.name.toString(),
-					taskOrders: taskOrders,
-				},
-			};
+            return {
+                jobId: hothId,
+                userId: this.portfolio.portfolio_managers ? this.portfolio.portfolio_managers.split(",")[0] : "",
+                operationType: "ADD_PORTFOLIO",
+                targetCspName: targetCsp,
+                payload: {
+                    name: this.portfolio.name.toString(),
+                    taskOrders: taskOrders,
+                },
+            };
 
-		} catch (error) {
-			const errorMessage = "Error creating an Add Portfolio payload. " + error;
-			this.errUtil.createError(
-				errorMessage,
-				this.errUtil.INVALID_INPUT
-			);
-		}
-	},
+        } catch (error) {
+            const errorMessage = "Error creating an Add Portfolio payload. " + error;
+            this.errUtil.createError(
+                errorMessage,
+                this.errUtil.INVALID_INPUT
+            );
+        }
+    },
 
-	/**
-   * Construct a request to provision an Environment using the HOTH API.
-   *
-   * @param {string} environmentRecord - the Environment being provisioned
-   * @return {Object} a valid ADD_ENVIRONMENT Provisioning Job Payload
-   * 
-   */
-	createAddEnvironmentPayload: function(environmentRecord) {
-		if (!environmentRecord) {
-			throw this.errUtil.createError(
-				"Environment must not be null.",
-				this.errUtil.INVALID_INPUT
-			);
-		}
+    /**
+     * Construct a request to provision an Environment using the HOTH API.
+     *
+     * @param {string} environmentRecord - the Environment being provisioned
+     * @return {Object} a valid ADD_ENVIRONMENT Provisioning Job Payload
+     * 
+     */
+    createAddEnvironmentPayload: function(environmentRecord) {
+        if (!environmentRecord) {
+            throw this.errUtil.createError(
+                "Environment must not be null.",
+                this.errUtil.INVALID_INPUT
+            );
+        }
 
-		const scope = this;
-		const hothClassificationLevel = this.convertClassificationToHothFormat(environmentRecord.classification_level.toString());
-		const jobPayload = {
-			jobId: gs.generateGUID(),
-			userId: this.portfolio.portfolio_managers ? this.portfolio.portfolio_managers.split(",")[0] : "",
-			operationType: "ADD_ENVIRONMENT",
-			targetCspName: environmentRecord.csp.name.toString(), 
-			portfolioId: this.portfolio.csp_id.toString(),
-			payload: {
-				name: environmentRecord.name.toString(),				
-				classificationLevel: hothClassificationLevel,
-				cloudDistinguisher: environmentRecord.csp.cloud_distinguisher ? JSON.parse(environmentRecord.csp.cloud_distinguisher) : null,
-				administrators: environmentRecord.pending_operators ? 
-				environmentRecord.pending_operators.toString().split(",")
-				.map(function (operatorSysId) {
-					const record = new GlideRecord(scope.OPERATOR_TABLE);
-					record.get(operatorSysId);
-					return {
-						email: record.email.toString(),
-						dodId: record.dod_id.toString()				
-					};
-				})
-				: null
-			},
-		};
-		if (environmentRecord.csp.cloudDistinguisher) {
-			jobPayload.payload.cloudDistinguisher = environmentRecord.csp.cloudDistinguisher;
-		}
-		return jobPayload;
-	},	
+        const scope = this;
+        const hothClassificationLevel = this.convertClassificationToHothFormat(environmentRecord.classification_level.toString());
+        const jobPayload = {
+            jobId: gs.generateGUID(),
+            userId: this.portfolio.portfolio_managers ? this.portfolio.portfolio_managers.split(",")[0] : "",
+            operationType: "ADD_ENVIRONMENT",
+            targetCspName: environmentRecord.csp.name.toString(),
+            portfolioId: this.portfolio.csp_id.toString(),
+            payload: {
+                name: environmentRecord.name.toString(),
+                classificationLevel: hothClassificationLevel,
+                cloudDistinguisher: environmentRecord.csp.cloud_distinguisher ? JSON.parse(environmentRecord.csp.cloud_distinguisher) : null,
+                administrators: environmentRecord.pending_operators ?
+                    environmentRecord.pending_operators.toString().split(",")
+                    .map(function(operatorSysId) {
+                        const record = new GlideRecord(scope.OPERATOR_TABLE);
+                        record.get(operatorSysId);
+                        return {
+                            email: record.email.toString(),
+                            dodId: record.dod_id.toString()
+                        };
+                    }) :
+                    null
+            },
+        };
+        if (environmentRecord.csp.cloudDistinguisher) {
+            jobPayload.payload.cloudDistinguisher = environmentRecord.csp.cloudDistinguisher;
+        }
+        return jobPayload;
+    },
 
-	/**
-  * Construct a request to update a TaskOrder using the HOTH API.
-  *
-  * @param {string} hothId - a GUID generated within ServiceNow for the provisioning job
-  * @param {string} targetCsp - the CSP being targeted for this provision request
-  * @param {string} taskOrderSysId - the sys_id of the task order record within ServiceNow
-  * @return {Object} an object for updating a task order
-  * 
-  */
-	createUpdateTaskOrderPayload: function(hothId, targetCsp, taskOrderSysId) {
-		try {
-			if (!hothId || !targetCsp) {
-				throw this.errUtil.createError(
-					"hothId and targetCsp must be provided.",
-					this.errUtil.INVALID_INPUT
-				);
-			}
+    /**
+     * Construct a request to update a TaskOrder using the HOTH API.
+     *
+     * @param {string} hothId - a GUID generated within ServiceNow for the provisioning job
+     * @param {string} targetCsp - the CSP being targeted for this provision request
+     * @param {string} taskOrderSysId - the sys_id of the task order record within ServiceNow
+     * @return {Object} an object for updating a task order
+     * 
+     */
+    createUpdateTaskOrderPayload: function(hothId, targetCsp, taskOrderSysId) {
+        try {
+            if (!hothId || !targetCsp) {
+                throw this.errUtil.createError(
+                    "hothId and targetCsp must be provided.",
+                    this.errUtil.INVALID_INPUT
+                );
+            }
 
-			const taskOrder = this.getTaskOrder(taskOrderSysId.toString());
-			gs.info("createUpdateTaskOrderPayload => " + JSON.stringify(taskOrder));
-			if (!taskOrder.csp_id) {
-				throw this.errUtil.createError(
-					"taskOrder must have a valid CSP ID to update.",
-					this.errUtil.INVALID_INPUT
-				);
-			}
+            const taskOrder = this.getTaskOrder(taskOrderSysId.toString());
+            if (!taskOrder.csp_id) {
+                throw this.errUtil.createError(
+                    "taskOrder must have a valid CSP ID to update.",
+                    this.errUtil.INVALID_INPUT
+                );
+            }
 
-			return {
-				jobId: hothId,
-				userId: this.portfolio.portfolio_managers ? this.portfolio.portfolio_managers.split(",")[0] : "",
-				operationType: "UPDATE_TASK_ORDER",
-				targetCspName: targetCsp.toString(), 
-				payload: {
-					portfolioId: this.portfolio.csp_id ? this.portfolio.csp_id.toString() : "",
-					taskOrderId: taskOrder.csp_id ? taskOrder.csp_id.toString() : "",
-					taskOrder: taskOrder,
-				},
-			};
+            return {
+                jobId: hothId,
+                userId: this.portfolio.portfolio_managers ? this.portfolio.portfolio_managers.split(",")[0] : "",
+                operationType: "UPDATE_TASK_ORDER",
+                targetCspName: targetCsp.toString(),
+                portfolioId: this.portfolio.csp_id ? this.portfolio.csp_id.toString() : "",
+                payload: {
+                    taskOrderId: taskOrder.csp_id ? taskOrder.csp_id.toString() : "",
+                    taskOrder: taskOrder,
+                },
+            };
 
-		} catch (error) {
-			const errorMessage = "Error creating an Update TaskOrder payload. " + error;
-			this.errUtil.createError(
-				errorMessage,
-				this.errUtil.INVALID_INPUT
-			);
-		}
-	},
+        } catch (error) {
+            const errorMessage = "Error creating an Update TaskOrder payload. " + error;
+            this.errUtil.createError(
+                errorMessage,
+                this.errUtil.INVALID_INPUT
+            );
+        }
+    },
 
-	type: 'HothProvisioning'
+    type: 'HothProvisioning'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>julius.fitzhugh-ctr</sys_created_by>
         <sys_created_on>2023-02-28 20:22:38</sys_created_on>
         <sys_id>f563b62d47152110f39f7601e36d43de</sys_id>
-        <sys_mod_count>63</sys_mod_count>
+        <sys_mod_count>67</sys_mod_count>
         <sys_name>HothProvisioning</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_f563b62d47152110f39f7601e36d43de</sys_update_name>
-        <sys_updated_by>xander.keele</sys_updated_by>
-        <sys_updated_on>2023-09-07 22:52:24</sys_updated_on>
+        <sys_updated_by>1609291318.CTR</sys_updated_by>
+        <sys_updated_on>2023-09-08 17:51:52</sys_updated_on>
     </sys_script_include>
 </record_update>
