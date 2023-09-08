@@ -398,6 +398,9 @@ Eda.prototype = {
                 if (clinData.obligatedAmount) {
                     clinGlideRecords.setValue("funds_obligated", clinData.obligatedAmount);
                 }
+				if(clinData.totalAmount){
+					grClin.setValue("funds_total",clinData.totalAmount);
+				}
                 clinGlideRecords.setValue("pop_start_date", clinData.popStartDate);
                 clinGlideRecords.setValue("pop_end_date", clinData.popEndDate);
                 clinGlideRecords.setValue('active', true);
@@ -417,6 +420,9 @@ Eda.prototype = {
         if (clinData.obligatedAmount) {
             grClin.setValue("funds_obligated", clinData.obligatedAmount);
         }
+		if(clinData.totalAmount){
+			grClin.setValue("funds_total",clinData.totalAmount);
+		}
         grClin.setValue("pop_start_date", clinData.popStartDate);
         grClin.setValue("pop_end_date", clinData.popEndDate);
         return grClin.insert();
@@ -470,9 +476,10 @@ Eda.prototype = {
         }).forEach(function(lineItem) {
             clinData[lineItem.LineItemIdentifier.DFARS.LineItem.LineItemBase] = {
                 popStartDate: lineItem.LineItemDates.LineItemPeriod.PeriodStart.DateElement,
-                popEndDate: lineItem.LineItemDates.LineItemPeriod.PeriodEnd.DateElement
+                popEndDate: lineItem.LineItemDates.LineItemPeriod.PeriodEnd.DateElement,
+				totalAmount: lineItem.LineItemAmounts.ItemOtherAmounts.Amount
             };
-        });
+		});
         // Next, gather Obligated Amount from "INFOSLIN" entries
         instrument.ContractLineItems.LineItems.filter(function(lineItem) {
             return lineItem.LineItemIdentifier.DFARS.LineItem.LineItemType == "INFOSLIN";
