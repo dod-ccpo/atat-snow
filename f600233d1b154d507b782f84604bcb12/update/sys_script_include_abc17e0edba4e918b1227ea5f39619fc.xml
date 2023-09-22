@@ -354,7 +354,6 @@ Eda.prototype = {
             taskOrderRecord.update();
         }
 
-
         taskOrderRecord.setValue("pop_start_date", taskOrder.popStartDate);
         taskOrderRecord.setValue("pop_end_date", taskOrder.popEndDate);
 
@@ -394,7 +393,8 @@ Eda.prototype = {
                 clinGlideRecords.setValue('active', false);
                 clinGlideRecords.update();
             } else {
-                clinSysIds.push(clinGlideRecords.sys_id);
+                const sys_id = clinGlideRecords.getValue("sys_id");
+                clinSysIds.push(sys_id);
                 const clinData = taskOrder.clinData[clin];
                 if (clinData.obligatedAmount) {
                     clinGlideRecords.setValue("funds_obligated", clinData.obligatedAmount);
@@ -431,7 +431,7 @@ Eda.prototype = {
 
     getCLINGlideRecordByCLIN_Number: function(clin, taskOrderSysId) {
         let clinRecord = new GlideRecord("x_g_dis_atat_clin");
-        clinRecord.addQuery("clin", clin);
+        clinRecord.addQuery("clin_number", clin);
         clinRecord.addQuery("task_order", taskOrderSysId);
         clinRecord.query();
 
@@ -655,13 +655,13 @@ Eda.prototype = {
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-01-24 02:42:04</sys_created_on>
         <sys_id>abc17e0edba4e918b1227ea5f39619fc</sys_id>
-        <sys_mod_count>111</sys_mod_count>
+        <sys_mod_count>112</sys_mod_count>
         <sys_name>Eda</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_abc17e0edba4e918b1227ea5f39619fc</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-09-21 19:59:23</sys_updated_on>
+        <sys_updated_on>2023-09-22 15:50:41</sys_updated_on>
     </sys_script_include>
 </record_update>
