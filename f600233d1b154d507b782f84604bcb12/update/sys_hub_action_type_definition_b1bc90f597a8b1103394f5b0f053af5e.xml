@@ -20,22 +20,22 @@
         <outputs/>
         <outputs/>
         <pre_compiled>false</pre_compiled>
-        <state>published</state>
+        <state>draft</state>
         <sys_class_name>sys_hub_action_type_definition</sys_class_name>
         <sys_created_by>torin.harthcock</sys_created_by>
         <sys_created_on>2023-08-09 17:22:45</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>b1bc90f597a8b1103394f5b0f053af5e</sys_id>
-        <sys_mod_count>12</sys_mod_count>
+        <sys_mod_count>13</sys_mod_count>
         <sys_name>REPORT: DAPPS Feedback</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_b1bc90f597a8b1103394f5b0f053af5e</sys_update_name>
-        <sys_updated_by>andrew.nickerl</sys_updated_by>
-        <sys_updated_on>2023-08-14 20:18:14</sys_updated_on>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-09-19 20:38:45</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -49,9 +49,9 @@
         <sys_created_by>torin.harthcock</sys_created_by>
         <sys_created_on>2023-08-09 18:49:09</sys_created_on>
         <sys_id>5b70b07997e8b1103394f5b0f053af94</sys_id>
-        <sys_mod_count>1</sys_mod_count>
-        <sys_updated_by>andrew.nickerl</sys_updated_by>
-        <sys_updated_on>2023-08-14 20:18:13</sys_updated_on>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-09-19 20:38:45</sys_updated_on>
         <value>{"version":"1.0","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}},"complexObjectSchema":{"FlowDesigner:FDACTIONSTATUS":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"integer\",\"default_value\":\"\",\"label\":\"Code\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"Message\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FDACTIONSTATUS.$type_facets":{"SimpleMapFacet":"{\"default_value\":\"\",\"label\":\"Action Status\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"uiUniqueId\":\"4adfb7bc-9d67-498d-88d0-8d6c3d584fed\",\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FDACTIONSTATUS\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"object\",\"order\":\"1\",\"max_length\":\"65000\"}"}},"serializationFormat":"JSON"}</value>
         <variable display_value="Action Status">5770b07997e8b1103394f5b0f053af88</variable>
     </sys_variable_value>
@@ -165,10 +165,10 @@
         <sys_created_by>torin.harthcock</sys_created_by>
         <sys_created_on>2023-08-09 18:46:42</sys_created_on>
         <sys_id>67efe43997e8b1103394f5b0f053afe2</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>7</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>torin.harthcock</sys_updated_by>
-        <sys_updated_on>2023-08-09 19:06:20</sys_updated_on>
+        <sys_updated_on>2023-09-19 20:38:45</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=67efe43997e8b1103394f5b0f053afe2"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -179,28 +179,22 @@
         <sys_created_by>torin.harthcock</sys_created_by>
         <sys_created_on>2023-08-09 18:46:42</sys_created_on>
         <sys_id>67efe43997e8b1103394f5b0f053aff1</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_updated_by>torin.harthcock</sys_updated_by>
-        <sys_updated_on>2023-08-09 19:06:20</sys_updated_on>
+        <sys_updated_on>2023-09-19 20:38:45</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   var packagesReportArray = []
   while(inputs.feedbackList.next()){
-    // instantiate script include using acquistion package
-    // push object returned from script include to array declared outside while loop
-    // convert array of json objects to CSV
-    // create file name "DAPPS Report MM-DD-YY.csv"
-    // write to that file
+
     var reportGen = new DappsReportFeedbackGen(inputs.feedbackList);
     var packageReport = reportGen.getReportRecord();
-    // build case for if package Report is empty
+    if(packageReport)
+    {
     packagesReportArray.push(packageReport);
-    
-    
+    }
   }
   
   // Logic for getting date in correct format for file name
-  var csvUtils = new CSVUtils();
-  var csvText = csvUtils.convertToCSV(packagesReportArray);
   var gdt = new GlideDateTime();
   var currentDate = gdt.getDate()
   
@@ -248,6 +242,18 @@
         <sys_updated_on>2023-08-09 18:46:42</sys_updated_on>
         <table>var__m_sys_hub_step_ext_input_67efe43997e8b1103394f5b0f053afe2</table>
         <value>{{step[edf02669-61ad-4da8-914a-8c68f65e7fd7].records}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>script</field>
+        <id>67efe43997e8b1103394f5b0f053afe2</id>
+        <sys_created_by>torin.harthcock</sys_created_by>
+        <sys_created_on>2023-09-18 20:49:01</sys_created_on>
+        <sys_id>858bc7ee97d9f1103394f5b0f053af6d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-09-18 20:49:01</sys_updated_on>
+        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
+        <value/>
     </sys_element_mapping>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_step_ext_output_67efe43997e8b1103394f5b0f053afe2^id=67efe43997e8b1103394f5b0f053afe2"/>
     <sys_element_mapping action="delete_multiple" query="table=var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7^id=67efe43997e8b1103394f5b0f053afe2"/>
@@ -796,17 +802,17 @@
     <sys_hub_action_plan action="INSERT_OR_UPDATE">
         <action_id display_value="REPORT: DAPPS Feedback">b1bc90f597a8b1103394f5b0f053af5e</action_id>
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"e1d4ba57472031109053e4be436d439d","name":"plan","plan_signature":null}}</plan>
-        <snapshot>ddd4ba57472031109053e4be436d434e</snapshot>
+        <snapshot>06f22c7e971135103394f5b0f053af97</snapshot>
         <sys_created_by>andrew.nickerl</sys_created_by>
         <sys_created_on>2023-08-14 20:18:16</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>e1d4ba57472031109053e4be436d439d</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_overrides/>
         <sys_scope/>
-        <sys_updated_by>andrew.nickerl</sys_updated_by>
-        <sys_updated_on>2023-08-14 20:18:16</sys_updated_on>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-09-19 03:11:07</sys_updated_on>
     </sys_hub_action_plan>
     <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
@@ -855,10 +861,10 @@
         <sys_created_by>andrew.nickerl</sys_created_by>
         <sys_created_on>2023-08-14 20:18:14</sys_created_on>
         <sys_id>19d4ba57472031109053e4be436d434c</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>andrew.nickerl</sys_updated_by>
-        <sys_updated_on>2023-08-14 20:18:14</sys_updated_on>
-        <value>{"version":"1.0","complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}},"complexObjectSchema":{"FlowDesigner:FDACTIONSTATUS":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"integer\",\"default_value\":\"\",\"label\":\"Code\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"Message\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FDACTIONSTATUS.$type_facets":{"SimpleMapFacet":"{\"default_value\":\"\",\"label\":\"Action Status\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"uiUniqueId\":\"4adfb7bc-9d67-498d-88d0-8d6c3d584fed\",\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FDACTIONSTATUS\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"object\",\"order\":\"1\",\"max_length\":\"65000\"}"}},"serializationFormat":"JSON"}</value>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-09-18 21:06:52</sys_updated_on>
+        <value>{"version":"1.0","complexObjectSchema":{"FlowDesigner:FDACTIONSTATUS":{"code":"Integer","code.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"Integer\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"integer\",\"default_value\":\"\",\"label\":\"Code\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"1\",\"max_length\":\"40\"}"},"message":"String","message.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"String\",\"read_only\":\"false\",\"hint\":\"\",\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"Message\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"order\":\"2\",\"max_length\":\"4000\"}"}},"FlowDesigner:FDACTIONSTATUS.$type_facets":{"SimpleMapFacet":"{\"default_value\":\"\",\"label\":\"Action Status\",\"action_error_output\":\"true\",\"mandatory\":\"false\",\"uiUniqueId\":\"4adfb7bc-9d67-498d-88d0-8d6c3d584fed\",\"uiTypeLabel\":\"Object\",\"co_type_name\":\"FDACTIONSTATUS\",\"element_mapping_provider\":\"com.glide.flow_design.action.data.FlowDesignVariableMapper\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"object\",\"order\":\"1\",\"max_length\":\"65000\"}"}},"complexObject":{"code":{"$cv":{"$c":"java.lang.String","$v":""}},"message":{"$cv":{"$c":"java.lang.String","$v":""}}},"serializationFormat":"JSON"}</value>
         <variable display_value="Action Status">ddd4ba57472031109053e4be436d433b</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -930,10 +936,10 @@
         <sys_created_by>andrew.nickerl</sys_created_by>
         <sys_created_on>2023-08-14 20:18:14</sys_created_on>
         <sys_id>49d4ba57472031109053e4be436d430f</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_updated_by>andrew.nickerl</sys_updated_by>
-        <sys_updated_on>2023-08-14 20:18:14</sys_updated_on>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-09-19 03:11:06</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=49d4ba57472031109053e4be436d430f"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -944,23 +950,19 @@
         <sys_created_by>andrew.nickerl</sys_created_by>
         <sys_created_on>2023-08-14 20:18:14</sys_created_on>
         <sys_id>15d4ba57472031109053e4be436d4338</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>andrew.nickerl</sys_updated_by>
-        <sys_updated_on>2023-08-14 20:18:14</sys_updated_on>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-09-19 03:11:06</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   var packagesReportArray = []
   while(inputs.feedbackList.next()){
-    // instantiate script include using acquistion package
-    // push object returned from script include to array declared outside while loop
-    // convert array of json objects to CSV
-    // create file name "DAPPS Report MM-DD-YY.csv"
-    // write to that file
+
     var reportGen = new DappsReportFeedbackGen(inputs.feedbackList);
     var packageReport = reportGen.getReportRecord();
-    // build case for if package Report is empty
+    if(packageReport)
+    {
     packagesReportArray.push(packageReport);
-    
-    
+    }
   }
   
   // Logic for getting date in correct format for file name
@@ -1003,18 +1005,6 @@
     </sys_variable_value>
     <sys_element_mapping action="delete_multiple" query="id=49d4ba57472031109053e4be436d430f"/>
     <sys_element_mapping action="INSERT_OR_UPDATE">
-        <field>application</field>
-        <id>49d4ba57472031109053e4be436d430f</id>
-        <sys_created_by>andrew.nickerl</sys_created_by>
-        <sys_created_on>2023-08-14 20:18:14</sys_created_on>
-        <sys_id>1dd4ba57472031109053e4be436d4337</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>andrew.nickerl</sys_updated_by>
-        <sys_updated_on>2023-08-14 20:18:14</sys_updated_on>
-        <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
-        <value/>
-    </sys_element_mapping>
-    <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>feedbackList</field>
         <id>49d4ba57472031109053e4be436d430f</id>
         <sys_created_by>andrew.nickerl</sys_created_by>
@@ -1029,12 +1019,12 @@
     <sys_element_mapping action="INSERT_OR_UPDATE">
         <field>script</field>
         <id>49d4ba57472031109053e4be436d430f</id>
-        <sys_created_by>andrew.nickerl</sys_created_by>
-        <sys_created_on>2023-08-14 20:18:14</sys_created_on>
-        <sys_id>ddd4ba57472031109053e4be436d4337</sys_id>
+        <sys_created_by>torin.harthcock</sys_created_by>
+        <sys_created_on>2023-09-18 21:06:52</sys_created_on>
+        <sys_id>6e9fcfe2971df1103394f5b0f053af38</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_updated_by>andrew.nickerl</sys_updated_by>
-        <sys_updated_on>2023-08-14 20:18:14</sys_updated_on>
+        <sys_updated_by>torin.harthcock</sys_updated_by>
+        <sys_updated_on>2023-09-18 21:06:52</sys_updated_on>
         <table>var__m_sys_flow_step_definition_input_106afb6647032200b4fad7527c9a71e7</table>
         <value/>
     </sys_element_mapping>
