@@ -270,7 +270,8 @@ Eda.prototype = {
         portfolio.setValue("name", portfolioName);
         portfolio.setValue("portfolio_owner", gs.getUserID());
         portfolio.setValue("agency", portfolioAgency);
-
+		const todaysDate = new GlideDateTime().getDisplayValue();
+		portfolio.setValue("provisioning_request_date", todaysDate);
         // set CSP column with first (?) environment name from POST body
         const cspName = environments?.[0]?.cspName;
 
@@ -392,7 +393,7 @@ Eda.prototype = {
                 clinGlideRecords.setValue('active', false);
                 clinGlideRecords.update();
             } else {
-				const sys_id = clinGlideRecords.getValue("sys_id");
+                const sys_id = clinGlideRecords.getValue("sys_id");
                 clinSysIds.push(sys_id);
                 const clinData = taskOrder.clinData[clin];
                 if (clinData.obligatedAmount) {
