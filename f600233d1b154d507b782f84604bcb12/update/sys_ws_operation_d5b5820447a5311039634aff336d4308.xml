@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>GET</http_method>
+        <name>Summary</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+  try{
+    if(!request.queryParams.userId) {
+        response.setStatus(400);
+        response.setBody({
+            "userId": request.queryParams.userId,
+            "error_message": "query parameter userId is required"
+        });
+    } else if (request.queryParams.userId.toString().length != 32) {
+        response.setStatus(400);
+        response.setBody({
+            "userId": request.queryParams.userId.toString(),
+            "error_message": "query parameter userId must be a 32 char sys_id"
+        });
+    } else {
+        let userId = request.queryParams.userId.toString();
+        let PORTFOLIO_TABLE = "x_g_dis_atat_portfolio";
+		const port = new GetUserPortfolios(userId);
+		let portfolios = port.getPortfolioDetails();
+		response.setStatus(200);
+		response.setContentType('application/json');
+		response.setBody({
+			"Portfolios": portfolios,
+			"userId": userId
+		});
+    } 
+  } catch (err) {
+        response.setStatus(400);
+        response.setBody(err);
+        let errUtil = new ErrorHandler();
+       throw errUtil.createError(
+            "Portfolio REST API --> Get PortfoliosSummaryList: " + err,
+           errUtil.METHOD_ERROR
+        );
+    }
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_g_dis_atat/portfolios/summary</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/summary</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>tom.arnold</sys_created_by>
+        <sys_created_on>2023-09-23 07:37:02</sys_created_on>
+        <sys_id>d5b5820447a5311039634aff336d4308</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Summary</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_ws_operation_d5b5820447a5311039634aff336d4308</sys_update_name>
+        <sys_updated_by>tom.arnold</sys_updated_by>
+        <sys_updated_on>2023-09-24 20:59:22</sys_updated_on>
+        <web_service_definition display_value="Portfolios">5256ec484721311039634aff336d43e8</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>
