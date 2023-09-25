@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.GetUserPortfolios</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>GetUserPortfolios</name>
+        <script><![CDATA[let GetUserPortfolios = Class.create();
+
+GetUserPortfolios.prototype = {
+    userId: null,
+    errUtil: new ErrorHandler(),
+    PORTFOLIO_TABLE: 'x_g_dis_atat_portfolio',
+	AGENCY_TABLE: 'x_g_dis_atat_agency',
+	TASK_ORDER_TABLE: 'x_g_dis_atat_task_order',
+	CLIN_TABLE: 'x_g_dis_atat_clin',
+	VENDOR_TABLE: 'x_g_dis_atat_cloud_service_provider',
+	ENVIRONMENT_TABLE: 'x_g_dis_atat_environment',
+	
+    initialize: function(userSysId) {
+        this.userId = userSysId;
+    },
+	getVendor: function(id){
+		let gr = new GlideRecord(this.VENDOR_TABLE);
+		gr.get(id);
+		return gr.vendor.toString();
+	},
+	getAgency: function(id) {
+		let gr = new GlideRecord(this.AGENCY_TABLE);
+		gr.get(id);
+		return gr.title.toString();
+	},
+	getTODetails: function(toId){
+		let gr = new GlideRecord(this.TASK_ORDER_TABLE);
+		gr.get(toId);
+		return {
+			popStart: gr.pop_start_date,
+			popEnd: gr.pop_end_date
+		};
+	},
+	getCLINData: function(toId){
+		let fundsObligated = 0.00;
+		let fundsSpent = 0.00;
+		let list = new global.GlideQuery(this.CLIN_TABLE)
+		.where('task_order',toId.toString())
+		.select('funds_obligated','actual_funds_spent','clin_status')
+		.toArray(100);
+		
+		list.forEach(function(clin) {
+			if(clin.clin_status != 'OPTION_PENDING' || clin.clin_status != 'EXPIRED'){
+				fundsObligated += parseFloat(clin.funds_obligated);
+				fundsSpent += parseFloat(clin.actual_funds_spent);
+			}
+			
+		});
+		return {
+			fundsObligated: fundsObligated,
+			fundsSpent: fundsSpent
+		};
+	},
+	getCSPLinks: function(id){
+		let environments = [];
+		let gr = new GlideRecord(this.ENVIRONMENT_TABLE);
+		gr.addQuery('portfolio', id);
+		gr.query();
+		while(gr.next()){
+			let csp = gr.csp.getDisplayValue().toString();
+			let dashboardLink = gr.dashboard_link.toString();
+			let data = {
+				csp: csp,
+				dashboard_link: dashboardLink
+			};
+			environments.push(data);
+		}
+		return environments;
+	},
+	getPortfolioDetails: function() {
+		let data = [];
+        let gr = new GlideRecord(this.PORTFOLIO_TABLE);
+		gr.addQuery('portfolio_owner',this.userId)
+			.addOrCondition('portfolio_managers','CONTAINS',this.userId)
+			.addOrCondition('portfolio_viewers','CONTAINS',this.userId);
+        gr.query();
+        while(gr.next()){
+			let toDetails = this.getTODetails(gr.active_task_order.sys_id);
+			let clinDetails = this.getCLINData(gr.active_task_order.sys_id);
+			let portfolio = {
+				portfolio_name: gr.name.toString(),
+				portfolio_status: gr.portfolio_status.toString(),
+				agency: this.getAgency(gr.agency),
+				last_updated: gr.last_updated,
+				current_user_is_owner: gr.portfolio_owner.toString() === this.userId ? true : false, 
+				current_user_is_manager: JSON.stringify(gr.portfolio_managers.toString()).includes(this.userId) ? true: false,
+				vendor: this.getVendor(gr.csp),
+				pop_start_date: toDetails.popStart,
+				pop_end_date: toDetails.popEnd,
+				total_obligated: clinDetails.fundsObligated,
+				funds_spent: clinDetails.fundsSpent,
+				active_task_order: gr.active_task_order.getDisplayValue().toString(),
+				owner_full_name: gr.portfolio_owner.getDisplayValue().toString(),
+				funding_status: gr.portfolio_funding_status.toString(),
+				csp_portal_links: this.getCSPLinks(gr.sys_id)
+			};
+            data.push(portfolio);
+        }
+
+        return data;
+	},
+
+    type: 'GetUserPortfolios'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>tom.arnold</sys_created_by>
+        <sys_created_on>2023-09-23 02:03:45</sys_created_on>
+        <sys_id>cdc93cc84761311039634aff336d4316</sys_id>
+        <sys_mod_count>68</sys_mod_count>
+        <sys_name>GetUserPortfolios</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_cdc93cc84761311039634aff336d4316</sys_update_name>
+        <sys_updated_by>tom.arnold</sys_updated_by>
+        <sys_updated_on>2023-09-25 23:50:00</sys_updated_on>
+    </sys_script_include>
+</record_update>
