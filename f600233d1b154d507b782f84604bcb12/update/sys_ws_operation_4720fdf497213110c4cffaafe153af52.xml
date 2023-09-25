@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>GET</http_method>
+        <name>Get My Roles</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+	const filter = request.queryParams.filter;
+	const roles = [];
+	const userRole = new GlideRecord("sys_user_has_role");
+	userRole.addQuery("user", gs.getUserID());
+	userRole.query();
+	while (userRole.next()) {
+		roles.push(userRole.role.getDisplayValue());
+	}
+	if (!filter) {
+		return roles;
+	}
+	else {
+		const filterRoles = filter.toString().split(",");
+		const filtered = roles.filter(function (role) {
+			return filterRoles.includes(role);
+		});
+		response.setStatus(filterRoles.length !== filtered.length ? 404 : 200);
+		return filtered;
+	}
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_g_dis_atat/user_proxy/self/roles</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/self/roles</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>jeffsegal</sys_created_by>
+        <sys_created_on>2023-09-25 13:56:32</sys_created_on>
+        <sys_id>4720fdf497213110c4cffaafe153af52</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>Get My Roles</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_ws_operation_4720fdf497213110c4cffaafe153af52</sys_update_name>
+        <sys_updated_by>jeffsegal</sys_updated_by>
+        <sys_updated_on>2023-09-25 15:44:26</sys_updated_on>
+        <web_service_definition display_value="User Proxy">2112e0f6dbb269508c045e8cd3961948</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>
