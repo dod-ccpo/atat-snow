@@ -270,7 +270,8 @@ Eda.prototype = {
         portfolio.setValue("name", portfolioName);
         portfolio.setValue("portfolio_owner", gs.getUserID());
         portfolio.setValue("agency", portfolioAgency);
-
+		const todaysDate = new GlideDateTime().getDisplayValue();
+		portfolio.setValue("provisioning_request_date", todaysDate);
         // set CSP column with first (?) environment name from POST body
         const cspName = environments?.[0]?.cspName;
 
@@ -386,7 +387,6 @@ Eda.prototype = {
             taskOrderRecord.update();
         }
 
-
         taskOrderRecord.setValue("pop_start_date", taskOrder.popStartDate);
         taskOrderRecord.setValue("pop_end_date", taskOrder.popEndDate);
 
@@ -426,7 +426,8 @@ Eda.prototype = {
                 clinGlideRecords.setValue('active', false);
                 clinGlideRecords.update();
             } else {
-                clinSysIds.push(clinGlideRecords.sys_id);
+                const sys_id = clinGlideRecords.getValue("sys_id");
+                clinSysIds.push(sys_id);
                 const clinData = taskOrder.clinData[clin];
                 if (clinData.obligatedAmount) {
                     clinGlideRecords.setValue("funds_obligated", clinData.obligatedAmount);
@@ -463,7 +464,7 @@ Eda.prototype = {
 
     getCLINGlideRecordByCLIN_Number: function(clin, taskOrderSysId) {
         let clinRecord = new GlideRecord("x_g_dis_atat_clin");
-        clinRecord.addQuery("clin", clin);
+        clinRecord.addQuery("clin_number", clin);
         clinRecord.addQuery("task_order", taskOrderSysId);
         clinRecord.query();
 
