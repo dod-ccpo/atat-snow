@@ -308,6 +308,7 @@ Eda.prototype = {
             portfolio.update();
 
             environments.forEach((env) => this.createEnvironment(env, portfolioName, portfolio));
+			this.emailCspAdmins(portfolio, environments);
 
             // Update Acquisition Package Status (if we have one)
             if (acquisitionPackageRecordFound) {
@@ -321,6 +322,38 @@ Eda.prototype = {
                 message: "No CLINs created"
             }));
         }
+    },
+
+    emailCspAdmins: function(portfolio, environments) {
+        // iterate through environments; extract operators from unclassified environments
+        let operatorsUnclassified = [];
+        environments.forEach((env) => {
+            const environmentRecord = new GlideRecord("x_g_dis_atat_environment");
+            environmentRecord.addQuery('portfolio', portfolio.sys_id);
+            environmentRecord.addQuery('classification_level', 'U');
+            environmentRecord.query();
+            while (environmentRecord.next()) {
+                const pendingOperators = environmentRecord.getValue('pending_operators');
+                const splitString = pendingOperators.split(',');
+                operatorsUnclassified = operatorsUnclassified.concat(splitString);
+            }
+        });
+
+        // retrieve emails for operators
+        let emails = [];
+        const operatorRecord = new GlideRecord('x_g_dis_atat_operator');
+        operatorRecord.addQuery('sys_id', 'IN', operatorsUnclassified);
+        operatorRecord.query();
+        while (operatorRecord.next()) {
+            const operatorEmail = operatorRecord.getValue('email');
+            emails.push(operatorEmail);
+        }
+
+        // remove duplicates
+        const uniqueEmails = emails.filter((operator, index) => emails.indexOf(operator) === index);
+        uniqueEmails.forEach((email) => {
+            gs.eventQueue('x_g_dis_atat.csp_provisioning', portfolio, email);
+        });
     },
 
     updatePortfolio: function(portfolioSysId, taskOrderNumber) {
@@ -399,9 +432,9 @@ Eda.prototype = {
                 if (clinData.obligatedAmount) {
                     clinGlideRecords.setValue("funds_obligated", clinData.obligatedAmount);
                 }
-				if(clinData.totalAmount){
-					clinGlideRecords.setValue("funds_total",clinData.totalAmount);
-				}
+                if (clinData.totalAmount) {
+                    clinGlideRecords.setValue("funds_total", clinData.totalAmount);
+                }
                 clinGlideRecords.setValue("pop_start_date", clinData.popStartDate);
                 clinGlideRecords.setValue("pop_end_date", clinData.popEndDate);
                 clinGlideRecords.setValue('active', true);
@@ -421,9 +454,9 @@ Eda.prototype = {
         if (clinData.obligatedAmount) {
             grClin.setValue("funds_obligated", clinData.obligatedAmount);
         }
-		if(clinData.totalAmount){
-			grClin.setValue("funds_total",clinData.totalAmount);
-		}
+        if (clinData.totalAmount) {
+            grClin.setValue("funds_total", clinData.totalAmount);
+        }
         grClin.setValue("pop_start_date", clinData.popStartDate);
         grClin.setValue("pop_end_date", clinData.popEndDate);
         return grClin.insert();
@@ -478,9 +511,9 @@ Eda.prototype = {
             clinData[lineItem.LineItemIdentifier.DFARS.LineItem.LineItemBase] = {
                 popStartDate: lineItem.LineItemDates.LineItemPeriod.PeriodStart.DateElement,
                 popEndDate: lineItem.LineItemDates.LineItemPeriod.PeriodEnd.DateElement,
-				totalAmount: lineItem.LineItemAmounts.ItemOtherAmounts.Amount
+                totalAmount: lineItem.LineItemAmounts.ItemOtherAmounts.Amount
             };
-		});
+        });
         // Next, gather Obligated Amount from "INFOSLIN" entries
         instrument.ContractLineItems.LineItems.filter(function(lineItem) {
             return lineItem.LineItemIdentifier.DFARS.LineItem.LineItemType == "INFOSLIN";
@@ -562,7 +595,7 @@ Eda.prototype = {
         environmentRecord.setValue("portfolio", portfolio.sys_id);
         environmentRecord.setValue("csp", cspRecord.sys_id);
         environmentRecord.setValue("classification_level", cspRecord.classification_level);
-        
+
         environmentRecord.insert();
 
         // Update Portfolio Vendor
@@ -571,6 +604,7 @@ Eda.prototype = {
 
         // Create Operators
         let pendingOperators = [];
+        let operatorEmails = [];
         environment.operators.forEach(function(operator) {
             const operatorRecord = new GlideRecord("x_g_dis_atat_operator");
             operatorRecord.initialize();
@@ -578,13 +612,12 @@ Eda.prototype = {
             operatorRecord.setValue("email", operator.email);
             operatorRecord.setValue("portfolio", portfolio.sys_id);
             operatorRecord.setValue("environment", environmentRecord.sys_id);
-			operatorRecord.update();
             pendingOperators.push(operatorRecord.insert());
         });
 
         // Add Operators back to Environment
         environmentRecord.setValue("pending_operators", pendingOperators);
-		environmentRecord.setValue("environment_status", "PROCESSING");
+        environmentRecord.setValue("environment_status", "PROCESSING");
         environmentRecord.update();
     },
 
@@ -655,13 +688,13 @@ Eda.prototype = {
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-01-24 02:42:04</sys_created_on>
         <sys_id>abc17e0edba4e918b1227ea5f39619fc</sys_id>
-        <sys_mod_count>112</sys_mod_count>
+        <sys_mod_count>129</sys_mod_count>
         <sys_name>Eda</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_abc17e0edba4e918b1227ea5f39619fc</sys_update_name>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-09-22 15:50:41</sys_updated_on>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-09-25 18:12:13</sys_updated_on>
     </sys_script_include>
 </record_update>
