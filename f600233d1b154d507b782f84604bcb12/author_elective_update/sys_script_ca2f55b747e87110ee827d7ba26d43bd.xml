@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="DELETE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>false</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_g_dis_atat_portfolio</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition table="x_g_dis_atat_portfolio">portfolio_statusCHANGESTOPROCESSING^operatorsVALCHANGES^EQ<item display_value="Processing" endquery="false" field="portfolio_status" goto="false" newquery="false" operator="CHANGESTO" or="false" value="PROCESSING"/>
+            <item endquery="false" field="operators" goto="false" newquery="false" operator="VALCHANGES" or="false" value=""/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Email Admins Upon Provisioning</name>
+        <order>1000</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+
+    // 'current' is the updated portfolio
+    const portfolioSysId = current.sys_id;
+
+    // use portfolio sys_id; retrieve unclassified environments for the portfolio
+    const environmentGR = new GlideRecord('x_g_dis_atat_environment');
+    environmentGR.addQuery('portfolio', portfolioSysId);
+    environmentGR.addQuery('classification_level', 'U');
+    environmentGR.query();
+
+    let operatorEmails = [];
+
+    // iterate through environments
+    while (environmentGR.next()) {
+        // extract pending operators
+		const csp = environmentGR.getValue('csp');
+        const pendingOperators = environmentGR.getValue('pending_operators');
+		gs.info(`CSP Name: ${csp.name} Pending Operators: ${JSON.stringify(pendingOperators)}`);
+        // query operator table for all operators in pending operators
+        const operatorGR = new GlideRecord('x_g_dis_atat_operator');
+        operatorGR.addQuery('sys_id', 'IN', pendingOperators);
+        operatorGR.query();
+        // iterate and extract operator email
+        while (operatorGR.next()) {
+            const operatorEmail = operatorGR.getValue('email');
+			gs.info(`operatorEmail: ${JSON.stringify(operatorEmail)}`);
+            operatorEmails.push(operatorEmail);
+        }
+    }
+	gs.info(`operatorEmails: ${JSON.stringify(operatorEmails)}`);
+    // remove duplicated emails
+    const uniqueEmails = operatorEmails.filter((email, index) => operatorEmails.indexOf(email) === index);
+
+    // dispatch to queue
+    uniqueEmails.forEach((email) => {
+		gs.info(`Dispatch: ${email}`);
+        gs.eventQueue('x_g_dis_atat.csp_provisioning', current, email);
+    });
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-08-16 03:24:58</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>ca2f55b747e87110ee827d7ba26d43bd</sys_id>
+        <sys_mod_count>117</sys_mod_count>
+        <sys_name>Email Admins Upon Provisioning</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_ca2f55b747e87110ee827d7ba26d43bd</sys_update_name>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-09-25 17:06:51</sys_updated_on>
+        <template/>
+        <when>after</when>
+    </sys_script>
+    <sys_translated_text action="DELETE" query="documentkey=ca2f55b747e87110ee827d7ba26d43bd"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="ATAT">f600233d1b154d507b782f84604bcb12</application>
+        <file_path/>
+        <instance_id>452cbf1b1bdb65d465324089bd4bcb17</instance_id>
+        <instance_name>dev176403</instance_name>
+        <name>sys_script_ca2f55b747e87110ee827d7ba26d43bd</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_script"&gt;&lt;sys_script action="INSERT_OR_UPDATE"&gt;&lt;abort_action&gt;false&lt;/abort_action&gt;&lt;access&gt;package_private&lt;/access&gt;&lt;action_delete&gt;false&lt;/action_delete&gt;&lt;action_insert&gt;false&lt;/action_insert&gt;&lt;action_query&gt;false&lt;/action_query&gt;&lt;action_update&gt;true&lt;/action_update&gt;&lt;active&gt;false&lt;/active&gt;&lt;add_message&gt;false&lt;/add_message&gt;&lt;advanced&gt;true&lt;/advanced&gt;&lt;change_fields&gt;false&lt;/change_fields&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;collection&gt;x_g_dis_atat_portfolio&lt;/collection&gt;&lt;condition/&gt;&lt;description/&gt;&lt;execute_function&gt;false&lt;/execute_function&gt;&lt;filter_condition table="x_g_dis_atat_portfolio"&gt;portfolio_statusCHANGESTOPROCESSING^operatorsVALCHANGES^EQ&lt;item display_value="Processing" endquery="false" field="portfolio_status" goto="false" newquery="false" operator="CHANGESTO" or="false" value="PROCESSING"/&gt;&lt;item endquery="false" field="operators" goto="false" newquery="false" operator="VALCHANGES" or="false" value=""/&gt;&lt;item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/&gt;&lt;/filter_condition&gt;&lt;is_rest&gt;false&lt;/is_rest&gt;&lt;message/&gt;&lt;name&gt;Email Admins Upon Provisioning&lt;/name&gt;&lt;order&gt;1000&lt;/order&gt;&lt;priority&gt;100&lt;/priority&gt;&lt;rest_method/&gt;&lt;rest_method_text/&gt;&lt;rest_service/&gt;&lt;rest_service_text/&gt;&lt;rest_variables/&gt;&lt;role_conditions/&gt;&lt;script&gt;&lt;![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+
+    // 'current' is the updated portfolio
+    const portfolioSysId = current.sys_id;
+
+    // use portfolio sys_id; retrieve unclassified environments for the portfolio
+    const environmentGR = new GlideRecord('x_g_dis_atat_environment');
+    environmentGR.addQuery('portfolio', portfolioSysId);
+    environmentGR.addQuery('classification_level', 'U');
+    environmentGR.query();
+
+    let operatorEmails = [];
+
+    // iterate through environments
+    while (environmentGR.next()) {
+        // extract pending operators
+		const csp = environmentGR.getValue('csp');
+        const pendingOperators = environmentGR.getValue('pending_operators');
+		gs.info(`CSP Name: ${csp.name} Pending Operators: ${JSON.stringify(pendingOperators)}`);
+        // query operator table for all operators in pending operators
+        const operatorGR = new GlideRecord('x_g_dis_atat_operator');
+        operatorGR.addQuery('sys_id', 'IN', pendingOperators);
+        operatorGR.query();
+        // iterate and extract operator email
+        while (operatorGR.next()) {
+            const operatorEmail = operatorGR.getValue('email');
+			gs.info(`operatorEmail: ${JSON.stringify(operatorEmail)}`);
+            operatorEmails.push(operatorEmail);
+        }
+    }
+	gs.info(`operatorEmails: ${JSON.stringify(operatorEmails)}`);
+    // remove duplicated emails
+    const uniqueEmails = operatorEmails.filter((email, index) =&gt; operatorEmails.indexOf(email) === index);
+
+    // dispatch to queue
+    uniqueEmails.forEach((email) =&gt; {
+		gs.info(`Dispatch: ${email}`);
+        gs.eventQueue('x_g_dis_atat.csp_provisioning', current, email);
+    });
+})(current, previous);]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script&lt;/sys_class_name&gt;&lt;sys_created_by&gt;stephen.hayes&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2023-08-16 03:24:58&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;ca2f55b747e87110ee827d7ba26d43bd&lt;/sys_id&gt;&lt;sys_mod_count&gt;117&lt;/sys_mod_count&gt;&lt;sys_name&gt;Email Admins Upon Provisioning&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="ATAT" source="x_g_dis_atat"&gt;f600233d1b154d507b782f84604bcb12&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="ATAT"&gt;f600233d1b154d507b782f84604bcb12&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_ca2f55b747e87110ee827d7ba26d43bd&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;stephen.hayes&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2023-09-25 17:06:51&lt;/sys_updated_on&gt;&lt;template/&gt;&lt;when&gt;after&lt;/when&gt;&lt;/sys_script&gt;&lt;sys_translated_text action="delete_multiple" query="documentkey=ca2f55b747e87110ee827d7ba26d43bd"/&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>1400259460</payload_hash>
+        <record_name>Email Admins Upon Provisioning</record_name>
+        <reverted_from/>
+        <source>d9795f2f47e07110ee827d7ba26d436c</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-09-25 17:06:52</sys_created_on>
+        <sys_id>13cb12fc47e13110ee827d7ba26d4365</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18acd4edc520000001</sys_recorded_at>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-09-25 17:06:52</sys_updated_on>
+        <type>Business Rule</type>
+        <update_guid>97cb12fcb7e13110e6e82e8a2b328d64</update_guid>
+        <update_guid_history>97cb12fcb7e13110e6e82e8a2b328d64:1400259460,f9275ab85fe13110f0812154f06ee8c3:1777618589,45e65ab8d7e131103479081dea9c5929:-1112641434,07d416784ae13110be9480c85b40ae27:-591529873,4f14d6384ee13110376e4cd073ab87cf:976950862,14839234f0e13110b97101e2d6a2fc05:-1806808256,00339eb443e13110381b7bd65a20045e:237767986,488f067018e13110334c416da5860275:1591991679,afeb8af8f3a1311085a505c1c8ec6146:-915747532,6bf78ef8936131109e6d4cd093cdbbda:-1052261312,760b4ef89ba13110468c951486f2d533:0,6bf78ef8936131109e6d4cd093cdbbda:-1052261312,14348ab45d613110572a42b7f4239177:-662937063,4f01ae668c1d311046e251252a8d779b:-614421019,f10cd69507d571105e270290f55a5e4a:-1947874573,d9ad5585b7553110d81bfd116b71748a:0,4d03436c971931109815efae8f169e33:1781407181,df520f2c20193110aed39cb309ff92ec:-626348508,196ffa680e1931107e392043dfd2a5a5:393287726,802df2683c19311042bb61824510841f:663786273,b2ccb2289e193110788ca720185fd33c:-380228031,f5e97e649119311035ac1b0021991897:-1045849043,c0b772e06d193110076d0ab03bf6d1ca:-1981692191,ace632e08419311004081f033ee5e2fb:419432568,4b06f2a06a1931102b71cf3f8272e76f:-1750532437,7dd472ec06d53110fe07b83966df77cc:1486217710,a18276ac1dd5311011d5bbdc092b2752:1512111866,07fe26a88ad5311021fac746c182408c:520672943,4c0e22a869d5311083dacbac3724c098:-1102615195,f4fa22e4b5d531108f86ac7f31d3c09c:171673253,ef108620ca553110d7785d7711ae1d62:-1833311914,882ff1ec37153110910ac60fc5e58f5b:-1595574978,4a5cf52c6c153110c273c24f5254941f:-5692459,ca7a39a8981531101dd6bdca8eb34aa8:-752733645,1018f1288b1531108db8690bb1281134:-820677951,bb777d6401153110439caa89c2119f06:1500373381,ccb4f9e0e6153110545a59e33f6aa56a:1054549399,57a371242d1531100f0f0c6cda156d41:-1856063264,dc1339e0821531101c485f24f3ad6a13:1973889904,daa231e07b1531101b41f5d0715a94ef:683577655,f962fd60eb15311020fc92bbcdc56fcd:46616010,cdb1f9a875d131103262f3dd52a1854f:-1136575971,ed91fd608715311092a2031413e41742:-428226916,608969a87dd1311098b71f5d5116170f:1621390233,ed77252810d13110a0984f861121bb54:-428226916,6a966524cad13110ef13f12d76d25a39:684097071,a90325247fd131109b78b9a151ebfc7e:1071103175,53b1a5ec1091311056d9ad3f634ad270:-787502563,b09d9dac0a913110ada011bd01f13a43:-93438242,3a3d59acdb913110165c69a4038037b6:146619915,d5fc19ac9b91311044f86103459f5499:-1699030184,308c952ce19131109ef867c7186410aa:-1261353999,a59a9d24359131107e91124925650de0:13566119,adb25164599131105546e4d4421c3112:-1545240292,f14119e092913110ddf7ec8c0d1668e1:1281815851,b448db1f0305311066f4638d9403b984:0,1c50a20f1e89711029af5841107db804:0,708e3143d8c57110a970d66f9e4c615e:40325321,8ab94ec78e09711022a9b7e6bfab69f2:0,708e3143d8c57110a970d66f9e4c615e:40325321,725868be3cc131100c25be474c6609aa:-21627161,df67a87e2ec1311081bf3777b025d5a9:1946130022,87cf732ab34131108cf7e11e5a32ca36:341086003,7b5fff6af0413110609860da5e5a0642:-7446453,d26a77668d41311056a15bf7f85c8d43:-493754763,dac97b62e041311075229024c9158c8a:1857030348,b1f87fe2164131109df879e4c1318ccc:-2058287682,98c73322b14131106721ef01a0cbd4bd:905499600,6b8da36a5a0131101b5e6aa645e4c7eb:-97798256,946ba7a6b601311079071f23831310ad:-596636560,311ba3a6ae013110308896ad346c0a03:1406962512,0d5a6b66d90131100180578b8fc01f5a:-1606661556,8f0aaf269e0131100b6c557c0328dab0:185624479,1679e32601013110b4ca6ccdc85b7c17:-1281560176,be99fbd225057110e6c634ff49610083:1530483707,fde737d2af05711066b449e5b130d20f:572687283,7e377b92fa057110417b9c3aef14d42c:-1926222464,4931d712a2817110b1e285d7bb0f47ef:-2099966775,35f01b12dc817110385b73f00a02680c:572687283,ebef4bde15417110dbc84cf5e1dcb90e:-4343597,efaf07def7417110188411a00bb86f3f:-1685012122,d54d831e614171105bc84256ced0cedb:-2015724634,081d4f1eb941711013a60a89af0b1823:2104509385,e47bc39a3a417110b97c29d5a52f940d:262712783,10facb9a62417110e053ad5a1007b89f:1561531321,376a839a98417110e4e4ac3a05e540c5:-716483664,67e9035a1f4171104548868695bfdc18:1258165077,2279035a3a4171109ccf2c938e2b0f96:-796893832,f9598b1ab74171108eb583a8150883e5:773678663,f3490b1a76417110a4d2529c24104d9f:1257440194,f0e80b1a4f41711057939c34fe0a7696:-826462868,0468031af7417110ea04b810fb3a9209:1025733691,9c77cf967f417110df3f86db8c2a7d84:1697267226,3b474f969341711083f60dbc046cb348:-198512103,8b2587161e4171108be0108f200dd449:880770809,d7c487122a41711055ed2585d3e47cc0:-9446106,7422d3f38db43110ec117074b444fc91:1820569081,1f81d3f39cb43110de8473ab03589e79:1086830616,f9f0d7730cb43110d752165fea9f05a9:-1571565155,0f3093f326b431103d862fd2af8c8d78:-1738604386,895ecfff39743110843545a916e65679:180018116,eded0f3361b43110cefcc478a5a4890c:1737191361,66dc47ffc67431104844a040eb3be062:-1811684362,3d2cc3bfab74311059700217cb6c06a3:1762338646,727b0f7fd1743110155ce372a0f66ae6:-1181308028,0ffa4f7f6b74311023569b3b104c6b9b:-1397997942,bc9e1637feb03110c8c6ba47743d34f3:1636667148,712322f7d3f031106ab8fa2c4cafad3d:0,bc9e1637feb03110c8c6ba47743d34f3:1636667148,86b5c73a9f70311088b2f18302c34244:760263110,1d650bf6d9703110a4c0144802041ee9:-900615089,376407f6477031106e8bde404652dbb4:-942533602,0514cbb64a703110bb4a57eaa8e271ad:-1934017472,9cd34bb6e3703110b798e7b497c81e50:1089632644,526307b6a5703110d425bf9fdfa5ebdd:-849133399,9f42cf36dd703110db2c57c914b037c6:853782602,a960cffea93031103bafb90602f5dacd:0,cdfc052e3930711042108ee03cdd2283:958129121,e5ca496a92307110a54a0804920af377:-1141627523,f219816a7f307110da525b8ae459cdfa:-1899896628,d6d8c52a65307110c44a7a7e1999c6f3:1477831103,df78092ab83071108a1c848f2f0a7b45:-528602954,f228c12af43071108caafb124eb49575:-346311230,2618852af73071105632550c89290029:1920404486,2fd7cde6b3307110b7ec3fb9a34fc0ec:-614035665,d7a745e6fb307110916f0feb4238b8c3:-1479769577,c36749e6f930711021d7803bfc50ca4c:1381250618,4a478d26e3307110cd534a1f98a9f8ff:120630817,c4d6c1667130711002ea1a15ec007322:1691980729,c3958566c1307110d2b7a47d153bf86f:1726368528,70158566d7307110f3f12f477f92671c:-799742436,1cd48d26f93071104b11f22794b1c73a:1500712359,459445260b307110bca834d519afbdb5:1197951559,544441262630711038af9e3e4c4819ca:303313262,a0c341e29730711055b8736bbef1e4cb:-552881258,ec82cda2ed307110548ac6fc990aaee2:-1323192425,b4c1cd62243071107bf0a6389b8991d0:-906222988,2f310562af30711052646bf3bbdc8a9a:-2035993775,2be0c562b0307110fe6a0d23816b34c9:1935023907,2a804d222e3071105c958a9129a8ae68:-1317865623,1840c5eefbfc3110549cf3a76fa8a799:1412860592,2c3401121bb031101662fc1967eb8f20:-947583286,48334d9efe703110d4409674cdf3ba35:-1478616026,2981099a83703110cc627affb24f28a6:1663369141,5b4e749a00703110797dd6e94a925de7:765234251,47acf056df7031102f86c9d109011d94:-218486967,bcc7b41692703110cda7ea7ce8853594:757119737,1ab0b81e7730311085159abf118f0283:-1862111419,df22dfb9cfb03110b863cce2854f27cb:0,9ae6f12dec70311048fe088c30f05ab9:-771785255,63d8aaa04130311093e86a18a06da42e:0,6e73e048b5b4b11076d05d9767989062:-771785255,5fce40842574b110095198d8a4ed76d4:1465610853,599ec044e774b110777f152ffa769754:2095070517,279d4c047374b110f0206ec3d2226bdf:-27835650,b56d88043874b1100d46661e29fbca6d:1448213035,a2c5404c5634b110ec4cc2e4db423434:332912728,08850c0c0534b1102013aea09f8a164d:-1582894817,2135c0c85b34b110290d54ec1aa01f7c:-1694860234,468440c86f34b1104118ccd6a8c3f599:587322185,feb340c83434b110be8b3349d0438109:1400730745,4af7adbf41e87110585f05adea0ca53d:-1670139865,21a721ff27e871109f595e3a2e1a0e7d:1059427317,ec672dbf2ae871108282fbe0ee44fd50:421035613,ddb6ed7f36e871102e27028b0a7d6402:1123445511,c876a57f70e871108721af8f5ca51d20:361266322,bcd425fbd2e8711020ff121b6f12b146:836758837,b404edbb1de8711035af373840655498:-1763910052,2ec3edbbd2e871107d5622b67559a40e:-328704397,a653a1bb20e87110f986f2fed93279bd:567225828,e11361bb2ce87110051630c5793597af:-986558608,39102db7d8e87110bc5569547eaa41d1:84772535</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-09-25 18:17:44</sys_created_on>
+        <sys_db_object display_value="" name="sys_script">sys_script</sys_db_object>
+        <sys_id>7697a9943b6b4dec861f99384b114749</sys_id>
+        <sys_metadata>ca2f55b747e87110ee827d7ba26d43bd</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Email Admins Upon Provisioning</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_parent display_value="ATAT:Portfolio">e152d508db47d99088887ea5f39619d2</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_scope_delete display_value="">0e7a10eb525044648240c5b393f748c4</sys_scope_delete>
+        <sys_update_name>sys_script_ca2f55b747e87110ee827d7ba26d43bd</sys_update_name>
+        <sys_update_version display_value="sys_script_ca2f55b747e87110ee827d7ba26d43bd">13cb12fc47e13110ee827d7ba26d4365</sys_update_version>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-09-25 18:17:44</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
