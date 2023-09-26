@@ -3,7 +3,10 @@
         <element label="Abbreviation" max_length="20" name="abbreviation" type="string"/>
         <element label="CSS ID" max_length="1000" name="css_id" type="integer" unique="true"/>
         <element display="true" label="Full Name" max_length="1000" name="full_name" type="string"/>
-        <index name="index" unique="true">
+        <index name="index">
+            <element name="css_id"/>
+        </index>
+        <index name="index2" unique="true">
             <element name="css_id"/>
         </index>
     </element>
