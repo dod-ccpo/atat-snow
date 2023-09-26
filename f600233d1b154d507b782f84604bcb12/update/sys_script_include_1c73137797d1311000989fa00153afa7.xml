@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.ProvisioningResponseProcessing</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Script include to handle provisioning job csp responses.</description>
+        <name>ProvisioningResponseProcessing</name>
+        <script><![CDATA[const ProvisioningResponseProcessing = Class.create();
+ProvisioningResponseProcessing.prototype = {
+  initialize: function () {
+    this.PORTFOLIO_TABLE = "x_g_dis_atat_portfolio";
+    this.TASK_ORDER_TABLE = "x_g_dis_atat_task_order";
+    this.ENVIRONMENT_TABLE = "x_g_dis_atat_environment";
+    this.OPERATOR_TABLE = "x_g_dis_atat_operator";
+    this.CLIN_TABLE = "x_g_dis_atat_clin";
+    this.PROVISIONING_TABLE = "x_g_dis_atat_provisioning_job";
+    this.errorHandler = new ErrorHandler();
+  },
+
+  getJobRecord: function (jobRecordSysId) {
+    const jobRecord = new GlideRecord(this.PROVISIONING_TABLE);
+    jobRecord.get(jobRecordSysId.toString());
+
+    if (!jobRecord.isValidRecord()) {
+      throw this.errorHandler.createError(
+        "Failed to find record in ATAT:Provisioning Job table.",
+        this.errorHandler.METHOD_ERROR()
+      );
+    }
+    return jobRecord;
+  },
+
+  addPortfolio: function (portfolioCspId, jobRecordSysId) {
+    const jobRecord = this.getJobRecord(jobRecordSysId);
+    const portfolioSysId = jobRecord.getValue("portfolio");
+    const portfolioRecord = new GlideRecord(this.PORTFOLIO_TABLE);
+    portfolioRecord.get(portfolioSysId);
+
+    if (!portfolioRecord?.isValidRecord()) {
+      throw this.errorHandler.createError(
+        "Operation Type 'ADD_PORTFOLIO': Could not retrieve portfolio record using '" + portfolioSysId,
+        this.errorHandler.METHOD_ERROR
+      );
+    }
+    // update the corresponding portfolio
+    portfolioRecord.setValue("provisioned", true);
+    portfolioRecord.setValue("provisioned_date", new GlideDateTime());
+    portfolioRecord.setValue("operators", ""); // clear operators
+    portfolioRecord.setValue("csp_id", portfolioCspId);
+    portfolioRecord.setValue("portfolio_status", "ACTIVE");
+    portfolioRecord.update();
+
+    const hothProvisioning = new HothProvisioning(portfolioSysId);
+    // Find all Environments under this Portfolio
+    const environmentRecord = new GlideRecord(this.ENVIRONMENT_TABLE);
+    environmentRecord.addQuery("portfolio", portfolioSysId);
+    environmentRecord.query();
+
+    while (environmentRecord.next()) {
+      const payload = hothProvisioning.createAddEnvironmentPayload(environmentRecord);
+
+      const newEnvironmentJobRecord = new GlideRecord(this.PROVISIONING_TABLE);
+      newEnvironmentJobRecord.initialize();
+      newEnvironmentJobRecord.setValue("title", environmentRecord.name.toString());
+      newEnvironmentJobRecord.setValue("environment", environmentRecord.getValue("sys_id").toString());
+      newEnvironmentJobRecord.setValue("hoth_job_id", payload.jobId);
+      newEnvironmentJobRecord.setValue("job_type", "ADD_ENVIRONMENT");
+      newEnvironmentJobRecord.setValue("payload", JSON.stringify(payload));
+      newEnvironmentJobRecord.setValue("portfolio", portfolioSysId);
+      newEnvironmentJobRecord.setValue("status", "NOT_STARTED");
+      newEnvironmentJobRecord.insert();
+    }
+  },
+
+  addEnvironment: function (response, jobRecordSysId) {
+    const jobRecord = this.getJobRecord(jobRecordSysId);
+    const environmentSysId = jobRecord.getValue("environment");
+    const environmentRecord = new GlideRecord(this.ENVIRONMENT_TABLE);
+    environmentRecord.get(environmentSysId);
+
+    if (!environmentRecord?.isValidRecord()) {
+      throw this.errorHandler.createError(
+        "Operation Type 'ADD_ENVIRONMENT': Could not retrieve environment record using '" + environmentSysId,
+        this.errorHandler.METHOD_ERROR
+      );
+    }
+
+    // Handle GetProvisioningStatus response (after async process complete)
+    if (response.status) {
+      environmentRecord.csp_id = response.status.environmentId;
+    }
+    // Handle regular HTTP 200 response direct from AddEnvironment request
+    else if (response.environment) {
+      environmentRecord.csp_id = response.environment.id;
+    } else {
+      throw this.errorHandler.createError(
+        "Expected 'response.status' or 'response.environment' to be non-null",
+        this.errorHandler.METHOD_ERROR
+      );
+    }
+    environmentRecord.update();
+  },
+
+  updateTaskOrder: function (jobRecordSysId) {
+    const jobRecord = this.getJobRecord(jobRecordSysId);
+    const taskOrderSysId = jobRecord.getValue("task_order");
+    const taskOrderRecord = new GlideRecord(this.TASK_ORDER_TABLE);
+    taskOrderRecord.get(taskOrderSysId);
+
+    if (!taskOrderRecord?.isValidRecord()) {
+      throw this.errorHandler.createError(
+        "Operation Type 'UPDATE_TASK_ORDER': Could not retrieve task order record using '" + taskOrderSysId,
+        this.errorHandler.METHOD_ERROR
+      );
+    }
+
+    taskOrderRecord.setValue("provisioned", true);
+    taskOrderRecord.setValue("provisioned_date", new GlideDateTime());
+    taskOrderRecord.update();
+  },
+
+  getPortfolio: function (response, jobRecordSysId) {
+    const jobRecord = this.getJobRecord(jobRecordSysId);
+    const portfolioCspId = response.portfolio.id;
+    const portfolioRecord = new GlideRecord(this.PORTFOLIO_TABLE);
+    const portfolioSysId = jobRecord.getValue("portfolio");
+    portfolioRecord.get(portfolioSysId);
+
+    if (!portfolioRecord?.isValidRecord()) {
+      throw this.errorHandler.createError(
+        "Failed to retrieve portfolio data using CSP data.",
+        this.errorHandler.METHOD_ERROR
+      );
+    }
+
+    // update the csp_id of the portfolio
+    if (portfolioRecord.getValue("csp_id") != portfolioCspId) {
+      portfolioRecord.setValue("csp_id", portfolioCspId);
+      portfolioRecord.update();
+    }
+
+    // process task orders
+    response.portfolio.task_orders.forEach((t) => {
+      this.updateTaskOrderRecord(t.task_order_number, t.id);
+    });
+
+    // process environments
+    response.portfolio.environments.forEach((e) => {
+      const existingEnv = new GlideRecord(this.ENVIRONMENT_TABLE);
+      existingEnv.addQuery("portfolio", portfolioSysId);
+      existingEnv.addQuery("name", e.name);
+      existingEnv.query();
+
+      if (existingEnv.next()) {
+        this.updateEnvironmentRecord(e, existingEnv);
+      } else {
+        throw this.errorHandler.createError(
+          "Failed to retrieve environment data using CSP data.",
+          this.errorHandler.METHOD_ERROR
+        );
+      }
+    });
+  },
+
+  updateTaskOrderRecord: function (taskOrderNumber, taskOrderCspId) {
+    const taskOrderRecord = new GlideRecord(this.TASK_ORDER_TABLE);
+    taskOrderRecord.get("task_order_number", taskOrderNumber);
+
+    if (taskOrderRecord.isValidRecord()) {
+      taskOrderRecord.setValue("csp_id", taskOrderCspId);
+      taskOrderRecord.update();
+    }
+  },
+
+  updateEnvironmentRecord: function (cspEnvironment, environmentRecord) {
+    if (environmentRecord.isValidRecord()) {
+      if (environmentRecord.getValue("csp_id") !== cspEnvironment.id) {
+        environmentRecord.setValue("csp_id", cspEnvironment.id);
+      }
+      if (environmentRecord.getValue("dashboard_link") !== cspEnvironment.dashboard_link) {
+        environmentRecord.setValue("dashboard_link", cspEnvironment.dashboard_link);
+      }
+      environmentRecord.update();
+    }
+  },
+
+  type: "ProvisioningResponseProcessing",
+};
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-09-22 19:28:03</sys_created_on>
+        <sys_id>1c73137797d1311000989fa00153afa7</sys_id>
+        <sys_mod_count>97</sys_mod_count>
+        <sys_name>ProvisioningResponseProcessing</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_1c73137797d1311000989fa00153afa7</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-09-26 15:54:39</sys_updated_on>
+    </sys_script_include>
+</record_update>
