@@ -26,6 +26,28 @@ GetPortfolioDetails.prototype = {
         this.userId = userId;
     },
 
+    availableFunds: function() {
+        // available_funds = total_funds (value of all exercised CLINs) minus funds_spent (total of all actual costs to date).
+
+        const total_funds = parseFloat(new global.GlideQuery(this.CLINS_TABLE)
+            .where('task_order', this.taskOrder.sys_id)
+            .where(new global.GlideQuery()
+                .where('clin_status', '!=', 'EXPIRED'))
+            .sum('funds_total')
+            .orElse(0.0));
+
+        const funds_spent = this.totalFundsSpent();
+        const available_funds = total_funds - funds_spent;
+        gs.info(`
+		Task Order ID: ${this.taskOrder.sys_id} 
+		Calculation: Funds Spent
+	    + ${total_funds} (Total Funds)
+		- ${funds_spent} (Funds Spent)
+		= ${available_funds} (Available Funds)
+		`);
+        return available_funds;
+    },
+
     taskOrderHelper: function() {
         const data = {
             task_order_id: this.taskOrder.sys_id,
@@ -37,13 +59,13 @@ GetPortfolioDetails.prototype = {
             total_obligated_funds: this.totalObligatedFunds()
         };
 
-        return data; 
+        return data;
     },
 
     estimatedFundsAvailable: function() {
         // total funds - funds spent - estimated_funds_to_be_invoiced (month only)
         // if have costs with projected spend (is_actual === false), sum of all projected. 
-		// Else, just return monthly average
+        // Else, just return monthly average
 
         let total_obligated_funds = this.totalTaskOrderValue();
         let total_funds_spent = this.totalFundsSpent();
@@ -312,8 +334,8 @@ GetPortfolioDetails.prototype = {
             //begin calculations on CLINS
             total_obligated: '', //clinData.fundsObligated,
             funds_spent: '', //clinData.fundsSpent, 
-            available_funds: 0, //this.calculateAvailableFunds(costData),
-            total_portfolio_funds: 0,
+            available_funds: this.availableFunds(),
+            total_portfolio_funds: 0.0,
             period_funds_spent: 0,
             spend_monthly_average: 0,
             spend_last_month: 0,
@@ -336,13 +358,13 @@ GetPortfolioDetails.prototype = {
         <sys_created_by>tom.arnold</sys_created_by>
         <sys_created_on>2023-09-26 00:36:32</sys_created_on>
         <sys_id>52b20c094729f11039634aff336d4383</sys_id>
-        <sys_mod_count>94</sys_mod_count>
+        <sys_mod_count>108</sys_mod_count>
         <sys_name>GetPortfolioDetails</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_52b20c094729f11039634aff336d4383</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-09-27 01:05:39</sys_updated_on>
+        <sys_updated_on>2023-09-27 15:08:18</sys_updated_on>
     </sys_script_include>
 </record_update>
