@@ -18,46 +18,161 @@ GetPortfolioDetails.prototype = {
     CLINS_TABLE: 'x_g_dis_atat_clin',
     ENVIRONMENT_TABLE: 'x_g_dis_atat_environment',
     COST_TABLE: 'x_g_dis_atat_costs',
-   
+
     ctb: this.convertToBoolean,
 
-    initialize: function(portfolioId,userId){
+    initialize: function(portfolioId, userId) {
         this.portfolioId = portfolioId;
         this.userId = userId;
-       
     },
+
+    taskOrderHelper: function() {
+        const data = {
+            task_order_id: this.taskOrder.sys_id,
+            task_order_status: this.taskOrder.task_order_status,
+            estimated_funds_available: this.estimatedFundsAvailable(),
+            total_task_order_value: this.totalTaskOrderValue(),
+            total_lifecycle_amount: this.totalTaskOrderLifecycleAmount(),
+            total_funds_spent: this.totalFundsSpent(),
+            total_obligated_funds: this.totalObligatedFunds()
+        };
+
+        return data;
+    },
+
+    estimatedFundsAvailable: function() {
+        // total funds - funds spent - estimated_funds_to_be_invoiced (month only)
+        // if have costs with projected spend (is_actual === false), sum of all projected. Else, just return monthly                  average
+
+        let total_obligated_funds = this.totalTaskOrderValue();
+        let total_funds_spent = this.totalFundsSpent();
+
+        // get projected spend for month
+
+        let estimated_funds_to_be_invoiced = parseFloat(new global.GlideQuery(this.COST_TABLE)
+            .where('portfolio', this.portfolioId)
+            .where('is_actual', false)
+            .sum('value')
+            .orElse(0.0));
+
+        // if no projected spend, calculate monthly avg
+        // TODO; talk to Jeff/Koko ?
+        if (estimated_funds_to_be_invoiced === 0.0) {
+            gs.info(`Projected Spend === 0.0; calculating monthly avg (placeholder).`);
+            estimated_funds_to_be_invoiced = 10000.00;
+        }
+
+        const estimated_funds_available = total_obligated_funds - total_funds_spent - estimated_funds_to_be_invoiced;
+
+        gs.info(`
+		Task Order ID: ${this.taskOrder.sys_id} 
+		Calculation: Estimated Funds Available
+	    + ${total_obligated_funds} (Total Obligated Funds)
+		- ${total_funds_spent} (Total Funds Spent)
+		- ${estimated_funds_to_be_invoiced} (Estimated Funds To Be Invoiced)
+		= ${estimated_funds_available} (Estimated Funds Available)
+		`);
+        return estimated_funds_available;
+    },
+
+    totalTaskOrderLifecycleAmount: function() {
+        // sum of all funds_total values for all CLINs in all periods, past, present and future
+
+        let total_lifecycle_amount = parseFloat(new global.GlideQuery(this.CLINS_TABLE)
+            .where('task_order', this.taskOrder.sys_id)
+            .sum('funds_total')
+            .orElse(0.0));
+
+        gs.info(`
+		totalTaskOrderLifecycleAmount
+		Task Order ID: ${this.taskOrder.sys_id} 
+		Calculated: ${total_lifecycle_amount}
+		`);
+        return total_lifecycle_amount;
+    },
+
+    totalTaskOrderValue: function() {
+        // sum of all funds_total values for all CLINs (excercised) in all periods, past, present and future
+        // exercised -> all clins with funds obligated?
+
+        let total_task_order_value = parseFloat(new global.GlideQuery(this.CLINS_TABLE)
+            .where('task_order', this.taskOrder.sys_id)
+			.where('funds_obligated', '>', 0.0)
+            .sum('funds_total')
+            .orElse(0.0));
+
+        gs.info(`
+		totalTaskOrderValue
+		Task Order ID: ${this.taskOrder.sys_id} 
+		Calculated: ${total_task_order_value}
+		`);
+        return total_task_order_value;
+    },
+
+    totalFundsSpent: function() {
+        // sum of all current and past clins actual_funds_spent ==> CLINS table key
+        let total_funds_spent = parseFloat(new global.GlideQuery(this.COST_TABLE)
+            .where('portfolio', this.portfolioId)
+            .sum('value')
+            .orElse(0.0));
+
+        gs.info(`
+		totalFundsSpent
+		Task Order ID: ${this.taskOrder.sys_id} 
+		Calculated: ${total_funds_spent}
+		`);
+
+        return total_funds_spent;
+    },
+
+    totalObligatedFunds: function() {
+        let total_obligated_funds = new global.GlideQuery(this.CLINS_TABLE)
+            .where('task_order', this.taskOrder.sys_id)
+            .sum('funds_obligated')
+            .orElse(0.0);
+        gs.info(`
+		totalObligatedFunds
+		Task Order ID: ${this.taskOrder.sys_id} 
+		Calculated: ${total_obligated_funds}
+		`);
+        return total_obligated_funds;
+    },
+
     /** 
      * Gets environment details for a single environment given a sys_id
      * @param {id} representing an environments sys_id
      * @return {classification_level,environment_status,provisioning_request_date,provisioned_date,dashboard_link} a json object representing the given environments data in the table 
-     */  
-    getEnvrionmentDetails: function(id) {
-        //let environments = []
-        var environment = new GlideRecord(this.ENVIRONMENT_TABLE);
-        environment.get(id)
+     */
+    getEnvironmentDetails: function(id) {
+
+        // this can throw...?
+        const environment = new GlideRecord(this.ENVIRONMENT_TABLE);
+        environment.get(id);
         return {
             classification_level: environment.classification_level,
             environment_status: environment.environment_status,
             provisioning_request_date: environment.provisioning_request_date,
             provisioned_date: environment.provisioned_date,
             dashboard_link: environment.dashboard_link
-        }
+        };
     },
+
     /**
      * Gets list of environments and its details for a given portfolio
      * @param {id} representing a portfolio sys_id
      * @return {[{classification_level,environment_status,provisioning_request_date,provisioned_date,dashboard_link}]} an array of json objects for all environments
      */
     getEnvironments: function(id) {
-        var environments = new GlideRecord(this.ENVIRONMENT_TABLE);
-        environments.addQuery('portfolio',id)
-        environments.query()
-        var data = []
-        while(environments.next()){
-            data.push(this.getEnvrionmentDetails(environments.sys_id))
+        const environments = new GlideRecord(this.ENVIRONMENT_TABLE);
+        environments.addQuery('portfolio', id);
+        environments.query();
+        const data = [];
+        while (environments.next()) {
+            data.push(this.getEnvironmentDetails(environments.sys_id));
         }
-        return data
+        return data;
     },
+
     //TODO leverage getCostData() if at all possible
     /**
      * Gets costs for a given CLIN given the sys_id
@@ -65,8 +180,8 @@ GetPortfolioDetails.prototype = {
      * @return {[{is_actual,value,year_month}]}
      */
     getCosts: function(id) {
-        
-        return '' //data array json objects
+
+        return ''; //data array json objects
     },
     /**
      * Parses CLIN details for a single clin given a CLIN record
@@ -98,10 +213,10 @@ GetPortfolioDetails.prototype = {
      */
     getClins: function() {
         var data = [];
-        var clins = new GlideRecord(this.CLINS_TABLE)
-        clins.addQuery('task_order',this.taskOrder.sys_id)
+        var clins = new GlideRecord(this.CLINS_TABLE);
+        clins.addQuery('task_order', this.taskOrder.sys_id);
         clins.query();
-        while(clins.next()){
+        while (clins.next()) {
             var tmp = this.getClinDetails(clins.sys_id);
             data.push(tmp);
         }
@@ -113,9 +228,9 @@ GetPortfolioDetails.prototype = {
      * @returns 
      */
     getUserInfo: function(id) {
-        var user = new GlideRecord('sys_user')
-        user.get(id)
-        return { 
+        var user = new GlideRecord('sys_user');
+        user.get(id);
+        return {
             name: user.name,
             first_name: user.first_name,
             last_name: user.last_name,
@@ -126,20 +241,20 @@ GetPortfolioDetails.prototype = {
             phone: user.commercial_phone,
             home_phone: user.home_phone,
             title: user.title
-        }
+        };
     },
-    getUserList: function(userString){
-        if(userString == ''){
-            return ''
+    getUserList: function(userString) {
+        if (userString == '') {
+            return '';
         }
         var data = [];
-        if(userString.indexOf(',') === -1){
-            data.push(this.getUserInfo(userString.toString().trim()))
+        if (userString.indexOf(',') === -1) {
+            data.push(this.getUserInfo(userString.toString().trim()));
         } else {
-            var usersList = userString.split(',')
-            for(var i=0; i<usersList.length; i++){
+            var usersList = userString.split(',');
+            for (var i = 0; i < usersList.length; i++) {
                 var userId = usersList[i].trim();
-                data.push(this.getUserInfo(userId))
+                data.push(this.getUserInfo(userId));
             }
         }
         return data;
@@ -149,18 +264,17 @@ GetPortfolioDetails.prototype = {
      * @param {toId} task_order_id used to filter costs table data
      * @return {[{agency,clin,csp,is_actual,organization,portfolio,task_order_number,value,year_month}]} for all cost records of the given task order
      */
-    getCostData: function(toId){
-		var gr = new GlideRecord(this.COST_TABLE);
-		var fundsObligated = 0.00;
-		var fundsSpent = 0.00;
-        var data = []
-        
+    getCostData: function(toId) {
+        const gr = new GlideRecord(this.COST_TABLE);
+        var fundsObligated = 0.00;
+        var fundsSpent = 0.00;
+        var data = [];
 
-		gr.addQuery('task_order_number',toId)//.addCondition("clin_status", "!=", "OPTION_PENDING")/*.addCondition("clin_status","!=","EXPIRED")*/;
-		gr.query();
-		
-        while(gr.next()){
-            var date = new GlideDateTime(gr.year_month)
+        gr.addQuery('task_order_number', toId) //.addCondition("clin_status", "!=", "OPTION_PENDING")/*.addCondition("clin_status","!=","EXPIRED")*/;
+        gr.query();
+
+        while (gr.next()) {
+            var date = new GlideDateTime(gr.year_month);
             var tmp = {
                 agency: gr.agency.getDisplayValue().toString(),
                 clin: gr.clin.getDisplayValue().toString(),
@@ -169,22 +283,21 @@ GetPortfolioDetails.prototype = {
                 organization: gr.organization.getDisplayValue().toString(),
                 portfolio: gr.portfolio.getDisplayValue().toString(),
                 taskOrderNumber: gr.task_order_number.getDisplayValue().toString(),
-                value: gr.value != 0 ? parseFloat(gr.value):0,
+                value: gr.value != 0 ? parseFloat(gr.value) : 0,
                 yearMonth: gr.year_month.getDisplayValue().toString(),
                 year: date.getYearLocalTime(),
                 month: date.getMonthLocalTime(),
-                day: date.getDayOfMonthLocalTime(), 
-            }
-            gs.info("DTO: " + JSON.stringify(tmp))
-            data.push(tmp)
-		}
-		return data
-	},
-    getDetails: function(){
+                day: date.getDayOfMonthLocalTime(),
+            };
+            data.push(tmp);
+        }
+        return data;
+    },
+    getDetails: function() {
         this.portfolio.get(this.portfolioId);
         this.taskOrder.get(this.portfolio.active_task_order);
-        var clins = this.getClins();
-        var costData = this.getCostData(this.taskOrder.task_order_number)
+        const clins = this.getClins();
+        const costData = this.getCostData(this.taskOrder.task_order_number);
 
         return {
             portfolio_name: this.portfolio.name,
@@ -192,14 +305,10 @@ GetPortfolioDetails.prototype = {
             agency: this.portfolio.agency.title.toString(),
             last_modified: this.portfolio.last_updated.toString(),
             current_user_is_owner: this.portfolio.portfolio_owner.toString() === this.userId ? true : false,
-            current_user_is_manager: JSON.stringify(this.portfolio.portfolio_managers.toString()).includes(this.userId) ? true: false,
+            current_user_is_manager: JSON.stringify(this.portfolio.portfolio_managers.toString()).includes(this.userId) ? true : false,
             vendor: this.portfolio.vendor.toString(),
             pop_start_date: this.taskOrder.pop_start_date,
             pop_end_date: this.taskOrder.pop_end_date,
-            //TODO refactor
-            total_obligated: '',//clinData.fundsObligated,
-            funds_spent: '',//clinData.fundsSpent, 
-
             description: this.portfolio.description.toString(),
             is_archived: Boolean(this.portfolio.is_archived),
             last_updated: this.portfolio.last_updated,
@@ -213,24 +322,21 @@ GetPortfolioDetails.prototype = {
                 viewers: this.getUserList(this.portfolio.portfolio_viewers),
             },
             //begin calculations on CLINS
-            available_funds: 0,//this.calculateAvailableFunds(costData),
+            total_obligated: '', //clinData.fundsObligated,
+            funds_spent: '', //clinData.fundsSpent, 
+            available_funds: 0, //this.calculateAvailableFunds(costData),
             total_portfolio_funds: 0,
             period_funds_spent: 0,
             spend_monthly_average: 0,
             spend_last_month: 0,
-            pend_end_of_month_forecast: 0,
+            spend_end_of_month_forecast: 0,
             spend_period_to_date: 0,
             spend_end_of_period_forecast: 0,
             estimated_funds_to_be_invoiced: 0,
             estimated_funds_available: 0,
             //end calculations on CLINS
             //begin task order
-            task_order: {
-                task_order_status: this.taskOrder.task_order_status,
-                total_task_order_value: 0, //TODO calculated
-                total_lifecycle_amount: this.taskOrder.funds_total,
-                total_funds_spent: 0 //TODO calculated
-            },
+            task_order: this.taskOrderHelper(),
             environments: this.getEnvironments(this.portfolioId),
             clins: clins,
             clinData: costData //internal use, prefer GlideAggregate over heavy calculations
@@ -242,13 +348,13 @@ GetPortfolioDetails.prototype = {
         <sys_created_by>tom.arnold</sys_created_by>
         <sys_created_on>2023-09-26 00:36:32</sys_created_on>
         <sys_id>52b20c094729f11039634aff336d4383</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>88</sys_mod_count>
         <sys_name>GetPortfolioDetails</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_52b20c094729f11039634aff336d4383</sys_update_name>
-        <sys_updated_by>tom.arnold</sys_updated_by>
-        <sys_updated_on>2023-09-26 00:36:32</sys_updated_on>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-09-27 00:07:30</sys_updated_on>
     </sys_script_include>
 </record_update>
