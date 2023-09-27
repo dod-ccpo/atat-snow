@@ -37,12 +37,13 @@ GetPortfolioDetails.prototype = {
             total_obligated_funds: this.totalObligatedFunds()
         };
 
-        return data;
+        return data; 
     },
 
     estimatedFundsAvailable: function() {
         // total funds - funds spent - estimated_funds_to_be_invoiced (month only)
-        // if have costs with projected spend (is_actual === false), sum of all projected. Else, just return monthly                  average
+        // if have costs with projected spend (is_actual === false), sum of all projected. 
+		// Else, just return monthly average
 
         let total_obligated_funds = this.totalTaskOrderValue();
         let total_funds_spent = this.totalFundsSpent();
@@ -97,7 +98,7 @@ GetPortfolioDetails.prototype = {
 
         let total_task_order_value = parseFloat(new global.GlideQuery(this.CLINS_TABLE)
             .where('task_order', this.taskOrder.sys_id)
-			.where('funds_obligated', '>', 0.0)
+            .where('funds_obligated', '>', 0.0)
             .sum('funds_total')
             .orElse(0.0));
 
@@ -138,39 +139,26 @@ GetPortfolioDetails.prototype = {
         return total_obligated_funds;
     },
 
-    /** 
-     * Gets environment details for a single environment given a sys_id
-     * @param {id} representing an environments sys_id
-     * @return {classification_level,environment_status,provisioning_request_date,provisioned_date,dashboard_link} a json object representing the given environments data in the table 
-     */
-    getEnvironmentDetails: function(id) {
-
-        // this can throw...?
-        const environment = new GlideRecord(this.ENVIRONMENT_TABLE);
-        environment.get(id);
-        return {
-            classification_level: environment.classification_level,
-            environment_status: environment.environment_status,
-            provisioning_request_date: environment.provisioning_request_date,
-            provisioned_date: environment.provisioned_date,
-            dashboard_link: environment.dashboard_link
-        };
-    },
-
     /**
      * Gets list of environments and its details for a given portfolio
      * @param {id} representing a portfolio sys_id
-     * @return {[{classification_level,environment_status,provisioning_request_date,provisioned_date,dashboard_link}]} an array of json objects for all environments
+     * @return [Environment]  
      */
-    getEnvironments: function(id) {
-        const environments = new GlideRecord(this.ENVIRONMENT_TABLE);
-        environments.addQuery('portfolio', id);
-        environments.query();
-        const data = [];
-        while (environments.next()) {
-            data.push(this.getEnvironmentDetails(environments.sys_id));
+    getEnvironments: function() {
+        const gr = new GlideRecord(this.ENVIRONMENT_TABLE);
+        gr.addQuery('portfolio', this.portfolioId);
+        gr.query();
+        let environments = [];
+        while (gr.next()) {
+            environments.push({
+                classification_level: gr.getValue('classification_level'),
+                environment_status: gr.getValue('environment_status'),
+                provisioning_request_date: gr.getValue('provisioning_request_date'),
+                provisioned_date: gr.getValue('provisioned_date'),
+                dashboard_link: gs.getProperty('glide.servlet.uri') + gr.getLink(false),
+            });
         }
-        return data;
+        return environments;
     },
 
     //TODO leverage getCostData() if at all possible
@@ -270,7 +258,7 @@ GetPortfolioDetails.prototype = {
         var fundsSpent = 0.00;
         var data = [];
 
-        gr.addQuery('task_order_number', toId) //.addCondition("clin_status", "!=", "OPTION_PENDING")/*.addCondition("clin_status","!=","EXPIRED")*/;
+        gr.addQuery('task_order_number', toId);
         gr.query();
 
         while (gr.next()) {
@@ -348,13 +336,13 @@ GetPortfolioDetails.prototype = {
         <sys_created_by>tom.arnold</sys_created_by>
         <sys_created_on>2023-09-26 00:36:32</sys_created_on>
         <sys_id>52b20c094729f11039634aff336d4383</sys_id>
-        <sys_mod_count>88</sys_mod_count>
+        <sys_mod_count>94</sys_mod_count>
         <sys_name>GetPortfolioDetails</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_52b20c094729f11039634aff336d4383</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-09-27 00:07:30</sys_updated_on>
+        <sys_updated_on>2023-09-27 01:05:39</sys_updated_on>
     </sys_script_include>
 </record_update>
