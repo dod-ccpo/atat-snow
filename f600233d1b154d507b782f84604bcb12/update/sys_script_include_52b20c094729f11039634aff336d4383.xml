@@ -18,7 +18,7 @@ GetPortfolioDetails.prototype = {
     CLINS_TABLE: 'x_g_dis_atat_clin',
     ENVIRONMENT_TABLE: 'x_g_dis_atat_environment',
     COST_TABLE: 'x_g_dis_atat_costs',
-
+    AVG_DAYS_IN_MONTH: 30.437,
     ctb: this.convertToBoolean,
 
     initialize: function(portfolioId, userId) {
@@ -90,6 +90,55 @@ GetPortfolioDetails.prototype = {
         return period_funds_spent;
     },
 
+    spendMonthlyAverage: function() {
+        const taskOrderPopStart = new GlideDateTime(this.taskOrder.pop_start_date + " 12:00:00");
+        taskOrderPopStart.setDayOfMonthLocalTime(10);
+        const currentMonth = new GlideDateTime().getMonthLocalTime();
+        const month = taskOrderPopStart.getMonthLocalTime();
+        const dayOfMonth = taskOrderPopStart.getDayOfMonthLocalTime();
+        const percentOfMonth = (this.AVG_DAYS_IN_MONTH - dayOfMonth) / this.AVG_DAYS_IN_MONTH;
+
+        const costs = [];
+        const gq = new global.GlideQuery(this.COST_TABLE)
+            .where('portfolio', this.portfolioId)
+            .where('is_actual', true)
+            .groupBy('year_month')
+            .aggregate('sum', 'value')
+            .select()
+            .toArray(100)
+            .forEach((e, i) => {
+                const year_month = e.group.year_month;
+                const sum = e.sum.value;
+                const costGdt = new GlideDateTime(year_month + " 12:00:00");
+                const costMonth = costGdt.getMonthLocalTime();
+                if (month === costMonth) {
+                    const proratedCost = (sum / percentOfMonth);
+                    gs.info(`Applying prorate of ${percentOfMonth} to ${sum} --> ${proratedCost}`);
+                    costs.push(proratedCost);
+                } else {
+                    costs.push(sum);
+                }
+            });
+
+        const sum = costs.reduce((acc, currentValue) => {
+            return acc + currentValue;
+        }, 0);
+
+        gs.info(`
+		Task Order PoP Start Month: ${taskOrderPopStart.getMonthLocalTime()}
+		Current Month:              ${currentMonth}
+		Duration (months):          ${costs.length}
+		---
+		First Month prorate:        ${percentOfMonth}
+		Costs (prorated):           ${costs}
+		---
+		Sum:                        ${Math.trunc(sum)}
+		Avg:                        ${Math.trunc(sum/costs.length)}
+		---
+		`);
+        return sum / costs.length;
+    },
+
     // sum of all is_actual costs for all CLINs from previous month.
     spendLastMonth: function() {
         const currentMonthGdt = new GlideDateTime();
@@ -112,7 +161,14 @@ GetPortfolioDetails.prototype = {
         return spendLastMonth;
     },
 
-    spendEndOfMonthForecast: function() {
+    // (spend_last_month - spend_monthly_average) / spend_monthly_average * 100
+    spendLastMonthTrend: function() {
+        const spendLastMonth = this.spendLastMonth();
+        const spendMonthlyAverage = this.spendMonthlyAverage();
+        return ((spendLastMonth - spendMonthlyAverage) / spendMonthlyAverage) * 100;
+    },
+
+    spendEndOfMonthXaasForecast: function() {
         const firstDayOfThisMonthGdt = new GlideDateTime();
         firstDayOfThisMonthGdt.setDayOfMonthLocalTime(1);
 
@@ -209,11 +265,6 @@ GetPortfolioDetails.prototype = {
             .orElse(0.0);
 
         return total_obligated_funds;
-    },
-
-    spendMonthlyAverage: function() {
-		
-        return 0.0;
     },
 
     /**
@@ -381,18 +432,18 @@ GetPortfolioDetails.prototype = {
             available_funds: this.availableFunds(),
             total_portfolio_funds: this.totalPortfolioFunds(),
             period_funds_spent: this.periodFundsSpent(),
+            spend_monthly_average: this.spendMonthlyAverage(),
             spend_last_month: this.spendLastMonth(),
-			spend_last_month_trend: 0.0,
+            spend_last_month_trend: this.spendLastMonthTrend(),
             spend_end_of_month_xaas_forecast: this.spendEndOfMonthXaasForecast(),
-			spend_end_of_month_xaas_forecast_trend: 0.0,
-			spend_end_of_period_forecast: this.spendEndOfPeriodForecast(), // intentional duplicate
+            spend_end_of_month_xaas_forecast_trend: 0.0,
+            spend_end_of_period_forecast: this.spendEndOfPeriodForecast(), // intentional duplicate
             estimated_funds_available: this.estimatedFundsAvailable(),
-			estimated_funds_to_be_invoiced: this.spendEndOfPeriodForecast(), // intentional duplicate
+            estimated_funds_to_be_invoiced: this.spendEndOfPeriodForecast(), // intentional duplicate
             total_task_order_value: this.totalTaskOrderValue(),
             total_lifecycle_amount: this.totalTaskOrderLifecycleAmount(),
             total_funds_spent: this.totalFundsSpent(),
             total_obligated_funds: this.totalObligatedFunds(),
-            spend_monthly_average: this.spendMonthlyAverage(),
             clins: clins,
             clinData: costData
         };
@@ -403,13 +454,13 @@ GetPortfolioDetails.prototype = {
         <sys_created_by>tom.arnold</sys_created_by>
         <sys_created_on>2023-09-26 00:36:32</sys_created_on>
         <sys_id>52b20c094729f11039634aff336d4383</sys_id>
-        <sys_mod_count>230</sys_mod_count>
+        <sys_mod_count>280</sys_mod_count>
         <sys_name>GetPortfolioDetails</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_52b20c094729f11039634aff336d4383</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-09-28 19:07:32</sys_updated_on>
+        <sys_updated_on>2023-09-28 22:47:12</sys_updated_on>
     </sys_script_include>
 </record_update>
