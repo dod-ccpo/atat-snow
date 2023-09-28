@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element db_object_id="5b80519e971121107b1372571153af38" label="DAPPS:Contract Type" max_length="40" name="x_g_dis_atat_contract_type" type="collection">
+    <element db_object_id="02525908db47d99088887ea5f3961909" label="DAPPS:Contract Type" max_length="40" name="x_g_dis_atat_contract_type" type="collection">
         <element label="Acquisition Package" max_length="32" name="acquisition_package" reference="x_g_dis_atat_acquisition_package" type="reference"/>
         <element label="Contract Type Justification" max_length="2000" name="contract_type_justification" type="string"/>
         <element calculation="(function calculatedFieldValue(current) {&#10;    if (current.firm_fixed_price &amp;&amp; !current.time_and_materials) return 'FFP';&#10;    else if (!current.firm_fixed_price &amp;&amp; current.time_and_materials) return 'T&amp;M';&#10;    else if (current.firm_fixed_price &amp;&amp; current.time_and_materials) return 'TBD';&#10;    else return 'NULL';&#10;})(current);" display="true" label="Display" max_length="10" name="display" read_only="true" type="string" virtual="true"/>
