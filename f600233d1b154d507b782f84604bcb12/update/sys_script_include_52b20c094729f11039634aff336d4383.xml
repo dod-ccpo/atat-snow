@@ -26,46 +26,133 @@ GetPortfolioDetails.prototype = {
         this.userId = userId;
     },
 
-    availableFunds: function() {
-        // available_funds = total_funds (value of all exercised CLINs) minus funds_spent (total of all actual costs to date).
+    getInPeriodClins: function() {
+        const now = new GlideDate();
 
-        const total_funds = parseFloat(new global.GlideQuery(this.CLINS_TABLE)
+        const clins = new global.GlideQuery(this.CLINS_TABLE)
             .where('task_order', this.taskOrder.sys_id)
-            .where(new global.GlideQuery()
-                .where('clin_status', '!=', 'EXPIRED'))
-            .sum('funds_total')
-            .orElse(0.0));
-
-        const funds_spent = this.totalFundsSpent();
-        const available_funds = total_funds - funds_spent;
-        gs.info(`
-		Task Order ID: ${this.taskOrder.sys_id} 
-		Calculation: Funds Spent
-	    + ${total_funds} (Total Funds)
-		- ${funds_spent} (Funds Spent)
-		= ${available_funds} (Available Funds)
-		`);
-        return available_funds;
+            .where('pop_start_date', '<=', now.getValue())
+            .where('pop_end_date', '>', now.getValue())
+            .select('sys_id')
+            .reduce(function(clins, i) {
+                clins.push(i.sys_id);
+                return clins;
+            }, []);
+        return clins;
     },
 
-    taskOrderHelper: function() {
-        const data = {
-            task_order_id: this.taskOrder.sys_id,
-            task_order_status: this.taskOrder.task_order_status,
-            estimated_funds_available: this.estimatedFundsAvailable(),
-            total_task_order_value: this.totalTaskOrderValue(),
-            total_lifecycle_amount: this.totalTaskOrderLifecycleAmount(),
-            total_funds_spent: this.totalFundsSpent(),
-            total_obligated_funds: this.totalObligatedFunds()
-        };
+    availableFunds: function() {
+        // available_funds = sum   (funds_total) for all in-period clins
+        //                   minus (funds_spent) for all in-period clins)
 
-        return data;
+        const clinsInPeriod = this.getInPeriodClins();
+
+        const total_funds = new global.GlideQuery(this.CLINS_TABLE)
+            .where('task_order', this.taskOrder.sys_id)
+            .where('sys_id', 'IN', clinsInPeriod)
+            .sum('funds_total')
+            .orElse(0.0);
+
+        const funds_spent = parseFloat(new global.GlideQuery(this.COST_TABLE)
+            .where('portfolio', this.portfolioId)
+            .where('clin', 'IN', clinsInPeriod)
+            .where('is_actual', true)
+            .sum('value')
+            .orElse(0.0));
+
+        return total_funds - funds_spent;
+    },
+
+    // Total obligated funds of all in-period CLINs:
+    totalPortfolioFunds: function() {
+        const clinsInPeriod = this.getInPeriodClins();
+
+        const total_portfolio_funds = new global.GlideQuery(this.CLINS_TABLE)
+            .where('task_order', this.taskOrder.sys_id)
+            .where('sys_id', 'IN', clinsInPeriod)
+            .sum('funds_obligated')
+            .orElse(0.0);
+
+        return total_portfolio_funds;
+    },
+
+    // Sum of all is_actual costs in current PoP
+    periodFundsSpent: function() {
+        const clinsInPeriod = this.getInPeriodClins();
+
+        const period_funds_spent = new global.GlideQuery(this.COST_TABLE)
+            .where('portfolio', this.portfolioId)
+            .where('clin', 'IN', clinsInPeriod)
+            .where('is_actual', true)
+            .sum('value')
+            .orElse(0.0);
+
+        return period_funds_spent;
+    },
+
+    // sum of all is_actual costs for all CLINs from previous month.
+    spendLastMonth: function() {
+        const currentMonthGdt = new GlideDateTime();
+        currentMonthGdt.setDayOfMonthLocalTime(1);
+        const previousMonthGdt = new GlideDateTime();
+        previousMonthGdt.addMonthsLocalTime(-1);
+        previousMonthGdt.setDayOfMonthLocalTime(1);
+
+        const currentMonthDate = currentMonthGdt.getDate();
+        const previousMonthDate = previousMonthGdt.getDate();
+
+        const spendLastMonth = parseFloat(new global.GlideQuery(this.COST_TABLE)
+            .where('portfolio', this.portfolioId)
+            .where('is_actual', true)
+            .where('year_month', '>=', previousMonthDate)
+            .where('year_month', '<', currentMonthDate)
+            .sum('value')
+            .orElse(0.0));
+
+        return spendLastMonth;
+    },
+
+    spendEndOfMonthForecast: function() {
+        const firstDayOfThisMonthGdt = new GlideDateTime();
+        firstDayOfThisMonthGdt.setDayOfMonthLocalTime(1);
+
+        const firstDayOfThisMonthDate = firstDayOfThisMonthGdt.getDate();
+
+        const lastDayOfThisMonthGdt = new GlideDateTime();
+        lastDayOfThisMonthGdt.addMonthsLocalTime(1);
+        lastDayOfThisMonthGdt.setDayOfMonthLocalTime(1);
+        lastDayOfThisMonthGdt.addDaysLocalTime(-1);
+
+        const lastDayOfThisMonthDate = lastDayOfThisMonthGdt.getDate();
+
+        const spendEndOfMonthForecast = new global.GlideQuery(this.COST_TABLE)
+            .where('portfolio', this.portfolioId)
+            .where('is_actual', false)
+            .where('year_month', '>=', firstDayOfThisMonthDate.getValue())
+            .where('year_month', '<=', lastDayOfThisMonthDate.getValue())
+            .sum('value')
+            .orElse(0.0);
+        return spendEndOfMonthForecast;
+    },
+
+    spendEndOfPeriodForecast: function() {
+
+        const summedCostData = this.spendLastMonth();
+        // check latest forecast (is_actual=false)
+
+        const gq = new global.GlideQuery(this.COST_TABLE)
+            .where('portfolio', this.portfolioId)
+            .where('is_actual', false)
+            .groupBy('clin')
+            .aggregate('min', 'year_month')
+            .select();
+
+        return 0.0;
     },
 
     estimatedFundsAvailable: function() {
         // total funds - funds spent - estimated_funds_to_be_invoiced (month only)
         // if have costs with projected spend (is_actual === false), sum of all projected. 
-        // Else, just return monthly average
 
         let total_obligated_funds = this.totalTaskOrderValue();
         let total_funds_spent = this.totalFundsSpent();
@@ -78,45 +165,22 @@ GetPortfolioDetails.prototype = {
             .sum('value')
             .orElse(0.0));
 
-        // if no projected spend, calculate monthly avg
-        // TODO; talk to Jeff/Koko ?
-        if (estimated_funds_to_be_invoiced === 0.0) {
-            gs.info(`Projected Spend === 0.0; calculating monthly avg (placeholder).`);
-            estimated_funds_to_be_invoiced = 10000.00;
-        }
-
-        const estimated_funds_available = total_obligated_funds - total_funds_spent - estimated_funds_to_be_invoiced;
-
-        gs.info(`
-		Task Order ID: ${this.taskOrder.sys_id} 
-		Calculation: Estimated Funds Available
-	    + ${total_obligated_funds} (Total Obligated Funds)
-		- ${total_funds_spent} (Total Funds Spent)
-		- ${estimated_funds_to_be_invoiced} (Estimated Funds To Be Invoiced)
-		= ${estimated_funds_available} (Estimated Funds Available)
-		`);
-        return estimated_funds_available;
+        return total_obligated_funds - total_funds_spent - estimated_funds_to_be_invoiced;
     },
 
+    // sum of all funds_total values for all CLINs in all periods, past, present and future
     totalTaskOrderLifecycleAmount: function() {
-        // sum of all funds_total values for all CLINs in all periods, past, present and future
 
         let total_lifecycle_amount = parseFloat(new global.GlideQuery(this.CLINS_TABLE)
             .where('task_order', this.taskOrder.sys_id)
             .sum('funds_total')
             .orElse(0.0));
 
-        gs.info(`
-		totalTaskOrderLifecycleAmount
-		Task Order ID: ${this.taskOrder.sys_id} 
-		Calculated: ${total_lifecycle_amount}
-		`);
         return total_lifecycle_amount;
     },
 
+    // sum of all funds_total values for all CLINs (excercised) in all periods, past, present and future
     totalTaskOrderValue: function() {
-        // sum of all funds_total values for all CLINs (excercised) in all periods, past, present and future
-        // exercised -> all clins with funds obligated?
 
         let total_task_order_value = parseFloat(new global.GlideQuery(this.CLINS_TABLE)
             .where('task_order', this.taskOrder.sys_id)
@@ -124,26 +188,16 @@ GetPortfolioDetails.prototype = {
             .sum('funds_total')
             .orElse(0.0));
 
-        gs.info(`
-		totalTaskOrderValue
-		Task Order ID: ${this.taskOrder.sys_id} 
-		Calculated: ${total_task_order_value}
-		`);
         return total_task_order_value;
     },
 
+    // sum of all current and past clins actual_funds_spent
     totalFundsSpent: function() {
-        // sum of all current and past clins actual_funds_spent ==> CLINS table key
         let total_funds_spent = parseFloat(new global.GlideQuery(this.COST_TABLE)
             .where('portfolio', this.portfolioId)
+            .where('is_actual', true)
             .sum('value')
             .orElse(0.0));
-
-        gs.info(`
-		totalFundsSpent
-		Task Order ID: ${this.taskOrder.sys_id} 
-		Calculated: ${total_funds_spent}
-		`);
 
         return total_funds_spent;
     },
@@ -153,12 +207,13 @@ GetPortfolioDetails.prototype = {
             .where('task_order', this.taskOrder.sys_id)
             .sum('funds_obligated')
             .orElse(0.0);
-        gs.info(`
-		totalObligatedFunds
-		Task Order ID: ${this.taskOrder.sys_id} 
-		Calculated: ${total_obligated_funds}
-		`);
+
         return total_obligated_funds;
+    },
+
+    spendMonthlyAverage: function() {
+		
+        return 0.0;
     },
 
     /**
@@ -183,16 +238,6 @@ GetPortfolioDetails.prototype = {
         return environments;
     },
 
-    //TODO leverage getCostData() if at all possible
-    /**
-     * Gets costs for a given CLIN given the sys_id
-     * @param {id}
-     * @return {[{is_actual,value,year_month}]}
-     */
-    getCosts: function(id) {
-
-        return ''; //data array json objects
-    },
     /**
      * Parses CLIN details for a single clin given a CLIN record
      * @param {id} representing a CLIN sys_id
@@ -213,8 +258,7 @@ GetPortfolioDetails.prototype = {
             funds_total: clin.funds_total,
             pop_start_date: clin.pop_start_date,
             pop_end_date: clin.pop_end_date,
-            type: clin.type,
-            costs: this.getCosts(clin.sys_id)
+            type: clin.type
         };
     },
     /**
@@ -222,12 +266,12 @@ GetPortfolioDetails.prototype = {
      * @return data array of all CLINs for a task order
      */
     getClins: function() {
-        var data = [];
-        var clins = new GlideRecord(this.CLINS_TABLE);
+        const data = [];
+        const clins = new GlideRecord(this.CLINS_TABLE);
         clins.addQuery('task_order', this.taskOrder.sys_id);
         clins.query();
         while (clins.next()) {
-            var tmp = this.getClinDetails(clins.sys_id);
+            const tmp = this.getClinDetails(clins.sys_id);
             data.push(tmp);
         }
         return data;
@@ -238,7 +282,7 @@ GetPortfolioDetails.prototype = {
      * @returns 
      */
     getUserInfo: function(id) {
-        var user = new GlideRecord('sys_user');
+        const user = new GlideRecord('sys_user');
         user.get(id);
         return {
             name: user.name,
@@ -253,6 +297,7 @@ GetPortfolioDetails.prototype = {
             title: user.title
         };
     },
+
     getUserList: function(userString) {
         if (userString == '') {
             return '';
@@ -269,6 +314,7 @@ GetPortfolioDetails.prototype = {
         }
         return data;
     },
+
     /**
      * Gather ALL Cost data for a given Portfolio where task_order_number = portfolio.active_task_order
      * @param {toId} task_order_id used to filter costs table data
@@ -303,6 +349,7 @@ GetPortfolioDetails.prototype = {
         }
         return data;
     },
+
     getDetails: function() {
         this.portfolio.get(this.portfolioId);
         this.taskOrder.get(this.portfolio.active_task_order);
@@ -324,32 +371,30 @@ GetPortfolioDetails.prototype = {
             last_updated: this.portfolio.last_updated,
             last_cost_data_sync: this.portfolio.last_cost_data_sync,
             funding_status: this.portfolio.portfolio_funding_status,
-
+            environments: this.getEnvironments(),
             portfolio_users: {
                 creator: this.portfolio.sys_created_by,
                 owner: this.getUserInfo(this.portfolio.portfolio_owner),
                 managers: this.getUserList(this.portfolio.portfolio_managers),
                 viewers: this.getUserList(this.portfolio.portfolio_viewers),
             },
-            //begin calculations on CLINS
-            total_obligated: '', //clinData.fundsObligated,
-            funds_spent: '', //clinData.fundsSpent, 
             available_funds: this.availableFunds(),
-            total_portfolio_funds: 0.0,
-            period_funds_spent: 0,
-            spend_monthly_average: 0,
-            spend_last_month: 0,
-            spend_end_of_month_forecast: 0,
-            spend_period_to_date: 0,
-            spend_end_of_period_forecast: 0,
-            estimated_funds_to_be_invoiced: 0,
-            estimated_funds_available: 0,
-            //end calculations on CLINS
-            //begin task order
-            task_order: this.taskOrderHelper(),
-            environments: this.getEnvironments(this.portfolioId),
+            total_portfolio_funds: this.totalPortfolioFunds(),
+            period_funds_spent: this.periodFundsSpent(),
+            spend_last_month: this.spendLastMonth(),
+			spend_last_month_trend: 0.0,
+            spend_end_of_month_xaas_forecast: this.spendEndOfMonthXaasForecast(),
+			spend_end_of_month_xaas_forecast_trend: 0.0,
+			spend_end_of_period_forecast: this.spendEndOfPeriodForecast(), // intentional duplicate
+            estimated_funds_available: this.estimatedFundsAvailable(),
+			estimated_funds_to_be_invoiced: this.spendEndOfPeriodForecast(), // intentional duplicate
+            total_task_order_value: this.totalTaskOrderValue(),
+            total_lifecycle_amount: this.totalTaskOrderLifecycleAmount(),
+            total_funds_spent: this.totalFundsSpent(),
+            total_obligated_funds: this.totalObligatedFunds(),
+            spend_monthly_average: this.spendMonthlyAverage(),
             clins: clins,
-            clinData: costData //internal use, prefer GlideAggregate over heavy calculations
+            clinData: costData
         };
     },
     type: 'GetPortfolioDetails'
@@ -358,13 +403,13 @@ GetPortfolioDetails.prototype = {
         <sys_created_by>tom.arnold</sys_created_by>
         <sys_created_on>2023-09-26 00:36:32</sys_created_on>
         <sys_id>52b20c094729f11039634aff336d4383</sys_id>
-        <sys_mod_count>108</sys_mod_count>
+        <sys_mod_count>230</sys_mod_count>
         <sys_name>GetPortfolioDetails</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_52b20c094729f11039634aff336d4383</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-09-27 15:08:18</sys_updated_on>
+        <sys_updated_on>2023-09-28 19:07:32</sys_updated_on>
     </sys_script_include>
 </record_update>
