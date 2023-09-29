@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_g_dis_atat.GetPortfolioDetails</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>GetPortfolioDetails</name>
+        <script><![CDATA[var GetPortfolioDetails = Class.create();
+GetPortfolioDetails.prototype = {
+    errUtil: new ErrorHandler(),
+    portfolioId: null,
+    userId: null,
+
+    AVG_DAYS_IN_MONTH: 30.437,
+    CLINS_TABLE: 'x_g_dis_atat_clin',
+    ENVIRONMENT_TABLE: 'x_g_dis_atat_environment',
+    COST_TABLE: 'x_g_dis_atat_costs',
+
+    portfolio: new GlideRecord('x_g_dis_atat_portfolio'),
+    taskOrder: new GlideRecord('x_g_dis_atat_task_order'),
+    clinsGR: new GlideRecord('x_g_dis_atat_clin'),
+
+    inPeriodClins: null,
+
+    availableFunds: null,
+    totalPortfolioFunds: null,
+    periodFundsSpent: null,
+    spendLastMonth: null,
+    spendMonthlyAverage: null,
+    spendEndOfMonthXaasForecast: null,
+
+    totalLifecycleAmount: null,
+    totalTaskOrderValue: null,
+    totalFundsSpent: null,
+    totalObligatedFunds: null,
+
+    initialize: function(portfolioId, userId) {
+        this.portfolioId = portfolioId;
+        this.userId = userId;
+    },
+
+    getInPeriodClins: function() {
+        const now = new GlideDate();
+        const clins = new global.GlideQuery(this.CLINS_TABLE)
+            .where('task_order', this.taskOrder.sys_id)
+            .where('pop_start_date', '<=', now.getValue())
+            .where('pop_end_date', '>', now.getValue())
+            .select('sys_id')
+            .reduce(function(clins, i) {
+                clins.push(i.sys_id);
+                return clins;
+            }, []);
+        return clins;
+    },
+
+    getAvailableFunds: function() {
+        // available_funds = sum   (funds_total) for all in-period clins
+        //                   minus (funds_spent) for all in-period clins)
+
+        const clinsInPeriod = this.inPeriodClins;
+
+        const total_funds = new global.GlideQuery(this.CLINS_TABLE)
+            .where('task_order', this.taskOrder.sys_id)
+            .where('sys_id', 'IN', clinsInPeriod)
+            .sum('funds_total')
+            .orElse(0.0);
+
+        const funds_spent = parseFloat(new global.GlideQuery(this.COST_TABLE)
+            .where('portfolio', this.portfolioId)
+            .where('clin', 'IN', clinsInPeriod)
+            .where('is_actual', true)
+            .sum('value')
+            .orElse(0.0));
+
+        return total_funds - funds_spent;
+    },
+
+    // Total obligated funds of all in-period CLINs:
+    getTotalPortfolioFunds: function() {
+        const clinsInPeriod = this.inPeriodClins;
+
+        const total_portfolio_funds = new global.GlideQuery(this.CLINS_TABLE)
+            .where('task_order', this.taskOrder.sys_id)
+            .where('sys_id', 'IN', clinsInPeriod)
+            .sum('funds_obligated')
+            .orElse(0.0);
+
+        return total_portfolio_funds;
+    },
+
+    // Sum of all is_actual costs in current PoP
+    getPeriodFundsSpent: function() {
+        const clinsInPeriod = this.inPeriodClins;
+
+        const period_funds_spent = new global.GlideQuery(this.COST_TABLE)
+            .where('portfolio', this.portfolioId)
+            .where('clin', 'IN', clinsInPeriod)
+            .where('is_actual', true)
+            .sum('value')
+            .orElse(0.0);
+
+        return period_funds_spent;
+    },
+
+    getSpendMonthlyAverage: function() {
+        const taskOrderPopStart = new GlideDateTime(this.taskOrder.pop_start_date + " 12:00:00");
+        const currentMonth = new GlideDateTime().getMonthLocalTime();
+        const month = taskOrderPopStart.getMonthLocalTime();
+        const dayOfMonth = taskOrderPopStart.getDayOfMonthLocalTime();
+        const percentOfMonth = (this.AVG_DAYS_IN_MONTH - dayOfMonth) / this.AVG_DAYS_IN_MONTH;
+
+        const costs = [];
+        const gq = new global.GlideQuery(this.COST_TABLE)
+            .where('portfolio', this.portfolioId)
+            .where('is_actual', true)
+            .groupBy('year_month')
+            .aggregate('sum', 'value')
+            .select()
+            .toArray(100)
+            .forEach((e, i) => {
+                const year_month = e.group.year_month;
+                const sum = e.sum.value;
+                const costGdt = new GlideDateTime(year_month + " 12:00:00");
+                const costMonth = costGdt.getMonthLocalTime();
+                if (month === costMonth) {
+                    const proratedCost = (sum / percentOfMonth);
+                    costs.push(proratedCost);
+                } else {
+                    costs.push(sum);
+                }
+            });
+
+        const sum = costs.reduce((acc, currentValue) => {
+            return acc + currentValue;
+        }, 0);
+        /*
+        gs.info(`
+		Task Order PoP Start Month: ${taskOrderPopStart.getMonthLocalTime()}
+		Current Month:              ${currentMonth}
+		Duration (months):          ${costs.length}
+		---
+		First Month prorate:        ${percentOfMonth}
+		Costs (prorated):           ${costs}
+		---
+		Sum:                        ${Math.trunc(sum)}
+		Avg:                        ${Math.trunc(sum/costs.length)}
+		---
+		`);
+		*/
+        return sum / costs.length;
+    },
+
+    // sum of all is_actual costs for all CLINs from previous month.
+    getSpendLastMonth: function() {
+        const currentMonthGdt = new GlideDateTime();
+        currentMonthGdt.setDayOfMonthLocalTime(1);
+        const previousMonthGdt = new GlideDateTime();
+        previousMonthGdt.addMonthsLocalTime(-1);
+        previousMonthGdt.setDayOfMonthLocalTime(1);
+
+        const currentMonthDate = currentMonthGdt.getLocalDate();
+        const previousMonthDate = previousMonthGdt.getLocalDate();
+        const spendLastMonth = new global.GlideQuery(this.COST_TABLE)
+            .where('portfolio', this.portfolioId)
+            .where('is_actual', true)
+            .where('year_month', '>=', previousMonthDate)
+            .where('year_month', '<', currentMonthDate)
+            .sum('value')
+            .orElse(0.0);
+
+        return spendLastMonth;
+    },
+
+    // (spend_last_month - spend_monthly_average) / spend_monthly_average * 100
+    getSpendLastMonthTrend: function() {
+        return ((this.spendLastMonth - this.spendMonthlyAverage) / this.spendMonthlyAverage) * 100;
+    },
+
+    getSpendEndOfMonthXaasForecast: function() {
+        const firstDayOfThisMonthGdt = new GlideDateTime();
+        firstDayOfThisMonthGdt.setDayOfMonthLocalTime(1);
+        const firstDayOfThisMonthDate = firstDayOfThisMonthGdt.getLocalDate();
+
+        const lastDayOfThisMonthGdt = new GlideDateTime();
+        lastDayOfThisMonthGdt.addMonthsLocalTime(1);
+        lastDayOfThisMonthGdt.setDayOfMonthLocalTime(1);
+        lastDayOfThisMonthGdt.addDaysLocalTime(-1);
+
+        const lastDayOfThisMonthDate = lastDayOfThisMonthGdt.getLocalDate();
+
+        const spendEndOfMonthForecast = new global.GlideQuery(this.COST_TABLE)
+            .where('portfolio', this.portfolioId)
+            .where('is_actual', false)
+            .where('year_month', '>=', firstDayOfThisMonthDate)
+            .where('year_month', '<=', lastDayOfThisMonthDate)
+            .sum('value')
+            .orElse(0.0);
+        return spendEndOfMonthForecast;
+    },
+
+    getSpendEndOfMonthXaasForecastTrend: function() {
+        return ((this.spendEndOfMonthXaasForecast - this.spendMonthlyAverage) / this.spendMonthlyAverage) * 100;
+    },
+
+    // sum all actual costs + (spend_monthly_average * months_remaining (prorated))
+    getSpendEndOfPeriodForecast: function() {
+        const taskOrderPopEnd = new GlideDateTime(this.taskOrder.pop_end_date + " 12:00:00");
+        const now = new GlideDateTime();
+        const dur = GlideDateTime.subtract(now, taskOrderPopEnd);
+
+        const monthsRemaining = dur.getRoundedDayPart() / this.AVG_DAYS_IN_MONTH;
+
+        const spend_end_of_period_forecast = this.totalFundsSpent + (this.spendMonthlyAverage * monthsRemaining);
+        /*
+        gs.info(`
+		Task Order PoP End:         ${taskOrderPopEnd}
+		Now:                        ${now}
+		Dur:                        ${dur.getDisplayValue()}
+		Months Remaining:           ${monthsRemaining}
+		---
+		Total Funds Spent:          ${totalFundsSpent}
+		Spend Monthly Average:      ${spendMonthlyAverage}
+		---
+		SpendEndOfPeriodForecast:   ${spend_end_of_period_forecast}
+		---
+		`);*/
+        return spend_end_of_period_forecast;
+    },
+
+    getEstimatedFundsAvailable: function() {
+        // total funds - funds spent - estimated_funds_to_be_invoiced (month only)
+        // if have costs with projected spend (is_actual === false), sum of all projected. 
+
+        const estimated_funds_to_be_invoiced = parseFloat(new global.GlideQuery(this.COST_TABLE)
+            .where('portfolio', this.portfolioId)
+            .where('is_actual', false)
+            .sum('value')
+            .orElse(0.0));
+
+        return this.totalPortfolioFunds - this.totalFundsSpent - estimated_funds_to_be_invoiced;
+    },
+
+    // sum of all funds_total values for all CLINs in all periods, past, present and future
+    getTotalLifecycleAmount: function() {
+        const total_lifecycle_amount = parseFloat(new global.GlideQuery(this.CLINS_TABLE)
+            .where('task_order', this.taskOrder.sys_id)
+            .sum('funds_total')
+            .orElse(0.0));
+
+        return total_lifecycle_amount;
+    },
+
+    // sum of all funds_total values for all CLINs (excercised) in all periods, past, present and future
+    getTotalTaskOrderValue: function() {
+        const total_task_order_value = parseFloat(new global.GlideQuery(this.CLINS_TABLE)
+            .where('task_order', this.taskOrder.sys_id)
+            .where('funds_obligated', '>', 0.0)
+            .sum('funds_total')
+            .orElse(0.0));
+
+        return total_task_order_value;
+    },
+
+    // sum of all current and past clins actual_funds_spent
+    getTotalFundsSpent: function() {
+        const total_funds_spent = new global.GlideQuery(this.COST_TABLE)
+            .where('portfolio', this.portfolioId)
+            .where('is_actual', true)
+            .sum('value')
+            .orElse(0.0);
+
+        return total_funds_spent;
+    },
+
+    getTotalObligatedFunds: function() {
+        const total_obligated_funds = new global.GlideQuery(this.CLINS_TABLE)
+            .where('task_order', this.taskOrder.sys_id)
+            .sum('funds_obligated')
+            .orElse(0.0);
+
+        return total_obligated_funds;
+    },
+
+    getEnvironments: function() {
+        const gr = new GlideRecord(this.ENVIRONMENT_TABLE);
+        gr.addQuery('portfolio', this.portfolioId);
+        gr.query();
+        let environments = [];
+        while (gr.next()) {
+            environments.push({
+                classification_level: gr.getValue('classification_level'),
+                environment_status: gr.getValue('environment_status'),
+                provisioning_request_date: gr.getValue('provisioning_request_date'),
+                provisioned_date: gr.getValue('provisioned_date'),
+                dashboard_link: gs.getProperty('glide.servlet.uri') + gr.getLink(false),
+            });
+        }
+        return environments;
+    },
+
+    getClinDetails: function(id) {
+        const clin = new GlideRecord(this.CLINS_TABLE);
+        clin.get(id);
+        const costs = new global.GlideQuery(this.COST_TABLE)
+            .where('clin', id)
+            .select('is_actual', 'value', 'year_month')
+            .toArray(100);
+
+        return {
+            clin_number: clin.clin_number,
+            idiq_clin: clin.idiq_clin,
+            active: Boolean(clin.active),
+            actual_funds_spent: clin.actual_funds_spent,
+            clin_status: clin.clin_status,
+            classification_level: clin.classification_level,
+            funds_obligated: clin.funds_obligated,
+            funds_total: clin.funds_total,
+            pop_start_date: clin.pop_start_date,
+            pop_end_date: clin.pop_end_date,
+            type: clin.type,
+            costs: costs
+        };
+    },
+
+	// not optimized; optimization pass in future sprint after more discussion
+    getPortfolioUsers: function() {
+        const creator = new global.GlideQuery('sys_user')
+            .where('user_name', this.portfolio.sys_created_by)
+            .selectOne('name', 'first_name', 'last_name', 'user_name', 'email', 'company', 'mobile_phone', 'phone', 'home_phone', 'title')
+            .get();
+
+        const owner = new global.GlideQuery('sys_user')
+            .where('sys_id', this.portfolio.portfolio_owner)
+            .selectOne('name', 'first_name', 'last_name', 'user_name', 'email', 'company', 'mobile_phone', 'phone', 'home_phone', 'title')
+            .get();
+
+        let managers = [];
+        if (this.portfolio.portfolio_managers) {
+            managers = new global.GlideQuery('sys_user')
+                .where('sys_id', 'IN', this.portfolio.portfolio_managers.split(','))
+                .select('name', 'first_name', 'last_name', 'user_name', 'email', 'company', 'mobile_phone', 'phone', 'home_phone', 'title')
+                .toArray(100);
+        }
+
+        let viewers = [];
+        if (this.portfolio.portfolio_viewers) {
+            viewers = new global.GlideQuery('sys_user')
+                .where('sys_id', 'IN', this.portfolio.portfolio_viewers.split(','))
+                .select('name', 'first_name', 'last_name', 'user_name', 'email', 'company', 'mobile_phone', 'phone', 'home_phone', 'title')
+                .toArray(100);
+        }
+
+        return {
+            creator,
+            owner,
+            managers,
+            viewers
+        };
+    },
+
+    /**
+     * Gets CLINs for a given task order
+     * @return data array of all CLINs for a task order
+     */
+    getClins: function() {
+        const data = [];
+        const clins = new GlideRecord(this.CLINS_TABLE);
+        clins.addQuery('task_order', this.taskOrder.sys_id);
+        clins.query();
+        while (clins.next()) {
+            const tmp = this.getClinDetails(clins.sys_id);
+            data.push(tmp);
+        }
+        return data;
+    },
+
+    getDetails: function() {
+        this.portfolio.get(this.portfolioId);
+        this.taskOrder.get(this.portfolio.active_task_order);
+        this.inPeriodClins = this.getInPeriodClins();
+        this.availableFunds = this.getAvailableFunds();
+        this.totalPortfolioFunds = this.getTotalPortfolioFunds();
+        this.periodFundsSpent = this.getPeriodFundsSpent();
+        this.spendLastMonth = this.getSpendLastMonth();
+        this.spendMonthlyAverage = this.getSpendMonthlyAverage();
+        this.spendEndOfMonthXaasForecast = this.getSpendEndOfMonthXaasForecast();
+
+        this.totalLifecycleAmount = this.getTotalLifecycleAmount();
+        this.totalTaskOrderValue = this.getTotalTaskOrderValue();
+        this.totalFundsSpent = this.getTotalFundsSpent();
+        this.totalObligatedFunds = this.getTotalObligatedFunds();
+
+        const clins = this.getClins();
+        return {
+            portfolio_name: this.portfolio.name,
+            portfolio_status: this.portfolio.portfolio_status.toString(),
+            agency: this.portfolio.agency.title.toString(),
+            last_modified: this.portfolio.last_updated.toString(),
+            current_user_is_owner: this.portfolio.portfolio_owner.toString() === this.userId ? true : false,
+            current_user_is_manager: JSON.stringify(this.portfolio.portfolio_managers.toString()).includes(this.userId) ? true : false,
+            vendor: this.portfolio.vendor.toString(),
+            pop_start_date: this.taskOrder.pop_start_date,
+            pop_end_date: this.taskOrder.pop_end_date,
+            description: this.portfolio.description.toString(),
+            is_archived: Boolean(this.portfolio.is_archived),
+            last_updated: this.portfolio.last_updated,
+            last_cost_data_sync: this.portfolio.last_cost_data_sync,
+            funding_status: this.portfolio.portfolio_funding_status,
+            environments: this.getEnvironments(),
+            portfolio_users: this.getPortfolioUsers(),
+            available_funds: this.availableFunds.toFixed(2),
+            total_portfolio_funds: this.totalPortfolioFunds.toFixed(2),
+            period_funds_spent: this.periodFundsSpent.toFixed(2),
+            spend_monthly_average: this.spendMonthlyAverage.toFixed(2),
+            spend_last_month: this.spendLastMonth.toFixed(2),
+            spend_last_month_trend: this.getSpendLastMonthTrend().toFixed(2),
+            spend_end_of_month_xaas_forecast: this.spendEndOfMonthXaasForecast.toFixed(2),
+            spend_end_of_month_xaas_forecast_trend: this.getSpendEndOfMonthXaasForecastTrend().toFixed(2),
+            spend_end_of_period_forecast: this.getSpendEndOfPeriodForecast().toFixed(2), // intentional duplicate
+            estimated_funds_available: this.getEstimatedFundsAvailable().toFixed(2),
+            estimated_funds_to_be_invoiced: this.getSpendEndOfPeriodForecast().toFixed(2), // intentional duplicate
+            task_order: {
+                total_task_order_value: this.totalTaskOrderValue.toFixed(2),
+                total_lifecycle_amount: this.totalLifecycleAmount.toFixed(2),
+                total_funds_spent: this.totalFundsSpent.toFixed(2),
+                total_obligated_funds: this.totalObligatedFunds.toFixed(2),
+            },
+            clins,
+        };
+    },
+    type: 'GetPortfolioDetails'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>tom.arnold</sys_created_by>
+        <sys_created_on>2023-09-26 00:36:32</sys_created_on>
+        <sys_id>52b20c094729f11039634aff336d4383</sys_id>
+        <sys_mod_count>387</sys_mod_count>
+        <sys_name>GetPortfolioDetails</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_include_52b20c094729f11039634aff336d4383</sys_update_name>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-09-29 15:00:36</sys_updated_on>
+    </sys_script_include>
+</record_update>
