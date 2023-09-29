@@ -12,32 +12,32 @@ GetPortfolioDetails.prototype = {
     errUtil: new ErrorHandler(),
     portfolioId: null,
     userId: null,
-	
-	AVG_DAYS_IN_MONTH: 30.437,
+
+    AVG_DAYS_IN_MONTH: 30.437,
     CLINS_TABLE: 'x_g_dis_atat_clin',
     ENVIRONMENT_TABLE: 'x_g_dis_atat_environment',
     COST_TABLE: 'x_g_dis_atat_costs',
-	
+
     portfolio: new GlideRecord('x_g_dis_atat_portfolio'),
     taskOrder: new GlideRecord('x_g_dis_atat_task_order'),
     clinsGR: new GlideRecord('x_g_dis_atat_clin'),
 
     ctb: this.convertToBoolean,
-	
+
     inPeriodClins: null,
-	
-	availableFunds: null,
-	totalPortfolioFunds: null,
-	periodFundsSpent: null,
-	spendLastMonth: null,
-	spendMonthlyAverage: null,
-	spendEndOfMonthXaasForecast: null,
-	
-	totalLifecycleAmount: null,
-	totalTaskOrderValue: null,
-	totalFundsSpent: null,
-	totalObligatedFunds: null,
-	
+
+    availableFunds: null,
+    totalPortfolioFunds: null,
+    periodFundsSpent: null,
+    spendLastMonth: null,
+    spendMonthlyAverage: null,
+    spendEndOfMonthXaasForecast: null,
+
+    totalLifecycleAmount: null,
+    totalTaskOrderValue: null,
+    totalFundsSpent: null,
+    totalObligatedFunds: null,
+
     initialize: function(portfolioId, userId) {
         this.portfolioId = portfolioId;
         this.userId = userId;
@@ -201,21 +201,21 @@ GetPortfolioDetails.prototype = {
             .orElse(0.0);
         return spendEndOfMonthForecast;
     },
-	
-	getSpendEndOfMonthXaasForecastTrend: function() {
+
+    getSpendEndOfMonthXaasForecastTrend: function() {
         return ((this.spendEndOfMonthXaasForecast - this.spendMonthlyAverage) / this.spendMonthlyAverage) * 100;
-	},
+    },
 
-	// sum all actual costs + (spend_monthly_average * months_remaining (prorated))
+    // sum all actual costs + (spend_monthly_average * months_remaining (prorated))
     getSpendEndOfPeriodForecast: function() {
-		const taskOrderPopEnd = new GlideDateTime(this.taskOrder.pop_end_date + " 12:00:00");
-		const now = new GlideDateTime();
-		const dur = GlideDateTime.subtract(now, taskOrderPopEnd);
-		
-		const monthsRemaining = dur.getRoundedDayPart() / this.AVG_DAYS_IN_MONTH;
+        const taskOrderPopEnd = new GlideDateTime(this.taskOrder.pop_end_date + " 12:00:00");
+        const now = new GlideDateTime();
+        const dur = GlideDateTime.subtract(now, taskOrderPopEnd);
 
-		const spend_end_of_period_forecast = this.totalFundsSpent + (this.spendMonthlyAverage * monthsRemaining);
-		/*
+        const monthsRemaining = dur.getRoundedDayPart() / this.AVG_DAYS_IN_MONTH;
+
+        const spend_end_of_period_forecast = this.totalFundsSpent + (this.spendMonthlyAverage * monthsRemaining);
+        /*
         gs.info(`
 		Task Order PoP End:         ${taskOrderPopEnd}
 		Now:                        ${now}
@@ -330,21 +330,7 @@ GetPortfolioDetails.prototype = {
             type: clin.type
         };
     },
-    /**
-     * Gets CLINs for a given task order
-     * @return data array of all CLINs for a task order
-     */
-    getClins: function() {
-        const data = [];
-        const clins = new GlideRecord(this.CLINS_TABLE);
-        clins.addQuery('task_order', this.taskOrder.sys_id);
-        clins.query();
-        while (clins.next()) {
-            const tmp = this.getClinDetails(clins.sys_id);
-            data.push(tmp);
-        }
-        return data;
-    },
+
     /**
      * Gets info for a single user record in the sys_user table
      * @param {id} representing a user sys_id 
@@ -389,13 +375,13 @@ GetPortfolioDetails.prototype = {
      * @param {toId} task_order_id used to filter costs table data
      * @return {[{agency,clin,csp,is_actual,organization,portfolio,task_order_number,value,year_month}]} for all cost records of the given task order
      */
-    getCostData: function(toId) {
+    getCostData: function() {
         const gr = new GlideRecord(this.COST_TABLE);
         var fundsObligated = 0.00;
         var fundsSpent = 0.00;
         var data = [];
 
-        gr.addQuery('task_order_number', toId);
+        gr.addQuery('task_order_number', this.taskOrder.task_order_number);
         gr.query();
 
         while (gr.next()) {
@@ -418,27 +404,48 @@ GetPortfolioDetails.prototype = {
         }
         return data;
     },
+    /**
+     * Gets CLINs for a given task order
+     * @return data array of all CLINs for a task order
+     */
+    getClins: function() {
+        const data = [];
+        const clins = new GlideRecord(this.CLINS_TABLE);
+        clins.addQuery('task_order', this.taskOrder.sys_id);
+        clins.query();
+        while (clins.next()) {
+            const tmp = this.getClinDetails(clins.sys_id);
+            data.push(tmp);
+        }
+        return data;
+    },
+
+    getClinData: function() {
+        const gq = new global.GlideQuery(this.CLINS_TABLE)
+            .where('task_order', this.taskOrder.sys_id)
+            .select()
+            .toArray(100);
+		return gq;
+    },
 
     getDetails: function() {
-		this.portfolio.get(this.portfolioId);
-		this.taskOrder.get(this.portfolio.active_task_order);
-		this.inPeriodClins = this.getInPeriodClins();
-		this.availableFunds = this.getAvailableFunds();
-		this.totalPortfolioFunds = this.getTotalPortfolioFunds();
-		this.periodFundsSpent = this.getPeriodFundsSpent();
-		this.spendLastMonth = this.getSpendLastMonth();
-		this.spendMonthlyAverage = this.getSpendMonthlyAverage();
-		this.spendEndOfMonthXaasForecast = this.getSpendEndOfMonthXaasForecast();
-		
-		this.totalLifecycleAmount = this.getTotalLifecycleAmount();
-		this.totalTaskOrderValue = this.getTotalTaskOrderValue();
-		this.totalFundsSpent = this.getTotalFundsSpent();
-		this.totalObligatedFunds = this.getTotalObligatedFunds();
-		
+        this.portfolio.get(this.portfolioId);
+        this.taskOrder.get(this.portfolio.active_task_order);
+        this.inPeriodClins = this.getInPeriodClins();
+        this.availableFunds = this.getAvailableFunds();
+        this.totalPortfolioFunds = this.getTotalPortfolioFunds();
+        this.periodFundsSpent = this.getPeriodFundsSpent();
+        this.spendLastMonth = this.getSpendLastMonth();
+        this.spendMonthlyAverage = this.getSpendMonthlyAverage();
+        this.spendEndOfMonthXaasForecast = this.getSpendEndOfMonthXaasForecast();
+
+        this.totalLifecycleAmount = this.getTotalLifecycleAmount();
+        this.totalTaskOrderValue = this.getTotalTaskOrderValue();
+        this.totalFundsSpent = this.getTotalFundsSpent();
+        this.totalObligatedFunds = this.getTotalObligatedFunds();
 		
         const clins = this.getClins();
-        const costData = this.getCostData(this.taskOrder.task_order_number);
-
+        const costData = this.getCostData();
         return {
             portfolio_name: this.portfolio.name,
             portfolio_status: this.portfolio.portfolio_status.toString(),
@@ -476,8 +483,9 @@ GetPortfolioDetails.prototype = {
             total_lifecycle_amount: this.totalLifecycleAmount,
             total_funds_spent: this.totalFundsSpent,
             total_obligated_funds: this.totalObligatedFunds,
-            clins: clins,
+			clins: clins,
             clinData: costData
+            
         };
     },
     type: 'GetPortfolioDetails'
@@ -486,13 +494,13 @@ GetPortfolioDetails.prototype = {
         <sys_created_by>tom.arnold</sys_created_by>
         <sys_created_on>2023-09-26 00:36:32</sys_created_on>
         <sys_id>52b20c094729f11039634aff336d4383</sys_id>
-        <sys_mod_count>321</sys_mod_count>
+        <sys_mod_count>329</sys_mod_count>
         <sys_name>GetPortfolioDetails</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_52b20c094729f11039634aff336d4383</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-09-29 02:37:38</sys_updated_on>
+        <sys_updated_on>2023-09-29 03:07:47</sys_updated_on>
     </sys_script_include>
 </record_update>
