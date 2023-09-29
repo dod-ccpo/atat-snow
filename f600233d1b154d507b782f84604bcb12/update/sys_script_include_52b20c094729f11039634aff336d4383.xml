@@ -22,8 +22,6 @@ GetPortfolioDetails.prototype = {
     taskOrder: new GlideRecord('x_g_dis_atat_task_order'),
     clinsGR: new GlideRecord('x_g_dis_atat_clin'),
 
-    ctb: this.convertToBoolean,
-
     inPeriodClins: null,
 
     availableFunds: null,
@@ -285,11 +283,6 @@ GetPortfolioDetails.prototype = {
         return total_obligated_funds;
     },
 
-    /**
-     * Gets list of environments and its details for a given portfolio
-     * @param {id} representing a portfolio sys_id
-     * @return [Environment]  
-     */
     getEnvironments: function() {
         const gr = new GlideRecord(this.ENVIRONMENT_TABLE);
         gr.addQuery('portfolio', this.portfolioId);
@@ -307,15 +300,14 @@ GetPortfolioDetails.prototype = {
         return environments;
     },
 
-    /**
-     * Parses CLIN details for a single clin given a CLIN record
-     * @param {id} representing a CLIN sys_id
-     * @return {clin_number,idiq_clin,active,clin_status,classification_level,funds_obligated,funds_total,pop_start_date,pop_end_date,type,costs}
-     */
     getClinDetails: function(id) {
-        //TODO get costs associated with each CLIN
-        var clin = new GlideRecord(this.CLINS_TABLE);
+        const clin = new GlideRecord(this.CLINS_TABLE);
         clin.get(id);
+        const costs = new global.GlideQuery(this.COST_TABLE)
+            .where('clin', id)
+            .select('is_actual', 'value', 'year_month')
+            .toArray(100);
+
         return {
             clin_number: clin.clin_number,
             idiq_clin: clin.idiq_clin,
@@ -327,83 +319,46 @@ GetPortfolioDetails.prototype = {
             funds_total: clin.funds_total,
             pop_start_date: clin.pop_start_date,
             pop_end_date: clin.pop_end_date,
-            type: clin.type
+            type: clin.type,
+            costs: costs
         };
     },
 
-    /**
-     * Gets info for a single user record in the sys_user table
-     * @param {id} representing a user sys_id 
-     * @returns 
-     */
-    getUserInfo: function(id) {
-        const user = new GlideRecord('sys_user');
-        user.get(id);
+    getPortfolioUsers: function() {
+        const creator = new global.GlideQuery('sys_user')
+            .where('user_name', this.portfolio.sys_created_by)
+            .selectOne('name', 'first_name', 'last_name', 'user_name', 'email', 'company', 'mobile_phone', 'phone', 'home_phone', 'title')
+            .get();
+
+        const owner = new global.GlideQuery('sys_user')
+            .where('sys_id', this.portfolio.portfolio_owner)
+            .selectOne('name', 'first_name', 'last_name', 'user_name', 'email', 'company', 'mobile_phone', 'phone', 'home_phone', 'title')
+            .get();
+
+        let managers = [];
+        if (this.portfolio.portfolio_managers) {
+            managers = new global.GlideQuery('sys_user')
+                .where('sys_id', 'IN', this.portfolio.portfolio_managers.split(','))
+                .select('name', 'first_name', 'last_name', 'user_name', 'email', 'company', 'mobile_phone', 'phone', 'home_phone', 'title')
+                .toArray(100);
+        }
+
+        let viewers = [];
+        if (this.portfolio.portfolio_viewers) {
+            viewers = new global.GlideQuery('sys_user')
+                .where('sys_id', 'IN', this.portfolio.portfolio_viewers.split(','))
+                .select('name', 'first_name', 'last_name', 'user_name', 'email', 'company', 'mobile_phone', 'phone', 'home_phone', 'title')
+                .toArray(100);
+        }
+
         return {
-            name: user.name,
-            first_name: user.first_name,
-            last_name: user.last_name,
-            user_name: '', //what is this?
-            email: user.email,
-            company: user.company.name, //ref
-            mobile_phone: user.mobile_phone,
-            phone: user.commercial_phone,
-            home_phone: user.home_phone,
-            title: user.title
+            creator,
+            owner,
+            managers,
+            viewers
         };
     },
 
-    getUserList: function(userString) {
-        if (userString == '') {
-            return '';
-        }
-        var data = [];
-        if (userString.indexOf(',') === -1) {
-            data.push(this.getUserInfo(userString.toString().trim()));
-        } else {
-            var usersList = userString.split(',');
-            for (var i = 0; i < usersList.length; i++) {
-                var userId = usersList[i].trim();
-                data.push(this.getUserInfo(userId));
-            }
-        }
-        return data;
-    },
-
-    /**
-     * Gather ALL Cost data for a given Portfolio where task_order_number = portfolio.active_task_order
-     * @param {toId} task_order_id used to filter costs table data
-     * @return {[{agency,clin,csp,is_actual,organization,portfolio,task_order_number,value,year_month}]} for all cost records of the given task order
-     */
-    getCostData: function() {
-        const gr = new GlideRecord(this.COST_TABLE);
-        var fundsObligated = 0.00;
-        var fundsSpent = 0.00;
-        var data = [];
-
-        gr.addQuery('task_order_number', this.taskOrder.task_order_number);
-        gr.query();
-
-        while (gr.next()) {
-            var date = new GlideDateTime(gr.year_month);
-            var tmp = {
-                agency: gr.agency.getDisplayValue().toString(),
-                clin: gr.clin.getDisplayValue().toString(),
-                csp: gr.csp.getDisplayValue().toString(),
-                is_actual: Boolean(gr.is_actual),
-                organization: gr.organization.getDisplayValue().toString(),
-                portfolio: gr.portfolio.getDisplayValue().toString(),
-                taskOrderNumber: gr.task_order_number.getDisplayValue().toString(),
-                value: gr.value != 0 ? parseFloat(gr.value) : 0,
-                yearMonth: gr.year_month.getDisplayValue().toString(),
-                year: date.getYearLocalTime(),
-                month: date.getMonthLocalTime(),
-                day: date.getDayOfMonthLocalTime(),
-            };
-            data.push(tmp);
-        }
-        return data;
-    },
     /**
      * Gets CLINs for a given task order
      * @return data array of all CLINs for a task order
@@ -418,14 +373,6 @@ GetPortfolioDetails.prototype = {
             data.push(tmp);
         }
         return data;
-    },
-
-    getClinData: function() {
-        const gq = new global.GlideQuery(this.CLINS_TABLE)
-            .where('task_order', this.taskOrder.sys_id)
-            .select()
-            .toArray(100);
-		return gq;
     },
 
     getDetails: function() {
@@ -443,9 +390,8 @@ GetPortfolioDetails.prototype = {
         this.totalTaskOrderValue = this.getTotalTaskOrderValue();
         this.totalFundsSpent = this.getTotalFundsSpent();
         this.totalObligatedFunds = this.getTotalObligatedFunds();
-		
+
         const clins = this.getClins();
-        const costData = this.getCostData();
         return {
             portfolio_name: this.portfolio.name,
             portfolio_status: this.portfolio.portfolio_status.toString(),
@@ -462,30 +408,25 @@ GetPortfolioDetails.prototype = {
             last_cost_data_sync: this.portfolio.last_cost_data_sync,
             funding_status: this.portfolio.portfolio_funding_status,
             environments: this.getEnvironments(),
-            portfolio_users: {
-                creator: this.portfolio.sys_created_by,
-                owner: this.getUserInfo(this.portfolio.portfolio_owner),
-                managers: this.getUserList(this.portfolio.portfolio_managers),
-                viewers: this.getUserList(this.portfolio.portfolio_viewers),
+            portfolio_users: this.getPortfolioUsers(),
+            available_funds: this.availableFunds.toFixed(2),
+            total_portfolio_funds: this.totalPortfolioFunds.toFixed(2),
+            period_funds_spent: this.periodFundsSpent.toFixed(2),
+            spend_monthly_average: this.spendMonthlyAverage.toFixed(2),
+            spend_last_month: this.spendLastMonth.toFixed(2),
+            spend_last_month_trend: this.getSpendLastMonthTrend().toFixed(2),
+            spend_end_of_month_xaas_forecast: this.spendEndOfMonthXaasForecast.toFixed(2),
+            spend_end_of_month_xaas_forecast_trend: this.getSpendEndOfMonthXaasForecastTrend().toFixed(2),
+            spend_end_of_period_forecast: this.getSpendEndOfPeriodForecast().toFixed(2), // intentional duplicate
+            estimated_funds_available: this.getEstimatedFundsAvailable().toFixed(2),
+            estimated_funds_to_be_invoiced: this.getSpendEndOfPeriodForecast().toFixed(2), // intentional duplicate
+            task_order: {
+                total_task_order_value: this.totalTaskOrderValue.toFixed(2),
+                total_lifecycle_amount: this.totalLifecycleAmount.toFixed(2),
+                total_funds_spent: this.totalFundsSpent.toFixed(2),
+                total_obligated_funds: this.totalObligatedFunds.toFixed(2),
             },
-            available_funds: this.availableFunds,
-            total_portfolio_funds: this.totalPortfolioFunds,
-            period_funds_spent: this.periodFundsSpent,
-            spend_monthly_average: this.spendMonthlyAverage,
-            spend_last_month: this.spendLastMonth,
-            spend_last_month_trend: this.getSpendLastMonthTrend(),
-            spend_end_of_month_xaas_forecast: this.spendEndOfMonthXaasForecast,
-            spend_end_of_month_xaas_forecast_trend: this.getSpendEndOfMonthXaasForecastTrend(),
-            spend_end_of_period_forecast: this.getSpendEndOfPeriodForecast(), // intentional duplicate
-            estimated_funds_available: this.getEstimatedFundsAvailable(),
-            estimated_funds_to_be_invoiced: this.getSpendEndOfPeriodForecast(), // intentional duplicate
-            total_task_order_value: this.totalTaskOrderValue,
-            total_lifecycle_amount: this.totalLifecycleAmount,
-            total_funds_spent: this.totalFundsSpent,
-            total_obligated_funds: this.totalObligatedFunds,
-			clins: clins,
-            clinData: costData
-            
+            clins,
         };
     },
     type: 'GetPortfolioDetails'
@@ -494,13 +435,13 @@ GetPortfolioDetails.prototype = {
         <sys_created_by>tom.arnold</sys_created_by>
         <sys_created_on>2023-09-26 00:36:32</sys_created_on>
         <sys_id>52b20c094729f11039634aff336d4383</sys_id>
-        <sys_mod_count>329</sys_mod_count>
+        <sys_mod_count>386</sys_mod_count>
         <sys_name>GetPortfolioDetails</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_52b20c094729f11039634aff336d4383</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-09-29 03:07:47</sys_updated_on>
+        <sys_updated_on>2023-09-29 14:40:46</sys_updated_on>
     </sys_script_include>
 </record_update>
