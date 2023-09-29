@@ -233,7 +233,7 @@ GetPortfolioDetails.prototype = {
         // total funds - funds spent - estimated_funds_to_be_invoiced (month only)
         // if have costs with projected spend (is_actual === false), sum of all projected. 
 
-        let estimated_funds_to_be_invoiced = parseFloat(new global.GlideQuery(this.COST_TABLE)
+        const estimated_funds_to_be_invoiced = parseFloat(new global.GlideQuery(this.COST_TABLE)
             .where('portfolio', this.portfolioId)
             .where('is_actual', false)
             .sum('value')
@@ -244,7 +244,7 @@ GetPortfolioDetails.prototype = {
 
     // sum of all funds_total values for all CLINs in all periods, past, present and future
     getTotalLifecycleAmount: function() {
-        let total_lifecycle_amount = parseFloat(new global.GlideQuery(this.CLINS_TABLE)
+        const total_lifecycle_amount = parseFloat(new global.GlideQuery(this.CLINS_TABLE)
             .where('task_order', this.taskOrder.sys_id)
             .sum('funds_total')
             .orElse(0.0));
@@ -254,7 +254,7 @@ GetPortfolioDetails.prototype = {
 
     // sum of all funds_total values for all CLINs (excercised) in all periods, past, present and future
     getTotalTaskOrderValue: function() {
-        let total_task_order_value = parseFloat(new global.GlideQuery(this.CLINS_TABLE)
+        const total_task_order_value = parseFloat(new global.GlideQuery(this.CLINS_TABLE)
             .where('task_order', this.taskOrder.sys_id)
             .where('funds_obligated', '>', 0.0)
             .sum('funds_total')
@@ -324,6 +324,7 @@ GetPortfolioDetails.prototype = {
         };
     },
 
+	// not optimized; optimization pass in future sprint after more discussion
     getPortfolioUsers: function() {
         const creator = new global.GlideQuery('sys_user')
             .where('user_name', this.portfolio.sys_created_by)
@@ -435,13 +436,13 @@ GetPortfolioDetails.prototype = {
         <sys_created_by>tom.arnold</sys_created_by>
         <sys_created_on>2023-09-26 00:36:32</sys_created_on>
         <sys_id>52b20c094729f11039634aff336d4383</sys_id>
-        <sys_mod_count>386</sys_mod_count>
+        <sys_mod_count>387</sys_mod_count>
         <sys_name>GetPortfolioDetails</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_52b20c094729f11039634aff336d4383</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-09-29 14:40:46</sys_updated_on>
+        <sys_updated_on>2023-09-29 15:00:36</sys_updated_on>
     </sys_script_include>
 </record_update>
