@@ -52,7 +52,7 @@ ProvisioningResponseProcessing.prototype = {
     portfolioRecord.setValue("portfolio_status", "ACTIVE");
     portfolioRecord.update();
 
-    const hothProvisioning = new HothProvisioning(portfolioSysId);
+    const hothProvisioning = new HothProvisioning(portfolioRecord);
     // Find all Environments under this Portfolio
     const environmentRecord = new GlideRecord(this.ENVIRONMENT_TABLE);
     environmentRecord.addQuery("portfolio", portfolioSysId);
@@ -193,13 +193,13 @@ ProvisioningResponseProcessing.prototype = {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-09-22 19:28:03</sys_created_on>
         <sys_id>1c73137797d1311000989fa00153afa7</sys_id>
-        <sys_mod_count>97</sys_mod_count>
+        <sys_mod_count>98</sys_mod_count>
         <sys_name>ProvisioningResponseProcessing</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_1c73137797d1311000989fa00153afa7</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-09-26 15:54:39</sys_updated_on>
+        <sys_updated_on>2023-10-04 18:16:35</sys_updated_on>
     </sys_script_include>
 </record_update>
