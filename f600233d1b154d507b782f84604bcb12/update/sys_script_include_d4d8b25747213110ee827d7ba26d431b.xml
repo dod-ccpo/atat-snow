@@ -10,12 +10,13 @@
         <script><![CDATA[var IncidentTicketHelper = Class.create();
 IncidentTicketHelper.prototype = {
 	// need to look up statics for different environments
-    ASSIGNMENT_GROUP: '69292c6f47a53110ee827d7ba26d438b',
+    ASSIGNMENT_GROUP: '69292c6f47a53110ee827d7ba26d438b', // T2 DAPPS / ATAT sys_id
     CATEGORY: 'software',
     IMPACT: 3,
     INCIDENT_TABLE: 'incident',
     URGENCY: 3,
-    SUB_CATEGORY: 'internal application',
+	SERVICE: '8f2aa0ef47a53110ee827d7ba26d4356', // ATAT Service sys_id
+    SUB_CATEGORY: 'Desktop',
 
     initialize: function() {
 
@@ -29,22 +30,24 @@ IncidentTicketHelper.prototype = {
             category: this.CATEGORY,
             description: descriptions.description,
             impact: this.IMPACT,
+			service: this.SERVICE,
             short_description: descriptions.short_description,
             subcategory: this.SUB_CATEGORY,
             urgency: this.URGENCY
         };
 
         const gq = new global.GlideQuery(this.INCIDENT_TABLE)
-            .insertOrUpdate(incident)
-            .orElse(null);
+            .insert(incident);
     },
 
     generateDescriptions: function(event) {
 		const { content, initialSnowRequest } = event;
-		const operationType = initialSnowRequest.operationType;
+		
 		const provisioningJobId = content.response.status.provisioningJobId;
         const portfolioId = content.response.status.portfolioId;
 		const status = content.response.status.status;
+		
+		const operationType = initialSnowRequest.operationType;
 		const targetCsp = initialSnowRequest.targetCsp.name;
         const userId = initialSnowRequest.userId;
     
@@ -59,13 +62,13 @@ IncidentTicketHelper.prototype = {
         <sys_created_by>stephen.hayes</sys_created_by>
         <sys_created_on>2023-10-03 13:39:05</sys_created_on>
         <sys_id>d4d8b25747213110ee827d7ba26d431b</sys_id>
-        <sys_mod_count>31</sys_mod_count>
+        <sys_mod_count>32</sys_mod_count>
         <sys_name>IncidentTicketHelper</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_d4d8b25747213110ee827d7ba26d431b</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-10-03 22:08:50</sys_updated_on>
+        <sys_updated_on>2023-10-04 12:33:03</sys_updated_on>
     </sys_script_include>
 </record_update>
