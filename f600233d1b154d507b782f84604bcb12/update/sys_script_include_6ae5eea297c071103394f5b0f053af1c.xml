@@ -12,33 +12,65 @@ DappsReportGen.prototype = {
 	USER_TABLE: "sys_user",
 	atatHelper: new AtatHelper(),
 	acquisitionPackage: null,
-	CLASS_TABLE: "x_g_dis_atat_selected_classification_level",
-	classInstance: new GlideRecord("x_g_dis_atat_classification_level"),
-	projectOverview: new GlideRecord("x_g_dis_atat_project_overview"),
-	organization: new GlideRecord("x_g_dis_atat_organization"),
-	evalPlan: new GlideRecord("x_g_dis_atat_evaluation_plan"),
-	contractType: new GlideRecord("x_g_dis_atat_contract_type"),
-	fundingRequest: new GlideRecord("x_g_dis_atat_funding_request"),
-	fsForm: new GlideRecord("x_g_dis_atat_funding_request_fs_form"),
-	mipr: new GlideRecord("x_g_dis_atat_funding_request_mipr"),
-	contractConsiderations: new GlideRecord("x_g_dis_atat_contract_considerations"),
-	fairOpportunity: new GlideRecord("x_g_dis_atat_fair_opportunity"),
-	contactInfo: new GlideRecord("x_g_dis_atat_contacts"),
+	CLASS_TABLE: null,
+	classInstance: null,
+	projectOverview: null,
+	organization: null,
+	evalPlan: null,
+	contractType: null,
+	fundingRequest: null,
+	fsForm: null,
+	mipr: null,
+	contractConsiderations: null,
+	fairOpportunity: null,
+	contactInfo: null,
 	ce: null,
 	ceData: null,
+	poc: null,
 
 	initialize: function(acqPkg) {
 		this.acquisitionPackage = acqPkg;
+		this.ce = new CostEstimate(this.acquisitionPackage);
+		
+		
+		this.CLASS_TABLE = "x_g_dis_atat_selected_classification_level",
+		this.classInstance = new GlideRecord("x_g_dis_atat_classification_level"),
+		this.projectOverview = new GlideRecord("x_g_dis_atat_project_overview"),
+		this.organization = new GlideRecord("x_g_dis_atat_organization"),
+		this.evalPlan = new GlideRecord("x_g_dis_atat_evaluation_plan"),
+		this.contractType = new GlideRecord("x_g_dis_atat_contract_type"),
+		this.fundingRequest = new GlideRecord("x_g_dis_atat_funding_request"),
+		this.fsForm = new GlideRecord("x_g_dis_atat_funding_request_fs_form"),
+		this.mipr = new GlideRecord("x_g_dis_atat_funding_request_mipr"),
+		this.contractConsiderations = new GlideRecord("x_g_dis_atat_contract_considerations"),
+		this.fairOpportunity = new GlideRecord("x_g_dis_atat_fair_opportunity"),
+		this.contactInfo = new GlideRecord("x_g_dis_atat_contacts"),
+		this.poc = new GlideRecord("x_g_dis_atat_contacts");
+		
 		this.projectOverview.get(this.acquisitionPackage.project_overview);
 		this.organization.get(this.acquisitionPackage.organization);
-		this.ce = new CostEstimate(this.acquisitionPackage);
+		
+		
 		try{
 			this.ceData = this.ce.getData();
 		}
 		catch(err){
 			this.ceData = 0;
 		}
+		
 
+		
+	},
+	getPOC: function() {
+		try{
+			gs.info("Are we catching primary contacts?");
+			this.poc.get(this.acquisitionPackage.primary_contact);
+			return this.poc.email.toString();
+		}
+		catch(error){
+			gs.info("Are we catching errors?");
+			return "";
+		}
 	},
 
 	getEstimatedCost: function() {
@@ -221,7 +253,7 @@ DappsReportGen.prototype = {
 			var names = [];
 			if (array.length > 0) {
 				array.forEach(function(item){
-					names.push(DappsReportGen.prototype.getUser(item).name.toString());
+					names.push(DappsReportGen.prototype.getUser(item).email.toString() || "Email Not Found");
 				});
 				return names.join().replaceAll(",", ";");
 			}			
@@ -282,6 +314,7 @@ DappsReportGen.prototype = {
 			Title: ('"' + this.getProjectOverview() + '"'),
 			"Mission Owners": this.getIndividuals("mission_owners"),
 			Contributors: this.getIndividuals("contributors"),
+			//POC: this.getPOC(),
 			// COR: this.getContact("COR"),
 			// ACOR: this.getContact("ACOR"),
 			Created: this.convertDateTime(new GlideDateTime(this.acquisitionPackage.sys_created_on.toString())), 
@@ -313,13 +346,13 @@ DappsReportGen.prototype = {
         <sys_created_by>torin.harthcock</sys_created_by>
         <sys_created_on>2023-07-18 14:53:08</sys_created_on>
         <sys_id>6ae5eea297c071103394f5b0f053af1c</sys_id>
-        <sys_mod_count>22</sys_mod_count>
+        <sys_mod_count>36</sys_mod_count>
         <sys_name>DappsReportGen</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_6ae5eea297c071103394f5b0f053af1c</sys_update_name>
         <sys_updated_by>torin.harthcock</sys_updated_by>
-        <sys_updated_on>2023-09-19 14:53:58</sys_updated_on>
+        <sys_updated_on>2023-10-05 18:49:04</sys_updated_on>
     </sys_script_include>
 </record_update>
