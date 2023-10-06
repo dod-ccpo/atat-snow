@@ -13,31 +13,47 @@ DappsReportGen.prototype = {
 	atatHelper: new AtatHelper(),
 	acquisitionPackage: null,
 	CLASS_TABLE: "x_g_dis_atat_selected_classification_level",
-	classInstance: new GlideRecord("x_g_dis_atat_classification_level"),
-	projectOverview: new GlideRecord("x_g_dis_atat_project_overview"),
-	organization: new GlideRecord("x_g_dis_atat_organization"),
-	evalPlan: new GlideRecord("x_g_dis_atat_evaluation_plan"),
-	contractType: new GlideRecord("x_g_dis_atat_contract_type"),
-	fundingRequest: new GlideRecord("x_g_dis_atat_funding_request"),
-	fsForm: new GlideRecord("x_g_dis_atat_funding_request_fs_form"),
-	mipr: new GlideRecord("x_g_dis_atat_funding_request_mipr"),
-	contractConsiderations: new GlideRecord("x_g_dis_atat_contract_considerations"),
-	fairOpportunity: new GlideRecord("x_g_dis_atat_fair_opportunity"),
-	contactInfo: new GlideRecord("x_g_dis_atat_contacts"),
+	classInstance: null,
+	projectOverview: null,
+	organization: null,
+	evalPlan: null,
+	contractType: null,
+	fundingRequest: new GlideRecord("x_g_dis_atat_funding_request"), //When this is handled like other properties and initially set as null, an error is thrown. Reason is uncertain.
+	fsForm: null,
+	mipr: null,
+	contractConsiderations: null,
+	fairOpportunity: null,
 	ce: null,
 	ceData: null,
+	poc: null,
 
 	initialize: function(acqPkg) {
 		this.acquisitionPackage = acqPkg;
+
+		this.projectOverview = new GlideRecord("x_g_dis_atat_project_overview");
 		this.projectOverview.get(this.acquisitionPackage.project_overview);
+		
+		this.organization = new GlideRecord("x_g_dis_atat_organization");
 		this.organization.get(this.acquisitionPackage.organization);
+		
 		this.ce = new CostEstimate(this.acquisitionPackage);
+		
+		this.classInstance = new GlideRecord("x_g_dis_atat_classification_level");
+		this.evalPlan = new GlideRecord("x_g_dis_atat_evaluation_plan");
+		this.contractType = new GlideRecord("x_g_dis_atat_contract_type");
+		this.fsForm = new GlideRecord("x_g_dis_atat_funding_request_fs_form");
+		this.mipr = new GlideRecord("x_g_dis_atat_funding_request_mipr");
+		this.contractConsiderations = new GlideRecord("x_g_dis_atat_contract_considerations");
+		this.fairOpportunity = new GlideRecord("x_g_dis_atat_fair_opportunity");
+		
 		try{
 			this.ceData = this.ce.getData();
 		}
 		catch(err){
 			this.ceData = 0;
 		}
+		this.poc = new GlideRecord("x_g_dis_atat_contacts");
+		this.poc.get(this.acquisitionPackage.primary_contact);
 
 	},
 
@@ -80,8 +96,8 @@ DappsReportGen.prototype = {
      * @returns {object} for source_selection, method as strings
      */
 	getEvalPlan: function() {
-		var sourceSelection;
-		var method;
+		let sourceSelection;
+		let method;
 		this.evalPlan.get(this.acquisitionPackage.evaluation_plan);
 		if(!this.evalPlan.source_selection){
 			sourceSelection = "";
@@ -106,8 +122,8 @@ DappsReportGen.prototype = {
      * @returns {object} for firm fixed price and time and materials as booleans
      */
 	getContractType: function() {
-		var ffp = "FALSE";
-		var tAndM = "FALSE";
+		let ffp = "FALSE";
+		let tAndM = "FALSE";
 		this.contractType.get(this.acquisitionPackage.contract_type);
 		if(!this.contractType){
 			return "";
@@ -135,8 +151,8 @@ DappsReportGen.prototype = {
 			return "";
 		}
 		else {
-			var miprNumber = this.getMiprNumber(this.fundingRequest.mipr);
-			var orderNumber = this.getFSOrderNumber(this.fundingRequest.fs_form);
+			const miprNumber = this.getMiprNumber(this.fundingRequest.mipr);
+			const orderNumber = this.getFSOrderNumber(this.fundingRequest.fs_form);
 			return {
 				requestType: this.fundingRequest.funding_request_type.toString(),
 				mipr: miprNumber,
@@ -180,16 +196,16 @@ DappsReportGen.prototype = {
 
 	getClassificationInstances: function(){
 		try { 
-			var list = new global.GlideQuery(this.CLASS_TABLE)
+			const list = new global.GlideQuery(this.CLASS_TABLE)
 			.where("acquisition_package", this.acquisitionPackage.sys_id)
 			.select("classification_level")
 			.toArray(10)
 			.map(removeSysId);
 			if(list.length > 0){
-				var classLevels = [];
+				let classLevels = [];
 
 				list.forEach(function(classLevel) {
-					var tmp = new global.GlideQuery("x_g_dis_atat_classification_level")
+					let tmp = new global.GlideQuery("x_g_dis_atat_classification_level")
 					.where("sys_id",classLevel.classification_level)
 					.select("display")
 					.toArray(1);
@@ -208,7 +224,7 @@ DappsReportGen.prototype = {
 	},
 
 	getIndividuals: function(users) {
-		var missionOwners;
+		let missionOwners;
 		if(users == "mission_owners"){
 			missionOwners = this.acquisitionPackage.mission_owners;
 		}
@@ -217,11 +233,11 @@ DappsReportGen.prototype = {
 		}
 
 		if(missionOwners){
-			var array = missionOwners.split(",");
-			var names = [];
+			let array = missionOwners.split(",");
+			let names = [];
 			if (array.length > 0) {
 				array.forEach(function(item){
-					names.push(DappsReportGen.prototype.getUser(item).name.toString());
+					names.push(DappsReportGen.prototype.getUser(item).email.toString());
 				});
 				return names.join().replaceAll(",", ";");
 			}			
@@ -236,24 +252,24 @@ DappsReportGen.prototype = {
      * @returns 
      */
 	getUser: function(str){
-		var user = new GlideRecord(this.USER_TABLE);
+		let user = new GlideRecord(this.USER_TABLE);
 		user.get(str);
 		return user;
 	},
 
 	convertDateTime: function(date){
-		var month = date.getMonthLocalTime();
-		var day = date.getDayOfMonthLocalTime();
-		var year = date.getYearLocalTime();
-		var time = date.getLocalTime().getByFormat('hh:mm:ss') + '.000Z'; //Better way to do this?
+		const month = date.getMonthLocalTime();
+		const day = date.getDayOfMonthLocalTime();
+		const year = date.getYearLocalTime();
+		const time = date.getLocalTime().getByFormat('hh:mm:ss') + '.000Z'; //Better way to do this?
 
-		var createdFormatted = month + '/' + day + '/' + year + 'T' + time;
+		const createdFormatted = month + '/' + day + '/' + year + 'T' + time;
 
 		return createdFormatted;
 	},
 
 	convertDocGen: function() {
-		var status = this.acquisitionPackage.docgen_job_status.getDisplayValue().toString();
+		let status = this.acquisitionPackage.docgen_job_status.getDisplayValue().toString();
 		if(status == "Success"){
 			status = "COMPLETE";
 		}
@@ -261,7 +277,7 @@ DappsReportGen.prototype = {
 	},
 
 	getFairOpportunity: function(){
-		var fairOpp = this.acquisitionPackage.fair_opportunity;
+		let fairOpp = this.acquisitionPackage.fair_opportunity;
 		if(!fairOpp){
 			return "";
 		}
@@ -272,16 +288,17 @@ DappsReportGen.prototype = {
 	},
 
 	getReportRecord: function() {
-		var evalPlan = this.getEvalPlan();
-		var contractType = this.getContractType();
-		var fundingRequest = this.getFundingRequest();
-		let cjadc2 = this.getCJADC2();
+		const evalPlan = this.getEvalPlan();
+		const contractType = this.getContractType();
+		const fundingRequest = this.getFundingRequest();
+		const cjadc2 = this.getCJADC2();
 		return {
 			Number: this.acquisitionPackage.number.toString(),
 			Status: this.acquisitionPackage.package_status.getDisplayValue().toString(),
 			Title: ('"' + this.getProjectOverview() + '"'),
 			"Mission Owners": this.getIndividuals("mission_owners"),
 			Contributors: this.getIndividuals("contributors"),
+			POC: this.poc.email,
 			// COR: this.getContact("COR"),
 			// ACOR: this.getContact("ACOR"),
 			Created: this.convertDateTime(new GlideDateTime(this.acquisitionPackage.sys_created_on.toString())), 
@@ -313,13 +330,13 @@ DappsReportGen.prototype = {
         <sys_created_by>torin.harthcock</sys_created_by>
         <sys_created_on>2023-07-18 14:53:08</sys_created_on>
         <sys_id>6ae5eea297c071103394f5b0f053af1c</sys_id>
-        <sys_mod_count>22</sys_mod_count>
+        <sys_mod_count>41</sys_mod_count>
         <sys_name>DappsReportGen</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_6ae5eea297c071103394f5b0f053af1c</sys_update_name>
         <sys_updated_by>torin.harthcock</sys_updated_by>
-        <sys_updated_on>2023-09-19 14:53:58</sys_updated_on>
+        <sys_updated_on>2023-10-05 20:08:22</sys_updated_on>
     </sys_script_include>
 </record_update>
