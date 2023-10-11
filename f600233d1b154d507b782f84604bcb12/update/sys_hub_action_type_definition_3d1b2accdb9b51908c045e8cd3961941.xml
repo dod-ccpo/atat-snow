@@ -26,7 +26,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>3d1b2accdb9b51908c045e8cd3961941</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>10</sys_mod_count>
         <sys_name>PROV: Consume Queue Payload</sys_name>
         <sys_overrides/>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
@@ -34,7 +34,7 @@
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_hub_action_type_definition_3d1b2accdb9b51908c045e8cd3961941</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-10-04 17:01:29</sys_updated_on>
+        <sys_updated_on>2023-10-06 12:56:02</sys_updated_on>
         <system_level>false</system_level>
         <type/>
     </sys_hub_action_type_definition>
@@ -127,10 +127,10 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 18:00:20</sys_created_on>
         <sys_id>be6eea08dbdb51908c045e8cd3961916</sys_id>
-        <sys_mod_count>58</sys_mod_count>
+        <sys_mod_count>59</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-10-04 17:01:24</sys_updated_on>
+        <sys_updated_on>2023-10-06 12:55:55</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=be6eea08dbdb51908c045e8cd3961916"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -141,9 +141,9 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 18:00:20</sys_created_on>
         <sys_id>766eea08dbdb51908c045e8cd396192b</sys_id>
-        <sys_mod_count>57</sys_mod_count>
+        <sys_mod_count>58</sys_mod_count>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-10-04 17:01:24</sys_updated_on>
+        <sys_updated_on>2023-10-06 12:55:55</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   const errorHandler = new ErrorHandler();
   const incidentTicketHelper = new IncidentTicketHelper();
@@ -160,7 +160,7 @@
     
     if (jobRecord.next()) {   
       // handle errors
-      if (event.code &lt; 200 || event.code &gt;= 400 ) {
+      if (event.code &lt; 200 || event.code &gt;= 400) {
         jobRecord.setValue('status', "FAILURE");
         jobRecord.setValue('status_message', JSON.stringify(response));
         jobRecord.update();
@@ -905,17 +905,17 @@
     <sys_hub_action_plan action="INSERT_OR_UPDATE">
         <action_id display_value="PROV: Consume Queue Payload">3d1b2accdb9b51908c045e8cd3961941</action_id>
         <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"36488b44db9f51908c045e8cd3961969","name":"plan","plan_signature":null}}</plan>
-        <snapshot>50e0703747a57110ee827d7ba26d43cf</snapshot>
+        <snapshot>d4ebce9c47f5f110ee827d7ba26d4359</snapshot>
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 19:53:23</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>36488b44db9f51908c045e8cd3961969</sys_id>
-        <sys_mod_count>21</sys_mod_count>
+        <sys_mod_count>22</sys_mod_count>
         <sys_overrides/>
         <sys_scope/>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-10-04 17:01:30</sys_updated_on>
+        <sys_updated_on>2023-10-06 12:56:03</sys_updated_on>
     </sys_hub_action_plan>
     <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
@@ -1042,10 +1042,10 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 19:53:21</sys_created_on>
         <sys_id>da484b44db9f51908c045e8cd39619f2</sys_id>
-        <sys_mod_count>21</sys_mod_count>
+        <sys_mod_count>22</sys_mod_count>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-10-04 17:01:28</sys_updated_on>
+        <sys_updated_on>2023-10-06 12:56:01</sys_updated_on>
     </sys_hub_step_instance>
     <sys_variable_value action="delete_multiple" query="document_key=da484b44db9f51908c045e8cd39619f2"/>
     <sys_variable_value action="INSERT_OR_UPDATE">
@@ -1056,9 +1056,9 @@
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2022-11-16 19:53:21</sys_created_on>
         <sys_id>a6488b44db9f51908c045e8cd3961902</sys_id>
-        <sys_mod_count>20</sys_mod_count>
+        <sys_mod_count>21</sys_mod_count>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-10-04 17:01:28</sys_updated_on>
+        <sys_updated_on>2023-10-06 12:56:01</sys_updated_on>
         <value>(function execute(inputs, outputs) {
   const errorHandler = new ErrorHandler();
   const incidentTicketHelper = new IncidentTicketHelper();
@@ -1075,7 +1075,7 @@
     
     if (jobRecord.next()) {   
       // handle errors
-      if (event.code &lt; 200 || event.code &gt;= 400 ) {
+      if (event.code &lt; 200 || event.code &gt;= 400) {
         jobRecord.setValue('status', "FAILURE");
         jobRecord.setValue('status_message', JSON.stringify(response));
         jobRecord.update();
