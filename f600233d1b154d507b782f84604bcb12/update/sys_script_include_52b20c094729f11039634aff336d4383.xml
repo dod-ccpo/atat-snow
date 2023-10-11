@@ -29,7 +29,10 @@ GetPortfolioDetails.prototype = {
     periodFundsSpent: null,
     spendLastMonth: null,
     spendMonthlyAverage: null,
+    xaasClinNumbers: ['01', '03', '05', '17', '19', '21'],    
+    spendXaaSTotalSpent: null,
     spendEndOfMonthXaasForecast: null,
+    monthsIntoPeriod: 0,
 
     totalLifecycleAmount: null,
     totalTaskOrderValue: null,
@@ -55,28 +58,6 @@ GetPortfolioDetails.prototype = {
         return clins;
     },
 
-    getAvailableFunds: function() {
-        // available_funds = sum   (funds_total) for all in-period clins
-        //                   minus (funds_spent) for all in-period clins)
-
-        const clinsInPeriod = this.inPeriodClins;
-
-        const total_funds = new global.GlideQuery(this.CLINS_TABLE)
-            .where('task_order', this.taskOrder.sys_id)
-            .where('sys_id', 'IN', clinsInPeriod)
-            .sum('funds_total')
-            .orElse(0.0);
-
-        const funds_spent = parseFloat(new global.GlideQuery(this.COST_TABLE)
-            .where('portfolio', this.portfolioId)
-            .where('clin', 'IN', clinsInPeriod)
-            .where('is_actual', true)
-            .sum('value')
-            .orElse(0.0));
-
-        return total_funds - funds_spent;
-    },
-
     // Total obligated funds of all in-period CLINs:
     getTotalPortfolioFunds: function() {
         const clinsInPeriod = this.inPeriodClins;
@@ -93,7 +74,6 @@ GetPortfolioDetails.prototype = {
     // Sum of all is_actual costs in current PoP
     getPeriodFundsSpent: function() {
         const clinsInPeriod = this.inPeriodClins;
-
         const period_funds_spent = new global.GlideQuery(this.COST_TABLE)
             .where('portfolio', this.portfolioId)
             .where('clin', 'IN', clinsInPeriod)
@@ -104,17 +84,18 @@ GetPortfolioDetails.prototype = {
         return period_funds_spent;
     },
 
-    getSpendMonthlyAverage: function() {
-        const taskOrderPopStart = new GlideDateTime(this.taskOrder.pop_start_date + " 12:00:00");
-        const currentMonth = new GlideDateTime().getMonthLocalTime();
-        const month = taskOrderPopStart.getMonthLocalTime();
-        const dayOfMonth = taskOrderPopStart.getDayOfMonthLocalTime();
-        const percentOfMonth = (this.AVG_DAYS_IN_MONTH - dayOfMonth) / this.AVG_DAYS_IN_MONTH;
+    getMonthlyXaaSSpend: function() {
 
-        const costs = [];
+    },
+
+    getSpendMonthlyAverage: function() {
+        const currentMonth = new GlideDateTime().getMonthLocalTime();
+        const costs = []; 
+
         const gq = new global.GlideQuery(this.COST_TABLE)
             .where('portfolio', this.portfolioId)
             .where('is_actual', true)
+            .where('clin', 'IN', this.inPeriodClins)		
             .groupBy('year_month')
             .aggregate('sum', 'value')
             .select()
@@ -124,10 +105,7 @@ GetPortfolioDetails.prototype = {
                 const sum = e.sum.value;
                 const costGdt = new GlideDateTime(year_month + " 12:00:00");
                 const costMonth = costGdt.getMonthLocalTime();
-                if (month === costMonth) {
-                    const proratedCost = (sum / percentOfMonth);
-                    costs.push(proratedCost);
-                } else {
+                if (currentMonth !== costMonth) { 
                     costs.push(sum);
                 }
             });
@@ -137,19 +115,18 @@ GetPortfolioDetails.prototype = {
         }, 0);
         /*
         gs.info(`
-		Task Order PoP Start Month: ${taskOrderPopStart.getMonthLocalTime()}
 		Current Month:              ${currentMonth}
 		Duration (months):          ${costs.length}
 		---
-		First Month prorate:        ${percentOfMonth}
-		Costs (prorated):           ${costs}
+		Costs:                      ${costs}
 		---
 		Sum:                        ${Math.trunc(sum)}
 		Avg:                        ${Math.trunc(sum/costs.length)}
 		---
 		`);
 		*/
-        return sum / costs.length;
+        this.monthsIntoPeriod = costs.length;
+        return sum / this.monthsIntoPeriod;
     },
 
     // sum of all is_actual costs for all CLINs from previous month.
@@ -173,35 +150,13 @@ GetPortfolioDetails.prototype = {
         return spendLastMonth;
     },
 
-    // (spend_last_month - spend_monthly_average) / spend_monthly_average * 100
     getSpendLastMonthTrend: function() {
         return ((this.spendLastMonth - this.spendMonthlyAverage) / this.spendMonthlyAverage) * 100;
     },
 
-    getSpendEndOfMonthXaasForecast: function() {
-        const firstDayOfThisMonthGdt = new GlideDateTime();
-        firstDayOfThisMonthGdt.setDayOfMonthLocalTime(1);
-        const firstDayOfThisMonthDate = firstDayOfThisMonthGdt.getLocalDate();
-
-        const lastDayOfThisMonthGdt = new GlideDateTime();
-        lastDayOfThisMonthGdt.addMonthsLocalTime(1);
-        lastDayOfThisMonthGdt.setDayOfMonthLocalTime(1);
-        lastDayOfThisMonthGdt.addDaysLocalTime(-1);
-
-        const lastDayOfThisMonthDate = lastDayOfThisMonthGdt.getLocalDate();
-
-        const spendEndOfMonthForecast = new global.GlideQuery(this.COST_TABLE)
-            .where('portfolio', this.portfolioId)
-            .where('is_actual', false)
-            .where('year_month', '>=', firstDayOfThisMonthDate)
-            .where('year_month', '<=', lastDayOfThisMonthDate)
-            .sum('value')
-            .orElse(0.0);
-        return spendEndOfMonthForecast;
-    },
-
     getSpendEndOfMonthXaasForecastTrend: function() {
-        return ((this.spendEndOfMonthXaasForecast - this.spendMonthlyAverage) / this.spendMonthlyAverage) * 100;
+        const monthlyXaaSAverageSpend = this.spendXaaSTotalSpent / this.monthsIntoPeriod
+        return ((this.spendEndOfMonthXaasForecast - monthlyXaaSAverageSpend) / monthlyXaaSAverageSpend) * 100;
     },
 
     // sum all actual costs + (spend_monthly_average * months_remaining (prorated))
@@ -230,16 +185,7 @@ GetPortfolioDetails.prototype = {
     },
 
     getEstimatedFundsAvailable: function() {
-        // total funds - funds spent - estimated_funds_to_be_invoiced (month only)
-        // if have costs with projected spend (is_actual === false), sum of all projected. 
-
-        const estimated_funds_to_be_invoiced = parseFloat(new global.GlideQuery(this.COST_TABLE)
-            .where('portfolio', this.portfolioId)
-            .where('is_actual', false)
-            .sum('value')
-            .orElse(0.0));
-
-        return this.totalPortfolioFunds - this.totalFundsSpent - estimated_funds_to_be_invoiced;
+        return this.totalPortfolioFunds - this.periodFundsSpent - this.spendEndOfMonthXaasForecast;
     },
 
     // sum of all funds_total values for all CLINs in all periods, past, present and future
@@ -306,9 +252,22 @@ GetPortfolioDetails.prototype = {
         clin.get(id);
         const costs = new global.GlideQuery(this.COST_TABLE)
             .where('clin', id)
-            .select('is_actual', 'value', 'year_month', 'clin$DISPLAY')
+            .select('is_actual', 'value', 'year_month', 'clin$DISPLAY', 'clin')
             .toArray(100);
-		
+        
+		costs.forEach((cost) => {
+            const last2ClinChars = cost.clin$DISPLAY.slice(-2);
+            if (this.inPeriodClins.includes(cost.clin) 
+                && this.xaasClinNumbers.includes(last2ClinChars)
+            ) {
+                if (cost.is_actual === true) {
+                    this.spendXaaSTotalSpent += parseFloat(cost.value)
+                } else {
+                    this.spendEndOfMonthXaasForecast += parseFloat(cost.value)
+                }
+
+            }
+        })
         return {
             clin_number: clin.clin_number,
             idiq_clin: clin.idiq_clin,
@@ -386,19 +345,18 @@ GetPortfolioDetails.prototype = {
         this.portfolio.get(this.portfolioId);
         this.taskOrder.get(this.portfolio.active_task_order);
         this.inPeriodClins = this.getInPeriodClins();
-        this.availableFunds = this.getAvailableFunds();
         this.totalPortfolioFunds = this.getTotalPortfolioFunds();
         this.periodFundsSpent = this.getPeriodFundsSpent();
+        this.availableFunds = this.totalPortfolioFunds - this.periodFundsSpent;	
         this.spendLastMonth = this.getSpendLastMonth();
         this.spendMonthlyAverage = this.getSpendMonthlyAverage();
-        this.spendEndOfMonthXaasForecast = this.getSpendEndOfMonthXaasForecast();
-
         this.totalLifecycleAmount = this.getTotalLifecycleAmount();
         this.totalTaskOrderValue = this.getTotalTaskOrderValue();
         this.totalFundsSpent = this.getTotalFundsSpent();
         this.totalObligatedFunds = this.getTotalObligatedFunds();
 
         const clins = this.getClins();
+        // this.spendEndOfMonthXaasForecast = this.getSpendEndOfMonthXaasForecast();
 
         return {
             portfolio_name: this.portfolio.name,
@@ -428,7 +386,7 @@ GetPortfolioDetails.prototype = {
             spend_end_of_month_xaas_forecast_trend: this.getSpendEndOfMonthXaasForecastTrend().toFixed(2),
             spend_end_of_period_forecast: this.getSpendEndOfPeriodForecast().toFixed(2), // intentional duplicate
             estimated_funds_available: this.getEstimatedFundsAvailable().toFixed(2),
-            estimated_funds_to_be_invoiced: this.spendEndOfMonthXaasForecast.toFixed(2), // intentional duplicate 
+            estimated_funds_to_be_invoiced: this.spendEndOfMonthXaasForecast.toFixed(2), // intentional duplicate
 			inPeriodClins: this.inPeriodClins,
             task_order: {
                 total_task_order_value: this.totalTaskOrderValue.toFixed(2),
@@ -447,13 +405,13 @@ GetPortfolioDetails.prototype = {
         <sys_created_by>tom.arnold</sys_created_by>
         <sys_created_on>2023-09-26 00:36:32</sys_created_on>
         <sys_id>52b20c094729f11039634aff336d4383</sys_id>
-        <sys_mod_count>410</sys_mod_count>
+        <sys_mod_count>436</sys_mod_count>
         <sys_name>GetPortfolioDetails</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_52b20c094729f11039634aff336d4383</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-10-10 18:24:36</sys_updated_on>
+        <sys_updated_on>2023-10-11 00:37:44</sys_updated_on>
     </sys_script_include>
 </record_update>
