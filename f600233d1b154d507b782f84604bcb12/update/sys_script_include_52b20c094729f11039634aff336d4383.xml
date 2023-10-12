@@ -22,22 +22,22 @@ GetPortfolioDetails.prototype = {
     taskOrder: new GlideRecord('x_g_dis_atat_task_order'),
     clinsGR: new GlideRecord('x_g_dis_atat_clin'),
 
-    inPeriodClins: null,
+    inPeriodClins: [],
 
-    availableFunds: null,
-    totalPortfolioFunds: null,
-    periodFundsSpent: null,
-    spendLastMonth: null,
-    spendMonthlyAverage: null,
+    availableFunds: 0,
+    totalPortfolioFunds: 0,
+    periodFundsSpent: 0,
+    spendLastMonth: 0,
+    spendMonthlyAverage: 0,
     xaasClinNumbers: ['01', '03', '05', '17', '19', '21'],    
-    spendXaaSTotalSpent: null,
-    spendEndOfMonthXaasForecast: null,
+    spendXaaSTotalSpent: 0,
+    spendEndOfMonthXaasForecast: 0,
     monthsIntoPeriod: 0,
 
-    totalLifecycleAmount: null,
-    totalTaskOrderValue: null,
-    totalFundsSpent: null,
-    totalObligatedFunds: null,
+    totalLifecycleAmount: 0,
+    totalTaskOrderValue: 0,
+    totalFundsSpent: 0,
+    totalObligatedFunds: 0,
 
     initialize: function(portfolioId, userId) {
         this.portfolioId = portfolioId;
@@ -109,24 +109,16 @@ GetPortfolioDetails.prototype = {
                     costs.push(sum);
                 }
             });
-
+		
+		if(costs.length === 0) {
+			return 0;
+		}
+        this.monthsIntoPeriod = costs.length;
         const sum = costs.reduce((acc, currentValue) => {
             return acc + currentValue;
         }, 0);
-        /*
-        gs.info(`
-		Current Month:              ${currentMonth}
-		Duration (months):          ${costs.length}
-		---
-		Costs:                      ${costs}
-		---
-		Sum:                        ${Math.trunc(sum)}
-		Avg:                        ${Math.trunc(sum/costs.length)}
-		---
-		`);
-		*/
-        this.monthsIntoPeriod = costs.length;
-        return sum / this.monthsIntoPeriod;
+
+		return sum / this.monthsIntoPeriod;
     },
 
     // sum of all is_actual costs for all CLINs from previous month.
@@ -151,11 +143,22 @@ GetPortfolioDetails.prototype = {
     },
 
     getSpendLastMonthTrend: function() {
-        return ((this.spendLastMonth - this.spendMonthlyAverage) / this.spendMonthlyAverage) * 100;
+		if(this.spendMonthlyAverage > 0) {
+			return ((this.spendLastMonth - this.spendMonthlyAverage) / this.spendMonthlyAverage) * 100;
+		}
+        return 0.0;
     },
 
     getSpendEndOfMonthXaasForecastTrend: function() {
-        const monthlyXaaSAverageSpend = this.spendXaaSTotalSpent / this.monthsIntoPeriod
+		if(this.monthsIntoPeriod === 0) {
+			return 0.0;
+		}
+		
+        const monthlyXaaSAverageSpend = this.spendXaaSTotalSpent / this.monthsIntoPeriod;
+		if(monthlyXaaSAverageSpend === 0) {
+			return 0.0;
+		}
+		
         return ((this.spendEndOfMonthXaasForecast - monthlyXaaSAverageSpend) / monthlyXaaSAverageSpend) * 100;
     },
 
@@ -164,24 +167,9 @@ GetPortfolioDetails.prototype = {
         const taskOrderPopEnd = new GlideDateTime(this.taskOrder.pop_end_date + " 12:00:00");
         const now = new GlideDateTime();
         const dur = GlideDateTime.subtract(now, taskOrderPopEnd);
-
         const monthsRemaining = dur.getRoundedDayPart() / this.AVG_DAYS_IN_MONTH;
 
-        const spend_end_of_period_forecast = this.totalFundsSpent + (this.spendMonthlyAverage * monthsRemaining);
-        /*
-        gs.info(`
-		Task Order PoP End:         ${taskOrderPopEnd}
-		Now:                        ${now}
-		Dur:                        ${dur.getDisplayValue()}
-		Months Remaining:           ${monthsRemaining}
-		---
-		Total Funds Spent:          ${totalFundsSpent}
-		Spend Monthly Average:      ${spendMonthlyAverage}
-		---
-		SpendEndOfPeriodForecast:   ${spend_end_of_period_forecast}
-		---
-		`);*/
-        return spend_end_of_period_forecast;
+        return this.totalFundsSpent + (this.spendMonthlyAverage * monthsRemaining);
     },
 
     getEstimatedFundsAvailable: function() {
@@ -237,11 +225,13 @@ GetPortfolioDetails.prototype = {
         while (gr.next()) {
             environments.push({
                 classification_level: gr.getValue('classification_level'),
+				cloud_distinguisher: gr.csp.cloud_distinguisher,
+				csp_display: gr.getDisplayValue('csp').toString(),
+				dashboard_link: "",
                 environment_status: gr.getValue('environment_status'),
+				provisioned_date: gr.getValue('provisioned_date'),
                 provisioning_request_date: gr.getValue('provisioning_request_date'),
-                provisioned_date: gr.getValue('provisioned_date'),
-                dashboard_link: gs.getProperty('glide.servlet.uri') + gr.getLink(false),
-				csp_display: gr.getDisplayValue('csp').toString()
+				sys_created_on: gr.getValue('sys_created_on'),
             });
         }
         return environments;
@@ -257,20 +247,17 @@ GetPortfolioDetails.prototype = {
         
 		costs.forEach((cost) => {
             const last2ClinChars = cost.clin$DISPLAY.slice(-2);
-            if (this.inPeriodClins.includes(cost.clin) 
-                && this.xaasClinNumbers.includes(last2ClinChars)
-            ) {
+            if (this.inPeriodClins.includes(cost.clin) && this.xaasClinNumbers.includes(last2ClinChars)) {
                 if (cost.is_actual === true) {
-                    this.spendXaaSTotalSpent += parseFloat(cost.value)
+                    this.spendXaaSTotalSpent += parseFloat(cost.value);
                 } else {
-                    this.spendEndOfMonthXaasForecast += parseFloat(cost.value)
+                    this.spendEndOfMonthXaasForecast += parseFloat(cost.value);
                 }
-
             }
-        })
+        });
         return {
             clin_number: clin.clin_number,
-            idiq_clin: clin.idiq_clin,
+            idiq_clin: clin.idiq_clin.getDisplayValue(),
             active: Boolean(clin.active),
             actual_funds_spent: clin.actual_funds_spent,
             clin_status: clin.clin_status,
@@ -356,7 +343,6 @@ GetPortfolioDetails.prototype = {
         this.totalObligatedFunds = this.getTotalObligatedFunds();
 
         const clins = this.getClins();
-        // this.spendEndOfMonthXaasForecast = this.getSpendEndOfMonthXaasForecast();
 
         return {
             portfolio_name: this.portfolio.name,
@@ -394,6 +380,7 @@ GetPortfolioDetails.prototype = {
                 total_funds_spent: this.totalFundsSpent.toFixed(2),
                 total_obligated_funds: this.totalObligatedFunds.toFixed(2),
 				task_order_number: this.taskOrder.task_order_number,
+				task_order_status: this.taskOrder.task_order_status,
 				sys_id: this.taskOrder.sys_id
             },
             clins,
@@ -405,13 +392,13 @@ GetPortfolioDetails.prototype = {
         <sys_created_by>tom.arnold</sys_created_by>
         <sys_created_on>2023-09-26 00:36:32</sys_created_on>
         <sys_id>52b20c094729f11039634aff336d4383</sys_id>
-        <sys_mod_count>436</sys_mod_count>
+        <sys_mod_count>451</sys_mod_count>
         <sys_name>GetPortfolioDetails</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_52b20c094729f11039634aff336d4383</sys_update_name>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-10-11 00:37:44</sys_updated_on>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-10-12 17:55:04</sys_updated_on>
     </sys_script_include>
 </record_update>
