@@ -6,17 +6,17 @@
         <default_operation_uri/>
         <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
         <http_method>GET</http_method>
-        <name>Order Validation</name>
+        <name>GTC Validation</name>
         <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
 	
-	var gInvoicingEndpoint = gs.getProperty("x_g_dis_atat.gInvoicing.baseUrl") + "/ginv/services/v2_0/order";
+	var gInvoicingEndpoint = gs.getProperty("x_g_dis_atat.gInvoicing.baseUrl") + "/ginv/services/v2_0/gtc";
 	var atatSystemId = gs.getProperty("x_g_dis_atat.gInvoicing.systemId");
 	var queryParams = request.queryParams;
-	var orderNumber = queryParams.orderNumber;
+	var gtcNumber = queryParams.gtcNumber;
 	var acquisitionPackageId = queryParams.acquisitionPackageId;
 	
-	if (!orderNumber) {
-		throw "orderNumber required";
+	if (!gtcNumber) {
+		throw "gtcNumber required";
 	}
 	if (!acquisitionPackageId) {
 		throw "acquisitionPackageId required";
@@ -26,19 +26,18 @@
 	var payload = {
 		atat_system_id: atatSystemId,
 		endpoint: gInvoicingEndpoint,
-		order_number: orderNumber.toString()		
+		gtc_Number: gtcNumber.toString()		
 	};
 	
 	try {
 		let ginv = new GInvoicing();
 		let response = ginv.getPayload(payload);
-		gs.info("here's response from order payload" +JSON.stringify(response.status_code));
 		if (response.status_code !== 200) {
-			throw "Could not find Order Number";
+			throw "Could not find GTC Number";
 		}
 		else {
-			ginv.updatePackage(acquisitionPackageId.toString(), null, orderNumber.toString());
-			return orderNumber.toString();
+			ginv.updatePackage(acquisitionPackageId.toString(), gtcNumber.toString(), null);
+			return gtcNumber.toString();
 		}			
 	} catch (error) {
 		response.setStatus(error.statusCode);
@@ -46,27 +45,27 @@
 	}
 	
 })(request, response);]]></operation_script>
-        <operation_uri>/api/x_g_dis_atat/g_invoicing/order_validation</operation_uri>
+        <operation_uri>/api/x_g_dis_atat/g_invoicing/gtc_validation</operation_uri>
         <produces>application/json,application/xml,text/xml</produces>
         <produces_customized>false</produces_customized>
-        <relative_path>/order_validation</relative_path>
+        <relative_path>/gtc_validation</relative_path>
         <request_example/>
         <requires_acl_authorization>true</requires_acl_authorization>
-        <requires_authentication>false</requires_authentication>
-        <requires_snc_internal_role>false</requires_snc_internal_role>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
         <short_description/>
         <sys_class_name>sys_ws_operation</sys_class_name>
-        <sys_created_by>zach.clark</sys_created_by>
-        <sys_created_on>2022-07-14 17:11:33</sys_created_on>
-        <sys_id>af147e7f1b6091107c458623604bcb3f</sys_id>
-        <sys_mod_count>31</sys_mod_count>
-        <sys_name>Order Validation</sys_name>
+        <sys_created_by>torin.harthcock</sys_created_by>
+        <sys_created_on>2023-10-11 16:59:48</sys_created_on>
+        <sys_id>798394b597fd31103394f5b0f053af2c</sys_id>
+        <sys_mod_count>21</sys_mod_count>
+        <sys_name>GTC Validation</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
-        <sys_update_name>sys_ws_operation_af147e7f1b6091107c458623604bcb3f</sys_update_name>
+        <sys_update_name>sys_ws_operation_798394b597fd31103394f5b0f053af2c</sys_update_name>
         <sys_updated_by>torin.harthcock</sys_updated_by>
-        <sys_updated_on>2023-10-12 15:34:48</sys_updated_on>
+        <sys_updated_on>2023-10-12 15:35:56</sys_updated_on>
         <web_service_definition display_value="G-Invoicing">c6c3fe7f1b6091107c458623604bcb39</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
