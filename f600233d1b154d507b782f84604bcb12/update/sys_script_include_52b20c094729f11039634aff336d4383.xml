@@ -227,11 +227,12 @@ GetPortfolioDetails.prototype = {
                 classification_level: gr.getValue('classification_level'),
 				cloud_distinguisher: gr.csp.cloud_distinguisher,
 				csp_display: gr.getDisplayValue('csp').toString(),
-				dashboard_link: "",
+				dashboard_link: gr.getValue('dashboard_link'),
                 environment_status: gr.getValue('environment_status'),
 				provisioned_date: gr.getValue('provisioned_date'),
                 provisioning_request_date: gr.getValue('provisioning_request_date'),
 				sys_created_on: gr.getValue('sys_created_on'),
+				sys_id: gr.getValue('sys_id')
             });
         }
 		environments.sort((a,b)=> a.csp_display > b.csp_display ? 1 : -1);
