@@ -30,20 +30,57 @@ AlertHelper.prototype = {
             .select('name', 'type', 'threshold')
             .toArray(100);
 
-        // get tracking status
-        const tracking = new global.GlideQuery(this.TRACKING_TABLE)
-            .select('alert', 'portfolio', 'status')
-            .toArray(100);
+
 
         const processed = this.processPortfolios(portfolios[0], alerts);
-        const log = this.updateTrackingTable(processed);
-
+        this.updateTrackingTable(processed);
+        this.processTracking();
         const ret = {
-            processed,
-            log
+            processed
         };
         return ret;
     },
+
+    // this will go into its own class
+    processTracking: function() {
+        // get tracking status
+        const tracking = new global.GlideQuery(this.TRACKING_TABLE)
+            .where('status', 'new')
+            .orderBy('clin')
+            .orderBy('alert.group')
+            .orderBy('alert.priority')
+            .select('alert', 'clin', 'sys_id')
+            .toArray(100);
+		
+		gs.info(JSON.stringify(tracking))
+		
+        let currentClin = '';
+        let currentGroup = '';
+        for (let i = 0; i < tracking.length; i++) {
+            if (tracking[i]['clin'] != currentClin) {
+                currentClin = tracking[i]['clin'];
+                if (tracking[i]['alert.group'] != currentGroup) {
+                    currentGroup = tracking[i]['alert.group'];
+                    // Mark the highest priority item as 'processed'
+                    const gr = new GlideRecord(this.TRACKING_TABLE);
+                    if (gr.get(tracking[i]['sys_id'])) {
+                        gr.status = 'processed';
+                        gr.update();
+                    }
+                } else {
+                    // Mark the remaining items as 'omitted'
+                    const gr = new GlideRecord(this.TRACKING_TABLE);
+                    if (gr.get(tracking[i]['sys_id'])) {
+                        gr.status = 'omitted';
+                        gr.update();
+                    }
+                }
+            }
+        }
+
+        return tracking;
+    },
+
 
     processPortfolios: function(portfolio, alerts) {
         const clins = new global.GlideQuery(this.CLINS_TABLE)
@@ -75,7 +112,7 @@ AlertHelper.prototype = {
             return this.PERCENT;
         }
         const difference = clin.funds_total - clin.actual_funds_spent;
-        return difference / clin.actual_funds_spent * this.PERCENT;
+        return (difference / clin.funds_total) * this.PERCENT;
     },
 
     calculateDaysRemaining: function(clin) {
@@ -104,14 +141,14 @@ AlertHelper.prototype = {
                     const res = new global.GlideQuery(this.TRACKING_TABLE)
                         .where('portfolio', portfolio.sys_id)
                         .where('alert', alert.sys_id)
-					    .where('clin', clin.clinSysId)
+                        .where('clin', clin.clinSysId)
                         .select()
                         .toArray(100);
                     if (res.length === 0) {
                         new global.GlideQuery(this.TRACKING_TABLE)
                             .insert({
                                 alert: alert.sys_id,
-							    clin: clin.clinSysId,
+                                clin: clin.clinSysId,
                                 portfolio: portfolio.sys_id,
                                 status: "new",
                             });
@@ -128,13 +165,13 @@ AlertHelper.prototype = {
         <sys_created_by>stephen.hayes</sys_created_by>
         <sys_created_on>2023-10-17 20:49:39</sys_created_on>
         <sys_id>4560680447463110ee827d7ba26d4331</sys_id>
-        <sys_mod_count>51</sys_mod_count>
+        <sys_mod_count>71</sys_mod_count>
         <sys_name>AlertHelper</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_4560680447463110ee827d7ba26d4331</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-10-18 01:25:50</sys_updated_on>
+        <sys_updated_on>2023-10-18 03:39:54</sys_updated_on>
     </sys_script_include>
 </record_update>
