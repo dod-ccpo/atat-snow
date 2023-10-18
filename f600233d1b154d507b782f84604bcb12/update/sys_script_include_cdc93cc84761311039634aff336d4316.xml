@@ -84,28 +84,31 @@ GetUserPortfolios.prototype = {
 			.addOrCondition('portfolio_viewers','CONTAINS',this.userId);
         gr.query();
         while(gr.next()){
-			let toDetails = this.getTODetails(gr.active_task_order.sys_id);
-			let clinDetails = this.getCLINData(gr.active_task_order.sys_id);
-			const agency = this.getAgency(gr.agency);
-			let portfolio = {
-				portfolio_name: gr.name.toString(),
-				portfolio_status: gr.portfolio_status.toString(),
-				agency: agency.acronym,
-				last_updated: gr.last_updated,
-				current_user_is_owner: gr.portfolio_owner.toString() === this.userId ? true : false, 
-				current_user_is_manager: JSON.stringify(gr.portfolio_managers.toString()).includes(this.userId) ? true: false,
-				vendor: this.getVendor(gr.csp),
-				pop_start_date: toDetails.popStart,
-				pop_end_date: toDetails.popEnd,
-				total_obligated: clinDetails.fundsObligated,
-				funds_spent: clinDetails.fundsSpent,
-				active_task_order: gr.active_task_order.getDisplayValue().toString(),
-				owner_full_name: gr.portfolio_owner.getDisplayValue().toString(),
-				funding_status: gr.portfolio_funding_status.toString(),
-				csp_portal_links: this.getCSPLinks(gr.sys_id),
-				sys_id: gr.sys_id.toString()
-			};
-            data.push(portfolio);
+			if (gr.active_task_order) {
+				let toDetails = this.getTODetails(gr.active_task_order.sys_id);
+				let clinDetails = this.getCLINData(gr.active_task_order.sys_id);
+				const agency = this.getAgency(gr.agency);
+				let portfolio = {
+					portfolio_name: gr.name.toString(),
+					portfolio_status: gr.portfolio_status.toString(),
+					agency: agency.acronym,
+					last_updated: gr.last_updated,
+					current_user_is_owner: gr.portfolio_owner.toString() === this.userId ? true : false, 
+					current_user_is_manager: JSON.stringify(gr.portfolio_managers.toString()).includes(this.userId) ? true: false,
+					vendor: this.getVendor(gr.csp),
+					pop_start_date: toDetails?.popStart ?? null,
+					pop_end_date: toDetails?.popEnd ?? null,
+					total_obligated: clinDetails?.fundsObligated ?? null,
+					funds_spent: clinDetails?.fundsSpent ?? null,
+					active_task_order: gr.active_task_order.getDisplayValue().toString(),
+					owner_full_name: gr.portfolio_owner.getDisplayValue().toString(),
+					funding_status: gr.portfolio_funding_status.toString(),
+					csp_portal_links: this.getCSPLinks(gr.sys_id),
+					sys_id: gr.sys_id.toString()
+				};
+				data.push(portfolio);
+			}
+				
         }
 		
         return data;
@@ -117,13 +120,13 @@ GetUserPortfolios.prototype = {
         <sys_created_by>tom.arnold</sys_created_by>
         <sys_created_on>2023-09-23 02:03:45</sys_created_on>
         <sys_id>cdc93cc84761311039634aff336d4316</sys_id>
-        <sys_mod_count>69</sys_mod_count>
+        <sys_mod_count>71</sys_mod_count>
         <sys_name>GetUserPortfolios</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_cdc93cc84761311039634aff336d4316</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-10-05 20:06:46</sys_updated_on>
+        <sys_updated_on>2023-10-18 20:17:04</sys_updated_on>
     </sys_script_include>
 </record_update>
