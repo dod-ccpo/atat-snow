@@ -284,12 +284,14 @@ GetPortfolioDetails.prototype = {
             .where('user_name', this.portfolio.sys_created_by)
             .selectOne('name', 'first_name', 'last_name', 'user_name', 'email', 'company', 'mobile_phone', 'phone', 'home_phone', 'title')
             .get();
+		creator.role="Creator";
 
         const owner = new global.GlideQuery('sys_user')
             .where('sys_id', this.portfolio.portfolio_owner)
             .selectOne('name', 'first_name', 'last_name', 'user_name', 'email', 'company', 'mobile_phone', 'phone', 'home_phone', 'title')
             .get();
-
+		owner.role="Owner";
+		
         let managers = [];
         if (this.portfolio.portfolio_managers) {
             managers = new global.GlideQuery('sys_user')
@@ -297,6 +299,7 @@ GetPortfolioDetails.prototype = {
                 .select('name', 'first_name', 'last_name', 'user_name', 'email', 'company', 'mobile_phone', 'phone', 'home_phone', 'title')
                 .toArray(100);
         }
+		managers.forEach(member => member.role="Manager");
 
         let viewers = [];
         if (this.portfolio.portfolio_viewers) {
@@ -305,6 +308,7 @@ GetPortfolioDetails.prototype = {
                 .select('name', 'first_name', 'last_name', 'user_name', 'email', 'company', 'mobile_phone', 'phone', 'home_phone', 'title')
                 .toArray(100);
         }
+		viewers.forEach(member => member.role="Viewer");
 
         return {
             creator,
@@ -394,13 +398,13 @@ GetPortfolioDetails.prototype = {
         <sys_created_by>tom.arnold</sys_created_by>
         <sys_created_on>2023-09-26 00:36:32</sys_created_on>
         <sys_id>52b20c094729f11039634aff336d4383</sys_id>
-        <sys_mod_count>455</sys_mod_count>
+        <sys_mod_count>456</sys_mod_count>
         <sys_name>GetPortfolioDetails</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_52b20c094729f11039634aff336d4383</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-10-13 18:05:42</sys_updated_on>
+        <sys_updated_on>2023-10-16 18:44:27</sys_updated_on>
     </sys_script_include>
 </record_update>
