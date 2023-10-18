@@ -8,8 +8,8 @@
         <http_method>GET</http_method>
         <name>analyze</name>
         <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
-    const alertHelper = new AlertHelper();
-	const analyzed = alertHelper.analyze();
+    const alertAnalyzer = new AlertAnalyzer();
+	const analyzed = alertAnalyzer.analyze();
             response.setStatus(200);
             response.setContentType('application/json');
             response.setBody({
@@ -29,14 +29,14 @@
         <sys_created_by>stephen.hayes</sys_created_by>
         <sys_created_on>2023-10-17 21:43:17</sys_created_on>
         <sys_id>579de84047863110ee827d7ba26d4308</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_name>analyze</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_ws_operation_579de84047863110ee827d7ba26d4308</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-10-18 11:13:40</sys_updated_on>
+        <sys_updated_on>2023-10-18 11:54:33</sys_updated_on>
         <web_service_definition display_value="Alerts">e67de44047863110ee827d7ba26d4382</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>

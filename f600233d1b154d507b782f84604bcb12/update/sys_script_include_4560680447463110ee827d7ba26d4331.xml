@@ -2,24 +2,21 @@
     <sys_script_include action="INSERT_OR_UPDATE">
         <access>package_private</access>
         <active>true</active>
-        <api_name>x_g_dis_atat.AlertHelper</api_name>
+        <api_name>x_g_dis_atat.AlertAnalyzer</api_name>
         <caller_access/>
         <client_callable>false</client_callable>
         <description>This class is responsible for generating new alert or notifications for dispatch.</description>
-        <name>AlertHelper</name>
-        <script><![CDATA[var AlertHelper = Class.create();
-AlertHelper.prototype = {
-    ALERT_TABLE: "x_g_dis_atat_alerts_alert",
-    CLINS_TABLE: "x_g_dis_atat_clin",
-    PORTFOLIO_TABLE: "x_g_dis_atat_portfolio",
-    TRACKING_TABLE: "x_g_dis_atat_alerts_tracking",
-    PERCENT: 100.0,
+        <name>AlertAnalyzer</name>
+        <script><![CDATA[class AlertAnalyzer {
 
-    initialize: function() {
+    constructor() {
+        this.ALERT_TABLE = "x_g_dis_atat_alerts_alert";
+        this.CLINS_TABLE = "x_g_dis_atat_clin";
+        this.PORTFOLIO_TABLE = "x_g_dis_atat_portfolio";
+        this.TRACKING_TABLE = "x_g_dis_atat_alerts_tracking";
+    }
 
-    },
-
-    analyze: function() {
+    analyze() {
         const portfolios = new global.GlideQuery(this.PORTFOLIO_TABLE)
             .select('name', 'active_task_order')
             .toArray(100);
@@ -28,106 +25,54 @@ AlertHelper.prototype = {
             .select('name', 'type', 'threshold')
             .toArray(100);
 
-        return this.analyzePortfolios(portfolios, alerts);
-    },
+        const analyzed = this.analyzePortfolios(portfolios, alerts);
+        this.updateTrackingTable(analyzed);
+        return analyzed;
+    }
 
-    process: function() {
-        const processed = this.getTrackingData();
-        Object.keys(processed).forEach(clin => {
-            Object.keys(processed[clin]).forEach(group => {
-                this.updateTrackingRecords(processed[clin][group]);
-            });
-        });
-        return processed;
-    },
-
-    getTrackingData: function() {
-        return new global.GlideQuery(this.TRACKING_TABLE)
-            .where('status', 'new')
-            .orderBy('clin')
-            .orderBy('alert.group')
-            .orderBy('alert.priority')
-            .select('alert.group', 'alert.priority', 'alert.sys_id', 'clin', 'sys_id')
-            .toArray(100)
-            .reduce(function(r, a) {
-                r[a.clin] = r[a.clin] || {};
-                r[a.clin][a.alert.group] = r[a.clin][a.alert.group] || [];
-                r[a.clin][a.alert.group].push(a);
-                return r;
-            }, {});
-    },
-
-    updateTrackingRecords: function(records) {
-        let gr = new GlideRecord(this.TRACKING_TABLE);
-        if (gr.get(records[0].sys_id)) {
-            gr.status = 'processed';
-            gr.update();
-        }
-
-        records.slice(1).forEach(record => {
-            if (gr.get(record.sys_id)) {
-                gr.status = 'omitted';
-                gr.update();
-            }
-        });
-    },
-
-    analyzePortfolios: function(portfolios, alerts) {
-        const analyzed = portfolios.map((portfolio) => {
+    analyzePortfolios(portfolios, alerts) {
+        return portfolios.map((portfolio) => {
             const clins = new global.GlideQuery(this.CLINS_TABLE)
                 .where('task_order', portfolio.active_task_order)
                 .select('actual_funds_spent', 'funds_total', 'pop_end_date')
                 .toArray(100)
-                .map((clin) => this.processClin(clin, alerts));
-            return { portfolio, clins };
+                .map((clin) => this.analyzeClin(clin, alerts));
+            return {
+                portfolio,
+                clins
+            };
         });
-		this.updateTrackingTable(analyzed);
-		return analyzed;
-    },
+    }
 
-    processClin: function(clin, alerts) {
+    analyzeClin(clin, alerts) {
         const percentRemaining = this.calculatePercentRemaining(clin);
         const daysRemaining = this.calculateDaysRemaining(clin);
-        const triggeredAlerts = this.processAlerts(clin, alerts, daysRemaining, percentRemaining);
+        const analyzedAlerts = this.analyzeAlerts(clin, alerts, daysRemaining, percentRemaining);
         return {
             percentRemaining,
             daysRemaining: daysRemaining.getDisplayValue(),
             clinSysId: clin.sys_id,
-            triggeredAlerts
+            analyzedAlerts
         };
-    },
+    }
 
-    calculatePercentRemaining: function(clin) {
-        if (clin.actual_funds_spent <= 0.0) {
-            return this.PERCENT;
-        }
-        const difference = clin.funds_total - clin.actual_funds_spent;
-        return (difference / clin.funds_total) * this.PERCENT;
-    },
-
-    calculateDaysRemaining: function(clin) {
-        return GlideDateTime.subtract(
-            new GlideDateTime(),
-            new GlideDateTime(clin.pop_end_date)
-        );
-    },
-
-    processAlerts: function(clin, alerts, daysRemaining, percentRemaining) {
-        return alerts.reduce((triggeredAlerts, alert) => {
+    analyzeAlerts(clin, alerts, daysRemaining, percentRemaining) {
+        const analyzedAlerts = alerts.reduce((triggeredAlerts, alert) => {
             if ((alert.type === 'time' && daysRemaining.getDayPart() <= alert.threshold) ||
                 (alert.type === 'funds' && percentRemaining <= alert.threshold)) {
-                triggeredAlerts.push(alert);
+                return [...triggeredAlerts, alert];
             }
             return triggeredAlerts;
         }, []);
-    },
+        return analyzedAlerts;
+    }
 
-    updateTrackingTable: function(processed) {
-        processed.forEach((i) => {
+    updateTrackingTable(analyzed) {
+        analyzed.forEach((i) => {
             const portfolio = i.portfolio;
             const clins = i.clins;
             clins.forEach((clin) => {
-                clin.triggeredAlerts?.forEach((alert) => {
+                clin.analyzedAlerts?.forEach((alert) => {
                     const res = new global.GlideQuery(this.TRACKING_TABLE)
                         .where('portfolio', portfolio.sys_id)
                         .where('alert', alert.sys_id)
@@ -146,21 +91,38 @@ AlertHelper.prototype = {
                 });
             });
         });
-    },
+    }
 
-    type: 'AlertHelper'
-};]]></script>
+    calculatePercentRemaining(clin) {
+        const {
+            actual_funds_spent,
+            funds_total
+        } = clin;
+        if (actual_funds_spent <= 0.0 || funds_total <= 0.0) {
+            return 100;
+        }
+        const difference = funds_total - actual_funds_spent;
+        return (difference / funds_total) * 100;
+    }
+
+    calculateDaysRemaining(clin) {
+        return GlideDateTime.subtract(
+            new GlideDateTime(),
+            new GlideDateTime(clin.pop_end_date)
+        );
+    }
+}]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
         <sys_created_on>2023-10-17 20:49:39</sys_created_on>
         <sys_id>4560680447463110ee827d7ba26d4331</sys_id>
-        <sys_mod_count>88</sys_mod_count>
-        <sys_name>AlertHelper</sys_name>
+        <sys_mod_count>93</sys_mod_count>
+        <sys_name>AlertAnalyzer</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_4560680447463110ee827d7ba26d4331</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-10-18 11:34:52</sys_updated_on>
+        <sys_updated_on>2023-10-18 11:59:44</sys_updated_on>
     </sys_script_include>
 </record_update>
