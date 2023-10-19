@@ -10,9 +10,15 @@
         <script><![CDATA[class AlertProcessor {
 
     constructor() {
+		this.ALERT_TYPE_FUNDS = "funds";
+		this.ALERT_TYPE_TIME = "time";
+		
         this.PREFERENCES_TABLE = "x_g_dis_atat_preferences";
         this.USER_TABLE = "sys_user";
         this.TRACKING_TABLE = "x_g_dis_atat_alerts_tracking";
+		
+		this.QUEUE_FUNDS = "x_g_dis_atat.alert_funds";
+		this.QUEUE_TIME = "x_g_dis_atat.alert_time";
     }
 
     process() {
@@ -31,7 +37,14 @@
             .orderBy('clin')
             .orderBy('alert.group')
             .orderBy('alert.priority')
-            .select('alert.group', 'alert.sys_id', 'alert.threshold', 'alert.type', 'portfolio', 'clin', 'sys_id')
+            .select('alert.group', 
+					'alert.sys_id', 
+					'alert.threshold', 
+					'alert.type',
+					'portfolio$DISPLAY', 
+					'clin', 
+					'clin$DISPLAY', 
+					'sys_id')
             .toArray(100)
             .reduce((r, a) => {
                 r[a.clin] = r[a.clin] || {};
@@ -56,30 +69,19 @@
             }
         });
     }
-    // emails.filter((operator, index) => emails.indexOf(operator) === index);
-    processAlert(gr, record) {
-        const sysIds = this.extractEmails(gr);
 
+	// TODO: remove users that opt-out
+    processAlert(gr, record) {
+        const userSysIds = this.extractEmails(gr);
+		const queue = (record.alert.type === this.ALERT_TYPE_FUNDS) ? this.QUEUE_FUNDS : this.QUEUE_TIME;
+		
         const emails = new global.GlideQuery(this.USER_TABLE)
-            .where('sys_id', 'IN', sysIds)
+            .where('sys_id', 'IN', userSysIds)
             .select('email')
             .toArray(100)
-            .map((user) => user.email);
-
-        gs.info(`Emails: ${JSON.stringify(emails)}`);
-
-        const alertPayload = {
-            alertType: record.alert.type,
-            clin: record.clin,
-            portfolio: record.portfolio,
-            emails,
-            taskOrder: gr.portfolio.active_task_order.getDisplayValue(),
-            threshold: record.alert.threshold
-        };
-
-        emails.forEach((email) => {
-            gs.eventQueue('x_g_dis_atat.csp_provisioning', portfolio, email);
-        });
+            .forEach((user) => {
+				gs.eventQueue(queue, gr, user.email, gr.portfolio.active_task_order.getDisplayValue());
+			});
     }
 
     extractEmails(gr) {
@@ -93,13 +95,13 @@
         <sys_created_by>stephen.hayes</sys_created_by>
         <sys_created_on>2023-10-18 11:47:30</sys_created_on>
         <sys_id>71eea70447427110ee827d7ba26d43e5</sys_id>
-        <sys_mod_count>29</sys_mod_count>
+        <sys_mod_count>45</sys_mod_count>
         <sys_name>AlertProcessor</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_71eea70447427110ee827d7ba26d43e5</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-10-19 01:16:16</sys_updated_on>
+        <sys_updated_on>2023-10-19 20:50:25</sys_updated_on>
     </sys_script_include>
 </record_update>
