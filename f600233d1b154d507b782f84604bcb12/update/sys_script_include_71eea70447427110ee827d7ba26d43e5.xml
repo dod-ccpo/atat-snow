@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
     <sys_script_include action="INSERT_OR_UPDATE">
-        <access>package_private</access>
+        <access>public</access>
         <active>true</active>
         <api_name>x_g_dis_atat.AlertProcessor</api_name>
         <caller_access/>
@@ -10,6 +10,8 @@
         <script><![CDATA[class AlertProcessor {
 
     constructor() {
+        this.PREFERENCES_TABLE = "x_g_dis_atat_preferences";
+        this.USER_TABLE = "sys_user";
         this.TRACKING_TABLE = "x_g_dis_atat_alerts_tracking";
     }
 
@@ -29,9 +31,9 @@
             .orderBy('clin')
             .orderBy('alert.group')
             .orderBy('alert.priority')
-            .select('alert.group', 'alert.priority', 'alert.sys_id', 'clin', 'sys_id')
+            .select('alert.group', 'alert.sys_id', 'alert.threshold', 'alert.type', 'portfolio', 'clin', 'sys_id')
             .toArray(100)
-            .reduce(function(r, a) {
+            .reduce((r, a) => {
                 r[a.clin] = r[a.clin] || {};
                 r[a.clin][a.alert.group] = r[a.clin][a.alert.group] || [];
                 r[a.clin][a.alert.group].push(a);
@@ -42,6 +44,7 @@
     updateTrackingRecords(records) {
         const gr = new GlideRecord(this.TRACKING_TABLE);
         if (gr.get(records[0].sys_id)) {
+            this.processAlert(gr, records[0]);
             gr.status = 'processed';
             gr.update();
         }
@@ -53,18 +56,50 @@
             }
         });
     }
+    // emails.filter((operator, index) => emails.indexOf(operator) === index);
+    processAlert(gr, record) {
+        const sysIds = this.extractEmails(gr);
+
+        const emails = new global.GlideQuery(this.USER_TABLE)
+            .where('sys_id', 'IN', sysIds)
+            .select('email')
+            .toArray(100)
+            .map((user) => user.email);
+
+        gs.info(`Emails: ${JSON.stringify(emails)}`);
+
+        const alertPayload = {
+            alertType: record.alert.type,
+            clin: record.clin,
+            portfolio: record.portfolio,
+            emails,
+            taskOrder: gr.portfolio.active_task_order.getDisplayValue(),
+            threshold: record.alert.threshold
+        };
+
+        emails.forEach((email) => {
+            gs.eventQueue('x_g_dis_atat.csp_provisioning', portfolio, email);
+        });
+    }
+
+    extractEmails(gr) {
+        const portfolioOwner = gr.portfolio.portfolio_owner.toString();
+        const portfolioManagers = gr.portfolio.portfolio_managers.toString().split(',');
+        const portfolioViewers = gr.portfolio.portfolio_viewers.toString().split(',');
+        return [].concat(portfolioOwner, portfolioManagers, portfolioViewers);
+    }
 }]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
         <sys_created_on>2023-10-18 11:47:30</sys_created_on>
         <sys_id>71eea70447427110ee827d7ba26d43e5</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>29</sys_mod_count>
         <sys_name>AlertProcessor</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_71eea70447427110ee827d7ba26d43e5</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-10-18 12:05:03</sys_updated_on>
+        <sys_updated_on>2023-10-19 01:16:16</sys_updated_on>
     </sys_script_include>
 </record_update>
