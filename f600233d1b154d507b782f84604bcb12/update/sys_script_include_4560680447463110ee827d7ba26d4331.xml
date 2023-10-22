@@ -5,7 +5,7 @@
         <api_name>x_g_dis_atat.AlertAnalyzer</api_name>
         <caller_access/>
         <client_callable>false</client_callable>
-        <description>This class is responsible for generating new alert or notifications for dispatch.</description>
+        <description>This class is responsible for generating new tracking items for email dispatch.</description>
         <name>AlertAnalyzer</name>
         <script><![CDATA[class AlertAnalyzer {
 
@@ -18,13 +18,23 @@
 
     analyze() {
         const portfolios = new global.GlideQuery(this.PORTFOLIO_TABLE)
-            .select('name', 'active_task_order')
+            .select('active_task_order', 'name')
             .toArray(100);
-
+		
+        if (portfolios.nil()) {
+            gs.logWarning('No portfolios found');
+			return {};
+        }
+		
         const alerts = new global.GlideQuery(this.ALERT_TABLE)
             .select('name', 'type', 'threshold')
             .toArray(100);
-
+		
+		if(alerts.nil()) {
+			gs.logWarning('No portfolios found');
+			return {};
+		}
+		
         const analyzed = this.analyzePortfolios(portfolios, alerts);
         this.updateTrackingTable(analyzed);
         return analyzed;
@@ -56,7 +66,7 @@
         };
     }
 
-	// this can be generic rather than hard-coding 'time' & 'funds'...
+    // this can be generic rather than hard-coding 'time' & 'funds'...
     analyzeAlerts(clin, alerts, daysRemaining, percentSpend) {
         const analyzedAlerts = alerts.reduce((triggeredAlerts, alert) => {
             if ((alert.type === 'time' && daysRemaining.getDayPart() <= alert.threshold) ||
@@ -113,13 +123,13 @@
         <sys_created_by>stephen.hayes</sys_created_by>
         <sys_created_on>2023-10-17 20:49:39</sys_created_on>
         <sys_id>4560680447463110ee827d7ba26d4331</sys_id>
-        <sys_mod_count>96</sys_mod_count>
+        <sys_mod_count>98</sys_mod_count>
         <sys_name>AlertAnalyzer</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_4560680447463110ee827d7ba26d4331</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-10-19 20:42:31</sys_updated_on>
+        <sys_updated_on>2023-10-20 22:10:54</sys_updated_on>
     </sys_script_include>
 </record_update>
