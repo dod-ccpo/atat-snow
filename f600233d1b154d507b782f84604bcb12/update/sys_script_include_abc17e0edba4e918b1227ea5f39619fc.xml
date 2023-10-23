@@ -270,8 +270,8 @@ Eda.prototype = {
         portfolio.setValue("name", portfolioName);
         portfolio.setValue("portfolio_owner", gs.getUserID());
         portfolio.setValue("agency", portfolioAgency);
-		const todaysDate = new GlideDateTime().getDisplayValue();
-		portfolio.setValue("provisioning_request_date", todaysDate);
+        const todaysDate = new GlideDateTime().getDisplayValue();
+        portfolio.setValue("provisioning_request_date", todaysDate);
         // set CSP column with first (?) environment name from POST body
         const cspName = environments?.[0]?.cspName;
 
@@ -281,7 +281,6 @@ Eda.prototype = {
 
         if (!optRecord.isEmpty()) {
             const cspRecord = optRecord.get();
-            gs.info(`CSP Record: ${JSON.stringify(cspRecord)}`);
             portfolio.setValue("csp", cspRecord.sys_id);
         }
 
@@ -308,7 +307,7 @@ Eda.prototype = {
             portfolio.update();
 
             environments.forEach((env) => this.createEnvironment(env, portfolioName, portfolio));
-			this.emailCspAdmins(portfolio, environments);
+            this.emailCspAdmins(portfolio, environments);
 
             // Update Acquisition Package Status (if we have one)
             if (acquisitionPackageRecordFound) {
@@ -496,34 +495,49 @@ Eda.prototype = {
     },
 
     getCLINData: function(instrument) {
-        let clinData = {};
+        const clinData = {};
 
         if (!Array.isArray(instrument.ContractLineItems.LineItems)) {
+			gs.error('LineItems is not an array');
             return null;
         }
 
         // Gather CLINs + PoP Dates from "CLIN" entries. Do not create CLINs if we don't have PoP dates.
-        instrument.ContractLineItems.LineItems.filter(function(lineItem) {
-            return lineItem.LineItemIdentifier.DFARS.LineItem.LineItemType == "CLIN";
-        }).filter(function(lineItem) {
-            return lineItem.LineItemDates;
-        }).forEach(function(lineItem) {
-            clinData[lineItem.LineItemIdentifier.DFARS.LineItem.LineItemBase] = {
-                popStartDate: lineItem.LineItemDates.LineItemPeriod.PeriodStart.DateElement,
-                popEndDate: lineItem.LineItemDates.LineItemPeriod.PeriodEnd.DateElement,
-                totalAmount: lineItem.LineItemAmounts.ItemOtherAmounts.Amount
-            };
-        });
         // Next, gather Obligated Amount from "INFOSLIN" entries
-        instrument.ContractLineItems.LineItems.filter(function(lineItem) {
-            return lineItem.LineItemIdentifier.DFARS.LineItem.LineItemType == "INFOSLIN";
-        }).filter(function(lineItem) {
-            return lineItem.LineItemAmounts;
-        }).forEach(function(lineItem) {
-            clinData[lineItem.LineItemIdentifier.DFARS.LineItem.LineItemBase].obligatedAmount = lineItem.LineItemAmounts.ItemObligatedAmount.ObligatedAmount;
+        instrument.ContractLineItems.LineItems.forEach((lineItem) => {
+            const type = lineItem.LineItemIdentifier?.DFARS?.LineItem?.LineItemType;
+            if (type === "CLIN" && lineItem.LineItemDates) {
+                const popStartDate = lineItem.LineItemDates.LineItemPeriod?.PeriodStart?.DateElement ?? null;
+                const popEndDate = lineItem.LineItemDates.LineItemPeriod?.PeriodEnd?.DateElement ?? null;
+                const totalAmount = lineItem.LineItemAmounts?.ItemOtherAmounts?.Amount ?? null;
+
+                // only create CLIN with both dates; warn otherwise.
+                if (popStartDate && popEndDate) {
+                    clinData[lineItem.LineItemIdentifier.DFARS.LineItem.LineItemBase] = {
+                        popStartDate,
+                        popEndDate,
+                        totalAmount
+                    };
+                } else {
+                    gs.warn(`CLIN ${JSON.stringify(lineItem)} missing PoP dates.`);
+                }
+
+            } else if (type === "INFOSYS" && lineItem?.LineItemAmounts) {
+                const baseItem = clinData[lineItem.LineItemIdentifier.DFARS.LineItem.LineItemBase];
+                if (baseItem) {
+                    baseItem.obligatedAmount = lineItem.LineItemAmounts.ItemObligatedAmount.ObligatedAmount ?? null;
+                }
+            }
         });
+		gs.info(`ClinData: ${JSON.stringify(clinData)}`);
 
         return clinData;
+    },
+
+    filterLineItems: function(type) {
+        return contractData.ContractLineItems.LineItems.filter(lineItem =>
+            lineItem?.LineItemIdentifier?.DFARS?.LineItem?.LineItemType == type && lineItem?.LineItemDates
+        );
     },
 
     getClassificationLevels: function(instrument) {
@@ -688,13 +702,13 @@ Eda.prototype = {
         <sys_created_by>1370228783.CTR</sys_created_by>
         <sys_created_on>2023-01-24 02:42:04</sys_created_on>
         <sys_id>abc17e0edba4e918b1227ea5f39619fc</sys_id>
-        <sys_mod_count>129</sys_mod_count>
+        <sys_mod_count>131</sys_mod_count>
         <sys_name>Eda</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_abc17e0edba4e918b1227ea5f39619fc</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-09-25 18:12:13</sys_updated_on>
+        <sys_updated_on>2023-10-23 20:41:18</sys_updated_on>
     </sys_script_include>
 </record_update>
