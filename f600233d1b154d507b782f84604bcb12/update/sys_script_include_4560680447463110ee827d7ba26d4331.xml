@@ -21,8 +21,8 @@
             .select('active_task_order', 'name')
             .toArray(100);
 		
-        if (portfolios.nil()) {
-            gs.logWarning('No portfolios found');
+        if (portfolios.length === 0) {
+            gs.warn('No portfolios found');
 			return {};
         }
 		
@@ -30,8 +30,8 @@
             .select('name', 'type', 'threshold')
             .toArray(100);
 		
-		if(alerts.nil()) {
-			gs.logWarning('No portfolios found');
+		if(alerts.length === 0) {
+			gs.warn('No portfolios found');
 			return {};
 		}
 		
@@ -41,9 +41,12 @@
     }
 
     analyzePortfolios(portfolios, alerts) {
+		const now = new GlideDate();
         return portfolios.map((portfolio) => {
             const clins = new global.GlideQuery(this.CLINS_TABLE)
                 .where('task_order', portfolio.active_task_order)
+                .where('pop_start_date', '<=', now.getValue())
+                .where('pop_end_date', '>', now.getValue())
                 .select('actual_funds_spent', 'funds_total', 'pop_end_date')
                 .toArray(100)
                 .map((clin) => this.analyzeClin(clin, alerts));
@@ -123,13 +126,13 @@
         <sys_created_by>stephen.hayes</sys_created_by>
         <sys_created_on>2023-10-17 20:49:39</sys_created_on>
         <sys_id>4560680447463110ee827d7ba26d4331</sys_id>
-        <sys_mod_count>98</sys_mod_count>
+        <sys_mod_count>101</sys_mod_count>
         <sys_name>AlertAnalyzer</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_4560680447463110ee827d7ba26d4331</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-10-20 22:10:54</sys_updated_on>
+        <sys_updated_on>2023-10-23 22:30:14</sys_updated_on>
     </sys_script_include>
 </record_update>

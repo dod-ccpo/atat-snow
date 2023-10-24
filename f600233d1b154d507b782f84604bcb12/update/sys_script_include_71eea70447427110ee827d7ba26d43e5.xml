@@ -71,10 +71,10 @@
     }
 
 	// TODO: remove users that opt-out
+	// TODO: generalize type?
     processAlert(gr, record) {
-        const userSysIds = this.extractEmails(gr);
+        const userSysIds = this.extractUserSysIds(gr);
 		const queue = (record.alert.type === this.ALERT_TYPE_FUNDS) ? this.QUEUE_FUNDS : this.QUEUE_TIME;
-		
         const emails = new global.GlideQuery(this.USER_TABLE)
             .where('sys_id', 'IN', userSysIds)
             .select('email')
@@ -84,24 +84,29 @@
 			});
     }
 
-    extractEmails(gr) {
-        const portfolioOwner = gr.portfolio.portfolio_owner.toString();
-        const portfolioManagers = gr.portfolio.portfolio_managers.toString().split(',');
-        const portfolioViewers = gr.portfolio.portfolio_viewers.toString().split(',');
-        return [].concat(portfolioOwner, portfolioManagers, portfolioViewers);
+    extractUserSysIds(gr) {
+        const emails = gr.portfolio.portfolio_owner.toString();
+		if(gr.portfolio.portfolio_managers) {
+			emails.concat(gr.portfolio.portfolio_managers.toString().split(','));
+		}
+		if(gr.portfolio.portfolio_viewers) {
+			emails.concat(gr.portfolio.portfolio_viewers.toString().split(','));
+		}
+
+        return [].concat(emails);
     }
 }]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
         <sys_created_on>2023-10-18 11:47:30</sys_created_on>
         <sys_id>71eea70447427110ee827d7ba26d43e5</sys_id>
-        <sys_mod_count>45</sys_mod_count>
+        <sys_mod_count>50</sys_mod_count>
         <sys_name>AlertProcessor</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_71eea70447427110ee827d7ba26d43e5</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-10-19 20:50:25</sys_updated_on>
+        <sys_updated_on>2023-10-24 13:13:50</sys_updated_on>
     </sys_script_include>
 </record_update>
