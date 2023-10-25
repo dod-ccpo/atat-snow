@@ -65,9 +65,9 @@
     }
   
     .button {
-        display: flex;
         padding: 8px 20px;
         justify-content: center;
+        text-decoration: none;
         align-items: center;
         gap: 8px;
         border-radius: 4px;
@@ -92,13 +92,11 @@
 <p class="title-text">Period of Performance alert for Task Order #${portfolio.active_task_order.task_order_number}</p>
 <div class="body-text">
 <p><strong>The Account Tracking Automation Tool (ATAT) reflects that the following Contract Line Item Numbers (CLINs) are within ${alert.threshold} days of expiring.</strong></p>
-<ul style="margin: 24px 0;">
-<li class="list-item"><strong>CLIN ${clin.clin_number}</strong> - Expires ${clin.pop_end_date}</li>
-</ul>
-</div>
+<p><strong>CLINs: ${portfolio.active_task_order.clins}</strong> - Expiring ${mail_script:atat_date_display}</p>
 <p class="body-text">You may need to request a task order modification or initiate a follow-on task order to update the funding associated with your "${portfolio.name}" portfolio.</p>
 <p class="body-text">To review your task order details and portfolio spend, login to ATAT by clicking the link below:</p>
-<button class="button"> View ATAT Portfolio </button></div>
+<a class="button" href="https://services.disa.mil/dapps-atat"> View ATAT Portfolio </a></div>
+</div>
 <div class="footer-container">
 <p class="footer-text">This was sent from an unmonitored email address. Please do not reply to this email. If you have questions about JWCC or ATAT, please contact our Customer Support Team at <a class="link" href="https://community.hacc.mil/s/contact?&amp;RoleType=Customer">https://community.hacc.mil/s/contact?&amp;RoleType=Customer</a></p>
 </div>
@@ -112,14 +110,14 @@
         <sys_created_by>stephen.hayes</sys_created_by>
         <sys_created_on>2023-10-19 14:04:22</sys_created_on>
         <sys_id>e1185da44746b110ee827d7ba26d436a</sys_id>
-        <sys_mod_count>9</sys_mod_count>
+        <sys_mod_count>23</sys_mod_count>
         <sys_name>Alert (Time)</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy/>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sysevent_email_template_e1185da44746b110ee827d7ba26d436a</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-10-24 13:40:05</sys_updated_on>
+        <sys_updated_on>2023-10-25 21:22:01</sys_updated_on>
         <sys_version>2</sys_version>
     </sysevent_email_template>
 </record_update>
