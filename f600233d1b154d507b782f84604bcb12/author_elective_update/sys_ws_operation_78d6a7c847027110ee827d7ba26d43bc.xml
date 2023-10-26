@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="DELETE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>GET</http_method>
+        <name>process</name>
+        <operation_script><![CDATA[(function process( /*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+
+    const alertProcessor = new AlertProcessor();
+    const process = alertProcessor.process();
+    response.setStatus(200);
+    response.setContentType('application/json');
+    response.setBody({
+        process,
+    });
+
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_g_dis_atat/alerts/process</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/process</relative_path>
+        <request_example/>
+        <requires_acl_authorization>false</requires_acl_authorization>
+        <requires_authentication>false</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-10-18 11:13:11</sys_created_on>
+        <sys_id>78d6a7c847027110ee827d7ba26d43bc</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>process</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_ws_operation_78d6a7c847027110ee827d7ba26d43bc</sys_update_name>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-10-18 11:53:44</sys_updated_on>
+        <web_service_definition display_value="Alerts">e67de44047863110ee827d7ba26d4382</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+<sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="ATAT">f600233d1b154d507b782f84604bcb12</application>
+        <file_path/>
+        <instance_id>452cbf1b1bdb65d465324089bd4bcb17</instance_id>
+        <instance_name>dev176403</instance_name>
+        <name>sys_ws_operation_78d6a7c847027110ee827d7ba26d43bc</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_ws_operation"&gt;
+    &lt;sys_ws_operation action="INSERT_OR_UPDATE"&gt;
+        &lt;active&gt;true&lt;/active&gt;
+        &lt;consumes&gt;application/json,application/xml,text/xml&lt;/consumes&gt;
+        &lt;consumes_customized&gt;false&lt;/consumes_customized&gt;
+        &lt;default_operation_uri/&gt;
+        &lt;enforce_acl&gt;cf9d01d3e73003009d6247e603f6a990&lt;/enforce_acl&gt;
+        &lt;http_method&gt;GET&lt;/http_method&gt;
+        &lt;name&gt;process&lt;/name&gt;
+        &lt;operation_script&gt;&lt;![CDATA[(function process( /*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+
+    const alertProcessor = new AlertProcessor();
+    const process = alertProcessor.process();
+    response.setStatus(200);
+    response.setContentType('application/json');
+    response.setBody({
+        process,
+    });
+
+})(request, response);]]&gt;&lt;/operation_script&gt;
+        &lt;operation_uri&gt;/api/x_g_dis_atat/alerts/process&lt;/operation_uri&gt;
+        &lt;produces&gt;application/json,application/xml,text/xml&lt;/produces&gt;
+        &lt;produces_customized&gt;false&lt;/produces_customized&gt;
+        &lt;relative_path&gt;/process&lt;/relative_path&gt;
+        &lt;request_example/&gt;
+        &lt;requires_acl_authorization&gt;false&lt;/requires_acl_authorization&gt;
+        &lt;requires_authentication&gt;false&lt;/requires_authentication&gt;
+        &lt;requires_snc_internal_role&gt;true&lt;/requires_snc_internal_role&gt;
+        &lt;short_description/&gt;
+        &lt;sys_class_name&gt;sys_ws_operation&lt;/sys_class_name&gt;
+        &lt;sys_created_by&gt;stephen.hayes&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2023-10-18 11:13:11&lt;/sys_created_on&gt;
+        &lt;sys_id&gt;78d6a7c847027110ee827d7ba26d43bc&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;4&lt;/sys_mod_count&gt;
+        &lt;sys_name&gt;process&lt;/sys_name&gt;
+        &lt;sys_package display_value="ATAT" source="x_g_dis_atat"&gt;f600233d1b154d507b782f84604bcb12&lt;/sys_package&gt;
+        &lt;sys_policy/&gt;
+        &lt;sys_scope display_value="ATAT"&gt;f600233d1b154d507b782f84604bcb12&lt;/sys_scope&gt;
+        &lt;sys_update_name&gt;sys_ws_operation_78d6a7c847027110ee827d7ba26d43bc&lt;/sys_update_name&gt;
+        &lt;sys_updated_by&gt;stephen.hayes&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2023-10-18 11:53:44&lt;/sys_updated_on&gt;
+        &lt;web_service_definition display_value="Alerts"&gt;e67de44047863110ee827d7ba26d4382&lt;/web_service_definition&gt;
+        &lt;web_service_version/&gt;
+    &lt;/sys_ws_operation&gt;
+&lt;/record_update&gt;</payload>
+        <payload_hash>1000514235</payload_hash>
+        <record_name>process</record_name>
+        <reverted_from/>
+        <source>3737d23e474a3510ee827d7ba26d436d</source>
+        <source_table>sys_upgrade_history</source_table>
+        <state>previous</state>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-10-26 18:26:44</sys_created_on>
+        <sys_id>eb57d27e474a3510ee827d7ba26d4341</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18b6d3d21910000001</sys_recorded_at>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-10-26 18:26:44</sys_updated_on>
+        <type>Scripted REST Resource</type>
+        <update_guid>2b57d27eac4a35105b217f1d79202641</update_guid>
+        <update_guid_history>2b57d27eac4a35105b217f1d79202641:0,17908a62f58af110625bf39b5f5547bd:578954971,25c09c524646b110a2ea91520eedec23:0,595a9b0e2442b110bfb246eefa036da3:578954971,063e2f75630671100b081a7ee678cc26:0,e8f27e29438231105aa7164debcf2811:578954971,6cb07f447a427110dd54e44a689fbeb0:-313886873,c580bb4409427110fd1ecfbcff90b7be:863967879,83c7e74cb0027110b5dc45e854e698bc:-1127189727,f3b7630c37027110be4c1ec92e17f8d0:1855863012,a267634c5b0271104943d0e5f55968b7:434601391</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-10-26 18:43:57</sys_created_on>
+        <sys_db_object display_value="" name="sys_ws_operation">sys_ws_operation</sys_db_object>
+        <sys_id>64893dcdfa394094ae746f974a820990</sys_id>
+        <sys_metadata>78d6a7c847027110ee827d7ba26d43bc</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>process</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_scope_delete display_value="">0e7a10eb525044648240c5b393f748c4</sys_scope_delete>
+        <sys_update_name>sys_ws_operation_78d6a7c847027110ee827d7ba26d43bc</sys_update_name>
+        <sys_update_version display_value="sys_ws_operation_78d6a7c847027110ee827d7ba26d43bc">eb57d27e474a3510ee827d7ba26d4341</sys_update_version>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-10-26 18:43:57</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
