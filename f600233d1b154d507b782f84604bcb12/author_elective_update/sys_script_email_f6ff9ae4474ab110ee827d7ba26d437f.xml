@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_email">
+    <sys_script_email action="DELETE">
+        <name>ATAT Alert Email Payload Parser</name>
+        <new_lines_to_html>false</new_lines_to_html>
+        <script><![CDATA[(function runMailScript(current, template, email, email_action, event) {     
+	const payload = JSON.parse(event.parm2);
+	const portfolio = payload.portfolio;
+	const taskOrder = payload.taskOrder;
+	gs.info(JSON.stringify(payload));
+	const subject = `ATAT Portfolio alert for "${portfolio}" - Task Order #${taskOrder}`;
+	gs.info(subject);
+	email.setSubject(subject);
+})(current, template, email, email_action, event);]]></script>
+        <sys_class_name>sys_script_email</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-10-19 19:28:00</sys_created_on>
+        <sys_id>f6ff9ae4474ab110ee827d7ba26d437f</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>ATAT Alert Email Payload Parser</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_email_f6ff9ae4474ab110ee827d7ba26d437f</sys_update_name>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-10-19 19:54:13</sys_updated_on>
+    </sys_script_email>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="ATAT">f600233d1b154d507b782f84604bcb12</application>
+        <file_path/>
+        <instance_id>452cbf1b1bdb65d465324089bd4bcb17</instance_id>
+        <instance_name>dev176403</instance_name>
+        <name>sys_script_email_f6ff9ae4474ab110ee827d7ba26d437f</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_email"&gt;&lt;sys_script_email action="INSERT_OR_UPDATE"&gt;&lt;name&gt;ATAT Alert Email Payload Parser&lt;/name&gt;&lt;new_lines_to_html&gt;false&lt;/new_lines_to_html&gt;&lt;script&gt;&lt;![CDATA[(function runMailScript(current, template, email, email_action, event) {     
+	const payload = JSON.parse(event.parm2);
+	const portfolio = payload.portfolio;
+	const taskOrder = payload.taskOrder;
+	gs.info(JSON.stringify(payload));
+	const subject = `ATAT Portfolio alert for "${portfolio}" - Task Order #${taskOrder}`;
+	gs.info(subject);
+	email.setSubject(subject);
+})(current, template, email, email_action, event);]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_email&lt;/sys_class_name&gt;&lt;sys_created_by&gt;stephen.hayes&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2023-10-19 19:28:00&lt;/sys_created_on&gt;&lt;sys_id&gt;f6ff9ae4474ab110ee827d7ba26d437f&lt;/sys_id&gt;&lt;sys_mod_count&gt;3&lt;/sys_mod_count&gt;&lt;sys_name&gt;ATAT Alert Email Payload Parser&lt;/sys_name&gt;&lt;sys_package display_value="ATAT" source="x_g_dis_atat"&gt;f600233d1b154d507b782f84604bcb12&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="ATAT"&gt;f600233d1b154d507b782f84604bcb12&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_email_f6ff9ae4474ab110ee827d7ba26d437f&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;stephen.hayes&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2023-10-19 19:54:13&lt;/sys_updated_on&gt;&lt;/sys_script_email&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-915844336</payload_hash>
+        <record_name>ATAT Alert Email Payload Parser</record_name>
+        <reverted_from/>
+        <source>755f33e347e17110ee827d7ba26d43ae</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-10-19 19:54:13</sys_created_on>
+        <sys_id>a44862ec474ab110ee827d7ba26d432d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18b4980b3530000001</sys_recorded_at>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-10-19 19:54:13</sys_updated_on>
+        <type>Email Script</type>
+        <update_guid>ac4862ec374ab110c1f6d0a802116e2c</update_guid>
+        <update_guid_history>ac4862ec374ab110c1f6d0a802116e2c:-915844336,ecc76ee89e4ab110da615ddb8273da68:1401869798,03942e68fa4ab1104ea9ceebeaa909a8:1325198442,6842a6e4094ab110bb9872cfe4954053:-1330991585</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-10-19 19:57:25</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_email">sys_script_email</sys_db_object>
+        <sys_id>3814c3c0e9984b4c9a4e6822bbee3e79</sys_id>
+        <sys_metadata>f6ff9ae4474ab110ee827d7ba26d437f</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>ATAT Alert Email Payload Parser</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_scope_delete display_value="">0e7a10eb525044648240c5b393f748c4</sys_scope_delete>
+        <sys_update_name>sys_script_email_f6ff9ae4474ab110ee827d7ba26d437f</sys_update_name>
+        <sys_update_version display_value="sys_script_email_f6ff9ae4474ab110ee827d7ba26d437f">a44862ec474ab110ee827d7ba26d432d</sys_update_version>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-10-19 19:57:25</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

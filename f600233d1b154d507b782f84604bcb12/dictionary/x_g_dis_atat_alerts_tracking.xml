@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="6d5aa48c47463110ee827d7ba26d4381" label="ATAT:Alerts:Tracking" max_length="40" name="x_g_dis_atat_alerts_tracking" type="collection">
+        <element display="true" label="Alert" max_length="32" name="alert" reference="x_g_dis_atat_alerts_alert" type="reference"/>
+        <element label="CLIN" mandatory="true" max_length="32" name="clin" reference="x_g_dis_atat_clin" type="reference"/>
+        <element label="Portfolio" max_length="32" name="portfolio" reference="x_g_dis_atat_portfolio" type="reference"/>
+        <element choice="1" label="Status" max_length="40" name="status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Failure" value="failure"/>
+                <element inactive_on_update="false" label="New" value="new"/>
+                <element inactive_on_update="false" label="Omitted" value="omitted"/>
+                <element inactive_on_update="false" label="Processed" value="processed"/>
+            </choice>
+        </element>
+        <index name="index">
+            <element name="alert"/>
+        </index>
+        <index name="index2">
+            <element name="clin"/>
+        </index>
+        <index name="index3">
+            <element name="portfolio"/>
+        </index>
+    </element>
+</database>

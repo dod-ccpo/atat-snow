@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_email">
+    <sys_script_email action="INSERT_OR_UPDATE">
+        <name>atat_date_display</name>
+        <new_lines_to_html>false</new_lines_to_html>
+        <script><![CDATA[(function runMailScript(current, template, email, email_action, event) {
+    const pop = current.clin.pop_end_date.getDisplayValue();
+    const gdt = new GlideDateTime(pop);
+    const year = gdt.getYearLocalTime();
+    const month = gdt.getMonthLocalTime();
+    const day = gdt.getDayOfMonthLocalTime();
+
+    const monthFormat = {
+        1: "Jan.",
+        2: "Feb.",
+        3: "March",
+        4: "April",
+        5: "May",
+        6: "June",
+        7: "July",
+        8: "Aug.",
+        9: "Sept.",
+        10: "Oct.",
+        11: "Nov.",
+        12: "Dec."
+    };
+
+    const formattedMonth = monthFormat[month];
+    const formattedDateLine = formattedMonth + " " + day + ", " + year;
+    template.print(formattedDateLine);
+})(current, template, email, email_action, event);]]></script>
+        <sys_class_name>sys_script_email</sys_class_name>
+        <sys_created_by>stephen.hayes</sys_created_by>
+        <sys_created_on>2023-10-25 17:17:33</sys_created_on>
+        <sys_id>296b34ae4746f110ee827d7ba26d4357</sys_id>
+        <sys_mod_count>53</sys_mod_count>
+        <sys_name>atat_date_display</sys_name>
+        <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
+        <sys_update_name>sys_script_email_296b34ae4746f110ee827d7ba26d4357</sys_update_name>
+        <sys_updated_by>stephen.hayes</sys_updated_by>
+        <sys_updated_on>2023-10-25 20:12:54</sys_updated_on>
+    </sys_script_email>
+</record_update>
