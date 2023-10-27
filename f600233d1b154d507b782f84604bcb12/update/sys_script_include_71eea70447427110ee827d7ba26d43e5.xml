@@ -23,15 +23,16 @@
 
     process() {
         const processed = this.getTrackingData();
-		const fundAlerts = [];
         const timeAlerts = [];
         Object.keys(processed).forEach((clin) => {
             Object.keys(processed[clin]).forEach(group => {
-                this.updateTrackingRecords(processed[clin][group], timeAlerts, fundAlerts);
+                this.updateTrackingRecords(processed[clin][group], timeAlerts);
             });
         });
 
-        return {fundAlerts, timeAlerts};
+        return {
+            timeAlerts
+        };
     }
 
     getTrackingData() {
@@ -55,28 +56,51 @@
             }, {});
     }
 
-    updateTrackingRecords(records, timeAlerts, fundAlerts) {
-        const sysIds = records.map(record => record.sys_id);
+    updateTrackingRecords(records, timeAlerts) {
         const gr = new GlideRecord(this.TRACKING_TABLE);
-        gr.addQuery('sys_id', 'IN', sysIds.join(','));
-		gr.orderBy('clin');
-		gr.orderBy('alert.group');
-		gr.orderBy('alert.priority');
-        gr.query();
+        if (gr.get(records[0].sys_id)) {
+            if (records[0].alert.type === this.ALERT_TYPE_FUNDS) {
+                this.handleAlert(gr, records[0], this.QUEUE_FUNDS);
+            } else if (records[0].alert.type === this.ALERT_TYPE_TIME 
+                       && !timeAlerts.includes(records[0].portfolio)) {
+                timeAlerts.push(records[0].portfolio);
+                this.handleAlert(gr, records[0], this.QUEUE_TIME);
+            }
+            gr.status = 'processed';
+            gr.update();
+        }
 
-        while (gr.next()) {
-            const record = records.find(record => record.sys_id.toString() === gr.sys_id.toString());
+        records.slice(1).forEach(record => {
+            if (gr.get(record.sys_id)) {
+                gr.status = 'omitted';
+                gr.update();
+            }
+        });
+    }
+
+    updateTrackingRecordsOld(records, timeAlerts, fundAlerts) {
+        const gr = new GlideRecord(this.TRACKING_TABLE);
+
+        if (gr.get(records[0])) {
             if (record.alert.type === this.ALERT_TYPE_FUNDS) {
-				fundAlerts.push(record.sys_id);
+                fundAlerts.push(record.sys_id);
                 this.handleAlert(gr, record, this.QUEUE_FUNDS);
-				// only one time alert per portfolio
+                // only one time alert per portfolio
             } else if (record.alert.type === this.ALERT_TYPE_TIME && !timeAlerts.includes(record.portfolio)) {
                 timeAlerts.push(record.portfolio);
                 this.handleAlert(gr, record, this.QUEUE_TIME);
             }
-            gr.status = (record === records[0]) ? 'processed' : 'omitted';
+
+            gr.status = 'processed';
             gr.update();
         }
+
+        records.slice(1).forEach(record => {
+            if (gr.get(record.sys_id)) {
+                gr.status = 'omitted';
+                gr.update();
+            }
+        });
     }
 
     handleAlert(gr, alert, queue) {
@@ -94,12 +118,12 @@
     }
 
     extractUserSysIds(gr) {
-		let emails = [];
-		
-		if(gr.portfolio.portfolio_owner) {
-			emails.push(gr.portfolio.portfolio_owner.toString());
-		}
-	
+        let emails = [];
+
+        if (gr.portfolio.portfolio_owner) {
+            emails.push(gr.portfolio.portfolio_owner.toString());
+        }
+
         if (gr.portfolio.portfolio_managers) {
             emails = emails.concat(gr.portfolio.portfolio_managers.toString().split(','));
         }
@@ -113,13 +137,13 @@
         <sys_created_by>stephen.hayes</sys_created_by>
         <sys_created_on>2023-10-18 11:47:30</sys_created_on>
         <sys_id>71eea70447427110ee827d7ba26d43e5</sys_id>
-        <sys_mod_count>125</sys_mod_count>
+        <sys_mod_count>132</sys_mod_count>
         <sys_name>AlertProcessor</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_71eea70447427110ee827d7ba26d43e5</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-10-27 16:58:15</sys_updated_on>
+        <sys_updated_on>2023-10-27 18:34:06</sys_updated_on>
     </sys_script_include>
 </record_update>
