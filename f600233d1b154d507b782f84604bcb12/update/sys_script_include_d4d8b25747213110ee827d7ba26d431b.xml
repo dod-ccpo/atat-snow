@@ -27,19 +27,21 @@ IncidentTicketHelper.prototype = {
             .where('name', this.ASSIGNMENT_GROUP_NAME)
             .selectOne('sys_id')
             .orElse('');
-
+		
         const descriptions = this.generateDescriptions(event);
-
+		
+		
         const incident = {
             assignment_group: assignmentGroup.sys_id ?? "",
             category: this.CATEGORY,
             description: descriptions.description,
             impact: this.IMPACT,
             short_description: descriptions.short_description,
-            urgency: this.URGENCY
+            urgency: this.URGENCY,
+			watch_list: event.initialSnowRequest.userId ?? ""
         };
-
-        // insert incident; default SNOW behavior is to auto-increment the incident ID.
+		
+        // default SNOW behavior is to auto-increment the incident ID.
         const incidentGq = new global.GlideQuery(this.INCIDENT_TABLE)
             .insert(incident);
     },
@@ -59,23 +61,24 @@ IncidentTicketHelper.prototype = {
         const userId = initialSnowRequest.userId;
 
         return descriptions = {
-            description: `Provisioning Job ${provisioningJobId} status is: ${status}; operation ${operationType} failed for portfolio ${portfolioId} affecting ${userId}.`,
+            description: `Provisioning Job sys_id ${provisioningJobId} status is: ${status}; operation ${operationType} failed for portfolio sys_id ${portfolioId} affecting user sys_id ${userId}.`,
             short_description: `Provisioning Job ${provisioningJobId} status is ${status}.`
         };
     },
+	
     type: 'IncidentTicketHelper'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>stephen.hayes</sys_created_by>
         <sys_created_on>2023-10-03 13:39:05</sys_created_on>
         <sys_id>d4d8b25747213110ee827d7ba26d431b</sys_id>
-        <sys_mod_count>50</sys_mod_count>
+        <sys_mod_count>55</sys_mod_count>
         <sys_name>IncidentTicketHelper</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_d4d8b25747213110ee827d7ba26d431b</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-10-05 20:54:59</sys_updated_on>
+        <sys_updated_on>2023-10-30 21:19:21</sys_updated_on>
     </sys_script_include>
 </record_update>
