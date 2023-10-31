@@ -13,6 +13,7 @@
         this.ALERT_TYPE_FUNDS = "funds";
         this.ALERT_TYPE_TIME = "time";
 
+		this.CLINS_TABLE = "x_g_dis_atat_clin";
         this.PREFERENCES_TABLE = "x_g_dis_atat_preferences";
         this.USER_TABLE = "sys_user";
         this.TRACKING_TABLE = "x_g_dis_atat_alerts_tracking";
@@ -60,11 +61,11 @@
         const gr = new GlideRecord(this.TRACKING_TABLE);
         if (gr.get(records[0].sys_id)) {
             if (records[0].alert.type === this.ALERT_TYPE_FUNDS) {
-                this.handleAlert(gr, records[0], this.QUEUE_FUNDS);
+                this.handleFundingAlert(gr, records[0]);
             } else if (records[0].alert.type === this.ALERT_TYPE_TIME 
                        && !timeAlerts.includes(records[0].portfolio)) {
                 timeAlerts.push(records[0].portfolio);
-                this.handleAlert(gr, records[0], this.QUEUE_TIME);
+                this.handleTimeAlert(gr, records[0]);
             }
             gr.status = 'processed';
             gr.update();
@@ -78,44 +79,45 @@
         });
     }
 
-    updateTrackingRecordsOld(records, timeAlerts, fundAlerts) {
-        const gr = new GlideRecord(this.TRACKING_TABLE);
-
-        if (gr.get(records[0])) {
-            if (record.alert.type === this.ALERT_TYPE_FUNDS) {
-                fundAlerts.push(record.sys_id);
-                this.handleAlert(gr, record, this.QUEUE_FUNDS);
-                // only one time alert per portfolio
-            } else if (record.alert.type === this.ALERT_TYPE_TIME && !timeAlerts.includes(record.portfolio)) {
-                timeAlerts.push(record.portfolio);
-                this.handleAlert(gr, record, this.QUEUE_TIME);
-            }
-
-            gr.status = 'processed';
-            gr.update();
-        }
-
-        records.slice(1).forEach(record => {
-            if (gr.get(record.sys_id)) {
-                gr.status = 'omitted';
-                gr.update();
-            }
-        });
-    }
-
-    handleAlert(gr, alert, queue) {
+    handleFundingAlert(gr, alert, queue) {
         const userSysIds = this.extractUserSysIds(gr);
         new global.GlideQuery(this.USER_TABLE)
             .where('sys_id', 'IN', userSysIds)
             .select('email')
             .toArray(100)
             .forEach((user) => {
-                gs.eventQueue(queue,
+                gs.eventQueue(this.QUEUE_FUNDS,
                     gr,
-                    user.email,
-                    gr.portfolio.active_task_order.getDisplayValue());
+                    user.email);
             });
     }
+	
+	// Time Alerts need in-period CLINS for the email template yet I have not figured out
+	// why I can't make a GlideRecord/Query call in an email script include, so, I am
+	// passing them along as event.parm2 on the queue.
+	handleTimeAlert(gr, alert, clins) {
+        const userSysIds = this.extractUserSysIds(gr);
+		const now = new GlideDate();
+
+		const inPeriodClins = new global.GlideQuery(this.CLINS_TABLE)
+                .where('task_order', gr.portfolio.active_task_order)
+                .where('pop_start_date', '<=', now.getValue())
+                .where('pop_end_date', '>', now.getValue())
+                .select('clin_number')
+                .toArray(100)
+                .map((clin) => ` ${clin.clin_number}`);
+		
+        new global.GlideQuery(this.USER_TABLE)
+            .where('sys_id', 'IN', userSysIds)
+            .select('email')
+            .toArray(100)
+            .forEach((user) => {
+                gs.eventQueue(this.QUEUE_TIME,
+                    gr,
+                    user.email,
+                    inPeriodClins);
+            });
+	}
 
     extractUserSysIds(gr) {
         let emails = [];
@@ -137,13 +139,13 @@
         <sys_created_by>stephen.hayes</sys_created_by>
         <sys_created_on>2023-10-18 11:47:30</sys_created_on>
         <sys_id>71eea70447427110ee827d7ba26d43e5</sys_id>
-        <sys_mod_count>132</sys_mod_count>
+        <sys_mod_count>142</sys_mod_count>
         <sys_name>AlertProcessor</sys_name>
         <sys_package display_value="ATAT" source="x_g_dis_atat">f600233d1b154d507b782f84604bcb12</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="ATAT">f600233d1b154d507b782f84604bcb12</sys_scope>
         <sys_update_name>sys_script_include_71eea70447427110ee827d7ba26d43e5</sys_update_name>
         <sys_updated_by>stephen.hayes</sys_updated_by>
-        <sys_updated_on>2023-10-27 18:34:06</sys_updated_on>
+        <sys_updated_on>2023-10-31 12:26:56</sys_updated_on>
     </sys_script_include>
 </record_update>
